@@ -9,7 +9,8 @@ namespace SignalAnalysis
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.SetDefaultFont(new Font(new FontFamily("Microsoft Sans Serif"), 10f));
+            Application.Run(new FrmMain());
         }
     }
 }
