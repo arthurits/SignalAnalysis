@@ -12,4 +12,17 @@
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.27" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="examples\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="examples\Artificial light test.elux">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="examples\Template.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

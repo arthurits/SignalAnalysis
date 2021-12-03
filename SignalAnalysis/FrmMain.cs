@@ -1,18 +1,40 @@
 using System.Text;
+using FftSharp;
 
 namespace SignalAnalysis
 {
     public partial class FrmMain : Form
     {
         private double[][] _signalData;
+        private double[] _signalFFT;
         private double[] _signalX;
+        private string[] _series;
         private int nSeries = 0;
         private int nPoints = 0;
-        double nFreq = 0.0;
+        double nSampleFreq = 0.0;
 
         public FrmMain()
         {
             InitializeComponent();
+
+            PopulateCboWindow();
+        }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            using (new CenterWinDialog(this))
+            {
+                if (DialogResult.No == MessageBox.Show(this,
+                                                        "Are you sure you want to exit\nthe application?",
+                                                        "Exit?",
+                                                        MessageBoxButtons.YesNo,
+                                                        MessageBoxIcon.Question,
+                                                        MessageBoxDefaultButton.Button2))
+                {
+                    // Cancel
+                    e.Cancel = true;
+                }
+            }
         }
 
         private void btnData_Click(object sender, EventArgs e)
@@ -23,7 +45,7 @@ namespace SignalAnalysis
             using OpenFileDialog openDlg = new OpenFileDialog();
 
             openDlg.Title = "Select data file";
-            openDlg.InitialDirectory = "c:\\";
+            openDlg.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
             openDlg.Filter = "ErgoLux files (*.elux)|*.elux|Text files (*.txt)|*.txt|All files (*.*)|*.*";
             openDlg.FilterIndex = 1;
             openDlg.RestoreDirectory = true;
@@ -40,15 +62,18 @@ namespace SignalAnalysis
                 filePath = openDlg.FileName;
                 lblData.Text = openDlg.FileName;
 
-                GetELuxData(openDlg.FileName);
+                if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
+                    ReadELuxData(filePath);
+                else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
+                    ReadTextData(filePath);
+
+                PopulateCboSeries();
 
                 //Read the contents of the file into a stream
-                //var fileStream = openFileDialog.OpenFile();
+                //var fileStream = openDlg.OpenFile();
 
                 //using StreamReader reader = new StreamReader(fileStream);
                 //fileContent = reader.ReadToEnd();
-
-                
 
             }
 
@@ -56,7 +81,7 @@ namespace SignalAnalysis
             //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
         }
 
-        private void GetELuxData(string FileName)
+        private void ReadELuxData(string FileName)
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, Encoding.UTF8);
@@ -113,6 +138,7 @@ namespace SignalAnalysis
             }
             if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries)) return;
             if (nSeries == 0) return;
+            nSeries += 6;
 
             strLine = sr.ReadLine();
             if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
@@ -135,10 +161,78 @@ namespace SignalAnalysis
                 }
                 return;
             }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nFreq)) return;
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSampleFreq)) return;
 
             strLine = sr.ReadLine();    // Empty line
+            
             strLine = sr.ReadLine();    // Column header lines
+            _series = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+
+            InitializeDataArrays(sr);
+        }
+
+        private void ReadTextData(string FileName)
+        {
+            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var sr = new StreamReader(fs, Encoding.UTF8);
+
+            string? strLine = sr.ReadLine();
+            if (strLine != null && strLine != "SignalAnalysis data")
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Number of series: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries)) return;
+            if (nSeries == 0) return;
+            nSeries += 6;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Number of points: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return;
+            if (nPoints == 0) return;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSampleFreq)) return;
+
+            strLine = sr.ReadLine();    // Empty line
+
+            strLine = sr.ReadLine();    // Column header lines
+            _series = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+
+            InitializeDataArrays(sr);
+        }
+
+        private void InitializeDataArrays(StreamReader sr)
+        {
+            string? strLine;
 
             // Initialize data arrays
             _signalX = new double[nPoints];
@@ -164,22 +258,144 @@ namespace SignalAnalysis
             }
         }
 
-
-        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void PopulateCboSeries(params string[] values)
         {
-            using (new CenterWinDialog(this))
-            {
-                if (DialogResult.No == MessageBox.Show(this,
-                                                        "Are you sure you want to exit\nthe application?",
-                                                        "Exit?",
-                                                        MessageBoxButtons.YesNo,
-                                                        MessageBoxIcon.Question,
-                                                        MessageBoxDefaultButton.Button2))
-                {
-                    // Cancel
-                    e.Cancel = true;
-                }
-            }
+            cboSeries.Items.Clear();
+            if (values.Length != 0)
+                cboSeries.Items.AddRange(values);
+            else
+                cboSeries.Items.AddRange(_series);
+            cboSeries.SelectedIndex = 0;
         }
+        private void PopulateCboWindow()
+        {
+            IWindow[] windows = Window.GetWindows();
+            cboWindow.Items.AddRange(windows);
+            cboWindow.SelectedIndex = windows.ToList().FindIndex(x => x.Name == "Hanning");
+        }
+
+        private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateOriginal();
+            UpdateFractal(chkProgressive.Checked);
+            cboWindow_SelectedIndexChanged(null, null);
+        }
+
+        private void cboWindow_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IWindow window = (IWindow)cboWindow.SelectedItem;
+            if (window is null)
+            {
+                //richTextBox1.Clear();
+                return;
+            }
+            else
+            {
+                //richTextBox1.Text = window.Description;
+            }
+
+            if (nPoints == 0) return;
+
+            // Adjust to the lowest power of 2
+            int power2 = (int)Math.Log2(nPoints);
+            //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
+            _signalFFT = new double[(int)Math.Pow(2, power2)];
+            Array.Copy(_signalData[cboSeries.SelectedIndex], _signalFFT, _signalFFT.Length);
+            
+            // apply window
+            double[] signalWindow = new double[_signalFFT.Length];
+            Array.Copy(_signalFFT, signalWindow, _signalFFT.Length);
+            window.ApplyInPlace(signalWindow);
+
+            UpdateKernel(window);
+            UpdateWindowed(signalWindow);
+            UpdateFFT(signalWindow);
+        }
+
+        private void chkProgressive_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateFractal(chkProgressive.Checked);
+        }
+
+        private void chkLog_CheckedChanged(object sender, EventArgs e)
+        {
+            cboWindow_SelectedIndexChanged(null, null);
+        }
+
+        private void UpdateOriginal()
+        {
+            plotOriginal.Plot.Clear();
+            plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
+            plotOriginal.Plot.Title("Input signal");
+            plotOriginal.Plot.YLabel("Amplitude");
+            plotOriginal.Plot.XLabel("Time (seconds)");
+            plotOriginal.Plot.AxisAuto(0);
+            plotOriginal.Refresh();
+        }
+
+        private void UpdateKernel(IWindow window)
+        {
+            double[] kernel = window.Create(nPoints);
+            double[] pad = ScottPlot.DataGen.Zeros(kernel.Length / 4);
+            double[] ys = pad.Concat(kernel).Concat(pad).ToArray();
+
+            plotWindow.Plot.Clear();
+            plotWindow.Plot.AddSignal(ys, nSampleFreq, Color.Red);
+            plotWindow.Plot.AxisAuto(0);
+            plotWindow.Plot.Title($"{window} Window");
+            plotWindow.Plot.YLabel("Amplitude");
+            plotWindow.Plot.XLabel("Time (seconds)");
+            plotWindow.Refresh();
+        }
+
+        private void UpdateWindowed(double[] signal)
+        {
+            plotApplied.Plot.Clear();
+            plotApplied.Plot.AddSignal(signal, nSampleFreq);
+            plotApplied.Plot.Title("Windowed signal");
+            plotApplied.Plot.YLabel("Amplitude");
+            plotApplied.Plot.XLabel("Time (seconds)");
+            plotApplied.Plot.AxisAuto(0);
+            plotApplied.Refresh();
+        }
+
+        private void UpdateFractal(bool progressive = false)
+        {
+            if (_signalData == null) return;
+
+            var fractalDim = new FractalDimension(nSampleFreq, _signalData[cboSeries.SelectedIndex], progressive);
+            var dimension = fractalDim.Dimension;
+
+            plotFractal.Plot.Clear();
+            if (progressive && fractalDim.ProgressDim != null)
+            {
+                plotFractal.Plot.AddSignal(fractalDim.ProgressDim, nSampleFreq, label: cboSeries.SelectedItem.ToString());
+            }
+            else
+            {
+                plotFractal.Plot.AddLine(0, dimension, (0, nPoints / nSampleFreq));
+            }
+            plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) + " (H = " + dimension.ToString("#.00000") + ")");
+            plotFractal.Plot.YLabel("Dimension (H)");
+            plotFractal.Plot.XLabel("Time (seconds)");
+            plotFractal.Plot.AxisAuto(0);
+            plotFractal.Refresh();
+        }
+
+        private void UpdateFFT(double[] signal)
+        {
+            double[] ys = chkLog.Checked ? Transform.FFTpower(signal) : Transform.FFTmagnitude(signal);
+
+            // Plot the results
+            plotFFT.Plot.Clear();
+            plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
+            plotFFT.Plot.Title("Fast Fourier Transform");
+            plotFFT.Plot.YLabel(chkLog.Checked ? "Power (dB)" : "Magnitude (RMS²)");
+            plotFFT.Plot.XLabel("Frequency (Hz)");
+            plotFFT.Plot.AxisAuto(0);
+            plotFFT.Refresh();
+        }
+
+        
     }
 }

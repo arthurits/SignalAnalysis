@@ -10,9 +10,11 @@ namespace SignalAnalysis
         private double _yMax;
         private double _yMin;
         private double _length;
-        private double _dimension;
-        public double Dimension => _dimension;
-        
+
+        public double[] ProgressDim { get; private set; }
+
+        public double Dimension { get; private set; }
+
 
         public FractalDimension()
         {
@@ -22,13 +24,23 @@ namespace SignalAnalysis
         public FractalDimension(double[] xValues, double[] yValues)
             :this()
         {
-            _dimension = ComputeDim(xValues, yValues);
+            Dimension = ComputeDim(xValues, yValues);
         }
 
-        public FractalDimension(double samplingFreq, double[] yValues)
+        public FractalDimension(double samplingFreq, double[] yValues, bool progress = false)
             : this()
         {
-            _dimension = ComputeDim(samplingFreq, yValues);
+            if (!progress)
+                Dimension = ComputeDim(samplingFreq, yValues);
+            else
+            {
+                ProgressDim = new double[yValues.Length];
+                ProgressDim[0] = 0;
+                for (int i = 1; i < yValues.Length; i++)
+                {
+                    ProgressDim[i] = ComputeDim(samplingFreq, yValues, i);
+                }
+            }
         }
 
         /// <summary>
@@ -37,16 +49,20 @@ namespace SignalAnalysis
         /// <param name="xValues"></param>
         /// <param name="yValues"></param>
         /// <returns>The fractal dimension of the curve</returns>
-        public double ComputeDim(double[] xValues, double[] yValues)
+        public double ComputeDim(double[] xValues, double[] yValues, int? length = null)
         {
-            _n = yValues.Length;
+            if (length == null)
+                _n = yValues.Length;
+            else
+                _n = length.Value;
+
             (_xMax, _xMin) = GetMaxMin(xValues);
             (_yMax, _yMin) = GetMaxMin(yValues);
             
             _length = NormalizedLength(xValues, yValues, _n, _xMax, _xMin, _yMax, _yMin);
-            _dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_n - 1));
+            Dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_n - 1));
 
-            return _dimension;
+            return Dimension;
         }
 
         /// <summary>
@@ -55,15 +71,19 @@ namespace SignalAnalysis
         /// <param name="samplingFreq">The sampling frequency</param>
         /// <param name="yValues">Array containing the ordinate points</param>
         /// <returns>The fractal dimension of the curve</returns>
-        public double ComputeDim(double samplingFreq, double[] yValues)
+        public double ComputeDim(double samplingFreq, double[] yValues, int? length = null)
         {
-            _n = yValues.Length;
+            if (length == null)
+                _n = yValues.Length;
+            else
+                _n = length.Value;
+
             (_yMax, _yMin) = GetMaxMin(yValues);
 
             _length = NormalizedLength(yValues, _n, _yMax, _yMin);
-            _dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_n - 1));
+            Dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_n - 1));
 
-            return _dimension;
+            return Dimension;
         }
 
         /// <summary>
