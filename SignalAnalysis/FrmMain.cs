@@ -5,10 +5,10 @@ namespace SignalAnalysis
 {
     public partial class FrmMain : Form
     {
-        private double[][] _signalData;
-        private double[] _signalFFT;
-        private double[] _signalX;
-        private string[] _series;
+        private double[][] _signalData = Array.Empty<double[]>();
+        private double[] _signalFFT = Array.Empty<double>();
+        private double[] _signalX = Array.Empty<double>();
+        private string[] _series = Array.Empty<string>();
         private int nSeries = 0;
         private int nPoints = 0;
         double nSampleFreq = 0.0;
@@ -18,6 +18,7 @@ namespace SignalAnalysis
             InitializeComponent();
 
             PopulateCboWindow();
+            chkLog.Checked = true;
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -46,8 +47,8 @@ namespace SignalAnalysis
 
             openDlg.Title = "Select data file";
             openDlg.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-            openDlg.Filter = "ErgoLux files (*.elux)|*.elux|Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            openDlg.FilterIndex = 1;
+            openDlg.Filter = "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            openDlg.FilterIndex = 4;
             openDlg.RestoreDirectory = true;
 
             DialogResult result;
@@ -64,8 +65,10 @@ namespace SignalAnalysis
 
                 if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                     ReadELuxData(filePath);
+                else if (".sig".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
+                    ReadSigData(filePath);
                 else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                    ReadTextData(filePath);
+                    throw new Exception("No generic text file reader has yet been implemented");
 
                 PopulateCboSeries();
 
@@ -171,7 +174,7 @@ namespace SignalAnalysis
             InitializeDataArrays(sr);
         }
 
-        private void ReadTextData(string FileName)
+        private void ReadSigData(string FileName)
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, Encoding.UTF8);
@@ -278,7 +281,8 @@ namespace SignalAnalysis
         {
             UpdateOriginal();
             UpdateFractal(chkProgressive.Checked);
-            cboWindow_SelectedIndexChanged(null, null);
+            cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
+            
         }
 
         private void cboWindow_SelectedIndexChanged(object sender, EventArgs e)
@@ -319,7 +323,7 @@ namespace SignalAnalysis
 
         private void chkLog_CheckedChanged(object sender, EventArgs e)
         {
-            cboWindow_SelectedIndexChanged(null, null);
+            cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
         }
 
         private void UpdateOriginal()
@@ -361,7 +365,10 @@ namespace SignalAnalysis
 
         private void UpdateFractal(bool progressive = false)
         {
-            if (_signalData == null) return;
+            if (_signalData.Length == 0) return;
+
+            var cursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
 
             var fractalDim = new FractalDimension(nSampleFreq, _signalData[cboSeries.SelectedIndex], progressive);
             var dimension = fractalDim.Dimension;
@@ -380,6 +387,8 @@ namespace SignalAnalysis
             plotFractal.Plot.XLabel("Time (seconds)");
             plotFractal.Plot.AxisAuto(0);
             plotFractal.Refresh();
+
+            this.Cursor = cursor;
         }
 
         private void UpdateFFT(double[] signal)

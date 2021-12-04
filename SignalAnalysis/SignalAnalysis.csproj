@@ -13,14 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="examples\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="examples\Artificial light test.elux">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="examples\Template.txt">
+    <None Update="examples\Template.sig">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
