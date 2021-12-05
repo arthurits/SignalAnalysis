@@ -46,7 +46,7 @@ namespace SignalAnalysis
             using OpenFileDialog openDlg = new OpenFileDialog();
 
             openDlg.Title = "Select data file";
-            openDlg.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            openDlg.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
             openDlg.Filter = "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*";
             openDlg.FilterIndex = 4;
             openDlg.RestoreDirectory = true;
@@ -68,20 +68,11 @@ namespace SignalAnalysis
                 else if (".sig".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                     ReadSigData(filePath);
                 else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                    throw new Exception("No generic text file reader has yet been implemented");
+                    throw new Exception("No generic text file reader has yet been implemented.");
 
                 PopulateCboSeries();
-
-                //Read the contents of the file into a stream
-                //var fileStream = openDlg.OpenFile();
-
-                //using StreamReader reader = new StreamReader(fileStream);
-                //fileContent = reader.ReadToEnd();
-
             }
 
-
-            //MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
         }
 
         private void PopulateCboSeries(params string[] values)
