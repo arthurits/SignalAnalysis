@@ -4,7 +4,8 @@
     {
         private void UpdateOriginal()
         {
-            plotOriginal.Plot.Clear();
+            plotOriginal.Clear();
+            //plotOriginal.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
             plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
             plotOriginal.Plot.Title("Input signal");
             plotOriginal.Plot.YLabel("Amplitude");
@@ -19,7 +20,8 @@
             double[] pad = ScottPlot.DataGen.Zeros(kernel.Length / 4);
             double[] ys = pad.Concat(kernel).Concat(pad).ToArray();
 
-            plotWindow.Plot.Clear();
+            plotWindow.Clear();
+            //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
             plotWindow.Plot.AddSignal(ys, nSampleFreq, Color.Red);
             plotWindow.Plot.AxisAuto(0);
             plotWindow.Plot.Title($"{window} Window");
@@ -30,7 +32,8 @@
 
         private void UpdateWindowed(double[] signal)
         {
-            plotApplied.Plot.Clear();
+            plotApplied.Clear();
+            //plotApplied.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
             plotApplied.Plot.AddSignal(signal, nSampleFreq);
             plotApplied.Plot.Title("Windowed signal");
             plotApplied.Plot.YLabel("Amplitude");
@@ -49,7 +52,7 @@
             var fractalDim = new FractalDimension(nSampleFreq, _signalData[cboSeries.SelectedIndex], progressive);
             var dimension = fractalDim.Dimension;
 
-            plotFractal.Plot.Clear();
+            plotFractal.Clear();
             if (progressive && fractalDim.ProgressDim != null)
             {
                 plotFractal.Plot.AddSignal(fractalDim.ProgressDim, nSampleFreq, label: cboSeries.SelectedItem.ToString());
@@ -72,7 +75,7 @@
             double[] ys = chkLog.Checked ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
 
             // Plot the results
-            plotFFT.Plot.Clear();
+            plotFFT.Clear();
             plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
             plotFFT.Plot.Title("Fast Fourier Transform");
             plotFFT.Plot.YLabel(chkLog.Checked ? "Power (dB)" : "Magnitude (RMS²)");

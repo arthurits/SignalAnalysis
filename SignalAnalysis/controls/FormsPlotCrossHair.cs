@@ -91,18 +91,36 @@ namespace ScottPlot
 
         private void OnDoubleClick(object sender, EventArgs e)
         {
-            //crossHair.IsVisible = !crossHair.IsVisible;
-            vLine.IsVisible = !vLine.IsVisible;
-            hLine.IsVisible = !hLine.IsVisible;
+            if (this.Plot.GetPlottables().Count() <= 2) return;
+
+            var plot = this.Plot.GetPlottables()[2];
+            var plotType = (this.Plot.GetPlottables()[2]).GetType();
+            var plotMethod = plotType.GetMethod("GetPointNearestX");
             
-            if (vLine.IsVisible || hLine.IsVisible)
+            if (plotMethod != null)
             {
-                (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
-                (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.ScatterPlot)(this.Plot.GetPlottables()[2])).GetPointNearestX(mouseCoordX);
-                vLine.X = pointX;
-                hLine.Y = pointY;
+                //crossHair.IsVisible = !crossHair.IsVisible;
+                vLine.IsVisible = !vLine.IsVisible;
+                hLine.IsVisible = !hLine.IsVisible;
+
+                if (vLine.IsVisible || hLine.IsVisible)
+                {
+                    (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
+                    //(double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.ScatterPlot)(this.Plot.GetPlottables()[2])).GetPointNearestX(mouseCoordX);
+                    var result = plotMethod.Invoke(plot, new object[] { mouseCoordX });
+                    if (result != null)
+                    {
+                        (double pointX, double pointY, int pointIndex) = ((double, double, int))result;
+                        vLine.X = pointX;
+                        hLine.Y = pointY;
+                    }
+                    else
+                    {
+                        vLine.IsVisible = false;
+                        hLine.IsVisible = false;
+                    }
+                }
             }
-            
         }
 
         private void OnDraggedVertical(object sender, EventArgs e)
@@ -188,12 +206,16 @@ namespace ScottPlot
             }
         }
 
-
-        public void ClearPlottablesWithData()
+        /// <summary>
+        /// Override Clear method.
+        /// </summary>
+        public void Clear()
         {
-            for (int i = this.Plot.GetPlottables().Length - 1; i > 0; i--)
+            Plottable.IPlottable[] plottables = this.Plot.GetPlottables();
+            for (int i = plottables.Length - 1; i >= 0; i--)
             {
-                this.Plot.RemoveAt(i);
+                if (plottables[i] is not Plottable.VLine && plottables[i] is not Plottable.HLine)
+                    this.Plot.RemoveAt(i);
             }
         }
 

@@ -4,14 +4,14 @@ namespace SignalAnalysis
     // Carlos Sevcik's "A procedure to estimate the fractal dimension of waveforms" (https://arxiv.org/abs/1003.5266)
     public class FractalDimension
     {
-        private int _n;
+        private int _nPoints;
         private double _xMax;
         private double _xMin;
         private double _yMax;
         private double _yMin;
         private double _length;
 
-        public double[] ProgressDim { get; private set; }
+        public double[] ProgressDim { get; private set; } = Array.Empty<double>();
 
         public double Dimension { get; private set; }
 
@@ -21,10 +21,18 @@ namespace SignalAnalysis
 
         }
 
-        public FractalDimension(double[] xValues, double[] yValues)
+        public FractalDimension(double[] xValues, double[] yValues, bool progress = false)
             :this()
         {
-            Dimension = ComputeDim(xValues, yValues);
+            if (!progress)
+                Dimension = ComputeDim(xValues, yValues);
+            else
+            {
+                ProgressDim = new double[yValues.Length];
+                //ProgressDim[0] = 0;
+                for (int i = 0; i < yValues.Length; i++)
+                    ProgressDim[i] = ComputeDim(xValues, yValues, i);
+            }
         }
 
         public FractalDimension(double samplingFreq, double[] yValues, bool progress = false)
@@ -35,32 +43,35 @@ namespace SignalAnalysis
             else
             {
                 ProgressDim = new double[yValues.Length];
-                ProgressDim[0] = 0;
-                for (int i = 1; i < yValues.Length; i++)
-                {
+                for (int i = 0; i < yValues.Length; i++)
                     ProgressDim[i] = ComputeDim(samplingFreq, yValues, i);
-                }
             }
         }
 
         /// <summary>
         /// Computes the fractal dimension of a discrete curve.
         /// </summary>
-        /// <param name="xValues"></param>
-        /// <param name="yValues"></param>
+        /// <param name="xValues">Array containing the abscissa points</param>
+        /// <param name="yValues">Array containing the ordinate points</param>
+        /// /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
         /// <returns>The fractal dimension of the curve</returns>
-        public double ComputeDim(double[] xValues, double[] yValues, int? length = null)
+        public double ComputeDim(double[] xValues, double[] yValues, int? arrayIndex = null)
         {
-            if (length == null)
-                _n = yValues.Length;
+            if (arrayIndex.HasValue)
+                _nPoints = arrayIndex.Value + 1;
             else
-                _n = length.Value;
+                _nPoints = yValues.Length;
 
-            (_xMax, _xMin) = GetMaxMin(xValues);
-            (_yMax, _yMin) = GetMaxMin(yValues);
-            
-            _length = NormalizedLength(xValues, yValues, _n, _xMax, _xMin, _yMax, _yMin);
-            Dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_n - 1));
+            if (_nPoints < 2)
+                Dimension = 0;
+            else
+            {
+                (_xMax, _xMin) = GetMaxMin(xValues, arrayIndex);
+                (_yMax, _yMin) = GetMaxMin(yValues, arrayIndex);
+
+                _length = NormalizedLength(xValues, yValues, _nPoints, _xMax, _xMin, _yMax, _yMin);
+                Dimension = 1 + System.Math.Log(_length) / System.Math.Log(2 * (_nPoints - 1));
+            }              
 
             return Dimension;
         }
@@ -70,18 +81,24 @@ namespace SignalAnalysis
         /// </summary>
         /// <param name="samplingFreq">The sampling frequency</param>
         /// <param name="yValues">Array containing the ordinate points</param>
+        /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
         /// <returns>The fractal dimension of the curve</returns>
-        public double ComputeDim(double samplingFreq, double[] yValues, int? length = null)
+        public double ComputeDim(double samplingFreq, double[] yValues, int? arrayIndex = null)
         {
-            if (length == null)
-                _n = yValues.Length;
+            if (arrayIndex.HasValue)
+                _nPoints = arrayIndex.Value + 1;
             else
-                _n = length.Value;
+                _nPoints = yValues.Length;
 
-            (_yMax, _yMin) = GetMaxMin(yValues);
+            if (_nPoints < 2)
+                Dimension = 0;
+            else
+            {
+                (_yMax, _yMin) = GetMaxMin(yValues, arrayIndex);
 
-            _length = NormalizedLength(yValues, _n, _yMax, _yMin);
-            Dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_n - 1));
+                _length = NormalizedLength(yValues, _nPoints, _yMax, _yMin);
+                Dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_nPoints - 1));
+            }
 
             return Dimension;
         }
@@ -92,23 +109,23 @@ namespace SignalAnalysis
         /// </summary>
         /// <param name="xValues">Array containing the abscissa points</param>
         /// <param name="yValues">Array containing the ordinate points</param>
-        /// <param name="n">Number of points</param>
+        /// <param name="nPoints">Number of points</param>
         /// <param name="xMax">The maximum x value</param>
         /// <param name="xMin">The minimum x value</param>
         /// <param name="yMax">The maximum y value</param>
         /// <param name="yMin">The minimum y value</param>
         /// <returns>The normalized length of the curve</returns>
-        private double NormalizedLength(double [] xValues, double[] yValues, int n, double xMax, double xMin, double yMax, double yMin)
+        private double NormalizedLength(double [] xValues, double[] yValues, int nPoints, double xMax, double xMin, double yMax, double yMin)
         {
             double length = 0.0;
-            double xNorm1 = 0.0;
+            double xNorm1;
             double xNorm2 = 0.0;
-            double yNorm1 = 0.0;
+            double yNorm1;
             double yNorm2 = 0.0;
 
-            if (n <= 1) return 0.0;
+            if (nPoints <= 1) return 0.0;
 
-            for (int i=0; i < n; i++)
+            for (int i = 0; i < nPoints; i++)
             {
                 xNorm1 = (xValues[i] - xMin) / (xMax - xMin);
                 yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
@@ -125,39 +142,53 @@ namespace SignalAnalysis
         /// The passed values are normalized to be in the range [0, 1] both in the abscissa and the ordinate axes.
         /// </summary>
         /// <param name="yValues">Array containing the ordinate points</param>
-        /// <param name="n">Number of points</param>
+        /// <param name="nPoints">Number of points</param>
         /// <param name="yMax">The maximum y value</param>
         /// <param name="yMin">The minimum y value</param>
         /// <returns>The normalized length of the curve</returns>
-        private double NormalizedLength(double[] yValues, int n, double yMax, double yMin)
+        private double NormalizedLength(double[] yValues, int nPoints, double yMax, double yMin)
         {
             double length = 0.0;
-            double yNorm1 = 0.0;
+            double yNorm1;
             double yNorm2 = 0.0;
 
-            if (n <= 1) return 0.0;
+            if (nPoints <= 1) return 0.0;
 
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < nPoints; i++)
             {
                 yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
                 if (i > 0)
-                    length += System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + System.Math.Pow(1 / (n - 1), 2));
+                    length += System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + System.Math.Pow(1 / (nPoints - 1), 2));
                 yNorm2 = yNorm1;
             }
             return length;
         }
 
-        private (double max, double min) GetMaxMin(double[] values)
+        /// <summary>
+        /// Get the maximum and minimum values whithin an array.
+        /// </summary>
+        /// <param name="values">Array of values</param>
+        /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
+        /// <returns>Maximum and minimum values</returns>
+        private (double max, double min) GetMaxMin(double[] values, int? arrayIndex = null)
         {
+            if (values.Length == 0) return (0.0, 0.0);
+
             double highest = values[0];
             double lowest = values[0];
+            int nPoints;
 
-            foreach (dynamic i in values)
+            if (arrayIndex.HasValue)
+                nPoints = arrayIndex.Value + 1;
+            else
+                nPoints = values.Length;
+
+            for (int i = 1; i < nPoints; i++)
             {
-                if (i > highest)
-                    highest = i;
-                if (i < lowest)
-                    lowest = i;
+                if (values[i] > highest)
+                    highest = values[i];
+                if (values[i] < lowest)
+                    lowest = values[i];
             }
 
             return (highest, lowest);
