@@ -8,7 +8,8 @@ namespace ScottPlot;
 
 public class FormsPlotCrossHair : ScottPlot.FormsPlot
 {
-    public event EventHandler<VLineDragEventArgs> VLineDragged;
+    public event EventHandler<LineDragEventArgs> VLineDragged;
+    public event EventHandler<LineDragEventArgs> HLineDragged;
     //private ScottPlot.Plottable.Crosshair crossHair;
     private ScottPlot.Plottable.VLine vLine;
     private ScottPlot.Plottable.HLine hLine;
@@ -37,7 +38,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         }
     }
 
-    public bool Constrict { get; set; } = false;
+    public bool SnapToPoint { get; set; } = false;
 
     /// <summary>
     /// Sets color for horizontal and vertical lines and their position label backgrounds
@@ -89,55 +90,61 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
 
     }
 
+    private (double? pointX, double? pointY, int? pointIndex) SnapLinesToPoint(bool ToX = false, bool ToY = false)
+    {
+        double? pointX = null;
+        double? pointY = null;
+        int? pointIndex = null;
+
+        var plot = this.Plot.GetPlottables()[2];
+        var plotType = (this.Plot.GetPlottables()[2]).GetType();
+        System.Reflection.MethodInfo? plotMethod = null;
+        if (ToX)
+            plotMethod = plotType.GetMethod("GetPointNearestX");
+        else if(ToY)
+            plotMethod = plotType.GetMethod("GetPointNearestY");
+
+        if (plotMethod == null) return (null, null, null);
+
+        if (vLine.IsVisible || hLine.IsVisible)
+        {
+            (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
+            var param = new object[1];
+            if (ToX)
+                param[0] = mouseCoordX;
+            else if (ToY) 
+                param[0] = mouseCoordY;
+
+            var result = plotMethod.Invoke(plot, param);
+            if (result != null)
+            {
+                (pointX, pointY, pointIndex) = ((double, double, int))result;
+                vLine.X = pointX.Value;
+                hLine.Y = pointY.Value;
+            }
+        }
+        return (pointX, pointY, pointIndex);
+    }
+
     private void OnDoubleClick(object sender, EventArgs e)
     {
         if (this.Plot.GetPlottables().Count() <= 2) return;
 
-        var plot = this.Plot.GetPlottables()[2];
-        var plotType = (this.Plot.GetPlottables()[2]).GetType();
-        var plotMethod = plotType.GetMethod("GetPointNearestX");
+        vLine.IsVisible = !vLine.IsVisible;
+        hLine.IsVisible = !hLine.IsVisible;
 
-        if (plotMethod != null)
-        {
-            //crossHair.IsVisible = !crossHair.IsVisible;
-            vLine.IsVisible = !vLine.IsVisible;
-            hLine.IsVisible = !hLine.IsVisible;
-
-            if (vLine.IsVisible || hLine.IsVisible)
-            {
-                (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
-                //(double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.ScatterPlot)(this.Plot.GetPlottables()[2])).GetPointNearestX(mouseCoordX);
-                var result = plotMethod.Invoke(plot, new object[] { mouseCoordX });
-                if (result != null)
-                {
-                    (double pointX, double pointY, int pointIndex) = ((double, double, int))result;
-                    vLine.X = pointX;
-                    hLine.Y = pointY;
-                }
-                else
-                {
-                    vLine.IsVisible = false;
-                    hLine.IsVisible = false;
-                }
-            }
-        }
+        SnapLinesToPoint(ToX: true);
     }
 
     private void OnDraggedVertical(object sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
-        if (!vLine.IsVisible || !Constrict) return;
+        if (!vLine.IsVisible || !SnapToPoint) return;
 
-        (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
-        //double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
-        (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.ScatterPlot)(this.Plot.GetPlottables()[2])).GetPointNearestX(mouseCoordX);
-        //crossHair.VerticalLine.X = pointX;
-        //crossHair.HorizontalLine.Y = pointY;
-        vLine.X = pointX;
-        hLine.Y = pointY;
+        var snap = SnapLinesToPoint(ToX: true);
 
         // Raise the custom event for the subscribers
-        OnVLineDragged(new VLineDragEventArgs(pointX, pointY, pointIndex));
+        OnVLineDragged(new LineDragEventArgs(snap.pointX, snap.pointY, snap.pointIndex));
         //EventHandler<VLineDragEventArgs> handler = VLineDragged;
         //handler?.Invoke(this, new VLineDragEventArgs(pointX, pointY, pointIndex));
 
@@ -146,19 +153,12 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     private void OnDraggedHorizontal(object sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
-        if (!hLine.IsVisible || !Constrict) return;
+        if (!hLine.IsVisible || !SnapToPoint) return;
 
-        (double mouseCoordX, double mouseCoordY) = this.GetMouseCoordinates();
-        //double xyRatio = formsPlot1.Plot.XAxis.Dims.PxPerUnit / formsPlot1.Plot.YAxis.Dims.PxPerUnit;
-        (double pointX, double pointY, int pointIndex) = ((ScottPlot.Plottable.ScatterPlot)(this.Plot.GetPlottables()[2])).GetPointNearestY(mouseCoordY);
-
-        //crossHair.VerticalLine.X = pointX;
-        //crossHair.HorizontalLine.Y = pointY;
-        vLine.X = pointX;
-        hLine.Y = pointY;
+        var snap = SnapLinesToPoint(ToY: true);
 
         // Raise the custom event for the subscribers
-        OnVLineDragged(new VLineDragEventArgs(pointX, pointY, pointIndex));
+        OnHLineDragged(new LineDragEventArgs(snap.pointX, snap.pointY, snap.pointIndex));
         //EventHandler<VLineDragEventArgs> handler = VLineDragged;
         //handler?.Invoke(this, new VLineDragEventArgs(pointX, pointY, pointIndex));
 
@@ -171,7 +171,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     public Plottable.IPlottable[] GetDataCurves()
     {
         //System.Collections.ObjectModel.ObservableCollection<ScottPlot.Plottable.IPlottable> plots = new();
-        var algo = this.Plot.GetPlottables().Where(x => !(x is Plottable.VLine));
+        var dataPlots = this.Plot.GetPlottables().Where(x => !(x is Plottable.VLine) && !(x is Plottable.HLine));
 
         //foreach (var plot in this.Plot.GetPlottables())
         //{
@@ -181,17 +181,37 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         //    }
         //}
 
-        return algo.ToArray();
+        return dataPlots.ToArray();
     }
 
     // Wrap event invocations inside a protected virtual method to allow derived classes to override the event invocation behavior
     // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines
-    protected virtual void OnVLineDragged(VLineDragEventArgs e)
+    protected virtual void OnVLineDragged(LineDragEventArgs e)
     {
         // Make a temporary copy of the event to avoid possibility of
         // a race condition if the last subscriber unsubscribes
         // immediately after the null check and before the event is raised.
-        EventHandler<VLineDragEventArgs> raiseEvent = VLineDragged;
+        EventHandler<LineDragEventArgs> raiseEvent = VLineDragged;
+
+        // Event will be null if there are no subscribers
+        if (raiseEvent != null)
+        {
+            // Format arguments if needed
+            //e.pointX = 0.0;
+            //e.pointY = 0.0;
+            //e.pointIndex = 0;
+
+            // Call to raise the event.
+            raiseEvent(this, e);
+        }
+    }
+
+    protected virtual void OnHLineDragged(LineDragEventArgs e)
+    {
+        // Make a temporary copy of the event to avoid possibility of
+        // a race condition if the last subscriber unsubscribes
+        // immediately after the null check and before the event is raised.
+        EventHandler<LineDragEventArgs> raiseEvent = HLineDragged;
 
         // Event will be null if there are no subscribers
         if (raiseEvent != null)
@@ -233,13 +253,13 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
 
 }
 
-public class VLineDragEventArgs : EventArgs
+public class LineDragEventArgs : EventArgs
 {
-    public VLineDragEventArgs(double X, double Y, int Index)
+    public LineDragEventArgs(double? X, double? Y, int? Index)
     {
-        pointX = X;
-        pointY = Y;
-        pointIndex = Index;
+        pointX = X ?? default;
+        pointY = Y ?? default;
+        pointIndex = Index ?? default;
     }
 
     public double pointX { get; set; }

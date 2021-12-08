@@ -76,7 +76,7 @@ partial class FrmMain
         // Plot the results
         plotFFT.Clear();
         plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
-        plotFFT.Plot.Title("Fast Fourier Transform");
+        plotFFT.Plot.Title("Fast Fourier transform");
         plotFFT.Plot.YLabel(chkLog.Checked ? "Power (dB)" : "Magnitude (RMS²)");
         plotFFT.Plot.XLabel("Frequency (Hz)");
         plotFFT.Plot.AxisAuto(0);
