@@ -12,6 +12,8 @@ Download latest release: [![GitHub release (latest by date)](https://img.shields
 ![Screenshot](/SignalAnalysis/images/screenshot.png?raw=true "SignalAnalysis GUI")
 
 ## External dependencies
-This project uses routines from the following Git:
+The fractal dimension implementation was based on Carlos Sevcik's ["A procedure to estimate the fractal dimension of waveforms"](https://arxiv.org/abs/1003.5266).
+
+This project uses routines from the following Gits:
 * [FftSharp](https://github.com/swharden/FftSharp)
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot)
