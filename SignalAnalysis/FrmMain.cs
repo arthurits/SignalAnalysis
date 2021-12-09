@@ -13,6 +13,8 @@ public partial class FrmMain : Form
     private int nPoints = 0;
     double nSampleFreq = 0.0;
 
+    Task fractalTask;
+
     public FrmMain()
     {
         InitializeComponent();
@@ -53,9 +55,7 @@ public partial class FrmMain : Form
 
         DialogResult result;
         using (new CenterWinDialog(this))
-        {
             result = openDlg.ShowDialog(this);
-        }
 
         if (result == DialogResult.OK && openDlg.FileName != "")
         {
@@ -140,4 +140,16 @@ public partial class FrmMain : Form
         cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
     }
 
+    private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (e.KeyChar == (char)Keys.Escape)
+        {
+            if (fractalTask != null)
+            { 
+                fractalTask.Dispose();
+                Cursor = Cursors.Default;
+            }
+        }
+        
+    }
 }

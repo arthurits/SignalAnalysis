@@ -41,15 +41,23 @@ partial class FrmMain
         plotApplied.Refresh();
     }
 
-    private void UpdateFractal(bool progressive = false)
+    private async void UpdateFractal(bool progressive = false)
     {
         if (_signalData.Length == 0) return;
 
         var cursor = this.Cursor;
         this.Cursor = Cursors.WaitCursor;
 
-        var fractalDim = new FractalDimension(nSampleFreq, _signalData[cboSeries.SelectedIndex], progressive);
-        var dimension = fractalDim.Dimension;
+        FractalDimension fractalDim = new FractalDimension();
+        double dimension = 0.0;
+        int index = cboSeries.SelectedIndex;
+
+        fractalTask = Task.Run(() =>
+        {
+            fractalDim = new FractalDimension(nSampleFreq, _signalData[index], progressive);
+            dimension = fractalDim.Dimension;
+        });
+        await fractalTask;
 
         plotFractal.Clear();
         if (progressive && fractalDim.ProgressDim != null)
