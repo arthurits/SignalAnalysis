@@ -48,33 +48,58 @@ partial class FrmMain
         var cursor = this.Cursor;
         this.Cursor = Cursors.WaitCursor;
 
-        FractalDimension fractalDim = new FractalDimension();
-        double dimension = 0.0;
+        //Dimension fractalDim = new Dimension();
+        //double dimension = 0.0;
         int index = cboSeries.SelectedIndex;
 
+        tokenSource = new();
+        token = tokenSource.Token;
         fractalTask = Task.Run(() =>
         {
-            fractalDim = new FractalDimension(nSampleFreq, _signalData[index], progressive);
-            dimension = fractalDim.Dimension;
-        });
-        await fractalTask;
+            FractalDimension.GetDimension(nSampleFreq, _signalData[index], token, progressive);
+            //fractalDim = new Dimension(nSampleFreq, _signalData[index], token, progressive);
+            //dimension = fractalDim.Dimension;
+        }, token);
 
-        plotFractal.Clear();
-        if (progressive && fractalDim.ProgressDim != null)
+        try
         {
-            plotFractal.Plot.AddSignal(fractalDim.ProgressDim, nSampleFreq, label: cboSeries.SelectedItem.ToString());
-        }
-        else
-        {
-            plotFractal.Plot.AddLine(0, dimension, (0, nPoints / nSampleFreq));
-        }
-        plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) + " (H = " + dimension.ToString("#.00000") + ")");
-        plotFractal.Plot.YLabel("Dimension (H)");
-        plotFractal.Plot.XLabel("Time (seconds)");
-        plotFractal.Plot.AxisAuto(0);
-        plotFractal.Refresh();
+            await fractalTask;
 
-        this.Cursor = cursor;
+            //if (fractalTask.IsCanceled) return;
+
+            plotFractal.Clear();
+            if (progressive && FractalDimension.DimensionCumulative.Length > 0)
+            {
+                plotFractal.Plot.AddSignal(FractalDimension.DimensionCumulative, nSampleFreq, label: cboSeries.SelectedItem.ToString());
+            }
+            else
+            {
+                plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, nPoints / nSampleFreq));
+            }
+            plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) + " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") + ")");
+            plotFractal.Plot.YLabel("Dimension (H)");
+            plotFractal.Plot.XLabel("Time (seconds)");
+            plotFractal.Plot.AxisAuto(0);
+            plotFractal.Refresh();
+        }
+        catch (OperationCanceledException)
+        {
+            //tokenSource.Dispose();
+            using (new CenterWinDialog(this))
+                MessageBox.Show(this,
+                    "Computation of the Hausdorff-Besicovitch fractal\ndimension has been stopped.",
+                    "Stop",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Stop);
+            this.chkProgressive.Checked = false;
+        }
+        finally
+        {
+            tokenSource.Dispose();
+            this.Cursor = cursor;
+            this.Cursor = Cursors.Default;
+        }
+
     }
 
     private void UpdateFFT(double[] signal)

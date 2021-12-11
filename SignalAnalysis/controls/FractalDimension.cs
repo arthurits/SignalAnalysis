@@ -2,49 +2,68 @@ namespace SignalAnalysis;
 
 // This class implements the computation of the fractal dimension of a discrete curve according to 
 // Carlos Sevcik's "A procedure to estimate the fractal dimension of waveforms" (https://arxiv.org/abs/1003.5266)
-public class FractalDimension
+public static class FractalDimension
 {
-    private int _nPoints;
-    private double _xMax;
-    private double _xMin;
-    private double _yMax;
-    private double _yMin;
-    private double _length;
+    //private int _nPoints;
+    //private double _xMax;
+    //private double _xMin;
+    //private double _yMax;
+    //private double _yMin;
+    //private double _length;
 
-    public double[] ProgressDim { get; private set; } = Array.Empty<double>();
+    /// <summary>
+    /// Gets the Hausdorff-Besicovitch dimension for each cumulative segment
+    /// </summary>
+    public static double[] DimensionCumulative { get; private set; } = Array.Empty<double>();
 
-    public double Dimension { get; private set; }
+    /// <summary>
+    /// Gets the  Hausdorff-Besicovitch dimension for the whole data set
+    /// </summary>
+    public static double DimensionSingle { get; private set; } = double.NaN;
 
+    private static readonly double DimensionMinimum = 1.0;
 
-    public FractalDimension()
+    //public FractalDimension()
+    //{
+
+    //}
+
+    public static void GetDimension(double[] xValues, double[] yValues, CancellationToken ct, bool progress = false)
     {
+        DimensionCumulative = Array.Empty<double>();
+        DimensionSingle = double.NaN;
 
-    }
-
-    public FractalDimension(double[] xValues, double[] yValues, bool progress = false)
-        : this()
-    {
         if (!progress)
-            Dimension = ComputeDim(xValues, yValues);
+            DimensionSingle = ComputeH(xValues, yValues);
         else
         {
-            ProgressDim = new double[yValues.Length];
+            DimensionCumulative = new double[yValues.Length];
             //ProgressDim[0] = 0;
             for (int i = 0; i < yValues.Length; i++)
-                ProgressDim[i] = ComputeDim(xValues, yValues, i);
+            {
+                DimensionCumulative[i] = ComputeH(xValues, yValues, i);
+                if (ct.IsCancellationRequested)
+                    ct.ThrowIfCancellationRequested();
+            }
         }
     }
 
-    public FractalDimension(double samplingFreq, double[] yValues, bool progress = false)
-        : this()
+    public static void GetDimension(double samplingFreq, double[] yValues, CancellationToken ct, bool progress = false)
     {
+        DimensionCumulative = Array.Empty<double>();
+        DimensionSingle = double.NaN;
+
         if (!progress)
-            Dimension = ComputeDim(samplingFreq, yValues);
+            DimensionSingle = ComputeH(samplingFreq, yValues);
         else
         {
-            ProgressDim = new double[yValues.Length];
+            DimensionCumulative = new double[yValues.Length];
             for (int i = 0; i < yValues.Length; i++)
-                ProgressDim[i] = ComputeDim(samplingFreq, yValues, i);
+            {
+                DimensionCumulative[i] = ComputeH(samplingFreq, yValues, i);
+                if (ct.IsCancellationRequested)
+                    ct.ThrowIfCancellationRequested();
+            }
         }
     }
 
@@ -55,25 +74,36 @@ public class FractalDimension
     /// <param name="yValues">Array containing the ordinate points</param>
     /// /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
     /// <returns>The fractal dimension of the curve</returns>
-    public double ComputeDim(double[] xValues, double[] yValues, int? arrayIndex = null)
+    private static double ComputeH(double[] xValues, double[] yValues, int? arrayIndex = null)
     {
+        int _nPoints;
+        double _xMax;
+        double _xMin;
+        double _yMax;
+        double _yMin;
+        double _length;
+        double dimensionH;
+
+        //DimensionCumulative = Array.Empty<double>();
+        //DimensionSingle = double.NaN;
+
         if (arrayIndex.HasValue)
             _nPoints = arrayIndex.Value + 1;
         else
             _nPoints = yValues.Length;
 
         if (_nPoints < 2)
-            Dimension = 0;
+            dimensionH = DimensionMinimum;
         else
         {
             (_xMax, _xMin) = GetMaxMin(xValues, arrayIndex);
             (_yMax, _yMin) = GetMaxMin(yValues, arrayIndex);
 
             _length = NormalizedLength(xValues, yValues, _nPoints, _xMax, _xMin, _yMax, _yMin);
-            Dimension = 1 + System.Math.Log(_length) / System.Math.Log(2 * (_nPoints - 1));
+            dimensionH = 1 + System.Math.Log(_length) / System.Math.Log(2 * (_nPoints - 1));
         }
 
-        return Dimension;
+        return dimensionH;
     }
 
     /// <summary>
@@ -83,24 +113,33 @@ public class FractalDimension
     /// <param name="yValues">Array containing the ordinate points</param>
     /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
     /// <returns>The fractal dimension of the curve</returns>
-    public double ComputeDim(double samplingFreq, double[] yValues, int? arrayIndex = null)
+    private static double ComputeH(double samplingFreq, double[] yValues, int? arrayIndex = null)
     {
+        int _nPoints;
+        double _yMax;
+        double _yMin;
+        double _length;
+        double dimensionH;
+
+        //DimensionCumulative = Array.Empty<double>();
+        //DimensionSingle = double.NaN;
+
         if (arrayIndex.HasValue)
             _nPoints = arrayIndex.Value + 1;
         else
             _nPoints = yValues.Length;
 
         if (_nPoints < 2)
-            Dimension = 0;
+            dimensionH = DimensionMinimum;
         else
         {
             (_yMax, _yMin) = GetMaxMin(yValues, arrayIndex);
 
             _length = NormalizedLength(yValues, _nPoints, _yMax, _yMin);
-            Dimension = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_nPoints - 1));
+            dimensionH = 1 + System.Math.Log10(_length) / System.Math.Log10(2 * (_nPoints - 1));
         }
 
-        return Dimension;
+        return dimensionH;
     }
 
     /// <summary>
@@ -115,7 +154,7 @@ public class FractalDimension
     /// <param name="yMax">The maximum y value</param>
     /// <param name="yMin">The minimum y value</param>
     /// <returns>The normalized length of the curve</returns>
-    private double NormalizedLength(double[] xValues, double[] yValues, int nPoints, double xMax, double xMin, double yMax, double yMin)
+    private static double NormalizedLength(double[] xValues, double[] yValues, int nPoints, double xMax, double xMin, double yMax, double yMin)
     {
         double length = 0.0;
         double xNorm1;
@@ -146,7 +185,7 @@ public class FractalDimension
     /// <param name="yMax">The maximum y value</param>
     /// <param name="yMin">The minimum y value</param>
     /// <returns>The normalized length of the curve</returns>
-    private double NormalizedLength(double[] yValues, int nPoints, double yMax, double yMin)
+    private static double NormalizedLength(double[] yValues, int nPoints, double yMax, double yMin)
     {
         double length = 0.0;
         double yNorm1;
@@ -170,7 +209,7 @@ public class FractalDimension
     /// <param name="values">Array of values</param>
     /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
     /// <returns>Maximum and minimum values</returns>
-    private (double max, double min) GetMaxMin(double[] values, int? arrayIndex = null)
+    private static (double max, double min) GetMaxMin(double[] values, int? arrayIndex = null)
     {
         if (values.Length == 0) return (0.0, 0.0);
 

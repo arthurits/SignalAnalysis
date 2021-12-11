@@ -14,6 +14,8 @@ public partial class FrmMain : Form
     double nSampleFreq = 0.0;
 
     Task fractalTask;
+    private CancellationTokenSource tokenSource;
+    private CancellationToken token;
 
     public FrmMain()
     {
@@ -21,6 +23,8 @@ public partial class FrmMain : Form
 
         PopulateCboWindow();
         chkLog.Checked = true;
+
+        //token = tokenSource.Token;
     }
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -142,14 +146,9 @@ public partial class FrmMain : Form
 
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
     {
-        if (e.KeyChar == (char)Keys.Escape)
-        {
-            if (fractalTask != null)
-            { 
-                fractalTask.Dispose();
-                Cursor = Cursors.Default;
-            }
-        }
+        if (e.KeyChar == (char)Keys.Escape && fractalTask.Status == TaskStatus.Running)
+            tokenSource.Cancel();
         
     }
+
 }
