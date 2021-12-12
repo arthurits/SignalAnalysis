@@ -48,8 +48,6 @@ partial class FrmMain
         var cursor = this.Cursor;
         this.Cursor = Cursors.WaitCursor;
 
-        //Dimension fractalDim = new Dimension();
-        //double dimension = 0.0;
         int index = cboSeries.SelectedIndex;
 
         tokenSource = new();
@@ -57,15 +55,11 @@ partial class FrmMain
         fractalTask = Task.Run(() =>
         {
             FractalDimension.GetDimension(nSampleFreq, _signalData[index], token, progressive);
-            //fractalDim = new Dimension(nSampleFreq, _signalData[index], token, progressive);
-            //dimension = fractalDim.Dimension;
         }, token);
 
         try
         {
             await fractalTask;
-
-            //if (fractalTask.IsCanceled) return;
 
             plotFractal.Clear();
             if (progressive && FractalDimension.DimensionCumulative.Length > 0)
@@ -84,7 +78,6 @@ partial class FrmMain
         }
         catch (OperationCanceledException)
         {
-            //tokenSource.Dispose();
             using (new CenterWinDialog(this))
                 MessageBox.Show(this,
                     "Computation of the Hausdorff-Besicovitch fractal\ndimension has been stopped.",

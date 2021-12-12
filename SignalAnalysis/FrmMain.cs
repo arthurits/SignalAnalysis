@@ -136,6 +136,9 @@ public partial class FrmMain : Form
 
     private void chkProgressive_CheckedChanged(object sender, EventArgs e)
     {
+        if (!chkProgressive.Checked)
+            FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
+
         UpdateFractal(chkProgressive.Checked);
     }
 
@@ -147,8 +150,7 @@ public partial class FrmMain : Form
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
     {
         if (e.KeyChar == (char)Keys.Escape && fractalTask.Status == TaskStatus.Running)
-            tokenSource.Cancel();
-        
+            tokenSource.Cancel();   
     }
 
 }
