@@ -41,8 +41,8 @@ partial class FrmMain
             this.lblSeries = new System.Windows.Forms.Label();
             this.lblWindow = new System.Windows.Forms.Label();
             this.cboWindow = new System.Windows.Forms.ComboBox();
-            this.chkProgressive = new System.Windows.Forms.CheckBox();
-            this.chkLog = new System.Windows.Forms.CheckBox();
+            this.chkCumulative = new System.Windows.Forms.CheckBox();
+            this.chkPower = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +51,7 @@ partial class FrmMain
             // 
             this.btnData.Location = new System.Drawing.Point(12, 12);
             this.btnData.Name = "btnData";
-            this.btnData.Size = new System.Drawing.Size(87, 33);
+            this.btnData.Size = new System.Drawing.Size(122, 33);
             this.btnData.TabIndex = 0;
             this.btnData.Text = "Select data";
             this.btnData.UseVisualStyleBackColor = true;
@@ -60,11 +60,11 @@ partial class FrmMain
             // lblData
             // 
             this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(105, 20);
+            this.lblData.Location = new System.Drawing.Point(140, 20);
             this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(87, 19);
+            this.lblData.Size = new System.Drawing.Size(93, 19);
             this.lblData.TabIndex = 1;
-            this.lblData.Text = "Data filepath";
+            this.lblData.Text = "Data-file path";
             // 
             // plotFractal
             // 
@@ -177,9 +177,9 @@ partial class FrmMain
             // cboSeries
             // 
             this.cboSeries.FormattingEnabled = true;
-            this.cboSeries.Location = new System.Drawing.Point(105, 53);
+            this.cboSeries.Location = new System.Drawing.Point(123, 53);
             this.cboSeries.Name = "cboSeries";
-            this.cboSeries.Size = new System.Drawing.Size(156, 25);
+            this.cboSeries.Size = new System.Drawing.Size(150, 25);
             this.cboSeries.TabIndex = 5;
             this.cboSeries.SelectedIndexChanged += new System.EventHandler(this.cboSeries_SelectedIndexChanged);
             // 
@@ -195,7 +195,7 @@ partial class FrmMain
             // lblWindow
             // 
             this.lblWindow.AutoSize = true;
-            this.lblWindow.Location = new System.Drawing.Point(340, 56);
+            this.lblWindow.Location = new System.Drawing.Point(316, 56);
             this.lblWindow.Name = "lblWindow";
             this.lblWindow.Size = new System.Drawing.Size(59, 19);
             this.lblWindow.TabIndex = 7;
@@ -204,41 +204,41 @@ partial class FrmMain
             // cboWindow
             // 
             this.cboWindow.FormattingEnabled = true;
-            this.cboWindow.Location = new System.Drawing.Point(405, 53);
+            this.cboWindow.Location = new System.Drawing.Point(381, 53);
             this.cboWindow.Name = "cboWindow";
-            this.cboWindow.Size = new System.Drawing.Size(155, 25);
+            this.cboWindow.Size = new System.Drawing.Size(150, 25);
             this.cboWindow.TabIndex = 8;
             this.cboWindow.SelectedIndexChanged += new System.EventHandler(this.cboWindow_SelectedIndexChanged);
             // 
-            // chkProgressive
+            // chkCumulative
             // 
-            this.chkProgressive.AutoSize = true;
-            this.chkProgressive.Location = new System.Drawing.Point(702, 52);
-            this.chkProgressive.Name = "chkProgressive";
-            this.chkProgressive.Size = new System.Drawing.Size(166, 23);
-            this.chkProgressive.TabIndex = 9;
-            this.chkProgressive.Text = "Progressive fractal dim";
-            this.chkProgressive.UseVisualStyleBackColor = true;
-            this.chkProgressive.CheckedChanged += new System.EventHandler(this.chkProgressive_CheckedChanged);
+            this.chkCumulative.AutoSize = true;
+            this.chkCumulative.Location = new System.Drawing.Point(680, 52);
+            this.chkCumulative.Name = "chkCumulative";
+            this.chkCumulative.Size = new System.Drawing.Size(205, 23);
+            this.chkCumulative.TabIndex = 9;
+            this.chkCumulative.Text = "Cumulative fractal dimension";
+            this.chkCumulative.UseVisualStyleBackColor = true;
+            this.chkCumulative.CheckedChanged += new System.EventHandler(this.chkProgressive_CheckedChanged);
             // 
-            // chkLog
+            // chkPower
             // 
-            this.chkLog.AutoSize = true;
-            this.chkLog.Location = new System.Drawing.Point(602, 52);
-            this.chkLog.Name = "chkLog";
-            this.chkLog.Size = new System.Drawing.Size(93, 23);
-            this.chkLog.TabIndex = 10;
-            this.chkLog.Text = "Power (dB)";
-            this.chkLog.UseVisualStyleBackColor = true;
-            this.chkLog.CheckedChanged += new System.EventHandler(this.chkLog_CheckedChanged);
+            this.chkPower.AutoSize = true;
+            this.chkPower.Location = new System.Drawing.Point(572, 52);
+            this.chkPower.Name = "chkPower";
+            this.chkPower.Size = new System.Drawing.Size(93, 23);
+            this.chkPower.TabIndex = 10;
+            this.chkPower.Text = "Power (dB)";
+            this.chkPower.UseVisualStyleBackColor = true;
+            this.chkPower.CheckedChanged += new System.EventHandler(this.chkLog_CheckedChanged);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 861);
-            this.Controls.Add(this.chkLog);
-            this.Controls.Add(this.chkProgressive);
+            this.Controls.Add(this.chkPower);
+            this.Controls.Add(this.chkCumulative);
             this.Controls.Add(this.cboWindow);
             this.Controls.Add(this.lblWindow);
             this.Controls.Add(this.lblSeries);
@@ -272,10 +272,10 @@ partial class FrmMain
     private Label lblSeries;
     private Label lblWindow;
     private ComboBox cboWindow;
-    private CheckBox chkProgressive;
+    private CheckBox chkCumulative;
     private TableLayoutPanel tableLayoutPanel2;
     private ScottPlot.FormsPlotCrossHair plotWindow;
     private ScottPlot.FormsPlotCrossHair plotApplied;
     private ScottPlot.FormsPlotCrossHair plotFFT;
-    private CheckBox chkLog;
+    private CheckBox chkPower;
 }

@@ -6,9 +6,9 @@ partial class FrmMain
         plotOriginal.Clear();
         //plotOriginal.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
-        plotOriginal.Plot.Title("Input signal");
-        plotOriginal.Plot.YLabel("Amplitude");
-        plotOriginal.Plot.XLabel("Time (seconds)");
+        plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle"));
+        plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel"));
+        plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel"));
         plotOriginal.Plot.AxisAuto(0);
         plotOriginal.Refresh();
     }
@@ -23,9 +23,9 @@ partial class FrmMain
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotWindow.Plot.AddSignal(ys, nSampleFreq, Color.Red);
         plotWindow.Plot.AxisAuto(0);
-        plotWindow.Plot.Title($"{window} Window");
-        plotWindow.Plot.YLabel("Amplitude");
-        plotWindow.Plot.XLabel("Time (seconds)");
+        plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle"));
+        plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel"));
+        plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel"));
         plotWindow.Refresh();
     }
 
@@ -34,9 +34,9 @@ partial class FrmMain
         plotApplied.Clear();
         //plotApplied.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotApplied.Plot.AddSignal(signal, nSampleFreq);
-        plotApplied.Plot.Title("Windowed signal");
-        plotApplied.Plot.YLabel("Amplitude");
-        plotApplied.Plot.XLabel("Time (seconds)");
+        plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle"));
+        plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel"));
+        plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel"));
         plotApplied.Plot.AxisAuto(0);
         plotApplied.Refresh();
     }
@@ -71,8 +71,8 @@ partial class FrmMain
                 plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, nPoints / nSampleFreq));
             }
             plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) + " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") + ")");
-            plotFractal.Plot.YLabel("Dimension (H)");
-            plotFractal.Plot.XLabel("Time (seconds)");
+            plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
+            plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
             plotFractal.Plot.AxisAuto(0);
             plotFractal.Refresh();
         }
@@ -80,11 +80,11 @@ partial class FrmMain
         {
             using (new CenterWinDialog(this))
                 MessageBox.Show(this,
-                    "Computation of the Hausdorff-Besicovitch fractal\ndimension has been stopped.",
-                    "Stop",
+                    StringsRM.GetString("strMsgBoxTaskCancel"),
+                    StringsRM.GetString("strMsgBoxTaskCancelTitle"),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Stop);
-            this.chkProgressive.Checked = false;
+            this.chkCumulative.Checked = false;
         }
         finally
         {
@@ -97,14 +97,14 @@ partial class FrmMain
 
     private void UpdateFFT(double[] signal)
     {
-        double[] ys = chkLog.Checked ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
+        double[] ys = chkPower.Checked ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
 
         // Plot the results
         plotFFT.Clear();
         plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
-        plotFFT.Plot.Title("Fast Fourier transform");
-        plotFFT.Plot.YLabel(chkLog.Checked ? "Power (dB)" : "Magnitude (RMS²)");
-        plotFFT.Plot.XLabel("Frequency (Hz)");
+        plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle"));
+        plotFFT.Plot.YLabel(chkPower.Checked ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
+        plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
     }

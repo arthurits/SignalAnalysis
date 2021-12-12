@@ -17,14 +17,20 @@ public partial class FrmMain : Form
     private CancellationTokenSource tokenSource;
     private CancellationToken token;
 
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/y99d1cd3(v=vs.100)?WT.mc_id=DT-MVP-5003235
+    /// https://stackoverflow.com/questions/32989100/how-to-make-multi-language-app-in-winforms
+    /// </summary>
+    private System.Resources.ResourceManager StringsRM = new System.Resources.ResourceManager("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+
     public FrmMain()
     {
         InitializeComponent();
 
         PopulateCboWindow();
-        chkLog.Checked = true;
+        chkPower.Checked = true;
 
-        //token = tokenSource.Token;
+        UpdateUI_Language();
     }
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -98,7 +104,7 @@ public partial class FrmMain : Form
     private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
     {
         UpdateOriginal();
-        UpdateFractal(chkProgressive.Checked);
+        UpdateFractal(chkCumulative.Checked);
         cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
 
     }
@@ -136,10 +142,10 @@ public partial class FrmMain : Form
 
     private void chkProgressive_CheckedChanged(object sender, EventArgs e)
     {
-        if (!chkProgressive.Checked)
+        if (!chkCumulative.Checked)
             FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
 
-        UpdateFractal(chkProgressive.Checked);
+        UpdateFractal(chkCumulative.Checked);
     }
 
     private void chkLog_CheckedChanged(object sender, EventArgs e)
@@ -153,4 +159,49 @@ public partial class FrmMain : Form
             tokenSource.Cancel();   
     }
 
+    private void UpdateUI_Language()
+    {
+        this.Text = StringsRM.GetString("strFrmTitle");
+        this.btnData.Text = StringsRM.GetString("strBtnData");
+        this.lblData.Text = StringsRM.GetString("strLblData");
+        this.lblSeries.Text = StringsRM.GetString("strLblSeries");
+        this.lblWindow.Text = StringsRM.GetString("strLblWindow");
+        this.chkPower.Text = StringsRM.GetString("strChkPower");
+        this.chkCumulative.Text = StringsRM.GetString("strChkCumulative");
+        
+        // Update plots if they contain series
+        if(plotOriginal.Plot.GetPlottables().Length > 2)
+        {
+            plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle"));
+            plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel"));
+            plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel"));
+        }
+
+        if (plotWindow.Plot.GetPlottables().Length > 2)
+        {
+            plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle"));
+            plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel"));
+            plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel"));
+        }
+        if (plotApplied.Plot.GetPlottables().Length > 2)
+        {
+            plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle"));
+            plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel"));
+            plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel"));
+        }
+
+        if (plotFractal.Plot.GetPlottables().Length > 2)
+        {
+            plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
+            plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
+        }
+
+        if (plotFFT.Plot.GetPlottables().Length > 2)
+        {
+            plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle"));
+            plotFFT.Plot.YLabel(chkPower.Checked ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
+            plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
+        }
+        
+    }
 }
