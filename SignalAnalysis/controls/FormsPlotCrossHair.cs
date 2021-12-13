@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScottPlot.Plottable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,7 +64,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         //crossHair.IsVisible = false;
 
         vLine = this.Plot.AddVerticalLine(0.0, style: ScottPlot.LineStyle.Dash);
-
         //VerticalLine = true;
         vLine.IsVisible = false;
         vLine.PositionLabel = true;

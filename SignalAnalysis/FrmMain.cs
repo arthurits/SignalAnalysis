@@ -26,6 +26,8 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         InitializeComponent();
+        this.plotOriginal.SnapToPoint = true;
+        this.plotFFT.SnapToPoint = true;
 
         PopulateCboWindow();
         chkPower.Checked = true;

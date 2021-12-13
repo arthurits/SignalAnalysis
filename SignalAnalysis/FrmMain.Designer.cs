@@ -76,7 +76,6 @@ partial class FrmMain
             this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFractal.Name = "plotFractal";
             this.plotFractal.Size = new System.Drawing.Size(852, 249);
-            this.plotFractal.SnapToPoint = false;
             this.plotFractal.TabIndex = 3;
             this.plotFractal.VerticalLine = false;
             // 
@@ -128,7 +127,6 @@ partial class FrmMain
             this.plotOriginal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotOriginal.Name = "plotOriginal";
             this.plotOriginal.Size = new System.Drawing.Size(278, 249);
-            this.plotOriginal.SnapToPoint = false;
             this.plotOriginal.TabIndex = 2;
             this.plotOriginal.VerticalLine = false;
             // 
@@ -142,7 +140,6 @@ partial class FrmMain
             this.plotWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotWindow.Name = "plotWindow";
             this.plotWindow.Size = new System.Drawing.Size(278, 249);
-            this.plotWindow.SnapToPoint = false;
             this.plotWindow.TabIndex = 3;
             this.plotWindow.VerticalLine = false;
             // 
@@ -156,7 +153,6 @@ partial class FrmMain
             this.plotApplied.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotApplied.Name = "plotApplied";
             this.plotApplied.Size = new System.Drawing.Size(280, 249);
-            this.plotApplied.SnapToPoint = false;
             this.plotApplied.TabIndex = 4;
             this.plotApplied.VerticalLine = false;
             // 
@@ -170,7 +166,6 @@ partial class FrmMain
             this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFFT.Name = "plotFFT";
             this.plotFFT.Size = new System.Drawing.Size(852, 249);
-            this.plotFFT.SnapToPoint = false;
             this.plotFFT.TabIndex = 5;
             this.plotFFT.VerticalLine = false;
             // 
