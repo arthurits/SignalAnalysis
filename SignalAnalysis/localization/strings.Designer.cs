@@ -124,7 +124,8 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Computation of the Hausdorff-Besicovitch fractal\ndimension has been stopped..
+        ///   Looks up a localized string similar to Computation of the Hausdorff-Besicovitch fractal
+        ///dimension has been stopped..
         /// </summary>
         internal static string strMsgBoxTaskCancel {
             get {

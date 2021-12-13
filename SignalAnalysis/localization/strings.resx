@@ -140,7 +140,7 @@
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>Computation of the Hausdorff-Besicovitch fractal
-      dimension has been stopped.</value>
+dimension has been stopped.</value>
   </data>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>Stop</value>
