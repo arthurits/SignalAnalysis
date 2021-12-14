@@ -1,11 +1,4 @@
-﻿using ScottPlot.Plottable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScottPlot;
+﻿namespace ScottPlot;
 
 public class FormsPlotCrossHair : ScottPlot.FormsPlot
 {
@@ -238,18 +231,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
             //if (plottables[i] is not Plottable.VLine && plottables[i] is not Plottable.HLine)
                 this.Plot.RemoveAt(i);
         }
-    }
-
-    private void InitializeComponent()
-    {
-        this.SuspendLayout();
-        // 
-        // FormsPlotCrossHair
-        // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-        this.Name = "FormsPlotCrossHair";
-        this.ResumeLayout(false);
-
     }
 
 }
