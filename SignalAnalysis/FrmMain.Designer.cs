@@ -69,15 +69,12 @@ partial class FrmMain
             // plotFractal
             // 
             this.plotFractal.BackColor = System.Drawing.Color.Transparent;
-            this.plotFractal.CrossHairColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.plotFractal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFractal.HorizontalLine = false;
             this.plotFractal.Location = new System.Drawing.Point(4, 258);
             this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFractal.Name = "plotFractal";
             this.plotFractal.Size = new System.Drawing.Size(852, 249);
             this.plotFractal.TabIndex = 3;
-            this.plotFractal.VerticalLine = false;
             // 
             // tableLayoutPanel1
             // 
@@ -120,54 +117,42 @@ partial class FrmMain
             // plotOriginal
             // 
             this.plotOriginal.BackColor = System.Drawing.Color.Transparent;
-            this.plotOriginal.CrossHairColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.plotOriginal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotOriginal.HorizontalLine = false;
             this.plotOriginal.Location = new System.Drawing.Point(4, 3);
             this.plotOriginal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotOriginal.Name = "plotOriginal";
             this.plotOriginal.Size = new System.Drawing.Size(278, 249);
             this.plotOriginal.TabIndex = 2;
-            this.plotOriginal.VerticalLine = false;
             // 
             // plotWindow
             // 
             this.plotWindow.BackColor = System.Drawing.Color.Transparent;
-            this.plotWindow.CrossHairColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.plotWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotWindow.HorizontalLine = false;
             this.plotWindow.Location = new System.Drawing.Point(290, 3);
             this.plotWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotWindow.Name = "plotWindow";
             this.plotWindow.Size = new System.Drawing.Size(278, 249);
             this.plotWindow.TabIndex = 3;
-            this.plotWindow.VerticalLine = false;
             // 
             // plotApplied
             // 
             this.plotApplied.BackColor = System.Drawing.Color.Transparent;
-            this.plotApplied.CrossHairColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.plotApplied.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotApplied.HorizontalLine = false;
             this.plotApplied.Location = new System.Drawing.Point(576, 3);
             this.plotApplied.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotApplied.Name = "plotApplied";
             this.plotApplied.Size = new System.Drawing.Size(280, 249);
             this.plotApplied.TabIndex = 4;
-            this.plotApplied.VerticalLine = false;
             // 
             // plotFFT
             // 
             this.plotFFT.BackColor = System.Drawing.Color.Transparent;
-            this.plotFFT.CrossHairColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.plotFFT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFFT.HorizontalLine = false;
             this.plotFFT.Location = new System.Drawing.Point(4, 513);
             this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFFT.Name = "plotFFT";
             this.plotFFT.Size = new System.Drawing.Size(852, 249);
             this.plotFFT.TabIndex = 5;
-            this.plotFFT.VerticalLine = false;
             // 
             // cboSeries
             // 
