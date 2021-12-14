@@ -4,7 +4,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
 {
     public event EventHandler<LineDragEventArgs> VLineDragged;
     public event EventHandler<LineDragEventArgs> HLineDragged;
-    //private ScottPlot.Plottable.Crosshair crossHair;
     
     public ScottPlot.Plottable.VLine VerticalLine { get; private set; }
     public ScottPlot.Plottable.HLine HorizontalLine { get; private set; }
