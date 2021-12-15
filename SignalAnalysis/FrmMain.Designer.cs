@@ -43,6 +43,11 @@ partial class FrmMain
             this.cboWindow = new System.Windows.Forms.ComboBox();
             this.chkCumulative = new System.Windows.Forms.CheckBox();
             this.chkPower = new System.Windows.Forms.CheckBox();
+            this.cmdExport = new System.Windows.Forms.Button();
+            this.lblStart = new System.Windows.Forms.Label();
+            this.lblEnd = new System.Windows.Forms.Label();
+            this.txtStart = new System.Windows.Forms.TextBox();
+            this.txtEnd = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -70,10 +75,11 @@ partial class FrmMain
             // 
             this.plotFractal.BackColor = System.Drawing.Color.Transparent;
             this.plotFractal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFractal.Location = new System.Drawing.Point(4, 258);
+            this.plotFractal.Location = new System.Drawing.Point(4, 243);
             this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFractal.Name = "plotFractal";
-            this.plotFractal.Size = new System.Drawing.Size(852, 249);
+            this.plotFractal.Size = new System.Drawing.Size(852, 234);
+            this.plotFractal.SnapToPoint = false;
             this.plotFractal.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -83,16 +89,17 @@ partial class FrmMain
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.plotFFT, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.plotFractal, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.plotFFT, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 84);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 127);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 765);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33445F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33444F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33111F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 722);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -111,7 +118,7 @@ partial class FrmMain
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 255);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 240);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // plotOriginal
@@ -121,7 +128,8 @@ partial class FrmMain
             this.plotOriginal.Location = new System.Drawing.Point(4, 3);
             this.plotOriginal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotOriginal.Name = "plotOriginal";
-            this.plotOriginal.Size = new System.Drawing.Size(278, 249);
+            this.plotOriginal.Size = new System.Drawing.Size(278, 234);
+            this.plotOriginal.SnapToPoint = false;
             this.plotOriginal.TabIndex = 2;
             // 
             // plotWindow
@@ -131,7 +139,8 @@ partial class FrmMain
             this.plotWindow.Location = new System.Drawing.Point(290, 3);
             this.plotWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotWindow.Name = "plotWindow";
-            this.plotWindow.Size = new System.Drawing.Size(278, 249);
+            this.plotWindow.Size = new System.Drawing.Size(278, 234);
+            this.plotWindow.SnapToPoint = false;
             this.plotWindow.TabIndex = 3;
             // 
             // plotApplied
@@ -141,23 +150,25 @@ partial class FrmMain
             this.plotApplied.Location = new System.Drawing.Point(576, 3);
             this.plotApplied.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotApplied.Name = "plotApplied";
-            this.plotApplied.Size = new System.Drawing.Size(280, 249);
+            this.plotApplied.Size = new System.Drawing.Size(280, 234);
+            this.plotApplied.SnapToPoint = false;
             this.plotApplied.TabIndex = 4;
             // 
             // plotFFT
             // 
             this.plotFFT.BackColor = System.Drawing.Color.Transparent;
             this.plotFFT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFFT.Location = new System.Drawing.Point(4, 513);
+            this.plotFFT.Location = new System.Drawing.Point(4, 483);
             this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFFT.Name = "plotFFT";
-            this.plotFFT.Size = new System.Drawing.Size(852, 249);
+            this.plotFFT.Size = new System.Drawing.Size(852, 236);
+            this.plotFFT.SnapToPoint = false;
             this.plotFFT.TabIndex = 5;
             // 
             // cboSeries
             // 
             this.cboSeries.FormattingEnabled = true;
-            this.cboSeries.Location = new System.Drawing.Point(123, 53);
+            this.cboSeries.Location = new System.Drawing.Point(140, 93);
             this.cboSeries.Name = "cboSeries";
             this.cboSeries.Size = new System.Drawing.Size(150, 25);
             this.cboSeries.TabIndex = 5;
@@ -166,7 +177,7 @@ partial class FrmMain
             // lblSeries
             // 
             this.lblSeries.AutoSize = true;
-            this.lblSeries.Location = new System.Drawing.Point(12, 56);
+            this.lblSeries.Location = new System.Drawing.Point(15, 94);
             this.lblSeries.Name = "lblSeries";
             this.lblSeries.Size = new System.Drawing.Size(82, 19);
             this.lblSeries.TabIndex = 6;
@@ -175,7 +186,7 @@ partial class FrmMain
             // lblWindow
             // 
             this.lblWindow.AutoSize = true;
-            this.lblWindow.Location = new System.Drawing.Point(316, 56);
+            this.lblWindow.Location = new System.Drawing.Point(316, 96);
             this.lblWindow.Name = "lblWindow";
             this.lblWindow.Size = new System.Drawing.Size(59, 19);
             this.lblWindow.TabIndex = 7;
@@ -184,7 +195,7 @@ partial class FrmMain
             // cboWindow
             // 
             this.cboWindow.FormattingEnabled = true;
-            this.cboWindow.Location = new System.Drawing.Point(381, 53);
+            this.cboWindow.Location = new System.Drawing.Point(381, 93);
             this.cboWindow.Name = "cboWindow";
             this.cboWindow.Size = new System.Drawing.Size(150, 25);
             this.cboWindow.TabIndex = 8;
@@ -193,7 +204,7 @@ partial class FrmMain
             // chkCumulative
             // 
             this.chkCumulative.AutoSize = true;
-            this.chkCumulative.Location = new System.Drawing.Point(680, 52);
+            this.chkCumulative.Location = new System.Drawing.Point(680, 92);
             this.chkCumulative.Name = "chkCumulative";
             this.chkCumulative.Size = new System.Drawing.Size(205, 23);
             this.chkCumulative.TabIndex = 9;
@@ -204,7 +215,7 @@ partial class FrmMain
             // chkPower
             // 
             this.chkPower.AutoSize = true;
-            this.chkPower.Location = new System.Drawing.Point(572, 52);
+            this.chkPower.Location = new System.Drawing.Point(572, 92);
             this.chkPower.Name = "chkPower";
             this.chkPower.Size = new System.Drawing.Size(93, 23);
             this.chkPower.TabIndex = 10;
@@ -212,11 +223,58 @@ partial class FrmMain
             this.chkPower.UseVisualStyleBackColor = true;
             this.chkPower.CheckedChanged += new System.EventHandler(this.chkLog_CheckedChanged);
             // 
+            // cmdExport
+            // 
+            this.cmdExport.Location = new System.Drawing.Point(503, 51);
+            this.cmdExport.Name = "cmdExport";
+            this.cmdExport.Size = new System.Drawing.Size(95, 31);
+            this.cmdExport.TabIndex = 11;
+            this.cmdExport.Text = "Export data";
+            this.cmdExport.UseVisualStyleBackColor = true;
+            this.cmdExport.Click += new System.EventHandler(this.cmdExport_Click);
+            // 
+            // lblStart
+            // 
+            this.lblStart.AutoSize = true;
+            this.lblStart.Location = new System.Drawing.Point(12, 58);
+            this.lblStart.Name = "lblStart";
+            this.lblStart.Size = new System.Drawing.Size(131, 19);
+            this.lblStart.TabIndex = 12;
+            this.lblStart.Text = "Starting array index:";
+            // 
+            // lblEnd
+            // 
+            this.lblEnd.AutoSize = true;
+            this.lblEnd.Location = new System.Drawing.Point(246, 58);
+            this.lblEnd.Name = "lblEnd";
+            this.lblEnd.Size = new System.Drawing.Size(125, 19);
+            this.lblEnd.TabIndex = 13;
+            this.lblEnd.Text = "Ending array index:";
+            // 
+            // txtStart
+            // 
+            this.txtStart.Location = new System.Drawing.Point(146, 55);
+            this.txtStart.Name = "txtStart";
+            this.txtStart.Size = new System.Drawing.Size(77, 25);
+            this.txtStart.TabIndex = 14;
+            // 
+            // txtEnd
+            // 
+            this.txtEnd.Location = new System.Drawing.Point(377, 55);
+            this.txtEnd.Name = "txtEnd";
+            this.txtEnd.Size = new System.Drawing.Size(77, 25);
+            this.txtEnd.TabIndex = 15;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 861);
+            this.Controls.Add(this.txtEnd);
+            this.Controls.Add(this.txtStart);
+            this.Controls.Add(this.lblEnd);
+            this.Controls.Add(this.lblStart);
+            this.Controls.Add(this.cmdExport);
             this.Controls.Add(this.chkPower);
             this.Controls.Add(this.chkCumulative);
             this.Controls.Add(this.cboWindow);
@@ -258,4 +316,9 @@ partial class FrmMain
     private ScottPlot.FormsPlotCrossHair plotApplied;
     private ScottPlot.FormsPlotCrossHair plotFFT;
     private CheckBox chkPower;
+    private Button cmdExport;
+    private Label lblStart;
+    private Label lblEnd;
+    private TextBox txtStart;
+    private TextBox txtEnd;
 }
