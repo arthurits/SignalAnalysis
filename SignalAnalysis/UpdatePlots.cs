@@ -1,11 +1,12 @@
 ﻿namespace SignalAnalysis;
 partial class FrmMain
 {
-    private void UpdateOriginal()
+    private void UpdateOriginal(double[] signal)
     {
         plotOriginal.Clear();
         //plotOriginal.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
-        plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
+        //plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
+        plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: cboSeries.SelectedItem.ToString());
         plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle"));
         plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel"));
         plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel"));
@@ -41,7 +42,7 @@ partial class FrmMain
         plotApplied.Refresh();
     }
 
-    private async void UpdateFractal(bool progressive = false)
+    private async void UpdateFractal(double[] signal, bool progressive = false)
     {
         if (_signalData.Length == 0) return;
 
@@ -54,7 +55,8 @@ partial class FrmMain
         token = tokenSource.Token;
         fractalTask = Task.Run(() =>
         {
-            FractalDimension.GetDimension(nSampleFreq, _signalData[index], token, progressive);
+            //FractalDimension.GetDimension(nSampleFreq, _signalData[index], token, progressive);
+            FractalDimension.GetDimension(nSampleFreq, signal, token, progressive);
         }, token);
 
         try
@@ -107,5 +109,20 @@ partial class FrmMain
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
+    }
+
+    private void UpdateStats(double[] signal)
+    {
+        double max = signal[0], min = signal[0], sum = 0;
+        
+        for (int i = 0; i < signal.Length; i++)
+        {
+            if (signal[i]> max) max = signal[i];
+            if (signal[i]< min) min = signal[i];
+            sum += signal[i];
+        }
+        double avg = sum / signal.Length;
+
+        lblStats.Text = String.Concat(avg.ToString(), "\t", max.ToString(), "\t", min.ToString());
     }
 }

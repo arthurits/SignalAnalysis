@@ -82,6 +82,9 @@ public partial class FrmMain : Form
             else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 throw new Exception("No generic text file reader has yet been implemented.");
 
+            this.txtStart.Text = "0";
+            this.txtEnd.Text = _signalData[0].Length.ToString();
+
             PopulateCboSeries();
         }
 
@@ -105,8 +108,14 @@ public partial class FrmMain : Form
 
     private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
     {
-        UpdateOriginal();
-        UpdateFractal(chkCumulative.Checked);
+        int nStart = int.Parse(txtStart.Text);
+        int nLength = int.Parse(txtEnd.Text) - nStart + 1;
+        double[] signal = new double[nLength];
+
+        Array.Copy(_signalData[cboSeries.SelectedIndex], nStart, signal, 0, nLength);
+        UpdateOriginal(signal);
+        UpdateStats(signal);
+        UpdateFractal(signal, chkCumulative.Checked);
         cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
 
     }

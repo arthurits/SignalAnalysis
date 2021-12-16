@@ -32,11 +32,11 @@ partial class FrmMain
             this.lblData = new System.Windows.Forms.Label();
             this.plotFractal = new ScottPlot.FormsPlotCrossHair();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.plotFFT = new ScottPlot.FormsPlotCrossHair();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.plotOriginal = new ScottPlot.FormsPlotCrossHair();
             this.plotWindow = new ScottPlot.FormsPlotCrossHair();
             this.plotApplied = new ScottPlot.FormsPlotCrossHair();
-            this.plotFFT = new ScottPlot.FormsPlotCrossHair();
             this.cboSeries = new System.Windows.Forms.ComboBox();
             this.lblSeries = new System.Windows.Forms.Label();
             this.lblWindow = new System.Windows.Forms.Label();
@@ -48,6 +48,7 @@ partial class FrmMain
             this.lblEnd = new System.Windows.Forms.Label();
             this.txtStart = new System.Windows.Forms.TextBox();
             this.txtEnd = new System.Windows.Forms.TextBox();
+            this.lblStats = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -102,6 +103,17 @@ partial class FrmMain
             this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 722);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
+            // plotFFT
+            // 
+            this.plotFFT.BackColor = System.Drawing.Color.Transparent;
+            this.plotFFT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotFFT.Location = new System.Drawing.Point(4, 483);
+            this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.plotFFT.Name = "plotFFT";
+            this.plotFFT.Size = new System.Drawing.Size(852, 236);
+            this.plotFFT.SnapToPoint = false;
+            this.plotFFT.TabIndex = 5;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
@@ -153,17 +165,6 @@ partial class FrmMain
             this.plotApplied.Size = new System.Drawing.Size(280, 234);
             this.plotApplied.SnapToPoint = false;
             this.plotApplied.TabIndex = 4;
-            // 
-            // plotFFT
-            // 
-            this.plotFFT.BackColor = System.Drawing.Color.Transparent;
-            this.plotFFT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFFT.Location = new System.Drawing.Point(4, 483);
-            this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotFFT.Name = "plotFFT";
-            this.plotFFT.Size = new System.Drawing.Size(852, 236);
-            this.plotFFT.SnapToPoint = false;
-            this.plotFFT.TabIndex = 5;
             // 
             // cboSeries
             // 
@@ -265,11 +266,21 @@ partial class FrmMain
             this.txtEnd.Size = new System.Drawing.Size(77, 25);
             this.txtEnd.TabIndex = 15;
             // 
+            // lblStats
+            // 
+            this.lblStats.AutoSize = true;
+            this.lblStats.Location = new System.Drawing.Point(620, 55);
+            this.lblStats.Name = "lblStats";
+            this.lblStats.Size = new System.Drawing.Size(132, 19);
+            this.lblStats.TabIndex = 16;
+            this.lblStats.Text = "Descriptive statistics";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 861);
+            this.Controls.Add(this.lblStats);
             this.Controls.Add(this.txtEnd);
             this.Controls.Add(this.txtStart);
             this.Controls.Add(this.lblEnd);
@@ -321,4 +332,5 @@ partial class FrmMain
     private Label lblEnd;
     private TextBox txtStart;
     private TextBox txtEnd;
+    private Label lblStats;
 }
