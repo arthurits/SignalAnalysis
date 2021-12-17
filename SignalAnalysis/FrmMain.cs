@@ -6,12 +6,14 @@ namespace SignalAnalysis;
 public partial class FrmMain : Form
 {
     private double[][] _signalData = Array.Empty<double[]>();
+    private double[] _signalRange = Array.Empty<double>();
     private double[] _signalFFT = Array.Empty<double>();
     private double[] _signalX = Array.Empty<double>();
     private string[] _series = Array.Empty<string>();
     private int nSeries = 0;
     private int nPoints = 0;
     double nSampleFreq = 0.0;
+    DateTime nStart;
 
     Task fractalTask;
     private CancellationTokenSource tokenSource;
@@ -83,7 +85,7 @@ public partial class FrmMain : Form
                 throw new Exception("No generic text file reader has yet been implemented.");
 
             this.txtStart.Text = "0";
-            this.txtEnd.Text = _signalData[0].Length.ToString();
+            this.txtEnd.Text = (_signalData[0].Length - 1).ToString();
 
             PopulateCboSeries();
         }
@@ -110,12 +112,12 @@ public partial class FrmMain : Form
     {
         int nStart = int.Parse(txtStart.Text);
         int nLength = int.Parse(txtEnd.Text) - nStart + 1;
-        double[] signal = new double[nLength];
+        _signalRange = new double[nLength];
 
-        Array.Copy(_signalData[cboSeries.SelectedIndex], nStart, signal, 0, nLength);
-        UpdateOriginal(signal);
-        UpdateStats(signal);
-        UpdateFractal(signal, chkCumulative.Checked);
+        Array.Copy(_signalData[cboSeries.SelectedIndex], nStart, _signalRange, 0, nLength);
+        UpdateOriginal(_signalRange);
+        UpdateStats(_signalRange);
+        UpdateFractal(_signalRange, chkCumulative.Checked);
         cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
 
     }
@@ -156,7 +158,7 @@ public partial class FrmMain : Form
         if (!chkCumulative.Checked)
             FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
 
-        UpdateFractal(chkCumulative.Checked);
+        UpdateFractal(_signalRange, chkCumulative.Checked);
     }
 
     private void chkLog_CheckedChanged(object sender, EventArgs e)

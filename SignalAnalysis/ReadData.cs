@@ -25,13 +25,17 @@ partial class FrmMain
 
         // Better implement a try parse block. Each read line should throw an exception instead of "return"
         strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Start time: ", StringComparison.Ordinal))
+        if (strLine != null)
         {
-            using (new CenterWinDialog(this))
+            if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
             {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                using (new CenterWinDialog(this))
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
             }
-            return;
+            else
+                DateTime.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nStart);
         }
 
         strLine = sr.ReadLine();

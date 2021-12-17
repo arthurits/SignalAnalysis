@@ -6,7 +6,10 @@ partial class FrmMain
         plotOriginal.Clear();
         //plotOriginal.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         //plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
-        plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: cboSeries.SelectedItem.ToString());
+        var sig = plotOriginal.Plot.AddSignal(signal, 24*60*60*nSampleFreq, label: cboSeries.SelectedItem.ToString());
+        sig.OffsetX = nStart.ToOADate();
+        plotOriginal.Plot.XAxis.DateTimeFormat(true);
+
         plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle"));
         plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel"));
         plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel"));
