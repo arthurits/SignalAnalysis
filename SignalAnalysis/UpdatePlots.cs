@@ -6,9 +6,23 @@ partial class FrmMain
         plotOriginal.Clear();
         //plotOriginal.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         //plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
-        var sig = plotOriginal.Plot.AddSignal(signal, 24*60*60*nSampleFreq, label: cboSeries.SelectedItem.ToString());
-        sig.OffsetX = nStart.ToOADate();
-        plotOriginal.Plot.XAxis.DateTimeFormat(true);
+
+        switch (_settings.AxisType)
+        {
+            case AxisType.Points:
+                plotOriginal.Plot.AddSignal(signal, nSampleFreq/nSampleFreq, label: cboSeries.SelectedItem.ToString());
+                plotOriginal.Plot.XAxis.DateTimeFormat(false);
+                break;
+            case AxisType.Seconds:
+                plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: cboSeries.SelectedItem.ToString());
+                plotOriginal.Plot.XAxis.DateTimeFormat(false);
+                break;
+            case AxisType.DateTime:
+                var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * nSampleFreq, label: cboSeries.SelectedItem.ToString());
+                sig.OffsetX = nStart.ToOADate();
+                plotOriginal.Plot.XAxis.DateTimeFormat(true);
+                break;
+        }
 
         plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle"));
         plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel"));
@@ -89,7 +103,7 @@ partial class FrmMain
                     StringsRM.GetString("strMsgBoxTaskCancelTitle"),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Stop);
-            this.chkCumulative.Checked = false;
+            _settings.CumulativeDimension = false;
         }
         finally
         {
@@ -102,13 +116,13 @@ partial class FrmMain
 
     private void UpdateFFT(double[] signal)
     {
-        double[] ys = chkPower.Checked ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
+        double[] ys = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
 
         // Plot the results
         plotFFT.Clear();
         plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
         plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle"));
-        plotFFT.Plot.YLabel(chkPower.Checked ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
+        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
@@ -120,12 +134,14 @@ partial class FrmMain
         
         for (int i = 0; i < signal.Length; i++)
         {
-            if (signal[i]> max) max = signal[i];
-            if (signal[i]< min) min = signal[i];
+            if (signal[i] > max) max = signal[i];
+            if (signal[i] < min) min = signal[i];
             sum += signal[i];
         }
         double avg = sum / signal.Length;
 
-        lblStats.Text = String.Concat(avg.ToString(), "\t", max.ToString(), "\t", min.ToString());
+        lblStats.Text = $"Avg: {avg.ToString("0.######")} - Max: {max.ToString("0.##")} - Min: {min.ToString("0.##")}";
+        //lblStats.Text = String.Concat("Avg: ", avg.ToString("0.###"), " Max: ", max.ToString("0.#"), " Min: ", min.ToString("0.#"));
+        // Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
     }
 }

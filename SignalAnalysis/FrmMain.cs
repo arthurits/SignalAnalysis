@@ -14,6 +14,7 @@ public partial class FrmMain : Form
     private int nPoints = 0;
     double nSampleFreq = 0.0;
     DateTime nStart;
+    clsSettings _settings = new();
 
     Task fractalTask;
     private CancellationTokenSource tokenSource;
@@ -32,7 +33,6 @@ public partial class FrmMain : Form
         this.plotFFT.SnapToPoint = true;
 
         PopulateCboWindow();
-        chkPower.Checked = true;
 
         UpdateUI_Language();
     }
@@ -75,7 +75,6 @@ public partial class FrmMain : Form
         {
             //Get the path of specified file
             filePath = openDlg.FileName;
-            lblData.Text = openDlg.FileName;
 
             if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 ReadELuxData(filePath);
@@ -84,10 +83,14 @@ public partial class FrmMain : Form
             else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 throw new Exception("No generic text file reader has yet been implemented.");
 
-            this.txtStart.Text = "0";
-            this.txtEnd.Text = (_signalData[0].Length - 1).ToString();
+            _settings.IndexStart = 0;
+            _settings.IndexEnd = _signalData[0].Length - 1;
+            //this.txtStart.Text = "0";
+            //this.txtEnd.Text = (_signalData[0].Length - 1).ToString();
 
             PopulateCboSeries();
+
+            this.Text = StringsRM.GetString("strFrmTitle") + " - " + openDlg.FileName;
         }
 
     }
@@ -110,14 +113,20 @@ public partial class FrmMain : Form
 
     private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int nStart = int.Parse(txtStart.Text);
-        int nLength = int.Parse(txtEnd.Text) - nStart + 1;
-        _signalRange = new double[nLength];
+        //int nStart = int.Parse(txtStart.Text);
+        //int nLength = int.Parse(txtEnd.Text) - nStart + 1;
+        _signalRange = new double[_settings.IndexEnd - _settings.IndexStart + 1];
 
-        Array.Copy(_signalData[cboSeries.SelectedIndex], nStart, _signalRange, 0, nLength);
+        Array.Copy(
+            _signalData[cboSeries.SelectedIndex],
+            _settings.IndexStart,
+            _signalRange,
+            0,
+            _settings.IndexEnd - _settings.IndexStart + 1);
+
         UpdateOriginal(_signalRange);
         UpdateStats(_signalRange);
-        UpdateFractal(_signalRange, chkCumulative.Checked);
+        UpdateFractal(_signalRange, _settings.CumulativeDimension);
         cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
 
     }
@@ -153,13 +162,13 @@ public partial class FrmMain : Form
         UpdateFFT(signalWindow);
     }
 
-    private void chkProgressive_CheckedChanged(object sender, EventArgs e)
-    {
-        if (!chkCumulative.Checked)
-            FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
+    //private void chkProgressive_CheckedChanged(object sender, EventArgs e)
+    //{
+    //    if (!chkCumulative.Checked)
+    //        FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
 
-        UpdateFractal(_signalRange, chkCumulative.Checked);
-    }
+    //    UpdateFractal(_signalRange, _settings.CumulativeDimension);
+    //}
 
     private void chkLog_CheckedChanged(object sender, EventArgs e)
     {
@@ -176,11 +185,11 @@ public partial class FrmMain : Form
     {
         this.Text = StringsRM.GetString("strFrmTitle");
         this.btnData.Text = StringsRM.GetString("strBtnData");
-        this.lblData.Text = StringsRM.GetString("strLblData");
+        //this.lblData.Text = StringsRM.GetString("strLblData");
         this.lblSeries.Text = StringsRM.GetString("strLblSeries");
         this.lblWindow.Text = StringsRM.GetString("strLblWindow");
-        this.chkPower.Text = StringsRM.GetString("strChkPower");
-        this.chkCumulative.Text = StringsRM.GetString("strChkCumulative");
+        //this.chkPower.Text = StringsRM.GetString("strChkPower");
+        //this.chkCumulative.Text = StringsRM.GetString("strChkCumulative");
         
         // Update plots if they contain series
         if(plotOriginal.Plot.GetPlottables().Length > 2)
@@ -212,7 +221,7 @@ public partial class FrmMain : Form
         if (plotFFT.Plot.GetPlottables().Length > 2)
         {
             plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle"));
-            plotFFT.Plot.YLabel(chkPower.Checked ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
+            plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
             plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
         }
         
@@ -220,6 +229,18 @@ public partial class FrmMain : Form
 
     private void cmdExport_Click(object sender, EventArgs e)
     {
+
+    }
+
+    private void btnSettings_Click(object sender, EventArgs e)
+    {
+        var frm = new FrmSettings(_settings);
+        frm.ShowDialog();
+        if(frm.DialogResult == DialogResult.OK)
+        {
+            _settings = frm.Settings;
+            cboSeries_SelectedIndexChanged(this, EventArgs.Empty);
+        }
 
     }
 }
