@@ -37,7 +37,7 @@
             this.radSeconds = new System.Windows.Forms.RadioButton();
             this.radPoints = new System.Windows.Forms.RadioButton();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
             this.chkPower = new System.Windows.Forms.CheckBox();
             this.chkCumulative = new System.Windows.Forms.CheckBox();
             this.grpAxis.SuspendLayout();
@@ -128,16 +128,17 @@
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnOK
+            // btnAccept
             // 
-            this.btnOK.Location = new System.Drawing.Point(325, 190);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(100, 30);
-            this.btnOK.TabIndex = 6;
-            this.btnOK.Text = "&OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnAccept.Location = new System.Drawing.Point(325, 190);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(100, 30);
+            this.btnAccept.TabIndex = 6;
+            this.btnAccept.Text = "&Accept";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // chkPower
             // 
@@ -167,7 +168,7 @@
             this.ClientSize = new System.Drawing.Size(437, 232);
             this.Controls.Add(this.chkCumulative);
             this.Controls.Add(this.chkPower);
-            this.Controls.Add(this.btnOK);
+            this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpAxis);
             this.Controls.Add(this.txtEnd);
@@ -175,7 +176,9 @@
             this.Controls.Add(this.lblEnd);
             this.Controls.Add(this.lblStart);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmSettings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.grpAxis.ResumeLayout(false);
             this.grpAxis.PerformLayout();
@@ -195,7 +198,7 @@
         private RadioButton radSeconds;
         private RadioButton radPoints;
         private Button btnCancel;
-        private Button btnOK;
+        private Button btnAccept;
         private CheckBox chkPower;
         private CheckBox chkCumulative;
     }

@@ -40,7 +40,7 @@ partial class FrmMain
             this.lblSeries = new System.Windows.Forms.Label();
             this.lblWindow = new System.Windows.Forms.Label();
             this.cboWindow = new System.Windows.Forms.ComboBox();
-            this.cmdExport = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.lblStats = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
@@ -187,15 +187,15 @@ partial class FrmMain
             this.cboWindow.TabIndex = 8;
             this.cboWindow.SelectedIndexChanged += new System.EventHandler(this.cboWindow_SelectedIndexChanged);
             // 
-            // cmdExport
+            // btnExport
             // 
-            this.cmdExport.Location = new System.Drawing.Point(146, 12);
-            this.cmdExport.Name = "cmdExport";
-            this.cmdExport.Size = new System.Drawing.Size(95, 28);
-            this.cmdExport.TabIndex = 11;
-            this.cmdExport.Text = "Export data";
-            this.cmdExport.UseVisualStyleBackColor = true;
-            this.cmdExport.Click += new System.EventHandler(this.cmdExport_Click);
+            this.btnExport.Location = new System.Drawing.Point(146, 12);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(95, 28);
+            this.btnExport.TabIndex = 11;
+            this.btnExport.Text = "Export data";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.cmdExport_Click);
             // 
             // lblStats
             // 
@@ -223,7 +223,7 @@ partial class FrmMain
             this.ClientSize = new System.Drawing.Size(884, 712);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.lblStats);
-            this.Controls.Add(this.cmdExport);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.cboWindow);
             this.Controls.Add(this.lblWindow);
             this.Controls.Add(this.lblSeries);
@@ -259,7 +259,7 @@ partial class FrmMain
     private ScottPlot.FormsPlotCrossHair plotWindow;
     private ScottPlot.FormsPlotCrossHair plotApplied;
     private ScottPlot.FormsPlotCrossHair plotFFT;
-    private Button cmdExport;
+    private Button btnExport;
     private Label lblStats;
     private Button btnSettings;
 }

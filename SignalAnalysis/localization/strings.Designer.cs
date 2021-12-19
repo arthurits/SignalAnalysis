@@ -61,11 +61,47 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Accept.
+        /// </summary>
+        internal static string strBtnAccept {
+            get {
+                return ResourceManager.GetString("strBtnAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Cancel.
+        /// </summary>
+        internal static string strBtnCancel {
+            get {
+                return ResourceManager.GetString("strBtnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select data.
         /// </summary>
         internal static string strBtnData {
             get {
                 return ResourceManager.GetString("strBtnData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Export.
+        /// </summary>
+        internal static string strBtnExport {
+            get {
+                return ResourceManager.GetString("strBtnExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Settings.
+        /// </summary>
+        internal static string strBtnSettings {
+            get {
+                return ResourceManager.GetString("strBtnSettings", resourceCulture);
             }
         }
         
@@ -88,11 +124,29 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string strFrmSettings {
+            get {
+                return ResourceManager.GetString("strFrmSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Signal analysis.
         /// </summary>
         internal static string strFrmTitle {
             get {
                 return ResourceManager.GetString("strFrmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abscissa axis.
+        /// </summary>
+        internal static string strGrpAxis {
+            get {
+                return ResourceManager.GetString("strGrpAxis", resourceCulture);
             }
         }
         
@@ -106,11 +160,29 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Array index end.
+        /// </summary>
+        internal static string strLblEnd {
+            get {
+                return ResourceManager.GetString("strLblEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select series.
         /// </summary>
         internal static string strLblSeries {
             get {
                 return ResourceManager.GetString("strLblSeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Array index start.
+        /// </summary>
+        internal static string strLblStart {
+            get {
+                return ResourceManager.GetString("strLblStart", resourceCulture);
             }
         }
         
@@ -283,6 +355,33 @@ namespace SignalAnalysis.localization {
         internal static string strPlotWindowYLabel {
             get {
                 return ResourceManager.GetString("strPlotWindowYLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data poins.
+        /// </summary>
+        internal static string strRadPoints {
+            get {
+                return ResourceManager.GetString("strRadPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seconds.
+        /// </summary>
+        internal static string strRadSeconds {
+            get {
+                return ResourceManager.GetString("strRadSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date and time.
+        /// </summary>
+        internal static string strRadTime {
+            get {
+                return ResourceManager.GetString("strRadTime", resourceCulture);
             }
         }
     }

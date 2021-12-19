@@ -10,13 +10,16 @@
 
 namespace SignalAnalysis
 {
+    
     public partial class FrmSettings : Form
     {
         public clsSettings Settings = new();
+        private System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
 
         public FrmSettings()
         {
             InitializeComponent();
+            UpdateUI_Language();
         }
 
         public FrmSettings(clsSettings settings)
@@ -41,12 +44,14 @@ namespace SignalAnalysis
             }
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void btnAccept_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtStart.Text, out int num)) return;
+            if (num < 0) return;
             Settings.IndexStart = num;
 
             if (!int.TryParse(txtEnd.Text, out num)) return;
+            if (num <= Settings.IndexStart) return;
             Settings.IndexEnd = num;
 
             Settings.PowerSpectra = chkPower.Checked;
@@ -56,7 +61,28 @@ namespace SignalAnalysis
             if (radPoints.Checked) Settings.AxisType = AxisType.Points;
             if (radTime.Checked) Settings.AxisType = AxisType.DateTime;
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void UpdateUI_Language()
+        {
+            this.Text = StringsRM.GetString("strFrmSettings");
+            this.lblStart.Text = StringsRM.GetString("strLblStart");
+            this.lblEnd.Text = StringsRM.GetString("strLblEnd");
+            this.grpAxis.Text = StringsRM.GetString("strGrpAxis");
+            this.radPoints.Text = StringsRM.GetString("strRadPoints");
+            this.radSeconds.Text = StringsRM.GetString("strRadSeconds");
+            this.radTime.Text = StringsRM.GetString("strRadTime");
+            this.chkPower.Text = StringsRM.GetString("strChkPower");
+            this.chkCumulative.Text = StringsRM.GetString("strChkCumulative");
+            this.btnCancel.Text = StringsRM.GetString("strBtnCancel");
+            this.btnAccept.Text = StringsRM.GetString("strBtnAccept");
+
         }
     }
 }

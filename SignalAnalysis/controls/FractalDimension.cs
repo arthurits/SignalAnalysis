@@ -233,3 +233,80 @@ public static class FractalDimension
         return (highest, lowest);
     }
 }
+
+// https://www.codeproject.com/Articles/27030/Approximate-and-Sample-Entropies-Complexity-Metric
+// https://pdfs.semanticscholar.org/6841/efb4c40a74c1faa9f36e6d949d1ee330bfa9.pdf
+// https://en.wikipedia.org/wiki/Sample_entropy
+public class Complexity
+{
+    /// <summary>
+    /// Computes the approximate and sample entropies of a physiological time-series signals (typically used to diagnose diseased states).
+    /// ApEn reflects the likelihood that similar patterns of observations will not be followed by additional similar observations. A time series containing many repetitive patterns has a relatively small ApEn; a less predictable process has a higher ApEn.
+    /// A smaller value of SampEn also indicates more self-similarity in data set or less noise.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="dim">Embedding dimension</param>
+    /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
+    /// <param name="std">Standard deviation of the population</param>
+    /// <returns>AppEn and SampEn</returns>
+    public static (double AppEn, double SampEn) Entropy(double[] data, uint dim = 2, double fTol = 0.2, double? std = null)
+    {
+        long upper = data.Length - (dim + 1) + 1;
+        bool eq = true;
+        int Cm = 0, Cm1 = 0;
+        double sum = 0.0;
+        double appEn = 0.0, sampEn = 0.0;
+        double tolerance;
+        if (std.HasValue)
+            tolerance = std.Value * fTol;
+        else
+            tolerance = StdDev(data) * fTol;
+
+
+        for (uint i = 0; i < upper; i++)
+        {
+            Cm = 0;
+            Cm1 = 0;
+            for (uint j = 0; j < upper; j++)
+            {
+                eq = true;
+                //m - length series
+                for (uint k = 0; k < dim; k++)
+                {
+                    if (Math.Abs(data[i + k] - data[j + k]) > tolerance)
+                    {
+                        eq = false;
+                        break;
+                    }
+                }
+                if (eq) Cm++;
+
+                //m+1 - length series
+                if (eq && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
+                    Cm1++;
+            }
+
+            if (Cm > 0 && Cm1 > 0)
+                sum += Math.Log((double)Cm / (double)Cm1);
+        }
+
+        appEn = sum / (double)(data.Length - dim);
+        sampEn = Cm > 0 && Cm1 > 0 ? Math.Log((double)Cm / (double)Cm1) : 0.0;
+
+        return (appEn, sampEn);
+    }
+
+    /// <summary>
+    /// Computes the standard deviation
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><langword="True"/> to compute the sample standard deviation (N-1), otherwise it computes the population (N) deviation</param>
+    /// <returns></returns>
+    public static double StdDev(double[] values, bool asSample = false)
+    {
+        double avg = System.Linq.Enumerable.Average(values);
+        double sum = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(values, v => (v - avg) * (v - avg)));
+        double denominator = values.Length - (asSample ? 1 : 0);
+        return denominator > 0.0 ? Math.Sqrt(sum / denominator) : -1;
+    }
+}

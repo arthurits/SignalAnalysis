@@ -24,7 +24,7 @@ public partial class FrmMain : Form
     /// https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/y99d1cd3(v=vs.100)?WT.mc_id=DT-MVP-5003235
     /// https://stackoverflow.com/questions/32989100/how-to-make-multi-language-app-in-winforms
     /// </summary>
-    private System.Resources.ResourceManager StringsRM = new System.Resources.ResourceManager("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+    private System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
 
     public FrmMain()
     {
@@ -56,10 +56,9 @@ public partial class FrmMain : Form
 
     private void btnData_Click(object sender, EventArgs e)
     {
-        var fileContent = string.Empty;
         var filePath = string.Empty;
 
-        using OpenFileDialog openDlg = new OpenFileDialog();
+        using OpenFileDialog openDlg = new();
 
         openDlg.Title = "Select data file";
         openDlg.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
@@ -83,11 +82,10 @@ public partial class FrmMain : Form
             else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 throw new Exception("No generic text file reader has yet been implemented.");
 
+            nPoints = _signalData[0].Length;
             _settings.IndexStart = 0;
             _settings.IndexEnd = _signalData[0].Length - 1;
-            //this.txtStart.Text = "0";
-            //this.txtEnd.Text = (_signalData[0].Length - 1).ToString();
-
+            
             PopulateCboSeries();
 
             this.Text = StringsRM.GetString("strFrmTitle") + " - " + openDlg.FileName;
@@ -115,6 +113,7 @@ public partial class FrmMain : Form
     {
         //int nStart = int.Parse(txtStart.Text);
         //int nLength = int.Parse(txtEnd.Text) - nStart + 1;
+        nPoints = _settings.IndexEnd - _settings.IndexStart + 1;
         _signalRange = new double[_settings.IndexEnd - _settings.IndexStart + 1];
 
         Array.Copy(
@@ -185,11 +184,11 @@ public partial class FrmMain : Form
     {
         this.Text = StringsRM.GetString("strFrmTitle");
         this.btnData.Text = StringsRM.GetString("strBtnData");
-        //this.lblData.Text = StringsRM.GetString("strLblData");
+        this.btnExport.Text = StringsRM.GetString("strBtnExport");
+        this.btnSettings.Text = StringsRM.GetString("strBtnSettings");
         this.lblSeries.Text = StringsRM.GetString("strLblSeries");
         this.lblWindow.Text = StringsRM.GetString("strLblWindow");
-        //this.chkPower.Text = StringsRM.GetString("strChkPower");
-        //this.chkCumulative.Text = StringsRM.GetString("strChkCumulative");
+
         
         // Update plots if they contain series
         if(plotOriginal.Plot.GetPlottables().Length > 2)

@@ -117,23 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>&amp;Aceptar</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>&amp;Cancelar</value>
+  </data>
   <data name="strBtnData" xml:space="preserve">
     <value>Seleccionar datos</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>&amp;Exportar</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>&amp;Opciones</value>
   </data>
   <data name="strChkCumulative" xml:space="preserve">
     <value>Dimensión fractal acumulada</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
-    <value>Espectro (db)</value>
+    <value>Espectro (dB)</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>Opciones</value>
   </data>
   <data name="strFrmTitle" xml:space="preserve">
     <value>Analisis de señales</value>
   </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>Eje de abscisas</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>
   </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>Índice final</value>
+  </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Seleccionar serie</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>Índice inicial</value>
   </data>
   <data name="strLblWindow" xml:space="preserve">
     <value>Ventana</value>
@@ -192,5 +216,14 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitud</value>
+  </data>
+  <data name="strRadPoints" xml:space="preserve">
+    <value>Puntos</value>
+  </data>
+  <data name="strRadSeconds" xml:space="preserve">
+    <value>Segundos</value>
+  </data>
+  <data name="strRadTime" xml:space="preserve">
+    <value>Tiempo</value>
   </data>
 </root>
