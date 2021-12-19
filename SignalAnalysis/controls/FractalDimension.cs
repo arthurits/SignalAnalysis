@@ -252,7 +252,7 @@ public class Complexity
     public static (double AppEn, double SampEn) Entropy(double[] data, uint dim = 2, double fTol = 0.2, double? std = null)
     {
         long upper = data.Length - (dim + 1) + 1;
-        bool eq = true;
+        bool isEqual;
         int Cm = 0, Cm1 = 0;
         double sum = 0.0;
         double appEn = 0.0, sampEn = 0.0;
@@ -269,20 +269,20 @@ public class Complexity
             Cm1 = 0;
             for (uint j = 0; j < upper; j++)
             {
-                eq = true;
+                isEqual = true;
                 //m - length series
                 for (uint k = 0; k < dim; k++)
                 {
                     if (Math.Abs(data[i + k] - data[j + k]) > tolerance)
                     {
-                        eq = false;
+                        isEqual = false;
                         break;
                     }
                 }
-                if (eq) Cm++;
+                if (isEqual) Cm++;
 
                 //m+1 - length series
-                if (eq && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
+                if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
                     Cm1++;
             }
 
@@ -297,11 +297,11 @@ public class Complexity
     }
 
     /// <summary>
-    /// Computes the standard deviation
+    /// Computes the standard deviation of a data series.
     /// </summary>
     /// <param name="values">Data values</param>
-    /// <param name="asSample"><langword="True"/> to compute the sample standard deviation (N-1), otherwise it computes the population (N) deviation</param>
-    /// <returns></returns>
+    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
+    /// <returns>Standard deviation</returns>
     public static double StdDev(double[] values, bool asSample = false)
     {
         double avg = System.Linq.Enumerable.Average(values);
