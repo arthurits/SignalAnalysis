@@ -79,6 +79,7 @@ partial class FrmMain
         try
         {
             await fractalTask;
+            Results.FractalDimension = FractalDimension.DimensionSingle;
 
             plotFractal.Clear();
             if (progressive && FractalDimension.DimensionCumulative.Length > 0)
@@ -128,7 +129,7 @@ partial class FrmMain
         plotFFT.Refresh();
     }
 
-    private void UpdateStats(double[] signal)
+    private void UpdateStats(double[] signal, bool entropy = false)
     {
         double max = signal[0], min = signal[0], sum = 0;
         
@@ -139,6 +140,12 @@ partial class FrmMain
             sum += signal[i];
         }
         double avg = sum / signal.Length;
+
+        Results.Maximum = max;
+        Results.Minimum = min;
+        Results.Average = avg;
+        if (entropy)
+            (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal);
 
         lblStats.Text = $"Avg: {avg.ToString("0.######")} - Max: {max.ToString("0.##")} - Min: {min.ToString("0.##")}";
         //lblStats.Text = String.Concat("Avg: ", avg.ToString("0.###"), " Max: ", max.ToString("0.#"), " Min: ", min.ToString("0.#"));

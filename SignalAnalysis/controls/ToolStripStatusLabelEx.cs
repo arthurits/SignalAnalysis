@@ -87,7 +87,7 @@ namespace System.Windows.Forms
             if (_checked)
             {
                 // fill the entire button with a color (will be used as a border)
-                System.Drawing.Rectangle rectButtonFill = new System.Drawing.Rectangle(System.Drawing.Point.Empty, new System.Drawing.Size(ContentRectangle.Size.Width, ContentRectangle.Size.Height));
+                System.Drawing.Rectangle rectButtonFill = new(System.Drawing.Point.Empty, new System.Drawing.Size(ContentRectangle.Size.Width, ContentRectangle.Size.Height));
                 e.Graphics.FillRectangle(_border, rectButtonFill);
 
                 // fill the entire button offset by 1,1 and height/width subtracted by 2 used as the fill color

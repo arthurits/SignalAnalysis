@@ -134,10 +134,10 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // If we are reading from the sensor, then exit
         if (!VerticalLine.IsVisible || !SnapToPoint) return;
 
-        var snap = SnapLinesToPoint(ToX: true);
+        var (pointX, pointY, pointIndex) = SnapLinesToPoint(ToX: true);
 
         // Raise the custom event for the subscribers
-        OnVLineDragged(new LineDragEventArgs(snap.pointX, snap.pointY, snap.pointIndex));
+        OnVLineDragged(new LineDragEventArgs(pointX, pointY, pointIndex));
         //EventHandler<VLineDragEventArgs> handler = VLineDragged;
         //handler?.Invoke(this, new VLineDragEventArgs(pointX, pointY, pointIndex));
 
@@ -148,10 +148,10 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // If we are reading from the sensor, then exit
         if (!HorizontalLine.IsVisible || !SnapToPoint) return;
 
-        var snap = SnapLinesToPoint(ToY: true);
+        var (pointX, pointY, pointIndex) = SnapLinesToPoint(ToY: true);
 
         // Raise the custom event for the subscribers
-        OnHLineDragged(new LineDragEventArgs(snap.pointX, snap.pointY, snap.pointIndex));
+        OnHLineDragged(new LineDragEventArgs(pointX, pointY, pointIndex));
         //EventHandler<VLineDragEventArgs> handler = VLineDragged;
         //handler?.Invoke(this, new VLineDragEventArgs(pointX, pointY, pointIndex));
 
@@ -164,7 +164,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     public Plottable.IPlottable[] GetDataCurves()
     {
         //System.Collections.ObjectModel.ObservableCollection<ScottPlot.Plottable.IPlottable> plots = new();
-        var dataPlots = this.Plot.GetPlottables().Where(x => !(x is Plottable.VLine) && !(x is Plottable.HLine));
+        var dataPlots = this.Plot.GetPlottables().Where(x => x is not Plottable.VLine && x is not Plottable.HLine);
 
         //foreach (var plot in this.Plot.GetPlottables())
         //{

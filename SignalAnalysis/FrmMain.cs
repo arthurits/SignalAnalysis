@@ -15,6 +15,28 @@ public partial class FrmMain : Form
     double nSampleFreq = 0.0;
     DateTime nStart;
     clsSettings _settings = new();
+    private struct Stats
+    {
+        public Stats(double Max = 0, double Min = 0, double Avg = 0, double FractalDim = 0, double AppEn = 0, double SampEn = 0)
+        {
+            Maximum = Max;
+            Minimum = Min;
+            Average = Avg;
+            FractalDimension = FractalDim;
+            ApproximateEntropy = AppEn;
+            SampleEntropy = SampEn;
+        }
+
+        public double Maximum { get; set; }
+        public double Minimum { get; set; }
+        public double Average { get; set; }
+        public double FractalDimension { get; set; }
+        public double ApproximateEntropy { get; set; }
+        public double SampleEntropy { get; set; }
+
+        public override string ToString() => $"Average {Average} lux, maximum {Maximum} lux, minimum {Minimum} lux, fractal dimension {FractalDimension}, approximate entropy {ApproximateEntropy}, sample entropy {SampleEntropy})";
+    }
+    Stats Results;
 
     Task fractalTask;
     private CancellationTokenSource tokenSource;
@@ -28,8 +50,9 @@ public partial class FrmMain : Form
 
     public FrmMain()
     {
-        InitializeComponent();
         InitializeToolStripPanel();
+        InitializeComponent();
+        
         this.plotOriginal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
 
@@ -54,24 +77,66 @@ public partial class FrmMain : Form
             Text = "Main toolbar"
         };
 
-        toolStripMain.Items.Add("Exit", new System.Drawing.Icon(path + @"\images\exit.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
-        toolStripMain.Items.Add("Open", new System.Drawing.Icon(path + @"\images\openfolder.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
-        toolStripMain.Items.Add("Save", new System.Drawing.Icon(path + @"\images\save.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        ToolStripItem toolStripItem;
+        toolStripItem = toolStripMain.Items.Add("Exit", new System.Drawing.Icon(path + @"\images\exit.ico", 48, 48).ToBitmap(), new EventHandler(Exit_Click));
+        toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+        toolStripItem.Name = "Exit";
+        toolStripItem = toolStripMain.Items.Add("Open", new System.Drawing.Icon(path + @"\images\openfolder.ico", 48, 48).ToBitmap(), new EventHandler(Open_Click));
+        toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+        toolStripItem = toolStripMain.Items.Add("Export", new System.Drawing.Icon(path + @"\images\save.ico", 48, 48).ToBitmap(), new EventHandler(Export_Click));
+        toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripMain.Items.Add(new ToolStripSeparator());
-        toolStripMain.Items.Add("Save", new System.Drawing.Icon(path + @"\images\settings.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        toolStripItem = toolStripMain.Items.Add("Settings", new System.Drawing.Icon(path + @"\images\settings.ico", 48, 48).ToBitmap(), new EventHandler(Settings_Click));
+        toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripMain.Items.Add(new ToolStripSeparator());
-        toolStripMain.Items.Add("About", new System.Drawing.Icon(path + @"\images\about.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        toolStripItem = toolStripMain.Items.Add("About", new System.Drawing.Icon(path + @"\images\about.ico", 48, 48).ToBitmap(), new EventHandler(About_Click));
+        toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         tspTop.Join(toolStripMain);
 
 
         ToolStripPanel tspBottom = new();
-        tspTop.Dock = DockStyle.Bottom;
+        tspBottom.Dock = DockStyle.Bottom;
+
+        StatusStrip statusStrip = new()
+        {
+            ShowItemToolTips = true,
+            TabIndex = 1,
+            Text = "Status bar"
+        };
+
+        int item;
+        item = statusStrip.Items.Add(new ToolStripStatusLabel()
+        {
+            AutoSize = true,
+            BorderSides = ToolStripStatusLabelBorderSides.Right,
+            DisplayStyle = ToolStripItemDisplayStyle.Text,
+            Name = "LabelEmpty",
+            Spring = true,
+            TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+            ToolTipText = ""
+        });
+
+        item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
+        {
+            AutoSize = false,
+            Checked = false,
+            DisplayStyle = ToolStripItemDisplayStyle.Text,
+            Name = "LabelExPower",
+            Size = new System.Drawing.Size(28, 23),
+            Text = "P",
+            ToolTipText = "Power spectra (dB)"
+        });
+        statusStrip.Items[item].Click += LabelExPower_Click;
+
+        var test = new ToolStripStatusLabelEx();
+        
 
         //tspTop.Join(mnuMainFrm);
-        //tspBottom.Join(this.statusStrip);
+        tspBottom.Join(statusStrip);
 
         //this.Controls.Add(tspBottom);
         this.Controls.Add(tspTop);
+        this.Controls.Add(tspBottom);
 
         // Exit the method
         return;
@@ -99,44 +164,7 @@ public partial class FrmMain : Form
         }
     }
 
-    private void btnData_Click(object sender, EventArgs e)
-    {
-        var filePath = string.Empty;
-
-        using OpenFileDialog openDlg = new();
-
-        openDlg.Title = "Select data file";
-        openDlg.InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
-        openDlg.Filter = "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*";
-        openDlg.FilterIndex = 4;
-        openDlg.RestoreDirectory = true;
-
-        DialogResult result;
-        using (new CenterWinDialog(this))
-            result = openDlg.ShowDialog(this);
-
-        if (result == DialogResult.OK && openDlg.FileName != "")
-        {
-            //Get the path of specified file
-            filePath = openDlg.FileName;
-
-            if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                ReadELuxData(filePath);
-            else if (".sig".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                ReadSigData(filePath);
-            else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                throw new Exception("No generic text file reader has yet been implemented.");
-
-            nPoints = _signalData[0].Length;
-            _settings.IndexStart = 0;
-            _settings.IndexEnd = _signalData[0].Length - 1;
-            
-            PopulateCboSeries();
-
-            this.Text = StringsRM.GetString("strFrmTitle") + " - " + openDlg.FileName;
-        }
-
-    }
+    
 
     private void PopulateCboSeries(params string[] values)
     {
@@ -169,7 +197,7 @@ public partial class FrmMain : Form
             _settings.IndexEnd - _settings.IndexStart + 1);
 
         UpdateOriginal(_signalRange);
-        UpdateStats(_signalRange);
+        UpdateStats(_signalRange, nPoints <= 50000);
         UpdateFractal(_signalRange, _settings.CumulativeDimension);
         cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
 
@@ -228,9 +256,9 @@ public partial class FrmMain : Form
     private void UpdateUI_Language()
     {
         this.Text = StringsRM.GetString("strFrmTitle");
-        this.btnData.Text = StringsRM.GetString("strBtnData");
-        this.btnExport.Text = StringsRM.GetString("strBtnExport");
-        this.btnSettings.Text = StringsRM.GetString("strBtnSettings");
+        //this.btnData.Text = StringsRM.GetString("strBtnData");
+        //this.btnExport.Text = StringsRM.GetString("strBtnExport");
+        //this.btnSettings.Text = StringsRM.GetString("strBtnSettings");
         this.lblSeries.Text = StringsRM.GetString("strLblSeries");
         this.lblWindow.Text = StringsRM.GetString("strLblWindow");
 
@@ -271,61 +299,4 @@ public partial class FrmMain : Form
         
     }
 
-    private void cmdExport_Click(object sender, EventArgs e)
-    {
-        // Exit if there is no data to be saved
-        if (_signalRange.Length == 0)
-        {
-            using (new CenterWinDialog(this))
-                MessageBox.Show("There is no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return;
-        }
-
-        // Displays a SaveFileDialog, so the user can save the data into a file  
-        SaveFileDialog SaveDlg = new()
-        {
-            DefaultExt = "*.elux",
-            Filter = "Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
-            FilterIndex = 1,
-            Title = "Export data",
-            OverwritePrompt = true,
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
-        };
-
-        DialogResult result;
-        using (new CenterWinDialog(this))
-            result = SaveDlg.ShowDialog(this.Parent);
-
-        // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
-        if (result == DialogResult.OK && SaveDlg.FileName != "")
-        {
-            switch (Path.GetExtension(SaveDlg.FileName).ToLower())
-            {
-                case ".elux":
-                    SaveELuxData(SaveDlg.FileName);
-                    break;
-                case ".txt":
-                    SaveTextData(SaveDlg.FileName, _signalRange.Length, cboSeries.SelectedText);
-                    break;
-                case ".bin":
-                    SaveBinaryData(SaveDlg.FileName);
-                    break;
-                default:
-                    SaveDefaultData(SaveDlg.FileName);
-                    break;
-            }
-        }
-    }
-
-    private void btnSettings_Click(object sender, EventArgs e)
-    {
-        var frm = new FrmSettings(_settings);
-        frm.ShowDialog();
-        if(frm.DialogResult == DialogResult.OK)
-        {
-            _settings = frm.Settings;
-            cboSeries_SelectedIndexChanged(this, EventArgs.Empty);
-        }
-
-    }
 }

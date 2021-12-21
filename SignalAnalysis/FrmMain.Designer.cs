@@ -28,7 +28,6 @@ partial class FrmMain
     /// </summary>
     private void InitializeComponent()
     {
-            this.btnData = new System.Windows.Forms.Button();
             this.plotFractal = new ScottPlot.FormsPlotCrossHair();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.plotFFT = new ScottPlot.FormsPlotCrossHair();
@@ -40,31 +39,19 @@ partial class FrmMain
             this.lblSeries = new System.Windows.Forms.Label();
             this.lblWindow = new System.Windows.Forms.Label();
             this.cboWindow = new System.Windows.Forms.ComboBox();
-            this.btnExport = new System.Windows.Forms.Button();
             this.lblStats = new System.Windows.Forms.Label();
-            this.btnSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnData
-            // 
-            this.btnData.Location = new System.Drawing.Point(12, 12);
-            this.btnData.Name = "btnData";
-            this.btnData.Size = new System.Drawing.Size(122, 28);
-            this.btnData.TabIndex = 0;
-            this.btnData.Text = "Select data";
-            this.btnData.UseVisualStyleBackColor = true;
-            this.btnData.Click += new System.EventHandler(this.btnData_Click);
             // 
             // plotFractal
             // 
             this.plotFractal.BackColor = System.Drawing.Color.Transparent;
             this.plotFractal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFractal.Location = new System.Drawing.Point(4, 205);
+            this.plotFractal.Location = new System.Drawing.Point(4, 208);
             this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFractal.Name = "plotFractal";
-            this.plotFractal.Size = new System.Drawing.Size(852, 196);
+            this.plotFractal.Size = new System.Drawing.Size(852, 199);
             this.plotFractal.SnapToPoint = false;
             this.plotFractal.TabIndex = 3;
             // 
@@ -85,17 +72,17 @@ partial class FrmMain
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33444F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33111F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 608);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 617);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // plotFFT
             // 
             this.plotFFT.BackColor = System.Drawing.Color.Transparent;
             this.plotFFT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFFT.Location = new System.Drawing.Point(4, 407);
+            this.plotFFT.Location = new System.Drawing.Point(4, 413);
             this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFFT.Name = "plotFFT";
-            this.plotFFT.Size = new System.Drawing.Size(852, 198);
+            this.plotFFT.Size = new System.Drawing.Size(852, 201);
             this.plotFFT.SnapToPoint = false;
             this.plotFFT.TabIndex = 5;
             // 
@@ -115,7 +102,7 @@ partial class FrmMain
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 240F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 202);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 205);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // plotOriginal
@@ -125,7 +112,7 @@ partial class FrmMain
             this.plotOriginal.Location = new System.Drawing.Point(4, 3);
             this.plotOriginal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotOriginal.Name = "plotOriginal";
-            this.plotOriginal.Size = new System.Drawing.Size(278, 196);
+            this.plotOriginal.Size = new System.Drawing.Size(278, 199);
             this.plotOriginal.SnapToPoint = false;
             this.plotOriginal.TabIndex = 2;
             // 
@@ -136,7 +123,7 @@ partial class FrmMain
             this.plotWindow.Location = new System.Drawing.Point(290, 3);
             this.plotWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotWindow.Name = "plotWindow";
-            this.plotWindow.Size = new System.Drawing.Size(278, 196);
+            this.plotWindow.Size = new System.Drawing.Size(278, 199);
             this.plotWindow.SnapToPoint = false;
             this.plotWindow.TabIndex = 3;
             // 
@@ -147,14 +134,14 @@ partial class FrmMain
             this.plotApplied.Location = new System.Drawing.Point(576, 3);
             this.plotApplied.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotApplied.Name = "plotApplied";
-            this.plotApplied.Size = new System.Drawing.Size(280, 196);
+            this.plotApplied.Size = new System.Drawing.Size(280, 199);
             this.plotApplied.SnapToPoint = false;
             this.plotApplied.TabIndex = 4;
             // 
             // cboSeries
             // 
             this.cboSeries.FormattingEnabled = true;
-            this.cboSeries.Location = new System.Drawing.Point(140, 55);
+            this.cboSeries.Location = new System.Drawing.Point(140, 64);
             this.cboSeries.Name = "cboSeries";
             this.cboSeries.Size = new System.Drawing.Size(150, 25);
             this.cboSeries.TabIndex = 5;
@@ -163,7 +150,7 @@ partial class FrmMain
             // lblSeries
             // 
             this.lblSeries.AutoSize = true;
-            this.lblSeries.Location = new System.Drawing.Point(15, 56);
+            this.lblSeries.Location = new System.Drawing.Point(15, 65);
             this.lblSeries.Name = "lblSeries";
             this.lblSeries.Size = new System.Drawing.Size(82, 19);
             this.lblSeries.TabIndex = 6;
@@ -172,7 +159,7 @@ partial class FrmMain
             // lblWindow
             // 
             this.lblWindow.AutoSize = true;
-            this.lblWindow.Location = new System.Drawing.Point(316, 58);
+            this.lblWindow.Location = new System.Drawing.Point(316, 67);
             this.lblWindow.Name = "lblWindow";
             this.lblWindow.Size = new System.Drawing.Size(59, 19);
             this.lblWindow.TabIndex = 7;
@@ -181,55 +168,32 @@ partial class FrmMain
             // cboWindow
             // 
             this.cboWindow.FormattingEnabled = true;
-            this.cboWindow.Location = new System.Drawing.Point(381, 55);
+            this.cboWindow.Location = new System.Drawing.Point(381, 64);
             this.cboWindow.Name = "cboWindow";
             this.cboWindow.Size = new System.Drawing.Size(150, 25);
             this.cboWindow.TabIndex = 8;
             this.cboWindow.SelectedIndexChanged += new System.EventHandler(this.cboWindow_SelectedIndexChanged);
             // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(146, 12);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(95, 28);
-            this.btnExport.TabIndex = 11;
-            this.btnExport.Text = "Export data";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.cmdExport_Click);
-            // 
             // lblStats
             // 
             this.lblStats.AutoSize = true;
-            this.lblStats.Location = new System.Drawing.Point(588, 58);
+            this.lblStats.Location = new System.Drawing.Point(588, 67);
             this.lblStats.Name = "lblStats";
             this.lblStats.Size = new System.Drawing.Size(132, 19);
             this.lblStats.TabIndex = 16;
             this.lblStats.Text = "Descriptive statistics";
             // 
-            // btnSettings
-            // 
-            this.btnSettings.Location = new System.Drawing.Point(260, 12);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(78, 28);
-            this.btnSettings.TabIndex = 17;
-            this.btnSettings.Text = "Settings";
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 712);
-            this.Controls.Add(this.btnSettings);
+            this.ClientSize = new System.Drawing.Size(884, 721);
             this.Controls.Add(this.lblStats);
-            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.cboWindow);
             this.Controls.Add(this.lblWindow);
             this.Controls.Add(this.lblSeries);
             this.Controls.Add(this.cboSeries);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.btnData);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
@@ -246,8 +210,6 @@ partial class FrmMain
     }
 
     #endregion
-
-    private Button btnData;
     private ScottPlot.FormsPlotCrossHair plotFractal;
     private TableLayoutPanel tableLayoutPanel1;
     private ScottPlot.FormsPlotCrossHair plotOriginal;
@@ -259,7 +221,5 @@ partial class FrmMain
     private ScottPlot.FormsPlotCrossHair plotWindow;
     private ScottPlot.FormsPlotCrossHair plotApplied;
     private ScottPlot.FormsPlotCrossHair plotFFT;
-    private Button btnExport;
     private Label lblStats;
-    private Button btnSettings;
 }
