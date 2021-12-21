@@ -260,7 +260,7 @@ public class Complexity
         if (std.HasValue)
             tolerance = std.Value * fTol;
         else
-            tolerance = StdDev(data) * fTol;
+            tolerance = StdDev<double>(data) * fTol;
 
 
         for (uint i = 0; i < upper; i++)
@@ -301,12 +301,16 @@ public class Complexity
     /// </summary>
     /// <param name="values">Data values</param>
     /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
-    /// <returns>Standard deviation</returns>
-    public static double StdDev(double[] values, bool asSample = false)
+    /// <returns>Standard deviation. A value equal to -1 indicates insufficient data points.</returns>
+    public static double StdDev<T>(IEnumerable<T> values, bool asSample = false)
     {
-        double avg = System.Linq.Enumerable.Average(values);
-        double sum = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(values, v => (v - avg) * (v - avg)));
-        double denominator = values.Length - (asSample ? 1 : 0);
+        // Convert into an enumerable of doubles.
+        IEnumerable<double> doubles = values.Select(value => Convert.ToDouble(value));
+
+        // Then compute the standard deviation
+        double avg = System.Linq.Enumerable.Average(doubles);
+        double sum = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));
+        double denominator = values.Count() - (asSample ? 1 : 0);
         return denominator > 0.0 ? Math.Sqrt(sum / denominator) : -1;
     }
 }

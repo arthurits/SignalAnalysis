@@ -29,12 +29,57 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         InitializeComponent();
+        InitializeToolStripPanel();
         this.plotOriginal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
 
         PopulateCboWindow();
 
         UpdateUI_Language();
+    }
+
+    // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.toolstrippanel?view=windowsdesktop-6.0
+    private void InitializeToolStripPanel()
+    {
+        String path = Path.GetDirectoryName(Environment.ProcessPath);
+
+        ToolStripPanel tspTop = new();
+        tspTop.Dock = DockStyle.Top;
+        ToolStrip toolStripMain = new()
+        {
+            ImageScalingSize = new System.Drawing.Size(48, 48),
+            Location = new System.Drawing.Point(0, 24),
+            Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue),
+            RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
+            Text = "Main toolbar"
+        };
+
+        toolStripMain.Items.Add("Exit", new System.Drawing.Icon(path + @"\images\exit.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        toolStripMain.Items.Add("Open", new System.Drawing.Icon(path + @"\images\openfolder.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        toolStripMain.Items.Add("Save", new System.Drawing.Icon(path + @"\images\save.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        toolStripMain.Items.Add(new ToolStripSeparator());
+        toolStripMain.Items.Add("Save", new System.Drawing.Icon(path + @"\images\settings.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        toolStripMain.Items.Add(new ToolStripSeparator());
+        toolStripMain.Items.Add("About", new System.Drawing.Icon(path + @"\images\about.ico", 48, 48).ToBitmap(), new EventHandler(this.toolStripMain_Exit_Click));
+        tspTop.Join(toolStripMain);
+
+
+        ToolStripPanel tspBottom = new();
+        tspTop.Dock = DockStyle.Bottom;
+
+        //tspTop.Join(mnuMainFrm);
+        //tspBottom.Join(this.statusStrip);
+
+        //this.Controls.Add(tspBottom);
+        this.Controls.Add(tspTop);
+
+        // Exit the method
+        return;
+    }
+
+    private void toolStripMain_Exit_Click(object sender, EventArgs e)
+    {
+        this.Close();
     }
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -228,7 +273,48 @@ public partial class FrmMain : Form
 
     private void cmdExport_Click(object sender, EventArgs e)
     {
+        // Exit if there is no data to be saved
+        if (_signalRange.Length == 0)
+        {
+            using (new CenterWinDialog(this))
+                MessageBox.Show("There is no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
 
+        // Displays a SaveFileDialog, so the user can save the data into a file  
+        SaveFileDialog SaveDlg = new()
+        {
+            DefaultExt = "*.elux",
+            Filter = "Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            FilterIndex = 1,
+            Title = "Export data",
+            OverwritePrompt = true,
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+        };
+
+        DialogResult result;
+        using (new CenterWinDialog(this))
+            result = SaveDlg.ShowDialog(this.Parent);
+
+        // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
+        if (result == DialogResult.OK && SaveDlg.FileName != "")
+        {
+            switch (Path.GetExtension(SaveDlg.FileName).ToLower())
+            {
+                case ".elux":
+                    SaveELuxData(SaveDlg.FileName);
+                    break;
+                case ".txt":
+                    SaveTextData(SaveDlg.FileName, _signalRange.Length, cboSeries.SelectedText);
+                    break;
+                case ".bin":
+                    SaveBinaryData(SaveDlg.FileName);
+                    break;
+                default:
+                    SaveDefaultData(SaveDlg.FileName);
+                    break;
+            }
+        }
     }
 
     private void btnSettings_Click(object sender, EventArgs e)
