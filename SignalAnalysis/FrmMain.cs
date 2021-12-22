@@ -37,6 +37,9 @@ public partial class FrmMain : Form
         public override string ToString() => $"Average {Average} lux, maximum {Maximum} lux, minimum {Minimum} lux, fractal dimension {FractalDimension}, approximate entropy {ApproximateEntropy}, sample entropy {SampleEntropy})";
     }
     Stats Results;
+    ToolStripComboBox stripComboSeries;
+    ToolStripComboBox stripComboWindows;
+
 
     Task fractalTask;
     private CancellationTokenSource tokenSource;
@@ -51,27 +54,63 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         InitializeToolStripPanel();
+        InitializeStatusStrip();
+        InitializeMenu();
         InitializeComponent();
         
         this.plotOriginal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
 
-        PopulateCboWindow();
+        PopulateComboWindow();
 
         UpdateUI_Language();
     }
 
     // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.toolstrippanel?view=windowsdesktop-6.0
+    // https://stackoverflow.com/questions/40382105/how-to-add-two-toolstripcombobox-and-separator-horizontally-to-one-toolstripdrop
     private void InitializeToolStripPanel()
     {
         String path = Path.GetDirectoryName(Environment.ProcessPath);
+
+        stripComboSeries = new()
+        {
+            AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend,
+            AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None,
+            DropDownHeight = 110,
+            DropDownWidth = 122,
+            FlatStyle = System.Windows.Forms.FlatStyle.Standard,
+            IntegralHeight = true,
+            MaxDropDownItems = 9,
+            MergeAction = System.Windows.Forms.MergeAction.MatchOnly,
+            Name = "cboSeries",
+            Size = new System.Drawing.Size(120, 25),
+            Sorted = false,
+            ToolTipText = "Select data series"
+        };
+        stripComboWindows = new()
+        {
+            AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend,
+            AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None,
+            DropDownHeight = 110,
+            DropDownWidth = 122,
+            FlatStyle = System.Windows.Forms.FlatStyle.Standard,
+            IntegralHeight = true,
+            MaxDropDownItems = 9,
+            MergeAction = System.Windows.Forms.MergeAction.MatchOnly,
+            Name = "cboWindows",
+            Size = new System.Drawing.Size(120, 25),
+            Sorted = false,
+            ToolTipText = "Select FFT window"
+        };
+        stripComboSeries.SelectedIndexChanged += ComboSeries_SelectedIndexChanged;
+        stripComboWindows.SelectedIndexChanged += ComboWindow_SelectedIndexChanged;
 
         ToolStripPanel tspTop = new();
         tspTop.Dock = DockStyle.Top;
         ToolStrip toolStripMain = new()
         {
             ImageScalingSize = new System.Drawing.Size(48, 48),
-            Location = new System.Drawing.Point(0, 24),
+            Location = new System.Drawing.Point(0, 0),
             Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue),
             RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
             Text = "Main toolbar"
@@ -83,23 +122,38 @@ public partial class FrmMain : Form
         toolStripItem.Name = "Exit";
         toolStripItem = toolStripMain.Items.Add("Open", new System.Drawing.Icon(path + @"\images\openfolder.ico", 48, 48).ToBitmap(), new EventHandler(Open_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+        toolStripItem.Name = "Open";
         toolStripItem = toolStripMain.Items.Add("Export", new System.Drawing.Icon(path + @"\images\save.ico", 48, 48).ToBitmap(), new EventHandler(Export_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+        toolStripItem.Name = "Export";
+        toolStripMain.Items.Add(new ToolStripSeparator());
+        toolStripMain.Items.Add(stripComboSeries);
+        toolStripMain.Items.Add(stripComboWindows);
         toolStripMain.Items.Add(new ToolStripSeparator());
         toolStripItem = toolStripMain.Items.Add("Settings", new System.Drawing.Icon(path + @"\images\settings.ico", 48, 48).ToBitmap(), new EventHandler(Settings_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+        toolStripItem.Name = "Settings";
         toolStripMain.Items.Add(new ToolStripSeparator());
         toolStripItem = toolStripMain.Items.Add("About", new System.Drawing.Icon(path + @"\images\about.ico", 48, 48).ToBitmap(), new EventHandler(About_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+        toolStripItem.Name = "About";
+
         tspTop.Join(toolStripMain);
+        this.Controls.Add(tspTop);
+        
+        return;
+    }
 
-
+    private void InitializeStatusStrip()
+    {
         ToolStripPanel tspBottom = new();
         tspBottom.Dock = DockStyle.Bottom;
 
         StatusStrip statusStrip = new()
         {
             ShowItemToolTips = true,
+            Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue),
+            RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
             TabIndex = 1,
             Text = "Status bar"
         };
@@ -119,27 +173,55 @@ public partial class FrmMain : Form
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = false,
+            Checked = true,
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExPower",
             Size = new System.Drawing.Size(28, 23),
             Text = "P",
             ToolTipText = "Power spectra (dB)"
         });
-        statusStrip.Items[item].Click += LabelExPower_Click;
+        statusStrip.Items[item].Click += LabelEx_Click;
+        item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
+        {
+            AutoSize = false,
+            Checked = false,
+            DisplayStyle = ToolStripItemDisplayStyle.Text,
+            Name = "LabelExCumulative",
+            Size = new System.Drawing.Size(28, 23),
+            Text = "F",
+            ToolTipText = "Cumulative fractal dimension"
+        });
+        statusStrip.Items[item].Click += LabelEx_Click;
+        item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
+        {
+            AutoSize = false,
+            Checked = false,
+            DisplayStyle = ToolStripItemDisplayStyle.Text,
+            Name = "LabelExEntropy",
+            Size = new System.Drawing.Size(28, 23),
+            Text = "E",
+            ToolTipText = "Approximate and sample entropy"
+        });
+        statusStrip.Items[item].Click += LabelEx_Click;
+        item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
+        {
+            AutoSize = false,
+            Checked = false,
+            DisplayStyle = ToolStripItemDisplayStyle.Text,
+            Name = "LabelExCrossHair",
+            Size = new System.Drawing.Size(28, 23),
+            Text = "C",
+            ToolTipText = "Plot's crosshair mode"
+        });
+        statusStrip.Items[item].Click += LabelEx_Click;
 
-        var test = new ToolStripStatusLabelEx();
-        
-
-        //tspTop.Join(mnuMainFrm);
         tspBottom.Join(statusStrip);
-
-        //this.Controls.Add(tspBottom);
-        this.Controls.Add(tspTop);
         this.Controls.Add(tspBottom);
+    }
 
-        // Exit the method
-        return;
+    private void InitializeMenu()
+    {
+
     }
 
     private void toolStripMain_Exit_Click(object sender, EventArgs e)
@@ -166,46 +248,44 @@ public partial class FrmMain : Form
 
     
 
-    private void PopulateCboSeries(params string[] values)
+    private void PopulateComboSeries(params string[] values)
     {
-        cboSeries.Items.Clear();
+        stripComboSeries.Items.Clear();
         if (values.Length != 0)
-            cboSeries.Items.AddRange(values);
+            stripComboSeries.Items.AddRange(values);
         else
-            cboSeries.Items.AddRange(_series);
-        cboSeries.SelectedIndex = 0;
+            stripComboSeries.Items.AddRange(_series);
+        stripComboSeries.SelectedIndex = 0;
     }
-    private void PopulateCboWindow()
+    private void PopulateComboWindow()
     {
         IWindow[] windows = Window.GetWindows();
-        cboWindow.Items.AddRange(windows);
-        cboWindow.SelectedIndex = windows.ToList().FindIndex(x => x.Name == "Hanning");
+        stripComboWindows.Items.AddRange(windows);
+        stripComboWindows.SelectedIndex = windows.ToList().FindIndex(x => x.Name == "Hanning");
     }
 
-    private void cboSeries_SelectedIndexChanged(object sender, EventArgs e)
+    private void ComboSeries_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //int nStart = int.Parse(txtStart.Text);
-        //int nLength = int.Parse(txtEnd.Text) - nStart + 1;
+        int nIndex = stripComboSeries.SelectedIndex;
         nPoints = _settings.IndexEnd - _settings.IndexStart + 1;
-        _signalRange = new double[_settings.IndexEnd - _settings.IndexStart + 1];
+        _signalRange = new double[nPoints];
 
         Array.Copy(
-            _signalData[cboSeries.SelectedIndex],
+            _signalData[nIndex],
             _settings.IndexStart,
             _signalRange,
             0,
-            _settings.IndexEnd - _settings.IndexStart + 1);
+            nPoints);
 
         UpdateOriginal(_signalRange);
-        UpdateStats(_signalRange, nPoints <= 50000);
+        UpdateStats(_signalRange, _settings.Entropy);
         UpdateFractal(_signalRange, _settings.CumulativeDimension);
-        cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
-
+        ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
     }
 
-    private void cboWindow_SelectedIndexChanged(object sender, EventArgs e)
+    private void ComboWindow_SelectedIndexChanged(object sender, EventArgs e)
     {
-        IWindow window = (IWindow)cboWindow.SelectedItem;
+        IWindow window = (IWindow)stripComboWindows.SelectedItem;
         if (window is null)
         {
             //richTextBox1.Clear();
@@ -222,7 +302,7 @@ public partial class FrmMain : Form
         int power2 = (int)Math.Log2(nPoints);
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
         _signalFFT = new double[(int)Math.Pow(2, power2)];
-        Array.Copy(_signalData[cboSeries.SelectedIndex], _signalFFT, _signalFFT.Length);
+        Array.Copy(_signalData[stripComboSeries.SelectedIndex], _signalFFT, _signalFFT.Length);
 
         // apply window
         double[] signalWindow = new double[_signalFFT.Length];
@@ -244,7 +324,7 @@ public partial class FrmMain : Form
 
     private void chkLog_CheckedChanged(object sender, EventArgs e)
     {
-        cboWindow_SelectedIndexChanged(this, EventArgs.Empty);
+        ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
     }
 
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
@@ -259,8 +339,8 @@ public partial class FrmMain : Form
         //this.btnData.Text = StringsRM.GetString("strBtnData");
         //this.btnExport.Text = StringsRM.GetString("strBtnExport");
         //this.btnSettings.Text = StringsRM.GetString("strBtnSettings");
-        this.lblSeries.Text = StringsRM.GetString("strLblSeries");
-        this.lblWindow.Text = StringsRM.GetString("strLblWindow");
+        //this.lblSeries.Text = StringsRM.GetString("strLblSeries");
+        //this.lblWindow.Text = StringsRM.GetString("strLblWindow");
 
         
         // Update plots if they contain series

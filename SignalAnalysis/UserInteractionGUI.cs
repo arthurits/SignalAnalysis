@@ -40,7 +40,7 @@ partial class FrmMain
             _settings.IndexStart = 0;
             _settings.IndexEnd = _signalData[0].Length - 1;
 
-            PopulateCboSeries();
+            PopulateComboSeries();
 
             this.Text = StringsRM.GetString("strFrmTitle") + " - " + openDlg.FileName;
         }
@@ -81,7 +81,7 @@ partial class FrmMain
                 //    SaveELuxData(SaveDlg.FileName);
                 //    break;
                 case ".txt":
-                    SaveTextData(SaveDlg.FileName, _signalRange.Length, cboSeries.SelectedText);
+                    SaveTextData(SaveDlg.FileName, _signalRange.Length, stripComboSeries.SelectedText);
                     break;
                 case ".bin":
                     SaveBinaryData(SaveDlg.FileName);
@@ -100,7 +100,7 @@ partial class FrmMain
         if (frm.DialogResult == DialogResult.OK)
         {
             _settings = frm.Settings;
-            cboSeries_SelectedIndexChanged(this, EventArgs.Empty);
+            ComboSeries_SelectedIndexChanged(this, EventArgs.Empty);
         }
 
     }
@@ -110,9 +110,35 @@ partial class FrmMain
         
     }
 
-    private void LabelExPower_Click(object sender, EventArgs e)
+    private void LabelEx_Click(object sender, EventArgs e)
     {
+        if (sender is not null && sender is ToolStripStatusLabelEx)
+        {
+            var label = (ToolStripStatusLabelEx)sender;
+            label.Checked = !label.Checked;
 
+            // Update the settings
+            switch (label.Name)
+            {
+                case "LabelExPower":
+                    _settings.PowerSpectra = label.Checked;
+                    //mnuMainFrm_View_Raw.Checked = label.Checked;
+                    break;
+                case "LabelExCumulative":
+                    _settings.CumulativeDimension = label.Checked;
+                    //mnuMainFrm_View_Radial.Checked = label.Checked;
+                    break;
+                case "LabelExEntropy":
+                    _settings.Entropy = label.Checked;
+                    //mnuMainFrm_View_Average.Checked = label.Checked;
+                    break;
+                case "LabelExCrossHair":
+                    _settings.CrossHair = label.Checked;
+                    //mnuMainFrm_View_Ratio.Checked = label.Checked;
+                    break;
+            }
+        }
     }
+
 }
 

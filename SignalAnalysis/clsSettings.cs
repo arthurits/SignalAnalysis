@@ -8,19 +8,16 @@ namespace SignalAnalysis
 {
     public class clsSettings
     {
-        public int IndexStart { get; set; }
-        public int IndexEnd { get; set; }
-        public bool PowerSpectra { get; set; }
-        public bool CumulativeDimension { get; set; }
-        public AxisType AxisType { get; set; }
+        public int IndexStart { get; set; } = 0;
+        public int IndexEnd { get; set; } = 0;
+        public bool PowerSpectra { get; set; } = true;
+        public bool CumulativeDimension { get; set; } = false;
+        public bool Entropy { get; set; }=false;
+        public bool CrossHair { get; set; } = false;
+        public AxisType AxisType { get; set; } = AxisType.Seconds;
 
         public clsSettings()
         {
-            IndexStart = 0;
-            IndexEnd = 0;
-            PowerSpectra = true;
-            CumulativeDimension = false;
-            AxisType = AxisType.Seconds;
         }
     }
 

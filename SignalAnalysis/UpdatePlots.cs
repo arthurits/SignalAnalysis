@@ -10,15 +10,15 @@ partial class FrmMain
         switch (_settings.AxisType)
         {
             case AxisType.Points:
-                plotOriginal.Plot.AddSignal(signal, nSampleFreq/nSampleFreq, label: cboSeries.SelectedItem.ToString());
+                plotOriginal.Plot.AddSignal(signal, nSampleFreq/nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
                 plotOriginal.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
-                plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: cboSeries.SelectedItem.ToString());
+                plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
                 plotOriginal.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
-                var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * nSampleFreq, label: cboSeries.SelectedItem.ToString());
+                var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
                 sig.OffsetX = nStart.ToOADate();
                 plotOriginal.Plot.XAxis.DateTimeFormat(true);
                 break;
@@ -66,7 +66,7 @@ partial class FrmMain
         var cursor = this.Cursor;
         this.Cursor = Cursors.WaitCursor;
 
-        int index = cboSeries.SelectedIndex;
+        int index = stripComboSeries.SelectedIndex;
 
         tokenSource = new();
         token = tokenSource.Token;
@@ -84,7 +84,7 @@ partial class FrmMain
             plotFractal.Clear();
             if (progressive && FractalDimension.DimensionCumulative.Length > 0)
             {
-                plotFractal.Plot.AddSignal(FractalDimension.DimensionCumulative, nSampleFreq, label: cboSeries.SelectedItem.ToString());
+                plotFractal.Plot.AddSignal(FractalDimension.DimensionCumulative, nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
             }
             else
             {
@@ -147,7 +147,12 @@ partial class FrmMain
         if (entropy)
             (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal);
 
-        lblStats.Text = $"Avg: {avg.ToString("0.######")} - Max: {max.ToString("0.##")} - Min: {min.ToString("0.##")}";
+        txtStats.Text = $"Average illuminance: {Results.Average:0.######}" + Environment.NewLine +
+            $"Maximum illuminance: {Results.Maximum:0.##}" + Environment.NewLine +
+            $"Minimum illuminance: {Results.Minimum:0.##}" + Environment.NewLine +
+            $"Fractal dimension: {Results.FractalDimension:0.########}" + Environment.NewLine +
+            $"Approximate entropy: {Results.ApproximateEntropy:0.########}" + Environment.NewLine +
+            $"Sample entropy: {Results.SampleEntropy:0.########}"; 
         //lblStats.Text = String.Concat("Avg: ", avg.ToString("0.###"), " Max: ", max.ToString("0.#"), " Min: ", min.ToString("0.#"));
         // Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
     }
