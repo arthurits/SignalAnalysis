@@ -126,11 +126,13 @@ partial class FrmMain
                     break;
                 case "LabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    //mnuMainFrm_View_Radial.Checked = label.Checked;
-                    break;
+                    if (label.Checked && statsTask != null)
+                        FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
+                        break;
                 case "LabelExEntropy":
                     _settings.Entropy = label.Checked;
-                    //mnuMainFrm_View_Average.Checked = label.Checked;
+                    if (label.Checked && statsTask != null)
+                        FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "LabelExCrossHair":
                     _settings.CrossHair = label.Checked;

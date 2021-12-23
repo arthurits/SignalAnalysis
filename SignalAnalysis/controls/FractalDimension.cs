@@ -28,7 +28,7 @@ public static class FractalDimension
 
     //}
 
-    public static void GetDimension(double[] xValues, double[] yValues, CancellationToken ct, bool progress = false)
+    public static void ComputeDimension(double[] xValues, double[] yValues, CancellationToken ct, bool progress = false)
     {
         DimensionCumulative = Array.Empty<double>();
         DimensionSingle = double.NaN;
@@ -48,7 +48,7 @@ public static class FractalDimension
         }
     }
 
-    public static void GetDimension(double samplingFreq, double[] yValues, CancellationToken ct, bool progress = false)
+    public static void ComputeDimension(double samplingFreq, double[] yValues, CancellationToken ct, bool progress = false)
     {
         DimensionCumulative = Array.Empty<double>();
         DimensionSingle = double.NaN;
@@ -249,7 +249,7 @@ public class Complexity
     /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
     /// <param name="std">Standard deviation of the population</param>
     /// <returns>AppEn and SampEn</returns>
-    public static (double AppEn, double SampEn) Entropy(double[] data, uint dim = 2, double fTol = 0.2, double? std = null)
+    public static (double AppEn, double SampEn) Entropy(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     {
         long upper = data.Length - (dim + 1) + 1;
         bool isEqual;
@@ -278,6 +278,8 @@ public class Complexity
                         isEqual = false;
                         break;
                     }
+                    if (ct.IsCancellationRequested)
+                        ct.ThrowIfCancellationRequested();
                 }
                 if (isEqual) Cm++;
 

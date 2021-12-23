@@ -8,7 +8,7 @@ public partial class FrmMain : Form
     private double[][] _signalData = Array.Empty<double[]>();
     private double[] _signalRange = Array.Empty<double>();
     private double[] _signalFFT = Array.Empty<double>();
-    private double[] _signalX = Array.Empty<double>();
+    //private double[] _signalX = Array.Empty<double>();
     private string[] _series = Array.Empty<string>();
     private int nSeries = 0;
     private int nPoints = 0;
@@ -34,14 +34,19 @@ public partial class FrmMain : Form
         public double ApproximateEntropy { get; set; }
         public double SampleEntropy { get; set; }
 
-        public override string ToString() => $"Average {Average} lux, maximum {Maximum} lux, minimum {Minimum} lux, fractal dimension {FractalDimension}, approximate entropy {ApproximateEntropy}, sample entropy {SampleEntropy})";
+        public override string ToString() => $"Average illuminance: {Average:0.######}" + Environment.NewLine +
+            $"Maximum illuminance: {Maximum:0.##}" + Environment.NewLine +
+            $"Minimum illuminance: {Minimum:0.##}" + Environment.NewLine +
+            $"Fractal dimension: {FractalDimension:0.########}" + Environment.NewLine +
+            $"Approximate entropy: {ApproximateEntropy:0.########}" + Environment.NewLine +
+            $"Sample entropy: {SampleEntropy:0.########}";
     }
     Stats Results;
     ToolStripComboBox stripComboSeries;
     ToolStripComboBox stripComboWindows;
 
 
-    Task fractalTask;
+    Task statsTask;
     private CancellationTokenSource tokenSource;
     private CancellationToken token;
 
@@ -71,6 +76,7 @@ public partial class FrmMain : Form
     private void InitializeToolStripPanel()
     {
         String path = Path.GetDirectoryName(Environment.ProcessPath);
+        Font toolFont = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 
         stripComboSeries = new()
         {
@@ -79,6 +85,7 @@ public partial class FrmMain : Form
             DropDownHeight = 110,
             DropDownWidth = 122,
             FlatStyle = System.Windows.Forms.FlatStyle.Standard,
+            Font = toolFont,
             IntegralHeight = true,
             MaxDropDownItems = 9,
             MergeAction = System.Windows.Forms.MergeAction.MatchOnly,
@@ -94,6 +101,7 @@ public partial class FrmMain : Form
             DropDownHeight = 110,
             DropDownWidth = 122,
             FlatStyle = System.Windows.Forms.FlatStyle.Standard,
+            Font = toolFont,
             IntegralHeight = true,
             MaxDropDownItems = 9,
             MergeAction = System.Windows.Forms.MergeAction.MatchOnly,
@@ -109,6 +117,7 @@ public partial class FrmMain : Form
         tspTop.Dock = DockStyle.Top;
         ToolStrip toolStripMain = new()
         {
+            Font = toolFont,
             ImageScalingSize = new System.Drawing.Size(48, 48),
             Location = new System.Drawing.Point(0, 0),
             Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue),
@@ -151,6 +160,7 @@ public partial class FrmMain : Form
 
         StatusStrip statusStrip = new()
         {
+            Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
             ShowItemToolTips = true,
             Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue),
             RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
@@ -277,10 +287,7 @@ public partial class FrmMain : Form
             0,
             nPoints);
 
-        UpdateOriginal(_signalRange);
-        UpdateStats(_signalRange, _settings.Entropy);
-        UpdateFractal(_signalRange, _settings.CumulativeDimension);
-        ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
+        ComputeStats();   
     }
 
     private void ComboWindow_SelectedIndexChanged(object sender, EventArgs e)
@@ -314,23 +321,25 @@ public partial class FrmMain : Form
         UpdateFFT(signalWindow);
     }
 
-    //private void chkProgressive_CheckedChanged(object sender, EventArgs e)
-    //{
-    //    if (!chkCumulative.Checked)
-    //        FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
-
-    //    UpdateFractal(_signalRange, _settings.CumulativeDimension);
-    //}
-
-    private void chkLog_CheckedChanged(object sender, EventArgs e)
-    {
-        ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
-    }
-
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
     {
-        if (e.KeyChar == (char)Keys.Escape && fractalTask.Status == TaskStatus.Running)
+        if (e.KeyChar == (char)Keys.Escape && statsTask.Status == TaskStatus.Running)
             tokenSource.Cancel();   
+    }
+
+    private async Task ComputeStats()
+    {
+        tokenSource = new();
+        token = tokenSource.Token;
+        statsTask = Task.Run(() =>
+        {
+            UpdateStats(_signalRange, _settings.CumulativeDimension, _settings.Entropy);
+        }, token);
+        await statsTask;
+        UpdateOriginal(_signalRange);
+        UpdateFractal(_signalRange, stripComboSeries.SelectedItem.ToString(), _settings.CumulativeDimension);
+        ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
+        txtStats.Text = Results.ToString();
     }
 
     private void UpdateUI_Language()

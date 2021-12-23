@@ -59,60 +59,24 @@ partial class FrmMain
         plotApplied.Refresh();
     }
 
-    private async void UpdateFractal(double[] signal, bool progressive = false)
+    private void UpdateFractal(double[] signal, string seriesName = "", bool progressive = false)
     {
         if (_signalData.Length == 0) return;
 
-        var cursor = this.Cursor;
-        this.Cursor = Cursors.WaitCursor;
-
-        int index = stripComboSeries.SelectedIndex;
-
-        tokenSource = new();
-        token = tokenSource.Token;
-        fractalTask = Task.Run(() =>
+        plotFractal.Clear();
+        if (progressive && FractalDimension.DimensionCumulative.Length > 0)
         {
-            //FractalDimension.GetDimension(nSampleFreq, _signalData[index], token, progressive);
-            FractalDimension.GetDimension(nSampleFreq, signal, token, progressive);
-        }, token);
-
-        try
-        {
-            await fractalTask;
-            Results.FractalDimension = FractalDimension.DimensionSingle;
-
-            plotFractal.Clear();
-            if (progressive && FractalDimension.DimensionCumulative.Length > 0)
-            {
-                plotFractal.Plot.AddSignal(FractalDimension.DimensionCumulative, nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
-            }
-            else
-            {
-                plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, nPoints / nSampleFreq));
-            }
-            plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) + " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") + ")");
-            plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
-            plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
-            plotFractal.Plot.AxisAuto(0);
-            plotFractal.Refresh();
+            plotFractal.Plot.AddSignal(FractalDimension.DimensionCumulative, nSampleFreq, label: seriesName);
         }
-        catch (OperationCanceledException)
+        else
         {
-            using (new CenterWinDialog(this))
-                MessageBox.Show(this,
-                    StringsRM.GetString("strMsgBoxTaskCancel"),
-                    StringsRM.GetString("strMsgBoxTaskCancelTitle"),
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Stop);
-            _settings.CumulativeDimension = false;
+            plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, nPoints / nSampleFreq));
         }
-        finally
-        {
-            tokenSource.Dispose();
-            this.Cursor = cursor;
-            this.Cursor = Cursors.Default;
-        }
-
+        plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) + " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") + ")");
+        plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
+        plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
+        plotFractal.Plot.AxisAuto(0);
+        plotFractal.Refresh();
     }
 
     private void UpdateFFT(double[] signal)
@@ -129,8 +93,13 @@ partial class FrmMain
         plotFFT.Refresh();
     }
 
-    private void UpdateStats(double[] signal, bool entropy = false)
+    private void UpdateStats(double[] signal, bool cumulative = false, bool entropy = false)
     {
+        if (signal.Length == 0) return;
+        
+        //var cursor = this.Cursor;
+        //this.Cursor = Cursors.WaitCursor;
+
         double max = signal[0], min = signal[0], sum = 0;
         
         for (int i = 0; i < signal.Length; i++)
@@ -144,16 +113,31 @@ partial class FrmMain
         Results.Maximum = max;
         Results.Minimum = min;
         Results.Average = avg;
-        if (entropy)
-            (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal);
 
-        txtStats.Text = $"Average illuminance: {Results.Average:0.######}" + Environment.NewLine +
-            $"Maximum illuminance: {Results.Maximum:0.##}" + Environment.NewLine +
-            $"Minimum illuminance: {Results.Minimum:0.##}" + Environment.NewLine +
-            $"Fractal dimension: {Results.FractalDimension:0.########}" + Environment.NewLine +
-            $"Approximate entropy: {Results.ApproximateEntropy:0.########}" + Environment.NewLine +
-            $"Sample entropy: {Results.SampleEntropy:0.########}"; 
-        //lblStats.Text = String.Concat("Avg: ", avg.ToString("0.###"), " Max: ", max.ToString("0.#"), " Min: ", min.ToString("0.#"));
-        // Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
+        try
+        {
+            FractalDimension.ComputeDimension(nSampleFreq, signal, token, cumulative);
+            Results.FractalDimension = FractalDimension.DimensionSingle;
+
+            if (entropy)
+                (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
+        }
+        catch (OperationCanceledException)
+        {
+            using (new CenterWinDialog(this))
+                MessageBox.Show(this,
+                    StringsRM.GetString("strMsgBoxTaskCancel"),
+                    StringsRM.GetString("strMsgBoxTaskCancelTitle"),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Stop);
+        }
+        finally
+        {
+            tokenSource.Dispose();
+            //this.Cursor = cursor;
+            //this.Cursor = Cursors.Default;
+            //txtStats.Text = Results.ToString();
+        }
+        
     }
 }

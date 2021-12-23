@@ -174,7 +174,6 @@ partial class FrmMain
         string? strLine;
 
         // Initialize data arrays
-        _signalX = new double[nPoints];
         _signalData = new double[nSeries][];
         for (int i = 0; i < nSeries; i++)
             _signalData[i] = new double[nPoints];
