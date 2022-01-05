@@ -54,7 +54,7 @@ public partial class FrmMain : Form
     /// https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/y99d1cd3(v=vs.100)?WT.mc_id=DT-MVP-5003235
     /// https://stackoverflow.com/questions/32989100/how-to-make-multi-language-app-in-winforms
     /// </summary>
-    private System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
 
     public FrmMain()
     {
@@ -76,7 +76,7 @@ public partial class FrmMain : Form
     private void InitializeToolStripPanel()
     {
         String path = Path.GetDirectoryName(Environment.ProcessPath);
-        Font toolFont = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+        Font toolFont = new ("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 
         stripComboSeries = new()
         {
