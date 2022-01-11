@@ -253,9 +253,10 @@ public class Complexity
     {
         long upper = data.Length - (dim + 1) + 1;
         bool isEqual;
-        int Cm = 0, Cm1 = 0;
+        int AppEn_Cum, AppEn_Cum1;
+        int SampEn_Cum = 0, SampEn_Cum1 = 0;
         double sum = 0.0;
-        double appEn = 0.0, sampEn = 0.0;
+        double appEn, sampEn;
         double tolerance;
         if (std.HasValue)
             tolerance = std.Value * fTol;
@@ -265,8 +266,8 @@ public class Complexity
 
         for (uint i = 0; i < upper; i++)
         {
-            Cm = 0;
-            Cm1 = 0;
+            AppEn_Cum = 0;
+            AppEn_Cum1 = 0;
             for (uint j = 0; j < upper; j++)
             {
                 isEqual = true;
@@ -281,19 +282,26 @@ public class Complexity
                     if (ct.IsCancellationRequested)
                         ct.ThrowIfCancellationRequested();
                 }
-                if (isEqual) Cm++;
+                if (isEqual)
+                {
+                    AppEn_Cum++;
+                    SampEn_Cum++;
+                }
 
                 //m+1 - length series
                 if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
-                    Cm1++;
+                {
+                    AppEn_Cum1++;
+                    SampEn_Cum1++;
+                }
             }
 
-            if (Cm > 0 && Cm1 > 0)
-                sum += Math.Log((double)Cm / (double)Cm1);
+            if (AppEn_Cum > 0 && AppEn_Cum1 > 0)
+                sum += Math.Log((double)AppEn_Cum / (double)AppEn_Cum1);
         }
 
         appEn = sum / (double)(data.Length - dim);
-        sampEn = Cm > 0 && Cm1 > 0 ? Math.Log((double)Cm / (double)Cm1) : 0.0;
+        sampEn = SampEn_Cum > 0 && SampEn_Cum1 > 0 ? Math.Log((double)SampEn_Cum / (double)SampEn_Cum1) : 0.0;
 
         return (appEn, sampEn);
     }
