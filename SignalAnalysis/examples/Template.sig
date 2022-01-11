@@ -1,6 +1,6 @@
 SignalAnalysis data
-Number of series: 2
-Number of points: 5280
+Number of data series: 2
+Number of data points: 5280
 Sampling frequency: 2
 
 Sensor #00	Sensor #01

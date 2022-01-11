@@ -8,9 +8,11 @@ namespace SignalAnalysis;
 partial class FrmMain
 {
     /// <summary>
-    /// Saves data into an elux format file.
+    /// Saves data into a text-formatted file.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <param name="FileName">Path (including name) of the text file</param>
+    /// <param name="Points">Number of points in _signalRange</param>
+    /// <param name="SeriesName">Name of the serie data to be saved</param>
     private void SaveTextData(string FileName, int Points, string SeriesName)
     {
         var cursor = Cursor.Current;
@@ -79,12 +81,54 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Saves data into a text format file.
+    /// Saves data into a SignalAnalysis-formatted file.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the elux file</param>
-    private void SaveELuxData(string FileName)
+    /// <param name="FileName">Path (including name) of the sig file</param>
+    /// <param name="Points">Number of points in _signalRange</param>
+    /// <param name="SeriesName">Name of the serie data to be saved</param>
+    private void SaveSigData(string FileName, int Points, string SeriesName)
     {
-        throw new Exception("Saving to text has not yet been implemented.");
+        var cursor = Cursor.Current;
+        Cursor.Current = Cursors.WaitCursor;
+
+        try
+        {
+            using var fs = File.Open(FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            using var sw = new StreamWriter(fs, Encoding.UTF8);
+
+            // Append millisecond pattern to current culture's full date time pattern
+            string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", "$1,fff");
+
+            // Save the header text into the file
+            string content = string.Empty;
+            TimeSpan nTime = nStart.AddSeconds((nPoints - 1) / nSampleFreq) - nStart; // At least there should be 1 point
+
+            sw.WriteLine("Signal analysis data");
+            sw.WriteLine("Number of data series: {0}", "1");
+            sw.WriteLine("Number of data points: {0}", Points.ToString());
+            sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString());
+            sw.WriteLine();
+            sw.WriteLine($"{SeriesName}");
+
+            // Save the numerical values
+            for (int j = 0; j < nPoints; j++)
+                sw.WriteLine(_signalRange[j].ToString("#0.0"));
+
+            // Show OK save data
+            using (new CenterWinDialog(this))
+                MessageBox.Show("Data has been successfully saved to disk.", "Data saving", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch
+        {
+            // Show error message
+            using (new CenterWinDialog(this))
+                MessageBox.Show("An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.", "Error saving data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            Cursor.Current = cursor;
+        }
     }
 
     /// <summary>

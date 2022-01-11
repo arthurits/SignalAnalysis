@@ -34,7 +34,7 @@ partial class FrmMain
             else if (".sig".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 ReadSigData(filePath);
             else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                throw new Exception("No generic text file reader has yet been implemented.");
+                ReadTextData(filePath);
 
             nPoints = _signalData[0].Length;
             _settings.IndexStart = 0;
@@ -60,8 +60,8 @@ partial class FrmMain
         // Displays a SaveFileDialog, so the user can save the data into a file  
         SaveFileDialog SaveDlg = new()
         {
-            DefaultExt = "*.elux",
-            Filter = "Text file (*.txt)|*.txt|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            DefaultExt = "*.txt",
+            Filter = "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
             FilterIndex = 1,
             Title = "Export data",
             OverwritePrompt = true,
@@ -82,6 +82,9 @@ partial class FrmMain
                 //    break;
                 case ".txt":
                     SaveTextData(SaveDlg.FileName, _signalRange.Length, stripComboSeries.SelectedText);
+                    break;
+                case ".sig":
+                    SaveSigData(SaveDlg.FileName, _signalRange.Length, stripComboSeries.SelectedText);
                     break;
                 case ".bin":
                     SaveBinaryData(SaveDlg.FileName);
