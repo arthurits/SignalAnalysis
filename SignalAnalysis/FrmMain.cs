@@ -15,36 +15,9 @@ public partial class FrmMain : Form
     double nSampleFreq = 0.0;
     DateTime nStart;
     clsSettings _settings = new();
-    private struct Stats
-    {
-        public Stats(double Max = 0, double Min = 0, double Avg = 0, double FractalDim = 0, double AppEn = 0, double SampEn = 0)
-        {
-            Maximum = Max;
-            Minimum = Min;
-            Average = Avg;
-            FractalDimension = FractalDim;
-            ApproximateEntropy = AppEn;
-            SampleEntropy = SampEn;
-        }
-
-        public double Maximum { get; set; }
-        public double Minimum { get; set; }
-        public double Average { get; set; }
-        public double FractalDimension { get; set; }
-        public double ApproximateEntropy { get; set; }
-        public double SampleEntropy { get; set; }
-
-        public override string ToString() => $"Average illuminance: {Average:0.######}" + Environment.NewLine +
-            $"Maximum illuminance: {Maximum:0.##}" + Environment.NewLine +
-            $"Minimum illuminance: {Minimum:0.##}" + Environment.NewLine +
-            $"Fractal dimension: {FractalDimension:0.########}" + Environment.NewLine +
-            $"Approximate entropy: {ApproximateEntropy:0.########}" + Environment.NewLine +
-            $"Sample entropy: {SampleEntropy:0.########}";
-    }
     Stats Results;
     ToolStripComboBox stripComboSeries;
     ToolStripComboBox stripComboWindows;
-
 
     Task statsTask;
     private CancellationTokenSource tokenSource;
@@ -115,6 +88,8 @@ public partial class FrmMain : Form
 
         ToolStripPanel tspTop = new();
         tspTop.Dock = DockStyle.Top;
+        tspTop.Name = "StripPanelTop";
+
         ToolStrip toolStripMain = new()
         {
             Font = toolFont,
@@ -157,10 +132,12 @@ public partial class FrmMain : Form
     {
         ToolStripPanel tspBottom = new();
         tspBottom.Dock = DockStyle.Bottom;
+        tspBottom.Name = "StripPanelBottom";
 
         StatusStrip statusStrip = new()
         {
-            Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
+            Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point),
+            Name = "StatusStrip",
             ShowItemToolTips = true,
             Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue),
             RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
@@ -276,6 +253,8 @@ public partial class FrmMain : Form
 
     private void ComboSeries_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (_signalData.Length == 0) return;
+
         int nIndex = stripComboSeries.SelectedIndex;
         nPoints = _settings.IndexEnd - _settings.IndexStart + 1;
         _signalRange = new double[nPoints];

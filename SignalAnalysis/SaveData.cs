@@ -43,6 +43,7 @@ partial class FrmMain
             sw.WriteLine("Maximum illuminance: {0}", Results.Maximum.ToString());
             sw.WriteLine("Minimum illuminance: {0}", Results.Minimum.ToString());
             sw.WriteLine("Fractal dimension: {0}", Results.FractalDimension.ToString());
+            sw.WriteLine("Fractal variance: {0}", Results.FractalVariance.ToString());
             sw.WriteLine("Approximate entropy: {0}", Results.ApproximateEntropy.ToString());
             sw.WriteLine("Sample entropy: {0}", Results.SampleEntropy.ToString());
             sw.WriteLine();

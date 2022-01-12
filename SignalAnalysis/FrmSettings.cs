@@ -30,6 +30,9 @@ namespace SignalAnalysis
             txtEnd.Text = Settings.IndexEnd.ToString();
             chkPower.Checked = Settings.PowerSpectra;
             chkCumulative.Checked = Settings.CumulativeDimension;
+            chkEntropy.Checked = Settings.Entropy;
+            chkCrossHair.Checked = Settings.CrossHair;
+
             switch (Settings.AxisType)
             {
                 case AxisType.Seconds:
@@ -51,11 +54,13 @@ namespace SignalAnalysis
             Settings.IndexStart = num;
 
             if (!int.TryParse(txtEnd.Text, out num)) return;
-            if (num <= Settings.IndexStart) return;
+            if (num > 0 && num <= Settings.IndexStart) return;
             Settings.IndexEnd = num;
 
             Settings.PowerSpectra = chkPower.Checked;
             Settings.CumulativeDimension = chkCumulative.Checked;
+            Settings.Entropy = chkEntropy.Checked;
+            Settings.CrossHair = chkCrossHair.Checked;
             
             Settings.AxisType = AxisType.Seconds;
             if (radPoints.Checked) Settings.AxisType = AxisType.Points;
@@ -80,6 +85,8 @@ namespace SignalAnalysis
             this.radTime.Text = StringsRM.GetString("strRadTime");
             this.chkPower.Text = StringsRM.GetString("strChkPower");
             this.chkCumulative.Text = StringsRM.GetString("strChkCumulative");
+            this.chkEntropy.Text = StringsRM.GetString("strChkEntropy");
+            this.chkCrossHair.Text = StringsRM.GetString("strChkCrossHair");
             this.btnCancel.Text = StringsRM.GetString("strBtnCancel");
             this.btnAccept.Text = StringsRM.GetString("strBtnAccept");
 

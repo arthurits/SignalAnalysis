@@ -104,6 +104,11 @@ partial class FrmMain
         {
             _settings = frm.Settings;
             ComboSeries_SelectedIndexChanged(this, EventArgs.Empty);
+
+            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExPower"]).Checked = _settings.PowerSpectra;
+            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCumulative"]).Checked = _settings.CumulativeDimension;
+            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExEntropy"]).Checked = _settings.Entropy;
+            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = _settings.CrossHair;
         }
 
     }
@@ -125,7 +130,6 @@ partial class FrmMain
             {
                 case "LabelExPower":
                     _settings.PowerSpectra = label.Checked;
-                    //mnuMainFrm_View_Raw.Checked = label.Checked;
                     break;
                 case "LabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
@@ -139,7 +143,6 @@ partial class FrmMain
                     break;
                 case "LabelExCrossHair":
                     _settings.CrossHair = label.Checked;
-                    //mnuMainFrm_View_Ratio.Checked = label.Checked;
                     break;
             }
         }

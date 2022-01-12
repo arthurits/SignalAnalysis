@@ -106,11 +106,29 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show plots&apos; crosshair.
+        /// </summary>
+        internal static string strChkCrossHair {
+            get {
+                return ResourceManager.GetString("strChkCrossHair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cumulative fractal dimension.
         /// </summary>
         internal static string strChkCumulative {
             get {
                 return ResourceManager.GetString("strChkCumulative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entropy (approximate &amp;&amp; sample).
+        /// </summary>
+        internal static string strChkEntropy {
+            get {
+                return ResourceManager.GetString("strChkEntropy", resourceCulture);
             }
         }
         

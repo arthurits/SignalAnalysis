@@ -72,7 +72,9 @@ partial class FrmMain
         {
             plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, nPoints / nSampleFreq));
         }
-        plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) + " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") + ")");
+        plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) +
+            " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") +
+            " Var(H) = " + FractalDimension.VarianceH.ToString("#.00000") + ")");
         plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
         plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
         plotFractal.Plot.AxisAuto(0);
@@ -118,6 +120,7 @@ partial class FrmMain
         {
             FractalDimension.ComputeDimension(nSampleFreq, signal, token, cumulative);
             Results.FractalDimension = FractalDimension.DimensionSingle;
+            Results.FractalVariance = FractalDimension.VarianceH;
 
             if (entropy)
                 (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);

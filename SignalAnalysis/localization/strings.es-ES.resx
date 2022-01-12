@@ -132,8 +132,14 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Opciones</value>
   </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>Cruz (mira) gráfica</value>
+  </data>
   <data name="strChkCumulative" xml:space="preserve">
     <value>Dimensión fractal acumulada</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>Entropía (aproximada, muestra)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Espectro (dB)</value>

@@ -176,7 +176,7 @@ partial class FrmMain
         double readValue;
 
         string? strLine = sr.ReadLine();
-        if (strLine != null && strLine != "SignalAnalysis data")
+        if (strLine != null && strLine != "Signal analysis data")
         {
             using (new CenterWinDialog(this))
             {
@@ -286,6 +286,18 @@ partial class FrmMain
         }
         if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return;
         Results.FractalDimension = readValue;
+
+        strLine = sr.ReadLine();
+        if (strLine != null && !strLine.Contains("Fractal variance: ", StringComparison.Ordinal))
+        {
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return;
+        }
+        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return;
+        Results.FractalVariance = readValue;
 
         strLine = sr.ReadLine();
         if (strLine != null && !strLine.Contains("Approximate entropy: ", StringComparison.Ordinal))

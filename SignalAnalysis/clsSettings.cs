@@ -12,7 +12,7 @@ namespace SignalAnalysis
         public int IndexEnd { get; set; } = 0;
         public bool PowerSpectra { get; set; } = true;
         public bool CumulativeDimension { get; set; } = false;
-        public bool Entropy { get; set; }=false;
+        public bool Entropy { get; set; } = false;
         public bool CrossHair { get; set; } = false;
         public AxisType AxisType { get; set; } = AxisType.Seconds;
 

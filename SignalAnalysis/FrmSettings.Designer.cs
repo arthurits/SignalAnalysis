@@ -40,13 +40,15 @@
             this.btnAccept = new System.Windows.Forms.Button();
             this.chkPower = new System.Windows.Forms.CheckBox();
             this.chkCumulative = new System.Windows.Forms.CheckBox();
+            this.chkEntropy = new System.Windows.Forms.CheckBox();
+            this.chkCrossHair = new System.Windows.Forms.CheckBox();
             this.grpAxis.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblStart
             // 
             this.lblStart.AutoSize = true;
-            this.lblStart.Location = new System.Drawing.Point(20, 37);
+            this.lblStart.Location = new System.Drawing.Point(20, 21);
             this.lblStart.Name = "lblStart";
             this.lblStart.Size = new System.Drawing.Size(113, 19);
             this.lblStart.TabIndex = 0;
@@ -55,7 +57,7 @@
             // lblEnd
             // 
             this.lblEnd.AutoSize = true;
-            this.lblEnd.Location = new System.Drawing.Point(20, 76);
+            this.lblEnd.Location = new System.Drawing.Point(20, 55);
             this.lblEnd.Name = "lblEnd";
             this.lblEnd.Size = new System.Drawing.Size(108, 19);
             this.lblEnd.TabIndex = 1;
@@ -63,14 +65,14 @@
             // 
             // txtStart
             // 
-            this.txtStart.Location = new System.Drawing.Point(135, 34);
+            this.txtStart.Location = new System.Drawing.Point(135, 18);
             this.txtStart.Name = "txtStart";
             this.txtStart.Size = new System.Drawing.Size(84, 25);
             this.txtStart.TabIndex = 2;
             // 
             // txtEnd
             // 
-            this.txtEnd.Location = new System.Drawing.Point(135, 73);
+            this.txtEnd.Location = new System.Drawing.Point(135, 52);
             this.txtEnd.Name = "txtEnd";
             this.txtEnd.Size = new System.Drawing.Size(84, 25);
             this.txtEnd.TabIndex = 3;
@@ -143,7 +145,7 @@
             // chkPower
             // 
             this.chkPower.AutoSize = true;
-            this.chkPower.Location = new System.Drawing.Point(20, 114);
+            this.chkPower.Location = new System.Drawing.Point(20, 88);
             this.chkPower.Name = "chkPower";
             this.chkPower.Size = new System.Drawing.Size(93, 23);
             this.chkPower.TabIndex = 7;
@@ -153,12 +155,32 @@
             // chkCumulative
             // 
             this.chkCumulative.AutoSize = true;
-            this.chkCumulative.Location = new System.Drawing.Point(20, 143);
+            this.chkCumulative.Location = new System.Drawing.Point(20, 117);
             this.chkCumulative.Name = "chkCumulative";
             this.chkCumulative.Size = new System.Drawing.Size(205, 23);
             this.chkCumulative.TabIndex = 8;
             this.chkCumulative.Text = "Cumulative fractal dimension";
             this.chkCumulative.UseVisualStyleBackColor = true;
+            // 
+            // chkEntropy
+            // 
+            this.chkEntropy.AutoSize = true;
+            this.chkEntropy.Location = new System.Drawing.Point(20, 146);
+            this.chkEntropy.Name = "chkEntropy";
+            this.chkEntropy.Size = new System.Drawing.Size(226, 23);
+            this.chkEntropy.TabIndex = 9;
+            this.chkEntropy.Text = "Entropy (approximate && sample)";
+            this.chkEntropy.UseVisualStyleBackColor = true;
+            // 
+            // chkCrossHair
+            // 
+            this.chkCrossHair.AutoSize = true;
+            this.chkCrossHair.Location = new System.Drawing.Point(20, 175);
+            this.chkCrossHair.Name = "chkCrossHair";
+            this.chkCrossHair.Size = new System.Drawing.Size(156, 23);
+            this.chkCrossHair.TabIndex = 10;
+            this.chkCrossHair.Text = "Show plot\'s crosshair";
+            this.chkCrossHair.UseVisualStyleBackColor = true;
             // 
             // FrmSettings
             // 
@@ -166,6 +188,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(437, 232);
+            this.Controls.Add(this.chkCrossHair);
+            this.Controls.Add(this.chkEntropy);
             this.Controls.Add(this.chkCumulative);
             this.Controls.Add(this.chkPower);
             this.Controls.Add(this.btnAccept);
@@ -201,5 +225,7 @@
         private Button btnAccept;
         private CheckBox chkPower;
         private CheckBox chkCumulative;
+        private CheckBox chkEntropy;
+        private CheckBox chkCrossHair;
     }
 }
