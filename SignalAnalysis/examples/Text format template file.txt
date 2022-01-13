@@ -1,0 +1,17 @@
+﻿Signal analysis data
+Start time: lunes, 5 de julio de 2021 8:59:12,020
+End time: lunes, 5 de julio de 2021 13:58:18,020
+Total measuring time: 0 days, 4 hours, 59 minutes, 6 seconds, and 0 milliseconds
+Number of data points: 2
+Sampling frequency: 1,5
+Average illuminance: 795,2168053492812
+Maximum illuminance: 867,5
+Minimum illuminance: 672,4
+Fractal dimension: 1,421087350505978
+Fractal variance: 0,00027659396839964417
+Approximate entropy: 0,04317543919772206
+Sample entropy: 0,04042956652288515
+
+Time	Average
+lunes, 5 de julio de 2021 8:59:12,020	672,4
+lunes, 5 de julio de 2021 8:59:12,687	716,5
