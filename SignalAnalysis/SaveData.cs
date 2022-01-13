@@ -59,7 +59,7 @@ partial class FrmMain
             for (int j = 0; j < nPoints; j++)
             {
                 time = nStart.AddSeconds(j / nSampleFreq).ToString(fullPattern);
-                content = $"{time}\t{_signalRange[j]:#0.0}";
+                content = $"{time}\t{_signalRange[j]:#0.000}";
                 
                 //trying to write data to csv
                 sw.WriteLine(content);
