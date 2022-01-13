@@ -132,7 +132,6 @@ partial class FrmMain
         }
         if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries)) return;
         if (nSeries == 0) return;
-        nSeries += 6;
 
         strLine = sr.ReadLine();
         if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
@@ -194,7 +193,14 @@ partial class FrmMain
             }
             return;
         }
-        if (strLine == null || DateTime.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nStart)) return;
+        // Append millisecond pattern to current culture's full date time pattern
+        var culture = System.Globalization.CultureInfo.CurrentCulture.Clone() as System.Globalization.CultureInfo;
+        System.Globalization.DateTimeFormatInfo dtfi = culture.DateTimeFormat;
+        string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+        fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", $"$1{System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator}fff");
+        dtfi.FullDateTimePattern = fullPattern;
+        culture.DateTimeFormat = dtfi;
+        if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], dtfi.FullDateTimePattern, culture, System.Globalization.DateTimeStyles.None, out nStart)) return;
 
         strLine = sr.ReadLine();
         if (strLine != null && !strLine.Contains("End time: ", StringComparison.Ordinal))
@@ -327,15 +333,17 @@ partial class FrmMain
 
         strLine = sr.ReadLine();    // Column header lines
         _series = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+        _series = _series[1..];
+        nSeries =_series.Length;
 
-        InitializeDataArrays(sr);
+        InitializeDataArrays(sr, true);
     }
 
     /// <summary>
     /// Reads the numeric data section pointed at.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>
-    private void InitializeDataArrays(StreamReader sr)
+    private void InitializeDataArrays(StreamReader sr, bool IsFirstColumDateTime = false)
     {
         string? strLine;
 
@@ -350,15 +358,15 @@ partial class FrmMain
             _signalData[i] = new double[nPoints];
         }
         string[] data;
-        int row = 0, col = 0;
+        int col = 0, row = 0;
         while ((strLine = sr.ReadLine()) != null)
         {
             data = strLine.Split("\t");
-            for (row = 0; row < data.Length; row++)
+            for (col = IsFirstColumDateTime ? 1 : 0; col < data.Length; col++)
             {
-                double.TryParse(data[row], out _signalData[row][col]);
+                double.TryParse(data[col], out _signalData[col - (IsFirstColumDateTime ? 1 : 0)][row]);
             }
-            col++;
+            row++;
         }
     }
 

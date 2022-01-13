@@ -25,7 +25,7 @@ partial class FrmMain
 
             // Append millisecond pattern to current culture's full date time pattern
             string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", "$1,fff");
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", $"$1{System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator}fff");
 
             // Save the header text into the file
             string content = string.Empty;
