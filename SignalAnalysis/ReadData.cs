@@ -13,6 +13,8 @@ partial class FrmMain
         using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         using var sr = new StreamReader(fs, Encoding.UTF8);
 
+        int nPoints = 0;
+
         string? strLine = sr.ReadLine();
         if (strLine != null && strLine != "ErgoLux data")
         {
@@ -97,9 +99,9 @@ partial class FrmMain
         strLine = sr.ReadLine();    // Empty line
 
         strLine = sr.ReadLine();    // Column header lines
-        _series = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+        seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
 
-        InitializeDataArrays(sr);
+        InitializeDataArrays(sr, nPoints);
     }
 
     /// <summary>
@@ -110,6 +112,8 @@ partial class FrmMain
     {
         using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         using var sr = new StreamReader(fs, Encoding.UTF8);
+
+        int nPoints = 0;
 
         string? strLine = sr.ReadLine();
         if (strLine != null && strLine != "SignalAnalysis data")
@@ -159,9 +163,9 @@ partial class FrmMain
         strLine = sr.ReadLine();    // Empty line
 
         strLine = sr.ReadLine();    // Column header lines
-        _series = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+        seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
 
-        InitializeDataArrays(sr);
+        InitializeDataArrays(sr, nPoints);
     }
 
     /// <summary>
@@ -173,6 +177,7 @@ partial class FrmMain
         using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         using var sr = new StreamReader(fs, Encoding.UTF8);
         double readValue;
+        int nPoints = 0;
 
         string? strLine = sr.ReadLine();
         if (strLine != null && strLine != "Signal analysis data")
@@ -332,30 +337,33 @@ partial class FrmMain
         strLine = sr.ReadLine();    // Empty line
 
         strLine = sr.ReadLine();    // Column header lines
-        _series = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
-        _series = _series[1..];
-        nSeries =_series.Length;
+        seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+        seriesLabels = seriesLabels[1..];
+        nSeries =seriesLabels.Length;
 
-        InitializeDataArrays(sr, true);
+        InitializeDataArrays(sr, nPoints, true);
     }
 
     /// <summary>
     /// Reads the numeric data section pointed at.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>
-    private void InitializeDataArrays(StreamReader sr, bool IsFirstColumDateTime = false)
+    private void InitializeDataArrays(StreamReader sr, int points, bool IsFirstColumDateTime = false)
     {
         string? strLine;
+
+        _settings.IndexStart = 0;
+        _settings.IndexEnd = points - 1;
 
         // Initialize data arrays
         _signalData = new double[nSeries][];
         for (int i = 0; i < nSeries; i++)
-            _signalData[i] = new double[nPoints];
+            _signalData[i] = new double[points];
 
         // Read data into _plotData
         for (int i = 0; i < _signalData.Length; i++)
         {
-            _signalData[i] = new double[nPoints];
+            _signalData[i] = new double[points];
         }
         string[] data;
         int col = 0, row = 0;

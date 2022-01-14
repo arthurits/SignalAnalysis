@@ -31,9 +31,9 @@ partial class FrmMain
         plotOriginal.Refresh();
     }
 
-    private void UpdateKernel(FftSharp.IWindow window)
+    private void UpdateKernel(FftSharp.IWindow window, int points)
     {
-        double[] kernel = window.Create(nPoints);
+        double[] kernel = window.Create(points);
         double[] pad = ScottPlot.DataGen.Zeros(kernel.Length / 4);
         double[] ys = pad.Concat(kernel).Concat(pad).ToArray();
 
@@ -70,7 +70,7 @@ partial class FrmMain
         }
         else
         {
-            plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, nPoints / nSampleFreq));
+            plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, signal.Length / nSampleFreq));
         }
         plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) +
             " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") +

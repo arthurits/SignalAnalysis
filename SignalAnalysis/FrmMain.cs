@@ -5,13 +5,18 @@ namespace SignalAnalysis;
 
 public partial class FrmMain : Form
 {
+    private string strDefaultSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+    private string strUserSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+    private string strDefaultOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
+    private string strUserOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
+    private bool RememberFileDialogPath = true;
     private double[][] _signalData = Array.Empty<double[]>();
-    private double[] _signalRange = Array.Empty<double>();
+    //private double[] _signalRange = Array.Empty<double>();
     private double[] _signalFFT = Array.Empty<double>();
     //private double[] _signalX = Array.Empty<double>();
-    private string[] _series = Array.Empty<string>();
+    private string[] seriesLabels = Array.Empty<string>();
     private int nSeries = 0;
-    private int nPoints = 0;
+    //private int nPoints = 0;
     double nSampleFreq = 0.0;
     DateTime nStart;
     clsSettings _settings = new();
@@ -241,7 +246,7 @@ public partial class FrmMain : Form
         if (values.Length != 0)
             stripComboSeries.Items.AddRange(values);
         else
-            stripComboSeries.Items.AddRange(_series);
+            stripComboSeries.Items.AddRange(seriesLabels);
         stripComboSeries.SelectedIndex = 0;
     }
     private void PopulateComboWindow()
@@ -255,17 +260,17 @@ public partial class FrmMain : Form
     {
         if (_signalData.Length == 0) return;
 
-        int nIndex = stripComboSeries.SelectedIndex;
-        nPoints = _settings.IndexEnd - _settings.IndexStart + 1;
-        _signalRange = new double[nPoints];
+        //int nIndex = stripComboSeries.SelectedIndex;
+        //nPoints = _settings.IndexEnd - _settings.IndexStart + 1;
+        //_signalRange = new double[nPoints];
 
-        Array.Copy(
-            _signalData[nIndex],
-            _settings.IndexStart,
-            _signalRange,
-            0,
-            nPoints);
-
+        //Array.Copy(
+        //    _signalData[nIndex],
+        //    _settings.IndexStart,
+        //    _signalRange,
+        //    0,
+        //    nPoints);
+        //var test = _signalData[nIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
         ComputeStats();   
     }
 
@@ -282,10 +287,14 @@ public partial class FrmMain : Form
             //richTextBox1.Text = window.Description;
         }
 
-        if (nPoints == 0) return;
+        if (stripComboSeries.SelectedIndex < 0) return;
+
+        // Extract the values 
+        var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (signal is null || signal.Length == 0) return;
 
         // Adjust to the lowest power of 2
-        int power2 = (int)Math.Log2(nPoints);
+        int power2 = (int)Math.Log2(signal.Length);
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
         _signalFFT = new double[(int)Math.Pow(2, power2)];
         Array.Copy(_signalData[stripComboSeries.SelectedIndex], _signalFFT, _signalFFT.Length);
@@ -295,7 +304,7 @@ public partial class FrmMain : Form
         Array.Copy(_signalFFT, signalWindow, _signalFFT.Length);
         window.ApplyInPlace(signalWindow);
 
-        UpdateKernel(window);
+        UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
         UpdateFFT(signalWindow);
     }
@@ -310,13 +319,19 @@ public partial class FrmMain : Form
     {
         tokenSource = new();
         token = tokenSource.Token;
+
+        // Extract the values 
+        var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (signal is null || signal.Length == 0) return;
+
         statsTask = Task.Run(() =>
         {
-            UpdateStats(_signalRange, _settings.CumulativeDimension, _settings.Entropy);
+            UpdateStats(signal, _settings.CumulativeDimension, _settings.Entropy);
         }, token);
         await statsTask;
-        UpdateOriginal(_signalRange);
-        UpdateFractal(_signalRange, stripComboSeries.SelectedItem.ToString(), _settings.CumulativeDimension);
+
+        UpdateOriginal(signal);
+        UpdateFractal(signal, stripComboSeries.SelectedItem.ToString() ?? string.Empty, _settings.CumulativeDimension);
         ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
         txtStats.Text = Results.ToString();
     }

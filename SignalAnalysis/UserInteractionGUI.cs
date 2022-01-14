@@ -15,7 +15,7 @@ partial class FrmMain
         using OpenFileDialog openDlg = new()
         {
             Title = "Select data file",
-            InitialDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples",
+            InitialDirectory = RememberFileDialogPath ? strUserOpenPath: strDefaultOpenPath,
             Filter = "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*",
             FilterIndex = 4,
             RestoreDirectory = true
@@ -26,8 +26,9 @@ partial class FrmMain
 
         if (result == DialogResult.OK && openDlg.FileName != "")
         {
-            //Get the path of specified file
+            //Get the path of specified file and store the directory for future calls
             filePath = openDlg.FileName;
+            if (RememberFileDialogPath) strUserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 ReadELuxData(filePath);
@@ -36,7 +37,7 @@ partial class FrmMain
             else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 ReadTextData(filePath);
 
-            nPoints = _signalData[0].Length;
+            //nPoints = _signalData[0].Length;
             _settings.IndexStart = 0;
             _settings.IndexEnd = _signalData[0].Length - 1;
 
@@ -49,8 +50,14 @@ partial class FrmMain
 
     private void Export_Click(object sender, EventArgs e)
     {
+        DialogResult result;
+        string filePath;
+
+        // Extract the values to be exported
+        var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+
         // Exit if there is no data to be saved
-        if (_signalRange.Length == 0)
+        if (signal is null || signal.Length == 0)
         {
             using (new CenterWinDialog(this))
                 MessageBox.Show("There is no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -65,26 +72,29 @@ partial class FrmMain
             FilterIndex = 1,
             Title = "Export data",
             OverwritePrompt = true,
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+            InitialDirectory = RememberFileDialogPath ? strUserSavePath : strDefaultSavePath
         };
 
-        DialogResult result;
         using (new CenterWinDialog(this))
             result = SaveDlg.ShowDialog(this.Parent);
 
         // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
         if (result == DialogResult.OK && SaveDlg.FileName != "")
         {
+            //Get the path of specified file and store the directory for future calls
+            filePath = SaveDlg.FileName;
+            if (RememberFileDialogPath) strUserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
+
             switch (Path.GetExtension(SaveDlg.FileName).ToLower())
             {
                 //case ".elux":
                 //    SaveELuxData(SaveDlg.FileName);
                 //    break;
                 case ".txt":
-                    SaveTextData(SaveDlg.FileName, _signalRange.Length, stripComboSeries.SelectedText);
+                    SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
                 case ".sig":
-                    SaveSigData(SaveDlg.FileName, _signalRange.Length, stripComboSeries.SelectedText);
+                    SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
                 case ".bin":
                     SaveBinaryData(SaveDlg.FileName);

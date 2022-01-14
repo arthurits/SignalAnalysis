@@ -11,9 +11,10 @@ partial class FrmMain
     /// Saves data into a text-formatted file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the text file</param>
-    /// <param name="Points">Number of points in _signalRange</param>
+    /// <param name="Data">Array of values to be saved</param>
+    /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
-    private void SaveTextData(string FileName, int Points, string SeriesName)
+    private void SaveTextData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
         var cursor = Cursor.Current;
         Cursor.Current = Cursors.WaitCursor;
@@ -29,15 +30,15 @@ partial class FrmMain
 
             // Save the header text into the file
             string content = string.Empty;
-            TimeSpan nTime = nStart.AddSeconds((nPoints-1) / nSampleFreq) - nStart; // At least there should be 1 point
+            TimeSpan nTime = nStart.AddSeconds((Data.Length - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
             sw.WriteLine("Signal analysis data");
-            sw.WriteLine("Start time: {0}", nStart.ToString(fullPattern));
-            sw.WriteLine("End time: {0}", nStart.AddSeconds((nPoints - 1) / nSampleFreq).ToString(fullPattern));
+            sw.WriteLine("Start time: {0}", nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern));
+            sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern));
             ////outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
             sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
             //sw.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
-            sw.WriteLine("Number of data points: {0}", Points.ToString());
+            sw.WriteLine("Number of data points: {0}", Data.Length.ToString());
             sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString());
             sw.WriteLine("Average illuminance: {0}", Results.Average.ToString());
             sw.WriteLine("Maximum illuminance: {0}", Results.Maximum.ToString());
@@ -56,10 +57,10 @@ partial class FrmMain
 
             string time;
             // Save the numerical values
-            for (int j = 0; j < nPoints; j++)
+            for (int j = 0; j < Data.Length; j++)
             {
-                time = nStart.AddSeconds(j / nSampleFreq).ToString(fullPattern);
-                content = $"{time}\t{_signalRange[j]:#0.000}";
+                time = nStart.AddSeconds((j+ ArrIndexInit) / nSampleFreq).ToString(fullPattern);
+                content = $"{time}\t{Data[j]:#0.000}";
                 
                 //trying to write data to csv
                 sw.WriteLine(content);
@@ -85,9 +86,10 @@ partial class FrmMain
     /// Saves data into a SignalAnalysis-formatted file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the sig file</param>
-    /// <param name="Points">Number of points in _signalRange</param>
+    /// <param name="Data">Array of values to be saved</param>
+    /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
-    private void SaveSigData(string FileName, int Points, string SeriesName)
+    private void SaveSigData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
         var cursor = Cursor.Current;
         Cursor.Current = Cursors.WaitCursor;
@@ -103,18 +105,18 @@ partial class FrmMain
 
             // Save the header text into the file
             string content = string.Empty;
-            TimeSpan nTime = nStart.AddSeconds((nPoints - 1) / nSampleFreq) - nStart; // At least there should be 1 point
+            //TimeSpan nTime = nStart.AddSeconds((nPoints - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
             sw.WriteLine("Signal analysis data");
             sw.WriteLine("Number of data series: {0}", "1");
-            sw.WriteLine("Number of data points: {0}", Points.ToString());
+            sw.WriteLine("Number of data points: {0}", Data.Length.ToString());
             sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString());
             sw.WriteLine();
             sw.WriteLine($"{SeriesName}");
 
             // Save the numerical values
-            for (int j = 0; j < nPoints; j++)
-                sw.WriteLine(_signalRange[j].ToString("#0.0"));
+            for (int j = 0; j < Data.Length; j++)
+                sw.WriteLine(Data[j].ToString("#0.0"));
 
             // Show OK save data
             using (new CenterWinDialog(this))
