@@ -10,14 +10,15 @@ public partial class FrmMain : Form
     private string strDefaultOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
     private string strUserOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
     private bool RememberFileDialogPath = true;
+    private string strNumericFormat = "G4";
+    private string strDataFormat = "#0.0##";
+
     private double[][] _signalData = Array.Empty<double[]>();
-    //private double[] _signalRange = Array.Empty<double>();
     private double[] _signalFFT = Array.Empty<double>();
-    //private double[] _signalX = Array.Empty<double>();
     private string[] seriesLabels = Array.Empty<string>();
     private int nSeries = 0;
-    //private int nPoints = 0;
     double nSampleFreq = 0.0;
+    
     DateTime nStart;
     clsSettings _settings = new();
     Stats Results;

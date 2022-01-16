@@ -37,7 +37,6 @@ partial class FrmMain
             sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern));
             ////outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
             sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
-            //sw.WriteLine("Number of sensors: {0}", _sett.T10_NumberOfSensors.ToString());
             sw.WriteLine("Number of data points: {0}", Data.Length.ToString());
             sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString());
             sw.WriteLine("Average illuminance: {0}", Results.Average.ToString());
@@ -48,11 +47,6 @@ partial class FrmMain
             sw.WriteLine("Approximate entropy: {0}", Results.ApproximateEntropy.ToString());
             sw.WriteLine("Sample entropy: {0}", Results.SampleEntropy.ToString());
             sw.WriteLine();
-            //for (int i = 0; i < _sett.T10_NumberOfSensors; i++)
-            //{
-            //    content += "Sensor #" + i.ToString("00") + "\t";
-            //}
-            //content += "Maximum" + "\t" + "Average" + "\t" + "Minimum" + "\t" + "Min/Average" + "\t" + "Min/Max" + "\t" + "Average/Max";
             sw.WriteLine($"Time\t{SeriesName}");
 
             string time;
@@ -60,7 +54,7 @@ partial class FrmMain
             for (int j = 0; j < Data.Length; j++)
             {
                 time = nStart.AddSeconds((j+ ArrIndexInit) / nSampleFreq).ToString(fullPattern);
-                content = $"{time}\t{Data[j]:#0.000}";
+                content = $"{time}\t{Data[j].ToString(strDataFormat, System.Globalization.CultureInfo.CurrentCulture)}";
                 
                 //trying to write data to csv
                 sw.WriteLine(content);
@@ -116,7 +110,7 @@ partial class FrmMain
 
             // Save the numerical values
             for (int j = 0; j < Data.Length; j++)
-                sw.WriteLine(Data[j].ToString("#0.0"));
+                sw.WriteLine(Data[j].ToString(strDataFormat));
 
             // Show OK save data
             using (new CenterWinDialog(this))
