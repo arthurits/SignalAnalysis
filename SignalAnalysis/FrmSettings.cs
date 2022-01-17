@@ -32,6 +32,7 @@ namespace SignalAnalysis
             chkCumulative.Checked = Settings.CumulativeDimension;
             chkEntropy.Checked = Settings.Entropy;
             chkCrossHair.Checked = Settings.CrossHair;
+            chkDlgPath.Checked = Settings.RememberFileDialogPath;
 
             switch (Settings.AxisType)
             {
@@ -45,6 +46,18 @@ namespace SignalAnalysis
                     radTime.Checked = true;
                     break;
             }
+
+            switch (Settings.AppCulture.Name)
+            {
+                case "":
+                    radInvariantCulture.Checked = true;
+                    break;
+                default:
+                    radCurrentCulture.Checked = true;
+                    break;
+            }
+
+            lblCulture.Text = Settings.AppCulture.Name;
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
@@ -65,6 +78,10 @@ namespace SignalAnalysis
             Settings.AxisType = AxisType.Seconds;
             if (radPoints.Checked) Settings.AxisType = AxisType.Points;
             if (radTime.Checked) Settings.AxisType = AxisType.DateTime;
+
+            Settings.RememberFileDialogPath = chkDlgPath.Checked;
+            if (radCurrentCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+            else Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
 
             DialogResult = DialogResult.OK;
         }

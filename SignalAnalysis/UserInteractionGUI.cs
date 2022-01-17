@@ -15,7 +15,7 @@ partial class FrmMain
         using OpenFileDialog openDlg = new()
         {
             Title = "Select data file",
-            InitialDirectory = RememberFileDialogPath ? strUserOpenPath: strDefaultOpenPath,
+            InitialDirectory = _settings.RememberFileDialogPath ? strUserOpenPath: strDefaultOpenPath,
             Filter = "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*",
             FilterIndex = 4,
             RestoreDirectory = true
@@ -28,22 +28,22 @@ partial class FrmMain
         {
             //Get the path of specified file and store the directory for future calls
             filePath = openDlg.FileName;
-            if (RememberFileDialogPath) strUserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
+            if (_settings.RememberFileDialogPath) strUserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
+            // Read the data file in the corresponding format
+            bool boolRead = false;
             if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                ReadELuxData(filePath);
+                boolRead = ReadELuxData(filePath);
             else if (".sig".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                ReadSigData(filePath);
+                boolRead = ReadSigData(filePath);
             else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                ReadTextData(filePath);
+                boolRead = ReadTextData(filePath);
 
-            //nPoints = _signalData[0].Length;
-            _settings.IndexStart = 0;
-            _settings.IndexEnd = _signalData[0].Length - 1;
-
-            PopulateComboSeries();
-
-            this.Text = StringsRM.GetString("strFrmTitle") + " - " + openDlg.FileName;
+            if (boolRead)
+            {
+                PopulateComboSeries();
+                this.Text = StringsRM.GetString("strFrmTitle") + " - " + openDlg.FileName;
+            }
         }
 
     }
@@ -72,7 +72,7 @@ partial class FrmMain
             FilterIndex = 1,
             Title = "Export data",
             OverwritePrompt = true,
-            InitialDirectory = RememberFileDialogPath ? strUserSavePath : strDefaultSavePath
+            InitialDirectory = _settings.RememberFileDialogPath ? strUserSavePath : strDefaultSavePath
         };
 
         using (new CenterWinDialog(this))
@@ -83,7 +83,7 @@ partial class FrmMain
         {
             //Get the path of specified file and store the directory for future calls
             filePath = SaveDlg.FileName;
-            if (RememberFileDialogPath) strUserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
+            if (_settings.RememberFileDialogPath) strUserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             switch (Path.GetExtension(SaveDlg.FileName).ToLower())
             {
@@ -119,6 +119,8 @@ partial class FrmMain
             ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCumulative"]).Checked = _settings.CumulativeDimension;
             ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExEntropy"]).Checked = _settings.Entropy;
             ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = _settings.CrossHair;
+
+            strMillisecondsFormat = $"$1{_settings.AppCulture.NumberFormat.NumberDecimalSeparator}fff";
         }
 
     }
