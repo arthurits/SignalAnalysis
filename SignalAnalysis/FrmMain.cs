@@ -325,6 +325,7 @@ public partial class FrmMain : Form
     {
         tokenSource = new();
         token = tokenSource.Token;
+        Results = new();
 
         // Extract the values 
         var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
@@ -336,21 +337,17 @@ public partial class FrmMain : Form
         }, token);
         await statsTask;
 
+        txtStats.Text = Results.ToString();
+
+        // Update plots
         UpdateOriginal(signal);
         UpdateFractal(signal, stripComboSeries.SelectedItem.ToString() ?? string.Empty, _settings.CumulativeDimension);
         ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
-        txtStats.Text = Results.ToString();
     }
 
     private void UpdateUI_Language()
     {
         this.Text = StringsRM.GetString("strFrmTitle");
-        //this.btnData.Text = StringsRM.GetString("strBtnData");
-        //this.btnExport.Text = StringsRM.GetString("strBtnExport");
-        //this.btnSettings.Text = StringsRM.GetString("strBtnSettings");
-        //this.lblSeries.Text = StringsRM.GetString("strLblSeries");
-        //this.lblWindow.Text = StringsRM.GetString("strLblWindow");
-
         
         // Update plots if they contain series
         if(plotOriginal.Plot.GetPlottables().Length > 2)

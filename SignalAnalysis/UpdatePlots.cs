@@ -73,8 +73,8 @@ partial class FrmMain
             plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, signal.Length / nSampleFreq));
         }
         plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) +
-            " (H = " + FractalDimension.DimensionSingle.ToString("#.00000") +
-            " Var(H) = " + FractalDimension.VarianceH.ToString("#.00000") + ")");
+            " (H = " + FractalDimension.DimensionSingle.ToString("#.00####") +
+            " — Var(H) = " + FractalDimension.VarianceH.ToString("#.00####") + ")");
         plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
         plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
         plotFractal.Plot.AxisAuto(0);
@@ -83,11 +83,27 @@ partial class FrmMain
 
     private void UpdateFFT(double[] signal)
     {
-        double[] ys = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
+        double[] ys = Array.Empty<double>();
+
+        try
+        {
+            ys = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
+        }
+        catch (Exception ex)
+        {
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show("Unexpected error while computing the FFT." + Environment.NewLine + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
 
         // Plot the results
         plotFFT.Clear();
-        plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
+        if (ys.Length > 0)
+            plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
         plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle"));
         plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
@@ -102,6 +118,7 @@ partial class FrmMain
         //var cursor = this.Cursor;
         //this.Cursor = Cursors.WaitCursor;
 
+        // Compute average, max, and min descriptive statistics
         double max = signal[0], min = signal[0], sum = 0;
         
         for (int i = 0; i < signal.Length; i++)
@@ -116,6 +133,7 @@ partial class FrmMain
         Results.Minimum = min;
         Results.Average = avg;
 
+        // Compute fractal and entropy values
         try
         {
             FractalDimension.ComputeDimension(nSampleFreq, signal, token, cumulative);
