@@ -15,7 +15,7 @@ partial class FrmMain
         using OpenFileDialog openDlg = new()
         {
             Title = "Select data file",
-            InitialDirectory = _settings.RememberFileDialogPath ? strUserOpenPath: strDefaultOpenPath,
+            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserOpenPath : _settings.DefaultOpenPath,
             Filter = "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*",
             FilterIndex = 4,
             RestoreDirectory = true
@@ -28,7 +28,7 @@ partial class FrmMain
         {
             //Get the path of specified file and store the directory for future calls
             filePath = openDlg.FileName;
-            if (_settings.RememberFileDialogPath) strUserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
+            if (_settings.RememberFileDialogPath) _settings.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             // Read the data file in the corresponding format
             bool boolRead = false;
@@ -72,7 +72,7 @@ partial class FrmMain
             FilterIndex = 1,
             Title = "Export data",
             OverwritePrompt = true,
-            InitialDirectory = _settings.RememberFileDialogPath ? strUserSavePath : strDefaultSavePath
+            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserSavePath : _settings.DefaultSavePath
         };
 
         using (new CenterWinDialog(this))
@@ -83,7 +83,7 @@ partial class FrmMain
         {
             //Get the path of specified file and store the directory for future calls
             filePath = SaveDlg.FileName;
-            if (_settings.RememberFileDialogPath) strUserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
+            if (_settings.RememberFileDialogPath) _settings.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             switch (Path.GetExtension(SaveDlg.FileName).ToLower())
             {
@@ -119,8 +119,6 @@ partial class FrmMain
             ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCumulative"]).Checked = _settings.CumulativeDimension;
             ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExEntropy"]).Checked = _settings.Entropy;
             ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = _settings.CrossHair;
-
-            strMillisecondsFormat = $"$1{_settings.AppCulture.NumberFormat.NumberDecimalSeparator}fff";
         }
 
     }
@@ -137,6 +135,12 @@ partial class FrmMain
             var label = (ToolStripStatusLabelEx)sender;
             label.Checked = !label.Checked;
 
+            // Change the text color
+            if (label.Checked)
+                label.ForeColor = Color.Black;
+            else
+                label.ForeColor = Color.LightGray;
+
             // Update the settings
             switch (label.Name)
             {
@@ -145,12 +149,12 @@ partial class FrmMain
                     break;
                 case "LabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    if (label.Checked && statsTask.Status == TaskStatus.Running)
+                    if (label.Checked && statsTask !=null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "LabelExEntropy":
                     _settings.Entropy = label.Checked;
-                    if (label.Checked && statsTask.Status == TaskStatus.Running)
+                    if (label.Checked && statsTask != null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "LabelExCrossHair":

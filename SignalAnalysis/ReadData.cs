@@ -37,7 +37,12 @@ partial class FrmMain
                 return result;
             }
             else
-                DateTime.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nStart);
+            {
+                // Append millisecond pattern to current culture's full date time pattern
+                string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
+                fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
+                if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, _settings.AppCulture, System.Globalization.DateTimeStyles.None, out nStart)) return result;
+            }
         }
 
         strLine = sr.ReadLine();
@@ -203,7 +208,7 @@ partial class FrmMain
         }
         // Append millisecond pattern to current culture's full date time pattern
         string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
-        fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", strMillisecondsFormat);
+        fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
         if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, _settings.AppCulture, System.Globalization.DateTimeStyles.None, out nStart)) return result;
 
         strLine = sr.ReadLine();

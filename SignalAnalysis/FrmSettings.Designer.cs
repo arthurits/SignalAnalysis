@@ -46,10 +46,11 @@
             this.lblStart = new System.Windows.Forms.Label();
             this.tabGUI = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblCulture = new System.Windows.Forms.Label();
             this.radInvariantCulture = new System.Windows.Forms.RadioButton();
             this.radCurrentCulture = new System.Windows.Forms.RadioButton();
             this.chkDlgPath = new System.Windows.Forms.CheckBox();
+            this.lblDataFormat = new System.Windows.Forms.Label();
+            this.txtDataFormat = new System.Windows.Forms.TextBox();
             this.tabSettings.SuspendLayout();
             this.tabPlot.SuspendLayout();
             this.grpAxis.SuspendLayout();
@@ -225,19 +226,20 @@
             // 
             // tabGUI
             // 
+            this.tabGUI.Controls.Add(this.txtDataFormat);
+            this.tabGUI.Controls.Add(this.lblDataFormat);
             this.tabGUI.Controls.Add(this.groupBox1);
             this.tabGUI.Controls.Add(this.chkDlgPath);
-            this.tabGUI.Location = new System.Drawing.Point(4, 24);
+            this.tabGUI.Location = new System.Drawing.Point(4, 26);
             this.tabGUI.Name = "tabGUI";
             this.tabGUI.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGUI.Size = new System.Drawing.Size(441, 215);
+            this.tabGUI.Size = new System.Drawing.Size(441, 213);
             this.tabGUI.TabIndex = 1;
             this.tabGUI.Text = "User interface";
             this.tabGUI.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblCulture);
             this.groupBox1.Controls.Add(this.radInvariantCulture);
             this.groupBox1.Controls.Add(this.radCurrentCulture);
             this.groupBox1.Location = new System.Drawing.Point(21, 20);
@@ -247,24 +249,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Globalization culture";
             // 
-            // lblCulture
-            // 
-            this.lblCulture.AutoSize = true;
-            this.lblCulture.Location = new System.Drawing.Point(218, 29);
-            this.lblCulture.Name = "lblCulture";
-            this.lblCulture.Size = new System.Drawing.Size(42, 19);
-            this.lblCulture.TabIndex = 2;
-            this.lblCulture.Text = "es-ES";
-            // 
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
             this.radInvariantCulture.Location = new System.Drawing.Point(21, 55);
             this.radInvariantCulture.Name = "radInvariantCulture";
-            this.radInvariantCulture.Size = new System.Drawing.Size(225, 23);
+            this.radInvariantCulture.Size = new System.Drawing.Size(196, 23);
             this.radInvariantCulture.TabIndex = 1;
             this.radInvariantCulture.TabStop = true;
-            this.radInvariantCulture.Text = "Invariant culture (EN) formatting";
+            this.radInvariantCulture.Text = "Invariant culture formatting";
             this.radInvariantCulture.UseVisualStyleBackColor = true;
             // 
             // radCurrentCulture
@@ -277,6 +270,7 @@
             this.radCurrentCulture.TabStop = true;
             this.radCurrentCulture.Text = "Current culture formatting";
             this.radCurrentCulture.UseVisualStyleBackColor = true;
+            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.radCurrentCulture_CheckedChanged);
             // 
             // chkDlgPath
             // 
@@ -287,6 +281,22 @@
             this.chkDlgPath.TabIndex = 0;
             this.chkDlgPath.Text = "Remember open/save dialog previous path";
             this.chkDlgPath.UseVisualStyleBackColor = true;
+            // 
+            // lblDataFormat
+            // 
+            this.lblDataFormat.AutoSize = true;
+            this.lblDataFormat.Location = new System.Drawing.Point(18, 164);
+            this.lblDataFormat.Name = "lblDataFormat";
+            this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
+            this.lblDataFormat.TabIndex = 2;
+            this.lblDataFormat.Text = "Numeric data-format string";
+            // 
+            // txtDataFormat
+            // 
+            this.txtDataFormat.Location = new System.Drawing.Point(201, 161);
+            this.txtDataFormat.Name = "txtDataFormat";
+            this.txtDataFormat.Size = new System.Drawing.Size(107, 25);
+            this.txtDataFormat.TabIndex = 3;
             // 
             // FrmSettings
             // 
@@ -336,9 +346,10 @@
         private TabPage tabPlot;
         private TabPage tabGUI;
         private GroupBox groupBox1;
-        private Label lblCulture;
         private RadioButton radInvariantCulture;
         private RadioButton radCurrentCulture;
         private CheckBox chkDlgPath;
+        private TextBox txtDataFormat;
+        private Label lblDataFormat;
     }
 }

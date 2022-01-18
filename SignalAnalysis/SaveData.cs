@@ -26,7 +26,7 @@ partial class FrmMain
 
             // Append millisecond pattern to current culture's full date time pattern
             string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", strMillisecondsFormat);
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
 
             // Save the header text into the file
             string content = string.Empty;
@@ -54,7 +54,7 @@ partial class FrmMain
             for (int j = 0; j < Data.Length; j++)
             {
                 time = nStart.AddSeconds((j+ ArrIndexInit) / nSampleFreq).ToString(fullPattern);
-                content = $"{time}\t{Data[j].ToString(strDataFormat, System.Globalization.CultureInfo.CurrentCulture)}";
+                content = $"{time}\t{Data[j].ToString(_settings.DataFormat, _settings.AppCulture)}";
                 
                 //trying to write data to csv
                 sw.WriteLine(content);
@@ -110,7 +110,7 @@ partial class FrmMain
 
             // Save the numerical values
             for (int j = 0; j < Data.Length; j++)
-                sw.WriteLine(Data[j].ToString(strDataFormat));
+                sw.WriteLine(Data[j].ToString(_settings.DataFormat));
 
             // Show OK save data
             using (new CenterWinDialog(this))

@@ -13,7 +13,7 @@ namespace SignalAnalysis
     
     public partial class FrmSettings : Form
     {
-        public clsSettings Settings = new();
+        public ClassSettings Settings = new();
         private System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
 
         public FrmSettings()
@@ -22,7 +22,7 @@ namespace SignalAnalysis
             UpdateUI_Language();
         }
 
-        public FrmSettings(clsSettings settings)
+        public FrmSettings(ClassSettings settings)
             :this()
         {
             Settings = settings;
@@ -52,7 +52,8 @@ namespace SignalAnalysis
             else
                 radCurrentCulture.Checked = true;
 
-            lblCulture.Text = Settings.AppCulture.Name;
+            chkDlgPath.Checked = Settings.RememberFileDialogPath;
+            txtDataFormat.Text = Settings.DataFormat;
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
@@ -74,9 +75,10 @@ namespace SignalAnalysis
             if (radPoints.Checked) Settings.AxisType = AxisType.Points;
             if (radTime.Checked) Settings.AxisType = AxisType.DateTime;
 
-            Settings.RememberFileDialogPath = chkDlgPath.Checked;
             if (radCurrentCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
             else Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            Settings.RememberFileDialogPath = chkDlgPath.Checked;
+            Settings.DataFormat = txtDataFormat.Text;
 
             DialogResult = DialogResult.OK;
         }
@@ -102,6 +104,14 @@ namespace SignalAnalysis
             this.btnCancel.Text = StringsRM.GetString("strBtnCancel");
             this.btnAccept.Text = StringsRM.GetString("strBtnAccept");
 
+        }
+
+        private void radCurrentCulture_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radCurrentCulture.Checked)
+                radCurrentCulture.Text = $"Current culture formatting ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+            else
+                radCurrentCulture.Text = "Current culture formatting";
         }
     }
 }

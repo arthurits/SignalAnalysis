@@ -5,14 +5,14 @@ namespace SignalAnalysis;
 
 public partial class FrmMain : Form
 {
-    private string strDefaultSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-    private string strUserSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-    private string strDefaultOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
-    private string strUserOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
+    //private string strDefaultSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+    //private string strUserSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+    //private string strDefaultOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
+    //private string strUserOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
     //private bool RememberFileDialogPath = true;
     //private string strNumericFormat = "G4";
-    private string strDataFormat = "#0.0##";
-    private string strMillisecondsFormat = "1.fff";
+    //private string strDataFormat = "#0.0##";
+    //private string strMillisecondsFormat = "1.fff";
     //private System.Globalization.CultureInfo appCulture = System.Globalization.CultureInfo.CurrentCulture;
 
     private double[][] _signalData = Array.Empty<double[]>();
@@ -22,7 +22,7 @@ public partial class FrmMain : Form
     double nSampleFreq = 0.0;
     
     DateTime nStart;
-    clsSettings _settings = new();
+    ClassSettings _settings = new();
     Stats Results;
     ToolStripComboBox stripComboSeries;
     ToolStripComboBox stripComboWindows;
@@ -39,6 +39,9 @@ public partial class FrmMain : Form
 
     public FrmMain()
     {
+        // Load settings
+        LoadProgramSettingsJSON();
+
         InitializeToolStripPanel();
         InitializeStatusStrip();
         InitializeMenu();
@@ -50,9 +53,6 @@ public partial class FrmMain : Form
         PopulateComboWindow();
 
         UpdateUI_Language();
-
-        // Culture related stuff
-        strMillisecondsFormat = $"$1{_settings.AppCulture.NumberFormat.NumberDecimalSeparator}fff";
     }
 
     // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.toolstrippanel?view=windowsdesktop-6.0
@@ -147,11 +147,13 @@ public partial class FrmMain : Form
 
         StatusStrip statusStrip = new()
         {
-            Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point),
+            Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
+            ImageScalingSize = new System.Drawing.Size(16, 16),
             Name = "StatusStrip",
             ShowItemToolTips = true,
             Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue),
             RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
+            Size = new System.Drawing.Size(934, 28),
             TabIndex = 1,
             Text = "Status bar"
         };
@@ -171,7 +173,7 @@ public partial class FrmMain : Form
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = true,
+            Checked = false,    // Inverse because we are simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExPower",
             Size = new System.Drawing.Size(28, 23),
@@ -179,10 +181,12 @@ public partial class FrmMain : Form
             ToolTipText = "Power spectra (dB)"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
+        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
+
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = false,
+            Checked = true,    // Inverse because we are simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExCumulative",
             Size = new System.Drawing.Size(28, 23),
@@ -190,10 +194,12 @@ public partial class FrmMain : Form
             ToolTipText = "Cumulative fractal dimension"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
+        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
+
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = false,
+            Checked = true,    // Inverse because we are simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExEntropy",
             Size = new System.Drawing.Size(28, 23),
@@ -201,10 +207,12 @@ public partial class FrmMain : Form
             ToolTipText = "Approximate and sample entropy"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
+        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
+
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = false,
+            Checked = true,    // Inverse because we are simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExCrossHair",
             Size = new System.Drawing.Size(28, 23),
@@ -212,6 +220,7 @@ public partial class FrmMain : Form
             ToolTipText = "Plot's crosshair mode"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
+        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
 
         tspBottom.Join(statusStrip);
         this.Controls.Add(tspBottom);
@@ -242,6 +251,9 @@ public partial class FrmMain : Form
                 e.Cancel = true;
             }
         }
+
+        // Save settings data
+        SaveProgramSettingsJSON();
     }
 
     
