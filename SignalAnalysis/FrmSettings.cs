@@ -47,15 +47,10 @@ namespace SignalAnalysis
                     break;
             }
 
-            switch (Settings.AppCulture.Name)
-            {
-                case "":
-                    radInvariantCulture.Checked = true;
-                    break;
-                default:
-                    radCurrentCulture.Checked = true;
-                    break;
-            }
+            if (Settings.AppCultureName == string.Empty)
+                radInvariantCulture.Checked = true;
+            else
+                radCurrentCulture.Checked = true;
 
             lblCulture.Text = Settings.AppCulture.Name;
         }
