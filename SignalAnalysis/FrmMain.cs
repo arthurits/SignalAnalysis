@@ -5,16 +5,6 @@ namespace SignalAnalysis;
 
 public partial class FrmMain : Form
 {
-    //private string strDefaultSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-    //private string strUserSavePath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-    //private string strDefaultOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
-    //private string strUserOpenPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\examples";
-    //private bool RememberFileDialogPath = true;
-    //private string strNumericFormat = "G4";
-    //private string strDataFormat = "#0.0##";
-    //private string strMillisecondsFormat = "1.fff";
-    //private System.Globalization.CultureInfo appCulture = System.Globalization.CultureInfo.CurrentCulture;
-
     private double[][] _signalData = Array.Empty<double[]>();
     private double[] _signalFFT = Array.Empty<double>();
     private string[] seriesLabels = Array.Empty<string>();
