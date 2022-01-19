@@ -144,6 +144,16 @@
   <data name="strChkPower" xml:space="preserve">
     <value>Espectro (dB)</value>
   </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>Error al leer el archivo de ajustes.
+
+{0}
+
+Se utilizarán los valores por defecto.</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Opciones</value>
   </data>
@@ -215,7 +225,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Amplitud</value>
   </data>
   <data name="strPlotWindowTitle" xml:space="preserve">
-    <value>Ventana {window}</value>
+    <value>Ventana {0}</value>
   </data>
   <data name="strPlotWindowXLabel" xml:space="preserve">
     <value>Tiempo (segundos)</value>

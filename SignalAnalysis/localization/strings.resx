@@ -144,6 +144,16 @@
   <data name="strChkPower" xml:space="preserve">
     <value>Power (dB)</value>
   </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>Error loading settings file.
+
+{0}
+
+Default values will be used instead.</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -215,7 +225,7 @@ dimension has been stopped.</value>
     <value>Amplitude</value>
   </data>
   <data name="strPlotWindowTitle" xml:space="preserve">
-    <value>{window} Window</value>
+    <value>{0} window</value>
   </data>
   <data name="strPlotWindowXLabel" xml:space="preserve">
     <value>Time (seconds)</value>

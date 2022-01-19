@@ -41,7 +41,7 @@ partial class FrmMain
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotWindow.Plot.AddSignal(ys, nSampleFreq, Color.Red);
         plotWindow.Plot.AxisAuto(0);
-        plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle"));
+        plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle") ?? "{0} window", window.Name));
         plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel"));
         plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel"));
         plotWindow.Refresh();

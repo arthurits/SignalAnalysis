@@ -10,7 +10,7 @@ namespace SignalAnalysis;
 partial class FrmMain
 {
     /// <summary>
-    /// Loads all settings from file _sett.FileName into class instance _sett
+    /// Loads all settings from file _sett.FileName into class instance _settings
     /// Shows MessageBox error if unsuccessful
     /// </summary>
     private void LoadProgramSettingsJSON()
@@ -18,12 +18,8 @@ partial class FrmMain
         try
         {
             var jsonString = File.ReadAllText(_settings.FileName);
-            _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
-            //_settings.InitializeJsonIgnore(_path);
-            //var settings = JsonSerializer.Deserialize<ClassSettings>(jsonString);
-            //settings.InitializeJsonIgnore(_path);
-            //_sett = settings;
-
+            _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
+            
             //this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             //this.DesktopLocation = new Point(_settings.Wnd_Left, _settings.Wnd_Top);
             //this.ClientSize = new Size(_settings.Wnd_Width, _settings.Wnd_Height);
@@ -36,8 +32,8 @@ partial class FrmMain
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(this,
-                    "Error loading settings file.\n\n" + ex.Message + "\n\n" + "Default values will be used instead.",
-                    "Error",
+                    String.Format(StringsRM.GetString("strErrorDeserialize") ?? string.Empty ,ex.Message),
+                    StringsRM.GetString("strErrorDeserializeTitle"),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

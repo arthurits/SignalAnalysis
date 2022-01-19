@@ -142,6 +142,28 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading settings file.
+        ///
+        ///{0}
+        ///
+        ///Default values will be used instead..
+        /// </summary>
+        internal static string strErrorDeserialize {
+            get {
+                return ResourceManager.GetString("strErrorDeserialize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string strErrorDeserializeTitle {
+            get {
+                return ResourceManager.GetString("strErrorDeserializeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string strFrmSettings {
@@ -350,7 +372,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {window} Window.
+        ///   Looks up a localized string similar to {0} window.
         /// </summary>
         internal static string strPlotWindowTitle {
             get {

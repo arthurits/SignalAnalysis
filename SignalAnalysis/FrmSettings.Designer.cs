@@ -45,12 +45,15 @@
             this.lblEnd = new System.Windows.Forms.Label();
             this.lblStart = new System.Windows.Forms.Label();
             this.tabGUI = new System.Windows.Forms.TabPage();
+            this.txtDataFormat = new System.Windows.Forms.TextBox();
+            this.lblDataFormat = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboAllCultures = new System.Windows.Forms.ComboBox();
+            this.radUserCulture = new System.Windows.Forms.RadioButton();
             this.radInvariantCulture = new System.Windows.Forms.RadioButton();
             this.radCurrentCulture = new System.Windows.Forms.RadioButton();
             this.chkDlgPath = new System.Windows.Forms.CheckBox();
-            this.lblDataFormat = new System.Windows.Forms.Label();
-            this.txtDataFormat = new System.Windows.Forms.TextBox();
+            this.btnReset = new System.Windows.Forms.Button();
             this.tabSettings.SuspendLayout();
             this.tabPlot.SuspendLayout();
             this.grpAxis.SuspendLayout();
@@ -238,21 +241,59 @@
             this.tabGUI.Text = "User interface";
             this.tabGUI.UseVisualStyleBackColor = true;
             // 
+            // txtDataFormat
+            // 
+            this.txtDataFormat.Location = new System.Drawing.Point(219, 174);
+            this.txtDataFormat.Name = "txtDataFormat";
+            this.txtDataFormat.Size = new System.Drawing.Size(89, 25);
+            this.txtDataFormat.TabIndex = 3;
+            // 
+            // lblDataFormat
+            // 
+            this.lblDataFormat.AutoSize = true;
+            this.lblDataFormat.Location = new System.Drawing.Point(18, 177);
+            this.lblDataFormat.Name = "lblDataFormat";
+            this.lblDataFormat.Size = new System.Drawing.Size(201, 19);
+            this.lblDataFormat.TabIndex = 2;
+            this.lblDataFormat.Text = "Numeric data-formatting string";
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboAllCultures);
+            this.groupBox1.Controls.Add(this.radUserCulture);
             this.groupBox1.Controls.Add(this.radInvariantCulture);
             this.groupBox1.Controls.Add(this.radCurrentCulture);
-            this.groupBox1.Location = new System.Drawing.Point(21, 20);
+            this.groupBox1.Location = new System.Drawing.Point(21, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(288, 94);
+            this.groupBox1.Size = new System.Drawing.Size(288, 124);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Globalization culture";
             // 
+            // cboAllCultures
+            // 
+            this.cboAllCultures.FormattingEnabled = true;
+            this.cboAllCultures.Location = new System.Drawing.Point(135, 84);
+            this.cboAllCultures.Name = "cboAllCultures";
+            this.cboAllCultures.Size = new System.Drawing.Size(136, 25);
+            this.cboAllCultures.TabIndex = 3;
+            // 
+            // radUserCulture
+            // 
+            this.radUserCulture.AutoSize = true;
+            this.radUserCulture.Location = new System.Drawing.Point(21, 86);
+            this.radUserCulture.Name = "radUserCulture";
+            this.radUserCulture.Size = new System.Drawing.Size(108, 23);
+            this.radUserCulture.TabIndex = 2;
+            this.radUserCulture.TabStop = true;
+            this.radUserCulture.Text = "Select culture";
+            this.radUserCulture.UseVisualStyleBackColor = true;
+            this.radUserCulture.CheckedChanged += new System.EventHandler(this.radUserCulture_CheckedChanged);
+            // 
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(21, 55);
+            this.radInvariantCulture.Location = new System.Drawing.Point(21, 56);
             this.radInvariantCulture.Name = "radInvariantCulture";
             this.radInvariantCulture.Size = new System.Drawing.Size(196, 23);
             this.radInvariantCulture.TabIndex = 1;
@@ -275,28 +316,22 @@
             // chkDlgPath
             // 
             this.chkDlgPath.AutoSize = true;
-            this.chkDlgPath.Location = new System.Drawing.Point(18, 131);
+            this.chkDlgPath.Location = new System.Drawing.Point(18, 144);
             this.chkDlgPath.Name = "chkDlgPath";
             this.chkDlgPath.Size = new System.Drawing.Size(290, 23);
             this.chkDlgPath.TabIndex = 0;
             this.chkDlgPath.Text = "Remember open/save dialog previous path";
             this.chkDlgPath.UseVisualStyleBackColor = true;
             // 
-            // lblDataFormat
+            // btnReset
             // 
-            this.lblDataFormat.AutoSize = true;
-            this.lblDataFormat.Location = new System.Drawing.Point(18, 164);
-            this.lblDataFormat.Name = "lblDataFormat";
-            this.lblDataFormat.Size = new System.Drawing.Size(177, 19);
-            this.lblDataFormat.TabIndex = 2;
-            this.lblDataFormat.Text = "Numeric data-format string";
-            // 
-            // txtDataFormat
-            // 
-            this.txtDataFormat.Location = new System.Drawing.Point(201, 161);
-            this.txtDataFormat.Name = "txtDataFormat";
-            this.txtDataFormat.Size = new System.Drawing.Size(107, 25);
-            this.txtDataFormat.TabIndex = 3;
+            this.btnReset.Location = new System.Drawing.Point(12, 263);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(100, 30);
+            this.btnReset.TabIndex = 12;
+            this.btnReset.Text = "&Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // FrmSettings
             // 
@@ -305,6 +340,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(473, 305);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.tabSettings);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.btnCancel);
@@ -351,5 +387,8 @@
         private CheckBox chkDlgPath;
         private TextBox txtDataFormat;
         private Label lblDataFormat;
+        private Button btnReset;
+        private ComboBox cboAllCultures;
+        private RadioButton radUserCulture;
     }
 }

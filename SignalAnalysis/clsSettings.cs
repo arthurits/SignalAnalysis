@@ -40,12 +40,12 @@ public class ClassSettings
     /// <summary>
     /// True if a crosshair is shown on the plots
     /// </summary>
-    [JsonPropertyName("Show plots\' crosshair")]
+    [JsonPropertyName("Show plots crosshair")]
     public bool CrossHair { get; set; } = false;
     /// <summary>
     /// Abscissa axis type
     /// </summary>
-    [JsonPropertyName("Plots\' abscissa axis")]
+    [JsonPropertyName("Plots abscissa axis")]
     public AxisType AxisType { get; set; } = AxisType.Seconds;
 
     /// <summary>
