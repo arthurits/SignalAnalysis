@@ -42,7 +42,7 @@ partial class FrmMain
             if (boolRead)
             {
                 PopulateComboSeries();
-                this.Text = StringsRM.GetString("strFrmTitle") + " - " + openDlg.FileName;
+                this.Text = StringsRM.GetString("strFrmTitle", _settings.AppCulture) + " - " + openDlg.FileName;
             }
         }
 

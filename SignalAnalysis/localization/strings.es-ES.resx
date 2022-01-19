@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="grpCulture" xml:space="preserve">
+    <value>Interfaz y formato de datos</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Aceptar</value>
   </data>
@@ -129,6 +132,9 @@
   <data name="strBtnExport" xml:space="preserve">
     <value>&amp;Exportar</value>
   </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>Restablecer</value>
+  </data>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Opciones</value>
   </data>
@@ -138,11 +144,21 @@
   <data name="strChkCumulative" xml:space="preserve">
     <value>Dimensión fractal acumulada</value>
   </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Recordar la ruta previa al abrir/guardar</value>
+  </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropía (aproximada, muestra)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Espectro (dB)</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>Está seguro de que desea restablecer todos
+los campos a sus valores por defecto?</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>¿Restablecer opciones?</value>
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error al leer el archivo de ajustes.
@@ -165,6 +181,9 @@ Se utilizarán los valores por defecto.</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>Cadena de formato numérico</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>Índice final</value>
@@ -233,6 +252,12 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitud</value>
   </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>Referencia cultural actual</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>Referencia cultural invariable</value>
+  </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>Puntos</value>
   </data>
@@ -241,5 +266,14 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strRadTime" xml:space="preserve">
     <value>Tiempo</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>Seleccionar</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>Interfaz de usuario</value>
+  </data>
+  <data name="strTabPlot" xml:space="preserve">
+    <value>Gráficos</value>
   </data>
 </root>

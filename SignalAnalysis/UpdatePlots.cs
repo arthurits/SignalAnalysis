@@ -24,9 +24,9 @@ partial class FrmMain
                 break;
         }
 
-        plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle"));
-        plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel"));
-        plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel"));
+        plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
+        plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture));
+        plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture));
         plotOriginal.Plot.AxisAuto(0);
         plotOriginal.Refresh();
     }
@@ -41,9 +41,9 @@ partial class FrmMain
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotWindow.Plot.AddSignal(ys, nSampleFreq, Color.Red);
         plotWindow.Plot.AxisAuto(0);
-        plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle") ?? "{0} window", window.Name));
-        plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel"));
-        plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel"));
+        plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
+        plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture));
+        plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture));
         plotWindow.Refresh();
     }
 
@@ -52,9 +52,9 @@ partial class FrmMain
         plotApplied.Clear();
         //plotApplied.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotApplied.Plot.AddSignal(signal, nSampleFreq);
-        plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle"));
-        plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel"));
-        plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel"));
+        plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture));
+        plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture));
+        plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture));
         plotApplied.Plot.AxisAuto(0);
         plotApplied.Refresh();
     }
@@ -75,8 +75,8 @@ partial class FrmMain
         plotFractal.Plot.Title("Fractal dimension" + (progressive ? " (progressive)" : String.Empty) +
             " (H = " + FractalDimension.DimensionSingle.ToString("#.00####") +
             " — Var(H) = " + FractalDimension.VarianceH.ToString("#.00####") + ")");
-        plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
-        plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
+        plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
+        plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
         plotFractal.Plot.AxisAuto(0);
         plotFractal.Refresh();
     }
@@ -104,9 +104,9 @@ partial class FrmMain
         plotFFT.Clear();
         if (ys.Length > 0)
             plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
-        plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle"));
-        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
-        plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
+        plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));
+        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture));
+        plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
     }
@@ -147,8 +147,8 @@ partial class FrmMain
         {
             using (new CenterWinDialog(this))
                 MessageBox.Show(this,
-                    StringsRM.GetString("strMsgBoxTaskCancel"),
-                    StringsRM.GetString("strMsgBoxTaskCancelTitle"),
+                    StringsRM.GetString("strMsgBoxTaskCancel", _settings.AppCulture),
+                    StringsRM.GetString("strMsgBoxTaskCancelTitle", _settings.AppCulture),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Stop);
         }

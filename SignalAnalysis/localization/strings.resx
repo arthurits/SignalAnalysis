@@ -129,6 +129,9 @@
   <data name="strBtnExport" xml:space="preserve">
     <value>&amp;Export</value>
   </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Settings</value>
   </data>
@@ -138,11 +141,21 @@
   <data name="strChkCumulative" xml:space="preserve">
     <value>Cumulative fractal dimension</value>
   </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Remember open/save dialog previous path</value>
+  </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropy (approximate &amp;&amp; sample)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Power (dB)</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>"Do you want to reset all fields
+to their default values?"</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>Reset settings?</value>
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error loading settings file.
@@ -163,8 +176,14 @@ Default values will be used instead.</value>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Abscissa axis</value>
   </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>UI and data format</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>Numeric data-formatting string</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>Array index end</value>
@@ -233,6 +252,12 @@ dimension has been stopped.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>Current culture formatting</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>Invariant culture formatting</value>
+  </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>Data poins</value>
   </data>
@@ -241,5 +266,14 @@ dimension has been stopped.</value>
   </data>
   <data name="strRadTime" xml:space="preserve">
     <value>Date and time</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>Select culture</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>User interface</value>
+  </data>
+  <data name="strTabPlot" xml:space="preserve">
+    <value>Plotting</value>
   </data>
 </root>

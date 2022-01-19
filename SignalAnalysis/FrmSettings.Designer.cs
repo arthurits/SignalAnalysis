@@ -47,7 +47,7 @@
             this.tabGUI = new System.Windows.Forms.TabPage();
             this.txtDataFormat = new System.Windows.Forms.TextBox();
             this.lblDataFormat = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpCulture = new System.Windows.Forms.GroupBox();
             this.cboAllCultures = new System.Windows.Forms.ComboBox();
             this.radUserCulture = new System.Windows.Forms.RadioButton();
             this.radInvariantCulture = new System.Windows.Forms.RadioButton();
@@ -58,7 +58,7 @@
             this.tabPlot.SuspendLayout();
             this.grpAxis.SuspendLayout();
             this.tabGUI.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grpCulture.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -231,7 +231,7 @@
             // 
             this.tabGUI.Controls.Add(this.txtDataFormat);
             this.tabGUI.Controls.Add(this.lblDataFormat);
-            this.tabGUI.Controls.Add(this.groupBox1);
+            this.tabGUI.Controls.Add(this.grpCulture);
             this.tabGUI.Controls.Add(this.chkDlgPath);
             this.tabGUI.Location = new System.Drawing.Point(4, 26);
             this.tabGUI.Name = "tabGUI";
@@ -257,26 +257,29 @@
             this.lblDataFormat.TabIndex = 2;
             this.lblDataFormat.Text = "Numeric data-formatting string";
             // 
-            // groupBox1
+            // grpCulture
             // 
-            this.groupBox1.Controls.Add(this.cboAllCultures);
-            this.groupBox1.Controls.Add(this.radUserCulture);
-            this.groupBox1.Controls.Add(this.radInvariantCulture);
-            this.groupBox1.Controls.Add(this.radCurrentCulture);
-            this.groupBox1.Location = new System.Drawing.Point(21, 14);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(288, 124);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Globalization culture";
+            this.grpCulture.Controls.Add(this.cboAllCultures);
+            this.grpCulture.Controls.Add(this.radUserCulture);
+            this.grpCulture.Controls.Add(this.radInvariantCulture);
+            this.grpCulture.Controls.Add(this.radCurrentCulture);
+            this.grpCulture.Location = new System.Drawing.Point(21, 14);
+            this.grpCulture.Name = "grpCulture";
+            this.grpCulture.Size = new System.Drawing.Size(288, 124);
+            this.grpCulture.TabIndex = 1;
+            this.grpCulture.TabStop = false;
+            this.grpCulture.Text = "UI and data format";
             // 
             // cboAllCultures
             // 
+            this.cboAllCultures.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cboAllCultures.Enabled = false;
             this.cboAllCultures.FormattingEnabled = true;
             this.cboAllCultures.Location = new System.Drawing.Point(135, 84);
             this.cboAllCultures.Name = "cboAllCultures";
             this.cboAllCultures.Size = new System.Drawing.Size(136, 25);
             this.cboAllCultures.TabIndex = 3;
+            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.cboAllCultures_SelectedValueChanged);
             // 
             // radUserCulture
             // 
@@ -356,8 +359,8 @@
             this.grpAxis.PerformLayout();
             this.tabGUI.ResumeLayout(false);
             this.tabGUI.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpCulture.ResumeLayout(false);
+            this.grpCulture.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -381,7 +384,7 @@
         private TabControl tabSettings;
         private TabPage tabPlot;
         private TabPage tabGUI;
-        private GroupBox groupBox1;
+        private GroupBox grpCulture;
         private RadioButton radInvariantCulture;
         private RadioButton radCurrentCulture;
         private CheckBox chkDlgPath;

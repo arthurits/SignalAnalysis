@@ -32,8 +32,8 @@ partial class FrmMain
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(this,
-                    String.Format(StringsRM.GetString("strErrorDeserialize") ?? string.Empty ,ex.Message),
-                    StringsRM.GetString("strErrorDeserializeTitle"),
+                    String.Format(StringsRM.GetString("strErrorDeserialize", _settings.AppCulture) ?? string.Empty, ex.Message),
+                    StringsRM.GetString("strErrorDeserializeTitle", _settings.AppCulture),
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

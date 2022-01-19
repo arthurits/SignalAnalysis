@@ -349,40 +349,40 @@ public partial class FrmMain : Form
 
     private void UpdateUI_Language()
     {
-        this.Text = StringsRM.GetString("strFrmTitle");
+        this.Text = StringsRM.GetString("strFrmTitle", _settings.AppCulture);
         
         // Update plots if they contain series
         if(plotOriginal.Plot.GetPlottables().Length > 2)
         {
-            plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle"));
-            plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel"));
-            plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel"));
+            plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
+            plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture));
+            plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture));
         }
 
         if (plotWindow.Plot.GetPlottables().Length > 2)
         {
-            plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle"));
-            plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel"));
-            plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel"));
+            plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture));
+            plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture));
+            plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture));
         }
         if (plotApplied.Plot.GetPlottables().Length > 2)
         {
-            plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle"));
-            plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel"));
-            plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel"));
+            plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture));
+            plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture));
+            plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture));
         }
 
         if (plotFractal.Plot.GetPlottables().Length > 2)
         {
-            plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel"));
-            plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel"));
+            plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
+            plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
         }
 
         if (plotFFT.Plot.GetPlottables().Length > 2)
         {
-            plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle"));
-            plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow") : StringsRM.GetString("strPlotFFTXLabelMag"));
-            plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel"));
+            plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));
+            plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture));
+            plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
         }
         
     }

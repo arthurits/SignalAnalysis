@@ -97,6 +97,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string strBtnReset {
+            get {
+                return ResourceManager.GetString("strBtnReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Settings.
         /// </summary>
         internal static string strBtnSettings {
@@ -124,6 +133,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remember open/save dialog previous path.
+        /// </summary>
+        internal static string strChkDlgPath {
+            get {
+                return ResourceManager.GetString("strChkDlgPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entropy (approximate &amp;&amp; sample).
         /// </summary>
         internal static string strChkEntropy {
@@ -138,6 +156,25 @@ namespace SignalAnalysis.localization {
         internal static string strChkPower {
             get {
                 return ResourceManager.GetString("strChkPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Do you want to reset all fields
+        ///to their default values?&quot;.
+        /// </summary>
+        internal static string strDlgReset {
+            get {
+                return ResourceManager.GetString("strDlgReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset settings?.
+        /// </summary>
+        internal static string strDlgResetTitle {
+            get {
+                return ResourceManager.GetString("strDlgResetTitle", resourceCulture);
             }
         }
         
@@ -191,11 +228,29 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UI and data format.
+        /// </summary>
+        internal static string strGrpCulture {
+            get {
+                return ResourceManager.GetString("strGrpCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data-file path.
         /// </summary>
         internal static string strLblData {
             get {
                 return ResourceManager.GetString("strLblData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numeric data-formatting string.
+        /// </summary>
+        internal static string strLblDataFormat {
+            get {
+                return ResourceManager.GetString("strLblDataFormat", resourceCulture);
             }
         }
         
@@ -399,6 +454,24 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current culture formatting.
+        /// </summary>
+        internal static string strRadCurrentCulture {
+            get {
+                return ResourceManager.GetString("strRadCurrentCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invariant culture formatting.
+        /// </summary>
+        internal static string strRadInvariantCulture {
+            get {
+                return ResourceManager.GetString("strRadInvariantCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data poins.
         /// </summary>
         internal static string strRadPoints {
@@ -422,6 +495,33 @@ namespace SignalAnalysis.localization {
         internal static string strRadTime {
             get {
                 return ResourceManager.GetString("strRadTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select culture.
+        /// </summary>
+        internal static string strRadUserCulture {
+            get {
+                return ResourceManager.GetString("strRadUserCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User interface.
+        /// </summary>
+        internal static string strTabGUI {
+            get {
+                return ResourceManager.GetString("strTabGUI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plotting.
+        /// </summary>
+        internal static string strTabPlot {
+            get {
+                return ResourceManager.GetString("strTabPlot", resourceCulture);
             }
         }
     }

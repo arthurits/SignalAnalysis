@@ -49,7 +49,8 @@ namespace SignalAnalysis
             if (radTime.Checked) Settings.AxisType = AxisType.DateTime;
 
             if (radCurrentCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
-            else Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            if (radInvariantCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            if (radUserCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
             Settings.RememberFileDialogPath = chkDlgPath.Checked;
             Settings.DataFormat = txtDataFormat.Text;
 
@@ -66,8 +67,8 @@ namespace SignalAnalysis
             DialogResult DlgResult;
             using (new CenterWinDialog(this))
             {
-                DlgResult = MessageBox.Show("Do you want to reset all fields\nto their default values?",
-                    "Reset settings?",
+                DlgResult = MessageBox.Show(StringsRM.GetString("strDlgReset", Settings.AppCulture) ?? "Do you want to reset all fields\nto their default values?",
+                    StringsRM.GetString("strDlgResetTitle", Settings.AppCulture) ?? "Reset settings?",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2);
@@ -82,14 +83,21 @@ namespace SignalAnalysis
         private void radCurrentCulture_CheckedChanged(object sender, EventArgs e)
         {
             if (radCurrentCulture.Checked)
-                radCurrentCulture.Text = $"Current culture formatting ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+                radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting") + $" ({Settings.AppCultureName})";
             else
-                radCurrentCulture.Text = "Current culture formatting";
+                radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting";
         }
 
         private void radUserCulture_CheckedChanged(object sender, EventArgs e)
         {
             cboAllCultures.Enabled = radUserCulture.Checked;
+        }
+
+        private void cboAllCultures_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var cbo = sender as ComboBox;
+            if (cbo is not null && cbo.Items.Count > 0)
+                UpdateUI_Language(System.Globalization.CultureInfo.CreateSpecificCulture((string)cbo.SelectedValue));
         }
 
         /// <summary>
@@ -122,8 +130,11 @@ namespace SignalAnalysis
 
             if (Settings.AppCultureName == string.Empty)
                 radInvariantCulture.Checked = true;
-            else
+            else if (Settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
                 radCurrentCulture.Checked = true;
+            else
+                radUserCulture.Checked = true;
+            cboAllCultures.SelectedValue = Settings.AppCultureName;
 
             chkDlgPath.Checked = Settings.RememberFileDialogPath;
             txtDataFormat.Text = Settings.DataFormat;
@@ -134,53 +145,62 @@ namespace SignalAnalysis
             var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures);
             //var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures & ~System.Globalization.CultureTypes.SpecificCultures);
 
-            // create a temp arraylist 
-            System.Collections.ArrayList tempArr = new ();
             // create an arraylist for the locales 
             System.Collections.ArrayList _locales = new ();
 
             foreach (var culture in cultures)
             {
                 // load in the string value 
-                tempArr.Add(culture.ToString());
-            }
-
-            // Sort the strings 
-            tempArr.Sort();
-
-            // Reload the new, sorted, strings back into the main arraylist for binding 
-            foreach (string strCulture in tempArr)
-            {
-                // load in the new culture objects to the arraylist for binding 
-                System.Globalization.CultureInfo culture = new (strCulture);
                 _locales.Add(culture);
             }
 
             // Databind https://social.msdn.microsoft.com/Forums/vstudio/en-US/2ff7d56d-d91d-48b4-815d-cf9356794a69/binding-cultureinfo-to-combobox-lcid-1033-name-french-france-what-is-going-on-?forum=netfxbcl
             cboAllCultures.DisplayMember = "DisplayName";
-            cboAllCultures.ValueMember = "LCID";
-            cboAllCultures.Sorted = true;
+            cboAllCultures.ValueMember = "Name";
             cboAllCultures.DataSource = _locales;
         }
 
         /// <summary>
         /// Update the form's interface language
         /// </summary>
+        /// <param name="culture">Culture used to display the UI</param>
         private void UpdateUI_Language()
         {
-            this.Text = StringsRM.GetString("strFrmSettings");
-            this.lblStart.Text = StringsRM.GetString("strLblStart");
-            this.lblEnd.Text = StringsRM.GetString("strLblEnd");
-            this.grpAxis.Text = StringsRM.GetString("strGrpAxis");
-            this.radPoints.Text = StringsRM.GetString("strRadPoints");
-            this.radSeconds.Text = StringsRM.GetString("strRadSeconds");
-            this.radTime.Text = StringsRM.GetString("strRadTime");
-            this.chkPower.Text = StringsRM.GetString("strChkPower");
-            this.chkCumulative.Text = StringsRM.GetString("strChkCumulative");
-            this.chkEntropy.Text = StringsRM.GetString("strChkEntropy");
-            this.chkCrossHair.Text = StringsRM.GetString("strChkCrossHair");
-            this.btnCancel.Text = StringsRM.GetString("strBtnCancel");
-            this.btnAccept.Text = StringsRM.GetString("strBtnAccept");
+            UpdateUI_Language(Settings.AppCulture);
+        }
+
+        /// <summary>
+        /// Update the form's interface language
+        /// </summary>
+        /// <param name="culture">Culture used to display the UI</param>
+        private void UpdateUI_Language(System.Globalization.CultureInfo culture)
+        {
+            this.Text = StringsRM.GetString("strFrmSettings", culture) ?? "Settings";
+
+            this.tabPlot.Text = StringsRM.GetString("strTabPlot", culture) ?? "Plotting";
+            this.tabGUI.Text = StringsRM.GetString("strTabGUI", culture) ?? "User interface";
+
+            this.lblStart.Text = StringsRM.GetString("strLblStart", culture);
+            this.lblEnd.Text = StringsRM.GetString("strLblEnd", culture);
+            this.grpAxis.Text = StringsRM.GetString("strGrpAxis", culture);
+            this.radPoints.Text = StringsRM.GetString("strRadPoints", culture);
+            this.radSeconds.Text = StringsRM.GetString("strRadSeconds", culture);
+            this.radTime.Text = StringsRM.GetString("strRadTime", culture);
+            this.chkPower.Text = StringsRM.GetString("strChkPower", culture);
+            this.chkCumulative.Text = StringsRM.GetString("strChkCumulative", culture);
+            this.chkEntropy.Text = StringsRM.GetString("strChkEntropy", culture);
+            this.chkCrossHair.Text = StringsRM.GetString("strChkCrossHair", culture);
+            
+            this.grpCulture.Text = StringsRM.GetString("strGrpReset", culture);
+            this.radCurrentCulture.Text = StringsRM.GetString("stRadCurrentCulture", culture);
+            this.radInvariantCulture.Text = StringsRM.GetString("strRadInvariantCulture", culture);
+            this.radUserCulture.Text = StringsRM.GetString("strRadUserCulture", culture);
+            this.chkDlgPath.Text = StringsRM.GetString("strChkDlgPath", culture);
+            this.lblDataFormat.Text = StringsRM.GetString("strLblDataFormat", culture);
+
+            this.btnCancel.Text = StringsRM.GetString("strBtnCancel", culture);
+            this.btnAccept.Text = StringsRM.GetString("strBtnAccept", culture);
+            this.btnReset.Text = StringsRM.GetString("strBtnReset", culture);
 
         }
 
