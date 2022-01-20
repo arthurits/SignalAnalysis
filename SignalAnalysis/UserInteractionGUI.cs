@@ -151,12 +151,12 @@ partial class FrmMain
                     break;
                 case "LabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    if (label.Checked && statsTask !=null && statsTask.Status == TaskStatus.Running)
+                    if (label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "LabelExEntropy":
                     _settings.Entropy = label.Checked;
-                    if (label.Checked && statsTask != null && statsTask.Status == TaskStatus.Running)
+                    if (label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "LabelExCrossHair":
