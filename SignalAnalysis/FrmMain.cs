@@ -14,6 +14,9 @@ public partial class FrmMain : Form
     DateTime nStart;
     ClassSettings _settings = new();
     Stats Results;
+    
+    ToolStripPanel tspTop;
+    ToolStripPanel tspBottom;
     ToolStripComboBox stripComboSeries;
     ToolStripComboBox stripComboWindows;
 
@@ -87,7 +90,7 @@ public partial class FrmMain : Form
         stripComboSeries.SelectedIndexChanged += ComboSeries_SelectedIndexChanged;
         stripComboWindows.SelectedIndexChanged += ComboWindow_SelectedIndexChanged;
 
-        ToolStripPanel tspTop = new();
+        tspTop = new();
         tspTop.Dock = DockStyle.Top;
         tspTop.Name = "StripPanelTop";
 
@@ -131,7 +134,7 @@ public partial class FrmMain : Form
 
     private void InitializeStatusStrip()
     {
-        ToolStripPanel tspBottom = new();
+        tspBottom = new();
         tspBottom.Dock = DockStyle.Bottom;
         tspBottom.Name = "StripPanelBottom";
 
@@ -350,9 +353,29 @@ public partial class FrmMain : Form
     private void UpdateUI_Language()
     {
         this.Text = StringsRM.GetString("strFrmTitle", _settings.AppCulture);
-        
+
+        // Update ToolStrip
+        ((ToolStrip)tspTop.Controls[0]).Items[0].Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";
+        ((ToolStrip)tspTop.Controls[0]).Items[0].ToolTipText = StringsRM.GetString("strToolTipExit", _settings.AppCulture) ?? "Exit the application";
+        ((ToolStrip)tspTop.Controls[0]).Items[1].Text = StringsRM.GetString("strToolStripOpen", _settings.AppCulture) ?? "Open";
+        ((ToolStrip)tspTop.Controls[0]).Items[1].ToolTipText = StringsRM.GetString("strToolTipOpen", _settings.AppCulture) ?? "Open data file from disk";
+        ((ToolStrip)tspTop.Controls[0]).Items[2].Text = StringsRM.GetString("strToolStripExport", _settings.AppCulture) ?? "Export";
+        ((ToolStrip)tspTop.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strToolTipExport", _settings.AppCulture) ?? "Export data and data analysis";
+        stripComboSeries.ToolTipText = StringsRM.GetString("strToolTipCboSeries", _settings.AppCulture) ?? "Select data series";
+        stripComboWindows.ToolTipText = StringsRM.GetString("strToolTipCboWindows", _settings.AppCulture) ?? "Select FFT window";
+        ((ToolStrip)tspTop.Controls[0]).Items[7].Text = StringsRM.GetString("strToolStripSettings", _settings.AppCulture) ?? "Settings";
+        ((ToolStrip)tspTop.Controls[0]).Items[7].ToolTipText = StringsRM.GetString("strToolTipSettings", _settings.AppCulture) ?? "Settings for plots, data, and UI";
+        ((ToolStrip)tspTop.Controls[0]).Items[9].Text = StringsRM.GetString("strToolStripAbout", _settings.AppCulture) ?? "About";
+        ((ToolStrip)tspTop.Controls[0]).Items[9].ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
+
+        // Update StatusStrip
+        ((ToolStrip)tspBottom.Controls[0]).Items[1].ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
+        ((ToolStrip)tspBottom.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
+        ((ToolStrip)tspBottom.Controls[0]).Items[3].ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
+        ((ToolStrip)tspBottom.Controls[0]).Items[4].ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
+
         // Update plots if they contain series
-        if(plotOriginal.Plot.GetPlottables().Length > 2)
+        if (plotOriginal.Plot.GetPlottables().Length > 2)
         {
             plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
             plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture));

@@ -133,7 +133,7 @@
     <value>&amp;Exportar</value>
   </data>
   <data name="strBtnReset" xml:space="preserve">
-    <value>Restablecer</value>
+    <value>&amp;Restablecer</value>
   </data>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Opciones</value>
@@ -270,10 +270,52 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Seleccionar</value>
   </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Activar la cruz (mira) gráfica en los gráficos</value>
+  </data>
+  <data name="strStatusTipEntropy" xml:space="preserve">
+    <value>Calcular la entropía (aproximada, muestra)</value>
+  </data>
+  <data name="strStatusTipFractal" xml:space="preserve">
+    <value>Calcular la dimensión fractal acumulada (elevado uso de la CPU)</value>
+  </data>
+  <data name="strStatusTipPower" xml:space="preserve">
+    <value>Mostrar el espectro (dB) o la magnitud de la FFT</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Interfaz de usuario</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Gráficos</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>Acerca de</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="strToolStripExport" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>Acerca de este software</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>Salir de la aplicación</value>
+  </data>
+  <data name="strToolTipExport" xml:space="preserve">
+    <value>Exportar datos y resultados del análisis</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>Abrir archivo de datos</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>Opciones para los gráficos, los datos y la interfaz</value>
   </data>
 </root>

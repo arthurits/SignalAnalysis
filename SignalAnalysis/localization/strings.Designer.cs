@@ -508,6 +508,42 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show plot&apos;s crosshair mode.
+        /// </summary>
+        internal static string strStatusTipCrossHair {
+            get {
+                return ResourceManager.GetString("strStatusTipCrossHair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compute the approximate and sample entropy.
+        /// </summary>
+        internal static string strStatusTipEntropy {
+            get {
+                return ResourceManager.GetString("strStatusTipEntropy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compute the cumulative fractal dimension (CPU intensive).
+        /// </summary>
+        internal static string strStatusTipFractal {
+            get {
+                return ResourceManager.GetString("strStatusTipFractal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plot either FFT power spectra(dB) or magnitude.
+        /// </summary>
+        internal static string strStatusTipPower {
+            get {
+                return ResourceManager.GetString("strStatusTipPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User interface.
         /// </summary>
         internal static string strTabGUI {
@@ -522,6 +558,96 @@ namespace SignalAnalysis.localization {
         internal static string strTabPlot {
             get {
                 return ResourceManager.GetString("strTabPlot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string strToolStripAbout {
+            get {
+                return ResourceManager.GetString("strToolStripAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string strToolStripExit {
+            get {
+                return ResourceManager.GetString("strToolStripExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        internal static string strToolStripExport {
+            get {
+                return ResourceManager.GetString("strToolStripExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string strToolStripOpen {
+            get {
+                return ResourceManager.GetString("strToolStripOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string strToolStripSettings {
+            get {
+                return ResourceManager.GetString("strToolStripSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About this software.
+        /// </summary>
+        internal static string strToolTipAbout {
+            get {
+                return ResourceManager.GetString("strToolTipAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit the application.
+        /// </summary>
+        internal static string strToolTipExit {
+            get {
+                return ResourceManager.GetString("strToolTipExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export data and data analysis.
+        /// </summary>
+        internal static string strToolTipExport {
+            get {
+                return ResourceManager.GetString("strToolTipExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open data file from disk.
+        /// </summary>
+        internal static string strToolTipOpen {
+            get {
+                return ResourceManager.GetString("strToolTipOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings for plots, data, and UI.
+        /// </summary>
+        internal static string strToolTipSettings {
+            get {
+                return ResourceManager.GetString("strToolTipSettings", resourceCulture);
             }
         }
     }

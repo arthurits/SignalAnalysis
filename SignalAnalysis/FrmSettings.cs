@@ -19,7 +19,8 @@ namespace SignalAnalysis
         public FrmSettings()
         {
             InitializeComponent();
-            FillCulture();
+            //FillAllCultures();
+            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
             UpdateUI_Language();
         }
 
@@ -140,7 +141,10 @@ namespace SignalAnalysis
             txtDataFormat.Text = Settings.DataFormat;
         }
 
-        private void FillCulture()
+        /// <summary>
+        /// Databind all cultures to the cboCultures
+        /// </summary>
+        private void FillAllCultures()
         {
             var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures);
             //var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures & ~System.Globalization.CultureTypes.SpecificCultures);
@@ -158,6 +162,18 @@ namespace SignalAnalysis
             cboAllCultures.DisplayMember = "DisplayName";
             cboAllCultures.ValueMember = "Name";
             cboAllCultures.DataSource = _locales;
+        }
+
+        /// <summary>
+        /// Databind only the cultures found in .resources files for a given type
+        /// </summary>
+        /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
+        private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
+        {
+            var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
+            cboAllCultures.DisplayMember = "DisplayName";
+            cboAllCultures.ValueMember = "Name";
+            cboAllCultures.DataSource = cultures.ToArray();
         }
 
         /// <summary>
