@@ -234,8 +234,8 @@ public partial class FrmMain : Form
         using (new CenterWinDialog(this))
         {
             if (DialogResult.No == MessageBox.Show(this,
-                                                    "Are you sure you want to exit\nthe application?",
-                                                    "Exit?",
+                                                    StringsRM.GetString("strMsgBoxExitTitle", _settings.AppCulture) ?? "Exit?",
+                                                    StringsRM.GetString("strMsgBoxExit", _settings.AppCulture) ?? "Are you sure you want to exit\nthe application?",
                                                     MessageBoxButtons.YesNo,
                                                     MessageBoxIcon.Question,
                                                     MessageBoxDefaultButton.Button2))

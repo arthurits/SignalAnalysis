@@ -200,6 +200,13 @@ Se utilizarán los valores por defecto.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Ventana</value>
   </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>¿Salir?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>¿Está seguro de que quiere
+salir de la aplicación?</value>
+  </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>El cálculo de la dimensión fractal de
 Hausdorff-Besicovitch se ha detenido.</value>

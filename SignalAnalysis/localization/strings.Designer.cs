@@ -291,6 +291,25 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit?.
+        /// </summary>
+        internal static string strMsgBoxExit {
+            get {
+                return ResourceManager.GetString("strMsgBoxExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to exit
+        ///the application?.
+        /// </summary>
+        internal static string strMsgBoxExitTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxExitTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Computation of the Hausdorff-Besicovitch fractal
         ///dimension has been stopped..
         /// </summary>

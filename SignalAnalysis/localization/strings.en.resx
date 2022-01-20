@@ -197,6 +197,13 @@ Default values will be used instead.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Window</value>
   </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>Exit?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>Are you sure you want to exit
+the application?</value>
+  </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>Computation of the Hausdorff-Besicovitch fractal
 dimension has been stopped.</value>
