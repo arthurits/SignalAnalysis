@@ -154,7 +154,7 @@
     <value>Espectro (dB)</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
-    <value>Está seguro de que desea restablecer todos
+    <value>¿Está seguro de que desea restablecer todos
 los campos a sus valores por defecto?</value>
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
@@ -178,6 +178,9 @@ Se utilizarán los valores por defecto.</value>
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Eje de abscisas</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>Formato de datos e interfaz</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>

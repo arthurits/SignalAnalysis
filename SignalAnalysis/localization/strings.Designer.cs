@@ -97,7 +97,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset.
+        ///   Looks up a localized string similar to &amp;Reset.
         /// </summary>
         internal static string strBtnReset {
             get {
@@ -160,8 +160,8 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Do you want to reset all fields
-        ///to their default values?&quot;.
+        ///   Looks up a localized string similar to Do you want to reset all fields
+        ///to their default values?.
         /// </summary>
         internal static string strDlgReset {
             get {
@@ -472,7 +472,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data poins.
+        ///   Looks up a localized string similar to Data points.
         /// </summary>
         internal static string strRadPoints {
             get {

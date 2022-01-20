@@ -130,7 +130,7 @@
     <value>&amp;Export</value>
   </data>
   <data name="strBtnReset" xml:space="preserve">
-    <value>Reset</value>
+    <value>&amp;Reset</value>
   </data>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Settings</value>
@@ -151,8 +151,8 @@
     <value>Power (dB)</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
-    <value>"Do you want to reset all fields
-to their default values?"</value>
+    <value>Do you want to reset all fields
+to their default values?</value>
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>Reset settings?</value>
@@ -259,7 +259,7 @@ dimension has been stopped.</value>
     <value>Invariant culture formatting</value>
   </data>
   <data name="strRadPoints" xml:space="preserve">
-    <value>Data poins</value>
+    <value>Data points</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Seconds</value>
