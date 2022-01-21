@@ -2,12 +2,12 @@
 
 partial class FrmMain
 {
-    private void Exit_Click(object sender, EventArgs e)
+    private void Exit_Click(object? sender, EventArgs e)
     {
         Close();
     }
 
-    private void Open_Click(object sender, EventArgs e)
+    private void Open_Click(object? sender, EventArgs e)
     {
         DialogResult result;
         string filePath;
@@ -48,7 +48,7 @@ partial class FrmMain
 
     }
 
-    private void Export_Click(object sender, EventArgs e)
+    private void Export_Click(object? sender, EventArgs e)
     {
         DialogResult result;
         string filePath;
@@ -106,7 +106,7 @@ partial class FrmMain
         }
     }
 
-    private void Settings_Click(object sender, EventArgs e)
+    private void Settings_Click(object? sender, EventArgs e)
     {
         var frm = new FrmSettings(_settings);
         frm.ShowDialog();
@@ -125,16 +125,16 @@ partial class FrmMain
 
     }
 
-    private void About_Click(object sender, EventArgs e)
+    private void About_Click(object? sender, EventArgs e)
     {
         
     }
 
-    private void LabelEx_Click(object sender, EventArgs e)
+    private void LabelEx_Click(object? sender, EventArgs e)
     {
-        if (sender is not null && sender is ToolStripStatusLabelEx)
+        if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
         {
-            var label = (ToolStripStatusLabelEx)sender;
+            var label = LabelEx;
             label.Checked = !label.Checked;
 
             // Change the text color

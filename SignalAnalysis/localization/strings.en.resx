@@ -157,6 +157,33 @@ to their default values?</value>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>Reset settings?</value>
   </data>
+  <data name="strELuxHeader01" xml:space="preserve">
+    <value>Section 'ErgoLux data' is mis-formatted.</value>
+  </data>
+  <data name="strELuxHeader02" xml:space="preserve">
+    <value>Section 'Start time' is mis-formatted.</value>
+  </data>
+  <data name="strELuxHeader03" xml:space="preserve">
+    <value>Section 'End time' is mis-formatted.</value>
+  </data>
+  <data name="strELuxHeader04" xml:space="preserve">
+    <value>Section 'Total measuring time' is mis-formatted.</value>
+  </data>
+  <data name="strELuxHeader05" xml:space="preserve">
+    <value>Section 'Number of sensors' is mis-formatted.</value>
+  </data>
+  <data name="strELuxHeader06" xml:space="preserve">
+    <value>Section 'Number of data points' is mis-formatted.</value>
+  </data>
+  <data name="strELuxHeader07" xml:space="preserve">
+    <value>Section 'Sampling frequency' is mis-formatted.</value>
+  </data>
+  <data name="strELuxHeader08" xml:space="preserve">
+    <value>Missing an empty line.</value>
+  </data>
+  <data name="strELuxHeader09" xml:space="preserve">
+    <value>Missing column headers (series names).</value>
+  </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error loading settings file.
 
@@ -203,6 +230,13 @@ Default values will be used instead.</value>
   <data name="strMsgBoxExitTitle" xml:space="preserve">
     <value>Are you sure you want to exit
 the application?</value>
+  </data>
+  <data name="strMsgBoxInitArray" xml:space="preserve">
+    <value>Unexpected error in 'InitializeDataArrays'.
+{0}</value>
+  </data>
+  <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>Computation of the Hausdorff-Besicovitch fractal
@@ -276,6 +310,19 @@ dimension has been stopped.</value>
   </data>
   <data name="strRadUserCulture" xml:space="preserve">
     <value>Select culture</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>Unable to read data from file.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>Invalid numeric value: {0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>Error parsing data</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Show plot's crosshair mode</value>

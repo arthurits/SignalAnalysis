@@ -12,17 +12,17 @@ public partial class FrmMain : Form
     double nSampleFreq = 0.0;
     
     DateTime nStart;
-    ClassSettings _settings = new();
+    ClassSettings _settings;
     Stats Results;
     
-    ToolStripPanel tspTop;
-    ToolStripPanel tspBottom;
-    ToolStripComboBox stripComboSeries;
-    ToolStripComboBox stripComboWindows;
+    ToolStripPanel tspTop = new();
+    ToolStripPanel tspBottom = new();
+    ToolStripComboBox stripComboSeries = new();
+    ToolStripComboBox stripComboWindows = new();
 
-    Task statsTask;
+    Task statsTask = Task.CompletedTask;
     private CancellationTokenSource tokenSource;
-    private CancellationToken token;
+    private CancellationToken token = CancellationToken.None;
 
     /// <summary>
     /// https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/y99d1cd3(v=vs.100)?WT.mc_id=DT-MVP-5003235
@@ -33,13 +33,15 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings
+        _settings = new();
         LoadProgramSettingsJSON();
 
+        // Initilization
         InitializeToolStripPanel();
         InitializeStatusStrip();
         InitializeMenu();
         InitializeComponent();
-        
+
         this.plotOriginal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
 
@@ -52,7 +54,6 @@ public partial class FrmMain : Form
     // https://stackoverflow.com/questions/40382105/how-to-add-two-toolstripcombobox-and-separator-horizontally-to-one-toolstripdrop
     private void InitializeToolStripPanel()
     {
-        String path = Path.GetDirectoryName(Environment.ProcessPath);
         Font toolFont = new ("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 
         stripComboSeries = new()
@@ -105,24 +106,24 @@ public partial class FrmMain : Form
         };
 
         ToolStripItem toolStripItem;
-        toolStripItem = toolStripMain.Items.Add("Exit", new System.Drawing.Icon(path + @"\images\exit.ico", 48, 48).ToBitmap(), new EventHandler(Exit_Click));
+        toolStripItem = toolStripMain.Items.Add("Exit", new System.Drawing.Icon(_settings.AppPath + @"\images\exit.ico", 48, 48).ToBitmap(), new EventHandler(Exit_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Exit";
-        toolStripItem = toolStripMain.Items.Add("Open", new System.Drawing.Icon(path + @"\images\openfolder.ico", 48, 48).ToBitmap(), new EventHandler(Open_Click));
+        toolStripItem = toolStripMain.Items.Add("Open", new System.Drawing.Icon(_settings.AppPath + @"\images\openfolder.ico", 48, 48).ToBitmap(), new EventHandler(Open_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Open";
-        toolStripItem = toolStripMain.Items.Add("Export", new System.Drawing.Icon(path + @"\images\save.ico", 48, 48).ToBitmap(), new EventHandler(Export_Click));
+        toolStripItem = toolStripMain.Items.Add("Export", new System.Drawing.Icon(_settings.AppPath + @"\images\save.ico", 48, 48).ToBitmap(), new EventHandler(Export_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Export";
         toolStripMain.Items.Add(new ToolStripSeparator());
         toolStripMain.Items.Add(stripComboSeries);
         toolStripMain.Items.Add(stripComboWindows);
         toolStripMain.Items.Add(new ToolStripSeparator());
-        toolStripItem = toolStripMain.Items.Add("Settings", new System.Drawing.Icon(path + @"\images\settings.ico", 48, 48).ToBitmap(), new EventHandler(Settings_Click));
+        toolStripItem = toolStripMain.Items.Add("Settings", new System.Drawing.Icon(_settings.AppPath + @"\images\settings.ico", 48, 48).ToBitmap(), new EventHandler(Settings_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Settings";
         toolStripMain.Items.Add(new ToolStripSeparator());
-        toolStripItem = toolStripMain.Items.Add("About", new System.Drawing.Icon(path + @"\images\about.ico", 48, 48).ToBitmap(), new EventHandler(About_Click));
+        toolStripItem = toolStripMain.Items.Add("About", new System.Drawing.Icon(_settings.AppPath + @"\images\about.ico", 48, 48).ToBitmap(), new EventHandler(About_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "About";
 
@@ -224,7 +225,7 @@ public partial class FrmMain : Form
 
     }
 
-    private void toolStripMain_Exit_Click(object sender, EventArgs e)
+    private void ToolStripMain_Exit_Click(object sender, EventArgs e)
     {
         this.Close();
     }
@@ -267,25 +268,14 @@ public partial class FrmMain : Form
         stripComboWindows.SelectedIndex = windows.ToList().FindIndex(x => x.Name == "Hanning");
     }
 
-    private void ComboSeries_SelectedIndexChanged(object sender, EventArgs e)
+    private void ComboSeries_SelectedIndexChanged(object? sender, EventArgs e)
     {
         if (_signalData.Length == 0) return;
 
-        //int nIndex = stripComboSeries.SelectedIndex;
-        //nPoints = _settings.IndexEnd - _settings.IndexStart + 1;
-        //_signalRange = new double[nPoints];
-
-        //Array.Copy(
-        //    _signalData[nIndex],
-        //    _settings.IndexStart,
-        //    _signalRange,
-        //    0,
-        //    nPoints);
-        //var test = _signalData[nIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
         ComputeStats();   
     }
 
-    private void ComboWindow_SelectedIndexChanged(object sender, EventArgs e)
+    private void ComboWindow_SelectedIndexChanged(object? sender, EventArgs e)
     {
         IWindow window = (IWindow)stripComboWindows.SelectedItem;
         if (window is null)

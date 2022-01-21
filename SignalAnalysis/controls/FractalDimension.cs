@@ -32,7 +32,7 @@ public static class FractalDimension
         else
         {
             DimensionCumulative = new double[yValues.Length];
-            //ProgressDim[0] = 0;
+
             for (int i = 0; i < yValues.Length; i++)
             {
                 DimensionCumulative[i] = ComputeH(xValues, yValues, i).dimension;
@@ -78,9 +78,6 @@ public static class FractalDimension
         double dimensionH;
         double varianceH;
 
-        //DimensionCumulative = Array.Empty<double>();
-        //DimensionSingle = double.NaN;
-
         if (arrayIndex.HasValue)
             _nPoints = arrayIndex.Value + 1;
         else
@@ -123,9 +120,6 @@ public static class FractalDimension
         double dimensionH;
         double varianceH;
 
-        //DimensionCumulative = Array.Empty<double>();
-        //DimensionSingle = double.NaN;
-
         if (arrayIndex.HasValue)
             _nPoints = arrayIndex.Value + 1;
         else
@@ -164,7 +158,7 @@ public static class FractalDimension
     private static (double normLength, double variance) NormalizedLength(double[] xValues, double[] yValues, int nPoints, double xMax, double xMin, double yMax, double yMin)
     {
         double lengthTotal = 0.0;
-        double lengthPartial = 0.0;
+        double lengthPartial;
         double mean = 0;
         double oldMean;
         double variance = 0;

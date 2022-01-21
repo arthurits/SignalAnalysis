@@ -179,6 +179,87 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Section &apos;ErgoLux data&apos; is mis-formatted..
+        /// </summary>
+        internal static string strELuxHeader01 {
+            get {
+                return ResourceManager.GetString("strELuxHeader01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;Start time&apos; is mis-formatted..
+        /// </summary>
+        internal static string strELuxHeader02 {
+            get {
+                return ResourceManager.GetString("strELuxHeader02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;End time&apos; is mis-formatted..
+        /// </summary>
+        internal static string strELuxHeader03 {
+            get {
+                return ResourceManager.GetString("strELuxHeader03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;Total measuring time&apos; is mis-formatted..
+        /// </summary>
+        internal static string strELuxHeader04 {
+            get {
+                return ResourceManager.GetString("strELuxHeader04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;Number of sensors&apos; is mis-formatted..
+        /// </summary>
+        internal static string strELuxHeader05 {
+            get {
+                return ResourceManager.GetString("strELuxHeader05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;Number of data points&apos; is mis-formatted..
+        /// </summary>
+        internal static string strELuxHeader06 {
+            get {
+                return ResourceManager.GetString("strELuxHeader06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;Sampling frequency&apos; is mis-formatted..
+        /// </summary>
+        internal static string strELuxHeader07 {
+            get {
+                return ResourceManager.GetString("strELuxHeader07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing an empty line..
+        /// </summary>
+        internal static string strELuxHeader08 {
+            get {
+                return ResourceManager.GetString("strELuxHeader08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing column headers (series names)..
+        /// </summary>
+        internal static string strELuxHeader09 {
+            get {
+                return ResourceManager.GetString("strELuxHeader09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error loading settings file.
         ///
         ///{0}
@@ -306,6 +387,25 @@ namespace SignalAnalysis.localization {
         internal static string strMsgBoxExitTitle {
             get {
                 return ResourceManager.GetString("strMsgBoxExitTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected error in &apos;InitializeDataArrays&apos;.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxInitArray {
+            get {
+                return ResourceManager.GetString("strMsgBoxInitArray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string strMsgBoxInitArrayTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxInitArrayTitle", resourceCulture);
             }
         }
         
@@ -523,6 +623,43 @@ namespace SignalAnalysis.localization {
         internal static string strRadUserCulture {
             get {
                 return ResourceManager.GetString("strRadUserCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to read data from file.
+        ///{0}.
+        /// </summary>
+        internal static string strReadDataError {
+            get {
+                return ResourceManager.GetString("strReadDataError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid numeric value: {0}.
+        /// </summary>
+        internal static string strReadDataErrorNumber {
+            get {
+                return ResourceManager.GetString("strReadDataErrorNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error parsing data.
+        /// </summary>
+        internal static string strReadDataErrorNumberTitle {
+            get {
+                return ResourceManager.GetString("strReadDataErrorNumberTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string strReadDataErrorTitle {
+            get {
+                return ResourceManager.GetString("strReadDataErrorTitle", resourceCulture);
             }
         }
         

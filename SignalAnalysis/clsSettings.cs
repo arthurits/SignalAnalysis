@@ -103,6 +103,8 @@ public class ClassSettings
     [JsonPropertyName("User open path")]
     public string UserOpenPath { get; set; } = $"{System.IO.Path.GetDirectoryName(Application.ExecutablePath)}\\examples";
 
+    public string? AppPath { get; set; } = Path.GetDirectoryName(Environment.ProcessPath);
+
     public ClassSettings()
     {
     }
