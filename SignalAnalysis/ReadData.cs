@@ -10,15 +10,15 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the elux file</param>
     private bool ReadELuxData(string FileName)
     {
-        using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-        using var sr = new StreamReader(fs, Encoding.UTF8);
         int nPoints = 0;
         bool result = true;
-
         string? strLine;
 
         try
         {
+            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var sr = new StreamReader(fs, Encoding.UTF8);
+            
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
