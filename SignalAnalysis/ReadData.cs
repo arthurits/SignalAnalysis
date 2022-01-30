@@ -10,15 +10,15 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the elux file</param>
     private bool ReadELuxData(string FileName)
     {
-        using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-        using var sr = new StreamReader(fs, Encoding.UTF8);
         int nPoints = 0;
         bool result = true;
-
         string? strLine;
 
         try
         {
+            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var sr = new StreamReader(fs, Encoding.UTF8);
+            
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
@@ -99,7 +99,7 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
                 MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _settings.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorTitle", _settings.AppCulture),
+                    StringsRM.GetString("strReadDataErrorTitle", _settings.AppCulture) ?? "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
