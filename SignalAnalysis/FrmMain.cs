@@ -36,6 +36,9 @@ public partial class FrmMain : Form
         _settings = new();
         LoadProgramSettingsJSON();
 
+        // Set form icon
+        if (File.Exists(_settings.AppPath + @"\images\logo.ico")) this.Icon = new Icon(_settings.AppPath + @"\images\logo.ico");
+
         // Initilization
         InitializeToolStripPanel();
         InitializeStatusStrip();
