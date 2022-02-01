@@ -68,7 +68,8 @@ public class ClassSettings
     [JsonPropertyName("Millisecons formatting string")]
     public string MillisecondsFormat
     {
-        get { return $"$1{AppCulture.NumberFormat.NumberDecimalSeparator}fff"; }
+        //get { return $"$1{AppCulture.NumberFormat.NumberDecimalSeparator}fff"; }
+        get { return GetMillisecondsFormat(AppCulture); }
     }
 
     /// <summary>
@@ -107,6 +108,11 @@ public class ClassSettings
 
     public ClassSettings()
     {
+    }
+
+    public string GetMillisecondsFormat(System.Globalization.CultureInfo culture)
+    {
+        return $"$1{culture.NumberFormat.NumberDecimalSeparator}fff";
     }
 }
 

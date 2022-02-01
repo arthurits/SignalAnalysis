@@ -25,27 +25,28 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, Encoding.UTF8);
 
             // Append millisecond pattern to current culture's full date time pattern
-            string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+            //string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
+            string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
 
             // Save the header text into the file
             string content = string.Empty;
             TimeSpan nTime = nStart.AddSeconds((Data.Length - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
-            sw.WriteLine("Signal analysis data");
-            sw.WriteLine("Start time: {0}", nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern));
-            sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern));
+            sw.WriteLine($"Signal analysis data ({_settings.AppCultureName})");
+            sw.WriteLine("Start time: {0}", nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
+            sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
             ////outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
             sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
             sw.WriteLine("Number of data points: {0}", Data.Length.ToString());
-            sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString());
-            sw.WriteLine("Average illuminance: {0}", Results.Average.ToString());
-            sw.WriteLine("Maximum illuminance: {0}", Results.Maximum.ToString());
-            sw.WriteLine("Minimum illuminance: {0}", Results.Minimum.ToString());
-            sw.WriteLine("Fractal dimension: {0}", Results.FractalDimension.ToString());
-            sw.WriteLine("Fractal variance: {0}", Results.FractalVariance.ToString());
-            sw.WriteLine("Approximate entropy: {0}", Results.ApproximateEntropy.ToString());
-            sw.WriteLine("Sample entropy: {0}", Results.SampleEntropy.ToString());
+            sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString(_settings.AppCulture));
+            sw.WriteLine("Average illuminance: {0}", Results.Average.ToString(_settings.AppCulture));
+            sw.WriteLine("Maximum illuminance: {0}", Results.Maximum.ToString(_settings.AppCulture));
+            sw.WriteLine("Minimum illuminance: {0}", Results.Minimum.ToString(_settings.AppCulture));
+            sw.WriteLine("Fractal dimension: {0}", Results.FractalDimension.ToString(_settings.AppCulture));
+            sw.WriteLine("Fractal variance: {0}", Results.FractalVariance.ToString(_settings.AppCulture));
+            sw.WriteLine("Approximate entropy: {0}", Results.ApproximateEntropy.ToString(_settings.AppCulture));
+            sw.WriteLine("Sample entropy: {0}", Results.SampleEntropy.ToString(_settings.AppCulture));
             sw.WriteLine();
             sw.WriteLine($"Time\t{SeriesName}");
 
@@ -53,7 +54,7 @@ partial class FrmMain
             // Save the numerical values
             for (int j = 0; j < Data.Length; j++)
             {
-                time = nStart.AddSeconds((j+ ArrIndexInit) / nSampleFreq).ToString(fullPattern);
+                time = nStart.AddSeconds((j+ ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture);
                 content = $"{time}\t{Data[j].ToString(_settings.DataFormat, _settings.AppCulture)}";
                 
                 //trying to write data to csv
@@ -94,8 +95,8 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, Encoding.UTF8);
 
             // Append millisecond pattern to current culture's full date time pattern
-            string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", "$1,fff");
+            string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
 
             // Save the header text into the file
             string content = string.Empty;
@@ -103,14 +104,14 @@ partial class FrmMain
 
             sw.WriteLine("Signal analysis data");
             sw.WriteLine("Number of data series: {0}", "1");
-            sw.WriteLine("Number of data points: {0}", Data.Length.ToString());
-            sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString());
+            sw.WriteLine("Number of data points: {0}", Data.Length.ToString(_settings.AppCulture));
+            sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString(_settings.AppCulture));
             sw.WriteLine();
             sw.WriteLine($"{SeriesName}");
 
             // Save the numerical values
             for (int j = 0; j < Data.Length; j++)
-                sw.WriteLine(Data[j].ToString(_settings.DataFormat));
+                sw.WriteLine(Data[j].ToString(_settings.DataFormat, _settings.AppCulture));
 
             // Show OK save data
             using (new CenterWinDialog(this))

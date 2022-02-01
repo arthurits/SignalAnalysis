@@ -22,17 +22,18 @@ partial class FrmMain
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
-            if (!strLine.Contains("ErgoLux data", StringComparison.Ordinal))
+            if (!strLine.Contains("ErgoLux data (", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture));
             if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture));
-            string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
-            if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, _settings.AppCulture, System.Globalization.DateTimeStyles.None, out nStart))
+            string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
+            if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture));
 
             strLine = sr.ReadLine();    // End time
@@ -73,7 +74,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
             if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSampleFreq))
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
             if (nSampleFreq <= 0)
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
@@ -91,7 +92,7 @@ partial class FrmMain
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringsRM.GetString("strELuxHeader09", _settings.AppCulture));
 
-            result = InitializeDataArrays(sr, nPoints);
+            result = InitializeDataArrays(sr, nPoints, fileCulture);
         }
 
         catch (FormatException ex)
@@ -113,66 +114,83 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the sig file</param>
     private bool ReadSigData(string FileName)
     {
-        using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-        using var sr = new StreamReader(fs, Encoding.UTF8);
         int nPoints = 0;
         bool result = false;
+        string? strLine;
 
-        string? strLine = sr.ReadLine();
-        if (strLine != null && strLine != "SignalAnalysis data")
+        try
         {
-            using (new CenterWinDialog(this))
+            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var sr = new StreamReader(fs, Encoding.UTF8);
+
+            strLine = sr.ReadLine();
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+            if (!strLine.Contains("SignalAnalysis data (", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+
+            if (strLine != null && strLine != "SignalAnalysis data (")
             {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                return result;
             }
-            return result;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Number of data series: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries)) return result;
+            if (nSeries == 0) return result;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return result;
+            if (nPoints == 0) return result;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq)) return result;
+
+            strLine = sr.ReadLine();    // It should be an empty line
+            if (strLine != string.Empty) return result;
+
+            strLine = sr.ReadLine();    // Column header lines
+            seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+
+            result = InitializeDataArrays(sr, nPoints, fileCulture);
+        }
+        catch
+        {
+            result = false;
         }
 
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Number of data series: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries)) return result;
-        if (nSeries == 0) return result;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return result;
-        if (nPoints == 0) return result;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSampleFreq)) return result;
-
-        strLine = sr.ReadLine();    // It should be an empty line
-        if (strLine != string.Empty) return result;
-
-        strLine = sr.ReadLine();    // Column header lines
-        seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
-
-        return InitializeDataArrays(sr, nPoints);
+        return result;
     }
 
     /// <summary>
@@ -181,179 +199,191 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the text file</param>
     private bool ReadTextData(string FileName)
     {
-        using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-        using var sr = new StreamReader(fs, Encoding.UTF8);
         double readValue;
         int nPoints = 0;
         bool result = false;
+        string? strLine;
 
-        string? strLine = sr.ReadLine();
-        if (strLine != null && strLine != "Signal analysis data")
+        try
         {
-            using (new CenterWinDialog(this))
+            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var sr = new StreamReader(fs, Encoding.UTF8);
+
+            strLine = sr.ReadLine();
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+            if (!strLine.Contains("SignalAnalysis data (", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Start time: ", StringComparison.Ordinal))
             {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
             }
-            return result;
+            // Append millisecond pattern to current culture's full date time pattern
+            string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
+            if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart)) return result;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("End time: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return result;
+            if (nPoints == 0) return result;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq)) return result;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Average illuminance: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            Results.Average = readValue;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Maximum illuminance: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            Results.Maximum = readValue;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Minimum illuminance: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            Results.Minimum = readValue;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Fractal dimension: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            Results.FractalDimension = readValue;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Fractal variance: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            Results.FractalVariance = readValue;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Approximate entropy: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            Results.ApproximateEntropy = readValue;
+
+            strLine = sr.ReadLine();
+            if (strLine != null && !strLine.Contains("Sample entropy: ", StringComparison.Ordinal))
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return result;
+            }
+            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            Results.SampleEntropy = readValue;
+
+            strLine = sr.ReadLine();    // It should be an empty line
+            if (strLine != string.Empty) return result;
+
+            strLine = sr.ReadLine();    // Column header lines
+            seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+            seriesLabels = seriesLabels[1..];
+            nSeries = seriesLabels.Length;
+
+            result = InitializeDataArrays(sr, nPoints, fileCulture, true);
+        }
+        catch (FormatException ex)
+        {
+            result = false;
+        }
+        catch (Exception ex)
+        {
+            result = false;
         }
 
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Start time: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        // Append millisecond pattern to current culture's full date time pattern
-        string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
-        fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
-        if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, _settings.AppCulture, System.Globalization.DateTimeStyles.None, out nStart)) return result;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("End time: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return result;
-        if (nPoints == 0) return result;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSampleFreq)) return result;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Average illuminance: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return result;
-        Results.Average = readValue;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Maximum illuminance: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return result;
-        Results.Maximum = readValue;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Minimum illuminance: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return result;
-        Results.Minimum = readValue;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Fractal dimension: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return result;
-        Results.FractalDimension = readValue;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Fractal variance: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return result;
-        Results.FractalVariance = readValue;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Approximate entropy: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return result;
-        Results.ApproximateEntropy = readValue;
-
-        strLine = sr.ReadLine();
-        if (strLine != null && !strLine.Contains("Sample entropy: ", StringComparison.Ordinal))
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return result;
-        }
-        if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out readValue)) return result;
-        Results.SampleEntropy = readValue;
-
-        strLine = sr.ReadLine();    // It should be an empty line
-        if (strLine != string.Empty) return result;
-
-        strLine = sr.ReadLine();    // Column header lines
-        seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
-        seriesLabels = seriesLabels[1..];
-        nSeries =seriesLabels.Length;
-
-        return InitializeDataArrays(sr, nPoints, true);
+        return result;
     }
 
     /// <summary>
     /// Reads the numeric data section pointed at.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>
-    private bool InitializeDataArrays(StreamReader sr, int points, bool IsFirstColumDateTime = false)
+    private bool InitializeDataArrays(StreamReader sr, int points, System.Globalization.CultureInfo culture, bool IsFirstColumDateTime = false)
     {
         bool result = true;
         string? strLine;
@@ -379,7 +409,7 @@ partial class FrmMain
                 data = strLine.Split("\t");
                 for (col = IsFirstColumDateTime ? 1 : 0; col < data.Length; col++)
                 {
-                    if (!double.TryParse(data[col], out _signalData[col - (IsFirstColumDateTime ? 1 : 0)][row]))
+                    if (!double.TryParse(data[col], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, culture, out _signalData[col - (IsFirstColumDateTime ? 1 : 0)][row]))
                         throw new FormatException(data[col].ToString());
                 }
                 row++;
