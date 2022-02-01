@@ -33,7 +33,7 @@ partial class FrmMain
             string content = string.Empty;
             TimeSpan nTime = nStart.AddSeconds((Data.Length - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
-            sw.WriteLine($"Signal analysis data ({_settings.AppCultureName})");
+            sw.WriteLine($"SignalAnalysis data ({_settings.AppCultureName})");
             sw.WriteLine("Start time: {0}", nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
             sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
             ////outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
@@ -102,7 +102,7 @@ partial class FrmMain
             string content = string.Empty;
             //TimeSpan nTime = nStart.AddSeconds((nPoints - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
-            sw.WriteLine("Signal analysis data");
+            sw.WriteLine($"SignalAnalysis data ({_settings.AppCultureName})");
             sw.WriteLine("Number of data series: {0}", "1");
             sw.WriteLine("Number of data points: {0}", Data.Length.ToString(_settings.AppCulture));
             sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString(_settings.AppCulture));
