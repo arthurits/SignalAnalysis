@@ -100,7 +100,7 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
                 MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _settings.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
-                    StringsRM.GetString("strReadDataErrorTitle", _settings.AppCulture),
+                    StringsRM.GetString("strReadDataErrorTitle", _settings.AppCulture) ?? "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
