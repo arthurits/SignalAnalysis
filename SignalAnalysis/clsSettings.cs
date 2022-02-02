@@ -104,13 +104,14 @@ public class ClassSettings
     [JsonPropertyName("User open path")]
     public string UserOpenPath { get; set; } = $"{System.IO.Path.GetDirectoryName(Application.ExecutablePath)}\\examples";
 
+    [JsonIgnore]
     public string? AppPath { get; set; } = Path.GetDirectoryName(Environment.ProcessPath);
 
     public ClassSettings()
     {
     }
 
-    public string GetMillisecondsFormat(System.Globalization.CultureInfo culture)
+    public static string GetMillisecondsFormat(System.Globalization.CultureInfo culture)
     {
         return $"$1{culture.NumberFormat.NumberDecimalSeparator}fff";
     }

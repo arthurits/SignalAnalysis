@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace SignalAnalysis;
 
 public partial class FrmMain : Form

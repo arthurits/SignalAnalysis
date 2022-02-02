@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SignalAnalysis;
 
-namespace SignalAnalysis;
 partial class FrmMain
 {
     /// <summary>
@@ -22,7 +17,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
-            using var sw = new StreamWriter(fs, Encoding.UTF8);
+            using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             // Append millisecond pattern to current culture's full date time pattern
             //string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
@@ -92,7 +87,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
-            using var sw = new StreamWriter(fs, Encoding.UTF8);
+            using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             // Append millisecond pattern to current culture's full date time pattern
             string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;

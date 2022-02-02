@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 partial class FrmMain
 {
@@ -18,7 +16,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using var sr = new StreamReader(fs, Encoding.UTF8);
+            using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
             
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
@@ -33,7 +31,7 @@ partial class FrmMain
             if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
             if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
 
@@ -142,7 +140,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using var sr = new StreamReader(fs, Encoding.UTF8);
+            using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
             strLine = sr.ReadLine();
             if (strLine is null)
@@ -244,7 +242,7 @@ partial class FrmMain
         try
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            using var sr = new StreamReader(fs, Encoding.UTF8);
+            using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
             strLine = sr.ReadLine();    // Signal analysis header
             if (strLine is null)
@@ -259,7 +257,7 @@ partial class FrmMain
             if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
             if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
                 throw new FormatException(StringsRM.GetString("strTextHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
 
