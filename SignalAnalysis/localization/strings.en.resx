@@ -369,7 +369,7 @@ dimension has been stopped.</value>
     <value>Plotting</value>
   </data>
   <data name="strTextHeader01" xml:space="preserve">
-    <value>Section 'ErgoLux data' is mis-formatted.</value>
+    <value>Section 'SignalAnalysis data' is mis-formatted.</value>
   </data>
   <data name="strTextHeader02" xml:space="preserve">
     <value>Section 'Start time' is mis-formatted.</value>

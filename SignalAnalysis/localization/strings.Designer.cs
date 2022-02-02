@@ -792,7 +792,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Section &apos;ErgoLux data&apos; is mis-formatted..
+        ///   Looks up a localized string similar to Section &apos;SignalAnalysis data&apos; is mis-formatted..
         /// </summary>
         internal static string strTextHeader01 {
             get {
