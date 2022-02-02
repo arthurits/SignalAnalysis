@@ -21,42 +21,42 @@ partial class FrmMain
             
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
             if (!strLine.Contains("ErgoLux data (", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
             if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
             if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
-                throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
 
             strLine = sr.ReadLine();    // End time
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader03", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
             if (!strLine.Contains("End time: ", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader03", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader04", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
             if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader04", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
 
             strLine = sr.ReadLine();    // Number of sensors
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture) ?? "Section 'Number of sensors' is mis-formatted.");
             if (!strLine.Contains("Number of sensors: ", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture) ?? "Section 'Number of sensors' is mis-formatted.");
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries))
-                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture) ?? "Section 'Number of sensors' is mis-formatted.");
             if (nSeries == 0)
-                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture) ?? "Section 'Number of sensors' is mis-formatted.");
             nSeries += 6;
 
             strLine = sr.ReadLine();    // Number of data points
@@ -125,69 +125,84 @@ partial class FrmMain
 
             strLine = sr.ReadLine();
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strSignalHeader01", _settings.AppCulture) ?? "Section 'SignalAnalysis data' is mis-formatted.");
             if (!strLine.Contains("SignalAnalysis data (", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strSignalHeader01", _settings.AppCulture) ?? "Section 'SignalAnalysis data' is mis-formatted.");
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
-            if (strLine != null && strLine != "SignalAnalysis data (")
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.",
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                return result;
-            }
+            strLine = sr.ReadLine();    // Number of series
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strSignalHeader02", _settings.AppCulture) ?? "Section 'Number of data series' is mis-formatted.");
+            if (!strLine.Contains("Number of data series: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strSignalHeader02", _settings.AppCulture) ?? "Section 'Number of data series' is mis-formatted.");
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries))
+                throw new FormatException(StringsRM.GetString("strSignalHeader02", _settings.AppCulture) ?? "Section 'Number of data series' is mis-formatted.");
+            if (nSeries == 0)
+                throw new FormatException(StringsRM.GetString("strSignalHeader02", _settings.AppCulture) ?? "Section 'Number of data series' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Number of data series: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries)) return result;
-            if (nSeries == 0) return result;
+            strLine = sr.ReadLine();    // Number of data points
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strSignalHeader03", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
+            if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strSignalHeader03", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
+                throw new FormatException(StringsRM.GetString("strSignalHeader03", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
+            if (nPoints == 0)
+                throw new FormatException(StringsRM.GetString("strSignalHeader03", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return result;
-            if (nPoints == 0) return result;
+            strLine = sr.ReadLine();    // Sampling frequency
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strSignalHeader04", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
+            if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strSignalHeader04", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
+                throw new FormatException(StringsRM.GetString("strSignalHeader04", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
+            if (nSampleFreq <= 0)
+                throw new FormatException(StringsRM.GetString("strSignalHeader04", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq)) return result;
+            strLine = sr.ReadLine();    // Empty line
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strSignalHeader05", _settings.AppCulture) ?? "Missing an empty line.");
+            if (strLine != string.Empty)
+                throw new FormatException(StringsRM.GetString("strSignalHeader05", _settings.AppCulture) ?? "Missing an empty line.");
 
-            strLine = sr.ReadLine();    // It should be an empty line
-            if (strLine != string.Empty) return result;
-
-            strLine = sr.ReadLine();    // Column header lines
-            seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+            strLine = sr.ReadLine();    // Column header names
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strSignalHeader06", _settings.AppCulture) ?? "Missing column headers(series names).");
+            string[] seriesLabels = strLine.Split('\t');
+            if (seriesLabels == Array.Empty<string>())
+                throw new FormatException(StringsRM.GetString("strSignalHeader06", _settings.AppCulture) ?? "Missing column headers(series names).");
 
             result = InitializeDataArrays(sr, nPoints, fileCulture);
         }
-        catch
+        catch (System.Globalization.CultureNotFoundException ex)
         {
             result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _settings.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorCultureTitle" ?? "Culture name error", _settings.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+        catch (FormatException ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _settings.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorTitle" ?? "Error opening data", _settings.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
+        catch (Exception ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _settings.AppCulture) ?? "An unexpected error happened while opening file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _settings.AppCulture) ?? "Error opening data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         return result;
@@ -209,159 +224,131 @@ partial class FrmMain
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, Encoding.UTF8);
 
-            strLine = sr.ReadLine();
+            strLine = sr.ReadLine();    // Signal analysis header
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strTextHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
             if (!strLine.Contains("SignalAnalysis data (", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strTextHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Start time: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            // Append millisecond pattern to current culture's full date time pattern
+            strLine = sr.ReadLine();    // Start time
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
+            if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.GetMillisecondsFormat(fileCulture));
-            if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart)) return result;
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
+                throw new FormatException(StringsRM.GetString("strTextHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("End time: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
+            strLine = sr.ReadLine();    // End time
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
+            if (!strLine.Contains("End time: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
+            strLine = sr.ReadLine();    // Total measuring time
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
+            if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Number of data points: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints)) return result;
-            if (nPoints == 0) return result;
+            //Section 'Number of data points' is mis-formatted.
+            strLine = sr.ReadLine();    // Number of data points
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader05", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
+            if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader05", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
+                throw new FormatException(StringsRM.GetString("strTextHeader05", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
+            if (nPoints == 0)
+                throw new FormatException(StringsRM.GetString("strTextHeader05", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq)) return result;
+            strLine = sr.ReadLine();    // Sampling frequency
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader06", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
+            if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader06", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
+                throw new FormatException(StringsRM.GetString("strTextHeader06", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
+            if (nSampleFreq <= 0)
+                throw new FormatException(StringsRM.GetString("strTextHeader06", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Average illuminance: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            strLine = sr.ReadLine();    // Average illuminance
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
+            if (!strLine.Contains("Average illuminance: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
             Results.Average = readValue;
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Maximum illuminance: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            strLine = sr.ReadLine();    // Maximum illuminance
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
+            if (!strLine.Contains("Maximum illuminance: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
             Results.Maximum = readValue;
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Minimum illuminance: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            strLine = sr.ReadLine();    // Minimum illuminance
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
+            if (!strLine.Contains("Minimum illuminance: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
             Results.Minimum = readValue;
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Fractal dimension: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            strLine = sr.ReadLine();    // Fractal dimension
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
+            if (!strLine.Contains("Fractal dimension: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
             Results.FractalDimension = readValue;
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Fractal variance: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            strLine = sr.ReadLine();    // Fractal variance
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
+            if (!strLine.Contains("Fractal variance: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
             Results.FractalVariance = readValue;
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Approximate entropy: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
+            strLine = sr.ReadLine();    // Approximate entropy
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
+            if (!strLine.Contains("Approximate entropy: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
             Results.ApproximateEntropy = readValue;
 
-            strLine = sr.ReadLine();
-            if (strLine != null && !strLine.Contains("Sample entropy: ", StringComparison.Ordinal))
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show("Unable to read data from file:\nwrong file format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return result;
-            }
-            if (strLine == null || !double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue)) return result;
-            Results.SampleEntropy = readValue;
+            strLine = sr.ReadLine();    // Sample entropy
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
+            if (!strLine.Contains("Sample entropy: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
+            Results.ApproximateEntropy = readValue;
 
-            strLine = sr.ReadLine();    // It should be an empty line
-            if (strLine != string.Empty) return result;
+            strLine = sr.ReadLine();    // Empty line
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Missing an empty line.");
+            if (strLine != string.Empty)
+                throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Missing an empty line.");
 
-            strLine = sr.ReadLine();    // Column header lines
-            seriesLabels = strLine != null ? strLine.Split('\t') : Array.Empty<string>();
+            strLine = sr.ReadLine();    // Column header names
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Missing column headers(series names).");
+            string[] seriesLabels = strLine.Split('\t');
+            if (seriesLabels == Array.Empty<string>())
+                throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Missing column headers(series names).");
             seriesLabels = seriesLabels[1..];
             nSeries = seriesLabels.Length;
 

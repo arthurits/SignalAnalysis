@@ -227,6 +227,14 @@ Se utilizarán los valores por defecto.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Ventana</value>
   </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>Se ha producido un error inesperado al abrir el archivo de datos.
+Por favor, inténtelo más tarde o contacte al autor de este software.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Error al abrir archivo de datos</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>¿Salir?</value>
   </data>
@@ -328,6 +336,24 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="strSignalHeader01" xml:space="preserve">
+    <value>La sección 'SignalAnalysis data' tiene formato incorrecto.</value>
+  </data>
+  <data name="strSignalHeader02" xml:space="preserve">
+    <value>La sección 'Number of data series' tiene formato incorrecto.</value>
+  </data>
+  <data name="strSignalHeader03" xml:space="preserve">
+    <value>La sección 'Number of data points' tiene formato incorrecto.</value>
+  </data>
+  <data name="strSignalHeader04" xml:space="preserve">
+    <value>La sección 'Sampling frequency' tiene formato incorrecto.</value>
+  </data>
+  <data name="strSignalHeader05" xml:space="preserve">
+    <value>No se ha encontrado una línea en blanco.</value>
+  </data>
+  <data name="strSignalHeader06" xml:space="preserve">
+    <value>No se ha encontrado el nombre de las series de datos.</value>
+  </data>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Activar la cruz (mira) gráfica en los gráficos</value>
   </data>
@@ -345,6 +371,51 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Gráficos</value>
+  </data>
+  <data name="strTextHeader01" xml:space="preserve">
+    <value>Section 'ErgoLux data' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader02" xml:space="preserve">
+    <value>Section 'Start time' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader03" xml:space="preserve">
+    <value>Section 'End time' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader04" xml:space="preserve">
+    <value>Section 'Total measuring time' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader05" xml:space="preserve">
+    <value>Section 'Number of data points' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader06" xml:space="preserve">
+    <value>Section 'Sampling frequency' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader07" xml:space="preserve">
+    <value>Section 'Average illuminance' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader08" xml:space="preserve">
+    <value>Section 'Maximum illuminance' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader09" xml:space="preserve">
+    <value>Section 'Minimum illuminance' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader10" xml:space="preserve">
+    <value>Section 'Fractal dimension' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader11" xml:space="preserve">
+    <value>Section 'Fractal variance' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader12" xml:space="preserve">
+    <value>Section 'Approximate entropy' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader13" xml:space="preserve">
+    <value>Section 'Sample entropy' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader14" xml:space="preserve">
+    <value>Missing an empty line.</value>
+  </data>
+  <data name="strTextHeader15" xml:space="preserve">
+    <value>Missing column headers (series names).</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>Acerca de</value>
