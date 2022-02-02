@@ -5,9 +5,10 @@ namespace SignalAnalysis;
 partial class FrmMain
 {
     /// <summary>
-    /// Reads data from an elux file and stores it into _signalData.
+    /// Reads data from an elux-formatted file and stores it into _signalData.
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool ReadELuxData(string FileName)
     {
         int nPoints = 0;
@@ -61,40 +62,48 @@ partial class FrmMain
 
             strLine = sr.ReadLine();    // Number of data points
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
             if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
-                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
             if (nPoints == 0)
-                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
 
             strLine = sr.ReadLine();    // Sampling frequency
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
             if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
-                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
             if (nSampleFreq <= 0)
-                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
 
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader08", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader08", _settings.AppCulture) ?? "Missing an empty line.");
             if (strLine != string.Empty)
-                throw new FormatException(StringsRM.GetString("strELuxHeader08", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader08", _settings.AppCulture) ?? "Missing an empty line.");
 
             strLine = sr.ReadLine();    // Column header lines
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strELuxHeader09", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader09", _settings.AppCulture) ?? "Missing column headers (series names).");
             seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
-                throw new FormatException(StringsRM.GetString("strELuxHeader09", _settings.AppCulture));
+                throw new FormatException(StringsRM.GetString("strELuxHeader09", _settings.AppCulture) ?? "Missing column headers (series names).");
 
             result = InitializeDataArrays(sr, nPoints, fileCulture);
         }
-
+        catch (System.Globalization.CultureNotFoundException ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _settings.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorCultureTitle" ?? "Culture name error", _settings.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
         catch (FormatException ex)
         {
             result = false;
@@ -104,14 +113,26 @@ partial class FrmMain
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
         }
+        catch (Exception ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _settings.AppCulture) ?? "An unexpected error happened while opening file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _settings.AppCulture) ?? "Error opening data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
 
         return result;
     }
 
     /// <summary>
-    /// Readas data from a sig-formatted file and stores it into _signalData.
+    /// Readas data from a signal-formatted file and stores it into _signalData.
     /// </summary>
     /// <param name="FileName">Path (including name) of the sig file</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool ReadSigData(string FileName)
     {
         int nPoints = 0;
@@ -169,7 +190,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strSignalHeader06", _settings.AppCulture) ?? "Missing column headers(series names).");
-            string[] seriesLabels = strLine.Split('\t');
+            seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringsRM.GetString("strSignalHeader06", _settings.AppCulture) ?? "Missing column headers(series names).");
 
@@ -212,6 +233,7 @@ partial class FrmMain
     /// Readas data from a text-formatted file and stores it into _signalData.
     /// </summary>
     /// <param name="FileName">Path (including name) of the text file</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool ReadTextData(string FileName)
     {
         double readValue;
@@ -346,7 +368,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Missing column headers(series names).");
-            string[] seriesLabels = strLine.Split('\t');
+            seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Missing column headers(series names).");
             seriesLabels = seriesLabels[1..];
@@ -354,22 +376,46 @@ partial class FrmMain
 
             result = InitializeDataArrays(sr, nPoints, fileCulture, true);
         }
+        catch (System.Globalization.CultureNotFoundException ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataErrorCulture", _settings.AppCulture) ?? "The culture identifier string name is not valid.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorCultureTitle" ?? "Culture name error", _settings.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+        }
         catch (FormatException ex)
         {
             result = false;
+            using (new CenterWinDialog(this))
+                MessageBox.Show(String.Format(StringsRM.GetString("strReadDataError", _settings.AppCulture) ?? "Unable to read data from file.\n{0}", ex.Message),
+                    StringsRM.GetString("strReadDataErrorTitle" ?? "Error opening data", _settings.AppCulture),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
         }
         catch (Exception ex)
         {
             result = false;
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _settings.AppCulture) ?? "An unexpected error happened while opening file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _settings.AppCulture) ?? "Error opening data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         return result;
     }
 
     /// <summary>
-    /// Reads the numeric data section pointed at.
+    /// Reads and parse the data into a numeric format.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>
+    /// <param name="culture">Culture to parse the read data into numeric values</param>
+    /// <param name="IsFirstColumDateTime"><see langword="True"/> if successfull</param>
+    /// <returns><see langword="True"/> if the first data-column is a DateTime value and thus it will be ingnores, <see langword="false"/> otherwise</returns>
     private bool InitializeDataArrays(StreamReader sr, int points, System.Globalization.CultureInfo culture, bool IsFirstColumDateTime = false)
     {
         bool result = true;
