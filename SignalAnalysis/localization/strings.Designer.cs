@@ -430,6 +430,24 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no data available to be saved..
+        /// </summary>
+        internal static string strMsgBoxNoData {
+            get {
+                return ResourceManager.GetString("strMsgBoxNoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No data.
+        /// </summary>
+        internal static string strMsgBoxNoDataTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxNoDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Computation of the Hausdorff-Besicovitch fractal
         ///dimension has been stopped..
         /// </summary>
@@ -445,6 +463,24 @@ namespace SignalAnalysis.localization {
         internal static string strMsgBoxTaskCancelTitle {
             get {
                 return ResourceManager.GetString("strMsgBoxTaskCancelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*.
+        /// </summary>
+        internal static string strOpenDlgFilter {
+            get {
+                return ResourceManager.GetString("strOpenDlgFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open data file.
+        /// </summary>
+        internal static string strOpenDlgTitle {
+            get {
+                return ResourceManager.GetString("strOpenDlgTitle", resourceCulture);
             }
         }
         
@@ -680,6 +716,24 @@ namespace SignalAnalysis.localization {
         internal static string strReadDataErrorTitle {
             get {
                 return ResourceManager.GetString("strReadDataErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|All files (*.*)|*.*.
+        /// </summary>
+        internal static string strSaveDlgFilter {
+            get {
+                return ResourceManager.GetString("strSaveDlgFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save data file.
+        /// </summary>
+        internal static string strSaveDlgTitle {
+            get {
+                return ResourceManager.GetString("strSaveDlgTitle", resourceCulture);
             }
         }
         

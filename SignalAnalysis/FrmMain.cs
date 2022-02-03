@@ -225,11 +225,6 @@ public partial class FrmMain : Form
 
     }
 
-    private void ToolStripMain_Exit_Click(object sender, EventArgs e)
-    {
-        this.Close();
-    }
-
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
     {
         using (new CenterWinDialog(this))

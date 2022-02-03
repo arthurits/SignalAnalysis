@@ -14,11 +14,11 @@ partial class FrmMain
 
         using OpenFileDialog openDlg = new()
         {
-            Title = "Select data file",
-            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserOpenPath : _settings.DefaultOpenPath,
-            Filter = "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*",
+            Filter = StringsRM.GetString("strOpenDlgFilter", _settings.AppCulture) ?? "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*",
             FilterIndex = 4,
-            RestoreDirectory = true
+            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserOpenPath : _settings.DefaultOpenPath,
+            RestoreDirectory = true,
+            Title = StringsRM.GetString("strOpenDlgTitle", _settings.AppCulture) ?? "Select data file",
         };
 
         using (new CenterWinDialog(this))
@@ -59,8 +59,14 @@ partial class FrmMain
         // Exit if there is no data to be saved
         if (signal is null || signal.Length == 0)
         {
+            // Exit if no data has been received or the matrices are still un-initialized
             using (new CenterWinDialog(this))
-                MessageBox.Show("There is no data available to be saved.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                MessageBox.Show(StringsRM.GetString("strMsgBoxNoData", _settings.AppCulture) ?? "There is no data available to be saved.",
+                    StringsRM.GetString("strMsgBoxNoDataTitle", _settings.AppCulture) ?? "No data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
             return;
         }
 
@@ -68,11 +74,11 @@ partial class FrmMain
         SaveFileDialog SaveDlg = new()
         {
             DefaultExt = "*.txt",
-            Filter = "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringsRM.GetString("strSaveDlgFilter", _settings.AppCulture) ?? "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
             FilterIndex = 1,
-            Title = "Export data",
+            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserSavePath : _settings.DefaultSavePath,
             OverwritePrompt = true,
-            InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserSavePath : _settings.DefaultSavePath
+            Title = StringsRM.GetString("strSaveDlgTitle", _settings.AppCulture) ?? "Export data"
         };
 
         using (new CenterWinDialog(this))
@@ -127,7 +133,8 @@ partial class FrmMain
 
     private void About_Click(object? sender, EventArgs e)
     {
-        
+        FrmAbout frmAbout = new();
+        frmAbout.ShowDialog();
     }
 
     private void LabelEx_Click(object? sender, EventArgs e)

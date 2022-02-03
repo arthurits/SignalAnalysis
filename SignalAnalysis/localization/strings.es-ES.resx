@@ -250,12 +250,24 @@ en la función 'InitializeDataArrays'.
   <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>No hay datos disponibles para guardar.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>Datos</value>
+  </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>El cálculo de la dimensión fractal de
 Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>Fin</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>Archivo ErgoLux (*.elux)|*.elux|Archivo SignalAnalysis (*.sig)|*.sig|Archivo de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>Abrir archivo de datos</value>
   </data>
   <data name="strPlotAppliedTitle" xml:space="preserve">
     <value>Señal transformada</value>
@@ -335,6 +347,12 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>Archivo de texto (*.txt)|*.txt|Archivo SignalAnalysis (*.sig)|*.sig|Archivo binario (*.bin)|*.bin|Todos los archivos (*.*)|*.*</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>Guardar archivo de datos</value>
   </data>
   <data name="strSignalHeader01" xml:space="preserve">
     <value>La sección 'SignalAnalysis data' tiene formato incorrecto.</value>
