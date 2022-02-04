@@ -168,6 +168,31 @@ partial class FrmMain
                     break;
                 case "LabelExCrossHair":
                     _settings.CrossHair = label.Checked;
+                    if (plotOriginal is not null)
+                    {
+                        plotOriginal.ShowCrossHair = label.Checked;
+                        plotOriginal.Refresh();
+                    }
+                    if (plotWindow is not null)
+                    {
+                        plotWindow.ShowCrossHair = label.Checked;
+                        plotWindow.Refresh();
+                    }
+                    if (plotApplied is not null)
+                    {
+                        plotApplied.ShowCrossHair = label.Checked;
+                        plotApplied.Refresh();
+                    }
+                    if (plotFractal is not null)
+                    {
+                        plotFractal.ShowCrossHair = label.Checked;
+                        plotFractal.Refresh();
+                    }
+                    if (plotFFT is not null)
+                    {
+                        plotFFT.ShowCrossHair = label.Checked;
+                        plotFFT.Refresh();
+                    }
                     break;
             }
         }

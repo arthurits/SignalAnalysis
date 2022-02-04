@@ -8,6 +8,20 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     public ScottPlot.Plottable.VLine VerticalLine { get; private set; }
     public ScottPlot.Plottable.HLine HorizontalLine { get; private set; }
 
+    public bool ShowCrossHair
+    {
+        get => this.Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Count() >= 0;
+        set
+        {
+            if (value)
+                ShowCrossHairLines(true, true);
+            else
+                DeleteCrossHairLines();
+        }
+    }
+    public bool ShowCrossHairVertical { get; set; } = false;
+    public bool ShowCrossHairHorizontal { get; set; } = false;
+
     public bool SnapToPoint { get; set; } = false;
 
     /// <summary>
@@ -59,6 +73,31 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
 
         CrossHairColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.Red);
     }
+
+    private void ShowCrossHairLines(bool showVertical = false, bool showHorizontal = false)
+    {
+        if (!showVertical && !showHorizontal) return;
+
+        if (this.Plot.GetPlottables().Length == 1)
+            CreateCrossHairLines();
+
+        if (showVertical && VerticalLine is not null)
+        {
+            VerticalLine.IsVisible = true;
+            var axis = this.Plot.GetPlottables()[0].GetAxisLimits();
+            VerticalLine.X = axis.XCenter;
+            //SnapLinesToPoint(ToX: true);
+        }
+
+        if (showHorizontal && HorizontalLine is not null)
+        {
+            HorizontalLine.IsVisible = true;
+            var axis = this.Plot.GetPlottables()[0].GetAxisLimits();
+            HorizontalLine.Y = axis.YCenter;
+            //SnapLinesToPoint(ToY: true);
+        }
+    }
+
 
     /// <summary>
     /// Delete vertical and horizontal plottable lines.
@@ -115,21 +154,23 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         return (pointX, pointY, pointIndex);
     }
 
-    private void OnDoubleClick(object sender, EventArgs e)
+    private void OnDoubleClick(object? sender, EventArgs e)
     {
-        if (this.Plot.GetPlottables().Length == 1)
-            CreateCrossHairLines();
+        ShowCrossHair = !ShowCrossHair;
 
-        VerticalLine.IsVisible = !VerticalLine.IsVisible;
-        HorizontalLine.IsVisible = !HorizontalLine.IsVisible;
+        //if (this.Plot.GetPlottables().Length == 1)
+        //    CreateCrossHairLines();
 
-        if (VerticalLine.IsVisible && HorizontalLine.IsVisible)
-            SnapLinesToPoint(ToX: true);
-        else
-            DeleteCrossHairLines();
+        //VerticalLine.IsVisible = !VerticalLine.IsVisible;
+        //HorizontalLine.IsVisible = !HorizontalLine.IsVisible;
+
+        //if (VerticalLine.IsVisible && HorizontalLine.IsVisible)
+        //    SnapLinesToPoint(ToX: true);
+        //else
+        //    DeleteCrossHairLines();
     }
 
-    private void OnDraggedVertical(object sender, EventArgs e)
+    private void OnDraggedVertical(object? sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
         if (!VerticalLine.IsVisible || !SnapToPoint) return;
@@ -143,7 +184,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
 
     }
 
-    private void OnDraggedHorizontal(object sender, EventArgs e)
+    private void OnDraggedHorizontal(object? sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
         if (!HorizontalLine.IsVisible || !SnapToPoint) return;
@@ -189,11 +230,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // Event will be null if there are no subscribers
         if (raiseEvent != null)
         {
-            // Format arguments if needed
-            //e.pointX = 0.0;
-            //e.pointY = 0.0;
-            //e.pointIndex = 0;
-
             // Call to raise the event.
             raiseEvent(this, e);
         }
@@ -209,11 +245,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // Event will be null if there are no subscribers
         if (raiseEvent != null)
         {
-            // Format arguments if needed
-            //e.pointX = 0.0;
-            //e.pointY = 0.0;
-            //e.pointIndex = 0;
-
             // Call to raise the event.
             raiseEvent(this, e);
         }
