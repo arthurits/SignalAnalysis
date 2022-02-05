@@ -137,6 +137,19 @@ partial class FrmMain
         frmAbout.ShowDialog();
     }
 
+    private void LabelEx_CheckedChanged(object? sender, EventArgs e)
+    {
+        if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
+        {
+            var label = LabelEx;
+            // Change the text color
+            if (label.Checked)
+                label.ForeColor = Color.Black;
+            else
+                label.ForeColor = Color.LightGray;
+        }
+    }
+
     private void LabelEx_Click(object? sender, EventArgs e)
     {
         if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
@@ -168,27 +181,27 @@ partial class FrmMain
                     break;
                 case "LabelExCrossHair":
                     _settings.CrossHair = label.Checked;
-                    if (plotOriginal is not null)
+                    if (plotOriginal is not null && plotOriginal.Plot.GetPlottables().Length > 0)
                     {
                         plotOriginal.ShowCrossHair = label.Checked;
                         plotOriginal.Refresh();
                     }
-                    if (plotWindow is not null)
+                    if (plotWindow is not null && plotWindow.Plot.GetPlottables().Length > 0)
                     {
                         plotWindow.ShowCrossHair = label.Checked;
                         plotWindow.Refresh();
                     }
-                    if (plotApplied is not null)
+                    if (plotApplied is not null && plotApplied.Plot.GetPlottables().Length > 0)
                     {
                         plotApplied.ShowCrossHair = label.Checked;
                         plotApplied.Refresh();
                     }
-                    if (plotFractal is not null)
+                    if (plotFractal is not null && plotFractal.Plot.GetPlottables().Length > 0)
                     {
                         plotFractal.ShowCrossHair = label.Checked;
                         plotFractal.Refresh();
                     }
-                    if (plotFFT is not null)
+                    if (plotFFT is not null && plotFFT.Plot.GetPlottables().Length > 0)
                     {
                         plotFFT.ShowCrossHair = label.Checked;
                         plotFFT.Refresh();

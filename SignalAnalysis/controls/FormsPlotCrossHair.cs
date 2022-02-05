@@ -2,21 +2,34 @@
 
 public class FormsPlotCrossHair : ScottPlot.FormsPlot
 {
+    private ContextMenuStrip customMenu = new ();
+    private System.Windows.Forms.ToolStripMenuItem detachLegendMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem crossHairMenuItem;
+
     public event EventHandler<LineDragEventArgs> VLineDragged;
     public event EventHandler<LineDragEventArgs> HLineDragged;
     
     public ScottPlot.Plottable.VLine VerticalLine { get; private set; }
     public ScottPlot.Plottable.HLine HorizontalLine { get; private set; }
 
+    private readonly System.Resources.ResourceManager StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
+
     public bool ShowCrossHair
     {
-        get => this.Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Count() >= 0;
+        //get => this.Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Count() == 2;
+        get => crossHairMenuItem.Checked;
         set
         {
             if (value)
+            {
                 ShowCrossHairLines(true, true);
+                crossHairMenuItem.Checked = value;
+            }
             else
+            {
                 DeleteCrossHairLines();
+                crossHairMenuItem.Checked = value;
+            }
         }
     }
     public bool ShowCrossHairVertical { get; set; } = false;
@@ -45,12 +58,61 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         get => VerticalLine.Color;
     }
 
-
     public FormsPlotCrossHair()
         : base()
-    {       
+    {
+        InitilizeContextMenu();
+
+        // unsubscribe from the default right-click menu event
+        this.RightClicked -= DefaultRightClickEvent;
+
+        // add a custom right-click action
+        this.RightClicked += CustomRightClickEvent;
+
         this.DoubleClick += new System.EventHandler(OnDoubleClick);
         this.Refresh();
+    }
+
+    private void InitilizeContextMenu()
+    {
+        int item;
+        System.Windows.Forms.ToolStripMenuItem menuItem;
+
+        item = customMenu.Items.Add(new ToolStripMenuItem("Copy image", null, new EventHandler(RightClickMenu_Copy_Click)));
+        menuItem = (ToolStripMenuItem)customMenu.Items[item];
+        menuItem.Text = StringsRM.GetString("strMenuCopy", System.Globalization.CultureInfo.CurrentCulture) ?? "Copy image";
+       
+        item = customMenu.Items.Add(new ToolStripMenuItem("Save image as...", null, new EventHandler(RightClickMenu_Help_Click)));
+        menuItem = (ToolStripMenuItem)customMenu.Items[item];
+        menuItem.Text = StringsRM.GetString("strMenuSave", System.Globalization.CultureInfo.CurrentCulture) ?? "Save image as...";
+        
+        item = customMenu.Items.Add(new ToolStripSeparator());
+        
+        item = customMenu.Items.Add(new ToolStripMenuItem("Zoom to fit data", null, new EventHandler(RightClickMenu_AutoAxis_Click)));
+        menuItem = (ToolStripMenuItem)customMenu.Items[item];
+        menuItem.Text = StringsRM.GetString("strMenuZoom", System.Globalization.CultureInfo.CurrentCulture) ?? "Zoom to fit data";
+
+        item = customMenu.Items.Add(new ToolStripSeparator());
+        
+        item = customMenu.Items.Add(new ToolStripMenuItem("Help", null, new EventHandler(RightClickMenu_Help_Click)));
+        menuItem = (ToolStripMenuItem)customMenu.Items[item];
+        menuItem.Text = StringsRM.GetString("strMenuHelp", System.Globalization.CultureInfo.CurrentCulture) ?? "Help";
+
+        item = customMenu.Items.Add(new ToolStripSeparator());
+
+        item = customMenu.Items.Add(new ToolStripMenuItem("Open in new window", null, new EventHandler(RightClickMenu_OpenInNewWindow_Click)));
+        menuItem = (ToolStripMenuItem)customMenu.Items[item];
+        menuItem.Text = StringsRM.GetString("strMenuOpen", System.Globalization.CultureInfo.CurrentCulture) ?? "Open in new window";
+
+        item = customMenu.Items.Add(new ToolStripMenuItem("Detach legend", null, new EventHandler(RightClickMenu_DetachLegend_Click)));
+        detachLegendMenuItem = (ToolStripMenuItem)customMenu.Items[item];
+        detachLegendMenuItem.Text = StringsRM.GetString("strMenuDetach", System.Globalization.CultureInfo.CurrentCulture) ?? "Detach legend";
+
+        item = customMenu.Items.Add(new ToolStripSeparator());
+        
+        item = customMenu.Items.Add(new ToolStripMenuItem("Show crosshair", null, new EventHandler(RightClickMenu_CrossHair_Click)));
+        crossHairMenuItem = (ToolStripMenuItem)customMenu.Items[item];
+        crossHairMenuItem.Text = StringsRM.GetString("strMenuCrossHair", System.Globalization.CultureInfo.CurrentCulture) ?? "Show crosshair";
     }
 
     /// <summary>
@@ -78,7 +140,10 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     {
         if (!showVertical && !showHorizontal) return;
 
-        if (this.Plot.GetPlottables().Length == 1)
+        if (Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Count() > 0) return;
+
+        // There should be at last one plottable added, otherwise
+        if (this.Plot.GetPlottables().Length >= 1)
             CreateCrossHairLines();
 
         if (showVertical && VerticalLine is not null)
@@ -98,18 +163,23 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         }
     }
 
-
     /// <summary>
     /// Delete vertical and horizontal plottable lines.
     /// Unsubscribe to the line's dragged events.
     /// </summary>
     private void DeleteCrossHairLines()
     {
-        VerticalLine.Dragged -= new System.EventHandler(OnDraggedVertical);
-        this.Plot.Clear(typeof(Plottable.VLine));
+        if (VerticalLine is not null)
+        {
+            VerticalLine.Dragged -= new System.EventHandler(OnDraggedVertical);
+            this.Plot.Clear(typeof(Plottable.VLine));
+        }
 
-        HorizontalLine.Dragged -= new System.EventHandler(OnDraggedHorizontal);
-        this.Plot.Clear(typeof(Plottable.HLine));
+        if (HorizontalLine is not null)
+        {
+            HorizontalLine.Dragged -= new System.EventHandler(OnDraggedHorizontal);
+            this.Plot.Clear(typeof(Plottable.HLine));
+        }
     }
 
     /// <summary>
@@ -157,17 +227,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     private void OnDoubleClick(object? sender, EventArgs e)
     {
         ShowCrossHair = !ShowCrossHair;
-
-        //if (this.Plot.GetPlottables().Length == 1)
-        //    CreateCrossHairLines();
-
-        //VerticalLine.IsVisible = !VerticalLine.IsVisible;
-        //HorizontalLine.IsVisible = !HorizontalLine.IsVisible;
-
-        //if (VerticalLine.IsVisible && HorizontalLine.IsVisible)
-        //    SnapLinesToPoint(ToX: true);
-        //else
-        //    DeleteCrossHairLines();
     }
 
     private void OnDraggedVertical(object? sender, EventArgs e)
@@ -260,6 +319,44 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         {
             //if (plottables[i] is not Plottable.VLine && plottables[i] is not Plottable.HLine)
                 this.Plot.RemoveAt(i);
+        }
+    }
+
+
+    /// <summary>
+    /// Launch the default right-click menu.
+    /// </summary>
+    private void CustomRightClickEvent(object sender, EventArgs e)
+    {
+        detachLegendMenuItem.Visible = Plot.Legend(null).Count > 0;
+        crossHairMenuItem.Enabled = Plot.GetPlottables().Length > 0;
+        customMenu.Show(System.Windows.Forms.Cursor.Position);
+    }
+    private void RightClickMenu_Copy_Click(object? sender, EventArgs e) => Clipboard.SetImage(Plot.Render());
+    private void RightClickMenu_Help_Click(object? sender, EventArgs e) => new FormHelp().Show();
+    private void RightClickMenu_AutoAxis_Click(object? sender, EventArgs e) { Plot.AxisAuto(); Refresh(); }
+    private void RightClickMenu_OpenInNewWindow_Click(object? sender, EventArgs e) => new FormsPlotViewer(Plot).Show();
+    private void RightClickMenu_DetachLegend_Click(object? sender, EventArgs e) => new FormsPlotLegendViewer(this);
+    private void RightClickMenu_SaveImage_Click(object? sender, EventArgs e)
+    {
+        var sfd = new SaveFileDialog
+        {
+            FileName = "ScottPlot.png",
+            Filter = "PNG Files (*.png)|*.png;*.png" +
+                     "|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg" +
+                     "|BMP Files (*.bmp)|*.bmp;*.bmp" +
+                     "|All files (*.*)|*.*"
+        };
+
+        if (sfd.ShowDialog() == DialogResult.OK)
+            Plot.SaveFig(sfd.FileName);
+    }
+    private void RightClickMenu_CrossHair_Click(object? sender, EventArgs e)
+    {
+        if (sender is not null)
+        {
+            ShowCrossHair = !ShowCrossHair;
+            Refresh();
         }
     }
 

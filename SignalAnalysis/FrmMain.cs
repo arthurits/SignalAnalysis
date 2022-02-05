@@ -175,7 +175,8 @@ public partial class FrmMain : Form
             ToolTipText = "Power spectra (dB)"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
+        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        statusStrip.Items[item].PerformClick();
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -188,7 +189,8 @@ public partial class FrmMain : Form
             ToolTipText = "Cumulative fractal dimension"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
+        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        statusStrip.Items[item].PerformClick();
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -201,7 +203,8 @@ public partial class FrmMain : Form
             ToolTipText = "Approximate and sample entropy"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
+        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        statusStrip.Items[item].PerformClick();
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -214,7 +217,8 @@ public partial class FrmMain : Form
             ToolTipText = "Plot's crosshair mode"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        LabelEx_Click(statusStrip.Items[item], EventArgs.Empty);
+        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        statusStrip.Items[item].PerformClick();
 
         tspBottom.Join(statusStrip);
         this.Controls.Add(tspBottom);
@@ -244,9 +248,7 @@ public partial class FrmMain : Form
         // Save settings data
         SaveProgramSettingsJSON();
     }
-
     
-
     private void PopulateComboSeries(params string[] values)
     {
         stripComboSeries.Items.Clear();
@@ -267,6 +269,7 @@ public partial class FrmMain : Form
     {
         if (_signalData.Length == 0) return;
 
+        ((ToolStripStatusLabelEx)((ToolStrip)tspBottom.Controls[0]).Items[4]).Checked = false;
         ComputeStats();   
     }
 
