@@ -363,6 +363,7 @@ public partial class FrmMain : Form
         ((ToolStrip)tspBottom.Controls[0]).Items[4].ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
 
         // Update plots if they contain series
+        plotOriginal.CultureUI = _settings.AppCulture;
         if (plotOriginal.Plot.GetPlottables().Length > 2)
         {
             plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
@@ -370,12 +371,15 @@ public partial class FrmMain : Form
             plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture));
         }
 
+        plotWindow.CultureUI = _settings.AppCulture;
         if (plotWindow.Plot.GetPlottables().Length > 2)
         {
             plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture));
             plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture));
             plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture));
         }
+
+        plotApplied.CultureUI = _settings.AppCulture;
         if (plotApplied.Plot.GetPlottables().Length > 2)
         {
             plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture));
@@ -383,12 +387,14 @@ public partial class FrmMain : Form
             plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture));
         }
 
+        plotFractal.CultureUI = _settings.AppCulture;
         if (plotFractal.Plot.GetPlottables().Length > 2)
         {
             plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
             plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
         }
 
+        plotFFT.CultureUI = _settings.AppCulture;
         if (plotFFT.Plot.GetPlottables().Length > 2)
         {
             plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));

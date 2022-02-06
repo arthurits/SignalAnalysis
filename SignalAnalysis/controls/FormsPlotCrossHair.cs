@@ -6,11 +6,27 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     private System.Windows.Forms.ToolStripMenuItem detachLegendMenuItem;
     private System.Windows.Forms.ToolStripMenuItem crossHairMenuItem;
 
+    /// <summary>
+    /// Event fired whenever the vertical line is dragged.
+    /// </summary>
     public event EventHandler<LineDragEventArgs> VLineDragged;
+    /// <summary>
+    /// Event fired whenever the horizontal line is dragged.
+    /// </summary>
     public event EventHandler<LineDragEventArgs> HLineDragged;
     
     public ScottPlot.Plottable.VLine VerticalLine { get; private set; }
     public ScottPlot.Plottable.HLine HorizontalLine { get; private set; }
+
+    private System.Globalization.CultureInfo _cultureUI;
+    /// <summary>
+    /// Culture used to show the right click context menu
+    /// </summary>
+    public System.Globalization.CultureInfo CultureUI
+    {
+        get { return _cultureUI; }
+        set { _cultureUI = value; ContextMenuUILanguage(); }
+    }
 
     private readonly System.Resources.ResourceManager StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
 
@@ -58,19 +74,33 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         get => VerticalLine.Color;
     }
 
-    public FormsPlotCrossHair()
+    public FormsPlotCrossHair(System.Globalization.CultureInfo? culture = null)
         : base()
     {
         InitilizeContextMenu();
 
-        // unsubscribe from the default right-click menu event
+        CultureUI = culture ?? System.Globalization.CultureInfo.CurrentCulture;
+
+        // Unsubscribe from the default right-click menu event
         this.RightClicked -= DefaultRightClickEvent;
 
-        // add a custom right-click action
+        // Add a custom right-click action
         this.RightClicked += CustomRightClickEvent;
 
         this.DoubleClick += new System.EventHandler(OnDoubleClick);
-        this.Refresh();
+        
+        //this.Refresh();
+    }
+
+    private void ContextMenuUILanguage()
+    {
+        customMenu.Items["Copy"].Text = StringsRM.GetString("strMenuCopy", CultureUI) ?? "Copy image";
+        customMenu.Items["Save"].Text = StringsRM.GetString("strMenuSave", CultureUI) ?? "Save image as...";
+        customMenu.Items["Zoom"].Text = StringsRM.GetString("strMenuZoom", CultureUI) ?? "Zoom to fit data";
+        customMenu.Items["Help"].Text = StringsRM.GetString("strMenuHelp", CultureUI) ?? "Help";
+        customMenu.Items["Open"].Text = StringsRM.GetString("strMenuOpen", CultureUI) ?? "Open in new window";
+        detachLegendMenuItem.Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
+        crossHairMenuItem.Text = StringsRM.GetString("strMenuCrossHair", CultureUI) ?? "Show crosshair";
     }
 
     private void InitilizeContextMenu()
@@ -80,39 +110,39 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
 
         item = customMenu.Items.Add(new ToolStripMenuItem("Copy image", null, new EventHandler(RightClickMenu_Copy_Click)));
         menuItem = (ToolStripMenuItem)customMenu.Items[item];
-        menuItem.Text = StringsRM.GetString("strMenuCopy", System.Globalization.CultureInfo.CurrentCulture) ?? "Copy image";
+        menuItem.Name = "Copy";
        
         item = customMenu.Items.Add(new ToolStripMenuItem("Save image as...", null, new EventHandler(RightClickMenu_Help_Click)));
         menuItem = (ToolStripMenuItem)customMenu.Items[item];
-        menuItem.Text = StringsRM.GetString("strMenuSave", System.Globalization.CultureInfo.CurrentCulture) ?? "Save image as...";
+        menuItem.Name = "Save";
         
         item = customMenu.Items.Add(new ToolStripSeparator());
         
         item = customMenu.Items.Add(new ToolStripMenuItem("Zoom to fit data", null, new EventHandler(RightClickMenu_AutoAxis_Click)));
         menuItem = (ToolStripMenuItem)customMenu.Items[item];
-        menuItem.Text = StringsRM.GetString("strMenuZoom", System.Globalization.CultureInfo.CurrentCulture) ?? "Zoom to fit data";
+        menuItem.Name = "Zoom";
 
         item = customMenu.Items.Add(new ToolStripSeparator());
         
         item = customMenu.Items.Add(new ToolStripMenuItem("Help", null, new EventHandler(RightClickMenu_Help_Click)));
         menuItem = (ToolStripMenuItem)customMenu.Items[item];
-        menuItem.Text = StringsRM.GetString("strMenuHelp", System.Globalization.CultureInfo.CurrentCulture) ?? "Help";
+        menuItem.Name = "Help";
 
         item = customMenu.Items.Add(new ToolStripSeparator());
 
         item = customMenu.Items.Add(new ToolStripMenuItem("Open in new window", null, new EventHandler(RightClickMenu_OpenInNewWindow_Click)));
         menuItem = (ToolStripMenuItem)customMenu.Items[item];
-        menuItem.Text = StringsRM.GetString("strMenuOpen", System.Globalization.CultureInfo.CurrentCulture) ?? "Open in new window";
+        menuItem.Name = "Open";
 
         item = customMenu.Items.Add(new ToolStripMenuItem("Detach legend", null, new EventHandler(RightClickMenu_DetachLegend_Click)));
         detachLegendMenuItem = (ToolStripMenuItem)customMenu.Items[item];
-        detachLegendMenuItem.Text = StringsRM.GetString("strMenuDetach", System.Globalization.CultureInfo.CurrentCulture) ?? "Detach legend";
+        detachLegendMenuItem.Name = "Detach";
 
         item = customMenu.Items.Add(new ToolStripSeparator());
         
         item = customMenu.Items.Add(new ToolStripMenuItem("Show crosshair", null, new EventHandler(RightClickMenu_CrossHair_Click)));
         crossHairMenuItem = (ToolStripMenuItem)customMenu.Items[item];
-        crossHairMenuItem.Text = StringsRM.GetString("strMenuCrossHair", System.Globalization.CultureInfo.CurrentCulture) ?? "Show crosshair";
+        crossHairMenuItem.Name = "CrossHair";
     }
 
     /// <summary>
@@ -326,7 +356,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     /// <summary>
     /// Launch the default right-click menu.
     /// </summary>
-    private void CustomRightClickEvent(object sender, EventArgs e)
+    private void CustomRightClickEvent(object? sender, EventArgs e)
     {
         detachLegendMenuItem.Visible = Plot.Legend(null).Count > 0;
         crossHairMenuItem.Enabled = Plot.GetPlottables().Length > 0;

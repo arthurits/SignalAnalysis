@@ -76,10 +76,19 @@ public partial class FrmSettings : Form
         {
             Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
-            radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting") + $" ({Settings.AppCultureName})";
+            //radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting") + $" ({Settings.AppCultureName})";
         }
-        else
-            radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting";
+        //else
+        //    radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting";
+    }
+
+    private void radInvariantCulture_CheckedChanged(object sender, EventArgs e)
+    {
+        if (radInvariantCulture.Checked)
+        {
+            Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            UpdateUI_Language();
+        }
     }
 
     private void radUserCulture_CheckedChanged(object sender, EventArgs e)
@@ -87,7 +96,7 @@ public partial class FrmSettings : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
+            Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture(((System.Globalization.CultureInfo)cboAllCultures.SelectedItem).Name);
             UpdateUI_Language();
         }
     }
@@ -136,7 +145,8 @@ public partial class FrmSettings : Form
             radCurrentCulture.Checked = true;
         else
             radUserCulture.Checked = true;
-        cboAllCultures.SelectedValue = Settings.AppCultureName;
+        //cboAllCultures.SelectedValue = Settings.AppCultureName;
+        cboAllCultures.Text = Settings.AppCulture.DisplayName;
 
         chkDlgPath.Checked = Settings.RememberFileDialogPath;
         txtDataFormat.Text = Settings.DataFormat;
@@ -209,7 +219,8 @@ public partial class FrmSettings : Form
         this.chkCrossHair.Text = StringsRM.GetString("strChkCrossHair", culture) ?? "Show plots' crosshair";
 
         this.grpCulture.Text = StringsRM.GetString("strGrpCulture", culture) ?? "UI and data format";
-        this.radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting";
+        this.radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting") + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+        //this.radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting";
         this.radInvariantCulture.Text = StringsRM.GetString("strRadInvariantCulture", culture) ?? "Invariant culture formatting";
         this.radUserCulture.Text = StringsRM.GetString("strRadUserCulture", culture) ?? "Select culture";
         this.chkDlgPath.Text = StringsRM.GetString("strChkDlgPath", culture) ?? "Remember open/save dialog previous path";

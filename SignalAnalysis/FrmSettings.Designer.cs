@@ -303,6 +303,7 @@
             this.radInvariantCulture.TabStop = true;
             this.radInvariantCulture.Text = "Invariant culture formatting";
             this.radInvariantCulture.UseVisualStyleBackColor = true;
+            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.radInvariantCulture_CheckedChanged);
             // 
             // radCurrentCulture
             // 
