@@ -206,6 +206,45 @@ Default values will be used instead.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI and data format</value>
   </data>
+  <data name="strHeader01" xml:space="preserve">
+    <value>SignalAnalysis data</value>
+  </data>
+  <data name="strHeader02" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="strHeader03" xml:space="preserve">
+    <value>End time</value>
+  </data>
+  <data name="strHeader04" xml:space="preserve">
+    <value>Total measuring time</value>
+  </data>
+  <data name="strHeader05" xml:space="preserve">
+    <value>Number of data points</value>
+  </data>
+  <data name="strHeader06" xml:space="preserve">
+    <value>Sampling frequency</value>
+  </data>
+  <data name="strHeader07" xml:space="preserve">
+    <value>Average illuminance</value>
+  </data>
+  <data name="strHeader08" xml:space="preserve">
+    <value>Maximum illuminance</value>
+  </data>
+  <data name="strHeader09" xml:space="preserve">
+    <value>Minimum illuminance</value>
+  </data>
+  <data name="strHeader10" xml:space="preserve">
+    <value>Fractal dimension</value>
+  </data>
+  <data name="strHeader11" xml:space="preserve">
+    <value>Fractal variance</value>
+  </data>
+  <data name="strHeader12" xml:space="preserve">
+    <value>Approximate entropy</value>
+  </data>
+  <data name="strHeader13" xml:space="preserve">
+    <value>Sample entropy</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
   </data>

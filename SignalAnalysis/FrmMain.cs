@@ -330,7 +330,7 @@ public partial class FrmMain : Form
         }, token);
         await statsTask;
 
-        txtStats.Text = Results.ToString();
+        txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
 
         // Update plots
         UpdateOriginal(signal);
@@ -401,7 +401,10 @@ public partial class FrmMain : Form
             plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture));
             plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
         }
-        
+
+        if (txtStats.Text.Length > 0)
+            txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+
     }
 
 }

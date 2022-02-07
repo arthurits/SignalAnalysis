@@ -318,6 +318,123 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SignalAnalysis data.
+        /// </summary>
+        internal static string strHeader01 {
+            get {
+                return ResourceManager.GetString("strHeader01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time.
+        /// </summary>
+        internal static string strHeader02 {
+            get {
+                return ResourceManager.GetString("strHeader02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End time.
+        /// </summary>
+        internal static string strHeader03 {
+            get {
+                return ResourceManager.GetString("strHeader03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total measuring time.
+        /// </summary>
+        internal static string strHeader04 {
+            get {
+                return ResourceManager.GetString("strHeader04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of data points.
+        /// </summary>
+        internal static string strHeader05 {
+            get {
+                return ResourceManager.GetString("strHeader05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sampling frequency.
+        /// </summary>
+        internal static string strHeader06 {
+            get {
+                return ResourceManager.GetString("strHeader06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average illuminance.
+        /// </summary>
+        internal static string strHeader07 {
+            get {
+                return ResourceManager.GetString("strHeader07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum illuminance.
+        /// </summary>
+        internal static string strHeader08 {
+            get {
+                return ResourceManager.GetString("strHeader08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum illuminance.
+        /// </summary>
+        internal static string strHeader09 {
+            get {
+                return ResourceManager.GetString("strHeader09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fractal dimension.
+        /// </summary>
+        internal static string strHeader10 {
+            get {
+                return ResourceManager.GetString("strHeader10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fractal variance.
+        /// </summary>
+        internal static string strHeader11 {
+            get {
+                return ResourceManager.GetString("strHeader11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approximate entropy.
+        /// </summary>
+        internal static string strHeader12 {
+            get {
+                return ResourceManager.GetString("strHeader12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sample entropy.
+        /// </summary>
+        internal static string strHeader13 {
+            get {
+                return ResourceManager.GetString("strHeader13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data-file path.
         /// </summary>
         internal static string strLblData {

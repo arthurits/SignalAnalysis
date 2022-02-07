@@ -209,6 +209,45 @@ Se utilizarán los valores por defecto.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Formato de datos e interfaz</value>
   </data>
+  <data name="strHeader01" xml:space="preserve">
+    <value>Datos SignalAnalysis</value>
+  </data>
+  <data name="strHeader02" xml:space="preserve">
+    <value>Tiempo inicial</value>
+  </data>
+  <data name="strHeader03" xml:space="preserve">
+    <value>Tiempo final</value>
+  </data>
+  <data name="strHeader04" xml:space="preserve">
+    <value>Tiempo total</value>
+  </data>
+  <data name="strHeader05" xml:space="preserve">
+    <value>Número de puntos</value>
+  </data>
+  <data name="strHeader06" xml:space="preserve">
+    <value>Frecuencia de muestreo</value>
+  </data>
+  <data name="strHeader07" xml:space="preserve">
+    <value>Illuminancia promedio</value>
+  </data>
+  <data name="strHeader08" xml:space="preserve">
+    <value>Illuminancia máxima</value>
+  </data>
+  <data name="strHeader09" xml:space="preserve">
+    <value>Illuminancia mínima</value>
+  </data>
+  <data name="strHeader10" xml:space="preserve">
+    <value>Dimensión fractal</value>
+  </data>
+  <data name="strHeader11" xml:space="preserve">
+    <value>Variancia fractal</value>
+  </data>
+  <data name="strHeader12" xml:space="preserve">
+    <value>Entropía aproximada</value>
+  </data>
+  <data name="strHeader13" xml:space="preserve">
+    <value>Entropía de muestra</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>
   </data>
