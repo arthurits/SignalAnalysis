@@ -36,9 +36,9 @@ partial class FrmMain
             (stringsRM.GetString("strHeader07", culture) ?? "Average illuminance") + $": {Average:0.######}" + Environment.NewLine +
             (stringsRM.GetString("strHeader08", culture) ?? "Maximum illuminance") + $": {Maximum:0.##}" + Environment.NewLine +
             (stringsRM.GetString("strHeader09", culture) ?? "Minimum illuminance") + $": {Minimum:0.##}" + Environment.NewLine +
-            (stringsRM.GetString("strHeader10", culture) ?? "Fractal dimension") + $": {Average:0.########}" + Environment.NewLine +
-            (stringsRM.GetString("strHeader11", culture) ?? "Fractal variance") + $": {Average:0.########}" + Environment.NewLine +
-            (stringsRM.GetString("strHeader12", culture) ?? "Approximate entropy") + $": {Average:0.########}" + Environment.NewLine +
-            (stringsRM.GetString("strHeader13", culture) ?? "Sample entropy") + $": {Average:0.########}";
+            (stringsRM.GetString("strHeader10", culture) ?? "Fractal dimension") + $": {FractalDimension:0.########}" + Environment.NewLine +
+            (stringsRM.GetString("strHeader11", culture) ?? "Fractal variance") + $": {FractalVariance:0.########}" + Environment.NewLine +
+            (stringsRM.GetString("strHeader12", culture) ?? "Approximate entropy") + $": {ApproximateEntropy:0.########}" + Environment.NewLine +
+            (stringsRM.GetString("strHeader13", culture) ?? "Sample entropy") + $": {SampleEntropy:0.########}";
     }
 }
