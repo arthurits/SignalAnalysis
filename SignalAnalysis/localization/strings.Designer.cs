@@ -674,6 +674,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (cumulative).
+        /// </summary>
+        internal static string strPlotFractalTitle__ {
+            get {
+                return ResourceManager.GetString("strPlotFractalTitle()", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time (seconds).
         /// </summary>
         internal static string strPlotFractalXLabel {

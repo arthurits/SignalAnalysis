@@ -332,6 +332,9 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotFractalTitle" xml:space="preserve">
     <value>Dimensión fractal</value>
   </data>
+  <data name="strPlotFractalTitle()" xml:space="preserve">
+    <value>(acumulada)</value>
+  </data>
   <data name="strPlotFractalXLabel" xml:space="preserve">
     <value>Tiempo (segundos)</value>
   </data>

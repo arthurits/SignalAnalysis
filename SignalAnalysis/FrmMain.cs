@@ -364,15 +364,16 @@ public partial class FrmMain : Form
 
         // Update plots if they contain series
         plotOriginal.CultureUI = _settings.AppCulture;
-        if (plotOriginal.Plot.GetPlottables().Length > 2)
+        if (plotOriginal.Plot.GetPlottables().Length > 0)
         {
             plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
             plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture));
             plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture));
+            plotOriginal.Refresh();
         }
 
         plotWindow.CultureUI = _settings.AppCulture;
-        if (plotWindow.Plot.GetPlottables().Length > 2)
+        if (plotWindow.Plot.GetPlottables().Length > 0)
         {
             plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture));
             plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture));
@@ -380,7 +381,7 @@ public partial class FrmMain : Form
         }
 
         plotApplied.CultureUI = _settings.AppCulture;
-        if (plotApplied.Plot.GetPlottables().Length > 2)
+        if (plotApplied.Plot.GetPlottables().Length > 0)
         {
             plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture));
             plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture));
@@ -388,14 +389,14 @@ public partial class FrmMain : Form
         }
 
         plotFractal.CultureUI = _settings.AppCulture;
-        if (plotFractal.Plot.GetPlottables().Length > 2)
+        if (plotFractal.Plot.GetPlottables().Length > 0)
         {
             plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
             plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
         }
 
         plotFFT.CultureUI = _settings.AppCulture;
-        if (plotFFT.Plot.GetPlottables().Length > 2)
+        if (plotFFT.Plot.GetPlottables().Length > 0)
         {
             plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));
             plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture));

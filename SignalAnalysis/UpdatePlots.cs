@@ -77,8 +77,8 @@ partial class FrmMain
             (progressive ? (StringsRM.GetString("strPlotFractalTitle()", _settings.AppCulture) ?? "(cumulative)") : String.Empty) +
             " (H = " + FractalDimension.DimensionSingle.ToString("#.00####") +
             " — Var(H) = " + FractalDimension.VarianceH.ToString("#.00####") + ")");
-        plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture) ?? );
-        plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture) ??);
+        plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture) ?? "Dimension (H)");
+        plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotFractal.Plot.AxisAuto(0);
         plotFractal.Refresh();
     }
