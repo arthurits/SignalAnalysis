@@ -32,21 +32,31 @@ partial class FrmMain
 
             // Read the data file in the corresponding format
             bool boolRead = false;
-            Stats results = new();
+            Stats? results = null;
             if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 boolRead = ReadELuxData(filePath);
             else if (".sig".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
                 boolRead = ReadSigData(filePath);
             else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
+            {
+                results = new();
                 boolRead = ReadTextData(filePath, results);
+            }
 
             if (boolRead)
             {
-                Results = results;
-                this.Text = StringsRM.GetString("strFrmTitle", _settings.AppCulture) + " - " + openDlg.FileName;
-                txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
                 PopulateComboSeries();
+                this.Text = StringsRM.GetString("strFrmTitle", _settings.AppCulture) + " - " + openDlg.FileName;
+
+                if (results is not null)
+                {
+                    Results = results;
+                    txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+                }
             }
+
+            
+
         }
 
     }

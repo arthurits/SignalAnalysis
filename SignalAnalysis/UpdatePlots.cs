@@ -10,7 +10,7 @@ partial class FrmMain
         switch (_settings.AxisType)
         {
             case AxisType.Points:
-                plotOriginal.Plot.AddSignal(signal, nSampleFreq/nSampleFreq, label: strLabel);
+                plotOriginal.Plot.AddSignal(signal, nSampleFreq / nSampleFreq, label: strLabel);
                 plotOriginal.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
@@ -116,13 +116,13 @@ partial class FrmMain
     private void UpdateStats(double[] signal, bool cumulative = false, bool entropy = false)
     {
         if (signal.Length == 0) return;
-        
+
         //var cursor = this.Cursor;
         //this.Cursor = Cursors.WaitCursor;
 
         // Compute average, max, and min descriptive statistics
         double max = signal[0], min = signal[0], sum = 0;
-        
+
         for (int i = 0; i < signal.Length; i++)
         {
             if (signal[i] > max) max = signal[i];
@@ -164,7 +164,7 @@ partial class FrmMain
             //this.Cursor = Cursors.Default;
             //txtStats.Text = Results.ToString();
         }
-        
+
     }
 
     private void UpdateBasicPlots(double[] signal, string? seriesName = "", bool progressive = false)
@@ -194,4 +194,23 @@ partial class FrmMain
         UpdateWindowed(signalWindow);
         UpdateFFT(signalWindow);
     }
+
+    /// <summary>
+    /// Compute stats and update the plots
+    /// </summary>
+    private void UpdateStatsPlots(int serie)
+    {
+        // Extract the values 
+        var signal = _signalData[serie][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (signal is null || signal.Length == 0) return;
+
+        string? label = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
+
+        ComputeStats(signal);
+        UpdateBasicPlots(signal, label);
+        UpdateWindowPlots(signal);
+
+        txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+    }
 }
+
