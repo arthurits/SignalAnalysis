@@ -245,6 +245,15 @@ Default values will be used instead.</value>
   <data name="strHeader13" xml:space="preserve">
     <value>Sample entropy</value>
   </data>
+  <data name="strHeader14" xml:space="preserve">
+    <value>Shannon entropy</value>
+  </data>
+  <data name="strHeader15" xml:space="preserve">
+    <value>Entropy bit</value>
+  </data>
+  <data name="strHeader16" xml:space="preserve">
+    <value>Ideal entropy</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
   </data>

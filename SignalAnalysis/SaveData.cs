@@ -28,20 +28,25 @@ partial class FrmMain
             string content = string.Empty;
             TimeSpan nTime = nStart.AddSeconds((Data.Length - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
-            sw.WriteLine($"SignalAnalysis data ({_settings.AppCultureName})");
-            sw.WriteLine("Start time: {0}", nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
-            sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
-            ////outfile.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds ({5})", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds, nTime.ToString(@"dd\-hh\:mm\:ss.fff"));
-            sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
-            sw.WriteLine("Number of data points: {0}", Data.Length.ToString());
-            sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString(_settings.AppCulture));
-            sw.WriteLine("Average illuminance: {0}", Results.Average.ToString(_settings.AppCulture));
-            sw.WriteLine("Maximum illuminance: {0}", Results.Maximum.ToString(_settings.AppCulture));
-            sw.WriteLine("Minimum illuminance: {0}", Results.Minimum.ToString(_settings.AppCulture));
-            sw.WriteLine("Fractal dimension: {0}", Results.FractalDimension.ToString(_settings.AppCulture));
-            sw.WriteLine("Fractal variance: {0}", Results.FractalVariance.ToString(_settings.AppCulture));
-            sw.WriteLine("Approximate entropy: {0}", Results.ApproximateEntropy.ToString(_settings.AppCulture));
-            sw.WriteLine("Sample entropy: {0}", Results.SampleEntropy.ToString(_settings.AppCulture));
+            sw.WriteLine($"{(StringsRM.GetString("strHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
+            //sw.WriteLine("Start time: {0}", nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
+            sw.WriteLine($"{(StringsRM.GetString("strHeader02", _settings.AppCulture) ?? "Start time")}: {nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture)}");
+            //sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
+            sw.WriteLine($"{(StringsRM.GetString("strHeader03", _settings.AppCulture) ?? "End time")}: {nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture)}");
+            //sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
+            sw.WriteLine($"{(StringsRM.GetString("strHeader04", _settings.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader05", _settings.AppCulture) ?? "Number of data points")}: {Data.Length.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader06", _settings.AppCulture) ?? "Sampling frequency")}: {nSampleFreq.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader07", _settings.AppCulture) ?? "Average illuminance")}: {Results.Average.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader08", _settings.AppCulture) ?? "Maximum illuminance")}: {Results.Maximum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader09", _settings.AppCulture) ?? "Minimum illuminance")}: {Results.Minimum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader10", _settings.AppCulture) ?? "Fractal dimension")}: {Results.FractalDimension.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader11", _settings.AppCulture) ?? "Fractal variance")}: {Results.FractalVariance.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader12", _settings.AppCulture) ?? "Approximate entropy")}: {Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader13", _settings.AppCulture) ?? "Sample entropy")}: {Results.SampleEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader14", _settings.AppCulture) ?? "Shannon entropy")}: {Results.ShannonEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader15", _settings.AppCulture) ?? "Entropy bit")}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader16", _settings.AppCulture) ?? "Ideal entropy")}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine();
             sw.WriteLine($"Time\t{SeriesName}");
 

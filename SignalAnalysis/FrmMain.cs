@@ -3,7 +3,7 @@ namespace SignalAnalysis;
 public partial class FrmMain : Form
 {
     private double[][] _signalData = Array.Empty<double[]>();
-    private double[] _signalFFT = Array.Empty<double>();
+    private double[] signalFFT = Array.Empty<double>();
     private string[] seriesLabels = Array.Empty<string>();
     private int nSeries = 0;
     double nSampleFreq = 0.0;
@@ -253,10 +253,25 @@ public partial class FrmMain : Form
     {
         stripComboSeries.Items.Clear();
         if (values.Length != 0)
+        {
             stripComboSeries.Items.AddRange(values);
+            stripComboSeries.SelectedText = values[0];
+        }
         else
+        {
             stripComboSeries.Items.AddRange(seriesLabels);
-        stripComboSeries.SelectedIndex = 0;
+            stripComboSeries.SelectedText = seriesLabels[0];
+        }
+
+        // Extract the values 
+        var signal = _signalData[0][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (signal is null || signal.Length == 0) return;
+
+        string? label = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
+
+        UpdateBasicPlots(signal, label);
+        UpdateWindowPlots(signal);
+
     }
     private void PopulateComboWindow()
     {
@@ -270,21 +285,28 @@ public partial class FrmMain : Form
         if (_signalData.Length == 0) return;
 
         ((ToolStripStatusLabelEx)((ToolStrip)tspBottom.Controls[0]).Items[4]).Checked = false;
-        ComputeStats();   
+
+        // Extract the values 
+        var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (signal is null || signal.Length == 0) return;
+
+        ComputeStats(signal);
+        UpdateBasicPlots(signal);
+        UpdateWindowPlots(signal);
     }
 
     private void ComboWindow_SelectedIndexChanged(object? sender, EventArgs e)
     {
-        IWindow window = (IWindow)stripComboWindows.SelectedItem;
-        if (window is null)
-        {
-            //richTextBox1.Clear();
-            return;
-        }
-        else
-        {
-            //richTextBox1.Text = window.Description;
-        }
+        //IWindow window = (IWindow)stripComboWindows.SelectedItem;
+        //if (window is null)
+        //{
+        //    //richTextBox1.Clear();
+        //    return;
+        //}
+        //else
+        //{
+        //    //richTextBox1.Text = window.Description;
+        //}
 
         if (stripComboSeries.SelectedIndex < 0) return;
 
@@ -292,20 +314,23 @@ public partial class FrmMain : Form
         var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
-        // Adjust to the lowest power of 2
-        int power2 = (int)Math.Log2(signal.Length);
-        //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
-        _signalFFT = new double[(int)Math.Pow(2, power2)];
-        Array.Copy(_signalData[stripComboSeries.SelectedIndex], _signalFFT, _signalFFT.Length);
+        UpdateWindowPlots(signal);
 
-        // apply window
-        double[] signalWindow = new double[_signalFFT.Length];
-        Array.Copy(_signalFFT, signalWindow, _signalFFT.Length);
-        window.ApplyInPlace(signalWindow);
 
-        UpdateKernel(window, signal.Length);
-        UpdateWindowed(signalWindow);
-        UpdateFFT(signalWindow);
+        //// Adjust to the lowest power of 2
+        //int power2 = (int)Math.Log2(signal.Length);
+        ////int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
+        //signalFFT = new double[(int)Math.Pow(2, power2)];
+        //Array.Copy(_signalData[stripComboSeries.SelectedIndex], signalFFT, signalFFT.Length);
+
+        //// apply window
+        //double[] signalWindow = new double[signalFFT.Length];
+        //Array.Copy(signalFFT, signalWindow, signalFFT.Length);
+        //window.ApplyInPlace(signalWindow);
+
+        //UpdateKernel(window, signal.Length);
+        //UpdateWindowed(signalWindow);
+        //UpdateFFT(signalWindow);
     }
 
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
@@ -314,15 +339,15 @@ public partial class FrmMain : Form
             tokenSource.Cancel();   
     }
 
-    private async Task ComputeStats()
+    private async Task ComputeStats(double[] signal)
     {
         tokenSource = new();
         token = tokenSource.Token;
         Results = new();
 
-        // Extract the values 
-        var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
-        if (signal is null || signal.Length == 0) return;
+        //// Extract the values 
+        //var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        //if (signal is null || signal.Length == 0) return;
 
         statsTask = Task.Run(() =>
         {
@@ -331,11 +356,6 @@ public partial class FrmMain : Form
         await statsTask;
 
         txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
-
-        // Update plots
-        UpdateOriginal(signal);
-        UpdateFractal(signal, stripComboSeries.SelectedItem.ToString() ?? string.Empty, _settings.CumulativeDimension);
-        ComboWindow_SelectedIndexChanged(this, EventArgs.Empty);
     }
 
     private void UpdateUI_Language()

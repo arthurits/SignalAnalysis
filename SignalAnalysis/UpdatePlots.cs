@@ -1,7 +1,7 @@
 ﻿namespace SignalAnalysis;
 partial class FrmMain
 {
-    private void UpdateOriginal(double[] signal)
+    private void UpdateOriginal(double[] signal, string strLabel = "")
     {
         plotOriginal.Clear();
         //plotOriginal.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
@@ -10,15 +10,15 @@ partial class FrmMain
         switch (_settings.AxisType)
         {
             case AxisType.Points:
-                plotOriginal.Plot.AddSignal(signal, nSampleFreq/nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
+                plotOriginal.Plot.AddSignal(signal, nSampleFreq/nSampleFreq, label: strLabel);
                 plotOriginal.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
-                plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
+                plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: strLabel);
                 plotOriginal.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
-                var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * nSampleFreq, label: stripComboSeries.SelectedItem.ToString());
+                var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * nSampleFreq, label: strLabel);
                 sig.OffsetX = nStart.ToOADate();
                 plotOriginal.Plot.XAxis.DateTimeFormat(true);
                 break;
@@ -70,13 +70,13 @@ partial class FrmMain
         }
         else
         {
-            plotFractal.Plot.AddLine(0, FractalDimension.DimensionSingle, (0, signal.Length / nSampleFreq));
+            plotFractal.Plot.AddLine(0, double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle, (0, signal.Length / nSampleFreq));
         }
         plotFractal.Plot.Title((StringsRM.GetString("strPlotFractalTitle", _settings.AppCulture) ?? "Fractal dimension") +
             " " +
             (progressive ? (StringsRM.GetString("strPlotFractalTitle()", _settings.AppCulture) ?? "(cumulative)") : String.Empty) +
-            " (H = " + FractalDimension.DimensionSingle.ToString("#.00####") +
-            " — Var(H) = " + FractalDimension.VarianceH.ToString("#.00####") + ")");
+            " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("#.00####") +
+            " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("#.00####") + ")");
         plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture) ?? "Dimension (H)");
         plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotFractal.Plot.AxisAuto(0);
@@ -143,7 +143,10 @@ partial class FrmMain
             Results.FractalVariance = FractalDimension.VarianceH;
 
             if (entropy)
+            {
                 (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
+                (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy) = Complexity.ShannonEntropy(signal);
+            }
         }
         catch (OperationCanceledException)
         {
@@ -162,5 +165,33 @@ partial class FrmMain
             //txtStats.Text = Results.ToString();
         }
         
+    }
+
+    private void UpdateBasicPlots(double[] signal, string? seriesName = "", bool progressive = false)
+    {
+        // Update plots
+        UpdateOriginal(signal, seriesName ?? string.Empty);
+        UpdateFractal(signal, seriesName ?? string.Empty, progressive);
+    }
+
+    private void UpdateWindowPlots(double[] signal)
+    {
+        IWindow window = (IWindow)stripComboWindows.SelectedItem;
+        if (window is null) return;
+
+        // Adjust to the lowest power of 2
+        int power2 = (int)Math.Log2(signal.Length);
+        //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
+        signalFFT = new double[(int)Math.Pow(2, power2)];
+        Array.Copy(signal, signalFFT, signalFFT.Length);
+
+        // apply window
+        double[] signalWindow = new double[signalFFT.Length];
+        Array.Copy(signalFFT, signalWindow, signalFFT.Length);
+        window.ApplyInPlace(signalWindow);
+
+        UpdateKernel(window, signal.Length);
+        UpdateWindowed(signalWindow);
+        UpdateFFT(signalWindow);
     }
 }

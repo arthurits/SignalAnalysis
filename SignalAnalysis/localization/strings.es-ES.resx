@@ -248,6 +248,15 @@ Se utilizarán los valores por defecto.</value>
   <data name="strHeader13" xml:space="preserve">
     <value>Entropía de muestra</value>
   </data>
+  <data name="strHeader14" xml:space="preserve">
+    <value>Entropía Shannon</value>
+  </data>
+  <data name="strHeader15" xml:space="preserve">
+    <value>Entropía bit</value>
+  </data>
+  <data name="strHeader16" xml:space="preserve">
+    <value>Entropía ideal</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>
   </data>

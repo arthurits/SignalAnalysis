@@ -232,7 +232,7 @@ partial class FrmMain
     /// </summary>
     /// <param name="FileName">Path (including name) of the text file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadTextData(string FileName)
+    private bool ReadTextData(string FileName, Stats results)
     {
         double readValue;
         int nPoints = 0;
@@ -301,7 +301,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
-            Results.Average = readValue;
+            results.Average = readValue;
 
             strLine = sr.ReadLine();    // Maximum illuminance
             if (strLine is null)
@@ -310,7 +310,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
-            Results.Maximum = readValue;
+            results.Maximum = readValue;
 
             strLine = sr.ReadLine();    // Minimum illuminance
             if (strLine is null)
@@ -319,7 +319,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
-            Results.Minimum = readValue;
+            results.Minimum = readValue;
 
             strLine = sr.ReadLine();    // Fractal dimension
             if (strLine is null)
@@ -328,7 +328,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
-            Results.FractalDimension = readValue;
+            results.FractalDimension = readValue;
 
             strLine = sr.ReadLine();    // Fractal variance
             if (strLine is null)
@@ -337,7 +337,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
-            Results.FractalVariance = readValue;
+            results.FractalVariance = readValue;
 
             strLine = sr.ReadLine();    // Approximate entropy
             if (strLine is null)
@@ -346,7 +346,7 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
-            Results.ApproximateEntropy = readValue;
+            results.ApproximateEntropy = readValue;
 
             strLine = sr.ReadLine();    // Sample entropy
             if (strLine is null)
@@ -355,20 +355,47 @@ partial class FrmMain
                 throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
-            Results.ApproximateEntropy = readValue;
+            results.SampleEntropy = readValue;
+
+            strLine = sr.ReadLine();    // Shannnon entropy
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Section 'Shannon entropy' is mis-formatted.");
+            if (!strLine.Contains("Shannon entropy: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Section 'Shannon entropy' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Section 'Shannon entropy' is mis-formatted.");
+            results.ShannonEntropy = readValue;
+
+            strLine = sr.ReadLine();    // Entropy bit
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Section 'Entropy bit' is mis-formatted.");
+            if (!strLine.Contains("Entropy bit: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Section 'Entropy bit' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Section 'Entropy bit' is mis-formatted.");
+            results.EntropyBit = readValue;
+
+            strLine = sr.ReadLine();    // Ideal entropy
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strTextHeader16", _settings.AppCulture) ?? "Section 'Ideal entropy' is mis-formatted.");
+            if (!strLine.Contains("Ideal entropy: ", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader16", _settings.AppCulture) ?? "Section 'Ideal entropy' is mis-formatted.");
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(StringsRM.GetString("strTextHeader16", _settings.AppCulture) ?? "Section 'Ideal entropy' is mis-formatted.");
+            results.IdealEntropy = readValue;
 
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Missing an empty line.");
+                throw new FormatException(StringsRM.GetString("strTextHeader17", _settings.AppCulture) ?? "Missing an empty line.");
             if (strLine != string.Empty)
-                throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Missing an empty line.");
+                throw new FormatException(StringsRM.GetString("strTextHeader17", _settings.AppCulture) ?? "Missing an empty line.");
 
             strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Missing column headers(series names).");
+                throw new FormatException(StringsRM.GetString("strTextHeader18", _settings.AppCulture) ?? "Missing column headers(series names).");
             seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
-                throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Missing column headers(series names).");
+                throw new FormatException(StringsRM.GetString("strTextHeader18", _settings.AppCulture) ?? "Missing column headers(series names).");
             seriesLabels = seriesLabels[1..];
             nSeries = seriesLabels.Length;
 

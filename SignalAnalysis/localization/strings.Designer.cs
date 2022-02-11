@@ -435,6 +435,33 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shannon entropy.
+        /// </summary>
+        internal static string strHeader14 {
+            get {
+                return ResourceManager.GetString("strHeader14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entropy bit.
+        /// </summary>
+        internal static string strHeader15 {
+            get {
+                return ResourceManager.GetString("strHeader15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ideal entropy.
+        /// </summary>
+        internal static string strHeader16 {
+            get {
+                return ResourceManager.GetString("strHeader16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data-file path.
         /// </summary>
         internal static string strLblData {
@@ -1089,7 +1116,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing an empty line..
+        ///   Looks up a localized string similar to Section &apos;Shannon entropy&apos; is mis-formatted..
         /// </summary>
         internal static string strTextHeader14 {
             get {
@@ -1098,11 +1125,38 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing column headers (series names)..
+        ///   Looks up a localized string similar to Section &apos;Entropy bit&apos; is mis-formatted..
         /// </summary>
         internal static string strTextHeader15 {
             get {
                 return ResourceManager.GetString("strTextHeader15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;Ideal entropy&apos; is mis-formatted..
+        /// </summary>
+        internal static string strTextHeader16 {
+            get {
+                return ResourceManager.GetString("strTextHeader16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing an empty line..
+        /// </summary>
+        internal static string strTextHeader17 {
+            get {
+                return ResourceManager.GetString("strTextHeader17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing column headers (series names)..
+        /// </summary>
+        internal static string strTextHeader18 {
+            get {
+                return ResourceManager.GetString("strTextHeader18", resourceCulture);
             }
         }
         

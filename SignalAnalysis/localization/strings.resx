@@ -245,6 +245,15 @@ Default values will be used instead.</value>
   <data name="strHeader13" xml:space="preserve">
     <value>Sample entropy</value>
   </data>
+  <data name="strHeader14" xml:space="preserve">
+    <value>Shannon entropy</value>
+  </data>
+  <data name="strHeader15" xml:space="preserve">
+    <value>Entropy bit</value>
+  </data>
+  <data name="strHeader16" xml:space="preserve">
+    <value>Ideal entropy</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
   </data>
@@ -468,9 +477,18 @@ dimension has been stopped.</value>
     <value>Section 'Sample entropy' is mis-formatted.</value>
   </data>
   <data name="strTextHeader14" xml:space="preserve">
-    <value>Missing an empty line.</value>
+    <value>Section 'Shannon entropy' is mis-formatted.</value>
   </data>
   <data name="strTextHeader15" xml:space="preserve">
+    <value>Section 'Entropy bit' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader16" xml:space="preserve">
+    <value>Section 'Ideal entropy' is mis-formatted.</value>
+  </data>
+  <data name="strTextHeader17" xml:space="preserve">
+    <value>Missing an empty line.</value>
+  </data>
+  <data name="strTextHeader18" xml:space="preserve">
     <value>Missing column headers (series names).</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
