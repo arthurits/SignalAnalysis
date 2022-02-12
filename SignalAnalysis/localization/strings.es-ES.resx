@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grpCulture" xml:space="preserve">
     <value>Interfaz y formato de datos</value>
@@ -209,8 +209,11 @@ Se utilizarán los valores por defecto.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Formato de datos e interfaz</value>
   </data>
+  <data name="strHeader00" xml:space="preserve">
+    <value>ErgoLux data</value>
+  </data>
   <data name="strHeader01" xml:space="preserve">
-    <value>Datos SignalAnalysis</value>
+    <value>SignalAnalysis data</value>
   </data>
   <data name="strHeader02" xml:space="preserve">
     <value>Tiempo inicial</value>
@@ -257,6 +260,12 @@ Se utilizarán los valores por defecto.</value>
   <data name="strHeader16" xml:space="preserve">
     <value>Entropía ideal</value>
   </data>
+  <data name="strHeader17" xml:space="preserve">
+    <value>Número de series</value>
+  </data>
+  <data name="strHeader18" xml:space="preserve">
+    <value>Número de sensores</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>
   </data>
@@ -283,6 +292,14 @@ Por favor, inténtelo más tarde o contacte al autor de este software.
   <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
     <value>Error al abrir archivo de datos</value>
   </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>Se ha producido un error inesperado al guardar el archivo de datos.
+Por favor, inténtelo más tarde o contacte al autor de este software.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Error al guardar archivo de datos</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>¿Salir?</value>
   </data>
@@ -303,6 +320,12 @@ en la función 'InitializeDataArrays'.
   </data>
   <data name="strMsgBoxNoDataTitle" xml:space="preserve">
     <value>Datos</value>
+  </data>
+  <data name="strMsgBoxOKSaveData" xml:space="preserve">
+    <value>Los datos se han guardado correctamente.</value>
+  </data>
+  <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
+    <value>Datos guardados</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>El cálculo de la dimensión fractal de

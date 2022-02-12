@@ -318,6 +318,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ErgoLux data.
+        /// </summary>
+        internal static string strHeader00 {
+            get {
+                return ResourceManager.GetString("strHeader00", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SignalAnalysis data.
         /// </summary>
         internal static string strHeader01 {
@@ -462,6 +471,24 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of data series.
+        /// </summary>
+        internal static string strHeader17 {
+            get {
+                return ResourceManager.GetString("strHeader17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of sensors.
+        /// </summary>
+        internal static string strHeader18 {
+            get {
+                return ResourceManager.GetString("strHeader18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data-file path.
         /// </summary>
         internal static string strLblData {
@@ -536,6 +563,26 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unexpected error happened while saving data file.
+        ///Please try again later or contact the software engineer.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorSaveData {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorSaveData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error saving data.
+        /// </summary>
+        internal static string strMsgBoxErrorSaveDataTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorSaveDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit?.
         /// </summary>
         internal static string strMsgBoxExit {
@@ -588,6 +635,24 @@ namespace SignalAnalysis.localization {
         internal static string strMsgBoxNoDataTitle {
             get {
                 return ResourceManager.GetString("strMsgBoxNoDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data has been successfully saved to disk..
+        /// </summary>
+        internal static string strMsgBoxOKSaveData {
+            get {
+                return ResourceManager.GetString("strMsgBoxOKSaveData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data saved.
+        /// </summary>
+        internal static string strMsgBoxOKSaveDataTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxOKSaveDataTitle", resourceCulture);
             }
         }
         

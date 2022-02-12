@@ -17,18 +17,18 @@ partial class FrmMain
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
-            
+
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
-            if (!strLine.Contains("ErgoLux data (", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader00", _settings.AppCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
-            if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader02", _settings.AppCulture) ?? "Start time"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
@@ -38,19 +38,19 @@ partial class FrmMain
             strLine = sr.ReadLine();    // End time
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
-            if (!strLine.Contains("End time: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader03", _settings.AppCulture) ?? "End time"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
-            if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader04", _settings.AppCulture) ?? "Total measuring time"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
 
             strLine = sr.ReadLine();    // Number of sensors
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture) ?? "Section 'Number of sensors' is mis-formatted.");
-            if (!strLine.Contains("Number of sensors: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader18", _settings.AppCulture) ?? "Number of sensors"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture) ?? "Section 'Number of sensors' is mis-formatted.");
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries))
                 throw new FormatException(StringsRM.GetString("strELuxHeader05", _settings.AppCulture) ?? "Section 'Number of sensors' is mis-formatted.");
@@ -61,7 +61,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Number of data points
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
-            if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader05", _settings.AppCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
                 throw new FormatException(StringsRM.GetString("strELuxHeader06", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
@@ -71,7 +71,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Sampling frequency
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
-            if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader06", _settings.AppCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
                 throw new FormatException(StringsRM.GetString("strELuxHeader07", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
@@ -142,17 +142,17 @@ partial class FrmMain
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
-            strLine = sr.ReadLine();
+            strLine = sr.ReadLine();    // SignalAnalysis data
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strSignalHeader01", _settings.AppCulture) ?? "Section 'SignalAnalysis data' is mis-formatted.");
-            if (!strLine.Contains("SignalAnalysis data (", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader01", _settings.AppCulture) ?? "SignalAnalysis data"} (", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strSignalHeader01", _settings.AppCulture) ?? "Section 'SignalAnalysis data' is mis-formatted.");
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Number of series
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strSignalHeader02", _settings.AppCulture) ?? "Section 'Number of data series' is mis-formatted.");
-            if (!strLine.Contains("Number of data series: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader17", _settings.AppCulture) ?? "Number of data series"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strSignalHeader02", _settings.AppCulture) ?? "Section 'Number of data series' is mis-formatted.");
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries))
                 throw new FormatException(StringsRM.GetString("strSignalHeader02", _settings.AppCulture) ?? "Section 'Number of data series' is mis-formatted.");
@@ -162,7 +162,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Number of data points
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strSignalHeader03", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
-            if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader05", _settings.AppCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strSignalHeader03", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
                 throw new FormatException(StringsRM.GetString("strSignalHeader03", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
@@ -172,7 +172,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Sampling frequency
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strSignalHeader04", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
-            if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader06", _settings.AppCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strSignalHeader04", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
                 throw new FormatException(StringsRM.GetString("strSignalHeader04", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
@@ -244,17 +244,17 @@ partial class FrmMain
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
-            strLine = sr.ReadLine();    // Signal analysis header
+            strLine = sr.ReadLine();    // SignalAnalysis data
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strTextHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
-            if (!strLine.Contains("SignalAnalysis data (", StringComparison.Ordinal))
-                throw new FormatException(StringsRM.GetString("strTextHeader01", _settings.AppCulture) ?? "Section 'ErgoLux data' is mis-formatted.");
+                throw new FormatException(StringsRM.GetString("strTextHeader01", _settings.AppCulture) ?? "Section 'SignalAnalysis data' is mis-formatted.");
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader01", _settings.AppCulture) ?? "SignalAnalysis data"} (", StringComparison.Ordinal))
+                throw new FormatException(StringsRM.GetString("strTextHeader01", _settings.AppCulture) ?? "Section 'SignalAnalysis data' is mis-formatted.");
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
-            if (!strLine.Contains("Start time: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader02", _settings.AppCulture) ?? "Start time"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader02", _settings.AppCulture) ?? "Section 'Start time' is mis-formatted.");
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
@@ -264,20 +264,20 @@ partial class FrmMain
             strLine = sr.ReadLine();    // End time
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
-            if (!strLine.Contains("End time: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader03", _settings.AppCulture) ?? "End time"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader03", _settings.AppCulture) ?? "Section 'End time' is mis-formatted.");
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
-            if (!strLine.Contains("Total measuring time: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader04", _settings.AppCulture) ?? "Total measuring time"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader04", _settings.AppCulture) ?? "Section 'Total measuring time' is mis-formatted.");
 
             //Section 'Number of data points' is mis-formatted.
             strLine = sr.ReadLine();    // Number of data points
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader05", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
-            if (!strLine.Contains("Number of data points: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader05", _settings.AppCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader05", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
             if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
                 throw new FormatException(StringsRM.GetString("strTextHeader05", _settings.AppCulture) ?? "Section 'Number of data points' is mis-formatted.");
@@ -287,7 +287,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Sampling frequency
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader06", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
-            if (!strLine.Contains("Sampling frequency: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader06", _settings.AppCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader06", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
                 throw new FormatException(StringsRM.GetString("strTextHeader06", _settings.AppCulture) ?? "Section 'Sampling frequency' is mis-formatted.");
@@ -297,7 +297,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Average illuminance
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
-            if (!strLine.Contains("Average illuminance: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader07", _settings.AppCulture) ?? "Average illuminance"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader07", _settings.AppCulture) ?? "Section 'Average illuminance' is mis-formatted.");
@@ -306,7 +306,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Maximum illuminance
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
-            if (!strLine.Contains("Maximum illuminance: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader08", _settings.AppCulture) ?? "Maximum illuminance"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader08", _settings.AppCulture) ?? "Section 'Maximum illuminance' is mis-formatted.");
@@ -315,7 +315,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Minimum illuminance
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
-            if (!strLine.Contains("Minimum illuminance: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader09", _settings.AppCulture) ?? "Minimum illuminance"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader09", _settings.AppCulture) ?? "Section 'Minimum illuminance' is mis-formatted.");
@@ -324,7 +324,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Fractal dimension
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
-            if (!strLine.Contains("Fractal dimension: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader10", _settings.AppCulture) ?? "Fractal dimension"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader10", _settings.AppCulture) ?? "Section 'Fractal dimension' is mis-formatted.");
@@ -333,7 +333,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Fractal variance
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
-            if (!strLine.Contains("Fractal variance: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader11", _settings.AppCulture) ?? "Fractal variance"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader11", _settings.AppCulture) ?? "Section 'Fractal variance' is mis-formatted.");
@@ -342,7 +342,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Approximate entropy
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
-            if (!strLine.Contains("Approximate entropy: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader12", _settings.AppCulture) ?? "Approximate entropy"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader12", _settings.AppCulture) ?? "Section 'Approximate entropy' is mis-formatted.");
@@ -351,7 +351,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Sample entropy
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
-            if (!strLine.Contains("Sample entropy: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader13", _settings.AppCulture) ?? "Sample entropy"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader13", _settings.AppCulture) ?? "Section 'Sample entropy' is mis-formatted.");
@@ -360,7 +360,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Shannnon entropy
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Section 'Shannon entropy' is mis-formatted.");
-            if (!strLine.Contains("Shannon entropy: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader14", _settings.AppCulture) ?? "Shannon entropy"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Section 'Shannon entropy' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader14", _settings.AppCulture) ?? "Section 'Shannon entropy' is mis-formatted.");
@@ -369,7 +369,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Entropy bit
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Section 'Entropy bit' is mis-formatted.");
-            if (!strLine.Contains("Entropy bit: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader15", _settings.AppCulture) ?? "Entropy bit"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Section 'Entropy bit' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader15", _settings.AppCulture) ?? "Section 'Entropy bit' is mis-formatted.");
@@ -378,7 +378,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Ideal entropy
             if (strLine is null)
                 throw new FormatException(StringsRM.GetString("strTextHeader16", _settings.AppCulture) ?? "Section 'Ideal entropy' is mis-formatted.");
-            if (!strLine.Contains("Ideal entropy: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringsRM.GetString("strHeader16", _settings.AppCulture) ?? "Ideal entropy"}: ", StringComparison.Ordinal))
                 throw new FormatException(StringsRM.GetString("strTextHeader16", _settings.AppCulture) ?? "Section 'Ideal entropy' is mis-formatted.");
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(StringsRM.GetString("strTextHeader16", _settings.AppCulture) ?? "Section 'Ideal entropy' is mis-formatted.");

@@ -20,7 +20,6 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             // Append millisecond pattern to current culture's full date time pattern
-            //string fullPattern = System.Globalization.DateTimeFormatInfo.CurrentInfo.FullDateTimePattern;
             string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
 
@@ -63,13 +62,23 @@ partial class FrmMain
 
             // Show OK save data
             using (new CenterWinDialog(this))
-                MessageBox.Show("Data has been successfully saved to disk.", "Data saving", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxOKSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk."),
+                    StringsRM.GetString("strMsgBoxOKSaveDataTitle", _settings.AppCulture) ?? "Data saved",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
-        catch
+        catch (Exception ex)
         {
             // Show error message
             using (new CenterWinDialog(this))
-                MessageBox.Show("An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.", "Error saving data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
         finally
         {
@@ -102,10 +111,10 @@ partial class FrmMain
             string content = string.Empty;
             //TimeSpan nTime = nStart.AddSeconds((nPoints - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
-            sw.WriteLine($"SignalAnalysis data ({_settings.AppCultureName})");
-            sw.WriteLine("Number of data series: {0}", "1");
-            sw.WriteLine("Number of data points: {0}", Data.Length.ToString(_settings.AppCulture));
-            sw.WriteLine("Sampling frequency: {0}", nSampleFreq.ToString(_settings.AppCulture));
+            sw.WriteLine($"{(StringsRM.GetString("strHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader17", _settings.AppCulture) ?? "Number of data series")}: 1");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader05", _settings.AppCulture) ?? "Number of data points")}: {Data.Length.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strHeader06", _settings.AppCulture) ?? "Sampling frequency")}: {nSampleFreq.ToString(_settings.AppCulture)}");
             sw.WriteLine();
             sw.WriteLine($"{SeriesName}");
 
@@ -115,13 +124,23 @@ partial class FrmMain
 
             // Show OK save data
             using (new CenterWinDialog(this))
-                MessageBox.Show("Data has been successfully saved to disk.", "Data saving", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxOKSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk."),
+                    StringsRM.GetString("strMsgBoxOKSaveDataTitle", _settings.AppCulture) ?? "Data saved",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
-        catch
+        catch (Exception ex)
         {
             // Show error message
             using (new CenterWinDialog(this))
-                MessageBox.Show("An unexpected error happened while saving data to disk.\nPlease try again later or contact the software engineer.", "Error saving data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
         finally
         {

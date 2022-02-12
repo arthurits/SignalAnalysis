@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Accept</value>
@@ -206,6 +206,9 @@ Default values will be used instead.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI and data format</value>
   </data>
+  <data name="strHeader00" xml:space="preserve">
+    <value>ErgoLux data</value>
+  </data>
   <data name="strHeader01" xml:space="preserve">
     <value>SignalAnalysis data</value>
   </data>
@@ -254,6 +257,12 @@ Default values will be used instead.</value>
   <data name="strHeader16" xml:space="preserve">
     <value>Ideal entropy</value>
   </data>
+  <data name="strHeader17" xml:space="preserve">
+    <value>Number of data series</value>
+  </data>
+  <data name="strHeader18" xml:space="preserve">
+    <value>Number of sensors</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
   </data>
@@ -280,6 +289,14 @@ Please try again later or contact the software engineer.
   <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
     <value>Error opening data</value>
   </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>An unexpected error happened while saving data file.
+Please try again later or contact the software engineer.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Error saving data</value>
+  </data>
   <data name="strMsgBoxExit" xml:space="preserve">
     <value>Exit?</value>
   </data>
@@ -299,6 +316,12 @@ the application?</value>
   </data>
   <data name="strMsgBoxNoDataTitle" xml:space="preserve">
     <value>No data</value>
+  </data>
+  <data name="strMsgBoxOKSaveData" xml:space="preserve">
+    <value>Data has been successfully saved to disk.</value>
+  </data>
+  <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
+    <value>Data saved</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
     <value>Computation of the Hausdorff-Besicovitch fractal
