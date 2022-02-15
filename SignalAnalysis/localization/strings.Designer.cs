@@ -390,6 +390,69 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string strFileHeader21 {
+            get {
+                return ResourceManager.GetString("strFileHeader21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        internal static string strFileHeader22 {
+            get {
+                return ResourceManager.GetString("strFileHeader22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        internal static string strFileHeader23 {
+            get {
+                return ResourceManager.GetString("strFileHeader23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes.
+        /// </summary>
+        internal static string strFileHeader24 {
+            get {
+                return ResourceManager.GetString("strFileHeader24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to seconds.
+        /// </summary>
+        internal static string strFileHeader25 {
+            get {
+                return ResourceManager.GetString("strFileHeader25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        internal static string strFileHeader26 {
+            get {
+                return ResourceManager.GetString("strFileHeader26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to milliseconds.
+        /// </summary>
+        internal static string strFileHeader27 {
+            get {
+                return ResourceManager.GetString("strFileHeader27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Section &apos;{0}&apos; is mis-formatted..
         /// </summary>
         internal static string strFileHeaderSection {

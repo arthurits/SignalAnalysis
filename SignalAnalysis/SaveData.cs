@@ -33,7 +33,14 @@ partial class FrmMain
             //sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader03", _settings.AppCulture) ?? "End time")}: {nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture)}");
             //sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time")}: {nTime.Days} days, {nTime.Hours} hours, {nTime.Minutes} minutes, {nTime.Seconds} seconds, and {nTime.Milliseconds} millisecons");
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time")}: " +
+                $"{nTime.Days} {(StringsRM.GetString("strFileHeader22", _settings.AppCulture) ?? "days")}, " +
+                $"{nTime.Hours} {(StringsRM.GetString("strFileHeader23", _settings.AppCulture) ?? "hours")}, " +
+                $"{nTime.Minutes} {(StringsRM.GetString("strFileHeader24", _settings.AppCulture) ?? "minutes")}, " +
+                $"{nTime.Seconds} {(StringsRM.GetString("strFileHeader25", _settings.AppCulture) ?? "seconds")} " +
+                $"{(StringsRM.GetString("strFileHeader26", _settings.AppCulture) ?? "and")} " +
+                $"{nTime.Milliseconds} {(StringsRM.GetString("strFileHeader27", _settings.AppCulture) ?? "milliseconds")}");
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader17", _settings.AppCulture) ?? "Number of data series")}: 1");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of data points")}: {Data.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Sampling frequency")}: {nSampleFreq.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average illuminance")}: {Results.Average.ToString(_settings.AppCulture)}");
@@ -47,7 +54,7 @@ partial class FrmMain
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader15", _settings.AppCulture) ?? "Entropy bit")}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader16", _settings.AppCulture) ?? "Ideal entropy")}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine();
-            sw.WriteLine($"Time\t{SeriesName}");
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t{SeriesName}");
 
             string time;
             // Save the numerical values

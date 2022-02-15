@@ -183,7 +183,7 @@ Se utilizarán los valores por defecto.</value>
     <value>Tiempo final</value>
   </data>
   <data name="strFileHeader04" xml:space="preserve">
-    <value>Tiempo total</value>
+    <value>Duración total</value>
   </data>
   <data name="strFileHeader05" xml:space="preserve">
     <value>Número de puntos</value>
@@ -232,6 +232,27 @@ Se utilizarán los valores por defecto.</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
     <value>No se ha encontrado el nombre de las series de datos.</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>Tiempo</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>días</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>horas</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>minutos</value>
+  </data>
+  <data name="strFileHeader25" xml:space="preserve">
+    <value>segundos</value>
+  </data>
+  <data name="strFileHeader26" xml:space="preserve">
+    <value>y</value>
+  </data>
+  <data name="strFileHeader27" xml:space="preserve">
+    <value>milisegundos</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La sección '{0}' tiene formato incorrecto.</value>

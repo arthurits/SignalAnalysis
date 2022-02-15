@@ -230,6 +230,27 @@ Default values will be used instead.</value>
   <data name="strFileHeader20" xml:space="preserve">
     <value>Missing column headers (series names).</value>
   </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="strFileHeader25" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="strFileHeader26" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="strFileHeader27" xml:space="preserve">
+    <value>milliseconds</value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Section '{0}' is mis-formatted.</value>
   </data>
