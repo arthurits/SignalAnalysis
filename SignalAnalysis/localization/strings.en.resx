@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Accept</value>
@@ -157,33 +157,6 @@ to their default values?</value>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>Reset settings?</value>
   </data>
-  <data name="strELuxHeader01" xml:space="preserve">
-    <value>Section 'ErgoLux data' is mis-formatted.</value>
-  </data>
-  <data name="strELuxHeader02" xml:space="preserve">
-    <value>Section 'Start time' is mis-formatted.</value>
-  </data>
-  <data name="strELuxHeader03" xml:space="preserve">
-    <value>Section 'End time' is mis-formatted.</value>
-  </data>
-  <data name="strELuxHeader04" xml:space="preserve">
-    <value>Section 'Total measuring time' is mis-formatted.</value>
-  </data>
-  <data name="strELuxHeader05" xml:space="preserve">
-    <value>Section 'Number of sensors' is mis-formatted.</value>
-  </data>
-  <data name="strELuxHeader06" xml:space="preserve">
-    <value>Section 'Number of data points' is mis-formatted.</value>
-  </data>
-  <data name="strELuxHeader07" xml:space="preserve">
-    <value>Section 'Sampling frequency' is mis-formatted.</value>
-  </data>
-  <data name="strELuxHeader08" xml:space="preserve">
-    <value>Missing an empty line.</value>
-  </data>
-  <data name="strELuxHeader09" xml:space="preserve">
-    <value>Missing column headers (series names).</value>
-  </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error loading settings file.
 
@@ -193,6 +166,72 @@ Default values will be used instead.</value>
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strFileHeader00" xml:space="preserve">
+    <value>ErgoLux data</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>SignalAnalysis data</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>End time</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Total measuring time</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Number of data points</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Sampling frequency</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Average illuminance</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Maximum illuminance</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>Minimum illuminance</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>Fractal dimension</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>Fractal variance</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>Approximate entropy</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>Sample entropy</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Shannon entropy</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Entropy bit</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Ideal entropy</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>Number of data series</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>Number of sensors</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>Missing an empty line.</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>Missing column headers (series names).</value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>Section '{0}' is mis-formatted.</value>
   </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Settings</value>
@@ -205,63 +244,6 @@ Default values will be used instead.</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI and data format</value>
-  </data>
-  <data name="strHeader00" xml:space="preserve">
-    <value>ErgoLux data</value>
-  </data>
-  <data name="strHeader01" xml:space="preserve">
-    <value>SignalAnalysis data</value>
-  </data>
-  <data name="strHeader02" xml:space="preserve">
-    <value>Start time</value>
-  </data>
-  <data name="strHeader03" xml:space="preserve">
-    <value>End time</value>
-  </data>
-  <data name="strHeader04" xml:space="preserve">
-    <value>Total measuring time</value>
-  </data>
-  <data name="strHeader05" xml:space="preserve">
-    <value>Number of data points</value>
-  </data>
-  <data name="strHeader06" xml:space="preserve">
-    <value>Sampling frequency</value>
-  </data>
-  <data name="strHeader07" xml:space="preserve">
-    <value>Average illuminance</value>
-  </data>
-  <data name="strHeader08" xml:space="preserve">
-    <value>Maximum illuminance</value>
-  </data>
-  <data name="strHeader09" xml:space="preserve">
-    <value>Minimum illuminance</value>
-  </data>
-  <data name="strHeader10" xml:space="preserve">
-    <value>Fractal dimension</value>
-  </data>
-  <data name="strHeader11" xml:space="preserve">
-    <value>Fractal variance</value>
-  </data>
-  <data name="strHeader12" xml:space="preserve">
-    <value>Approximate entropy</value>
-  </data>
-  <data name="strHeader13" xml:space="preserve">
-    <value>Sample entropy</value>
-  </data>
-  <data name="strHeader14" xml:space="preserve">
-    <value>Shannon entropy</value>
-  </data>
-  <data name="strHeader15" xml:space="preserve">
-    <value>Entropy bit</value>
-  </data>
-  <data name="strHeader16" xml:space="preserve">
-    <value>Ideal entropy</value>
-  </data>
-  <data name="strHeader17" xml:space="preserve">
-    <value>Number of data series</value>
-  </data>
-  <data name="strHeader18" xml:space="preserve">
-    <value>Number of sensors</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
@@ -424,24 +406,6 @@ dimension has been stopped.</value>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Save data file</value>
   </data>
-  <data name="strSignalHeader01" xml:space="preserve">
-    <value>Section 'SignalAnalysis data' is mis-formatted.</value>
-  </data>
-  <data name="strSignalHeader02" xml:space="preserve">
-    <value>Section 'Number of data series' is mis-formatted.</value>
-  </data>
-  <data name="strSignalHeader03" xml:space="preserve">
-    <value>Section 'Number of data points' is mis-formatted.</value>
-  </data>
-  <data name="strSignalHeader04" xml:space="preserve">
-    <value>Section 'Sampling frequency' is mis-formatted.</value>
-  </data>
-  <data name="strSignalHeader05" xml:space="preserve">
-    <value>Missing an empty line.</value>
-  </data>
-  <data name="strSignalHeader06" xml:space="preserve">
-    <value>Missing column headers (series names).</value>
-  </data>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Show plot's crosshair mode</value>
   </data>
@@ -459,51 +423,6 @@ dimension has been stopped.</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Plotting</value>
-  </data>
-  <data name="strTextHeader01" xml:space="preserve">
-    <value>Section 'SignalAnalysis data' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader02" xml:space="preserve">
-    <value>Section 'Start time' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader03" xml:space="preserve">
-    <value>Section 'End time' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader04" xml:space="preserve">
-    <value>Section 'Total measuring time' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader05" xml:space="preserve">
-    <value>Section 'Number of data points' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader06" xml:space="preserve">
-    <value>Section 'Sampling frequency' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader07" xml:space="preserve">
-    <value>Section 'Average illuminance' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader08" xml:space="preserve">
-    <value>Section 'Maximum illuminance' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader09" xml:space="preserve">
-    <value>Section 'Minimum illuminance' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader10" xml:space="preserve">
-    <value>Section 'Fractal dimension' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader11" xml:space="preserve">
-    <value>Section 'Fractal variance' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader12" xml:space="preserve">
-    <value>Section 'Approximate entropy' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader13" xml:space="preserve">
-    <value>Section 'Sample entropy' is mis-formatted.</value>
-  </data>
-  <data name="strTextHeader14" xml:space="preserve">
-    <value>Missing an empty line.</value>
-  </data>
-  <data name="strTextHeader15" xml:space="preserve">
-    <value>Missing column headers (series names).</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>About</value>

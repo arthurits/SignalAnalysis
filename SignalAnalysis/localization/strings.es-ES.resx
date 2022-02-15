@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grpCulture" xml:space="preserve">
     <value>Interfaz y formato de datos</value>
@@ -160,33 +160,6 @@ los campos a sus valores por defecto?</value>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>¿Restablecer opciones?</value>
   </data>
-  <data name="strELuxHeader01" xml:space="preserve">
-    <value>La sección 'ErgoLux data' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader02" xml:space="preserve">
-    <value>La sección 'Start time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader03" xml:space="preserve">
-    <value>La sección 'End time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader04" xml:space="preserve">
-    <value>La sección 'Total measuring time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader05" xml:space="preserve">
-    <value>La sección 'Number of sensors' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader06" xml:space="preserve">
-    <value>La sección 'Number of data points' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader07" xml:space="preserve">
-    <value>La sección 'Sampling frequency' tiene formato incorrecto.</value>
-  </data>
-  <data name="strELuxHeader08" xml:space="preserve">
-    <value>No se ha encontrado una línea en blanco.</value>
-  </data>
-  <data name="strELuxHeader09" xml:space="preserve">
-    <value>No se ha encontrado el nombre de las series de datos.</value>
-  </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error al leer el archivo de ajustes.
 
@@ -196,6 +169,72 @@ Se utilizarán los valores por defecto.</value>
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strFileHeader00" xml:space="preserve">
+    <value>ErgoLux data</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>SignalAnalysis data</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Tiempo inicial</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>Tiempo final</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Tiempo total</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Número de puntos</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Frecuencia de muestreo</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Illuminancia promedio</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Illuminancia máxima</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>Illuminancia mínima</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>Dimensión fractal</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>Variancia fractal</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>Entropía aproximada</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>Entropía de muestra</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Entropía Shannon</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Entropía bit</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Entropía ideal</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>Número de series</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>Número de sensores</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>No se ha encontrado una línea en blanco.</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>No se ha encontrado el nombre de las series de datos.</value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>La sección '{0}' tiene formato incorrecto.</value>
   </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Opciones</value>
@@ -208,63 +247,6 @@ Se utilizarán los valores por defecto.</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Formato de datos e interfaz</value>
-  </data>
-  <data name="strHeader00" xml:space="preserve">
-    <value>ErgoLux data</value>
-  </data>
-  <data name="strHeader01" xml:space="preserve">
-    <value>SignalAnalysis data</value>
-  </data>
-  <data name="strHeader02" xml:space="preserve">
-    <value>Tiempo inicial</value>
-  </data>
-  <data name="strHeader03" xml:space="preserve">
-    <value>Tiempo final</value>
-  </data>
-  <data name="strHeader04" xml:space="preserve">
-    <value>Tiempo total</value>
-  </data>
-  <data name="strHeader05" xml:space="preserve">
-    <value>Número de puntos</value>
-  </data>
-  <data name="strHeader06" xml:space="preserve">
-    <value>Frecuencia de muestreo</value>
-  </data>
-  <data name="strHeader07" xml:space="preserve">
-    <value>Illuminancia promedio</value>
-  </data>
-  <data name="strHeader08" xml:space="preserve">
-    <value>Illuminancia máxima</value>
-  </data>
-  <data name="strHeader09" xml:space="preserve">
-    <value>Illuminancia mínima</value>
-  </data>
-  <data name="strHeader10" xml:space="preserve">
-    <value>Dimensión fractal</value>
-  </data>
-  <data name="strHeader11" xml:space="preserve">
-    <value>Variancia fractal</value>
-  </data>
-  <data name="strHeader12" xml:space="preserve">
-    <value>Entropía aproximada</value>
-  </data>
-  <data name="strHeader13" xml:space="preserve">
-    <value>Entropía de muestra</value>
-  </data>
-  <data name="strHeader14" xml:space="preserve">
-    <value>Entropía Shannon</value>
-  </data>
-  <data name="strHeader15" xml:space="preserve">
-    <value>Entropía bit</value>
-  </data>
-  <data name="strHeader16" xml:space="preserve">
-    <value>Entropía ideal</value>
-  </data>
-  <data name="strHeader17" xml:space="preserve">
-    <value>Número de series</value>
-  </data>
-  <data name="strHeader18" xml:space="preserve">
-    <value>Número de sensores</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>
@@ -428,24 +410,6 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Guardar archivo de datos</value>
   </data>
-  <data name="strSignalHeader01" xml:space="preserve">
-    <value>La sección 'SignalAnalysis data' tiene formato incorrecto.</value>
-  </data>
-  <data name="strSignalHeader02" xml:space="preserve">
-    <value>La sección 'Number of data series' tiene formato incorrecto.</value>
-  </data>
-  <data name="strSignalHeader03" xml:space="preserve">
-    <value>La sección 'Number of data points' tiene formato incorrecto.</value>
-  </data>
-  <data name="strSignalHeader04" xml:space="preserve">
-    <value>La sección 'Sampling frequency' tiene formato incorrecto.</value>
-  </data>
-  <data name="strSignalHeader05" xml:space="preserve">
-    <value>No se ha encontrado una línea en blanco.</value>
-  </data>
-  <data name="strSignalHeader06" xml:space="preserve">
-    <value>No se ha encontrado el nombre de las series de datos.</value>
-  </data>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Activar la cruz (mira) gráfica en los gráficos</value>
   </data>
@@ -463,51 +427,6 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Gráficos</value>
-  </data>
-  <data name="strTextHeader01" xml:space="preserve">
-    <value>La sección 'SignalAnalysis data' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader02" xml:space="preserve">
-    <value>La sección 'Start time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader03" xml:space="preserve">
-    <value>La sección 'End time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader04" xml:space="preserve">
-    <value>La sección 'Total measuring time' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader05" xml:space="preserve">
-    <value>La sección 'Number of data points' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader06" xml:space="preserve">
-    <value>La sección 'Sampling frequency' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader07" xml:space="preserve">
-    <value>La sección 'Average illuminance' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader08" xml:space="preserve">
-    <value>La sección 'Maximum illuminance' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader09" xml:space="preserve">
-    <value>La sección 'Minimum illuminance' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader10" xml:space="preserve">
-    <value>La sección 'Fractal dimension' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader11" xml:space="preserve">
-    <value>La sección 'Fractal variance' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader12" xml:space="preserve">
-    <value>La sección 'Approximate entropy' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader13" xml:space="preserve">
-    <value>La sección 'Sample entropy' tiene formato incorrecto.</value>
-  </data>
-  <data name="strTextHeader14" xml:space="preserve">
-    <value>No se ha encontrado una línea en blanco.</value>
-  </data>
-  <data name="strTextHeader15" xml:space="preserve">
-    <value>No se ha encontrado el nombre de las series de datos.</value>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>Acerca de</value>

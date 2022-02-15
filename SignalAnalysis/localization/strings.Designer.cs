@@ -179,87 +179,6 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Section &apos;ErgoLux data&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader01 {
-            get {
-                return ResourceManager.GetString("strELuxHeader01", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Start time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader02 {
-            get {
-                return ResourceManager.GetString("strELuxHeader02", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;End time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader03 {
-            get {
-                return ResourceManager.GetString("strELuxHeader03", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Total measuring time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader04 {
-            get {
-                return ResourceManager.GetString("strELuxHeader04", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Number of sensors&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader05 {
-            get {
-                return ResourceManager.GetString("strELuxHeader05", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Number of data points&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader06 {
-            get {
-                return ResourceManager.GetString("strELuxHeader06", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Sampling frequency&apos; is mis-formatted..
-        /// </summary>
-        internal static string strELuxHeader07 {
-            get {
-                return ResourceManager.GetString("strELuxHeader07", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing an empty line..
-        /// </summary>
-        internal static string strELuxHeader08 {
-            get {
-                return ResourceManager.GetString("strELuxHeader08", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing column headers (series names)..
-        /// </summary>
-        internal static string strELuxHeader09 {
-            get {
-                return ResourceManager.GetString("strELuxHeader09", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error loading settings file.
         ///
         ///{0}
@@ -278,6 +197,204 @@ namespace SignalAnalysis.localization {
         internal static string strErrorDeserializeTitle {
             get {
                 return ResourceManager.GetString("strErrorDeserializeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ErgoLux data.
+        /// </summary>
+        internal static string strFileHeader00 {
+            get {
+                return ResourceManager.GetString("strFileHeader00", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SignalAnalysis data.
+        /// </summary>
+        internal static string strFileHeader01 {
+            get {
+                return ResourceManager.GetString("strFileHeader01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time.
+        /// </summary>
+        internal static string strFileHeader02 {
+            get {
+                return ResourceManager.GetString("strFileHeader02", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End time.
+        /// </summary>
+        internal static string strFileHeader03 {
+            get {
+                return ResourceManager.GetString("strFileHeader03", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total measuring time.
+        /// </summary>
+        internal static string strFileHeader04 {
+            get {
+                return ResourceManager.GetString("strFileHeader04", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of data points.
+        /// </summary>
+        internal static string strFileHeader05 {
+            get {
+                return ResourceManager.GetString("strFileHeader05", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sampling frequency.
+        /// </summary>
+        internal static string strFileHeader06 {
+            get {
+                return ResourceManager.GetString("strFileHeader06", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average illuminance.
+        /// </summary>
+        internal static string strFileHeader07 {
+            get {
+                return ResourceManager.GetString("strFileHeader07", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum illuminance.
+        /// </summary>
+        internal static string strFileHeader08 {
+            get {
+                return ResourceManager.GetString("strFileHeader08", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum illuminance.
+        /// </summary>
+        internal static string strFileHeader09 {
+            get {
+                return ResourceManager.GetString("strFileHeader09", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fractal dimension.
+        /// </summary>
+        internal static string strFileHeader10 {
+            get {
+                return ResourceManager.GetString("strFileHeader10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fractal variance.
+        /// </summary>
+        internal static string strFileHeader11 {
+            get {
+                return ResourceManager.GetString("strFileHeader11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approximate entropy.
+        /// </summary>
+        internal static string strFileHeader12 {
+            get {
+                return ResourceManager.GetString("strFileHeader12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sample entropy.
+        /// </summary>
+        internal static string strFileHeader13 {
+            get {
+                return ResourceManager.GetString("strFileHeader13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shannon entropy.
+        /// </summary>
+        internal static string strFileHeader14 {
+            get {
+                return ResourceManager.GetString("strFileHeader14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entropy bit.
+        /// </summary>
+        internal static string strFileHeader15 {
+            get {
+                return ResourceManager.GetString("strFileHeader15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ideal entropy.
+        /// </summary>
+        internal static string strFileHeader16 {
+            get {
+                return ResourceManager.GetString("strFileHeader16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of data series.
+        /// </summary>
+        internal static string strFileHeader17 {
+            get {
+                return ResourceManager.GetString("strFileHeader17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of sensors.
+        /// </summary>
+        internal static string strFileHeader18 {
+            get {
+                return ResourceManager.GetString("strFileHeader18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing an empty line..
+        /// </summary>
+        internal static string strFileHeader19 {
+            get {
+                return ResourceManager.GetString("strFileHeader19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing column headers (series names)..
+        /// </summary>
+        internal static string strFileHeader20 {
+            get {
+                return ResourceManager.GetString("strFileHeader20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Section &apos;{0}&apos; is mis-formatted..
+        /// </summary>
+        internal static string strFileHeaderSection {
+            get {
+                return ResourceManager.GetString("strFileHeaderSection", resourceCulture);
             }
         }
         
@@ -314,177 +431,6 @@ namespace SignalAnalysis.localization {
         internal static string strGrpCulture {
             get {
                 return ResourceManager.GetString("strGrpCulture", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ErgoLux data.
-        /// </summary>
-        internal static string strHeader00 {
-            get {
-                return ResourceManager.GetString("strHeader00", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SignalAnalysis data.
-        /// </summary>
-        internal static string strHeader01 {
-            get {
-                return ResourceManager.GetString("strHeader01", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start time.
-        /// </summary>
-        internal static string strHeader02 {
-            get {
-                return ResourceManager.GetString("strHeader02", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to End time.
-        /// </summary>
-        internal static string strHeader03 {
-            get {
-                return ResourceManager.GetString("strHeader03", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Total measuring time.
-        /// </summary>
-        internal static string strHeader04 {
-            get {
-                return ResourceManager.GetString("strHeader04", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Number of data points.
-        /// </summary>
-        internal static string strHeader05 {
-            get {
-                return ResourceManager.GetString("strHeader05", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sampling frequency.
-        /// </summary>
-        internal static string strHeader06 {
-            get {
-                return ResourceManager.GetString("strHeader06", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Average illuminance.
-        /// </summary>
-        internal static string strHeader07 {
-            get {
-                return ResourceManager.GetString("strHeader07", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maximum illuminance.
-        /// </summary>
-        internal static string strHeader08 {
-            get {
-                return ResourceManager.GetString("strHeader08", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Minimum illuminance.
-        /// </summary>
-        internal static string strHeader09 {
-            get {
-                return ResourceManager.GetString("strHeader09", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fractal dimension.
-        /// </summary>
-        internal static string strHeader10 {
-            get {
-                return ResourceManager.GetString("strHeader10", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fractal variance.
-        /// </summary>
-        internal static string strHeader11 {
-            get {
-                return ResourceManager.GetString("strHeader11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Approximate entropy.
-        /// </summary>
-        internal static string strHeader12 {
-            get {
-                return ResourceManager.GetString("strHeader12", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sample entropy.
-        /// </summary>
-        internal static string strHeader13 {
-            get {
-                return ResourceManager.GetString("strHeader13", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Shannon entropy.
-        /// </summary>
-        internal static string strHeader14 {
-            get {
-                return ResourceManager.GetString("strHeader14", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Entropy bit.
-        /// </summary>
-        internal static string strHeader15 {
-            get {
-                return ResourceManager.GetString("strHeader15", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ideal entropy.
-        /// </summary>
-        internal static string strHeader16 {
-            get {
-                return ResourceManager.GetString("strHeader16", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Number of data series.
-        /// </summary>
-        internal static string strHeader17 {
-            get {
-                return ResourceManager.GetString("strHeader17", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Number of sensors.
-        /// </summary>
-        internal static string strHeader18 {
-            get {
-                return ResourceManager.GetString("strHeader18", resourceCulture);
             }
         }
         
@@ -956,60 +902,6 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Section &apos;SignalAnalysis data&apos; is mis-formatted..
-        /// </summary>
-        internal static string strSignalHeader01 {
-            get {
-                return ResourceManager.GetString("strSignalHeader01", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Number of data series&apos; is mis-formatted..
-        /// </summary>
-        internal static string strSignalHeader02 {
-            get {
-                return ResourceManager.GetString("strSignalHeader02", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Number of data points&apos; is mis-formatted..
-        /// </summary>
-        internal static string strSignalHeader03 {
-            get {
-                return ResourceManager.GetString("strSignalHeader03", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Sampling frequency&apos; is mis-formatted..
-        /// </summary>
-        internal static string strSignalHeader04 {
-            get {
-                return ResourceManager.GetString("strSignalHeader04", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing an empty line..
-        /// </summary>
-        internal static string strSignalHeader05 {
-            get {
-                return ResourceManager.GetString("strSignalHeader05", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing column headers (series names)..
-        /// </summary>
-        internal static string strSignalHeader06 {
-            get {
-                return ResourceManager.GetString("strSignalHeader06", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Show plot&apos;s crosshair mode.
         /// </summary>
         internal static string strStatusTipCrossHair {
@@ -1060,168 +952,6 @@ namespace SignalAnalysis.localization {
         internal static string strTabPlot {
             get {
                 return ResourceManager.GetString("strTabPlot", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;SignalAnalysis data&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader01 {
-            get {
-                return ResourceManager.GetString("strTextHeader01", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Start time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader02 {
-            get {
-                return ResourceManager.GetString("strTextHeader02", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;End time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader03 {
-            get {
-                return ResourceManager.GetString("strTextHeader03", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Total measuring time&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader04 {
-            get {
-                return ResourceManager.GetString("strTextHeader04", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Number of data points&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader05 {
-            get {
-                return ResourceManager.GetString("strTextHeader05", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Sampling frequency&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader06 {
-            get {
-                return ResourceManager.GetString("strTextHeader06", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Average illuminance&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader07 {
-            get {
-                return ResourceManager.GetString("strTextHeader07", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Maximum illuminance&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader08 {
-            get {
-                return ResourceManager.GetString("strTextHeader08", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Minimum illuminance&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader09 {
-            get {
-                return ResourceManager.GetString("strTextHeader09", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Fractal dimension&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader10 {
-            get {
-                return ResourceManager.GetString("strTextHeader10", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Fractal variance&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader11 {
-            get {
-                return ResourceManager.GetString("strTextHeader11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Approximate entropy&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader12 {
-            get {
-                return ResourceManager.GetString("strTextHeader12", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Sample entropy&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader13 {
-            get {
-                return ResourceManager.GetString("strTextHeader13", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Shannon entropy&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader14 {
-            get {
-                return ResourceManager.GetString("strTextHeader14", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Entropy bit&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader15 {
-            get {
-                return ResourceManager.GetString("strTextHeader15", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Section &apos;Ideal entropy&apos; is mis-formatted..
-        /// </summary>
-        internal static string strTextHeader16 {
-            get {
-                return ResourceManager.GetString("strTextHeader16", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing an empty line..
-        /// </summary>
-        internal static string strTextHeader17 {
-            get {
-                return ResourceManager.GetString("strTextHeader17", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing column headers (series names)..
-        /// </summary>
-        internal static string strTextHeader18 {
-            get {
-                return ResourceManager.GetString("strTextHeader18", resourceCulture);
             }
         }
         
