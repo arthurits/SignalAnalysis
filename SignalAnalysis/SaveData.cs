@@ -16,7 +16,7 @@ partial class FrmMain
 
         try
         {
-            using var fs = File.Open(FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             // Append millisecond pattern to current culture's full date time pattern
@@ -100,7 +100,7 @@ partial class FrmMain
 
         try
         {
-            using var fs = File.Open(FileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+            using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             // Append millisecond pattern to current culture's full date time pattern
