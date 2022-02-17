@@ -24,9 +24,9 @@ partial class FrmMain
                 break;
         }
 
-        plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
-        plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture));
-        plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture));
+        plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture) ?? "Input signal");
+        plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture) ?? "Amplitude");
+        plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotOriginal.Plot.AxisAuto(0);
         plotOriginal.Refresh();
     }
@@ -42,8 +42,8 @@ partial class FrmMain
         plotWindow.Plot.AddSignal(ys, nSampleFreq, Color.Red);
         plotWindow.Plot.AxisAuto(0);
         plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
-        plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture));
-        plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture));
+        plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture) ?? "Amplitude");
+        plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotWindow.Refresh();
     }
 
@@ -52,9 +52,9 @@ partial class FrmMain
         plotApplied.Clear();
         //plotApplied.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotApplied.Plot.AddSignal(signal, nSampleFreq);
-        plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture));
-        plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture));
-        plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture));
+        plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture) ?? "Windowed signal");
+        plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture) ?? "Amplitude");
+        plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture) ?? "Time (seconds)");
         plotApplied.Plot.AxisAuto(0);
         plotApplied.Refresh();
     }
@@ -94,9 +94,9 @@ partial class FrmMain
         catch (Exception ex)
         {
             using (new CenterWinDialog(this))
-            {
-                MessageBox.Show("Unexpected error while computing the FFT." + Environment.NewLine + ex.Message,
-                    "Error",
+            {strMsgBoxErrorFFT
+                MessageBox.Show(StringsRM.GetString("strMsgBoxErrorFFT", _settings.AppCulture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + ex.Message,
+                    StringsRM.GetString("strMsgBoxErrorFFTTitle", _settings.AppCulture) ?? "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -106,9 +106,9 @@ partial class FrmMain
         plotFFT.Clear();
         if (ys.Length > 0)
             plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
-        plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));
-        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture));
-        plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
+        plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture) ?? "Fast Fourier transform");
+        plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture ?? "Magnitude (RMS²)")));
+        plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)");
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
     }
