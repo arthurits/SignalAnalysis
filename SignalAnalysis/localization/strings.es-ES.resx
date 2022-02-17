@@ -287,6 +287,13 @@ Se utilizarán los valores por defecto.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Ventana</value>
   </data>
+  <data name="strMsgBoxErrorFFT" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular la FFT.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
+    <value>Error en FFT</value>
+  </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>Se ha producido un error inesperado al abrir el archivo de datos.
 Por favor, inténtelo más tarde o contacte al autor de este software.

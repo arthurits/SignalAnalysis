@@ -284,6 +284,13 @@ Default values will be used instead.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Window</value>
   </data>
+  <data name="strMsgBoxErrorFFT" xml:space="preserve">
+    <value>Unexpected error while computing the FFT.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
+    <value>FFT error</value>
+  </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>An unexpected error happened while opening data file.
 Please try again later or contact the software engineer.

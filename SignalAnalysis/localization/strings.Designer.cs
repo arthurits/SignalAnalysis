@@ -552,6 +552,25 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unexpected error while computing the FFT.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorFFT {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorFFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FFT error.
+        /// </summary>
+        internal static string strMsgBoxErrorFFTTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorFFTTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An unexpected error happened while opening data file.
         ///Please try again later or contact the software engineer.
         ///{0}.

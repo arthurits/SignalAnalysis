@@ -94,9 +94,9 @@ partial class FrmMain
         catch (Exception ex)
         {
             using (new CenterWinDialog(this))
-            {strMsgBoxErrorFFT
-                MessageBox.Show(StringsRM.GetString("strMsgBoxErrorFFT", _settings.AppCulture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + ex.Message,
-                    StringsRM.GetString("strMsgBoxErrorFFTTitle", _settings.AppCulture) ?? "Error",
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorFFT", _settings.AppCulture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorFFTTitle", _settings.AppCulture) ?? "FFT error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
