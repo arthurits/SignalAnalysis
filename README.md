@@ -17,3 +17,6 @@ The fractal dimension implementation was based on Carlos Sevcik's ["A procedure 
 This project uses routines from the following Gits:
 * [FftSharp](https://github.com/swharden/FftSharp)
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot)
+
+## Stats
+![Alt](https://repobeats.axiom.co/api/embed/c5aab350a0c22fc792060a37591b667e5b41ecb1.svg "Repobeats analytics image")
