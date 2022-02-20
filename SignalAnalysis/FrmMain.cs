@@ -298,20 +298,20 @@ public partial class FrmMain : Form
             tokenSource.Cancel();   
     }
 
-    private async Task ComputeStats(double[] signal)
-    {
-        tokenSource = new();
-        token = tokenSource.Token;
-        Results = new();
+    //private async Task ComputeStats(double[] signal)
+    //{
+    //    tokenSource = new();
+    //    token = tokenSource.Token;
+    //    Results = new();
 
-        statsTask = Task.Run(() =>
-        {
-            UpdateStats(signal, _settings.CumulativeDimension, _settings.Entropy);
-        }, token);
-        await statsTask;
+    //    statsTask = Task.Run(() =>
+    //    {
+    //        UpdateStats(signal, _settings.CumulativeDimension, _settings.Entropy);
+    //    }, token);
+    //    await statsTask;
 
-        txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
-    }
+    //    txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+    //}
 
     private void UpdateUI_Language()
     {

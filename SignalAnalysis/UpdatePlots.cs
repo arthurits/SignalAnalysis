@@ -113,12 +113,54 @@ partial class FrmMain
         plotFFT.Refresh();
     }
 
-    private void UpdateStats(double[] signal, bool cumulative = false, bool entropy = false)
+    /// <summary>
+    /// Compute stats and update the plots and results
+    /// This is the main computing function that calls sub-functions
+    /// </summary>
+    /// <param name="serie">The series to be computed</param>
+    /// <returns></returns>
+    private async Task UpdateStatsPlots(int series)
+    {
+        // Extract the values 
+        var signal = _signalData[series][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (signal is null || signal.Length == 0) return;
+
+        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
+
+        // Show a waiting cursor
+        var cursor = this.Cursor;
+        Cursor.Current = Cursors.WaitCursor;
+
+        //ComputeStats(signal);
+        tokenSource = new();
+        token = tokenSource.Token;
+        Results = new();
+        statsTask = Task.Run(() =>
+        {
+            UpdateStats(signal, _settings.CumulativeDimension, _settings.Entropy);
+        }, token);
+        await statsTask;
+
+        // Update plots and results
+        //UpdateBasicPlots(signal, seriesName);
+        UpdateOriginal(signal, seriesName ?? string.Empty);
+        UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
+        UpdateWindowPlots(signal);
+        txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+
+        // Restore the cursor
+        Cursor.Current = cursor;
+    }
+
+    /// <summary>
+    /// Compute the signal stats
+    /// </summary>
+    /// <param name="signal">Signal data</param>
+    /// <param name="progressive"><see langword>True</see> if the progressive fractal dimension is to be computed</param>
+    /// <param name="entropy"><see langword="True"/> if all the entropy parameters are to be computed</param>
+    private void UpdateStats(double[] signal, bool progressive = false, bool entropy = false)
     {
         if (signal.Length == 0) return;
-
-        //var cursor = this.Cursor;
-        //this.Cursor = Cursors.WaitCursor;
 
         // Compute average, max, and min descriptive statistics
         double max = signal[0], min = signal[0], sum = 0;
@@ -138,7 +180,7 @@ partial class FrmMain
         // Compute fractal and entropy values
         try
         {
-            FractalDimension.ComputeDimension(nSampleFreq, signal, token, cumulative);
+            FractalDimension.ComputeDimension(nSampleFreq, signal, token, progressive);
             Results.FractalDimension = FractalDimension.DimensionSingle;
             Results.FractalVariance = FractalDimension.VarianceH;
 
@@ -160,32 +202,39 @@ partial class FrmMain
         finally
         {
             tokenSource.Dispose();
-            //this.Cursor = cursor;
-            //this.Cursor = Cursors.Default;
-            //txtStats.Text = Results.ToString();
         }
 
     }
 
-    private void UpdateBasicPlots(double[] signal, string? seriesName = "", bool progressive = false)
-    {
-        // Update plots
-        UpdateOriginal(signal, seriesName ?? string.Empty);
-        UpdateFractal(signal, seriesName ?? string.Empty, progressive);
-    }
+    /// <summary>
+    /// Updates the original data plot and the fractal dimension plot
+    /// </summary>
+    /// <param name="signal">Signal data</param>
+    /// <param name="seriesName">Name of the data series</param>
+    /// <param name="progressive"><see langword="True"/> if the progressive fractal dimension has been computed</param>
+    //private void UpdateBasicPlots(double[] signal, string? seriesName = "", bool progressive = false)
+    //{
+    //    // Update plots
+    //    UpdateOriginal(signal, seriesName ?? string.Empty);
+    //    UpdateFractal(signal, seriesName ?? string.Empty, progressive);
+    //}
 
+    /// <summary>
+    /// Updates the FFT related plots: FFT window, windowed signal, and signal FFT spectrum
+    /// </summary>
+    /// <param name="signal">Signal data</param>
     private void UpdateWindowPlots(double[] signal)
     {
         IWindow window = (IWindow)stripComboWindows.SelectedItem;
         if (window is null) return;
 
-        // Adjust to the lowest power of 2
-        int power2 = (int)Math.Log2(signal.Length);
+        // Round up to the next integer (Adjust to the lowest power of 2)
+        int power2 = (int)Math.Ceiling(Math.Log2(signal.Length));
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
         signalFFT = new double[(int)Math.Pow(2, power2)];
         Array.Copy(signal, signalFFT, signalFFT.Length);
 
-        // apply window
+        // Apply window to signal
         double[] signalWindow = new double[signalFFT.Length];
         Array.Copy(signalFFT, signalWindow, signalFFT.Length);
         window.ApplyInPlace(signalWindow);
@@ -193,24 +242,6 @@ partial class FrmMain
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
         UpdateFFT(signalWindow);
-    }
-
-    /// <summary>
-    /// Compute stats and update the plots
-    /// </summary>
-    private void UpdateStatsPlots(int serie)
-    {
-        // Extract the values 
-        var signal = _signalData[serie][_settings.IndexStart..(_settings.IndexEnd + 1)];
-        if (signal is null || signal.Length == 0) return;
-
-        string? label = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
-
-        ComputeStats(signal);
-        UpdateBasicPlots(signal, label);
-        UpdateWindowPlots(signal);
-
-        txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
     }
 }
 

@@ -13,6 +13,10 @@ partial class FrmMain
         bool result = true;
         string? strLine;
 
+        // Show a waiting cursor
+        var cursor = Cursor.Current;
+        Cursor.Current = Cursors.WaitCursor;
+
         try
         {
             using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -122,6 +126,10 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
+        finally
+        {
+            Cursor.Current = cursor;
+        }
 
         return result;
     }
@@ -136,6 +144,10 @@ partial class FrmMain
         int nPoints = 0;
         bool result = false;
         string? strLine;
+
+        // Show a waiting cursor
+        var cursor = Cursor.Current;
+        Cursor.Current = Cursors.WaitCursor;
 
         try
         {
@@ -223,6 +235,10 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
+        finally
+        {
+            Cursor.Current = cursor;
+        }
 
         return result;
     }
@@ -238,6 +254,10 @@ partial class FrmMain
         int nPoints = 0;
         bool result = false;
         string? strLine;
+
+        // Show a waiting cursor
+        var cursor = Cursor.Current;
+        Cursor.Current = Cursors.WaitCursor;
 
         try
         {
@@ -438,6 +458,10 @@ partial class FrmMain
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        }
+        finally
+        {
+            Cursor.Current = cursor;
         }
 
         return result;
