@@ -162,28 +162,29 @@ partial class FrmMain
     {
         if (signal.Length == 0) return;
 
-        // Compute average, max, and min descriptive statistics
-        double max = signal[0], min = signal[0], sum = 0;
-
-        for (int i = 0; i < signal.Length; i++)
-        {
-            if (signal[i] > max) max = signal[i];
-            if (signal[i] < min) min = signal[i];
-            sum += signal[i];
-        }
-        double avg = sum / signal.Length;
-
-        Results.Maximum = max;
-        Results.Minimum = min;
-        Results.Average = avg;
-
-        // Compute fractal and entropy values
         try
         {
+            // Compute average, max, and min descriptive statistics
+            double max = signal[0], min = signal[0], sum = 0;
+
+            for (int i = 0; i < signal.Length; i++)
+            {
+                if (signal[i] > max) max = signal[i];
+                if (signal[i] < min) min = signal[i];
+                sum += signal[i];
+            }
+            double avg = sum / signal.Length;
+
+            Results.Maximum = max;
+            Results.Minimum = min;
+            Results.Average = avg;
+
+            // Compute fractal values
             FractalDimension.ComputeDimension(nSampleFreq, signal, token, progressive);
             Results.FractalDimension = FractalDimension.DimensionSingle;
             Results.FractalVariance = FractalDimension.VarianceH;
 
+            // Compute entropy values
             if (entropy)
             {
                 (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
