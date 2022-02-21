@@ -26,6 +26,10 @@ partial class FrmMain
 
         if (result == DialogResult.OK && openDlg.FileName != "")
         {
+            // Show a waiting cursor
+            var cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+
             //Get the path of specified file and store the directory for future calls
             filePath = openDlg.FileName;
             if (_settings.RememberFileDialogPath) _settings.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
@@ -55,8 +59,8 @@ partial class FrmMain
                 }
             }
 
-            
-
+            // Restore the cursor
+            Cursor.Current = cursor;
         }
 
     }
@@ -100,6 +104,10 @@ partial class FrmMain
         // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
         if (result == DialogResult.OK && SaveDlg.FileName != "")
         {
+            // Show a waiting cursor
+            var cursor = Cursor.Current;
+            Cursor.Current = Cursors.WaitCursor;
+
             //Get the path of specified file and store the directory for future calls
             filePath = SaveDlg.FileName;
             if (_settings.RememberFileDialogPath) _settings.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
@@ -122,6 +130,9 @@ partial class FrmMain
                     SaveDefaultData(SaveDlg.FileName);
                     break;
             }
+
+            // Restore the cursor
+            Cursor.Current = cursor;
         }
     }
 

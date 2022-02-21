@@ -11,10 +11,6 @@ partial class FrmMain
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     private void SaveTextData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
-        // Show a waiting cursor
-        var cursor = Cursor.Current;
-        Cursor.Current = Cursors.WaitCursor;
-
         try
         {
             using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
@@ -88,11 +84,6 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
-        finally
-        {
-            // Restore the cursor
-            Cursor.Current = cursor;
-        }
     }
 
     /// <summary>
@@ -104,10 +95,6 @@ partial class FrmMain
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     private void SaveSigData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
-        // Show a waiting cursor
-        var cursor = Cursor.Current;
-        Cursor.Current = Cursors.WaitCursor;
-
         try
         {
             using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
@@ -152,11 +139,7 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
-        finally
-        {
-            // Restore the cursor
-            Cursor.Current = cursor;
-        }
+
     }
 
     /// <summary>
