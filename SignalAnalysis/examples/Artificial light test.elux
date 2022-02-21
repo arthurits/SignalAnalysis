@@ -1,12 +1,12 @@
 ErgoLux data (es-ES)
-Start time: martes, 1 de junio de 2021 10:53:43,830
-End time: martes, 1 de junio de 2021 11:37:44,663
-Total measuring time: 0 days, 0 hours, 44 minutes, 0 seconds, and 833 milliseconds
-Number of sensors: 5
-Number of data points: 5280
-Sampling frequency: 2
+Tiempo inicial: martes, 1 de junio de 2021 10:53:43,830
+Tiempo final: martes, 1 de junio de 2021 11:37:44,663
+Duración total: 0 days, 0 hours, 44 minutes, 0 seconds, and 833 milliseconds
+Número de sensores: 5
+Número de puntos: 5280
+Frecuencia de muestreo: 2
 
-Sensor #00	Sensor #01	Sensor #02	Sensor #03	Sensor #04	Maximum	Average	Minimum	Min/Average	Min/Max	Average/Max
+Sensor #00	Sensor #01	Sensor #02	Sensor #03	Sensor #04	Máximo	Promedio	Mínimo	Mín/Promedio	Mín/Máx	Promedio/Máx
 658,0	585,0	554,0	541,0	518,0	658,0	571,2	518,0	0,907	0,787	0,868
 672,0	601,0	557,0	556,0	520,0	672,0	581,2	520,0	0,895	0,774	0,865
 677,0	625,0	584,0	555,0	520,0	677,0	592,2	520,0	0,878	0,768	0,875

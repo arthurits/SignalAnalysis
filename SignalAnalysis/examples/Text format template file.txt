@@ -1,17 +1,21 @@
-﻿Signal analysis data
-Start time: lunes, 5 de julio de 2021 8:59:12,020
-End time: lunes, 5 de julio de 2021 13:58:18,020
-Total measuring time: 0 days, 4 hours, 59 minutes, 6 seconds, and 0 milliseconds
-Number of data points: 2
-Sampling frequency: 1,5
-Average illuminance: 795,2168053492812
-Maximum illuminance: 867,5
-Minimum illuminance: 672,4
-Fractal dimension: 1,421087350505978
-Fractal variance: 0,00027659396839964417
-Approximate entropy: 0,04317543919772206
-Sample entropy: 0,04042956652288515
+﻿SignalAnalysis data (es-ES)
+Tiempo inicial: lunes, 5 de julio de 2021 8:59:12,020
+Tiempo final: lunes, 5 de julio de 2021 13:58:18,020
+Duración total: 0 días, 4 horas, 59 minutos, 6 segundos, and 0 milisegundos
+Número de series: 1
+Número de puntos: 2
+Frecuencia de muestreo: 1,5
+Illuminancia promedio: 795,2168053492812
+Illuminancia máxima: 867,5
+Illuminancia mínima: 672,4
+Dimensión fractal: 1,421087350505978
+Variancia fractal: 0,00027659396839964417
+Entropía aproximada: 0,04317543919772206
+Entropía de muestra: 0,04042956652288515
+Entropía de Shannon: 0
+Entropía bit: 0
+Entropía ideal: 0
 
-Time	Average
+Tiempo	Promedio
 lunes, 5 de julio de 2021 8:59:12,020	672,4
 lunes, 5 de julio de 2021 8:59:12,687	716,5

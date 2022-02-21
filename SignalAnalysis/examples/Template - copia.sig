@@ -1,7 +1,7 @@
-SignalAnalysis data
-Number of data series: 2
-Number of data points: 35865
-Sampling frequency: 2
+SignalAnalysis data (es-ES)
+Número de series: 2
+Número de puntos: 35865
+Frecuencia de muestreo: 2
 
 Sensor #00	Sensor #01
 658	585
