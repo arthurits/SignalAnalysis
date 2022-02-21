@@ -228,11 +228,11 @@ partial class FrmMain
         IWindow window = (IWindow)stripComboWindows.SelectedItem;
         if (window is null) return;
 
-        // Round up to the next integer (Adjust to the lowest power of 2)
-        int power2 = (int)Math.Ceiling(Math.Log2(signal.Length));
+        // Round down to the next integer (Adjust to the lowest power of 2)
+        int power2 = (int)Math.Floor(Math.Log2(signal.Length));
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
         signalFFT = new double[(int)Math.Pow(2, power2)];
-        Array.Copy(signal, signalFFT, signalFFT.Length);
+        Array.Copy(signal, signalFFT, Math.Min(signalFFT.Length, signal.Length));
 
         // Apply window to signal
         double[] signalWindow = new double[signalFFT.Length];

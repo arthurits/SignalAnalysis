@@ -1,6 +1,6 @@
 SignalAnalysis data (es-ES)
-Número de series: 2
-Número de puntos: 35865
+NÃºmero de series: 2
+NÃºmero de puntos: 5280
 Frecuencia de muestreo: 2
 
 Sensor #00	Sensor #01
