@@ -9,8 +9,10 @@ partial class FrmMain
     /// <param name="Data">Array of values to be saved</param>
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
-    private void SaveTextData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
+    private bool SaveTextData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
+        bool result = false;
+
         try
         {
             using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
@@ -64,14 +66,8 @@ partial class FrmMain
                 sw.WriteLine(content);
             }
 
-            // Show OK save data
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxOKSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk."),
-                    StringsRM.GetString("strMsgBoxOKSaveDataTitle", _settings.AppCulture) ?? "Data saved",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            // Success!
+            result = true;
         }
         catch (Exception ex)
         {
@@ -84,6 +80,8 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
+
+        return result;
     }
 
     /// <summary>
@@ -93,8 +91,10 @@ partial class FrmMain
     /// <param name="Data">Array of values to be saved</param>
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
-    private void SaveSigData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
+    private bool SaveSigData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
+        bool result = false;
+
         try
         {
             using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
@@ -119,14 +119,8 @@ partial class FrmMain
             for (int j = 0; j < Data.Length; j++)
                 sw.WriteLine(Data[j].ToString(_settings.DataFormat, _settings.AppCulture));
 
-            // Show OK save data
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxOKSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk."),
-                    StringsRM.GetString("strMsgBoxOKSaveDataTitle", _settings.AppCulture) ?? "Data saved",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            // Success!
+            result = true;
         }
         catch (Exception ex)
         {
@@ -139,25 +133,29 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
-
+        return result;
     }
 
     /// <summary>
     /// Saves data into a binary format file.
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
-    private void SaveBinaryData(string FileName)
+    private bool SaveBinaryData(string FileName)
     {
-        throw new Exception("Saving to binary has not yet been implemented.");
+        bool result = false;
+        // throw new Exception("Saving to binary has not yet been implemented.");
+        return result;
     }
 
     /// <summary>
     /// Saves data. Default behaviour
     /// </summary>
     /// <param name="FileName">Path (including name) of the elux file</param>
-    private void SaveDefaultData(string FileName)
+    private bool SaveDefaultData(string FileName)
     {
+        bool result = false;
         using (new CenterWinDialog(this))
             MessageBox.Show("No data has been saved to disk.", "No data saved", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return result;
     }
 }

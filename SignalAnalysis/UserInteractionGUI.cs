@@ -112,27 +112,41 @@ partial class FrmMain
             filePath = SaveDlg.FileName;
             if (_settings.RememberFileDialogPath) _settings.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
+            // Save data into file in the corresponding format
+            bool boolSave;
             switch (Path.GetExtension(SaveDlg.FileName).ToLower())
             {
                 //case ".elux":
                 //    SaveELuxData(SaveDlg.FileName);
                 //    break;
                 case ".txt":
-                    SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
+                    boolSave = SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
                 case ".sig":
-                    SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
+                    boolSave = SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
                 case ".bin":
-                    SaveBinaryData(SaveDlg.FileName);
+                    boolSave = SaveBinaryData(SaveDlg.FileName);
                     break;
                 default:
-                    SaveDefaultData(SaveDlg.FileName);
+                    boolSave = SaveDefaultData(SaveDlg.FileName);
                     break;
             }
 
             // Restore the cursor
             Cursor.Current = cursor;
+
+            if (boolSave)
+            {
+                // Show OK save data
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxOKSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk."),
+                        StringsRM.GetString("strMsgBoxOKSaveDataTitle", _settings.AppCulture) ?? "Data saved",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
         }
     }
 
