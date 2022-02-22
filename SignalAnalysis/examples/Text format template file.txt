@@ -5,9 +5,9 @@ Duración total: 0 días, 4 horas, 59 minutos, 6 segundos, and 0 milisegundos
 Número de series: 1
 Número de puntos: 2
 Frecuencia de muestreo: 1,5
-Illuminancia promedio: 795,2168053492812
-Illuminancia máxima: 867,5
-Illuminancia mínima: 672,4
+Promedio: 795,2168053492812
+Máximo: 867,5
+Mínimo: 672,4
 Dimensión fractal: 1,421087350505978
 Variancia fractal: 0,00027659396839964417
 Entropía aproximada: 0,04317543919772206
