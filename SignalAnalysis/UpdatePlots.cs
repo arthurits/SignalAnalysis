@@ -130,8 +130,9 @@ partial class FrmMain
         // Show a waiting cursor
         var cursor = this.Cursor;
         Cursor.Current = Cursors.WaitCursor;
+        Application.DoEvents();
 
-        //ComputeStats(signal);
+        // ComputeStats(signal);
         tokenSource = new();
         token = tokenSource.Token;
         Results = new();
@@ -142,10 +143,11 @@ partial class FrmMain
         await statsTask;
 
         // Update plots and results
-        //UpdateBasicPlots(signal, seriesName);
+        //    UpdateBasicPlots(signal, seriesName);
         UpdateOriginal(signal, seriesName ?? string.Empty);
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
         UpdateWindowPlots(signal);
+
         txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
 
         // Restore the cursor

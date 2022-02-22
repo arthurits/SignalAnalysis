@@ -12,15 +12,35 @@ public class CenterWinDialog : IDisposable
     private int mTries = 0;
     private Form mOwner;
     private System.Drawing.Rectangle clientRect;
+    //private delegate System.Windows.Forms.Form SafeCallGetOwner(Form owner);
 
     public CenterWinDialog(Form owner)
     {
         mOwner = owner;
-        clientRect = Screen.FromControl(owner).WorkingArea;
+        //mOwner = GetOwner(owner);
+        clientRect = Screen.FromControl(mOwner).WorkingArea;
 
-        if (owner.WindowState != FormWindowState.Minimized)
-            owner.BeginInvoke(new MethodInvoker(findDialog));
+        if (mOwner.WindowState != FormWindowState.Minimized)
+            mOwner.BeginInvoke(new MethodInvoker(findDialog));
     }
+
+    //private System.Windows.Forms.Form GetOwner(Form owner)
+    //{
+    //    System.Windows.Forms.Form SafeOwner;
+
+    //    if (owner.InvokeRequired)
+    //    {
+    //        var d = new SafeCallGetOwner(GetOwner);
+    //        SafeOwner = owner.Invoke(d, new object[] { owner }) as Form;
+    //        //return form as Form;
+    //    }
+    //    else
+    //    {
+    //        SafeOwner = owner;
+    //    }
+
+    //    return SafeOwner;
+    //}
 
     private void findDialog()
     {

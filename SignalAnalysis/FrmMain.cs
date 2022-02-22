@@ -42,10 +42,10 @@ public partial class FrmMain : Form
         InitializeMenu();
         InitializeComponent();
 
+        PopulateComboWindow();
+
         this.plotOriginal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
-
-        PopulateComboWindow();
 
         UpdateUI_Language();
     }
@@ -102,6 +102,7 @@ public partial class FrmMain : Form
             Location = new System.Drawing.Point(0, 0),
             Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue),
             RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
+            TabIndex = 1,
             Text = "Main toolbar"
         };
 
@@ -148,7 +149,7 @@ public partial class FrmMain : Form
             Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue),
             RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
             Size = new System.Drawing.Size(934, 28),
-            TabIndex = 1,
+            TabIndex = 0,
             Text = "Status bar"
         };
 
@@ -229,6 +230,11 @@ public partial class FrmMain : Form
 
     }
 
+    private void FrmMain_Shown(object sender, EventArgs e)
+    {
+        this.tableLayoutPanel1.Focus();
+    }
+
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
     {
         using (new CenterWinDialog(this))
@@ -273,6 +279,9 @@ public partial class FrmMain : Form
 
     private void ComboSeries_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        // Move the focus away in order to deselect the text
+        this.Focus();
+
         if (_signalData.Length == 0) return;
 
         ((ToolStripStatusLabelEx)((ToolStrip)tspBottom.Controls[0]).Items[4]).Checked = false;
@@ -283,6 +292,9 @@ public partial class FrmMain : Form
 
     private void ComboWindow_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        // Move the focus away in order to deselect the text
+        this.tableLayoutPanel1.Focus();
+
         if (stripComboSeries.SelectedIndex < 0) return;
 
         // Extract the values 
