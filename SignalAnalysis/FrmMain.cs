@@ -232,6 +232,11 @@ public partial class FrmMain : Form
 
     private void FrmMain_Shown(object sender, EventArgs e)
     {
+        // Signal the native process (that launched us) to close the splash screen
+        using var closeSplashEvent = new System.Threading.EventWaitHandle(false, System.Threading.EventResetMode.ManualReset, "CloseSplashScreenEvent");
+        closeSplashEvent.Set();
+        
+        // Move the focus away in order to deselect the text
         this.tableLayoutPanel1.Focus();
     }
 
