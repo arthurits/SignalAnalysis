@@ -42,9 +42,9 @@ partial class FrmMain
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader17", _settings.AppCulture) ?? "Number of data series")}: 1");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of data points")}: {Data.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Sampling frequency")}: {nSampleFreq.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average illuminance")}: {Results.Average.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum illuminance")}: {Results.Maximum.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum illuminance")}: {Results.Minimum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average")}: {Results.Average.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum")}: {Results.Maximum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum")}: {Results.Minimum.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader10", _settings.AppCulture) ?? "Fractal dimension")}: {Results.FractalDimension.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader11", _settings.AppCulture) ?? "Fractal variance")}: {Results.FractalVariance.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader12", _settings.AppCulture) ?? "Approximate entropy")}: {Results.ApproximateEntropy.ToString(_settings.AppCulture)}");

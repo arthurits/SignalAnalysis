@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="grpCulture" xml:space="preserve">
     <value>Interfaz y formato de datos</value>
@@ -192,13 +192,13 @@ Se utilizarán los valores por defecto.</value>
     <value>Frecuencia de muestreo</value>
   </data>
   <data name="strFileHeader07" xml:space="preserve">
-    <value>Illuminancia promedio</value>
+    <value>Promedio</value>
   </data>
   <data name="strFileHeader08" xml:space="preserve">
-    <value>Illuminancia máxima</value>
+    <value>Máximo</value>
   </data>
   <data name="strFileHeader09" xml:space="preserve">
-    <value>Illuminancia mínima</value>
+    <value>Mínimo</value>
   </data>
   <data name="strFileHeader10" xml:space="preserve">
     <value>Dimensión fractal</value>

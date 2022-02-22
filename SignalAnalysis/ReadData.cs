@@ -305,29 +305,29 @@ partial class FrmMain
 
             strLine = sr.ReadLine();    // Average illuminance
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average illuminance"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average illuminance"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average illuminance"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average"));
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average illuminance"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average"));
             results.Average = readValue;
 
             strLine = sr.ReadLine();    // Maximum illuminance
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum illuminance"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum illuminance"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum illuminance"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum"));
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum illuminance"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum"));
             results.Maximum = readValue;
 
             strLine = sr.ReadLine();    // Minimum illuminance
             if (strLine is null)
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum illuminance"));
-            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum illuminance"}: ", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum illuminance"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum"}: ", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum"));
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
-                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum illuminance"));
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum"));
             results.Minimum = readValue;
 
             strLine = sr.ReadLine();    // Fractal dimension

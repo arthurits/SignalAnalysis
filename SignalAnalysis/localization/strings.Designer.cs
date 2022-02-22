@@ -264,7 +264,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Average illuminance.
+        ///   Looks up a localized string similar to Average.
         /// </summary>
         internal static string strFileHeader07 {
             get {
@@ -273,7 +273,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum illuminance.
+        ///   Looks up a localized string similar to Maximum.
         /// </summary>
         internal static string strFileHeader08 {
             get {
@@ -282,7 +282,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum illuminance.
+        ///   Looks up a localized string similar to Minimum.
         /// </summary>
         internal static string strFileHeader09 {
             get {
