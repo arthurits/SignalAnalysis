@@ -144,7 +144,7 @@ public class Crosshair2 : Plottable.IPlottable
         VerticalLine.Render(dims, bmp, lowQuality);
     }
 
-    private void OnDraggedVertical(object sender, EventArgs e)
+    private void OnDraggedVertical(object? sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
         //if (!vLine.IsVisible || !SnapToPoint) return;
