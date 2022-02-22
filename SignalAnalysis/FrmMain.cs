@@ -275,12 +275,15 @@ public partial class FrmMain : Form
         IWindow[] windows = Window.GetWindows();
         stripComboWindows.Items.AddRange(windows);
         stripComboWindows.SelectedIndex = windows.ToList().FindIndex(x => x.Name == "Hanning");
+
+        // Move the focus away in order to deselect the text
+        this.tableLayoutPanel1.Focus();
     }
 
     private void ComboSeries_SelectedIndexChanged(object? sender, EventArgs e)
     {
         // Move the focus away in order to deselect the text
-        this.Focus();
+        this.tableLayoutPanel1.Focus();
 
         if (_signalData.Length == 0) return;
 

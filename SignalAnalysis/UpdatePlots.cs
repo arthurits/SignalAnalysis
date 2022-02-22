@@ -130,7 +130,7 @@ partial class FrmMain
         // Show a waiting cursor
         var cursor = this.Cursor;
         Cursor.Current = Cursors.WaitCursor;
-        Application.DoEvents();
+        this.UseWaitCursor = true;
 
         // ComputeStats(signal);
         tokenSource = new();
@@ -151,6 +151,7 @@ partial class FrmMain
         txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
 
         // Restore the cursor
+        this.UseWaitCursor = false;
         Cursor.Current = cursor;
     }
 
@@ -196,11 +197,13 @@ partial class FrmMain
         catch (OperationCanceledException)
         {
             using (new CenterWinDialog(this))
-                MessageBox.Show(this,
-                    StringsRM.GetString("strMsgBoxTaskCancel", _settings.AppCulture),
-                    StringsRM.GetString("strMsgBoxTaskCancelTitle", _settings.AppCulture),
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Stop);
+            {
+                MessageBox.Show(
+                      StringsRM.GetString("strMsgBoxTaskCancel", _settings.AppCulture),
+                      StringsRM.GetString("strMsgBoxTaskCancelTitle", _settings.AppCulture),
+                      MessageBoxButtons.OK,
+                      MessageBoxIcon.Stop);
+            }
         }
         finally
         {

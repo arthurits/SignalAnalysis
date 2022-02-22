@@ -17,30 +17,20 @@ public class CenterWinDialog : IDisposable
     public CenterWinDialog(Form owner)
     {
         mOwner = owner;
-        //mOwner = GetOwner(owner);
-        clientRect = Screen.FromControl(mOwner).WorkingArea;
+        //clientRect = Screen.FromControl(mOwner).WorkingArea;
+        owner.Invoke((MethodInvoker)delegate
+        {
+            mOwner = owner;
+        });
 
-        if (mOwner.WindowState != FormWindowState.Minimized)
-            mOwner.BeginInvoke(new MethodInvoker(findDialog));
+        owner.Invoke((MethodInvoker)delegate
+        {
+            clientRect = Screen.FromControl(owner).WorkingArea;
+        });
+
+        if (owner.WindowState != FormWindowState.Minimized)
+            owner.BeginInvoke(new MethodInvoker(findDialog));
     }
-
-    //private System.Windows.Forms.Form GetOwner(Form owner)
-    //{
-    //    System.Windows.Forms.Form SafeOwner;
-
-    //    if (owner.InvokeRequired)
-    //    {
-    //        var d = new SafeCallGetOwner(GetOwner);
-    //        SafeOwner = owner.Invoke(d, new object[] { owner }) as Form;
-    //        //return form as Form;
-    //    }
-    //    else
-    //    {
-    //        SafeOwner = owner;
-    //    }
-
-    //    return SafeOwner;
-    //}
 
     private void findDialog()
     {
