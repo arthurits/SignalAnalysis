@@ -181,25 +181,19 @@ partial class FrmMain
             bw.Write(Results.EntropyBit);
             bw.Write(Results.IdealEntropy);
 
-            
-            for (int i = 0; i < nSeries; i++)
-                content += $"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Sensor #")}{i:00}\t";
-            content += $"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Maximum")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader10", _settings.AppCulture) ?? "Average")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader11", _settings.AppCulture) ?? "Minimum")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader12", _settings.AppCulture) ?? "Min/Average")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader13", _settings.AppCulture) ?? "Min/Max")}\t" +
-                    $"{(StringsRM.GetString("strFileHeader14", _settings.AppCulture) ?? "Average/Max")}\t";
+            content = $"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t";
+            for (int i = 0; i < seriesLabels.Length; i++)
+                content += $"{seriesLabels[i]}\t";
             bw.WriteLine(content);
 
             // https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
             byte[] bytesLine;
-            for (int i = 0; i < Data.Length; i++)
+            for (int i = 0; i < _signalData.Length; i++)
             {
                 // bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray()); // Requires LINQ
-                //bytesLine = new byte[_plotData[i].Length * sizeof(double)];
-                //Buffer.BlockCopy(_plotData[i], 0, bytesLine, 0, bytesLine.Length);
-                //bw.Write(bytesLine);
+                bytesLine = new byte[_signalData[i].Length * sizeof(double)];
+                Buffer.BlockCopy(_signalData[i], 0, bytesLine, 0, bytesLine.Length);
+                bw.Write(bytesLine);
             }
 
             // Success!
