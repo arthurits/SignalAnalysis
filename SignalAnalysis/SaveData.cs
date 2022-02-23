@@ -155,6 +155,9 @@ partial class FrmMain
             using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             using var bw = new BinaryWriter(fs, System.Text.Encoding.UTF8, false);
             
+            string content = string.Empty;
+            TimeSpan nTime = nStart.AddSeconds((Data.Length - 1) / nSampleFreq) - nStart; // At least there should be 1 point
+
             // Save the header text into the file
             bw.Write($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
             bw.Write(nStart.AddSeconds(ArrIndexInit / nSampleFreq));
@@ -164,7 +167,7 @@ partial class FrmMain
             bw.Write(nTime.Minutes);
             bw.Write(nTime.Seconds);
             bw.Write(nTime.Milliseconds);
-            bw.Write(_sett.T10_NumberOfSensors);
+            bw.Write(nSeries);
             bw.Write(Data.Length);
             bw.Write(nSampleFreq);
             bw.Write(Results.Average);
@@ -177,12 +180,41 @@ partial class FrmMain
             bw.Write(Results.ShannonEntropy);
             bw.Write(Results.EntropyBit);
             bw.Write(Results.IdealEntropy);
+
             
+            for (int i = 0; i < nSeries; i++)
+                content += $"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Sensor #")}{i:00}\t";
+            content += $"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Maximum")}\t" +
+                    $"{(StringsRM.GetString("strFileHeader10", _settings.AppCulture) ?? "Average")}\t" +
+                    $"{(StringsRM.GetString("strFileHeader11", _settings.AppCulture) ?? "Minimum")}\t" +
+                    $"{(StringsRM.GetString("strFileHeader12", _settings.AppCulture) ?? "Min/Average")}\t" +
+                    $"{(StringsRM.GetString("strFileHeader13", _settings.AppCulture) ?? "Min/Max")}\t" +
+                    $"{(StringsRM.GetString("strFileHeader14", _settings.AppCulture) ?? "Average/Max")}\t";
+            bw.WriteLine(content);
+
+            // https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
+            byte[] bytesLine;
+            for (int i = 0; i < Data.Length; i++)
+            {
+                // bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray()); // Requires LINQ
+                //bytesLine = new byte[_plotData[i].Length * sizeof(double)];
+                //Buffer.BlockCopy(_plotData[i], 0, bytesLine, 0, bytesLine.Length);
+                //bw.Write(bytesLine);
+            }
+
             // Success!
             result = true;
         }
-        catch
+        catch (Exception ex)
         {
+            // Show error message
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
         
         return result;
@@ -198,6 +230,6 @@ partial class FrmMain
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool SaveDefaultData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
-        return SaveTextData(FileName, Data, ArrIndexinit, SeriesName);
+        return SaveTextData(FileName, Data, ArrIndexInit, SeriesName);
     }
 }

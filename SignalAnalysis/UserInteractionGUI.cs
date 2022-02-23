@@ -116,9 +116,6 @@ partial class FrmMain
             bool boolSave;
             switch (Path.GetExtension(SaveDlg.FileName).ToLower())
             {
-                //case ".elux":
-                //    SaveELuxData(SaveDlg.FileName);
-                //    break;
                 case ".txt":
                     boolSave = SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
@@ -126,10 +123,10 @@ partial class FrmMain
                     boolSave = SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
                 case ".bin":
-                    boolSave = SaveBinaryData(SaveDlg.FileName);
+                    boolSave = SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
                 default:
-                    boolSave = SaveDefaultData(SaveDlg.FileName);
+                    boolSave = SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
                     break;
             }
 
