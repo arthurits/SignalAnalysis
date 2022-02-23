@@ -9,6 +9,7 @@ partial class FrmMain
     /// <param name="Data">Array of values to be saved</param>
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool SaveTextData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
         bool result = false;
@@ -91,6 +92,7 @@ partial class FrmMain
     /// <param name="Data">Array of values to be saved</param>
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool SaveSigData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
         bool result = false;
@@ -137,25 +139,65 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Saves data into a binary format file.
+    /// Saves data into a binary-formatted file.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the elux file</param>
-    private bool SaveBinaryData(string FileName)
+    /// <param name="FileName">Path (including name) of the sig file</param>
+    /// <param name="Data">Array of values to be saved</param>
+    /// <param name="ArrIndexInit">Offset index of _signalData</param>
+    /// <param name="SeriesName">Name of the serie data to be saved</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
+    private bool SaveBinaryData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
         bool result = false;
-        // throw new Exception("Saving to binary has not yet been implemented.");
+        
+        try
+        {
+            using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+            using var bw = new BinaryWriter(fs, System.Text.Encoding.UTF8, false);
+            
+            // Save the header text into the file
+            bw.Write($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
+            bw.Write(nStart.AddSeconds(ArrIndexInit / nSampleFreq));
+            bw.Write(nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq));
+            bw.Write(nTime.Days);
+            bw.Write(nTime.Hours);
+            bw.Write(nTime.Minutes);
+            bw.Write(nTime.Seconds);
+            bw.Write(nTime.Milliseconds);
+            bw.Write(_sett.T10_NumberOfSensors);
+            bw.Write(Data.Length);
+            bw.Write(nSampleFreq);
+            bw.Write(Results.Average);
+            bw.Write(Results.Maximum);
+            bw.Write(Results.Minimum);
+            bw.Write(Results.FractalDimension);
+            bw.Write(Results.FractalVariance);
+            bw.Write(Results.ApproximateEntropy);
+            bw.Write(Results.SampleEntropy);
+            bw.Write(Results.ShannonEntropy);
+            bw.Write(Results.EntropyBit);
+            bw.Write(Results.IdealEntropy);
+            
+            // Success!
+            result = true;
+        }
+        catch
+        {
+        }
+        
         return result;
     }
 
     /// <summary>
-    /// Saves data. Default behaviour
+    /// Default saving, reverting to SaveTextData function.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the elux file</param>
-    private bool SaveDefaultData(string FileName)
+    /// <param name="FileName">Path (including name) of the sig file</param>
+    /// <param name="Data">Array of values to be saved</param>
+    /// <param name="ArrIndexInit">Offset index of _signalData</param>
+    /// <param name="SeriesName">Name of the serie data to be saved</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
+    private bool SaveDefaultData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
     {
-        bool result = false;
-        using (new CenterWinDialog(this))
-            MessageBox.Show("No data has been saved to disk.", "No data saved", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        return result;
+        return SaveTextData(FileName, Data, ArrIndexinit, SeriesName);
     }
 }
