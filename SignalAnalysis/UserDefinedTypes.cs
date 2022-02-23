@@ -29,19 +29,10 @@ partial class FrmMain
         public double EntropyBit { get; set; }          // The entropy bit value of a message
         public double IdealEntropy { get; set; }        // The ideal entropy value of a message
 
-        public override string ToString() =>
-            $"Average illuminance: {Average:0.######}" + Environment.NewLine +
-            $"Maximum illuminance: {Maximum:0.##}" + Environment.NewLine +
-            $"Minimum illuminance: {Minimum:0.##}" + Environment.NewLine +
-            $"Fractal dimension: {FractalDimension:0.########}" + Environment.NewLine +
-            $"Fractal variance: {FractalVariance:0.########}" + Environment.NewLine +
-            $"Approximate entropy: {ApproximateEntropy:0.########}" + Environment.NewLine +
-            $"Sample entropy: {SampleEntropy:0.########}";
-
         public string ToString(System.Resources.ResourceManager stringsRM, System.Globalization.CultureInfo culture) =>
-            (stringsRM.GetString("strHeader07", culture) ?? "Average illuminance") + $": {Average:0.######}" + Environment.NewLine +
-            (stringsRM.GetString("strHeader08", culture) ?? "Maximum illuminance") + $": {Maximum:0.##}" + Environment.NewLine +
-            (stringsRM.GetString("strHeader09", culture) ?? "Minimum illuminance") + $": {Minimum:0.##}" + Environment.NewLine +
+            (stringsRM.GetString("strHeader07", culture) ?? "Average") + $": {Average:0.######}" + Environment.NewLine +
+            (stringsRM.GetString("strHeader08", culture) ?? "Maximum") + $": {Maximum:0.##}" + Environment.NewLine +
+            (stringsRM.GetString("strHeader09", culture) ?? "Minimum") + $": {Minimum:0.##}" + Environment.NewLine +
             (stringsRM.GetString("strHeader10", culture) ?? "Fractal dimension") + $": {FractalDimension:0.########}" + Environment.NewLine +
             (stringsRM.GetString("strHeader11", culture) ?? "Fractal variance") + $": {FractalVariance:0.########}" + Environment.NewLine +
             (stringsRM.GetString("strHeader12", culture) ?? "Approximate entropy") + $": {ApproximateEntropy:0.########}" + Environment.NewLine +
