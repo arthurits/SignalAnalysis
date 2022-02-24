@@ -46,6 +46,11 @@ partial class FrmMain
                 results = new();
                 boolRead = ReadTextData(filePath, results);
             }
+            else if (".bin".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
+            {
+                results = new();
+                boolRead = ReadBinData(filePath, results);
+            }
 
             if (boolRead)
             {

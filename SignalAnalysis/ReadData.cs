@@ -231,6 +231,7 @@ partial class FrmMain
     /// Readas data from a text-formatted file and stores it into _signalData.
     /// </summary>
     /// <param name="FileName">Path (including name) of the text file</param>
+    /// <param name="results">Numeric results read from the file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool ReadTextData(string FileName, Stats results)
     {
@@ -401,10 +402,10 @@ partial class FrmMain
 
             strLine = sr.ReadLine();    // Column header names
             if (strLine is null)
-                throw new FormatException(StringsRM.GetString("strTextHeader20", _settings.AppCulture) ?? "Missing column headers(series names).");
+                throw new FormatException(StringsRM.GetString("strTextHeader20", _settings.AppCulture) ?? "Missing column headers (series names).");
             seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
-                throw new FormatException(StringsRM.GetString("strTextHeader20", _settings.AppCulture) ?? "Missing column headers(series names).");
+                throw new FormatException(StringsRM.GetString("strTextHeader20", _settings.AppCulture) ?? "Missing column headers (series names).");
             seriesLabels = seriesLabels[1..];
             nSeries = seriesLabels.Length;
 
@@ -444,6 +445,99 @@ partial class FrmMain
     }
 
     /// <summary>
+    /// Readas data from a binary-formatted file and stores it into _signalData.
+    /// </summary>
+    /// <param name="FileName">Path (including name) of the text file</param>
+    /// <param name="results">Numeric results read from the file</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
+    /// <exception cref="FormatException"></exception>
+    private bool ReadBinData(string FileName, Stats results)
+    {
+        int nPoints;
+        bool result = true;
+
+        try
+        {
+            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var br = new BinaryReader(fs, System.Text.Encoding.UTF8);
+
+            string strLine = br.ReadString();   // SignalAnalysis data
+            if (strLine is null)
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data"));
+            if (!strLine.Contains($"{StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data"} (", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringsRM.GetString("strFileHeaderSection", _settings.AppCulture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data"));
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+
+            nStart = br.ReadDateTime();     // start time
+            br.ReadDateTime();              // end time
+            int dummy = br.ReadInt32();     // days
+            dummy = br.ReadInt32();         // hours
+            dummy = br.ReadInt32();         // minutes
+            dummy = br.ReadInt32();         // seconds
+            dummy = br.ReadInt32();         // milliseconds
+            nPoints = br.ReadInt32();       // number of series
+            nPoints = br.ReadInt32();       // number of data points
+            nSampleFreq = br.ReadDouble();  // sampling frequency
+            results.Average = br.ReadDouble();
+            results.Maximum = br.ReadDouble();
+            results.Minimum = br.ReadDouble();
+            results.FractalDimension = br.ReadDouble();
+            results.FractalVariance = br.ReadDouble();
+            results.ApproximateEntropy = br.ReadDouble();
+            results.SampleEntropy = br.ReadDouble();
+            results.ShannonEntropy = br.ReadDouble();
+            results.EntropyBit = br.ReadDouble();
+            results.IdealEntropy = br.ReadDouble();
+
+            strLine = br.ReadString();      // Column header names
+            if (strLine is null)
+                throw new FormatException(StringsRM.GetString("strFileHeader20", _settings.AppCulture) ?? "Missing column headers (series names).");
+            seriesLabels = strLine.Split('\t');
+            if (seriesLabels == Array.Empty<string>())
+                throw new FormatException(StringsRM.GetString("strFileHeader20", _settings.AppCulture) ?? "Missing column headers (series names).");
+            seriesLabels = seriesLabels[1..];
+            nSeries = seriesLabels.Length;
+
+            // Read data into array
+            _settings.IndexStart = 0;
+            _settings.IndexEnd = nPoints - 1;
+
+            // Initialize data arrays
+            _signalData = new double[nSeries][];
+            for (int i = 0; i < nSeries; i++)
+                _signalData[i] = new double[nPoints];
+
+            // Read data into _signalData
+            for (int row = 0; row < nSeries; row++)
+            {
+                for (int col = 0; col < _signalData[row].Length; col++)
+                {
+                    br.ReadDateTime();
+                    _signalData[row][col] = br.ReadDouble();
+                }
+            }
+
+        }
+        catch (EndOfStreamException)
+        {
+
+        }
+        catch (Exception ex)
+        {
+            result = false;
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorOpenData", _settings.AppCulture) ?? "An unexpected error happened while opening file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorOpenDataTitle", _settings.AppCulture) ?? "Error opening data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
     /// Reads and parse the data into a numeric format.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>
@@ -464,7 +558,7 @@ partial class FrmMain
             for (int i = 0; i < nSeries; i++)
                 _signalData[i] = new double[points];
 
-            // Read data into _plotData
+            // Read data into _signalData
             for (int i = 0; i < _signalData.Length; i++)
             {
                 _signalData[i] = new double[points];

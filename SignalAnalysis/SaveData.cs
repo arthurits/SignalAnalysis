@@ -167,7 +167,7 @@ partial class FrmMain
             bw.Write(nTime.Minutes);
             bw.Write(nTime.Seconds);
             bw.Write(nTime.Milliseconds);
-            bw.Write(nSeries);
+            bw.Write(1);
             bw.Write(Data.Length);
             bw.Write(nSampleFreq);
             bw.Write(Results.Average);
@@ -181,20 +181,29 @@ partial class FrmMain
             bw.Write(Results.EntropyBit);
             bw.Write(Results.IdealEntropy);
 
-            content = $"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t";
-            for (int i = 0; i < seriesLabels.Length; i++)
-                content += $"{seriesLabels[i]}\t";
-            bw.WriteLine(content);
+            bw.Write($"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t{SeriesName}");
 
-            // https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
-            byte[] bytesLine;
-            for (int i = 0; i < _signalData.Length; i++)
+            // Save the numerical values
+            for (int j = 0; j < Data.Length; j++)
             {
-                // bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray()); // Requires LINQ
-                bytesLine = new byte[_signalData[i].Length * sizeof(double)];
-                Buffer.BlockCopy(_signalData[i], 0, bytesLine, 0, bytesLine.Length);
-                bw.Write(bytesLine);
+                bw.Write(nStart.AddSeconds((j + ArrIndexInit) / nSampleFreq));
+                bw.Write(Data[j]);   
             }
+
+            //content = $"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t";
+            //for (int i = 0; i < seriesLabels.Length; i++)
+            //    content += $"{seriesLabels[i]}\t";
+            //bw.WriteLine(content);
+
+            //// https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
+            //byte[] bytesLine;
+            //for (int i = 0; i < _signalData.Length; i++)
+            //{
+            //    // bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray()); // Requires LINQ
+            //    bytesLine = new byte[_signalData[i].Length * sizeof(double)];
+            //    Buffer.BlockCopy(_signalData[i], 0, bytesLine, 0, bytesLine.Length);
+            //    bw.Write(bytesLine);
+            //}
 
             // Success!
             result = true;
