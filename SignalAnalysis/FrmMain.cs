@@ -333,9 +333,22 @@ public partial class FrmMain : Form
     //    txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
     //}
 
+    private void SetFormTitle(System.Windows.Forms.Form frm, string strFileName = "")
+    {
+        string sep = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? " — ";
+        if (strFileName != String.Empty)
+            frm.Text = (StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis") + $"{sep}{strFileName}";
+        else
+        {
+            int index = frm.Text.IndexOf(sep) > -1 ? frm.Text.IndexOf(sep) : frm.Text.Length;
+            frm.Text = (StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis") + frm.Text[index..];
+        }
+    }
+
     private void UpdateUI_Language()
     {
-        this.Text = StringsRM.GetString("strFrmTitle", _settings.AppCulture);
+        // Update the form's tittle
+        SetFormTitle(this);
 
         // Update ToolStrip
         ((ToolStrip)tspTop.Controls[0]).Items[0].Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";

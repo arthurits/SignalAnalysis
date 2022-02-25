@@ -480,6 +480,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  — .
+        /// </summary>
+        internal static string strFrmTitleUnion {
+            get {
+                return ResourceManager.GetString("strFrmTitleUnion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Abscissa axis.
         /// </summary>
         internal static string strGrpAxis {
