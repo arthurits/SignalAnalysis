@@ -122,16 +122,16 @@ partial class FrmMain
             switch (Path.GetExtension(SaveDlg.FileName).ToLower())
             {
                 case ".txt":
-                    boolSave = SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
+                    boolSave = SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
                     break;
                 case ".sig":
-                    boolSave = SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
+                    boolSave = SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
                     break;
                 case ".bin":
-                    boolSave = SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
+                    boolSave = SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
                     break;
                 default:
-                    boolSave = SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedText);
+                    boolSave = SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
                     break;
             }
 

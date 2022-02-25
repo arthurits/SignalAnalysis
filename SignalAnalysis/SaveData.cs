@@ -10,7 +10,7 @@ partial class FrmMain
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool SaveTextData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
+    private bool SaveTextData(string FileName, double[] Data, int ArrIndexInit, string? SeriesName)
     {
         bool result = false;
 
@@ -93,7 +93,7 @@ partial class FrmMain
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool SaveSigData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
+    private bool SaveSigData(string FileName, double[] Data, int ArrIndexInit, string? SeriesName)
     {
         bool result = false;
 
@@ -139,14 +139,14 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Saves data into a binary-formatted file.
+    /// Saves data into a binary-formatted file. Adapts the text-format to a binary format.
     /// </summary>
     /// <param name="FileName">Path (including name) of the sig file</param>
     /// <param name="Data">Array of values to be saved</param>
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool SaveBinaryData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
+    private bool SaveBinaryData(string FileName, double[] Data, int ArrIndexInit, string? SeriesName)
     {
         bool result = false;
         
@@ -231,7 +231,7 @@ partial class FrmMain
     /// <param name="ArrIndexInit">Offset index of _signalData</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool SaveDefaultData(string FileName, double[] Data, int ArrIndexInit, string SeriesName)
+    private bool SaveDefaultData(string FileName, double[] Data, int ArrIndexInit, string? SeriesName)
     {
         return SaveTextData(FileName, Data, ArrIndexInit, SeriesName);
     }

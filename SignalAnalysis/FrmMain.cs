@@ -301,7 +301,7 @@ public partial class FrmMain : Form
     private void ComboWindow_SelectedIndexChanged(object? sender, EventArgs e)
     {
         // Move the focus away in order to deselect the text
-        this.tableLayoutPanel1.Focus();
+        this.tableLayoutPanel2.Focus();
 
         if (stripComboSeries.SelectedIndex < 0) return;
 
