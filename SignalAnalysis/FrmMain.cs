@@ -318,37 +318,38 @@ public partial class FrmMain : Form
             tokenSource.Cancel();   
     }
 
-    //private async Task ComputeStats(double[] signal)
-    //{
-    //    tokenSource = new();
-    //    token = tokenSource.Token;
-    //    Results = new();
-
-    //    statsTask = Task.Run(() =>
-    //    {
-    //        UpdateStats(signal, _settings.CumulativeDimension, _settings.Entropy);
-    //    }, token);
-    //    await statsTask;
-
-    //    txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
-    //}
-
-    private void SetFormTitle(System.Windows.Forms.Form frm, string strFileName = "")
+    /// <summary>
+    /// Sets the form's title
+    /// </summary>
+    /// <param name="frm">Form which title is to be set</param>
+    /// <param name="strFileName">String to be added at the default title in 'strFormTitle' string.
+    /// If <see langword="null"/>, no string is added.
+    /// If <see cref="String.Empty"/>, the current added text is mantained.
+    /// Other values are added to the default title.</param>
+    private void SetFormTitle(System.Windows.Forms.Form frm, string? strFileName = null)
     {
-        string sep = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? " — ";
-        if (strFileName != String.Empty)
-            frm.Text = (StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis") + $"{sep}{strFileName}";
-        else
+        string strText = String.Empty;
+        string strSep = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? " - ";
+        if (strFileName is not null)
         {
-            int index = frm.Text.IndexOf(sep) > -1 ? frm.Text.IndexOf(sep) : frm.Text.Length;
-            frm.Text = (StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis") + frm.Text[index..];
+            if (strFileName != String.Empty)
+                strText = $"{strSep}{strFileName}";
+            else
+            {
+                int index = frm.Text.IndexOf(strSep) > -1 ? frm.Text.IndexOf(strSep) : frm.Text.Length;
+                strText = frm.Text[index..];
+            }
         }
+        frm.Text = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis" + strText;
     }
 
+    /// <summary>
+    /// Updates the UI language of all controls
+    /// </summary>
     private void UpdateUI_Language()
     {
         // Update the form's tittle
-        SetFormTitle(this);
+        SetFormTitle(this, String.Empty);
 
         // Update ToolStrip
         ((ToolStrip)tspTop.Controls[0]).Items[0].Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";

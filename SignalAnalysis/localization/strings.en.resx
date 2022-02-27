@@ -261,7 +261,7 @@ Default values will be used instead.</value>
     <value>Signal analysis</value>
   </data>
   <data name="strFrmTitleUnion" xml:space="preserve">
-    <value> — </value>
+    <value> - </value>
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Abscissa axis</value>

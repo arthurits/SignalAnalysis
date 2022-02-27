@@ -213,19 +213,6 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Updates the original data plot and the fractal dimension plot
-    /// </summary>
-    /// <param name="signal">Signal data</param>
-    /// <param name="seriesName">Name of the data series</param>
-    /// <param name="progressive"><see langword="True"/> if the progressive fractal dimension has been computed</param>
-    //private void UpdateBasicPlots(double[] signal, string? seriesName = "", bool progressive = false)
-    //{
-    //    // Update plots
-    //    UpdateOriginal(signal, seriesName ?? string.Empty);
-    //    UpdateFractal(signal, seriesName ?? string.Empty, progressive);
-    //}
-
-    /// <summary>
     /// Updates the FFT related plots: FFT window, windowed signal, and signal FFT spectrum
     /// </summary>
     /// <param name="signal">Signal data</param>
@@ -245,6 +232,7 @@ partial class FrmMain
         Array.Copy(signalFFT, signalWindow, signalFFT.Length);
         window.ApplyInPlace(signalWindow);
 
+        // Update plots
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
         UpdateFFT(signalWindow);

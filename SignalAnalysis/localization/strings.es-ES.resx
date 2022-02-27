@@ -264,7 +264,7 @@ Se utilizarán los valores por defecto.</value>
     <value>Análisis de señales</value>
   </data>
   <data name="strFrmTitleUnion" xml:space="preserve">
-    <value> — </value>
+    <value> - </value>
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Eje de abscisas</value>
