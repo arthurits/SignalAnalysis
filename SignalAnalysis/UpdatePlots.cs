@@ -207,6 +207,12 @@ partial class FrmMain
         double[] signalWindow = Array.Empty<double>();
         double[] signalFFT = Array.Empty<double>();
 
+        // Show a waiting cursor
+        var cursor = this.Cursor;
+        Cursor.Current = Cursors.WaitCursor;
+        this.UseWaitCursor = true;
+
+        // Run the intensive code on a separate task
         statsTask = Task.Run(() =>
             {
                 // Round down to the next integer (Adjust to the lowest power of 2)
@@ -240,6 +246,10 @@ partial class FrmMain
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
         UpdateFFT(signalFFT);
+
+        // Restore the cursor
+        this.UseWaitCursor = false;
+        Cursor.Current = cursor;
     }
 }
 

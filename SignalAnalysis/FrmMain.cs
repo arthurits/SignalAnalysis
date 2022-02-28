@@ -90,7 +90,7 @@ public partial class FrmMain : Form
         };
         stripComboSeries.SelectedIndexChanged += ComboSeries_SelectedIndexChanged;
         stripComboWindows.SelectedIndexChanged += ComboWindow_SelectedIndexChanged;
-
+        
         tspTop = new();
         tspTop.Dock = DockStyle.Top;
         tspTop.Name = "StripPanelTop";
@@ -309,16 +309,7 @@ public partial class FrmMain : Form
         var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
-        // Show a waiting cursor
-        var cursor = this.Cursor;
-        Cursor.Current = Cursors.WaitCursor;
-        this.UseWaitCursor = true;
-
         UpdateWindowPlots(signal);
-
-        // Restore the cursor
-        this.UseWaitCursor = false;
-        Cursor.Current = cursor;
     }
 
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
