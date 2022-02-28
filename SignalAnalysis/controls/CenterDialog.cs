@@ -18,10 +18,6 @@ public class CenterWinDialog : IDisposable
     {
         mOwner = owner;
         //clientRect = Screen.FromControl(mOwner).WorkingArea;
-        owner.Invoke((MethodInvoker)delegate
-        {
-            mOwner = owner;
-        });
 
         owner.Invoke((MethodInvoker)delegate
         {

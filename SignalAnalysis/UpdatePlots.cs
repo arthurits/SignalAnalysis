@@ -85,27 +85,10 @@ partial class FrmMain
 
     private void UpdateFFT(double[] signal)
     {
-        double[] ys = Array.Empty<double>();
-
-        try
-        {
-            ys = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signal) : FftSharp.Transform.FFTmagnitude(signal);
-        }
-        catch (Exception ex)
-        {
-            using (new CenterWinDialog(this))
-            {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorFFT", _settings.AppCulture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorFFTTitle", _settings.AppCulture) ?? "FFT error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-        }
-
         // Plot the results
         plotFFT.Clear();
-        if (ys.Length > 0)
-            plotFFT.Plot.AddSignal(ys, (double)ys.Length / nSampleFreq);
+        if (signal.Length > 0)
+            plotFFT.Plot.AddSignal(signal, (double)signal.Length / nSampleFreq);
         plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture) ?? "Fast Fourier transform");
         plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"));
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)");
@@ -138,7 +121,7 @@ partial class FrmMain
         Results = new();
         statsTask = Task.Run(() =>
         {
-            UpdateStats(signal, _settings.CumulativeDimension, _settings.Entropy);
+            UpdateStats(signal, token, _settings.CumulativeDimension, _settings.Entropy);
         }, token);
         await statsTask;
 
@@ -146,7 +129,7 @@ partial class FrmMain
         //    UpdateBasicPlots(signal, seriesName);
         UpdateOriginal(signal, seriesName ?? string.Empty);
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
-        UpdateWindowPlots(signal);
+        await UpdateWindowPlots(signal);
 
         txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
 
@@ -161,7 +144,7 @@ partial class FrmMain
     /// <param name="signal">Signal data</param>
     /// <param name="progressive"><see langword>True</see> if the progressive fractal dimension is to be computed</param>
     /// <param name="entropy"><see langword="True"/> if all the entropy parameters are to be computed</param>
-    private void UpdateStats(double[] signal, bool progressive = false, bool entropy = false)
+    private void UpdateStats(double[] signal, CancellationToken c, bool progressive = false, bool entropy = false)
     {
         if (signal.Length == 0) return;
 
@@ -216,26 +199,47 @@ partial class FrmMain
     /// Updates the FFT related plots: FFT window, windowed signal, and signal FFT spectrum
     /// </summary>
     /// <param name="signal">Signal data</param>
-    private void UpdateWindowPlots(double[] signal)
+    private async Task UpdateWindowPlots(double[] signal)
     {
         IWindow window = (IWindow)stripComboWindows.SelectedItem;
         if (window is null) return;
 
-        // Round down to the next integer (Adjust to the lowest power of 2)
-        int power2 = (int)Math.Floor(Math.Log2(signal.Length));
-        //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
-        signalFFT = new double[(int)Math.Pow(2, power2)];
-        Array.Copy(signal, signalFFT, Math.Min(signalFFT.Length, signal.Length));
+        double[] signalWindow = Array.Empty<double>();
+        double[] signalFFT = Array.Empty<double>();
 
-        // Apply window to signal
-        double[] signalWindow = new double[signalFFT.Length];
-        Array.Copy(signalFFT, signalWindow, signalFFT.Length);
-        window.ApplyInPlace(signalWindow);
+        statsTask = Task.Run(() =>
+            {
+                // Round down to the next integer (Adjust to the lowest power of 2)
+                int power2 = (int)Math.Floor(Math.Log2(signal.Length));
+                //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
 
+                // Apply window to signal
+                signalWindow = new double[(int)Math.Pow(2, power2)];
+                Array.Copy(signal, signalWindow, Math.Min(signalWindow.Length, signal.Length));
+                window.ApplyInPlace(signalWindow);
+
+                try
+                {
+                    signalFFT = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signalWindow) : FftSharp.Transform.FFTmagnitude(signalWindow);
+                }
+                catch (Exception ex)
+                {
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show(
+                            String.Format(StringsRM.GetString("strMsgBoxErrorFFT", _settings.AppCulture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + "{0}", ex.Message),
+                            StringsRM.GetString("strMsgBoxErrorFFTTitle", _settings.AppCulture) ?? "FFT error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                }
+            });
+        await statsTask;
+        
         // Update plots
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
-        UpdateFFT(signalWindow);
+        UpdateFFT(signalFFT);
     }
 }
 
