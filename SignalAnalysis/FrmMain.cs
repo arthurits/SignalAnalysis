@@ -329,7 +329,7 @@ public partial class FrmMain : Form
     private void SetFormTitle(System.Windows.Forms.Form frm, string? strFileName = null)
     {
         string strText = String.Empty;
-        string strSep = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? " - ";
+        string strSep = StringsRM.GetString("strFrmTitleUnion", _settings.AppCulture) ?? " - ";
         if (strFileName is not null)
         {
             if (strFileName != String.Empty)
