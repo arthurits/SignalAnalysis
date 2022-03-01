@@ -3,22 +3,23 @@ namespace SignalAnalysis;
 public partial class FrmMain : Form
 {
     private double[][] _signalData = Array.Empty<double[]>();
-    private double[] signalFFT = Array.Empty<double>();
+    //private double[] signalFFT = Array.Empty<double>();
     private string[] seriesLabels = Array.Empty<string>();
     private int nSeries = 0;
     double nSampleFreq = 0.0;
     
     DateTime nStart;
     ClassSettings _settings;
-    Stats Results;
+    Stats Results = new();
     
     ToolStripPanel tspTop = new();
     ToolStripPanel tspBottom = new();
     ToolStripComboBox stripComboSeries = new();
     ToolStripComboBox stripComboWindows = new();
+    ToolStripStatusLabel stripLblCulture = new();
 
     Task statsTask = Task.CompletedTask;
-    private CancellationTokenSource tokenSource;
+    private CancellationTokenSource tokenSource = new();
     private CancellationToken token = CancellationToken.None;
 
     /// <summary>
@@ -165,6 +166,18 @@ public partial class FrmMain : Form
             ToolTipText = ""
         });
 
+        stripLblCulture = new ToolStripStatusLabel()
+        {
+            AutoSize = false,
+            BorderSides = ToolStripStatusLabelBorderSides.Right,
+            DisplayStyle = ToolStripItemDisplayStyle.Text,
+            Name = "LabelCulture",
+            Size = new System.Drawing.Size(60, 23),
+            TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+            ToolTipText = "User interface language"
+        };
+        statusStrip.Items.Add(stripLblCulture);
+
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
@@ -301,7 +314,7 @@ public partial class FrmMain : Form
     private void ComboWindow_SelectedIndexChanged(object? sender, EventArgs e)
     {
         // Move the focus away in order to deselect the text
-        this.tableLayoutPanel2.Focus();
+        this.tableLayoutPanel1.Focus();
 
         if (stripComboSeries.SelectedIndex < 0) return;
 
@@ -366,10 +379,12 @@ public partial class FrmMain : Form
         ((ToolStrip)tspTop.Controls[0]).Items[9].ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
 
         // Update StatusStrip
-        ((ToolStrip)tspBottom.Controls[0]).Items[1].ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
-        ((ToolStrip)tspBottom.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
-        ((ToolStrip)tspBottom.Controls[0]).Items[3].ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
-        ((ToolStrip)tspBottom.Controls[0]).Items[4].ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
+        stripLblCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
+        stripLblCulture.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
+        ((ToolStrip)tspBottom.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
+        ((ToolStrip)tspBottom.Controls[0]).Items[3].ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
+        ((ToolStrip)tspBottom.Controls[0]).Items[4].ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
+        ((ToolStrip)tspBottom.Controls[0]).Items[5].ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
 
         // Update plots if they contain series
         plotOriginal.CultureUI = _settings.AppCulture;

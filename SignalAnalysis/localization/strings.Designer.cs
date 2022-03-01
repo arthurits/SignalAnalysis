@@ -1135,5 +1135,14 @@ namespace SignalAnalysis.localization {
                 return ResourceManager.GetString("strToolTipSettings", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User interface language.
+        /// </summary>
+        internal static string strToolTipUILanguage {
+            get {
+                return ResourceManager.GetString("strToolTipUILanguage", resourceCulture);
+            }
+        }
     }
 }

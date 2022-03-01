@@ -485,4 +485,7 @@ dimension has been stopped.</value>
   <data name="strToolTipSettings" xml:space="preserve">
     <value>Settings for plots, data, and UI</value>
   </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>User interface language</value>
+  </data>
 </root>

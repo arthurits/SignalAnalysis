@@ -116,12 +116,13 @@ partial class FrmMain
         this.UseWaitCursor = true;
 
         // ComputeStats(signal);
+        if (tokenSource is not null) tokenSource.Dispose();
         tokenSource = new();
         token = tokenSource.Token;
         Results = new();
         statsTask = Task.Run(() =>
         {
-            UpdateStats(signal, token, _settings.CumulativeDimension, _settings.Entropy);
+            UpdateStats(signal, _settings.CumulativeDimension, _settings.Entropy);
         }, token);
         await statsTask;
 
@@ -144,7 +145,7 @@ partial class FrmMain
     /// <param name="signal">Signal data</param>
     /// <param name="progressive"><see langword>True</see> if the progressive fractal dimension is to be computed</param>
     /// <param name="entropy"><see langword="True"/> if all the entropy parameters are to be computed</param>
-    private void UpdateStats(double[] signal, CancellationToken c, bool progressive = false, bool entropy = false)
+    private void UpdateStats(double[] signal, bool progressive = false, bool entropy = false)
     {
         if (signal.Length == 0) return;
 

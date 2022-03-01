@@ -489,4 +489,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strToolTipSettings" xml:space="preserve">
     <value>Opciones para los gráficos, los datos y la interfaz</value>
   </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>Idioma de la interfaz de usuario</value>
+  </data>
 </root>
