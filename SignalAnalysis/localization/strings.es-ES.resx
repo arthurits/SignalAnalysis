@@ -257,6 +257,9 @@ Se utilizarán los valores por defecto.</value>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La sección '{0}' tiene formato incorrecto.</value>
   </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Seleccionar referencia cultural</value>
+  </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Opciones</value>
   </data>

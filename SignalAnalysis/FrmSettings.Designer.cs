@@ -69,7 +69,7 @@
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
             // btnAccept
             // 
@@ -79,7 +79,7 @@
             this.btnAccept.TabIndex = 6;
             this.btnAccept.Text = "&Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            this.btnAccept.Click += new System.EventHandler(this.Accept_Click);
             // 
             // tabSettings
             // 
@@ -233,10 +233,10 @@
             this.tabGUI.Controls.Add(this.lblDataFormat);
             this.tabGUI.Controls.Add(this.grpCulture);
             this.tabGUI.Controls.Add(this.chkDlgPath);
-            this.tabGUI.Location = new System.Drawing.Point(4, 26);
+            this.tabGUI.Location = new System.Drawing.Point(4, 24);
             this.tabGUI.Name = "tabGUI";
             this.tabGUI.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGUI.Size = new System.Drawing.Size(441, 213);
+            this.tabGUI.Size = new System.Drawing.Size(441, 215);
             this.tabGUI.TabIndex = 1;
             this.tabGUI.Text = "User interface";
             this.tabGUI.UseVisualStyleBackColor = true;
@@ -279,7 +279,7 @@
             this.cboAllCultures.Name = "cboAllCultures";
             this.cboAllCultures.Size = new System.Drawing.Size(136, 25);
             this.cboAllCultures.TabIndex = 3;
-            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.cboAllCultures_SelectedValueChanged);
+            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.AllCultures_SelectedValueChanged);
             // 
             // radUserCulture
             // 
@@ -291,7 +291,7 @@
             this.radUserCulture.TabStop = true;
             this.radUserCulture.Text = "Select culture";
             this.radUserCulture.UseVisualStyleBackColor = true;
-            this.radUserCulture.CheckedChanged += new System.EventHandler(this.radUserCulture_CheckedChanged);
+            this.radUserCulture.CheckedChanged += new System.EventHandler(this.UserCulture_CheckedChanged);
             // 
             // radInvariantCulture
             // 
@@ -303,7 +303,7 @@
             this.radInvariantCulture.TabStop = true;
             this.radInvariantCulture.Text = "Invariant culture formatting";
             this.radInvariantCulture.UseVisualStyleBackColor = true;
-            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.radInvariantCulture_CheckedChanged);
+            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.InvariantCulture_CheckedChanged);
             // 
             // radCurrentCulture
             // 
@@ -315,7 +315,7 @@
             this.radCurrentCulture.TabStop = true;
             this.radCurrentCulture.Text = "Current culture formatting";
             this.radCurrentCulture.UseVisualStyleBackColor = true;
-            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.radCurrentCulture_CheckedChanged);
+            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.CurrentCulture_CheckedChanged);
             // 
             // chkDlgPath
             // 
@@ -335,7 +335,7 @@
             this.btnReset.TabIndex = 12;
             this.btnReset.Text = "&Reset";
             this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.btnReset.Click += new System.EventHandler(this.Reset_Click);
             // 
             // FrmSettings
             // 
@@ -351,6 +351,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmSettings";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.tabSettings.ResumeLayout(false);

@@ -254,6 +254,9 @@ Default values will be used instead.</value>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Section '{0}' is mis-formatted.</value>
   </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Select culture</value>
+  </data>
   <data name="strFrmSettings" xml:space="preserve">
     <value>Settings</value>
   </data>

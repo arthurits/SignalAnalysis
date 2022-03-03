@@ -10,7 +10,7 @@ namespace System.Windows.Forms;
 public class CenterWinDialog : IDisposable
 {
     private int mTries = 0;
-    private Form mOwner;
+    private readonly Form mOwner;
     private System.Drawing.Rectangle clientRect;
     //private delegate System.Windows.Forms.Form SafeCallGetOwner(Form owner);
 
@@ -25,30 +25,30 @@ public class CenterWinDialog : IDisposable
         });
 
         if (owner.WindowState != FormWindowState.Minimized)
-            owner.BeginInvoke(new MethodInvoker(findDialog));
+            owner.BeginInvoke(new MethodInvoker(FindDialog));
     }
 
-    private void findDialog()
+    private void FindDialog()
     {
         // Enumerate windows to find the message box
         if (mTries < 0) return;
-        EnumThreadWndProc callback = new EnumThreadWndProc(checkWindow);
+        EnumThreadWndProc callback = new(CheckWindow);
         if (EnumThreadWindows(GetCurrentThreadId(), callback, IntPtr.Zero))
         {
-            if (++mTries < 10) mOwner.BeginInvoke(new MethodInvoker(findDialog));
+            if (++mTries < 10) mOwner.BeginInvoke(new MethodInvoker(FindDialog));
         }
     }
-    private bool checkWindow(IntPtr hWnd, IntPtr lp)
+    private bool CheckWindow(IntPtr hWnd, IntPtr lp)
     {
         // Checks if <hWnd> is a dialog
-        System.Text.StringBuilder sb = new System.Text.StringBuilder(260);
-        GetClassName(hWnd, sb, sb.Capacity);
+        System.Text.StringBuilder sb = new(260);
+        int result = GetClassName(hWnd, sb, sb.Capacity);
+        if (result == 0) return true;   // Error in GetClassName
         if (sb.ToString() != "#32770") return true;
 
         // Got it
-        System.Drawing.Rectangle frmRect = new System.Drawing.Rectangle(mOwner.Location, mOwner.Size);
-        RECT dlgRect;
-        GetWindowRect(hWnd, out dlgRect);
+        System.Drawing.Rectangle frmRect = new(mOwner.Location, mOwner.Size);
+        GetWindowRect(hWnd, out RECT dlgRect);
 
         int x = frmRect.Left + (frmRect.Width - dlgRect.Right + dlgRect.Left) / 2;
         int y = frmRect.Top + (frmRect.Height - dlgRect.Bottom + dlgRect.Top) / 2;
@@ -65,6 +65,7 @@ public class CenterWinDialog : IDisposable
     public void Dispose()
     {
         mTries = -1;
+        GC.SuppressFinalize(this);
     }
 
     // P/Invoke declarations

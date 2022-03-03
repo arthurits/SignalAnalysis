@@ -176,8 +176,9 @@ public partial class FrmMain : Form
             TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
             ToolTipText = "User interface language"
         };
-        statusStrip.Items.Add(stripLblCulture);
-
+        stripLblCulture.Click += Language_Click;
+        item = statusStrip.Items.Add(stripLblCulture);
+        
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,

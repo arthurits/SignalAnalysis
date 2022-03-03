@@ -177,6 +177,17 @@ partial class FrmMain
         frmAbout.ShowDialog();
     }
 
+    private void Language_Click(object? sender, EventArgs e)
+    {
+        FrmLanguage frm = new(_settings);
+        frm.ShowDialog();
+
+        if (frm.DialogResult == DialogResult.OK)
+        {
+            UpdateUI_Language();
+        }
+    }
+
     private void LabelEx_CheckedChanged(object? sender, EventArgs e)
     {
         if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)

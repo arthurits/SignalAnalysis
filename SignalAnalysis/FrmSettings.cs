@@ -3,7 +3,7 @@
 public partial class FrmSettings : Form
 {
     public ClassSettings Settings = new();
-    private System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
 
     public FrmSettings()
     {
@@ -19,7 +19,7 @@ public partial class FrmSettings : Form
         UpdateControls(settings);
     }
 
-    private void btnAccept_Click(object sender, EventArgs e)
+    private void Accept_Click(object sender, EventArgs e)
     {
         if (!int.TryParse(txtStart.Text, out int num)) return;
         if (num < 0) return;
@@ -38,21 +38,21 @@ public partial class FrmSettings : Form
         if (radPoints.Checked) Settings.AxisType = AxisType.Points;
         if (radTime.Checked) Settings.AxisType = AxisType.DateTime;
 
-        if (radCurrentCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
-        if (radInvariantCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
-        if (radUserCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
+        //if (radCurrentCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+        //if (radInvariantCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+        //if (radUserCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
 
         DialogResult = DialogResult.OK;
     }
 
-    private void btnCancel_Click(object sender, EventArgs e)
+    private void Cancel_Click(object sender, EventArgs e)
     {
         DialogResult = DialogResult.Cancel;
     }
 
-    private void btnReset_Click(object sender, EventArgs e)
+    private void Reset_Click(object sender, EventArgs e)
     {
         DialogResult DlgResult;
         using (new CenterWinDialog(this))
@@ -70,19 +70,16 @@ public partial class FrmSettings : Form
         }
     }
 
-    private void radCurrentCulture_CheckedChanged(object sender, EventArgs e)
+    private void CurrentCulture_CheckedChanged(object sender, EventArgs e)
     {
         if (radCurrentCulture.Checked)
         {
             Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
-            //radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting") + $" ({Settings.AppCultureName})";
         }
-        //else
-        //    radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", Settings.AppCulture) ?? "Current culture formatting";
     }
 
-    private void radInvariantCulture_CheckedChanged(object sender, EventArgs e)
+    private void InvariantCulture_CheckedChanged(object sender, EventArgs e)
     {
         if (radInvariantCulture.Checked)
         {
@@ -91,22 +88,24 @@ public partial class FrmSettings : Form
         }
     }
 
-    private void radUserCulture_CheckedChanged(object sender, EventArgs e)
+    private void UserCulture_CheckedChanged(object sender, EventArgs e)
     {
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture(((System.Globalization.CultureInfo)cboAllCultures.SelectedItem).Name);
+            //Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture(((System.Globalization.CultureInfo)cboAllCultures.SelectedItem).Name);
+            Settings.AppCulture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
             UpdateUI_Language();
         }
     }
 
-    private void cboAllCultures_SelectedValueChanged(object sender, EventArgs e)
+    private void AllCultures_SelectedValueChanged(object sender, EventArgs e)
     {
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cbo.SelectedValue);
+            //Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cbo.SelectedValue ?? String.Empty);
+            Settings.AppCulture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
         }
     }
@@ -150,29 +149,6 @@ public partial class FrmSettings : Form
 
         chkDlgPath.Checked = Settings.RememberFileDialogPath;
         txtDataFormat.Text = Settings.DataFormat;
-    }
-
-    /// <summary>
-    /// Databind all cultures to the cboCultures
-    /// </summary>
-    private void FillAllCultures()
-    {
-        var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures);
-        //var cultures = System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.AllCultures & ~System.Globalization.CultureTypes.SpecificCultures);
-
-        // create an arraylist for the locales 
-        System.Collections.ArrayList _locales = new();
-
-        foreach (var culture in cultures)
-        {
-            // load in the string value 
-            _locales.Add(culture);
-        }
-
-        // Databind https://social.msdn.microsoft.com/Forums/vstudio/en-US/2ff7d56d-d91d-48b4-815d-cf9356794a69/binding-cultureinfo-to-combobox-lcid-1033-name-french-france-what-is-going-on-?forum=netfxbcl
-        cboAllCultures.DisplayMember = "DisplayName";
-        cboAllCultures.ValueMember = "Name";
-        cboAllCultures.DataSource = _locales;
     }
 
     /// <summary>

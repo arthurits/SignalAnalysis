@@ -462,6 +462,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select culture.
+        /// </summary>
+        internal static string strFrmLanguage {
+            get {
+                return ResourceManager.GetString("strFrmLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string strFrmSettings {
