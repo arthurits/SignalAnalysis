@@ -7,7 +7,7 @@ partial class FrmMain
     /// </summary>
     /// <param name="FileName">Path (including name) of the text file</param>
     /// <param name="Data">Array of values to be saved</param>
-    /// <param name="ArrIndexInit">Offset index of _signalData</param>
+    /// <param name="ArrIndexInit">Offset index of _signalData (used to compute the time data field)</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool SaveTextData(string FileName, double[] Data, int ArrIndexInit, string? SeriesName)
@@ -90,7 +90,7 @@ partial class FrmMain
     /// </summary>
     /// <param name="FileName">Path (including name) of the sig file</param>
     /// <param name="Data">Array of values to be saved</param>
-    /// <param name="ArrIndexInit">Offset index of _signalData</param>
+    /// <param name="ArrIndexInit">Offset index of _signalData (used to compute the time data field)</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool SaveSigData(string FileName, double[] Data, int ArrIndexInit, string? SeriesName)
@@ -108,7 +108,6 @@ partial class FrmMain
 
             // Save the header text into the file
             string content = string.Empty;
-            //TimeSpan nTime = nStart.AddSeconds((nPoints - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader17", _settings.AppCulture) ?? "Number of data series")}: 1");
@@ -143,7 +142,7 @@ partial class FrmMain
     /// </summary>
     /// <param name="FileName">Path (including name) of the sig file</param>
     /// <param name="Data">Array of values to be saved</param>
-    /// <param name="ArrIndexInit">Offset index of _signalData</param>
+    /// <param name="ArrIndexInit">Offset index of _signalData (used to compute the time data field)</param>
     /// <param name="SeriesName">Name of the serie data to be saved</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool SaveBinaryData(string FileName, double[] Data, int ArrIndexInit, string? SeriesName)
@@ -189,21 +188,6 @@ partial class FrmMain
                 bw.Write(nStart.AddSeconds((j + ArrIndexInit) / nSampleFreq));
                 bw.Write(Data[j]);   
             }
-
-            //content = $"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t";
-            //for (int i = 0; i < seriesLabels.Length; i++)
-            //    content += $"{seriesLabels[i]}\t";
-            //bw.WriteLine(content);
-
-            //// https://stackoverflow.com/questions/6952923/conversion-double-array-to-byte-array
-            //byte[] bytesLine;
-            //for (int i = 0; i < _signalData.Length; i++)
-            //{
-            //    // bw.Write(_plotData[i].SelectMany(value => BitConverter.GetBytes(value)).ToArray()); // Requires LINQ
-            //    bytesLine = new byte[_signalData[i].Length * sizeof(double)];
-            //    Buffer.BlockCopy(_signalData[i], 0, bytesLine, 0, bytesLine.Length);
-            //    bw.Write(bytesLine);
-            //}
 
             // Success!
             result = true;

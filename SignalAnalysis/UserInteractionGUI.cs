@@ -35,22 +35,15 @@ partial class FrmMain
             if (_settings.RememberFileDialogPath) _settings.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             // Read the data file in the corresponding format
-            bool boolRead = false;
             Stats? results = null;
-            if (".elux".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                boolRead = ReadELuxData(filePath);
-            else if (".sig".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-                boolRead = ReadSigData(filePath);
-            else if (".txt".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
+            bool boolRead = Path.GetExtension(filePath).ToLower() switch
             {
-                results = new();
-                boolRead = ReadTextData(filePath, results);
-            }
-            else if (".bin".Equals(Path.GetExtension(filePath), StringComparison.OrdinalIgnoreCase))
-            {
-                results = new();
-                boolRead = ReadBinData(filePath, results);
-            }
+                ".elux" => ReadELuxData(filePath),
+                ".sig" => ReadSigData(filePath),
+                ".txt" => ReadTextData(filePath, results),
+                ".bin" => ReadBinData(filePath, results),
+                _ => throw new NotImplementedException()
+            };
 
             if (boolRead)
             {
@@ -116,24 +109,14 @@ partial class FrmMain
             //Get the path of specified file and store the directory for future calls
             filePath = SaveDlg.FileName;
             if (_settings.RememberFileDialogPath) _settings.UserSavePath = Path.GetDirectoryName(filePath) ?? string.Empty;
-
-            // Save data into file in the corresponding format
-            bool boolSave;
-            switch (Path.GetExtension(SaveDlg.FileName).ToLower())
+            
+            var boolSave = Path.GetExtension(filePath).ToLower() switch
             {
-                case ".txt":
-                    boolSave = SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
-                    break;
-                case ".sig":
-                    boolSave = SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
-                    break;
-                case ".bin":
-                    boolSave = SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
-                    break;
-                default:
-                    boolSave = SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString());
-                    break;
-            }
+                ".txt" => SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
+                ".sig" => SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
+                ".bin" => SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
+                _ => SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
+            };
 
             // Restore the cursor
             Cursor.Current = cursor;
@@ -183,9 +166,7 @@ partial class FrmMain
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
-        {
             UpdateUI_Language();
-        }
     }
 
     private void LabelEx_CheckedChanged(object? sender, EventArgs e)

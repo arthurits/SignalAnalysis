@@ -53,7 +53,7 @@ public class Crosshair2 : Plottable.IPlottable
     /// <summary>
     /// Sets the line width for vertical and horizontal lines
     /// </summary>
-    public float LineWidth
+    public double LineWidth
     {
         set
         {
@@ -131,7 +131,7 @@ public class Crosshair2 : Plottable.IPlottable
 
     public AxisLimits GetAxisLimits() => new(double.NaN, double.NaN, double.NaN, double.NaN);
 
-    public Plottable.LegendItem[] GetLegendItems() => null;
+    public Plottable.LegendItem[]? GetLegendItems() => null;
 
     public void ValidateData(bool deep = false) { }
 

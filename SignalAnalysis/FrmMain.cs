@@ -150,7 +150,7 @@ public partial class FrmMain : Form
             Renderer = new customRenderer<ToolStripStatusLabelEx>(Brushes.SteelBlue, Brushes.LightSkyBlue),
             RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional,
             Size = new System.Drawing.Size(934, 28),
-            TabIndex = 0,
+            TabIndex = 1,
             Text = "Status bar"
         };
 
@@ -182,7 +182,7 @@ public partial class FrmMain : Form
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = false,    // Inverse because we are simulating a click
+            Checked = false,    // Inverse because we are later simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExPower",
             Size = new System.Drawing.Size(28, 23),
@@ -196,7 +196,7 @@ public partial class FrmMain : Form
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = true,    // Inverse because we are simulating a click
+            Checked = true,    // Inverse because we are later simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExCumulative",
             Size = new System.Drawing.Size(28, 23),
@@ -210,7 +210,7 @@ public partial class FrmMain : Form
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = true,    // Inverse because we are simulating a click
+            Checked = true,    // Inverse because we are later simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExEntropy",
             Size = new System.Drawing.Size(28, 23),
@@ -224,7 +224,7 @@ public partial class FrmMain : Form
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
             AutoSize = false,
-            Checked = true,    // Inverse because we are simulating a click
+            Checked = true,    // Inverse because we are later simulating a click
             DisplayStyle = ToolStripItemDisplayStyle.Text,
             Name = "LabelExCrossHair",
             Size = new System.Drawing.Size(28, 23),

@@ -3,12 +3,12 @@
 public partial class FrmLanguage : Form
 {
     private ClassSettings _settings = new();
-    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
 
     public FrmLanguage()
     {
         InitializeComponent();
-        FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+        FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
         UpdateUI_Language();
     }
 
@@ -51,7 +51,6 @@ public partial class FrmLanguage : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            //_settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue ?? String.Empty);
             _settings.AppCulture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
             UpdateUI_Language();
         }
@@ -62,7 +61,6 @@ public partial class FrmLanguage : Form
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            //_settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cbo.SelectedValue);
             _settings.AppCulture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
         }

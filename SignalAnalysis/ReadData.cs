@@ -233,12 +233,14 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the text file</param>
     /// <param name="results">Numeric results read from the file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadTextData(string FileName, Stats results)
+    private bool ReadTextData(string FileName, Stats? results)
     {
         double readValue;
         int nPoints = 0;
         bool result = false;
         string? strLine;
+
+        if (results is null) results = new();
 
         try
         {
@@ -451,10 +453,12 @@ partial class FrmMain
     /// <param name="results">Numeric results read from the file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     /// <exception cref="FormatException"></exception>
-    private bool ReadBinData(string FileName, Stats results)
+    private bool ReadBinData(string FileName, Stats? results)
     {
         int nPoints;
         bool result = true;
+
+        if (results is null) results = new();
 
         try
         {

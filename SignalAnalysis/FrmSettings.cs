@@ -3,13 +3,13 @@
 public partial class FrmSettings : Form
 {
     public ClassSettings Settings = new();
-    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
 
     public FrmSettings()
     {
         InitializeComponent();
-        //FillAllCultures();
-        FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
+        
+        FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
         UpdateUI_Language();
     }
 
@@ -38,9 +38,6 @@ public partial class FrmSettings : Form
         if (radPoints.Checked) Settings.AxisType = AxisType.Points;
         if (radTime.Checked) Settings.AxisType = AxisType.DateTime;
 
-        //if (radCurrentCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
-        //if (radInvariantCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
-        //if (radUserCulture.Checked) Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cboAllCultures.SelectedValue);
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
 
@@ -93,7 +90,6 @@ public partial class FrmSettings : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            //Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture(((System.Globalization.CultureInfo)cboAllCultures.SelectedItem).Name);
             Settings.AppCulture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
             UpdateUI_Language();
         }
@@ -104,7 +100,6 @@ public partial class FrmSettings : Form
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            //Settings.AppCulture = System.Globalization.CultureInfo.CreateSpecificCulture((string)cbo.SelectedValue ?? String.Empty);
             Settings.AppCulture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
         }
@@ -144,8 +139,7 @@ public partial class FrmSettings : Form
             radCurrentCulture.Checked = true;
         else
             radUserCulture.Checked = true;
-        //cboAllCultures.SelectedValue = Settings.AppCultureName;
-        cboAllCultures.Text = Settings.AppCulture.DisplayName;
+        cboAllCultures.SelectedValue = Settings.AppCultureName;
 
         chkDlgPath.Checked = Settings.RememberFileDialogPath;
         txtDataFormat.Text = Settings.DataFormat;

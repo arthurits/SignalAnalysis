@@ -2,23 +2,23 @@
 
 public class FormsPlotCrossHair : ScottPlot.FormsPlot
 {
-    private ContextMenuStrip customMenu = new ();
-    private System.Windows.Forms.ToolStripMenuItem detachLegendMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem crossHairMenuItem;
+    private readonly ContextMenuStrip customMenu = new ();
+    private System.Windows.Forms.ToolStripMenuItem detachLegendMenuItem = new();
+    private System.Windows.Forms.ToolStripMenuItem crossHairMenuItem = new();
 
     /// <summary>
     /// Event fired whenever the vertical line is dragged.
     /// </summary>
-    public event EventHandler<LineDragEventArgs> VLineDragged;
+    public event EventHandler<LineDragEventArgs>? VLineDragged;
     /// <summary>
     /// Event fired whenever the horizontal line is dragged.
     /// </summary>
-    public event EventHandler<LineDragEventArgs> HLineDragged;
+    public event EventHandler<LineDragEventArgs>? HLineDragged;
     
-    public ScottPlot.Plottable.VLine VerticalLine { get; private set; }
-    public ScottPlot.Plottable.HLine HorizontalLine { get; private set; }
+    public ScottPlot.Plottable.VLine? VerticalLine { get; private set; }
+    public ScottPlot.Plottable.HLine? HorizontalLine { get; private set; }
 
-    private System.Globalization.CultureInfo _cultureUI;
+    private System.Globalization.CultureInfo _cultureUI = System.Globalization.CultureInfo.CurrentCulture;
     /// <summary>
     /// Culture used to show the right click context menu
     /// </summary>
@@ -60,18 +60,18 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     {
         set
         {
-            if (VerticalLine != null)
+            if (VerticalLine is not null)
             {
                 VerticalLine.Color = value;
                 VerticalLine.PositionLabelBackground = System.Drawing.Color.FromArgb(200, value);
             }
-            if (HorizontalLine != null)
+            if (HorizontalLine is not null)
             {
                 HorizontalLine.Color = value;
                 HorizontalLine.PositionLabelBackground = System.Drawing.Color.FromArgb(200, value);
             }
         }
-        get => VerticalLine.Color;
+        get => VerticalLine?.Color ?? System.Drawing.Color.Red;
     }
 
     public FormsPlotCrossHair(System.Globalization.CultureInfo? culture = null)
@@ -87,7 +87,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // Add a custom right-click action
         this.RightClicked += CustomRightClickEvent;
 
-        this.DoubleClick += new System.EventHandler(OnDoubleClick);
+        this.DoubleClick += OnDoubleClick;
         
         //this.Refresh();
     }
@@ -170,7 +170,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     {
         if (!showVertical && !showHorizontal) return;
 
-        if (Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Count() > 0) return;
+        if (Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Any()) return;
 
         // There should be at last one plottable added, otherwise
         if (this.Plot.GetPlottables().Length >= 1)
@@ -232,7 +232,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         else if(ToY)
             plotMethod = plotType.GetMethod("GetPointNearestY");
 
-        if (plotMethod == null) return (null, null, null);
+        if (plotMethod is null || VerticalLine is null || HorizontalLine is null) return (null, null, null);
 
         if (VerticalLine.IsVisible || HorizontalLine.IsVisible)
         {
@@ -244,7 +244,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
                 param[0] = mouseCoordY;
 
             var result = plotMethod.Invoke(plot, param);
-            if (result != null)
+            if (result is not null)
             {
                 (pointX, pointY, pointIndex) = ((double, double, int))result;
                 VerticalLine.X = pointX.Value;
@@ -262,7 +262,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     private void OnDraggedVertical(object? sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
-        if (!VerticalLine.IsVisible || !SnapToPoint) return;
+        if (VerticalLine is null || !VerticalLine.IsVisible || !SnapToPoint) return;
 
         var (pointX, pointY, pointIndex) = SnapLinesToPoint(ToX: true);
 
@@ -276,7 +276,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     private void OnDraggedHorizontal(object? sender, EventArgs e)
     {
         // If we are reading from the sensor, then exit
-        if (!HorizontalLine.IsVisible || !SnapToPoint) return;
+        if (HorizontalLine is null || !HorizontalLine.IsVisible || !SnapToPoint) return;
 
         var (pointX, pointY, pointIndex) = SnapLinesToPoint(ToY: true);
 
@@ -314,10 +314,10 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // Make a temporary copy of the event to avoid possibility of
         // a race condition if the last subscriber unsubscribes
         // immediately after the null check and before the event is raised.
-        EventHandler<LineDragEventArgs> raiseEvent = VLineDragged;
+        EventHandler<LineDragEventArgs>? raiseEvent = VLineDragged;
 
         // Event will be null if there are no subscribers
-        if (raiseEvent != null)
+        if (raiseEvent is not null)
         {
             // Call to raise the event.
             raiseEvent(this, e);
@@ -329,10 +329,10 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // Make a temporary copy of the event to avoid possibility of
         // a race condition if the last subscriber unsubscribes
         // immediately after the null check and before the event is raised.
-        EventHandler<LineDragEventArgs> raiseEvent = HLineDragged;
+        EventHandler<LineDragEventArgs>? raiseEvent = HLineDragged;
 
         // Event will be null if there are no subscribers
-        if (raiseEvent != null)
+        if (raiseEvent is not null)
         {
             // Call to raise the event.
             raiseEvent(this, e);
@@ -396,14 +396,14 @@ public class LineDragEventArgs : EventArgs
 {
     public LineDragEventArgs(double? X, double? Y, int? Index)
     {
-        pointX = X ?? default;
-        pointY = Y ?? default;
-        pointIndex = Index ?? default;
+        PointX = X ?? default;
+        PointY = Y ?? default;
+        PointIndex = Index ?? default;
     }
 
-    public double pointX { get; set; }
-    public double pointY { get; set; }
-    public int pointIndex { get; set; }
+    public double PointX { get; set; }
+    public double PointY { get; set; }
+    public int PointIndex { get; set; }
 
 }
 
