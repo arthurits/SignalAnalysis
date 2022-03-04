@@ -28,11 +28,10 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         set { _cultureUI = value; ContextMenuUILanguage(); }
     }
 
-    private readonly System.Resources.ResourceManager StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
+    private readonly System.Resources.ResourceManager StringsRM;
 
     public bool ShowCrossHair
     {
-        //get => this.Plot.GetPlottables().Where(x => x is Plottable.VLine || x is Plottable.HLine).Count() == 2;
         get => crossHairMenuItem.Checked;
         set
         {
@@ -74,21 +73,23 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         get => VerticalLine?.Color ?? System.Drawing.Color.Red;
     }
 
-    public FormsPlotCrossHair(System.Globalization.CultureInfo? culture = null)
-        : base()
+    public FormsPlotCrossHair()
+        :base()
     {
         InitilizeContextMenu();
-
-        CultureUI = culture ?? System.Globalization.CultureInfo.CurrentCulture;
-
         // Unsubscribe from the default right-click menu event
         this.RightClicked -= DefaultRightClickEvent;
-
         // Add a custom right-click action
         this.RightClicked += CustomRightClickEvent;
-
         this.DoubleClick += OnDoubleClick;
-        
+
+        StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
+    }
+
+    public FormsPlotCrossHair(System.Globalization.CultureInfo? culture = null)
+        : this()
+    {
+        CultureUI = culture ?? System.Globalization.CultureInfo.CurrentCulture;
         //this.Refresh();
     }
 
