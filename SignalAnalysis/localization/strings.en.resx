@@ -425,6 +425,13 @@ dimension has been stopped.</value>
     <value>Unable to read data from file.
 {0}</value>
   </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>The culture identifier string name is not valid.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>Culture name error</value>
+  </data>
   <data name="strReadDataErrorNumber" xml:space="preserve">
     <value>Invalid numeric value: {0}</value>
   </data>

@@ -183,8 +183,8 @@ partial class FrmMain
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(
-                      StringsRM.GetString("strMsgBoxTaskCancel", _settings.AppCulture),
-                      StringsRM.GetString("strMsgBoxTaskCancelTitle", _settings.AppCulture),
+                      StringsRM.GetString("strMsgBoxTaskCancel", _settings.AppCulture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.",
+                      StringsRM.GetString("strMsgBoxTaskCancelTitle", _settings.AppCulture) ?? "Stop",
                       MessageBoxButtons.OK,
                       MessageBoxIcon.Stop);
             }

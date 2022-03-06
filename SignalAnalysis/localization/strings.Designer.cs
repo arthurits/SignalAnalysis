@@ -957,6 +957,25 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The culture identifier string name is not valid.
+        ///{0}.
+        /// </summary>
+        internal static string strReadDataErrorCulture {
+            get {
+                return ResourceManager.GetString("strReadDataErrorCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Culture name error.
+        /// </summary>
+        internal static string strReadDataErrorCultureTitle {
+            get {
+                return ResourceManager.GetString("strReadDataErrorCultureTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid numeric value: {0}.
         /// </summary>
         internal static string strReadDataErrorNumber {

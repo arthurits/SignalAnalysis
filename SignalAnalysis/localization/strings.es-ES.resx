@@ -429,6 +429,13 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>No se ha podido leer el archivo de datos.
 {0}</value>
   </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>El nombre de la referencia cultural no es válido.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>Referencia cultural errónea</value>
+  </data>
   <data name="strReadDataErrorNumber" xml:space="preserve">
     <value>Valor numérico incorrecto: {0}</value>
   </data>
