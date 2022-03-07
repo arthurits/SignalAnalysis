@@ -28,7 +28,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         set { _cultureUI = value; ContextMenuUILanguage(); }
     }
 
-    private readonly System.Resources.ResourceManager StringsRM;
+    private readonly System.Resources.ResourceManager StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
 
     public bool ShowCrossHair
     {
@@ -37,12 +37,12 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         {
             if (value)
             {
-                ShowCrossHairLines(true, true);
+                ShowLines(true, true);
                 crossHairMenuItem.Checked = value;
             }
             else
             {
-                DeleteCrossHairLines();
+                DeleteLines();
                 crossHairMenuItem.Checked = value;
             }
         }
@@ -82,8 +82,6 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         // Add a custom right-click action
         this.RightClicked += CustomRightClickEvent;
         this.DoubleClick += OnDoubleClick;
-
-        StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
     }
 
     public FormsPlotCrossHair(System.Globalization.CultureInfo? culture = null)
@@ -150,7 +148,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     /// Add vertical and horizontal plottable lines.
     /// Subscribe to the line's dragged events.
     /// </summary>
-    private void CreateCrossHairLines()
+    private void CreateLines()
     {
         VerticalLine = this.Plot.AddVerticalLine(0.0, style: ScottPlot.LineStyle.Dash);
         VerticalLine.IsVisible = false;
@@ -167,7 +165,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         CrossHairColor = System.Drawing.Color.FromArgb(200, System.Drawing.Color.Red);
     }
 
-    private void ShowCrossHairLines(bool showVertical = false, bool showHorizontal = false)
+    private void ShowLines(bool showVertical = false, bool showHorizontal = false)
     {
         if (!showVertical && !showHorizontal) return;
 
@@ -175,7 +173,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
 
         // There should be at last one plottable added, otherwise
         if (this.Plot.GetPlottables().Length >= 1)
-            CreateCrossHairLines();
+            CreateLines();
 
         if (showVertical && VerticalLine is not null)
         {
@@ -198,7 +196,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     /// Delete vertical and horizontal plottable lines.
     /// Unsubscribe to the line's dragged events.
     /// </summary>
-    private void DeleteCrossHairLines()
+    private void DeleteLines()
     {
         if (VerticalLine is not null)
         {
