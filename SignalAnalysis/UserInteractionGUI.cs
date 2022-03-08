@@ -129,7 +129,7 @@ partial class FrmMain
                     MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxOKSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk."),
                         StringsRM.GetString("strMsgBoxOKSaveDataTitle", _settings.AppCulture) ?? "Data saved",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                        MessageBoxIcon.Information);
                 }
             }
         }
