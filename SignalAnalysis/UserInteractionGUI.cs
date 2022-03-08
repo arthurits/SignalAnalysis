@@ -40,8 +40,8 @@ partial class FrmMain
             {
                 ".elux" => ReadELuxData(filePath),
                 ".sig" => ReadSigData(filePath),
-                ".txt" => ReadTextData(filePath, results),
-                ".bin" => ReadBinData(filePath, results),
+                ".txt" => ReadTextData(filePath, results = new()),
+                ".bin" => ReadBinData(filePath, results = new()),
                 _ => throw new NotImplementedException()
             };
 
