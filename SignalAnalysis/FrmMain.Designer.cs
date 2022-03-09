@@ -43,10 +43,15 @@ partial class FrmMain
             // plotFractal
             // 
             this.plotFractal.BackColor = System.Drawing.Color.Transparent;
+            this.plotFractal.CrossHairColor = System.Drawing.Color.Red;
+            this.plotFractal.CultureUI = new System.Globalization.CultureInfo("en-US");
             this.plotFractal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plotFractal.Location = new System.Drawing.Point(4, 178);
             this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFractal.Name = "plotFractal";
+            this.plotFractal.ShowCrossHair = false;
+            this.plotFractal.ShowCrossHairHorizontal = false;
+            this.plotFractal.ShowCrossHairVertical = false;
             this.plotFractal.Size = new System.Drawing.Size(852, 169);
             this.plotFractal.SnapToPoint = false;
             this.plotFractal.TabIndex = 3;
@@ -71,14 +76,20 @@ partial class FrmMain
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 625);
             this.tableLayoutPanel1.TabIndex = 4;
+            this.tableLayoutPanel1.TabStop = true;
             // 
             // plotFFT
             // 
             this.plotFFT.BackColor = System.Drawing.Color.Transparent;
+            this.plotFFT.CrossHairColor = System.Drawing.Color.Red;
+            this.plotFFT.CultureUI = new System.Globalization.CultureInfo("en-US");
             this.plotFFT.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plotFFT.Location = new System.Drawing.Point(4, 353);
             this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotFFT.Name = "plotFFT";
+            this.plotFFT.ShowCrossHair = false;
+            this.plotFFT.ShowCrossHairHorizontal = false;
+            this.plotFFT.ShowCrossHairVertical = false;
             this.plotFFT.Size = new System.Drawing.Size(852, 169);
             this.plotFFT.SnapToPoint = false;
             this.plotFFT.TabIndex = 5;
@@ -105,10 +116,15 @@ partial class FrmMain
             // plotOriginal
             // 
             this.plotOriginal.BackColor = System.Drawing.Color.Transparent;
+            this.plotOriginal.CrossHairColor = System.Drawing.Color.Red;
+            this.plotOriginal.CultureUI = new System.Globalization.CultureInfo("en-US");
             this.plotOriginal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plotOriginal.Location = new System.Drawing.Point(4, 3);
             this.plotOriginal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotOriginal.Name = "plotOriginal";
+            this.plotOriginal.ShowCrossHair = false;
+            this.plotOriginal.ShowCrossHairHorizontal = false;
+            this.plotOriginal.ShowCrossHairVertical = false;
             this.plotOriginal.Size = new System.Drawing.Size(278, 169);
             this.plotOriginal.SnapToPoint = false;
             this.plotOriginal.TabIndex = 2;
@@ -116,10 +132,15 @@ partial class FrmMain
             // plotWindow
             // 
             this.plotWindow.BackColor = System.Drawing.Color.Transparent;
+            this.plotWindow.CrossHairColor = System.Drawing.Color.Red;
+            this.plotWindow.CultureUI = new System.Globalization.CultureInfo("en-US");
             this.plotWindow.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plotWindow.Location = new System.Drawing.Point(290, 3);
             this.plotWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotWindow.Name = "plotWindow";
+            this.plotWindow.ShowCrossHair = false;
+            this.plotWindow.ShowCrossHairHorizontal = false;
+            this.plotWindow.ShowCrossHairVertical = false;
             this.plotWindow.Size = new System.Drawing.Size(278, 169);
             this.plotWindow.SnapToPoint = false;
             this.plotWindow.TabIndex = 3;
@@ -127,10 +148,15 @@ partial class FrmMain
             // plotApplied
             // 
             this.plotApplied.BackColor = System.Drawing.Color.Transparent;
+            this.plotApplied.CrossHairColor = System.Drawing.Color.Red;
+            this.plotApplied.CultureUI = new System.Globalization.CultureInfo("en-US");
             this.plotApplied.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plotApplied.Location = new System.Drawing.Point(576, 3);
             this.plotApplied.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.plotApplied.Name = "plotApplied";
+            this.plotApplied.ShowCrossHair = false;
+            this.plotApplied.ShowCrossHairHorizontal = false;
+            this.plotApplied.ShowCrossHairVertical = false;
             this.plotApplied.Size = new System.Drawing.Size(280, 169);
             this.plotApplied.SnapToPoint = false;
             this.plotApplied.TabIndex = 4;
@@ -154,12 +180,13 @@ partial class FrmMain
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(900, 760);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Signal analysis";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
-        this.Shown += new System.EventHandler(this.FrmMain_Shown);
-        this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmMain_KeyPress);
+            this.Shown += new System.EventHandler(this.FrmMain_Shown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmMain_KeyPress);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
