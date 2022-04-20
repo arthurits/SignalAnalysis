@@ -6,6 +6,11 @@ namespace SignalAnalysis;
 public class EmbeddedResources
 {
 	public const string AppLogo = @"images\logo.ico";
+	public const string IconExit = @"images\exit.ico";
+	public const string IconOpen = @"images\openfolder.ico";
+	public const string IconExport = @"images\save.ico";
+	public const string IconSettings = @"images\settings.ico";
+	public const string IconAbout = @"images\about.ico";
 
 	/// <summary>
 	/// Loads a graphics resource from a disk location
