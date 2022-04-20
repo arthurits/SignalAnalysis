@@ -115,7 +115,8 @@ partial class FrmAbout : Form
         //if (System.IO.File.Exists(path + @"\images\about.ico")) this.Icon = new Icon(path + @"\images\about.ico");
 
         //Bitmap image = new Icon(path + @"\images\logo.ico", 256, 256).ToBitmap();
-        if (System.IO.File.Exists(path + @"\images\logo@256.png")) this.logoPictureBox.Image = new Bitmap(path + @"\images\logo@256.png");
+        //if (System.IO.File.Exists(path + @"\images\logo@256.png")) this.logoPictureBox.Image = new Bitmap(path + @"\images\logo@256.png");
+        this.logoPictureBox.Image = EmbeddedResources.LoadGraphicsResource<Image>(EmbeddedResources.AppLogo256);
     }
 
     //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
