@@ -3,9 +3,10 @@ namespace SignalAnalysis;
 /// <summary>
 /// Load graphics resources from disk
 /// </summary>
-public class EmbeddedResources
+public class GraphicsResources
 {
 	public const string AppLogo = @"images\logo.ico";
+	public const string AppLogo256 = @"images\logo@256.png";
 	public const string IconExit = @"images\exit.ico";
 	public const string IconOpen = @"images\openfolder.ico";
 	public const string IconExport = @"images\save.ico";
@@ -18,7 +19,7 @@ public class EmbeddedResources
 	/// <typeparam name="T">Type of resource to be loaded</typeparam>
 	/// <param name="fileName">File name (absolute or relative to the working directory) to load resource from</param>
 	/// <returns>The graphics resource</returns>
-	public static T? LoadGraphicsResource<T> (string fileName)
+	public static T? Load<T> (string fileName)
     {
 		T? resource = default;
 		try

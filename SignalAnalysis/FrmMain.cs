@@ -35,7 +35,7 @@ public partial class FrmMain : Form
         LoadProgramSettingsJSON();
 
         // Set form icon
-        this.Icon = EmbeddedResources.LoadGraphicsResource<Icon>(EmbeddedResources.AppLogo);
+        this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
 
         // Initilization
         InitializeToolStripPanel();
