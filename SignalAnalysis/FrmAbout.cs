@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Reflection;
 
 namespace SignalAnalysis;
 
@@ -111,14 +104,13 @@ partial class FrmAbout : Form
         this.textBoxDescription.Text = AssemblyDescription;
 
         // Set form icons and images
-        var path = Path.GetDirectoryName(Environment.ProcessPath);
         //if (System.IO.File.Exists(path + @"\images\about.ico")) this.Icon = new Icon(path + @"\images\about.ico");
 
         //Bitmap image = new Icon(path + @"\images\logo.ico", 256, 256).ToBitmap();
-        if (System.IO.File.Exists(path + @"\images\logo@256.png")) this.logoPictureBox.Image = new Bitmap(path + @"\images\logo@256.png");
+        //if (System.IO.File.Exists(path + @"\images\logo@256.png")) this.logoPictureBox.Image = new Bitmap(path + @"\images\logo@256.png");
+        this.logoPictureBox.Image = GraphicsResources.Load<Image>(GraphicsResources.AppLogo256);
     }
 
-    //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
     protected override void WndProc(ref Message m)
     {
         const int WM_PARENTNOTIFY = 0x210;

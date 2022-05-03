@@ -62,24 +62,24 @@ partial class FrmMain
         };
 
         ToolStripItem toolStripItem;
-        toolStripItem = toolStripMain.Items.Add("Exit", new System.Drawing.Icon(_settings.AppPath + @"\images\exit.ico", 48, 48).ToBitmap(), new EventHandler(Exit_Click));
+        toolStripItem = toolStripMain.Items.Add("Exit", new System.Drawing.Icon(GraphicsResources.IconExit, 48, 48).ToBitmap(), new EventHandler(Exit_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Exit";
-        toolStripItem = toolStripMain.Items.Add("Open", new System.Drawing.Icon(_settings.AppPath + @"\images\openfolder.ico", 48, 48).ToBitmap(), new EventHandler(Open_Click));
+        toolStripItem = toolStripMain.Items.Add("Open", new System.Drawing.Icon(GraphicsResources.IconOpen, 48, 48).ToBitmap(), new EventHandler(Open_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Open";
-        toolStripItem = toolStripMain.Items.Add("Export", new System.Drawing.Icon(_settings.AppPath + @"\images\save.ico", 48, 48).ToBitmap(), new EventHandler(Export_Click));
+        toolStripItem = toolStripMain.Items.Add("Export", new System.Drawing.Icon(GraphicsResources.IconExport, 48, 48).ToBitmap(), new EventHandler(Export_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Export";
         toolStripMain.Items.Add(new ToolStripSeparator());
         toolStripMain.Items.Add(stripComboSeries);
         toolStripMain.Items.Add(stripComboWindows);
         toolStripMain.Items.Add(new ToolStripSeparator());
-        toolStripItem = toolStripMain.Items.Add("Settings", new System.Drawing.Icon(_settings.AppPath + @"\images\settings.ico", 48, 48).ToBitmap(), new EventHandler(Settings_Click));
+        toolStripItem = toolStripMain.Items.Add("Settings", new System.Drawing.Icon(GraphicsResources.IconSettings, 48, 48).ToBitmap(), new EventHandler(Settings_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "Settings";
         toolStripMain.Items.Add(new ToolStripSeparator());
-        toolStripItem = toolStripMain.Items.Add("About", new System.Drawing.Icon(_settings.AppPath + @"\images\about.ico", 48, 48).ToBitmap(), new EventHandler(About_Click));
+        toolStripItem = toolStripMain.Items.Add("About", new System.Drawing.Icon(GraphicsResources.IconAbout, 48, 48).ToBitmap(), new EventHandler(About_Click));
         toolStripItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
         toolStripItem.Name = "About";
 
