@@ -9,7 +9,7 @@ public partial class FrmMain : Form
     double nSampleFreq = 0.0;
     
     DateTime nStart;
-    ClassSettings _settings;
+    ClassSettings _settings = new();
     Stats Results = new();
     
     ToolStripPanel tspTop = new();
@@ -31,7 +31,6 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings
-        _settings = new();
         LoadProgramSettingsJSON();
 
         // Set form icon
