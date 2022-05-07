@@ -36,7 +36,7 @@ public partial class FrmMain : Form
         // Set form icon
         this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
 
-        // Initilization
+        // Controls initialization
         InitializeToolStripPanel();
         InitializeStatusStrip();
         InitializeMenu();
@@ -47,6 +47,7 @@ public partial class FrmMain : Form
         this.plotOriginal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
 
+        // Language initialization
         UpdateUI_Language();
     }
 
