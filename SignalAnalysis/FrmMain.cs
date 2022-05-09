@@ -3,7 +3,6 @@ namespace SignalAnalysis;
 public partial class FrmMain : Form
 {
     private double[][] _signalData = Array.Empty<double[]>();
-    //private double[] signalFFT = Array.Empty<double>();
     private string[] seriesLabels = Array.Empty<string>();
     private int nSeries = 0;
     double nSampleFreq = 0.0;
