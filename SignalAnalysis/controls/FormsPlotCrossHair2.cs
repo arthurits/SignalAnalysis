@@ -71,8 +71,9 @@ public class Crosshair2 : Plottable.IPlottable
     {
         set
         {
-            HorizontalLine.PositionLabelFont = value;
-            VerticalLine.PositionLabelFont = value;
+            HorizontalLine.PositionLabelAxis.Label(fontName: value.Name);
+            VerticalLine.PositionLabelAxis.Label(fontName: value.Name);
+            //VerticalLine.PositionLabelFont = value;
         }
         [Obsolete("The get method only remain for the compatibility. Get HorizontalLine.PositionLabelFont and VerticalLine.PositionLabelFont instead.")]
         get => HorizontalLine.PositionLabelFont;
