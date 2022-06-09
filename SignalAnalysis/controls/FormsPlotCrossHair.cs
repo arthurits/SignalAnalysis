@@ -178,8 +178,12 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         if (showVertical && VerticalLine is not null)
         {
             VerticalLine.IsVisible = true;
-            var plot = (Plottable.IHasAxisLimits)this.Plot.GetPlottables()[0];
-            VerticalLine.X = plot.GetAxisLimits().XCenter;
+            var plot = this.Plot.GetPlottables()[0];
+            if (plot is Plottable.IHasAxisLimits plottableWithLimits)
+            {
+                var limits = plottableWithLimits.GetAxisLimits();
+                VerticalLine.X = limits.XCenter;
+            }
             //SnapLinesToPoint(ToX: true);
         }
 
