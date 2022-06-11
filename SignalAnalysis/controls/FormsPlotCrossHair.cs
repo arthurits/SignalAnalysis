@@ -178,31 +178,23 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         if (showVertical && VerticalLine is not null)
         {
             VerticalLine.IsVisible = true;
-            var plot = this.Plot.GetPlottables()[0];
-            if (plot is Plottable.IHasAxisLimits plottableWithLimits)
-            {
-                var limits = plottableWithLimits.GetAxisLimits();
-                VerticalLine.X = limits.XCenter;
-            }
+            var axis = this.Plot.GetPlottables()[0].GetAxisLimits();
+            VerticalLine.X = axis.XCenter;
             //SnapLinesToPoint(ToX: true);
         }
 
         if (showHorizontal && HorizontalLine is not null)
         {
             HorizontalLine.IsVisible = true;
-            var plot = this.Plot.GetPlottables()[0];
-            if (plot is Plottable.IHasAxisLimits plottableWithLimits)
-            {
-                var limits = plottableWithLimits.GetAxisLimits();
-                HorizontalLine.Y = limits.YCenter;
-            }
+            var axis = this.Plot.GetPlottables()[0].GetAxisLimits();
+            HorizontalLine.Y = axis.YCenter;
             //SnapLinesToPoint(ToY: true);
         }
     }
 
     /// <summary>
     /// Delete vertical and horizontal plottable lines.
-    /// Unsubscribe to the line's dragged events.
+    /// Unsubscribe to the lines's dragged events.
     /// </summary>
     private void DeleteLines()
     {
