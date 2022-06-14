@@ -128,7 +128,7 @@ namespace FftSharp
 
             if (oneSided)
             {
-                double fftPeriodHz = sampleRate / pointCount / 2;
+                double fftPeriodHz = sampleRate / (pointCount-1) / 2;
 
                 // freqs start at 0 and approach maxFreq
                 for (int i = 0; i < pointCount; i++)
@@ -137,7 +137,7 @@ namespace FftSharp
             }
             else
             {
-                double fftPeriodHz = sampleRate / pointCount;
+                double fftPeriodHz = sampleRate / (pointCount - 1);
 
                 // first half: freqs start a 0 and approach maxFreq
                 int halfIndex = pointCount / 2;
@@ -251,7 +251,7 @@ namespace FftSharp
                 Span<Complex> buffer = temp;
                 MakeComplex(buffer, input);
                 FFT(buffer);
-                buffer.Slice(0, destination.Length).CopyTo(destination);
+                buffer[..destination.Length].CopyTo(destination);
             }
             catch (Exception ex)
             {

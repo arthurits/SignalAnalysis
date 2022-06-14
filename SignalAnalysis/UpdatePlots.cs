@@ -83,12 +83,17 @@ partial class FrmMain
         plotFractal.Refresh();
     }
 
-    private void UpdateFFT(double[] signal)
+    private void UpdateFFT(double[] signal, double[]? frequency = null)
     {
         // Plot the results
         plotFFT.Clear();
         if (signal.Length > 0)
-            plotFFT.Plot.AddSignal(signal, (double)signal.Length / nSampleFreq);
+        {
+            if (frequency is not null)
+                plotFFT.Plot.AddScatterLines(frequency, signal);
+            else
+                plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / nSampleFreq);
+        }
         plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture) ?? "Fast Fourier transform");
         plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"));
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)");
@@ -207,6 +212,7 @@ partial class FrmMain
 
         double[] signalWindow = Array.Empty<double>();
         double[] signalFFT = Array.Empty<double>();
+        double[] freq = Array.Empty<double>();
 
         // Show a waiting cursor
         var cursor = this.Cursor;
@@ -228,6 +234,7 @@ partial class FrmMain
                 try
                 {
                     signalFFT = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signalWindow) : FftSharp.Transform.FFTmagnitude(signalWindow);
+                    freq = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
                 }
                 catch (Exception ex)
                 {
@@ -246,7 +253,7 @@ partial class FrmMain
         // Update plots
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
-        UpdateFFT(signalFFT);
+        UpdateFFT(signalFFT, freq);
 
         // Restore the cursor
         this.UseWaitCursor = false;
