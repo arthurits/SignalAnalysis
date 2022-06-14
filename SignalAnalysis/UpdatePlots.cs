@@ -234,7 +234,7 @@ partial class FrmMain
                 try
                 {
                     signalFFT = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signalWindow) : FftSharp.Transform.FFTmagnitude(signalWindow);
-                    freq = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
+                    //freq = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
                 }
                 catch (Exception ex)
                 {
@@ -253,7 +253,8 @@ partial class FrmMain
         // Update plots
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
-        UpdateFFT(signalFFT, freq);
+        UpdateFFT(signalFFT);
+        //UpdateFFT(signalFFT, freq);
 
         // Restore the cursor
         this.UseWaitCursor = false;
