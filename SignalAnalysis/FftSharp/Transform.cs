@@ -128,7 +128,7 @@ namespace FftSharp
 
             if (oneSided)
             {
-                double fftPeriodHz = sampleRate / (pointCount-1) / 2;
+                double fftPeriodHz = sampleRate / (pointCount - 1) / 2;
 
                 // freqs start at 0 and approach maxFreq
                 for (int i = 0; i < pointCount; i++)

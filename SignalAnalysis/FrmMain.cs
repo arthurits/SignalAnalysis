@@ -36,10 +36,10 @@ public partial class FrmMain : Form
         this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
 
         // Controls initialization
+        InitializeComponent();
         InitializeToolStripPanel();
         InitializeStatusStrip();
         InitializeMenu();
-        InitializeComponent();
 
         PopulateComboWindow();
 
