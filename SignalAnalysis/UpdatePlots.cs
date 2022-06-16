@@ -39,7 +39,7 @@ partial class FrmMain
 
         plotWindow.Clear();
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
-        plotWindow.Plot.AddSignal(ys, nSampleFreq, Color.Red);
+        plotWindow.Plot.AddSignal(kernel, nSampleFreq, Color.Red);
         plotWindow.Plot.AxisAuto(0);
         plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
         plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture) ?? "Amplitude");
@@ -95,7 +95,7 @@ partial class FrmMain
                 plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / nSampleFreq);
         }
         plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture) ?? "Fast Fourier transform");
-        plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"));
+        plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"));
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)");
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();

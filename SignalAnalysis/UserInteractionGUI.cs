@@ -200,6 +200,7 @@ partial class FrmMain
             {
                 case "LabelExPower":
                     _settings.PowerSpectra = label.Checked;
+                    ComboWindow_SelectedIndexChanged(null, EventArgs.Empty);
                     break;
                 case "LabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
