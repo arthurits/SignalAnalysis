@@ -25,7 +25,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
     public System.Globalization.CultureInfo CultureUI
     {
         get { return _cultureUI; }
-        set { _cultureUI = value; ContextMenuUILanguage(); }
+        set { _cultureUI = value; ContextMenuUILanguage(); SetLabelCulture(); }
     }
 
     private readonly System.Resources.ResourceManager StringsRM = new("ScottPlot.FormsPlotCrossHair", typeof(FormsPlotCrossHair).Assembly);
@@ -100,6 +100,21 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
         customMenu.Items["Open"].Text = StringsRM.GetString("strMenuOpen", CultureUI) ?? "Open in new window";
         detachLegendMenuItem.Text = StringsRM.GetString("strMenuDetach", CultureUI) ?? "Detach legend";
         crossHairMenuItem.Text = StringsRM.GetString("strMenuCrossHair", CultureUI) ?? "Show crosshair";
+    }
+
+
+    private void SetLabelCulture()
+    {
+        if (VerticalLine is not null)
+            VerticalLine.PositionFormatter = position => position.ToString("F2", CultureUI);
+
+        if (HorizontalLine is not null)
+            HorizontalLine.PositionFormatter = position => position.ToString("F2", CultureUI);
+
+        this.Plot.XAxis.SetCulture(CultureUI);
+        this.Plot.YAxis.SetCulture(CultureUI);
+
+        this.Refresh();
     }
 
     private void InitilizeContextMenu()
