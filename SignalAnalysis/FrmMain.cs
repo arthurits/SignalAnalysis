@@ -200,17 +200,19 @@ public partial class FrmMain : Form
             plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
             plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture));
             plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture));
-            plotOriginal.Refresh();
         }
-
+        
         plotWindow.CultureUI = _settings.AppCulture;
         if (plotWindow.Plot.GetPlottables().Length > 0)
         {
-            plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture));
+            IWindow window = (IWindow)stripComboWindows.SelectedItem;
+            if (window is not null)
+                plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
+            //plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture));
             plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture));
             plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture));
         }
-
+        
         plotApplied.CultureUI = _settings.AppCulture;
         if (plotApplied.Plot.GetPlottables().Length > 0)
         {
@@ -218,14 +220,19 @@ public partial class FrmMain : Form
             plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture));
             plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture));
         }
-
+        
         plotFractal.CultureUI = _settings.AppCulture;
         if (plotFractal.Plot.GetPlottables().Length > 0)
         {
+            plotFractal.Plot.Title((StringsRM.GetString("strPlotFractalTitle", _settings.AppCulture) ?? "Fractal dimension") +
+                " " +
+                (_settings.CumulativeDimension ? (StringsRM.GetString("strPlotFractalTitle()", _settings.AppCulture) ?? "(cumulative)") : String.Empty) +
+                " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####") +
+                " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####") + ")");
             plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
             plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
         }
-
+        
         plotFFT.CultureUI = _settings.AppCulture;
         if (plotFFT.Plot.GetPlottables().Length > 0)
         {
@@ -234,6 +241,13 @@ public partial class FrmMain : Form
             plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
         }
 
+        plotOriginal.Refresh();
+        plotWindow.Refresh();
+        plotApplied.Refresh();
+        plotFractal.Refresh();
+        plotFFT.Refresh();
+
+        // Update the results text
         if (txtStats.Text.Length > 0)
             txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
 

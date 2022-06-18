@@ -94,9 +94,11 @@ partial class FrmMain
     /// </summary>
     private void InitializeStatusStrip()
     {
-        tspBottom = new();
-        tspBottom.Dock = DockStyle.Bottom;
-        tspBottom.Name = "StripPanelBottom";
+        tspBottom = new()
+        {
+            Dock = DockStyle.Bottom,
+            Name = "StripPanelBottom"
+        };
 
         StatusStrip statusStrip = new()
         {
@@ -148,7 +150,6 @@ partial class FrmMain
         });
         statusStrip.Items[item].Click += LabelEx_Click;
         ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
-        statusStrip.Items[item].PerformClick();
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -162,7 +163,6 @@ partial class FrmMain
         });
         statusStrip.Items[item].Click += LabelEx_Click;
         ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
-        statusStrip.Items[item].PerformClick();
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -176,7 +176,6 @@ partial class FrmMain
         });
         statusStrip.Items[item].Click += LabelEx_Click;
         ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
-        statusStrip.Items[item].PerformClick();
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -190,10 +189,15 @@ partial class FrmMain
         });
         statusStrip.Items[item].Click += LabelEx_Click;
         ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
-        statusStrip.Items[item].PerformClick();
 
         tspBottom.Join(statusStrip);
         this.Controls.Add(tspBottom);
+
+        // Simulate a click on each label in order to...
+        statusStrip.Items["LabelExPower"].PerformClick();
+        statusStrip.Items["LabelExCumulative"].PerformClick();
+        statusStrip.Items["LabelExEntropy"].PerformClick();
+        statusStrip.Items["LabelExCrossHair"].PerformClick();
     }
 
     /// <summary>

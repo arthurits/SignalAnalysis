@@ -27,7 +27,7 @@ partial class FrmMain
         plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture) ?? "Input signal");
         plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture) ?? "Amplitude");
         plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture) ?? "Time (seconds)");
-        plotOriginal.Plot.AxisAuto(0);
+        //plotOriginal.Plot.AxisAuto(0);
         plotOriginal.Refresh();
     }
 
@@ -40,7 +40,7 @@ partial class FrmMain
         plotWindow.Clear();
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotWindow.Plot.AddSignal(kernel, nSampleFreq, Color.Red);
-        plotWindow.Plot.AxisAuto(0);
+        //plotWindow.Plot.AxisAuto(0);
         plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
         plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture) ?? "Amplitude");
         plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture) ?? "Time (seconds)");
@@ -55,7 +55,7 @@ partial class FrmMain
         plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture) ?? "Windowed signal");
         plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture) ?? "Amplitude");
         plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture) ?? "Time (seconds)");
-        plotApplied.Plot.AxisAuto(0);
+        //plotApplied.Plot.AxisAuto(0);
         plotApplied.Refresh();
     }
 
