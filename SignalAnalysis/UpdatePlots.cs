@@ -133,6 +133,8 @@ partial class FrmMain
 
         // Update plots and results
         //    UpdateBasicPlots(signal, seriesName);
+        _settings.CrossHair = false;
+        ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)this.Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = false;
         UpdateOriginal(signal, seriesName ?? string.Empty);
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
         await UpdateWindowPlots(signal);
@@ -251,8 +253,14 @@ partial class FrmMain
                 }
             });
         await statsTask;
-        
+
         // Update plots
+        _settings.CrossHair = false;
+        ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)this.Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = false;
+        plotOriginal.ShowCrossHair = false;
+        plotOriginal.Refresh();
+        plotFractal.ShowCrossHair = false;
+        plotFractal.Refresh();
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
         UpdateFFT(signalFFT);
