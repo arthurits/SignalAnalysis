@@ -364,6 +364,7 @@ public class FormsPlotCrossHair : ScottPlot.FormsPlot
             //if (plottables[i] is not Plottable.VLine && plottables[i] is not Plottable.HLine)
                 this.Plot.RemoveAt(i);
         }
+        ShowCrossHair = false;
     }
 
 
