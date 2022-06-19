@@ -97,7 +97,7 @@ partial class FrmMain
         plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture) ?? "Fast Fourier transform");
         plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"));
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)");
-        plotFFT.Plot.AxisAuto(0);
+        //plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
     }
 
@@ -234,6 +234,8 @@ partial class FrmMain
                 try
                 {
                     signalFFT = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signalWindow) : FftSharp.Transform.FFTmagnitude(signalWindow);
+                    // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
+                    signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
                     //freq = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
                 }
                 catch (Exception ex)
