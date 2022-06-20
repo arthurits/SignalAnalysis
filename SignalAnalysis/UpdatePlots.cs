@@ -97,7 +97,7 @@ partial class FrmMain
         plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture) ?? "Fast Fourier transform");
         plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"));
         plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)");
-        //plotFFT.Plot.AxisAuto(0);
+        plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
     }
 
