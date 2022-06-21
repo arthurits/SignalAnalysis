@@ -118,7 +118,8 @@ public partial class FrmMain : Form
 
         if (_signalData.Length == 0) return;
 
-        ((ToolStripStatusLabelEx)((ToolStrip)tspBottom.Controls[0]).Items[4]).Checked = false;
+        //((ToolStripStatusLabelEx)((ToolStrip)tspBottom.Controls[0]).Items[4]).Checked = false;
+        //_settings.Entropy = false;
 
         // Update stats and plots
         UpdateStatsPlots(stripComboSeries.SelectedIndex);

@@ -34,8 +34,8 @@ partial class FrmMain
     private void UpdateKernel(FftSharp.IWindow window, int points)
     {
         double[] kernel = window.Create(points);
-        double[] pad = ScottPlot.DataGen.Zeros(kernel.Length / 4);
-        double[] ys = pad.Concat(kernel).Concat(pad).ToArray();
+        //double[] pad = ScottPlot.DataGen.Zeros(kernel.Length / 4);
+        //double[] ys = pad.Concat(kernel).Concat(pad).ToArray();
 
         plotWindow.Clear();
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
