@@ -171,15 +171,15 @@ partial class FrmMain
 
     private void LabelEx_CheckedChanged(object? sender, EventArgs e)
     {
-        if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
-        {
-            var label = LabelEx;
-            // Change the text color
-            if (label.Checked)
-                label.ForeColor = Color.Black;
-            else
-                label.ForeColor = Color.LightGray;
-        }
+        //if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
+        //{
+        //    var label = LabelEx;
+        //    // Change the text color
+        //    if (label.Checked)
+        //        label.ForeColor = Color.Black;
+        //    else
+        //        label.ForeColor = Color.LightGray;
+        //}
     }
 
     private void LabelEx_Click(object? sender, EventArgs e)
@@ -204,12 +204,16 @@ partial class FrmMain
                     break;
                 case "LabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    if (label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
+                    if (_settings.CumulativeDimension)
+                        UpdateStatsPlots(stripComboSeries.SelectedIndex);
+                    if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "LabelExEntropy":
                     _settings.Entropy = label.Checked;
-                    if (label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
+                    if (_settings.Entropy)
+                        UpdateStatsPlots(stripComboSeries.SelectedIndex);
+                    if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "LabelExCrossHair":

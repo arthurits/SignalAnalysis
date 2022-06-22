@@ -149,7 +149,7 @@ partial class FrmMain
             ToolTipText = "Power spectra (dB)"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        //((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -162,7 +162,7 @@ partial class FrmMain
             ToolTipText = "Cumulative fractal dimension"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        //((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -175,7 +175,7 @@ partial class FrmMain
             ToolTipText = "Approximate and sample entropy"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        //((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
 
         item = statusStrip.Items.Add(new ToolStripStatusLabelEx()
         {
@@ -188,7 +188,7 @@ partial class FrmMain
             ToolTipText = "Plot's crosshair mode"
         });
         statusStrip.Items[item].Click += LabelEx_Click;
-        ((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
+        //((ToolStripStatusLabelEx)statusStrip.Items[item]).CheckedChanged += LabelEx_CheckedChanged;
 
         tspBottom.Join(statusStrip);
         this.Controls.Add(tspBottom);

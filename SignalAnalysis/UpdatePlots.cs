@@ -89,7 +89,7 @@ partial class FrmMain
         plotFFT.Clear();
         if (signal.Length > 0)
         {
-            if (frequency is not null)
+            if (frequency is not null && frequency.Length > 0)
                 plotFFT.Plot.AddScatterLines(frequency, signal);
             else
                 plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / nSampleFreq);
@@ -214,7 +214,7 @@ partial class FrmMain
 
         double[] signalWindow = Array.Empty<double>();
         double[] signalFFT = Array.Empty<double>();
-        double[] freq = Array.Empty<double>();
+        //double[] freq = Array.Empty<double>();
 
         // Show a waiting cursor
         var cursor = this.Cursor;
@@ -235,10 +235,22 @@ partial class FrmMain
 
                 try
                 {
-                    signalFFT = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signalWindow) : FftSharp.Transform.FFTmagnitude(signalWindow);
-                    // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
-                    signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
-                    //freq = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
+                    if (_settings.PowerSpectra)
+                    {
+                        signalFFT = FftSharp.Transform.FFTpower(signalWindow);
+                        // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
+                        signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
+                        Results.FFTpower = signalFFT;
+                    }
+                    else
+                    {
+                        signalFFT = FftSharp.Transform.FFTmagnitude(signalWindow);
+                        Results.FFTmagnitude = signalFFT;
+                    }
+                    //signalFFT = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signalWindow) : FftSharp.Transform.FFTmagnitude(signalWindow);
+                    //// Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
+                    //signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
+                    Results.FFTfrequencies = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
                 }
                 catch (Exception ex)
                 {
@@ -263,8 +275,8 @@ partial class FrmMain
         plotFractal.Refresh();
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
-        UpdateFFT(signalFFT);
-        //UpdateFFT(signalFFT, freq);
+        //UpdateFFT(signalFFT);
+        UpdateFFT(signalFFT, Results.FFTfrequencies);
 
         // Restore the cursor
         this.UseWaitCursor = false;
