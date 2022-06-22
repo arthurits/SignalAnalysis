@@ -219,4 +219,28 @@ partial class FrmMain
     {
         return SaveTextData(FileName, Data, ArrIndexInit, SeriesName);
     }
+
+    private bool SaveResultsData(string FileName)
+    {
+        bool result = false;
+
+        try
+        {
+            using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+            using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
+        }
+        catch (Exception ex)
+        {
+            // Show error message
+            using (new CenterWinDialog(this))
+            {
+                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
+                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        return result;
+    }
 }

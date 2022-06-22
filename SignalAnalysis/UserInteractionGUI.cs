@@ -89,7 +89,7 @@ partial class FrmMain
         SaveFileDialog SaveDlg = new()
         {
             DefaultExt = "*.txt",
-            Filter = StringsRM.GetString("strSaveDlgFilter", _settings.AppCulture) ?? "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringsRM.GetString("strSaveDlgFilter", _settings.AppCulture) ?? "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|Results file (*.results)|*.results|All files (*.*)|*.*",
             FilterIndex = 1,
             InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserSavePath : _settings.DefaultSavePath,
             OverwritePrompt = true,
@@ -115,6 +115,7 @@ partial class FrmMain
                 ".txt" => SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
                 ".sig" => SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
                 ".bin" => SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
+                ".results" => SaveResultsData(SaveDlg.FileName),
                 _ => SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
             };
 
