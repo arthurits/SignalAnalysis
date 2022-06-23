@@ -446,7 +446,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Error</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
-    <value>Archivo de texto (*.txt)|*.txt|Archivo SignalAnalysis (*.sig)|*.sig|Archivo binario (*.bin)|*.bin|Todos los archivos (*.*)|*.*</value>
+    <value>Archivo de texto (*.txt)|*.txt|Archivo SignalAnalysis (*.sig)|*.sig|Archivo binario (*.bin)|*.bin|Archivo de resultados (*.results)|*.results|Todos los archivos (*.*)|*.*</value>
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Guardar archivo de datos</value>
