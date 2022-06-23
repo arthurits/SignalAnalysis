@@ -442,7 +442,7 @@ dimension has been stopped.</value>
     <value>Error</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
-    <value>Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|All files (*.*)|*.*</value>
+    <value>Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|Results file (*.results)|*.results|All files (*.*)|*.*</value>
   </data>
   <data name="strSaveDlgTitle" xml:space="preserve">
     <value>Save data file</value>

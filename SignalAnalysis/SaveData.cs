@@ -220,6 +220,7 @@ partial class FrmMain
         return SaveTextData(FileName, Data, ArrIndexInit, SeriesName);
     }
 
+
     private bool SaveResultsData(string FileName)
     {
         bool result = false;
@@ -228,6 +229,27 @@ partial class FrmMain
         {
             using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
+
+            sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
+            sw.WriteLine(Results.ToString(StringsRM, _settings.AppCulture));
+            sw.WriteLine();
+            sw.WriteLine($"{(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)")}\t{(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"))}");
+
+            string FFTvalue;
+            string content;
+            // Save the numerical values
+            for (int j = 0; j < Results.FFTfrequencies.Length; j++)
+            {
+                FFTvalue = _settings.PowerSpectra ? Results.FFTpower[j].ToString("0.########", _settings.AppCulture) : Results.FFTmagnitude[j].ToString(_settings.DataFormat, _settings.AppCulture);
+                content = $"{Results.FFTfrequencies[j].ToString("0.########", _settings.AppCulture)}\t{FFTvalue}";
+
+                //trying to write data to csv
+                sw.WriteLine(content);
+            }
+
+            // Success!
+            result = true;
+
         }
         catch (Exception ex)
         {
