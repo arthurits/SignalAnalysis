@@ -28,7 +28,6 @@ partial class FrmMain
     /// </summary>
     private void InitializeComponent()
     {
-            this.plotFractal = new ScottPlot.FormsPlotCrossHair();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.plotFFT = new ScottPlot.FormsPlotCrossHair();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -36,25 +35,13 @@ partial class FrmMain
             this.plotWindow = new ScottPlot.FormsPlotCrossHair();
             this.plotApplied = new ScottPlot.FormsPlotCrossHair();
             this.txtStats = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.plotFractal = new ScottPlot.FormsPlotCrossHair();
+            this.plotFractalDistribution = new ScottPlot.FormsPlotCrossHair();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // plotFractal
-            // 
-            this.plotFractal.BackColor = System.Drawing.Color.Transparent;
-            this.plotFractal.CrossHairColor = System.Drawing.Color.Red;
-            this.plotFractal.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotFractal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFractal.Location = new System.Drawing.Point(4, 176);
-            this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotFractal.Name = "plotFractal";
-            this.plotFractal.ShowCrossHair = false;
-            this.plotFractal.ShowCrossHairHorizontal = false;
-            this.plotFractal.ShowCrossHairVertical = false;
-            this.plotFractal.Size = new System.Drawing.Size(852, 167);
-            this.plotFractal.SnapToPoint = false;
-            this.plotFractal.TabIndex = 3;
             // 
             // tableLayoutPanel1
             // 
@@ -64,9 +51,9 @@ partial class FrmMain
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.plotFFT, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.plotFractal, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtStats, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 74);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -172,6 +159,53 @@ partial class FrmMain
             this.txtStats.Size = new System.Drawing.Size(854, 95);
             this.txtStats.TabIndex = 6;
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel3.Controls.Add(this.plotFractal, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.plotFractalDistribution, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 173);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(860, 173);
+            this.tableLayoutPanel3.TabIndex = 7;
+            // 
+            // plotFractal
+            // 
+            this.plotFractal.BackColor = System.Drawing.Color.Transparent;
+            this.plotFractal.CrossHairColor = System.Drawing.Color.Red;
+            this.plotFractal.CultureUI = new System.Globalization.CultureInfo("en-US");
+            this.plotFractal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotFractal.Location = new System.Drawing.Point(4, 3);
+            this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.plotFractal.Name = "plotFractal";
+            this.plotFractal.ShowCrossHair = false;
+            this.plotFractal.ShowCrossHairHorizontal = false;
+            this.plotFractal.ShowCrossHairVertical = false;
+            this.plotFractal.Size = new System.Drawing.Size(594, 167);
+            this.plotFractal.SnapToPoint = false;
+            this.plotFractal.TabIndex = 4;
+            // 
+            // plotFractalDistribution
+            // 
+            this.plotFractalDistribution.CrossHairColor = System.Drawing.Color.Red;
+            this.plotFractalDistribution.CultureUI = new System.Globalization.CultureInfo("en-US");
+            this.plotFractalDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotFractalDistribution.Location = new System.Drawing.Point(606, 3);
+            this.plotFractalDistribution.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.plotFractalDistribution.Name = "plotFractalDistribution";
+            this.plotFractalDistribution.ShowCrossHair = false;
+            this.plotFractalDistribution.ShowCrossHairHorizontal = false;
+            this.plotFractalDistribution.ShowCrossHairVertical = false;
+            this.plotFractalDistribution.Size = new System.Drawing.Size(250, 167);
+            this.plotFractalDistribution.SnapToPoint = false;
+            this.plotFractalDistribution.TabIndex = 5;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -190,12 +224,12 @@ partial class FrmMain
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
     }
 
     #endregion
-    private ScottPlot.FormsPlotCrossHair plotFractal;
     private TableLayoutPanel tableLayoutPanel1;
     private ScottPlot.FormsPlotCrossHair plotOriginal;
     private TableLayoutPanel tableLayoutPanel2;
@@ -203,4 +237,7 @@ partial class FrmMain
     private ScottPlot.FormsPlotCrossHair plotApplied;
     private ScottPlot.FormsPlotCrossHair plotFFT;
     private TextBox txtStats;
+    private TableLayoutPanel tableLayoutPanel3;
+    private ScottPlot.FormsPlotCrossHair plotFractal;
+    private ScottPlot.FormsPlotCrossHair plotFractalDistribution;
 }

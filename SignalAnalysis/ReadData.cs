@@ -542,6 +542,24 @@ partial class FrmMain
     }
 
     /// <summary>
+    /// Default not implemented file-read function showing an error message
+    /// </summary>
+    /// <param name="FileName">Path (including name and extension) of the text file</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
+    private bool ReadNotimplemented(string FileName)
+    {
+        bool result = false;
+
+        using (new CenterWinDialog(this))
+            MessageBox.Show(String.Format(StringsRM.GetString("strReadNotimplementedError", _settings.AppCulture) ?? "Unable to read data from a {0} file.", Path.GetExtension(FileName).ToUpper()),
+                StringsRM.GetString("strReadNotimplementedErrorTitle", _settings.AppCulture) ?? "Not implemented",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+        return result;
+    }
+
+    /// <summary>
     /// Reads and parse the data into a numeric format.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>

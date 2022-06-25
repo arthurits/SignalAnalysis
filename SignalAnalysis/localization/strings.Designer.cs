@@ -722,7 +722,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*.
+        ///   Looks up a localized string similar to ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*.
         /// </summary>
         internal static string strOpenDlgFilter {
             get {
@@ -799,6 +799,33 @@ namespace SignalAnalysis.localization {
         internal static string strPlotFFTYLabelPow {
             get {
                 return ResourceManager.GetString("strPlotFFTYLabelPow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fractal dimension (H).
+        /// </summary>
+        internal static string strPlotFractalDisributionXLabel {
+            get {
+                return ResourceManager.GetString("strPlotFractalDisributionXLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Probability.
+        /// </summary>
+        internal static string strPlotFractalDisributionYLabel {
+            get {
+                return ResourceManager.GetString("strPlotFractalDisributionYLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fractal dimension distribution.
+        /// </summary>
+        internal static string strPlotFractalDistributionTitle {
+            get {
+                return ResourceManager.GetString("strPlotFractalDistributionTitle", resourceCulture);
             }
         }
         
@@ -999,6 +1026,24 @@ namespace SignalAnalysis.localization {
         internal static string strReadDataErrorTitle {
             get {
                 return ResourceManager.GetString("strReadDataErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to read data from a {0} file..
+        /// </summary>
+        internal static string strReadNotimplementedError {
+            get {
+                return ResourceManager.GetString("strReadNotimplementedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not implemented.
+        /// </summary>
+        internal static string strReadNotimplementedErrorTitle {
+            get {
+                return ResourceManager.GetString("strReadNotimplementedErrorTitle", resourceCulture);
             }
         }
         

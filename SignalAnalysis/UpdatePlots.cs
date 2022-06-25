@@ -39,7 +39,10 @@ partial class FrmMain
 
         plotWindow.Clear();
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
-        plotWindow.Plot.AddSignal(kernel, nSampleFreq, Color.Red);
+        var plot = plotWindow.Plot.AddSignal(kernel, nSampleFreq, Color.Crimson);
+        plot.LineWidth = 1.0;
+        plot.MarkerSize = 5;
+        plot.MarkerShape = ScottPlot.MarkerShape.filledCircle;
         //plotWindow.Plot.AxisAuto(0);
         plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
         plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture) ?? "Amplitude");
@@ -83,6 +86,37 @@ partial class FrmMain
         plotFractal.Refresh();
     }
 
+    private void UpdateFractalDistribution(double mean, double variance)
+    {
+        plotFractalDistribution.Clear();
+
+        if (variance > 0)
+        {
+            Random rand = new(0);
+            double std = Math.Sqrt(variance);
+            double[] values = ScottPlot.DataGen.RandomNormal(rand, pointCount: 1000, mean: mean, stdDev: std);
+
+            // create a Population object from the data
+            var pop = new ScottPlot.Statistics.Population(values);
+
+            //(double[] counts, double[] binEdges) = ScottPlot.Statistics.Common.Histogram(values, min: mean - 3 * std, max: mean + 3 * std, binSize: pop.span/100);
+            //double[] curveXs = binEdges;
+            //double[] curveYs = ScottPlot.Statistics.Common.ProbabilityDensity(values, curveXs, percent: true);
+
+            double[] curveXs = ScottPlot.DataGen.Range(pop.minus3stDev, pop.plus3stDev, pop.span / 100);
+            double[] curveYs = pop.GetDistribution(curveXs, normalize: true);
+
+            plotFractalDistribution.Plot.AddScatter(curveXs, curveYs, color: Color.Crimson, markerSize: 0, lineWidth: 2);
+            plotFractalDistribution.Plot.AddVerticalLine(x: mean, color: Color.DarkGray, width: 1.2f, style: ScottPlot.LineStyle.Solid);
+        }
+
+        plotFractalDistribution.Plot.Title(StringsRM.GetString("strPlotFractalDistributionTitle", _settings.AppCulture) ?? "Fractal dimension distribution");
+        plotFractalDistribution.Plot.XLabel(StringsRM.GetString("strPlotFractalDisributionXLabel", _settings.AppCulture) ?? "Fractal dimension (H)");
+        plotFractalDistribution.Plot.YLabel(StringsRM.GetString("strPlotFractalDisributionYLabel", _settings.AppCulture) ?? "Probability");
+        plotFractalDistribution.Plot.AxisAuto(0, null);
+        plotFractalDistribution.Refresh();
+    }
+
     private void UpdateFFT(double[] signal, double[]? frequency = null)
     {
         // Plot the results
@@ -90,7 +124,7 @@ partial class FrmMain
         if (signal.Length > 0)
         {
             if (frequency is not null && frequency.Length > 0)
-                plotFFT.Plot.AddScatterLines(frequency, signal);
+                plotFFT.Plot.AddScatter(frequency, signal);
             else
                 plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / nSampleFreq);
         }
@@ -137,6 +171,7 @@ partial class FrmMain
         ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)this.Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = false;
         UpdateOriginal(signal, seriesName ?? string.Empty);
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
+        UpdateFractalDistribution(Results.FractalDimension, Results.FractalVariance);
         await UpdateWindowPlots(signal);
 
         txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
@@ -235,21 +270,15 @@ partial class FrmMain
 
                 try
                 {
-                    if (_settings.PowerSpectra)
-                    {
-                        signalFFT = FftSharp.Transform.FFTpower(signalWindow);
-                        // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
-                        signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
-                        Results.FFTpower = signalFFT;
-                    }
-                    else
-                    {
-                        signalFFT = FftSharp.Transform.FFTmagnitude(signalWindow);
-                        Results.FFTmagnitude = signalFFT;
-                    }
-                    //signalFFT = _settings.PowerSpectra ? FftSharp.Transform.FFTpower(signalWindow) : FftSharp.Transform.FFTmagnitude(signalWindow);
-                    //// Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
-                    //signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
+                    signalFFT = FftSharp.Transform.FFTpower(signalWindow);
+                    // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
+                    signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
+                    Results.FFTpower = signalFFT;
+
+                    signalFFT = FftSharp.Transform.FFTmagnitude(signalWindow);
+                    Results.FFTmagnitude = signalFFT;
+
+                    signalFFT = _settings.PowerSpectra ? Results.FFTpower : Results.FFTmagnitude;
                     Results.FFTfrequencies = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
                 }
                 catch (Exception ex)
@@ -275,8 +304,8 @@ partial class FrmMain
         plotFractal.Refresh();
         UpdateKernel(window, signal.Length);
         UpdateWindowed(signalWindow);
-        //UpdateFFT(signalFFT);
-        UpdateFFT(signalFFT, Results.FFTfrequencies);
+        UpdateFFT(signalFFT);
+        //UpdateFFT(signalFFT, Results.FFTfrequencies);
 
         // Restore the cursor
         this.UseWaitCursor = false;

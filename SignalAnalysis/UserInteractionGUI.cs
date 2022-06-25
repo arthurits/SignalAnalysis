@@ -14,8 +14,8 @@ partial class FrmMain
 
         using OpenFileDialog openDlg = new()
         {
-            Filter = StringsRM.GetString("strOpenDlgFilter", _settings.AppCulture) ?? "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*",
-            FilterIndex = 4,
+            Filter = StringsRM.GetString("strOpenDlgFilter", _settings.AppCulture) ?? "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*",
+            FilterIndex = 5,
             InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserOpenPath : _settings.DefaultOpenPath,
             RestoreDirectory = true,
             Title = StringsRM.GetString("strOpenDlgTitle", _settings.AppCulture) ?? "Select data file",
@@ -42,7 +42,7 @@ partial class FrmMain
                 ".sig" => ReadSigData(filePath),
                 ".txt" => ReadTextData(filePath, results = new()),
                 ".bin" => ReadBinData(filePath, results = new()),
-                _ => throw new NotImplementedException()
+                _ => ReadNotimplemented(filePath)
             };
 
             if (boolRead)

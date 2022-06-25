@@ -44,6 +44,9 @@ public partial class FrmMain : Form
         PopulateComboWindow();
 
         this.plotOriginal.SnapToPoint = true;
+        this.plotWindow.SnapToPoint = true;
+        this.plotApplied.SnapToPoint = true;
+        this.plotFractal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
 
         // Language initialization

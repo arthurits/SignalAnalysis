@@ -347,7 +347,7 @@ dimension has been stopped.</value>
     <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|All files (*.*)|*.*</value>
+    <value>ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Open data file</value>
@@ -372,6 +372,15 @@ dimension has been stopped.</value>
   </data>
   <data name="strPlotFFTYLabelPow" xml:space="preserve">
     <value>Power (dB)</value>
+  </data>
+  <data name="strPlotFractalDisributionXLabel" xml:space="preserve">
+    <value>Fractal dimension (H)</value>
+  </data>
+  <data name="strPlotFractalDisributionYLabel" xml:space="preserve">
+    <value>Probability</value>
+  </data>
+  <data name="strPlotFractalDistributionTitle" xml:space="preserve">
+    <value>Fractal dimension distribution</value>
   </data>
   <data name="strPlotFractalTitle" xml:space="preserve">
     <value>Fractal dimension</value>
@@ -440,6 +449,12 @@ dimension has been stopped.</value>
   </data>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strReadNotimplementedError" xml:space="preserve">
+    <value>Unable to read data from a {0} file.</value>
+  </data>
+  <data name="strReadNotimplementedErrorTitle" xml:space="preserve">
+    <value>Not implemented</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
     <value>Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|Results file (*.results)|*.results|All files (*.*)|*.*</value>

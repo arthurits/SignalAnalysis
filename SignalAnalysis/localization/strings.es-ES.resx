@@ -351,7 +351,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Fin</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>Archivo ErgoLux (*.elux)|*.elux|Archivo SignalAnalysis (*.sig)|*.sig|Archivo de texto (*.txt)|*.txt|Todos los archivos (*.*)|*.*</value>
+    <value>Archivo ErgoLux (*.elux)|*.elux|Archivo SignalAnalysis (*.sig)|*.sig|Archivo de texto (*.txt)|*.txt|Archivo binario (*.bin)|*.bin|Todos los archivos (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Abrir archivo de datos</value>
@@ -376,6 +376,15 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strPlotFFTYLabelPow" xml:space="preserve">
     <value>Espectro (dB)</value>
+  </data>
+  <data name="strPlotFractalDisributionXLabel" xml:space="preserve">
+    <value>Dimension fractal (H)</value>
+  </data>
+  <data name="strPlotFractalDisributionYLabel" xml:space="preserve">
+    <value>Probabilidad</value>
+  </data>
+  <data name="strPlotFractalDistributionTitle" xml:space="preserve">
+    <value>Distribución dimensión fractal</value>
   </data>
   <data name="strPlotFractalTitle" xml:space="preserve">
     <value>Dimensión fractal</value>
@@ -444,6 +453,12 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strReadDataErrorTitle" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="strReadNotimplementedError" xml:space="preserve">
+    <value>No se pueden leer datos de un archivo {0}.</value>
+  </data>
+  <data name="strReadNotimplementedErrorTitle" xml:space="preserve">
+    <value>Sin implementar</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
     <value>Archivo de texto (*.txt)|*.txt|Archivo SignalAnalysis (*.sig)|*.sig|Archivo binario (*.bin)|*.bin|Archivo de resultados (*.results)|*.results|Todos los archivos (*.*)|*.*</value>
