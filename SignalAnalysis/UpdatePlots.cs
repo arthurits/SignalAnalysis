@@ -168,7 +168,7 @@ partial class FrmMain
         // Update plots and results
         //    UpdateBasicPlots(signal, seriesName);
         _settings.CrossHair = false;
-        ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)this.Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = false;
+        statusStripLabelExCrossHair.Checked = false;
         UpdateOriginal(signal, seriesName ?? string.Empty);
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
         UpdateFractalDistribution(Results.FractalDimension, Results.FractalVariance);
@@ -297,7 +297,7 @@ partial class FrmMain
 
         // Update plots
         _settings.CrossHair = false;
-        ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)this.Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = false;
+        statusStripLabelExCrossHair.Checked = false;
         plotOriginal.ShowCrossHair = false;
         plotOriginal.Refresh();
         plotFractal.ShowCrossHair = false;

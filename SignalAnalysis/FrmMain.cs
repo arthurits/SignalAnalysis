@@ -11,12 +11,6 @@ public partial class FrmMain : Form
     ClassSettings _settings = new();
     Stats Results = new();
     
-    ToolStripPanel tspTop = new();
-    ToolStripPanel tspBottom = new();
-    ToolStripComboBox stripComboSeries = new();
-    ToolStripComboBox stripComboWindows = new();
-    ToolStripStatusLabel stripLblCulture = new();
-
     Task statsTask = Task.CompletedTask;
     private CancellationTokenSource tokenSource = new();
     private CancellationToken token = CancellationToken.None;
@@ -121,7 +115,7 @@ public partial class FrmMain : Form
 
         if (_signalData.Length == 0) return;
 
-        //((ToolStripStatusLabelEx)((ToolStrip)tspBottom.Controls[0]).Items[4]).Checked = false;
+        //statusStripLabelExEntropy.Checked = false;
         //_settings.Entropy = false;
 
         // Update stats and plots
@@ -172,30 +166,32 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_Language()
     {
+        this.SuspendLayout();
+
         // Update the form's tittle
         SetFormTitle(this, String.Empty);
 
         // Update ToolStrip
-        ((ToolStrip)tspTop.Controls[0]).Items[0].Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";
-        ((ToolStrip)tspTop.Controls[0]).Items[0].ToolTipText = StringsRM.GetString("strToolTipExit", _settings.AppCulture) ?? "Exit the application";
-        ((ToolStrip)tspTop.Controls[0]).Items[1].Text = StringsRM.GetString("strToolStripOpen", _settings.AppCulture) ?? "Open";
-        ((ToolStrip)tspTop.Controls[0]).Items[1].ToolTipText = StringsRM.GetString("strToolTipOpen", _settings.AppCulture) ?? "Open data file from disk";
-        ((ToolStrip)tspTop.Controls[0]).Items[2].Text = StringsRM.GetString("strToolStripExport", _settings.AppCulture) ?? "Export";
-        ((ToolStrip)tspTop.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strToolTipExport", _settings.AppCulture) ?? "Export data and data analysis";
+        this.toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";
+        this.toolStripMain_Exit.ToolTipText = StringsRM.GetString("strToolTipExit", _settings.AppCulture) ?? "Exit the application";
+        this.toolStripMain_Open.Text = StringsRM.GetString("strToolStripOpen", _settings.AppCulture) ?? "Open";
+        this.toolStripMain_Open.ToolTipText = StringsRM.GetString("strToolTipOpen", _settings.AppCulture) ?? "Open data file from disk";
+        this.toolStripMain_Export.Text = StringsRM.GetString("strToolStripExport", _settings.AppCulture) ?? "Export";
+        this.toolStripMain_Export.ToolTipText = StringsRM.GetString("strToolTipExport", _settings.AppCulture) ?? "Export data and data analysis";
         stripComboSeries.ToolTipText = StringsRM.GetString("strToolTipCboSeries", _settings.AppCulture) ?? "Select data series";
         stripComboWindows.ToolTipText = StringsRM.GetString("strToolTipCboWindows", _settings.AppCulture) ?? "Select FFT window";
-        ((ToolStrip)tspTop.Controls[0]).Items[7].Text = StringsRM.GetString("strToolStripSettings", _settings.AppCulture) ?? "Settings";
-        ((ToolStrip)tspTop.Controls[0]).Items[7].ToolTipText = StringsRM.GetString("strToolTipSettings", _settings.AppCulture) ?? "Settings for plots, data, and UI";
-        ((ToolStrip)tspTop.Controls[0]).Items[9].Text = StringsRM.GetString("strToolStripAbout", _settings.AppCulture) ?? "About";
-        ((ToolStrip)tspTop.Controls[0]).Items[9].ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
+        this.toolStripMain_Settings.Text = StringsRM.GetString("strToolStripSettings", _settings.AppCulture) ?? "Settings";
+        this.toolStripMain_Settings.ToolTipText = StringsRM.GetString("strToolTipSettings", _settings.AppCulture) ?? "Settings for plots, data, and UI";
+        this.toolStripMain_About.Text = StringsRM.GetString("strToolStripAbout", _settings.AppCulture) ?? "About";
+        this.toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
 
         // Update StatusStrip
-        stripLblCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
-        stripLblCulture.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
-        ((ToolStrip)tspBottom.Controls[0]).Items[2].ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
-        ((ToolStrip)tspBottom.Controls[0]).Items[3].ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
-        ((ToolStrip)tspBottom.Controls[0]).Items[4].ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
-        ((ToolStrip)tspBottom.Controls[0]).Items[5].ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
+        statusStripLabelCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
+        statusStripLabelCulture.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
+        statusStripLabelExPower.ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
+        statusStripLabelExCumulative.ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
+        statusStripLabelExEntropy.ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
+        statusStripLabelExCrossHair.ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
 
         // Update plots if they contain series
         plotOriginal.CultureUI = _settings.AppCulture;
@@ -236,7 +232,15 @@ public partial class FrmMain : Form
             plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
             plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
         }
-        
+
+        plotFractalDistribution.CultureUI = _settings.AppCulture;
+        if (plotFractal.Plot.GetPlottables().Length > 0)
+        {
+            plotFractalDistribution.Plot.Title(StringsRM.GetString("strPlotFractalDistributionTitle", _settings.AppCulture) ?? "Fractal dimension distribution");
+            plotFractalDistribution.Plot.XLabel(StringsRM.GetString("strPlotFractalDisributionXLabel", _settings.AppCulture) ?? "Fractal dimension (H)");
+            plotFractalDistribution.Plot.YLabel(StringsRM.GetString("strPlotFractalDisributionYLabel", _settings.AppCulture) ?? "Probability");
+        }
+
         plotFFT.CultureUI = _settings.AppCulture;
         if (plotFFT.Plot.GetPlottables().Length > 0)
         {
@@ -249,12 +253,13 @@ public partial class FrmMain : Form
         plotWindow.Refresh();
         plotApplied.Refresh();
         plotFractal.Refresh();
+        plotFractalDistribution.Refresh();
         plotFFT.Refresh();
 
         // Update the results text
         if (txtStats.Text.Length > 0)
             txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
 
+        this.ResumeLayout();
     }
-
 }

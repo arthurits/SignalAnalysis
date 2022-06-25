@@ -69,10 +69,12 @@ partial class FrmMain
         string filePath;
 
         // Extract the values to be exported
-        var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        double[] signal = Array.Empty<double>();
+        if (_signalData.Length > 0)
+            signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
 
         // Exit if there is no data to be saved
-        if (signal is null || signal.Length == 0)
+        if (signal.Length == 0)
         {
             // Exit if no data has been received or the matrices are still un-initialized
             using (new CenterWinDialog(this))
@@ -145,10 +147,10 @@ partial class FrmMain
             _settings = frm.Settings;
             ComboSeries_SelectedIndexChanged(this, EventArgs.Empty);
 
-            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExPower"]).Checked = _settings.PowerSpectra;
-            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCumulative"]).Checked = _settings.CumulativeDimension;
-            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExEntropy"]).Checked = _settings.Entropy;
-            ((ToolStripStatusLabelEx)((StatusStrip)((ToolStripPanel)Controls["StripPanelBottom"]).Controls["StatusStrip"]).Items["LabelExCrossHair"]).Checked = _settings.CrossHair;
+            statusStripLabelExPower.Checked = _settings.PowerSpectra;
+            statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
+            statusStripLabelExEntropy.Checked = _settings.Entropy;
+            statusStripLabelExCrossHair.Checked = _settings.CrossHair;
 
             UpdateUI_Language();
         }
