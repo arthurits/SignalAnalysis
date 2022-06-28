@@ -168,22 +168,39 @@ public partial class FrmMain : Form
     {
         this.SuspendLayout();
 
+        // Testing string resources
+        StringResources.StringRM = StringsRM;
+        StringResources.Culture = _settings.AppCulture;
+
+
         // Update the form's tittle
         SetFormTitle(this, String.Empty);
 
         // Update ToolStrip
-        this.toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";
-        this.toolStripMain_Exit.ToolTipText = StringsRM.GetString("strToolTipExit", _settings.AppCulture) ?? "Exit the application";
-        this.toolStripMain_Open.Text = StringsRM.GetString("strToolStripOpen", _settings.AppCulture) ?? "Open";
-        this.toolStripMain_Open.ToolTipText = StringsRM.GetString("strToolTipOpen", _settings.AppCulture) ?? "Open data file from disk";
-        this.toolStripMain_Export.Text = StringsRM.GetString("strToolStripExport", _settings.AppCulture) ?? "Export";
-        this.toolStripMain_Export.ToolTipText = StringsRM.GetString("strToolTipExport", _settings.AppCulture) ?? "Export data and data analysis";
-        stripComboSeries.ToolTipText = StringsRM.GetString("strToolTipCboSeries", _settings.AppCulture) ?? "Select data series";
-        stripComboWindows.ToolTipText = StringsRM.GetString("strToolTipCboWindows", _settings.AppCulture) ?? "Select FFT window";
-        this.toolStripMain_Settings.Text = StringsRM.GetString("strToolStripSettings", _settings.AppCulture) ?? "Settings";
-        this.toolStripMain_Settings.ToolTipText = StringsRM.GetString("strToolTipSettings", _settings.AppCulture) ?? "Settings for plots, data, and UI";
-        this.toolStripMain_About.Text = StringsRM.GetString("strToolStripAbout", _settings.AppCulture) ?? "About";
-        this.toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
+        //this.toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";
+        //this.toolStripMain_Exit.ToolTipText = StringsRM.GetString("strToolTipExit", _settings.AppCulture) ?? "Exit the application";
+        //this.toolStripMain_Open.Text = StringsRM.GetString("strToolStripOpen", _settings.AppCulture) ?? "Open";
+        //this.toolStripMain_Open.ToolTipText = StringsRM.GetString("strToolTipOpen", _settings.AppCulture) ?? "Open data file from disk";
+        //this.toolStripMain_Export.Text = StringsRM.GetString("strToolStripExport", _settings.AppCulture) ?? "Export";
+        //this.toolStripMain_Export.ToolTipText = StringsRM.GetString("strToolTipExport", _settings.AppCulture) ?? "Export data and data analysis";
+        //stripComboSeries.ToolTipText = StringsRM.GetString("strToolTipCboSeries", _settings.AppCulture) ?? "Select data series";
+        //stripComboWindows.ToolTipText = StringsRM.GetString("strToolTipCboWindows", _settings.AppCulture) ?? "Select FFT window";
+        //this.toolStripMain_Settings.Text = StringsRM.GetString("strToolStripSettings", _settings.AppCulture) ?? "Settings";
+        //this.toolStripMain_Settings.ToolTipText = StringsRM.GetString("strToolTipSettings", _settings.AppCulture) ?? "Settings for plots, data, and UI";
+        //this.toolStripMain_About.Text = StringsRM.GetString("strToolStripAbout", _settings.AppCulture) ?? "About";
+        //this.toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
+        this.toolStripMain_Exit.Text = StringResources.ToolStripExit;
+        this.toolStripMain_Exit.ToolTipText = StringResources.ToolTipExit;
+        this.toolStripMain_Open.Text = StringResources.ToolStripOpen;
+        this.toolStripMain_Open.ToolTipText = StringResources.ToolTipOpen;
+        this.toolStripMain_Export.Text = StringResources.ToolStripExport;
+        this.toolStripMain_Export.ToolTipText = StringResources.ToolTipExport;
+        stripComboSeries.ToolTipText = StringResources.ToolTipCboSeries;
+        stripComboWindows.ToolTipText = StringResources.ToolTipCboWindows;
+        this.toolStripMain_Settings.Text = StringResources.ToolStripSettings;
+        this.toolStripMain_Settings.ToolTipText = StringResources.ToolTipSettings;
+        this.toolStripMain_About.Text = StringResources.ToolStripAbout;
+        this.toolStripMain_About.ToolTipText = StringResources.ToolTipAbout;
 
         // Update StatusStrip
         statusStripLabelCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
