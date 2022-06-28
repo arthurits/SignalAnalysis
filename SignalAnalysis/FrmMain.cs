@@ -169,7 +169,7 @@ public partial class FrmMain : Form
         this.SuspendLayout();
 
         // Testing string resources
-        StringResources.StringRM = StringsRM;
+        //StringResources.StringRM = StringsRM;
         StringResources.Culture = _settings.AppCulture;
 
 
@@ -204,11 +204,16 @@ public partial class FrmMain : Form
 
         // Update StatusStrip
         statusStripLabelCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
-        statusStripLabelCulture.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
-        statusStripLabelExPower.ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
-        statusStripLabelExCumulative.ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
-        statusStripLabelExEntropy.ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
-        statusStripLabelExCrossHair.ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
+        //statusStripLabelCulture.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
+        //statusStripLabelExPower.ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
+        //statusStripLabelExCumulative.ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
+        //statusStripLabelExEntropy.ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
+        //statusStripLabelExCrossHair.ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
+        statusStripLabelCulture.ToolTipText = StringResources.ToolTipUILanguage;
+        statusStripLabelExPower.ToolTipText = StringResources.StatusTipPower;
+        statusStripLabelExCumulative.ToolTipText = StringResources.StatusTipFractal;
+        statusStripLabelExEntropy.ToolTipText = StringResources.StatusTipEntropy;
+        statusStripLabelExCrossHair.ToolTipText = StringResources.StatusTipCrossHair;
 
         // Update plots if they contain series
         plotOriginal.CultureUI = _settings.AppCulture;

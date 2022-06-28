@@ -52,6 +52,12 @@ public static class StringResources
     public static string ToolStripAbout => StringRM.GetString("strToolStripAbout", Culture) ?? "About";
     public static string ToolTipAbout => StringRM.GetString("strToolTipAbout", Culture) ?? "About this software";
 
+    public static string ToolTipUILanguage => StringRM.GetString("strToolTipUILanguage", Culture) ?? "User interface language";
+    public static string StatusTipPower => StringRM.GetString("strStatusTipPower", Culture) ?? "Power spectra(dB)";
+    public static string StatusTipFractal => StringRM.GetString("strStatusTipFractal", Culture) ?? "Cumulative fractal dimension";
+    public static string StatusTipEntropy => StringRM.GetString("strStatusTipEntropy", Culture) ?? "Approximate and sample entropy";
+    public static string StatusTipCrossHair => StringRM.GetString("strStatusTipCrossHair", Culture) ?? "Plot's crosshair mode";
+
 
     //StringsRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
     //    StringsRM.GetString("strPlotFFTYLabelPow", Culture) ?? "Power (dB)";
