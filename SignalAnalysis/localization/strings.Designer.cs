@@ -832,18 +832,18 @@ namespace SignalAnalysis.localization {
         /// <summary>
         ///   Looks up a localized string similar to Fractal dimension.
         /// </summary>
-        internal static string strPlotFractalTitle {
+        internal static string strPlotFractalTitle1 {
             get {
-                return ResourceManager.GetString("strPlotFractalTitle", resourceCulture);
+                return ResourceManager.GetString("strPlotFractalTitle1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to (cumulative).
         /// </summary>
-        internal static string strPlotFractalTitle__ {
+        internal static string strPlotFractalTitle2 {
             get {
-                return ResourceManager.GetString("strPlotFractalTitle()", resourceCulture);
+                return ResourceManager.GetString("strPlotFractalTitle2", resourceCulture);
             }
         }
         

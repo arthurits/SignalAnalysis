@@ -38,6 +38,12 @@ public static class StringResources
     public static string FileHeader26 => StringRM.GetString("strFileHeader26", Culture) ?? "and";
     public static string FileHeader27 => StringRM.GetString("strFileHeader27", Culture) ?? "milliseconds";
 
+    public static string FormTitle => StringRM.GetString("strFormTitle", Culture) ?? "Signal analysis";
+    public static string FormTitleUnion => StringRM.GetString("strFrmTitleUnion", Culture) ?? " - ";
+
+
+    public static string MsgBoxExitTitle => StringRM.GetString("strMsgBoxExitTitle", Culture) ?? "Exit?";
+    public static string MsgBoxExit => StringRM.GetString("strMsgBoxExit", Culture) ?? "Are you sure you want to exit\nthe application?";
 
     public static string ToolStripExit => StringRM.GetString("strToolStripExit", Culture) ?? "Exit";
     public static string ToolTipExit => StringRM.GetString("strToolTipExit", Culture) ?? "Exit the application";
@@ -58,6 +64,26 @@ public static class StringResources
     public static string StatusTipEntropy => StringRM.GetString("strStatusTipEntropy", Culture) ?? "Approximate and sample entropy";
     public static string StatusTipCrossHair => StringRM.GetString("strStatusTipCrossHair", Culture) ?? "Plot's crosshair mode";
 
+    public static string PlotOriginalTitle => StringRM.GetString("strPlotOriginalTitle", Culture) ?? "Input signal";
+    public static string PlotOriginalYLabel => StringRM.GetString("strPlotOriginalYLabel", Culture) ?? "Amplitude";
+    public static string PlotOriginalXLabel => StringRM.GetString("strPlotOriginalXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotWindowTitle => StringRM.GetString("strPlotWindowTitle", Culture) ?? "{0} window";
+    public static string PlotWindowYLabel => StringRM.GetString("strPlotWindowYLabel", Culture) ?? "Amplitude";
+    public static string PlotWindowXLabel => StringRM.GetString("strPlotWindowXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotAppliedTitle => StringRM.GetString("strPlotAppliedTitle", Culture) ?? "Windowed signal";
+    public static string PlotAppliedYLabel => StringRM.GetString("strPlotAppliedYLabel", Culture) ?? "Amplitude";
+    public static string PlotAppliedXLabel => StringRM.GetString("strPlotAppliedXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotFractalDistributionTitle => StringRM.GetString("strPlotFractalDistributionTitle", Culture) ?? "Fractal dimension distribution";
+    public static string PlotFractalDistributionXLabel => StringRM.GetString("strPlotFractalDisributionXLabel", Culture) ?? "Fractal dimension (H)";
+    public static string PlotFractalDistributionYLabel => StringRM.GetString("strPlotFractalDisributionYLabel", Culture) ?? "Probability";
+    public static string PlotFractalTitle => StringRM.GetString("strPlotFractalTitle", Culture) ?? "Fractal dimension";
+    public static string PlotFractalTitle2 => StringRM.GetString("strPlotFractalTitle()", Culture) ?? "(cumulative)";
+    public static string PlotFractalYLabel => StringRM.GetString("strPlotFractalYLabel", Culture) ?? "Dimension (H)";
+    public static string PlotFractalXLabel => StringRM.GetString("strPlotFractalXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotFFTTitle => StringRM.GetString("strPlotFFTTitle", Culture) ?? "Fast Fourier transform";
+    public static string PlotFFTYLabelPow => StringRM.GetString("strPlotFFTYLabelPow", Culture) ?? "Power (dB)";
+    public static string PlotFFTYLabelMag => StringRM.GetString("strPlotFFTYLabelMag", Culture) ?? "Magnitude (RMS²)";
+    public static string PlotFFTXLabel => StringRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
 
     //StringsRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
     //    StringsRM.GetString("strPlotFFTYLabelPow", Culture) ?? "Power (dB)";

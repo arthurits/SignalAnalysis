@@ -382,10 +382,10 @@ dimension has been stopped.</value>
   <data name="strPlotFractalDistributionTitle" xml:space="preserve">
     <value>Fractal dimension distribution</value>
   </data>
-  <data name="strPlotFractalTitle" xml:space="preserve">
+  <data name="strPlotFractalTitle1" xml:space="preserve">
     <value>Fractal dimension</value>
   </data>
-  <data name="strPlotFractalTitle()" xml:space="preserve">
+  <data name="strPlotFractalTitle2" xml:space="preserve">
     <value>(cumulative)</value>
   </data>
   <data name="strPlotFractalXLabel" xml:space="preserve">

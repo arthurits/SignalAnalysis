@@ -174,7 +174,7 @@ partial class FrmMain
         UpdateFractalDistribution(Results.FractalDimension, Results.FractalVariance);
         await UpdateWindowPlots(signal);
 
-        txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+        txtStats.Text = Results.ToString(_settings.AppCulture);
 
         // Restore the cursor
         this.UseWaitCursor = false;

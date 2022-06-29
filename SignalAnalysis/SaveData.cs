@@ -231,7 +231,7 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
-            sw.WriteLine(Results.ToString(StringsRM, _settings.AppCulture));
+            sw.WriteLine(Results.ToString(_settings.AppCulture));
             sw.WriteLine();
             sw.WriteLine($"{(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)")}\t{StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"}\t{StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)"}");
 

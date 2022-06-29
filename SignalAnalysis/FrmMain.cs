@@ -62,8 +62,8 @@ public partial class FrmMain : Form
         using (new CenterWinDialog(this))
         {
             if (DialogResult.No == MessageBox.Show(this,
-                                                    StringsRM.GetString("strMsgBoxExitTitle", _settings.AppCulture) ?? "Exit?",
-                                                    StringsRM.GetString("strMsgBoxExit", _settings.AppCulture) ?? "Are you sure you want to exit\nthe application?",
+                                                    StringResources.MsgBoxExitTitle,
+                                                    StringResources.MsgBoxExit,
                                                     MessageBoxButtons.YesNo,
                                                     MessageBoxIcon.Question,
                                                     MessageBoxDefaultButton.Button2))
@@ -147,7 +147,7 @@ public partial class FrmMain : Form
     private void SetFormTitle(System.Windows.Forms.Form frm, string? strFileName = null)
     {
         string strText = String.Empty;
-        string strSep = StringsRM.GetString("strFrmTitleUnion", _settings.AppCulture) ?? " - ";
+        string strSep = StringResources.FormTitleUnion;
         if (strFileName is not null)
         {
             if (strFileName != String.Empty)
@@ -158,7 +158,7 @@ public partial class FrmMain : Form
                 strText = frm.Text[index..];
             }
         }
-        frm.Text = StringsRM.GetString("strFormTitle", _settings.AppCulture) ?? "Signal analysis" + strText;
+        frm.Text = StringResources.FormTitle + strText;
     }
 
     /// <summary>
@@ -219,9 +219,12 @@ public partial class FrmMain : Form
         plotOriginal.CultureUI = _settings.AppCulture;
         if (plotOriginal.Plot.GetPlottables().Length > 0)
         {
-            plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture));
-            plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture));
-            plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture));
+            //plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture) ?? "Input signal");
+            //plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture) ?? "Amplitude");
+            //plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture) ?? "Time (seconds)");
+            plotOriginal.Plot.Title(StringResources.PlotOriginalTitle);
+            plotOriginal.Plot.YLabel(StringResources.PlotOriginalYLabel);
+            plotOriginal.Plot.XLabel(StringResources.PlotOriginalXLabel);
         }
         
         plotWindow.CultureUI = _settings.AppCulture;
@@ -229,46 +232,67 @@ public partial class FrmMain : Form
         {
             IWindow window = (IWindow)stripComboWindows.SelectedItem;
             if (window is not null)
-                plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
-            //plotWindow.Plot.Title(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture));
-            plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture));
-            plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture));
+            {
+                //plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
+                plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
+            }
+            //plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture) ?? "Amplitude");
+            //plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture) ?? "Time (seconds)");
+            plotWindow.Plot.YLabel(StringResources.PlotWindowYLabel);
+            plotWindow.Plot.XLabel(StringResources.PlotWindowXLabel);
         }
         
         plotApplied.CultureUI = _settings.AppCulture;
         if (plotApplied.Plot.GetPlottables().Length > 0)
         {
-            plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture));
-            plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture));
-            plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture));
+            //plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture) ?? "Windowed signal");
+            //plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture) ?? "Amplitude");
+            //plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture) ?? "Time (seconds)");
+            plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
+            plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
+            plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
         }
         
         plotFractal.CultureUI = _settings.AppCulture;
         if (plotFractal.Plot.GetPlottables().Length > 0)
         {
-            plotFractal.Plot.Title((StringsRM.GetString("strPlotFractalTitle", _settings.AppCulture) ?? "Fractal dimension") +
+            //plotFractal.Plot.Title((StringsRM.GetString("strPlotFractalTitle", _settings.AppCulture) ?? "Fractal dimension") +
+            //    " " +
+            //    (_settings.CumulativeDimension ? (StringsRM.GetString("strPlotFractalTitle()", _settings.AppCulture) ?? "(cumulative)") : String.Empty) +
+            //    " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
+            //    " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
+            //plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
+            //plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
+
+            plotFractal.Plot.Title(StringResources.PlotFractalTitle +
                 " " +
-                (_settings.CumulativeDimension ? (StringsRM.GetString("strPlotFractalTitle()", _settings.AppCulture) ?? "(cumulative)") : String.Empty) +
+                (_settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty) +
                 " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
                 " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
-            plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
-            plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
+            plotFractal.Plot.YLabel(StringResources.PlotFractalYLabel);
+            plotFractal.Plot.XLabel(StringResources.PlotFractalXLabel);
         }
 
         plotFractalDistribution.CultureUI = _settings.AppCulture;
         if (plotFractal.Plot.GetPlottables().Length > 0)
         {
-            plotFractalDistribution.Plot.Title(StringsRM.GetString("strPlotFractalDistributionTitle", _settings.AppCulture) ?? "Fractal dimension distribution");
-            plotFractalDistribution.Plot.XLabel(StringsRM.GetString("strPlotFractalDisributionXLabel", _settings.AppCulture) ?? "Fractal dimension (H)");
-            plotFractalDistribution.Plot.YLabel(StringsRM.GetString("strPlotFractalDisributionYLabel", _settings.AppCulture) ?? "Probability");
+            //plotFractalDistribution.Plot.Title(StringsRM.GetString("strPlotFractalDistributionTitle", _settings.AppCulture) ?? "Fractal dimension distribution");
+            //plotFractalDistribution.Plot.XLabel(StringsRM.GetString("strPlotFractalDisributionXLabel", _settings.AppCulture) ?? "Fractal dimension (H)");
+            //plotFractalDistribution.Plot.YLabel(StringsRM.GetString("strPlotFractalDisributionYLabel", _settings.AppCulture) ?? "Probability");
+            plotFractalDistribution.Plot.Title(StringResources.PlotFractalDistributionTitle);
+            plotFractalDistribution.Plot.XLabel(StringResources.PlotFractalDistributionXLabel);
+            plotFractalDistribution.Plot.YLabel(StringResources.PlotFractalDistributionYLabel);
         }
 
         plotFFT.CultureUI = _settings.AppCulture;
         if (plotFFT.Plot.GetPlottables().Length > 0)
         {
-            plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));
-            plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTXLabelMag", _settings.AppCulture));
-            plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
+            //plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));
+            //plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture));
+            //plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
+            plotFFT.Plot.Title(StringResources.PlotFFTTitle);
+            plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
+            plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);
         }
 
         plotOriginal.Refresh();
@@ -280,7 +304,7 @@ public partial class FrmMain : Form
 
         // Update the results text
         if (txtStats.Text.Length > 0)
-            txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+            txtStats.Text = Results.ToString(_settings.AppCulture);
 
         this.ResumeLayout();
     }

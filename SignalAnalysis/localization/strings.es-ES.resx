@@ -378,7 +378,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Espectro (dB)</value>
   </data>
   <data name="strPlotFractalDisributionXLabel" xml:space="preserve">
-    <value>Dimension fractal (H)</value>
+    <value>Dimensión fractal (H)</value>
   </data>
   <data name="strPlotFractalDisributionYLabel" xml:space="preserve">
     <value>Probabilidad</value>
@@ -386,10 +386,10 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotFractalDistributionTitle" xml:space="preserve">
     <value>Distribución dimensión fractal</value>
   </data>
-  <data name="strPlotFractalTitle" xml:space="preserve">
+  <data name="strPlotFractalTitle1" xml:space="preserve">
     <value>Dimensión fractal</value>
   </data>
-  <data name="strPlotFractalTitle()" xml:space="preserve">
+  <data name="strPlotFractalTitle2" xml:space="preserve">
     <value>(acumulada)</value>
   </data>
   <data name="strPlotFractalXLabel" xml:space="preserve">

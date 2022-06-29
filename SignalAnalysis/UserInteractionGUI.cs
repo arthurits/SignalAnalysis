@@ -53,7 +53,7 @@ partial class FrmMain
                 if (results is not null)
                 {
                     Results = results;
-                    txtStats.Text = Results.ToString(StringsRM, _settings.AppCulture);
+                    txtStats.Text = Results.ToString(_settings.AppCulture);
                 }
             }
 

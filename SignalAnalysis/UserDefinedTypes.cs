@@ -32,16 +32,16 @@ public class Stats
     public double[] FFTmagnitude { get; set; }
     public double[] FFTfrequencies { get; set; }
 
-    public string ToString(System.Resources.ResourceManager stringsRM, System.Globalization.CultureInfo culture) =>
-        (stringsRM.GetString("strFileHeader07", culture) ?? "Average") + ": " + Average.ToString("0.######", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader08", culture) ?? "Maximum") + ": " + Maximum.ToString("0.##", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader09", culture) ?? "Minimum") + ": " + Minimum.ToString("0.##", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader10", culture) ?? "Fractal dimension") + ": " + FractalDimension.ToString("0.########", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader11", culture) ?? "Fractal variance") + ": " + FractalVariance.ToString("0.########", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader12", culture) ?? "Approximate entropy") + ": " + ApproximateEntropy.ToString("0.########", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader13", culture) ?? "Sample entropy") + ": " + SampleEntropy.ToString("0.########", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader14", culture) ?? "Shannon entropy") + ": " + ShannonEntropy.ToString("0.########", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader15", culture) ?? "Entropy bit") + ": " + EntropyBit.ToString("0.########", culture) + Environment.NewLine +
-        (stringsRM.GetString("strFileHeader16", culture) ?? "Ideal entropy") + ": " + IdealEntropy.ToString("0.########", culture);
+    public string ToString(System.Globalization.CultureInfo culture) =>
+        StringResources.FileHeader07 + ": " + Average.ToString("0.######", culture) + Environment.NewLine +
+        StringResources.FileHeader08 + ": " + Maximum.ToString("0.##", culture) + Environment.NewLine +
+        StringResources.FileHeader09 + ": " + Minimum.ToString("0.##", culture) + Environment.NewLine +
+        StringResources.FileHeader10 + ": " + FractalDimension.ToString("0.########", culture) + Environment.NewLine +
+        StringResources.FileHeader11 + ": " + FractalVariance.ToString("0.########", culture) + Environment.NewLine +
+        StringResources.FileHeader12 + ": " + ApproximateEntropy.ToString("0.########", culture) + Environment.NewLine +
+        StringResources.FileHeader13 + ": " + SampleEntropy.ToString("0.########", culture) + Environment.NewLine +
+        StringResources.FileHeader14 + ": " + ShannonEntropy.ToString("0.########", culture) + Environment.NewLine +
+        StringResources.FileHeader15 + ": " + EntropyBit.ToString("0.########", culture) + Environment.NewLine +
+        StringResources.FileHeader16 + ": " + IdealEntropy.ToString("0.########", culture);
 }
 
