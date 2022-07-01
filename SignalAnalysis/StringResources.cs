@@ -111,8 +111,8 @@ public static class StringResources
     public static string PlotFractalDistributionTitle => StringRM.GetString("strPlotFractalDistributionTitle", Culture) ?? "Fractal dimension distribution";
     public static string PlotFractalDistributionXLabel => StringRM.GetString("strPlotFractalDisributionXLabel", Culture) ?? "Fractal dimension (H)";
     public static string PlotFractalDistributionYLabel => StringRM.GetString("strPlotFractalDisributionYLabel", Culture) ?? "Probability";
-    public static string PlotFractalTitle1 => StringRM.GetString("strPlotFractalTitle", Culture) ?? "Fractal dimension";
-    public static string PlotFractalTitle2 => StringRM.GetString("strPlotFractalTitle()", Culture) ?? "(cumulative)";
+    public static string PlotFractalTitle1 => StringRM.GetString("strPlotFractalTitle1", Culture) ?? "Fractal dimension";
+    public static string PlotFractalTitle2 => StringRM.GetString("strPlotFractalTitle2", Culture) ?? "(cumulative)";
     public static string PlotFractalYLabel => StringRM.GetString("strPlotFractalYLabel", Culture) ?? "Dimension (H)";
     public static string PlotFractalXLabel => StringRM.GetString("strPlotFractalXLabel", Culture) ?? "Time (seconds)";
     public static string PlotFFTTitle => StringRM.GetString("strPlotFFTTitle", Culture) ?? "Fast Fourier transform";
