@@ -177,18 +177,6 @@ public partial class FrmMain : Form
         SetFormTitle(this, String.Empty);
 
         // Update ToolStrip
-        //this.toolStripMain_Exit.Text = StringsRM.GetString("strToolStripExit", _settings.AppCulture) ?? "Exit";
-        //this.toolStripMain_Exit.ToolTipText = StringsRM.GetString("strToolTipExit", _settings.AppCulture) ?? "Exit the application";
-        //this.toolStripMain_Open.Text = StringsRM.GetString("strToolStripOpen", _settings.AppCulture) ?? "Open";
-        //this.toolStripMain_Open.ToolTipText = StringsRM.GetString("strToolTipOpen", _settings.AppCulture) ?? "Open data file from disk";
-        //this.toolStripMain_Export.Text = StringsRM.GetString("strToolStripExport", _settings.AppCulture) ?? "Export";
-        //this.toolStripMain_Export.ToolTipText = StringsRM.GetString("strToolTipExport", _settings.AppCulture) ?? "Export data and data analysis";
-        //stripComboSeries.ToolTipText = StringsRM.GetString("strToolTipCboSeries", _settings.AppCulture) ?? "Select data series";
-        //stripComboWindows.ToolTipText = StringsRM.GetString("strToolTipCboWindows", _settings.AppCulture) ?? "Select FFT window";
-        //this.toolStripMain_Settings.Text = StringsRM.GetString("strToolStripSettings", _settings.AppCulture) ?? "Settings";
-        //this.toolStripMain_Settings.ToolTipText = StringsRM.GetString("strToolTipSettings", _settings.AppCulture) ?? "Settings for plots, data, and UI";
-        //this.toolStripMain_About.Text = StringsRM.GetString("strToolStripAbout", _settings.AppCulture) ?? "About";
-        //this.toolStripMain_About.ToolTipText = StringsRM.GetString("strToolTipAbout", _settings.AppCulture) ?? "About this software";
         this.toolStripMain_Exit.Text = StringResources.ToolStripExit;
         this.toolStripMain_Exit.ToolTipText = StringResources.ToolTipExit;
         this.toolStripMain_Open.Text = StringResources.ToolStripOpen;
@@ -204,11 +192,6 @@ public partial class FrmMain : Form
 
         // Update StatusStrip
         statusStripLabelCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
-        //statusStripLabelCulture.ToolTipText = StringsRM.GetString("strToolTipUILanguage", _settings.AppCulture) ?? "User interface language";
-        //statusStripLabelExPower.ToolTipText = StringsRM.GetString("strStatusTipPower", _settings.AppCulture) ?? "Power spectra(dB)";
-        //statusStripLabelExCumulative.ToolTipText = StringsRM.GetString("strStatusTipFractal", _settings.AppCulture) ?? "Cumulative fractal dimension";
-        //statusStripLabelExEntropy.ToolTipText = StringsRM.GetString("strStatusTipEntropy", _settings.AppCulture) ?? "Approximate and sample entropy";
-        //statusStripLabelExCrossHair.ToolTipText = StringsRM.GetString("strStatusTipCrossHair", _settings.AppCulture) ?? "Plot's crosshair mode";
         statusStripLabelCulture.ToolTipText = StringResources.ToolTipUILanguage;
         statusStripLabelExPower.ToolTipText = StringResources.StatusTipPower;
         statusStripLabelExCumulative.ToolTipText = StringResources.StatusTipFractal;
@@ -219,9 +202,6 @@ public partial class FrmMain : Form
         plotOriginal.CultureUI = _settings.AppCulture;
         if (plotOriginal.Plot.GetPlottables().Length > 0)
         {
-            //plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture) ?? "Input signal");
-            //plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture) ?? "Amplitude");
-            //plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture) ?? "Time (seconds)");
             plotOriginal.Plot.Title(StringResources.PlotOriginalTitle);
             plotOriginal.Plot.YLabel(StringResources.PlotOriginalYLabel);
             plotOriginal.Plot.XLabel(StringResources.PlotOriginalXLabel);
@@ -232,12 +212,8 @@ public partial class FrmMain : Form
         {
             IWindow window = (IWindow)stripComboWindows.SelectedItem;
             if (window is not null)
-            {
-                //plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
                 plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
-            }
-            //plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture) ?? "Amplitude");
-            //plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture) ?? "Time (seconds)");
+
             plotWindow.Plot.YLabel(StringResources.PlotWindowYLabel);
             plotWindow.Plot.XLabel(StringResources.PlotWindowXLabel);
         }
@@ -245,9 +221,6 @@ public partial class FrmMain : Form
         plotApplied.CultureUI = _settings.AppCulture;
         if (plotApplied.Plot.GetPlottables().Length > 0)
         {
-            //plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture) ?? "Windowed signal");
-            //plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture) ?? "Amplitude");
-            //plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture) ?? "Time (seconds)");
             plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
             plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
             plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
@@ -256,15 +229,7 @@ public partial class FrmMain : Form
         plotFractal.CultureUI = _settings.AppCulture;
         if (plotFractal.Plot.GetPlottables().Length > 0)
         {
-            //plotFractal.Plot.Title((StringsRM.GetString("strPlotFractalTitle", _settings.AppCulture) ?? "Fractal dimension") +
-            //    " " +
-            //    (_settings.CumulativeDimension ? (StringsRM.GetString("strPlotFractalTitle()", _settings.AppCulture) ?? "(cumulative)") : String.Empty) +
-            //    " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
-            //    " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
-            //plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture));
-            //plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture));
-
-            plotFractal.Plot.Title(StringResources.PlotFractalTitle +
+            plotFractal.Plot.Title(StringResources.PlotFractalTitle1 +
                 " " +
                 (_settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty) +
                 " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
@@ -276,9 +241,6 @@ public partial class FrmMain : Form
         plotFractalDistribution.CultureUI = _settings.AppCulture;
         if (plotFractal.Plot.GetPlottables().Length > 0)
         {
-            //plotFractalDistribution.Plot.Title(StringsRM.GetString("strPlotFractalDistributionTitle", _settings.AppCulture) ?? "Fractal dimension distribution");
-            //plotFractalDistribution.Plot.XLabel(StringsRM.GetString("strPlotFractalDisributionXLabel", _settings.AppCulture) ?? "Fractal dimension (H)");
-            //plotFractalDistribution.Plot.YLabel(StringsRM.GetString("strPlotFractalDisributionYLabel", _settings.AppCulture) ?? "Probability");
             plotFractalDistribution.Plot.Title(StringResources.PlotFractalDistributionTitle);
             plotFractalDistribution.Plot.XLabel(StringResources.PlotFractalDistributionXLabel);
             plotFractalDistribution.Plot.YLabel(StringResources.PlotFractalDistributionYLabel);
@@ -287,9 +249,6 @@ public partial class FrmMain : Form
         plotFFT.CultureUI = _settings.AppCulture;
         if (plotFFT.Plot.GetPlottables().Length > 0)
         {
-            //plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture));
-            //plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) : StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture));
-            //plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture));
             plotFFT.Plot.Title(StringResources.PlotFFTTitle);
             plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
             plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);

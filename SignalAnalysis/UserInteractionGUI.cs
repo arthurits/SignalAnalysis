@@ -14,11 +14,11 @@ partial class FrmMain
 
         using OpenFileDialog openDlg = new()
         {
-            Filter = StringsRM.GetString("strOpenDlgFilter", _settings.AppCulture) ?? "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*",
+            Filter = StringResources.OpenDlgFilter,
             FilterIndex = 5,
             InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserOpenPath : _settings.DefaultOpenPath,
             RestoreDirectory = true,
-            Title = StringsRM.GetString("strOpenDlgTitle", _settings.AppCulture) ?? "Select data file",
+            Title = StringResources.OpenDlgTitle,
         };
 
         using (new CenterWinDialog(this))
@@ -79,8 +79,8 @@ partial class FrmMain
             // Exit if no data has been received or the matrices are still un-initialized
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringsRM.GetString("strMsgBoxNoData", _settings.AppCulture) ?? "There is no data available to be saved.",
-                    StringsRM.GetString("strMsgBoxNoDataTitle", _settings.AppCulture) ?? "No data",
+                MessageBox.Show(StringResources.MsgBoxNoDataTitle,
+                    StringResources.MsgBoxNoDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -91,11 +91,11 @@ partial class FrmMain
         SaveFileDialog SaveDlg = new()
         {
             DefaultExt = "*.txt",
-            Filter = StringsRM.GetString("strSaveDlgFilter", _settings.AppCulture) ?? "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|Results file (*.results)|*.results|All files (*.*)|*.*",
+            Filter = StringResources.SaveDlgFilter,
             FilterIndex = 1,
             InitialDirectory = _settings.RememberFileDialogPath ? _settings.UserSavePath : _settings.DefaultSavePath,
             OverwritePrompt = true,
-            Title = StringsRM.GetString("strSaveDlgTitle", _settings.AppCulture) ?? "Export data"
+            Title = StringResources.SaveDlgTitle
         };
 
         using (new CenterWinDialog(this))
@@ -129,8 +129,8 @@ partial class FrmMain
                 // Show OK save data
                 using (new CenterWinDialog(this))
                 {
-                    MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxOKSaveData", _settings.AppCulture) ?? "Data has been successfully saved to disk."),
-                        StringsRM.GetString("strMsgBoxOKSaveDataTitle", _settings.AppCulture) ?? "Data saved",
+                    MessageBox.Show(StringResources.MsgBoxOKSaveData,
+                        StringResources.MsgBoxOKSaveDataTitle,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                 }

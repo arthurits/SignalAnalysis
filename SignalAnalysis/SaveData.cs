@@ -27,34 +27,31 @@ partial class FrmMain
             string content = string.Empty;
             TimeSpan nTime = nStart.AddSeconds((Data.Length - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
-            //sw.WriteLine("Start time: {0}", nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader02", _settings.AppCulture) ?? "Start time")}: {nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture)}");
-            //sw.WriteLine("End time: {0}", nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture));
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader03", _settings.AppCulture) ?? "End time")}: {nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture)}");
-            //sw.WriteLine("Total measuring time: {0} days, {1} hours, {2} minutes, {3} seconds, and {4} milliseconds", nTime.Days, nTime.Hours, nTime.Minutes, nTime.Seconds, nTime.Milliseconds);
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader04", _settings.AppCulture) ?? "Total measuring time")}: " +
-                $"{nTime.Days} {(StringsRM.GetString("strFileHeader22", _settings.AppCulture) ?? "days")}, " +
-                $"{nTime.Hours} {(StringsRM.GetString("strFileHeader23", _settings.AppCulture) ?? "hours")}, " +
-                $"{nTime.Minutes} {(StringsRM.GetString("strFileHeader24", _settings.AppCulture) ?? "minutes")}, " +
-                $"{nTime.Seconds} {(StringsRM.GetString("strFileHeader25", _settings.AppCulture) ?? "seconds")} " +
-                $"{(StringsRM.GetString("strFileHeader26", _settings.AppCulture) ?? "and")} " +
-                $"{nTime.Milliseconds} {(StringsRM.GetString("strFileHeader27", _settings.AppCulture) ?? "milliseconds")}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader17", _settings.AppCulture) ?? "Number of data series")}: 1");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of data points")}: {Data.Length.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Sampling frequency")}: {nSampleFreq.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader07", _settings.AppCulture) ?? "Average")}: {Results.Average.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader08", _settings.AppCulture) ?? "Maximum")}: {Results.Maximum.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader09", _settings.AppCulture) ?? "Minimum")}: {Results.Minimum.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader10", _settings.AppCulture) ?? "Fractal dimension")}: {Results.FractalDimension.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader11", _settings.AppCulture) ?? "Fractal variance")}: {Results.FractalVariance.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader12", _settings.AppCulture) ?? "Approximate entropy")}: {Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader13", _settings.AppCulture) ?? "Sample entropy")}: {Results.SampleEntropy.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader14", _settings.AppCulture) ?? "Shannon entropy")}: {Results.ShannonEntropy.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader15", _settings.AppCulture) ?? "Entropy bit")}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader16", _settings.AppCulture) ?? "Ideal entropy")}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
+            sw.WriteLine($"{StringResources.FileHeader02}: {nStart.AddSeconds(ArrIndexInit / nSampleFreq).ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader03}: {nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq).ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader04}: " +
+                $"{nTime.Days} {StringResources.FileHeader22}, " +
+                $"{nTime.Hours} {StringResources.FileHeader23}, " +
+                $"{nTime.Minutes} {StringResources.FileHeader24}, " +
+                $"{nTime.Seconds} {StringResources.FileHeader25} " +
+                $"{StringResources.FileHeader26} " +
+                $"{nTime.Milliseconds} {StringResources.FileHeader27}");
+            sw.WriteLine($"{StringResources.FileHeader17}: 1");
+            sw.WriteLine($"{StringResources.FileHeader05}: {Data.Length.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader06}: {nSampleFreq.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader07}: {Results.Average.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader08}: {Results.Maximum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader09}: {Results.Minimum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader10}: {Results.FractalDimension.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader11}: {Results.FractalVariance.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader12}: {Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader13}: {Results.SampleEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader14}: {Results.ShannonEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader15}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader16}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine();
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t{SeriesName}");
+            sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}");
 
             string time;
             // Save the numerical values
@@ -75,8 +72,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                    StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -109,10 +106,10 @@ partial class FrmMain
             // Save the header text into the file
             string content = string.Empty;
 
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader17", _settings.AppCulture) ?? "Number of data series")}: 1");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader05", _settings.AppCulture) ?? "Number of data points")}: {Data.Length.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader06", _settings.AppCulture) ?? "Sampling frequency")}: {nSampleFreq.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
+            sw.WriteLine($"{StringResources.FileHeader17}: 1");
+            sw.WriteLine($"{StringResources.FileHeader05}: {Data.Length.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader06}: {nSampleFreq.ToString(_settings.AppCulture)}");
             sw.WriteLine();
             sw.WriteLine($"{SeriesName}");
 
@@ -128,8 +125,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                    StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -158,7 +155,7 @@ partial class FrmMain
             TimeSpan nTime = nStart.AddSeconds((Data.Length - 1) / nSampleFreq) - nStart; // At least there should be 1 point
 
             // Save the header text into the file
-            bw.Write($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
+            bw.Write($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
             bw.Write(nStart.AddSeconds(ArrIndexInit / nSampleFreq));
             bw.Write(nStart.AddSeconds((Data.Length - 1 + ArrIndexInit) / nSampleFreq));
             bw.Write(nTime.Days);
@@ -180,7 +177,7 @@ partial class FrmMain
             bw.Write(Results.EntropyBit);
             bw.Write(Results.IdealEntropy);
 
-            bw.Write($"{(StringsRM.GetString("strFileHeader21", _settings.AppCulture) ?? "Time")}\t{SeriesName}");
+            bw.Write($"{StringResources.FileHeader21}\t{SeriesName}");
 
             // Save the numerical values
             for (int j = 0; j < Data.Length; j++)
@@ -197,8 +194,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                    StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -220,7 +217,11 @@ partial class FrmMain
         return SaveTextData(FileName, Data, ArrIndexInit, SeriesName);
     }
 
-
+    /// <summary>
+    /// Results saving function
+    /// </summary>
+    /// <param name="FileName">Path (including name) of the results file</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool SaveResultsData(string FileName)
     {
         bool result = false;
@@ -230,10 +231,10 @@ partial class FrmMain
             using var fs = File.Open(FileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
-            sw.WriteLine($"{(StringsRM.GetString("strFileHeader01", _settings.AppCulture) ?? "SignalAnalysis data")} ({_settings.AppCultureName})");
+            sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
             sw.WriteLine(Results.ToString(_settings.AppCulture));
             sw.WriteLine();
-            sw.WriteLine($"{(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)")}\t{StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"}\t{StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)"}");
+            sw.WriteLine($"{StringResources.PlotFFTXLabel}\t{StringResources.PlotFFTYLabelMag}\t{StringResources.PlotFFTYLabelPow}");
 
             // Save the numerical values
             for (int j = 0; j < Results.FFTfrequencies.Length; j++)
@@ -254,8 +255,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringsRM.GetString("strMsgBoxErrorSaveData", _settings.AppCulture) ?? "An unexpected error happened while saving file data.\nPlease try again later or contact the software engineer." + Environment.NewLine + "{0}", ex.Message),
-                    StringsRM.GetString("strMsgBoxErrorSaveDataTitle", _settings.AppCulture) ?? "Error saving data",
+                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                    StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

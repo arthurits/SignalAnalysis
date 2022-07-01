@@ -13,6 +13,7 @@ public static class StringResources
     public static System.Globalization.CultureInfo Culture { get; set; } = System.Globalization.CultureInfo.CurrentCulture;
 
 
+    public static string FileHeader00 => StringRM.GetString("strFileHeader00", Culture) ?? "ErgoLux data";
     public static string FileHeader01 => StringRM.GetString("strFileHeader01", Culture) ?? "SignalAnalysis data";
     public static string FileHeader02 => StringRM.GetString("strFileHeader02", Culture) ?? "Start time";
     public static string FileHeader03 => StringRM.GetString("strFileHeader03", Culture) ?? "End time";
@@ -30,6 +31,9 @@ public static class StringResources
     public static string FileHeader15 => StringRM.GetString("strFileHeader15", Culture) ?? "Entropy bit";
     public static string FileHeader16 => StringRM.GetString("strFileHeader16", Culture) ?? "Ideal entropy";
     public static string FileHeader17 => StringRM.GetString("strFileHeader17", Culture) ?? "Number of data series";
+    public static string FileHeader18 => StringRM.GetString("strFileHeader18", Culture) ?? "Number of sensors";
+    public static string FileHeader19 => StringRM.GetString("strFileHeader19", Culture) ?? "Missing an empty line.";
+    public static string FileHeader20 => StringRM.GetString("strFileHeader20", Culture) ?? "Missing column headers (series names).";
     public static string FileHeader21 => StringRM.GetString("strFileHeader21", Culture) ?? "Time";
     public static string FileHeader22 => StringRM.GetString("strFileHeader22", Culture) ?? "days";
     public static string FileHeader23 => StringRM.GetString("strFileHeader23", Culture) ?? "hours";
@@ -38,12 +42,43 @@ public static class StringResources
     public static string FileHeader26 => StringRM.GetString("strFileHeader26", Culture) ?? "and";
     public static string FileHeader27 => StringRM.GetString("strFileHeader27", Culture) ?? "milliseconds";
 
+    public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
+
+
     public static string FormTitle => StringRM.GetString("strFormTitle", Culture) ?? "Signal analysis";
     public static string FormTitleUnion => StringRM.GetString("strFrmTitleUnion", Culture) ?? " - ";
 
 
     public static string MsgBoxExitTitle => StringRM.GetString("strMsgBoxExitTitle", Culture) ?? "Exit?";
-    public static string MsgBoxExit => StringRM.GetString("strMsgBoxExit", Culture) ?? "Are you sure you want to exit\nthe application?";
+    public static string MsgBoxExit => StringRM.GetString("strMsgBoxExit", Culture) ?? "Are you sure you want to exit" + Environment.NewLine + "the application?";
+    public static string MsgBoxErrorFFT => StringRM.GetString("strMsgBoxErrorFFT", Culture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + "{0}";
+    public static string MsgBoxErrorFFTTitle => StringRM.GetString("strMsgBoxErrorFFTTitle", Culture) ?? "FFT error";
+    public static string MsgBoxErrorOpenData => StringRM.GetString("strMsgBoxErrorOpenData", Culture) ?? "An unexpected error happened while opening file data." + Environment.NewLine + "Please try again later or contact the software engineer." + Environment.NewLine + "{0}";
+    public static string MsgBoxErrorOpenDataTitle => StringRM.GetString("strMsgBoxErrorOpenDataTitle", Culture) ?? "Error opening data";
+    public static string MsgBoxErrorSaveData => StringRM.GetString("strMsgBoxErrorSaveData", Culture) ?? "An unexpected error happened while saving file data." + Environment.NewLine + "Please try again later or contact the software engineer." + Environment.NewLine + "{0}";
+    public static string MsgBoxErrorSaveDataTitle => StringRM.GetString("strMsgBoxErrorSaveDataTitle", Culture) ?? "Error saving data";
+    public static string MsgBoxInitArray => StringRM.GetString("strMsgBoxInitArray", Culture) ?? "Unexpected error in 'InitializeDataArrays'." + Environment.NewLine + "{0}";
+    public static string MsgBoxInitArrayTitle => StringRM.GetString("strMsgBoxInitArrayTitle", Culture) ?? "Error";
+    public static string MsgBoxOKSaveData => StringRM.GetString("strMsgBoxOKSaveData", Culture) ?? "Data has been successfully saved to disk.";
+    public static string MsgBoxOKSaveDataTitle => StringRM.GetString("strMsgBoxOKSaveDataTitle", Culture) ?? "Data saved";
+    public static string MsgBoxNoData => StringRM.GetString("strMsgBoxNoData", Culture) ?? "There is no data available to be saved.";
+    public static string MsgBoxNoDataTitle => StringRM.GetString("strMsgBoxNoDataTitle", Culture) ?? "No data";
+    public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.";
+    public static string MsgBoxTaskCancelTitle => StringRM.GetString("strMsgBoxTaskCancelTitle", Culture) ?? "Stop";
+
+    public static string OpenDlgFilter => StringRM.GetString("strOpenDlgFilter", Culture) ?? "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*";
+    public static string OpenDlgTitle => StringRM.GetString("strOpenDlgTitle", Culture) ?? "Select data file";
+    public static string SaveDlgFilter => StringRM.GetString("strSaveDlgFilter", Culture) ?? "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|Results file (*.results)|*.results|All files (*.*)|*.*";
+    public static string SaveDlgTitle => StringRM.GetString("strSaveDlgTitle", Culture) ?? "Export data";
+
+    public static string ReadDataErrorCulture => StringRM.GetString("strReadDataErrorCulture", Culture) ?? "The culture identifier string name is not valid." + Environment.NewLine + "{0}";
+    public static string ReadDataErrorCultureTitle => StringRM.GetString("strReadDataErrorCultureTitle", Culture) ?? "Culture name error";
+    public static string ReadDataError => StringRM.GetString("strReadDataError", Culture) ?? "Unable to read data from file." + Environment.NewLine + "{0}";
+    public static string ReadDataErrorTitle => StringRM.GetString("strReadDataErrorTitle", Culture) ?? "Error";
+    public static string ReadDataErrorNumber => StringRM.GetString("strReadDataErrorNumber", Culture) ?? "Invalid numeric value: {0}";
+    public static string ReadDataErrorNumberTitle => StringRM.GetString("strReadDataErrorNumberTitle", Culture) ?? "Error parsing data";
+    public static string ReadNotimplementedError => StringRM.GetString("strReadNotimplementedError", Culture) ?? "Unable to read data from a {0} file.";
+    public static string ReadNotimplementedErrorTitle => StringRM.GetString("strReadNotimplementedErrorTitle", Culture) ?? "Not implemented";
 
     public static string ToolStripExit => StringRM.GetString("strToolStripExit", Culture) ?? "Exit";
     public static string ToolTipExit => StringRM.GetString("strToolTipExit", Culture) ?? "Exit the application";
@@ -76,7 +111,7 @@ public static class StringResources
     public static string PlotFractalDistributionTitle => StringRM.GetString("strPlotFractalDistributionTitle", Culture) ?? "Fractal dimension distribution";
     public static string PlotFractalDistributionXLabel => StringRM.GetString("strPlotFractalDisributionXLabel", Culture) ?? "Fractal dimension (H)";
     public static string PlotFractalDistributionYLabel => StringRM.GetString("strPlotFractalDisributionYLabel", Culture) ?? "Probability";
-    public static string PlotFractalTitle => StringRM.GetString("strPlotFractalTitle", Culture) ?? "Fractal dimension";
+    public static string PlotFractalTitle1 => StringRM.GetString("strPlotFractalTitle", Culture) ?? "Fractal dimension";
     public static string PlotFractalTitle2 => StringRM.GetString("strPlotFractalTitle()", Culture) ?? "(cumulative)";
     public static string PlotFractalYLabel => StringRM.GetString("strPlotFractalYLabel", Culture) ?? "Dimension (H)";
     public static string PlotFractalXLabel => StringRM.GetString("strPlotFractalXLabel", Culture) ?? "Time (seconds)";
@@ -85,11 +120,4 @@ public static class StringResources
     public static string PlotFFTYLabelMag => StringRM.GetString("strPlotFFTYLabelMag", Culture) ?? "Magnitude (RMS²)";
     public static string PlotFFTXLabel => StringRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
 
-    //StringsRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
-    //    StringsRM.GetString("strPlotFFTYLabelPow", Culture) ?? "Power (dB)";
-
-    //StringsRM.GetString("strMsgBoxErrorSaveDataTitle", Culture) ?? "Error saving data";
-    //    StringsRM.GetString("strPlotFFTYLabelMag", Culture) ?? "Magnitude (RMS²)";
-
-    //    String.Format(StringsRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.", StringsRM.GetString("strFileHeader00", Culture) ?? "ErgoLux data");
 }

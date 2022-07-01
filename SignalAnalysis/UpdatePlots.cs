@@ -24,9 +24,9 @@ partial class FrmMain
                 break;
         }
 
-        plotOriginal.Plot.Title(StringsRM.GetString("strPlotOriginalTitle", _settings.AppCulture) ?? "Input signal");
-        plotOriginal.Plot.YLabel(StringsRM.GetString("strPlotOriginalYLabel", _settings.AppCulture) ?? "Amplitude");
-        plotOriginal.Plot.XLabel(StringsRM.GetString("strPlotOriginalXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotOriginal.Plot.Title(StringResources.PlotOriginalTitle);
+        plotOriginal.Plot.YLabel(StringResources.PlotOriginalYLabel);
+        plotOriginal.Plot.XLabel(StringResources.PlotOriginalXLabel);
         //plotOriginal.Plot.AxisAuto(0);
         plotOriginal.Refresh();
     }
@@ -44,9 +44,9 @@ partial class FrmMain
         plot.MarkerSize = 5;
         plot.MarkerShape = ScottPlot.MarkerShape.filledCircle;
         //plotWindow.Plot.AxisAuto(0);
-        plotWindow.Plot.Title(String.Format(StringsRM.GetString("strPlotWindowTitle", _settings.AppCulture) ?? "{0} window", window.Name));
-        plotWindow.Plot.YLabel(StringsRM.GetString("strPlotWindowYLabel", _settings.AppCulture) ?? "Amplitude");
-        plotWindow.Plot.XLabel(StringsRM.GetString("strPlotWindowXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
+        plotWindow.Plot.YLabel(StringResources.PlotWindowYLabel);
+        plotWindow.Plot.XLabel(StringResources.PlotWindowXLabel);
         plotWindow.Refresh();
     }
 
@@ -55,9 +55,9 @@ partial class FrmMain
         plotApplied.Clear();
         //plotApplied.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotApplied.Plot.AddSignal(signal, nSampleFreq);
-        plotApplied.Plot.Title(StringsRM.GetString("strPlotAppliedTitle", _settings.AppCulture) ?? "Windowed signal");
-        plotApplied.Plot.YLabel(StringsRM.GetString("strPlotAppliedYLabel", _settings.AppCulture) ?? "Amplitude");
-        plotApplied.Plot.XLabel(StringsRM.GetString("strPlotAppliedXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
+        plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
+        plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
         //plotApplied.Plot.AxisAuto(0);
         plotApplied.Refresh();
     }
@@ -75,13 +75,13 @@ partial class FrmMain
         {
             plotFractal.Plot.AddLine(0, double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle, (0, signal.Length / nSampleFreq));
         }
-        plotFractal.Plot.Title((StringsRM.GetString("strPlotFractalTitle", _settings.AppCulture) ?? "Fractal dimension") +
+        plotFractal.Plot.Title((StringResources.PlotFractalTitle1) +
             " " +
-            (progressive ? (StringsRM.GetString("strPlotFractalTitle()", _settings.AppCulture) ?? "(cumulative)") : String.Empty) +
+            (progressive ? StringResources.PlotFractalTitle2 : String.Empty) +
             " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
             " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
-        plotFractal.Plot.YLabel(StringsRM.GetString("strPlotFractalYLabel", _settings.AppCulture) ?? "Dimension (H)");
-        plotFractal.Plot.XLabel(StringsRM.GetString("strPlotFractalXLabel", _settings.AppCulture) ?? "Time (seconds)");
+        plotFractal.Plot.YLabel(StringResources.PlotFractalYLabel);
+        plotFractal.Plot.XLabel(StringResources.PlotFractalXLabel);
         plotFractal.Plot.AxisAuto(0);
         plotFractal.Refresh();
     }
@@ -110,9 +110,9 @@ partial class FrmMain
             plotFractalDistribution.Plot.AddVerticalLine(x: mean, color: Color.DarkGray, width: 1.2f, style: ScottPlot.LineStyle.Solid);
         }
 
-        plotFractalDistribution.Plot.Title(StringsRM.GetString("strPlotFractalDistributionTitle", _settings.AppCulture) ?? "Fractal dimension distribution");
-        plotFractalDistribution.Plot.XLabel(StringsRM.GetString("strPlotFractalDisributionXLabel", _settings.AppCulture) ?? "Fractal dimension (H)");
-        plotFractalDistribution.Plot.YLabel(StringsRM.GetString("strPlotFractalDisributionYLabel", _settings.AppCulture) ?? "Probability");
+        plotFractalDistribution.Plot.Title(StringResources.PlotFractalDistributionTitle);
+        plotFractalDistribution.Plot.XLabel(StringResources.PlotFractalDistributionXLabel);
+        plotFractalDistribution.Plot.YLabel(StringResources.PlotFractalDistributionYLabel);
         plotFractalDistribution.Plot.AxisAuto(0, null);
         plotFractalDistribution.Refresh();
     }
@@ -128,9 +128,9 @@ partial class FrmMain
             else
                 plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / nSampleFreq);
         }
-        plotFFT.Plot.Title(StringsRM.GetString("strPlotFFTTitle", _settings.AppCulture) ?? "Fast Fourier transform");
-        plotFFT.Plot.YLabel(_settings.PowerSpectra ? (StringsRM.GetString("strPlotFFTYLabelPow", _settings.AppCulture) ?? "Power (dB)") : (StringsRM.GetString("strPlotFFTYLabelMag", _settings.AppCulture) ?? "Magnitude (RMS²)"));
-        plotFFT.Plot.XLabel(StringsRM.GetString("strPlotFFTXLabel", _settings.AppCulture) ?? "Frequency (Hz)");
+        plotFFT.Plot.Title(StringResources.PlotFFTTitle);
+        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
+        plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
     }
@@ -225,8 +225,8 @@ partial class FrmMain
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(
-                      StringsRM.GetString("strMsgBoxTaskCancel", _settings.AppCulture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.",
-                      StringsRM.GetString("strMsgBoxTaskCancelTitle", _settings.AppCulture) ?? "Stop",
+                      StringResources.MsgBoxTaskCancel,
+                      StringResources.MsgBoxTaskCancelTitle,
                       MessageBoxButtons.OK,
                       MessageBoxIcon.Stop);
             }
@@ -285,9 +285,8 @@ partial class FrmMain
                 {
                     using (new CenterWinDialog(this))
                     {
-                        MessageBox.Show(
-                            String.Format(StringsRM.GetString("strMsgBoxErrorFFT", _settings.AppCulture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + "{0}", ex.Message),
-                            StringsRM.GetString("strMsgBoxErrorFFTTitle", _settings.AppCulture) ?? "FFT error",
+                        MessageBox.Show(String.Format(StringResources.MsgBoxErrorFFT, ex.Message),
+                            StringResources.MsgBoxErrorFFTTitle,
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     }
