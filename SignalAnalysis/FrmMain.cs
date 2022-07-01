@@ -198,67 +198,47 @@ public partial class FrmMain : Form
         statusStripLabelExEntropy.ToolTipText = StringResources.StatusTipEntropy;
         statusStripLabelExCrossHair.ToolTipText = StringResources.StatusTipCrossHair;
 
-        // Update plots if they contain series
+        // Update plots
         plotOriginal.CultureUI = _settings.AppCulture;
-        if (plotOriginal.Plot.GetPlottables().Length > 0)
-        {
-            plotOriginal.Plot.Title(StringResources.PlotOriginalTitle);
-            plotOriginal.Plot.YLabel(StringResources.PlotOriginalYLabel);
-            plotOriginal.Plot.XLabel(StringResources.PlotOriginalXLabel);
-        }
-        
-        plotWindow.CultureUI = _settings.AppCulture;
-        if (plotWindow.Plot.GetPlottables().Length > 0)
-        {
-            IWindow window = (IWindow)stripComboWindows.SelectedItem;
-            if (window is not null)
-                plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
+        plotOriginal.Plot.Title(StringResources.PlotOriginalTitle);
+        plotOriginal.Plot.YLabel(StringResources.PlotOriginalYLabel);
+        plotOriginal.Plot.XLabel(StringResources.PlotOriginalXLabel);
+        plotOriginal.Refresh();
 
-            plotWindow.Plot.YLabel(StringResources.PlotWindowYLabel);
-            plotWindow.Plot.XLabel(StringResources.PlotWindowXLabel);
-        }
-        
+        plotWindow.CultureUI = _settings.AppCulture;
+        IWindow window = (IWindow)stripComboWindows.SelectedItem;
+        if (window is not null)
+            plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
+        plotWindow.Plot.YLabel(StringResources.PlotWindowYLabel);
+        plotWindow.Plot.XLabel(StringResources.PlotWindowXLabel);
+        plotWindow.Refresh();
+
         plotApplied.CultureUI = _settings.AppCulture;
-        if (plotApplied.Plot.GetPlottables().Length > 0)
-        {
-            plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
-            plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
-            plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
-        }
-        
+        plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
+        plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
+        plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
+        plotApplied.Refresh();
+
         plotFractal.CultureUI = _settings.AppCulture;
-        if (plotFractal.Plot.GetPlottables().Length > 0)
-        {
-            plotFractal.Plot.Title(StringResources.PlotFractalTitle1 +
-                " " +
-                (_settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty) +
-                " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
-                " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
-            plotFractal.Plot.YLabel(StringResources.PlotFractalYLabel);
-            plotFractal.Plot.XLabel(StringResources.PlotFractalXLabel);
-        }
+        plotFractal.Plot.Title(StringResources.PlotFractalTitle1 +
+            " " +
+            (_settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty) +
+            " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
+            " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
+        plotFractal.Plot.YLabel(StringResources.PlotFractalYLabel);
+        plotFractal.Plot.XLabel(StringResources.PlotFractalXLabel);
+        plotFractal.Refresh();
 
         plotFractalDistribution.CultureUI = _settings.AppCulture;
-        if (plotFractal.Plot.GetPlottables().Length > 0)
-        {
-            plotFractalDistribution.Plot.Title(StringResources.PlotFractalDistributionTitle);
-            plotFractalDistribution.Plot.XLabel(StringResources.PlotFractalDistributionXLabel);
-            plotFractalDistribution.Plot.YLabel(StringResources.PlotFractalDistributionYLabel);
-        }
+        plotFractalDistribution.Plot.Title(StringResources.PlotFractalDistributionTitle);
+        plotFractalDistribution.Plot.XLabel(StringResources.PlotFractalDistributionXLabel);
+        plotFractalDistribution.Plot.YLabel(StringResources.PlotFractalDistributionYLabel);
+        plotFractalDistribution.Refresh();
 
         plotFFT.CultureUI = _settings.AppCulture;
-        if (plotFFT.Plot.GetPlottables().Length > 0)
-        {
-            plotFFT.Plot.Title(StringResources.PlotFFTTitle);
-            plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
-            plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);
-        }
-
-        plotOriginal.Refresh();
-        plotWindow.Refresh();
-        plotApplied.Refresh();
-        plotFractal.Refresh();
-        plotFractalDistribution.Refresh();
+        plotFFT.Plot.Title(StringResources.PlotFFTTitle);
+        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
+        plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);
         plotFFT.Refresh();
 
         // Update the results text
