@@ -629,7 +629,8 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exit?.
+        ///   Looks up a localized string similar to Are you sure you want to exit
+        ///the application?.
         /// </summary>
         internal static string strMsgBoxExit {
             get {
@@ -638,8 +639,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to exit
-        ///the application?.
+        ///   Looks up a localized string similar to Exit?.
         /// </summary>
         internal static string strMsgBoxExitTitle {
             get {

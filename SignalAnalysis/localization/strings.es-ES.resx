@@ -317,11 +317,11 @@ Por favor, inténtelo más tarde o contacte al autor de este software.
     <value>Error al guardar archivo de datos</value>
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
-    <value>¿Salir?</value>
-  </data>
-  <data name="strMsgBoxExitTitle" xml:space="preserve">
     <value>¿Está seguro de que quiere
 salir de la aplicación?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>¿Salir?</value>
   </data>
   <data name="strMsgBoxInitArray" xml:space="preserve">
     <value>Se ha producido un error inesperado

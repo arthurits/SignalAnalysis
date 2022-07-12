@@ -62,8 +62,8 @@ public partial class FrmMain : Form
         using (new CenterWinDialog(this))
         {
             if (DialogResult.No == MessageBox.Show(this,
-                                                    StringResources.MsgBoxExitTitle,
                                                     StringResources.MsgBoxExit,
+                                                    StringResources.MsgBoxExitTitle,
                                                     MessageBoxButtons.YesNo,
                                                     MessageBoxIcon.Question,
                                                     MessageBoxDefaultButton.Button2))
