@@ -22,15 +22,21 @@ namespace SignalAnalysis
             this.formsPlot1.Refresh();
             this.formsPlot1.Render();
 
-            ScottPlot.Crosshair2 ch = new();
-            this.formsPlot1.Plot.Add(ch);
+            // https://github.com/ScottPlot/ScottPlot/issues/2007
+            // https://scottplot.net/cookbook/4.1/category/plottable-axis-line-and-span/
+            var test = this.formsPlot1.Plot.AddCrosshair(0, 0);
+            test.VerticalLine.DragEnabled = true;
+            test.HorizontalLine.DragEnabled = true;
+            
+            //ScottPlot.Crosshair2 ch = new();
+            //this.formsPlot1.Plot.Add(ch);
 
-            // you can style both lines at the same time
-            ch.VerticalLine.DragEnabled = true;
-            ch.VerticalLine.DragEnabled = true;
-            //ch.LineStyle = ScottPlot.LineStyle.Dash;
-            //ch.Color = System.Drawing.Color.Blue;
-            ch.LineWidth = 2;
+            //// you can style both lines at the same time
+            //ch.VerticalLine.DragEnabled = true;
+            //ch.VerticalLine.DragEnabled = true;
+            ////ch.LineStyle = ScottPlot.LineStyle.Dash;
+            ////ch.Color = System.Drawing.Color.Blue;
+            //ch.LineWidth = 2;
         }
     }
 }
