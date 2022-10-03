@@ -42,7 +42,7 @@ partial class FrmMain
                 ".sig" => ReadSigData(filePath),
                 ".txt" => ReadTextData(filePath, results = new()),
                 ".bin" => ReadBinData(filePath, results = new()),
-                _ => ReadNotimplemented(filePath)
+                _ => ReadNotImplemented(filePath)
             };
 
             if (boolRead)
@@ -252,3 +252,4 @@ partial class FrmMain
     }
 
 }
+

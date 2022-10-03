@@ -546,7 +546,7 @@ partial class FrmMain
     /// </summary>
     /// <param name="FileName">Path (including name and extension) of the text file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadNotimplemented(string FileName)
+    private bool ReadNotImplemented(string FileName)
     {
         bool result = false;
 
@@ -623,4 +623,3 @@ partial class FrmMain
     }
 
 }
-
