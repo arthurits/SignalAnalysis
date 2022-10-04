@@ -12,6 +12,7 @@ public static class StringResources
     /// </summary>
     public static System.Globalization.CultureInfo Culture { get; set; } = System.Globalization.CultureInfo.CurrentCulture;
 
+    public static string GetString(string StringName, System.Globalization.CultureInfo Culture) => StringRM.GetString(StringName, Culture) ?? string.Empty;
 
     public static string FileHeader00 => StringRM.GetString("strFileHeader00", Culture) ?? "ErgoLux data";
     public static string FileHeader01 => StringRM.GetString("strFileHeader01", Culture) ?? "SignalAnalysis data";

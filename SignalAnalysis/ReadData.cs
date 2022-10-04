@@ -21,9 +21,13 @@ partial class FrmMain
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader00));
-            if (!strLine.Contains($"{StringResources.FileHeader00} (", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader00));
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader00", fileCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader00));
+
+            //if (!strLine.Contains($"{StringResources.FileHeader00} (", StringComparison.Ordinal))
+            //    throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader00));
+            //System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
@@ -145,9 +149,9 @@ partial class FrmMain
             strLine = sr.ReadLine();    // SignalAnalysis data
             if (strLine is null)
                 throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
-            if (!strLine.Contains($"{StringResources.FileHeader01} (", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader01", fileCulture) ?? "SignalAnalysis data"} (", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
 
             strLine = sr.ReadLine();    // Number of series
             if (strLine is null)
@@ -250,9 +254,12 @@ partial class FrmMain
             strLine = sr.ReadLine();    // SignalAnalysis data
             if (strLine is null)
                 throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
-            if (!strLine.Contains($"{StringResources.FileHeader01} (", StringComparison.Ordinal))
-                throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
             System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader01", fileCulture) ?? "SignalAnalysis data"} (", StringComparison.Ordinal))
+                throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
+            //if (!strLine.Contains($"{StringResources.FileHeader01} (", StringComparison.Ordinal))
+            //    throw new FormatException(String.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
+            //System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
 
             strLine = sr.ReadLine();    // Start time
             if (strLine is null)
