@@ -140,7 +140,7 @@ partial class FrmMain
 
     private void Settings_Click(object? sender, EventArgs e)
     {
-        var frm = new FrmSettings(_settings);
+        FrmSettings frm = new(_settings);
         frm.ShowDialog();
         if (frm.DialogResult == DialogResult.OK)
         {
@@ -252,4 +252,3 @@ partial class FrmMain
     }
 
 }
-

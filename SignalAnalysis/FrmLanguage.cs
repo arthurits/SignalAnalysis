@@ -1,4 +1,7 @@
-﻿namespace SignalAnalysis;
+﻿using ScottPlot;
+using System.Globalization;
+
+namespace SignalAnalysis;
 
 public partial class FrmLanguage : Form
 {
@@ -80,8 +83,11 @@ public partial class FrmLanguage : Form
         else if (_settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
             radCurrentCulture.Checked = true;
         else
+        {
+            cboAllCultures.SelectedValue = _settings.AppCultureName;
             radUserCulture.Checked = true;
-        cboAllCultures.SelectedValue = _settings.AppCultureName;
+        }
+        
     }
 
     /// <summary>
@@ -90,10 +96,12 @@ public partial class FrmLanguage : Form
     /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
+        string cultureName = _settings.AppCultureName;
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
         cboAllCultures.DataSource = cultures.ToArray();
+        cboAllCultures.SelectedValue = cultureName;
     }
 
     /// <summary>

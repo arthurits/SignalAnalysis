@@ -138,8 +138,10 @@ public partial class FrmSettings : Form
         else if (Settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
             radCurrentCulture.Checked = true;
         else
+        {
+            cboAllCultures.SelectedValue = Settings.AppCultureName;
             radUserCulture.Checked = true;
-        cboAllCultures.SelectedValue = Settings.AppCultureName;
+        }
 
         chkDlgPath.Checked = Settings.RememberFileDialogPath;
         txtDataFormat.Text = Settings.DataFormat;
@@ -151,10 +153,12 @@ public partial class FrmSettings : Form
     /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
+        string cultureName = Settings.AppCultureName;
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
         cboAllCultures.DataSource = cultures.ToArray();
+        cboAllCultures.SelectedValue = cultureName;
     }
 
     /// <summary>
