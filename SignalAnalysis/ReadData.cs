@@ -541,6 +541,20 @@ partial class FrmMain
     }
 
     /// <summary>
+    /// Reads data from a json file and stores it into _signalData.
+    /// </summary>
+    /// <param name="FileName">Path (including name) of the json file</param>
+    /// <param name="results">Numeric results read from the file</param>
+    /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
+    private bool ReadJsonData(string FileName, Stats? results)
+    {
+        int nPoints = 0;
+        bool result = true;
+
+        return result;
+    }
+
+    /// <summary>
     /// Default not implemented file-read function showing an error message
     /// </summary>
     /// <param name="FileName">Path (including name and extension) of the text file</param>
