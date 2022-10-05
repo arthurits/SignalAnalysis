@@ -39,16 +39,16 @@
             // cboAllCultures
             // 
             this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(155, 127);
+            this.cboAllCultures.Location = new System.Drawing.Point(45, 141);
             this.cboAllCultures.Name = "cboAllCultures";
-            this.cboAllCultures.Size = new System.Drawing.Size(140, 25);
+            this.cboAllCultures.Size = new System.Drawing.Size(190, 25);
             this.cboAllCultures.TabIndex = 0;
             this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.AllCultures_SelectedValueChanged);
             // 
             // radCurrentCulture
             // 
             this.radCurrentCulture.AutoSize = true;
-            this.radCurrentCulture.Location = new System.Drawing.Point(23, 37);
+            this.radCurrentCulture.Location = new System.Drawing.Point(23, 27);
             this.radCurrentCulture.Name = "radCurrentCulture";
             this.radCurrentCulture.Size = new System.Drawing.Size(120, 23);
             this.radCurrentCulture.TabIndex = 1;
@@ -60,7 +60,7 @@
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(23, 83);
+            this.radInvariantCulture.Location = new System.Drawing.Point(23, 68);
             this.radInvariantCulture.Name = "radInvariantCulture";
             this.radInvariantCulture.Size = new System.Drawing.Size(127, 23);
             this.radInvariantCulture.TabIndex = 2;
@@ -72,12 +72,12 @@
             // radUserCulture
             // 
             this.radUserCulture.AutoSize = true;
-            this.radUserCulture.Location = new System.Drawing.Point(23, 129);
+            this.radUserCulture.Location = new System.Drawing.Point(23, 109);
             this.radUserCulture.Name = "radUserCulture";
-            this.radUserCulture.Size = new System.Drawing.Size(101, 23);
+            this.radUserCulture.Size = new System.Drawing.Size(108, 23);
             this.radUserCulture.TabIndex = 3;
             this.radUserCulture.TabStop = true;
-            this.radUserCulture.Text = "User culture";
+            this.radUserCulture.Text = "Select culture";
             this.radUserCulture.UseVisualStyleBackColor = true;
             this.radUserCulture.CheckedChanged += new System.EventHandler(this.UserCulture_CheckedChanged);
             // 

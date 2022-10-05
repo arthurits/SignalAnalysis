@@ -1,8 +1,11 @@
-﻿namespace SignalAnalysis;
+﻿using System.Globalization;
+
+namespace SignalAnalysis;
 
 public partial class FrmSettings : Form
 {
-    public ClassSettings Settings = new();
+    private CultureInfo _culture = CultureInfo.CurrentCulture;
+    public ClassSettings? Settings;
     private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
 
     public FrmSettings()
@@ -14,13 +17,19 @@ public partial class FrmSettings : Form
     public FrmSettings(ClassSettings settings)
         : this()
     {
+        Settings = settings;
+        _culture = settings.AppCulture;
         UpdateControls(settings);
     }
 
     private void Accept_Click(object sender, EventArgs e)
     {
+        DialogResult = DialogResult.Cancel;
+
         if (!int.TryParse(txtStart.Text, out int num)) return;
         if (num < 0) return;
+        if (Settings is null) return;
+        
         Settings.IndexStart = num;
 
         if (!int.TryParse(txtEnd.Text, out num)) return;
@@ -39,6 +48,8 @@ public partial class FrmSettings : Form
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
 
+        Settings.AppCulture = _culture;
+
         DialogResult = DialogResult.OK;
     }
 
@@ -52,8 +63,8 @@ public partial class FrmSettings : Form
         DialogResult DlgResult;
         using (new CenterWinDialog(this))
         {
-            DlgResult = MessageBox.Show(StringsRM.GetString("strDlgReset", Settings.AppCulture) ?? "Do you want to reset all fields\nto their default values?",
-                StringsRM.GetString("strDlgResetTitle", Settings.AppCulture) ?? "Reset settings?",
+            DlgResult = MessageBox.Show(StringsRM.GetString("strDlgReset", _culture) ?? "Do you want to reset all fields\nto their default values?",
+                StringsRM.GetString("strDlgResetTitle", _culture) ?? "Reset settings?",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);
@@ -69,7 +80,7 @@ public partial class FrmSettings : Form
     {
         if (radCurrentCulture.Checked)
         {
-            Settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+            _culture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
         }
     }
@@ -78,7 +89,7 @@ public partial class FrmSettings : Form
     {
         if (radInvariantCulture.Checked)
         {
-            Settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            _culture = System.Globalization.CultureInfo.InvariantCulture;
             UpdateUI_Language();
         }
     }
@@ -88,7 +99,7 @@ public partial class FrmSettings : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            Settings.AppCulture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
+            _culture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
             UpdateUI_Language();
         }
     }
@@ -98,7 +109,7 @@ public partial class FrmSettings : Form
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            Settings.AppCulture = new((string)cbo.SelectedValue);
+            _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
         }
     }
@@ -109,16 +120,15 @@ public partial class FrmSettings : Form
     /// <param name="settings">Class containing the values to show on the form's controls</param>
     private void UpdateControls(ClassSettings settings)
     {
-        Settings = settings;
-        txtStart.Text = Settings.IndexStart.ToString();
-        txtEnd.Text = Settings.IndexEnd.ToString();
-        chkPower.Checked = Settings.PowerSpectra;
-        chkCumulative.Checked = Settings.CumulativeDimension;
-        chkEntropy.Checked = Settings.Entropy;
-        chkCrossHair.Checked = Settings.CrossHair;
-        chkDlgPath.Checked = Settings.RememberFileDialogPath;
+        txtStart.Text = settings.IndexStart.ToString();
+        txtEnd.Text = settings.IndexEnd.ToString();
+        chkPower.Checked = settings.PowerSpectra;
+        chkCumulative.Checked = settings.CumulativeDimension;
+        chkEntropy.Checked = settings.Entropy;
+        chkCrossHair.Checked = settings.CrossHair;
+        chkDlgPath.Checked = settings.RememberFileDialogPath;
 
-        switch (Settings.AxisType)
+        switch (settings.AxisType)
         {
             case AxisType.Seconds:
                 radSeconds.Checked = true;
@@ -131,18 +141,18 @@ public partial class FrmSettings : Form
                 break;
         }
 
-        if (Settings.AppCultureName == string.Empty)
+        if (_culture.Name == string.Empty)
             radInvariantCulture.Checked = true;
-        else if (Settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
+        else if (_culture.Name == System.Globalization.CultureInfo.CurrentCulture.Name)
             radCurrentCulture.Checked = true;
         else
         {
-            cboAllCultures.SelectedValue = Settings.AppCultureName;
+            cboAllCultures.SelectedValue = _culture.Name;
             radUserCulture.Checked = true;
         }
 
-        chkDlgPath.Checked = Settings.RememberFileDialogPath;
-        txtDataFormat.Text = Settings.DataFormat;
+        chkDlgPath.Checked = settings.RememberFileDialogPath;
+        txtDataFormat.Text = settings.DataFormat;
     }
 
     /// <summary>
@@ -151,7 +161,7 @@ public partial class FrmSettings : Form
     /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
-        string cultureName = Settings.AppCultureName;
+        string cultureName = _culture.Name;
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
@@ -165,7 +175,7 @@ public partial class FrmSettings : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language()
     {
-        UpdateUI_Language(Settings.AppCulture);
+        UpdateUI_Language(_culture);
     }
 
     /// <summary>

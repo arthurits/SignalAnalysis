@@ -5,30 +5,28 @@ namespace SignalAnalysis;
 
 public partial class FrmLanguage : Form
 {
-    private ClassSettings _settings = new();
+    private CultureInfo _culture = CultureInfo.CurrentCulture;
+    private readonly ClassSettings? Settings;
     private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
 
     public FrmLanguage()
     {
         InitializeComponent();
         FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
-        //UpdateUI_Language();
-    }
-
-    private void CboAllCultures_SelectionChangeCommitted(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
     }
 
     public FrmLanguage(ClassSettings settings)
     : this()
     {
-        UpdateControls(settings);
+        Settings = settings;
+        _culture = settings.AppCulture;
+        UpdateControls(settings.AppCultureName);
     }
 
     private void Accept_Click(object sender, EventArgs e)
     {
-        this.DialogResult = DialogResult.OK;
+        if (Settings is not null) Settings.AppCulture = _culture;
+        DialogResult = DialogResult.OK;
     }
 
     private void Cancel_Click(object sender, EventArgs e)
@@ -40,7 +38,7 @@ public partial class FrmLanguage : Form
     {
         if (radCurrentCulture.Checked)
         {
-            _settings.AppCulture = System.Globalization.CultureInfo.CurrentCulture;
+            _culture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
         }
     }
@@ -49,7 +47,7 @@ public partial class FrmLanguage : Form
     {
         if (radInvariantCulture.Checked)
         {
-            _settings.AppCulture = System.Globalization.CultureInfo.InvariantCulture;
+            _culture = System.Globalization.CultureInfo.InvariantCulture;
             UpdateUI_Language();
         }
     }
@@ -59,7 +57,7 @@ public partial class FrmLanguage : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            _settings.AppCulture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
+            _culture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
             UpdateUI_Language();
         }
     }
@@ -69,7 +67,7 @@ public partial class FrmLanguage : Form
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
-            _settings.AppCulture = new((string)cbo.SelectedValue);
+            _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
         }
     }
@@ -77,22 +75,18 @@ public partial class FrmLanguage : Form
     /// <summary>
     /// Updates the form's controls with values from the settings class
     /// </summary>
-    /// <param name="settings">Class containing the values to show on the form's controls</param>
-    private void UpdateControls(ClassSettings settings)
+    private void UpdateControls(string cultureName = "")
     {
-        _settings = settings;
-
         cboAllCultures.Enabled = false;
-        if (_settings.AppCultureName == string.Empty)
+        if (cultureName == string.Empty)
             radInvariantCulture.Checked = true;
-        else if (_settings.AppCultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
+        else if (cultureName == System.Globalization.CultureInfo.CurrentCulture.Name)
             radCurrentCulture.Checked = true;
         else
         {
-            cboAllCultures.SelectedValue = _settings.AppCultureName;
+            cboAllCultures.SelectedValue = cultureName;
             radUserCulture.Checked = true;
-        }
-        
+        }   
     }
 
     /// <summary>
@@ -101,7 +95,7 @@ public partial class FrmLanguage : Form
     /// <param name="type">A type from which the resource manager derives all information for finding .resources files</param>
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
-        string cultureName = _settings.AppCultureName;
+        string cultureName = _culture.Name;
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
@@ -115,7 +109,7 @@ public partial class FrmLanguage : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language()
     {
-        UpdateUI_Language(_settings.AppCulture);
+        UpdateUI_Language(_culture);
     }
 
     /// <summary>
