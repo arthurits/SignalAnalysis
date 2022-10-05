@@ -192,7 +192,7 @@ public partial class FrmMain : Form
 
         // Update StatusStrip
         statusStripLabelCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
-        statusStripLabelCulture.ToolTipText = StringResources.ToolTipUILanguage;
+        statusStripLabelCulture.ToolTipText = StringResources.ToolTipUILanguage + ":" + Environment.NewLine + _settings.AppCulture.NativeName;
         statusStripLabelExPower.ToolTipText = StringResources.StatusTipPower;
         statusStripLabelExCumulative.ToolTipText = StringResources.StatusTipFractal;
         statusStripLabelExEntropy.ToolTipText = StringResources.StatusTipEntropy;

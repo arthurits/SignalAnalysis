@@ -8,9 +8,7 @@ public partial class FrmSettings : Form
     public FrmSettings()
     {
         InitializeComponent();
-        
         FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
-        UpdateUI_Language();
     }
 
     public FrmSettings(ClassSettings settings)

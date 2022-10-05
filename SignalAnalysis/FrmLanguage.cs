@@ -12,7 +12,12 @@ public partial class FrmLanguage : Form
     {
         InitializeComponent();
         FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
-        UpdateUI_Language();
+        //UpdateUI_Language();
+    }
+
+    private void CboAllCultures_SelectionChangeCommitted(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
     }
 
     public FrmLanguage(ClassSettings settings)
