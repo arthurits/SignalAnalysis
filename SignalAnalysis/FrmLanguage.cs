@@ -118,12 +118,14 @@ public partial class FrmLanguage : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language(System.Globalization.CultureInfo culture)
     {
-        this.Text = StringsRM.GetString("strFrmLanguage", culture) ?? "Select culture";
-        this.radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting") + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
-        this.radInvariantCulture.Text = StringsRM.GetString("strRadInvariantCulture", culture) ?? "Invariant culture formatting";
-        this.radUserCulture.Text = StringsRM.GetString("strRadUserCulture", culture) ?? "Select culture";
-        this.btnCancel.Text = StringsRM.GetString("strBtnCancel", culture) ?? "&Cancel";
-        this.btnAccept.Text = StringsRM.GetString("strBtnAccept", culture) ?? "&Accept";
+        StringResources.Culture = culture;
+
+        this.Text = StringResources.FrmLanguage;
+        this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+        this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
+        this.radUserCulture.Text = StringResources.RadUserCulture;
+        this.btnCancel.Text = StringResources.BtnCancel;
+        this.btnAccept.Text = StringResources.BtnAccept;
     }
 
 }

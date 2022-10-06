@@ -1,4 +1,7 @@
-﻿namespace SignalAnalysis;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+namespace SignalAnalysis;
 
 public static class StringResources
 {
@@ -46,7 +49,10 @@ public static class StringResources
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 
 
-    public static string FormTitle => StringRM.GetString("strFormTitle", Culture) ?? "Signal analysis";
+    public static string FormTitle => StringRM.GetString("strFrmTitle", Culture) ?? "Signal analysis";
+    public static string FrmLanguage => StringRM.GetString("strFrmLanguage", Culture) ?? "Select culture";
+    public static string FrmSettings => StringRM.GetString("strFrmSettings", Culture) ?? "Settings";
+
     public static string FormTitleUnion => StringRM.GetString("strFrmTitleUnion", Culture) ?? " - ";
 
 
@@ -120,5 +126,34 @@ public static class StringResources
     public static string PlotFFTYLabelPow => StringRM.GetString("strPlotFFTYLabelPow", Culture) ?? "Power (dB)";
     public static string PlotFFTYLabelMag => StringRM.GetString("strPlotFFTYLabelMag", Culture) ?? "Magnitude (RMS²)";
     public static string PlotFFTXLabel => StringRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
+
+    public static string BtnAccept => StringRM.GetString("strBtnAccept", Culture) ?? "&Accept";
+    public static string BtnCancel => StringRM.GetString("strBtnCancel", Culture) ?? "&Cancel";
+    public static string BtnData => StringRM.GetString("strBtnData", Culture) ?? "Select data";
+    public static string BtnExport => StringRM.GetString("strBtnExport", Culture) ?? "&Export";
+    public static string BtnReset => StringRM.GetString("strBtnReset", Culture) ?? "&Reset";
+    public static string BtnSettings => StringRM.GetString("strBtnSettings", Culture) ?? "&Settings";
+
+    // Settings
+    public static string TabPlot => StringRM.GetString("strTabPlot", Culture) ?? "Plotting";
+    public static string TabGUI => StringRM.GetString("strTabGUI", Culture) ?? "User interface";
+
+    public static string LblStart => StringRM.GetString("strLblStart", Culture) ?? "Array index start";
+    public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end";
+    public static string GrpAxis => StringRM.GetString("strGrpAxis", Culture) ?? "Abscissa axis";
+    public static string RadPoints => StringRM.GetString("strRadPoints", Culture) ?? "Data points";
+    public static string RadSeconds => StringRM.GetString("strRadSeconds", Culture) ?? "Seconds";
+    public static string RadTime => StringRM.GetString("strRadTime", Culture) ?? "Date and time";
+    public static string ChkPower => StringRM.GetString("strChkPower", Culture) ?? "Power (dB)";
+    public static string ChkCumulative => StringRM.GetString("strChkCumulative", Culture) ?? "Cumulative fractal dimension";
+    public static string ChkEntropy => StringRM.GetString("strChkEntropy", Culture) ?? "Entropy (approximate && sample)";
+    public static string ChkCrossHair => StringRM.GetString("strChkCrossHair", Culture) ?? "Show plots' crosshair";
+
+    public static string GrpCulture => StringRM.GetString("strGrpCulture", Culture) ?? "UI and data format";
+    public static string RadCurrentCulture => StringRM.GetString("strRadCurrentCulture", Culture) ?? "Current culture formatting";
+    public static string RadInvariantCulture => StringRM.GetString("strRadInvariantCulture", Culture) ?? "Invariant culture formatting";
+    public static string RadUserCulture => StringRM.GetString("strRadUserCulture", Culture) ?? "Select culture";
+    public static string ChkDlgPath => StringRM.GetString("strChkDlgPath", Culture) ?? "Remember open/save dialog previous path";
+    public static string LblDataFormat => StringRM.GetString("strLblDataFormat", Culture) ?? "Numeric data-formatting string";
 
 }

@@ -184,33 +184,34 @@ public partial class FrmSettings : Form
     /// <param name="culture">Culture used to display the UI</param>
     private void UpdateUI_Language(System.Globalization.CultureInfo culture)
     {
-        this.Text = StringsRM.GetString("strFrmSettings", culture) ?? "Settings";
+        StringResources.Culture = culture;
 
-        this.tabPlot.Text = StringsRM.GetString("strTabPlot", culture) ?? "Plotting";
-        this.tabGUI.Text = StringsRM.GetString("strTabGUI", culture) ?? "User interface";
+        this.Text = StringResources.FrmSettings; ;
 
-        this.lblStart.Text = StringsRM.GetString("strLblStart", culture) ?? "Array index start";
-        this.lblEnd.Text = StringsRM.GetString("strLblEnd", culture) ?? "Array index end";
-        this.grpAxis.Text = StringsRM.GetString("strGrpAxis", culture) ?? "Abscissa axis";
-        this.radPoints.Text = StringsRM.GetString("strRadPoints", culture) ?? "Data points";
-        this.radSeconds.Text = StringsRM.GetString("strRadSeconds", culture) ?? "Seconds";
-        this.radTime.Text = StringsRM.GetString("strRadTime", culture) ?? "Date and time";
-        this.chkPower.Text = StringsRM.GetString("strChkPower", culture) ?? "Power (dB)";
-        this.chkCumulative.Text = StringsRM.GetString("strChkCumulative", culture) ?? "Cumulative fractal dimension";
-        this.chkEntropy.Text = StringsRM.GetString("strChkEntropy", culture) ?? "Entropy (approximate && sample)";
-        this.chkCrossHair.Text = StringsRM.GetString("strChkCrossHair", culture) ?? "Show plots' crosshair";
+        this.tabPlot.Text = StringResources.TabPlot;
+        this.tabGUI.Text = StringResources.TabGUI;
 
-        this.grpCulture.Text = StringsRM.GetString("strGrpCulture", culture) ?? "UI and data format";
-        this.radCurrentCulture.Text = (StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting") + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
-        //this.radCurrentCulture.Text = StringsRM.GetString("strRadCurrentCulture", culture) ?? "Current culture formatting";
-        this.radInvariantCulture.Text = StringsRM.GetString("strRadInvariantCulture", culture) ?? "Invariant culture formatting";
-        this.radUserCulture.Text = StringsRM.GetString("strRadUserCulture", culture) ?? "Select culture";
-        this.chkDlgPath.Text = StringsRM.GetString("strChkDlgPath", culture) ?? "Remember open/save dialog previous path";
-        this.lblDataFormat.Text = StringsRM.GetString("strLblDataFormat", culture) ?? "Numeric data-formatting string";
+        this.lblStart.Text = StringResources.LblStart;
+        this.lblEnd.Text = StringResources.LblEnd;
+        this.grpAxis.Text = StringResources.GrpAxis;
+        this.radPoints.Text = StringResources.RadPoints;
+        this.radSeconds.Text = StringResources.RadSeconds;
+        this.radTime.Text = StringResources.RadTime;
+        this.chkPower.Text = StringResources.ChkPower;
+        this.chkCumulative.Text = StringResources.ChkCumulative;
+        this.chkEntropy.Text = StringResources.ChkEntropy;
+        this.chkCrossHair.Text = StringResources.ChkCrossHair;
 
-        this.btnReset.Text = StringsRM.GetString("strBtnReset", culture) ?? "&Reset";
-        this.btnCancel.Text = StringsRM.GetString("strBtnCancel", culture) ?? "&Cancel";
-        this.btnAccept.Text = StringsRM.GetString("strBtnAccept", culture) ?? "&Accept";
+        this.grpCulture.Text = StringResources.GrpCulture;
+        this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
+        this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
+        this.radUserCulture.Text = StringResources.RadUserCulture;
+        this.chkDlgPath.Text = StringResources.ChkDlgPath;
+        this.lblDataFormat.Text = StringResources.LblDataFormat;
+
+        this.btnReset.Text = StringResources.BtnReset;
+        this.btnCancel.Text = StringResources.BtnCancel;
+        this.btnAccept.Text = StringResources.BtnAccept;
     }
 
 }
