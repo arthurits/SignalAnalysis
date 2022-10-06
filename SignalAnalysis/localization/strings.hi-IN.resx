@@ -53,6 +53,7 @@
     value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
+
     mimetype: application/x-microsoft.net.object.bytearray.base64
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
@@ -305,7 +306,7 @@
   </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
     <value>डेटा फ़ाइल सहेजते समय एक अनपेक्षित त्रुटि हुई.
-Please try again later or contact the software engineer.
+कृपया बाद में पुन: प्रयास करें या सॉफ़्टवेयर इंजीनियर से संपर्क करें।
 {0}</value>
   </data>
   <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
@@ -337,7 +338,7 @@ Please try again later or contact the software engineer.
     <value>डेटा सहेजा गया</value>
   </data>
   <data name="strMsgBoxTaskCancel" xml:space="preserve">
-हॉसडॉर्फ-बेसिकोविच फ्रैक्टल आयाम की गणना रोक दी गई है।</value>
+    <value>हॉसडॉर्फ-बेसिकोविच फ्रैक्टल आयाम की गणना रोक दी गई है।</value>
   </data>
   <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
     <value>विराम</value>
@@ -427,7 +428,7 @@ Please try again later or contact the software engineer.
     <value>संस्कृति का चयन करें</value>
   </data>
   <data name="strReadDataError" xml:space="preserve">
-    <value>फ़ाइल से डेटा पढ़ने में असमर्थ।</value>
+    <value>फ़ाइल से डेटा पढ़ने में असमर्थ।
 {0}</value>
   </data>
   <data name="strReadDataErrorCulture" xml:space="preserve">
@@ -507,6 +508,6 @@ Please try again later or contact the software engineer.
     <value>प्लॉट, डेटा और UI के लिए सेटिंग</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
-<value>उपयोगकर्ता इंटरफ़ेस भाषा</value>
+    <value>उपयोगकर्ता इंटरफ़ेस भाषा</value>
   </data>
 </root>
