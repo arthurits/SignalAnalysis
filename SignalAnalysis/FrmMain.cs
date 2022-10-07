@@ -15,12 +15,6 @@ public partial class FrmMain : Form
     private CancellationTokenSource tokenSource = new();
     private CancellationToken token = CancellationToken.None;
 
-    /// <summary>
-    /// https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/y99d1cd3(v=vs.100)?WT.mc_id=DT-MVP-5003235
-    /// https://stackoverflow.com/questions/32989100/how-to-make-multi-language-app-in-winforms
-    /// </summary>
-    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
-
     public FrmMain()
     {
         // Load settings

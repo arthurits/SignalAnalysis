@@ -7,7 +7,6 @@ public partial class FrmLanguage : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly ClassSettings? Settings;
-    private readonly System.Resources.ResourceManager StringsRM = new("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
 
     public FrmLanguage()
     {

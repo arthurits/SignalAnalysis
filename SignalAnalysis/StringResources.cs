@@ -7,6 +7,8 @@ public static class StringResources
 {
     /// <summary>
     /// Represents a resource manager that provides convinient access to culture-specific resources at run time
+    /// https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/y99d1cd3(v=vs.100)?WT.mc_id=DT-MVP-5003235
+    /// https://stackoverflow.com/questions/32989100/how-to-make-multi-language-app-in-winforms
     /// </summary>
     public static System.Resources.ResourceManager StringRM { get; set; } = new("SignalAnalysis.localization.strings", typeof(FrmMain).Assembly);
     
