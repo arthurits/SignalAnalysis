@@ -1174,6 +1174,24 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select data series.
+        /// </summary>
+        internal static string strToolTipCboSeries {
+            get {
+                return ResourceManager.GetString("strToolTipCboSeries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select FFT window.
+        /// </summary>
+        internal static string strToolTipCboWindows {
+            get {
+                return ResourceManager.GetString("strToolTipCboWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit the application.
         /// </summary>
         internal static string strToolTipExit {

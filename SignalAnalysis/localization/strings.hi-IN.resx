@@ -495,6 +495,12 @@
   <data name="strToolTipAbout" xml:space="preserve">
     <value>इस सॉफ्टवेयर के बारे में</value>
   </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>डेटा श्रृंखला का चयन करें</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>FFT विंडो चुनें</value>
+  </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>आवेदन से बाहर निकलें</value>
   </data>

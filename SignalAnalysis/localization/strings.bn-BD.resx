@@ -498,6 +498,12 @@
   <data name="strToolTipAbout" xml:space="preserve">
     <value>এই সফটওয়্যার সম্পর্কে</value>
   </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>ডেটা সিরিজ নির্বাচন করুন</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>FFT উইন্ডো নির্বাচন করুন</value>
+  </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>সফটওয়্যার থেকে প্রস্থান করুন</value>
   </data>

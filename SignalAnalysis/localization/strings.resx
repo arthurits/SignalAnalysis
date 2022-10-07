@@ -498,6 +498,12 @@ dimension has been stopped.</value>
   <data name="strToolTipAbout" xml:space="preserve">
     <value>About this software</value>
   </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>Select data series</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>Select FFT window</value>
+  </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>Exit the application</value>
   </data>

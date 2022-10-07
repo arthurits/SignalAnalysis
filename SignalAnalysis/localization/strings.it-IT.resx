@@ -495,6 +495,12 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strToolTipAbout" xml:space="preserve">
     <value>Informazioni su questo software</value>
   </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>Seleziona serie di dati</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>Seleziona la finestra FFT</value>
+  </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>Esci dall'applicazione</value>
   </data>

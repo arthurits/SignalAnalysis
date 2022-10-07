@@ -73,6 +73,11 @@ public static class StringResources
     public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.";
     public static string MsgBoxTaskCancelTitle => StringRM.GetString("strMsgBoxTaskCancelTitle", Culture) ?? "Stop";
 
+    public static string ErrorDeserialize => StringRM.GetString("strErrorDeserialize", Culture) ?? "Error loading settings file." +
+            Environment.NewLine + Environment.NewLine + "{0}" +
+            Environment.NewLine + Environment.NewLine + "Default values will be used instead.";
+    public static string ErrorDeserializeTitle => StringRM.GetString("strErrorDeserializeTitle", Culture) ?? "Error";
+
     public static string OpenDlgFilter => StringRM.GetString("strOpenDlgFilter", Culture) ?? "ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*";
     public static string OpenDlgTitle => StringRM.GetString("strOpenDlgTitle", Culture) ?? "Select data file";
     public static string SaveDlgFilter => StringRM.GetString("strSaveDlgFilter", Culture) ?? "Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|Results file (*.results)|*.results|All files (*.*)|*.*";
@@ -129,10 +134,7 @@ public static class StringResources
 
     public static string BtnAccept => StringRM.GetString("strBtnAccept", Culture) ?? "&Accept";
     public static string BtnCancel => StringRM.GetString("strBtnCancel", Culture) ?? "&Cancel";
-    public static string BtnData => StringRM.GetString("strBtnData", Culture) ?? "Select data";
-    public static string BtnExport => StringRM.GetString("strBtnExport", Culture) ?? "&Export";
     public static string BtnReset => StringRM.GetString("strBtnReset", Culture) ?? "&Reset";
-    public static string BtnSettings => StringRM.GetString("strBtnSettings", Culture) ?? "&Settings";
 
     // Settings
     public static string TabPlot => StringRM.GetString("strTabPlot", Culture) ?? "Plotting";
@@ -155,5 +157,17 @@ public static class StringResources
     public static string RadUserCulture => StringRM.GetString("strRadUserCulture", Culture) ?? "Select culture";
     public static string ChkDlgPath => StringRM.GetString("strChkDlgPath", Culture) ?? "Remember open/save dialog previous path";
     public static string LblDataFormat => StringRM.GetString("strLblDataFormat", Culture) ?? "Numeric data-formatting string";
+
+    public static string DlgReset => StringRM.GetString("strDlgReset", Culture) ?? "Do you want to reset all fields" +
+            Environment.NewLine + "to their default values?";
+    public static string DlgResetTitle => StringRM.GetString("strDlgResetTitle", Culture) ?? "Reset settings?";
+    
+    // Unused strings
+    public static string LblData => StringRM.GetString("strLblData", Culture) ?? "Data-file path";
+    public static string LblSeries => StringRM.GetString("strLblSeries", Culture) ?? "Select series";
+    public static string LblWindow => StringRM.GetString("strLblWindow", Culture) ?? "Window";
+    public static string BtnData => StringRM.GetString("strBtnData", Culture) ?? "Select data";
+    public static string BtnExport => StringRM.GetString("strBtnExport", Culture) ?? "&Export";
+    public static string BtnSettings => StringRM.GetString("strBtnSettings", Culture) ?? "&Settings";
 
 }

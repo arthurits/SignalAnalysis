@@ -79,7 +79,7 @@ partial class FrmMain
             // Exit if no data has been received or the matrices are still un-initialized
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringResources.MsgBoxNoDataTitle,
+                MessageBox.Show(StringResources.MsgBoxNoData,
                     StringResources.MsgBoxNoDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);

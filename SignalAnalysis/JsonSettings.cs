@@ -1,9 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Text;
-using System.Text.Json;
-using System.Windows.Forms;
+﻿using System.Text.Json;
 
 namespace SignalAnalysis;
 
@@ -32,8 +27,8 @@ partial class FrmMain
             using (new CenterWinDialog(this))
             {
                 MessageBox.Show(this,
-                    StringsRM.GetString("strErrorDeserialize", _settings.AppCulture) ?? $"Error loading settings file.\n\n{ex.Message}\n\nDefault values will be used instead.",
-                    StringsRM.GetString("strErrorDeserializeTitle", _settings.AppCulture) ?? "Error",
+                    string.Format(StringResources.ErrorDeserialize, ex.Message),
+                    StringResources.ErrorDeserializeTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -59,4 +54,3 @@ partial class FrmMain
     }
 
 }
-

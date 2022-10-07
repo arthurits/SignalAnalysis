@@ -497,6 +497,12 @@ er blevet stoppet.</value>
   <data name="strToolTipAbout" xml:space="preserve">
     <value>Om programmet</value>
   </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>Vælg dataserie</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>Vælg FFT-vindue</value>
+  </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>Afslut applikationen</value>
   </data>

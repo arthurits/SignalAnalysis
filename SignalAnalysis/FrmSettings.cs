@@ -63,8 +63,8 @@ public partial class FrmSettings : Form
         DialogResult DlgResult;
         using (new CenterWinDialog(this))
         {
-            DlgResult = MessageBox.Show(StringsRM.GetString("strDlgReset", _culture) ?? "Do you want to reset all fields\nto their default values?",
-                StringsRM.GetString("strDlgResetTitle", _culture) ?? "Reset settings?",
+            DlgResult = MessageBox.Show(StringResources.DlgReset,
+                StringResources.DlgResetTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2);

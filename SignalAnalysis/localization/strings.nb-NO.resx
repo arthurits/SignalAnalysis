@@ -498,6 +498,12 @@ har stoppet.</value>
   <data name="strToolTipAbout" xml:space="preserve">
     <value>Om denne programvaren</value>
   </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>Velg dataserie</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>Velg FFT-vindu</value>
+  </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>Avslutt applikasjonen</value>
   </data>

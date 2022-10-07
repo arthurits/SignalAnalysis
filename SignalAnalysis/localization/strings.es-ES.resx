@@ -502,6 +502,12 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strToolTipAbout" xml:space="preserve">
     <value>Acerca de este software</value>
   </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>Seleccionar la serie de datos</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>Seleccionar la ventana a utilizar en la FFT</value>
+  </data>
   <data name="strToolTipExit" xml:space="preserve">
     <value>Salir de la aplicación</value>
   </data>
