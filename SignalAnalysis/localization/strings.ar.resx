@@ -472,7 +472,7 @@
     <value>حساب البعد الكسري التراكمي (الخالص بالمعالج)</value>
   </data>
   <data name="strStatusTipPower" xml:space="preserve">
-    <value>حساب أطياف القدرة(ديسيبل) أو الحجم/value>
+    <value>حساب أطياف القدرة(ديسيبل) أو الحجم</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>واجهة المستخدم</value>
