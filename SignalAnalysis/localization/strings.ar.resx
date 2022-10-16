@@ -359,7 +359,7 @@
     <value>الوقت (ثواني)</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
-    <value>hgsum</value>
+    <value>السعة</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>تحويل فورييه السريع</value>
