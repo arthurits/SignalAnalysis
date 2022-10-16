@@ -97,7 +97,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(string.Format(StringResources.ReadDataErrorCulture, ex.Message),
+                MessageBox.Show(this, 
+                    string.Format(_settings.AppCulture, StringResources.ReadDataErrorCulture, ex.Message),
                     StringResources.ReadDataErrorCultureTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -106,7 +107,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(string.Format(StringResources.ReadDataError, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.ReadDataError, ex.Message),
                     StringResources.ReadDataErrorTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -116,7 +118,8 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(string.Format(StringResources.MsgBoxErrorOpenData, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.MsgBoxErrorOpenData, ex.Message),
                     StringResources.MsgBoxErrorOpenDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -198,7 +201,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(string.Format(StringResources.ReadDataErrorCulture, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.ReadDataErrorCulture, ex.Message),
                     StringResources.ReadDataErrorCultureTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -207,7 +211,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(string.Format(StringResources.ReadDataError, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.ReadDataError, ex.Message),
                     StringResources.ReadDataErrorTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -217,7 +222,8 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(string.Format(StringResources.MsgBoxErrorOpenData, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.MsgBoxErrorOpenData, ex.Message),
                     StringResources.MsgBoxErrorOpenDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -426,7 +432,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(string.Format(StringResources.ReadDataError, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.ReadDataError, ex.Message),
                     StringResources.ReadDataErrorTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -436,7 +443,8 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(string.Format(StringResources.MsgBoxErrorOpenData, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.MsgBoxErrorOpenData, ex.Message),
                     StringResources.MsgBoxErrorOpenDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -530,7 +538,8 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(string.Format(StringResources.MsgBoxErrorOpenData, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.MsgBoxErrorOpenData, ex.Message),
                     StringResources.MsgBoxErrorOpenDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -615,7 +624,8 @@ partial class FrmMain
         {
             result = false;
             using (new CenterWinDialog(this))
-                MessageBox.Show(string.Format(StringResources.ReadDataErrorNumber, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.ReadDataErrorNumber, ex.Message),
                     StringResources.ReadDataErrorNumberTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -625,7 +635,8 @@ partial class FrmMain
             result = false;
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show( string.Format(StringResources.MsgBoxInitArray, ex.Message),
+                MessageBox.Show(this,
+                    string.Format(_settings.AppCulture, StringResources.MsgBoxInitArray, ex.Message),
                     StringResources.MsgBoxInitArrayTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);

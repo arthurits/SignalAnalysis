@@ -62,7 +62,8 @@ public partial class FrmSettings : Form
         DialogResult DlgResult;
         using (new CenterWinDialog(this))
         {
-            DlgResult = MessageBox.Show(StringResources.DlgReset,
+            DlgResult = MessageBox.Show(this,
+                StringResources.DlgReset,
                 StringResources.DlgResetTitle,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,

@@ -224,7 +224,7 @@ partial class FrmMain
         {
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(
+                MessageBox.Show(this,
                       StringResources.MsgBoxTaskCancel,
                       StringResources.MsgBoxTaskCancelTitle,
                       MessageBoxButtons.OK,
@@ -285,7 +285,8 @@ partial class FrmMain
                 {
                     using (new CenterWinDialog(this))
                     {
-                        MessageBox.Show(String.Format(StringResources.MsgBoxErrorFFT, ex.Message),
+                        MessageBox.Show(this,
+                            String.Format(_settings.AppCulture, StringResources.MsgBoxErrorFFT, ex.Message),
                             StringResources.MsgBoxErrorFFTTitle,
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error);

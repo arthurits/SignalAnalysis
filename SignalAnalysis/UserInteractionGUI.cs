@@ -22,7 +22,9 @@ partial class FrmMain
         };
 
         using (new CenterWinDialog(this))
+        {
             result = openDlg.ShowDialog(this);
+        }
 
         if (result == DialogResult.OK && openDlg.FileName != "")
         {
@@ -79,7 +81,8 @@ partial class FrmMain
             // Exit if no data has been received or the matrices are still un-initialized
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(StringResources.MsgBoxNoData,
+                MessageBox.Show(this,
+                    StringResources.MsgBoxNoData,
                     StringResources.MsgBoxNoDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
@@ -99,7 +102,9 @@ partial class FrmMain
         };
 
         using (new CenterWinDialog(this))
+        {
             result = SaveDlg.ShowDialog(this.Parent);
+        }
 
         // If the file name is not an empty string, call the corresponding routine to save the data into a file.  
         if (result == DialogResult.OK && SaveDlg.FileName != "")
@@ -129,7 +134,8 @@ partial class FrmMain
                 // Show OK save data
                 using (new CenterWinDialog(this))
                 {
-                    MessageBox.Show(StringResources.MsgBoxOKSaveData,
+                    MessageBox.Show(this,
+                        StringResources.MsgBoxOKSaveData,
                         StringResources.MsgBoxOKSaveDataTitle,
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -141,10 +147,10 @@ partial class FrmMain
     private void Settings_Click(object? sender, EventArgs e)
     {
         FrmSettings frm = new(_settings);
-        frm.ShowDialog();
+        frm.ShowDialog(this);
         if (frm.DialogResult == DialogResult.OK)
         {
-            _settings = frm.Settings;
+            //_settings = frm.Settings;
             ComboSeries_SelectedIndexChanged(this, EventArgs.Empty);
 
             statusStripLabelExPower.Checked = _settings.PowerSpectra;

@@ -72,7 +72,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                MessageBox.Show(this,
+                    String.Format(_settings.AppCulture, StringResources.MsgBoxErrorSaveData, ex.Message),
                     StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -125,7 +126,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                MessageBox.Show(this,
+                    String.Format(_settings.AppCulture, StringResources.MsgBoxErrorSaveData, ex.Message),
                     StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -194,7 +196,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                MessageBox.Show(this,
+                    String.Format(_settings.AppCulture, StringResources.MsgBoxErrorSaveData, ex.Message),
                     StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -255,7 +258,8 @@ partial class FrmMain
             // Show error message
             using (new CenterWinDialog(this))
             {
-                MessageBox.Show(String.Format(StringResources.MsgBoxErrorSaveData, ex.Message),
+                MessageBox.Show(this,
+                    String.Format(_settings.AppCulture, StringResources.MsgBoxErrorSaveData, ex.Message),
                     StringResources.MsgBoxErrorSaveDataTitle,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
