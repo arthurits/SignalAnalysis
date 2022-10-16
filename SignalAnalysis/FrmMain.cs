@@ -214,11 +214,20 @@ public partial class FrmMain : Form
         plotApplied.Refresh();
 
         plotFractal.CultureUI = _settings.AppCulture;
-        plotFractal.Plot.Title(StringResources.PlotFractalTitle1 +
-            " " +
-            (_settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty) +
-            " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
-            " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
+        //plotFractal.Plot.Title(StringResources.PlotFractalTitle1 +
+        //    " " +
+        //    (_settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty) +
+        //    " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
+        //    " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
+
+        plotFractal.Plot.Title(String.Format(_settings.AppCulture,
+            "{0} {1} (H = {2:0.00####} — Var(H) = {3:0.00####})",
+            StringResources.PlotFractalTitle1,
+            _settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty,
+            double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle,
+            double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH)
+            );
+
         plotFractal.Plot.YLabel(StringResources.PlotFractalYLabel);
         plotFractal.Plot.XLabel(StringResources.PlotFractalXLabel);
         plotFractal.Refresh();
