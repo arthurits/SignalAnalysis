@@ -31,11 +31,10 @@ partial class FrmMain
 
         tspBottom.Join(statusStrip);
 
-        // Simulate a click on each label in order to...
-        statusStripLabelExPower.PerformClick();
-        statusStripLabelExCumulative.PerformClick();
-        statusStripLabelExEntropy.PerformClick();
-        statusStripLabelExCrossHair.PerformClick();
+        statusStripLabelExPower.Checked = true;
+        statusStripLabelExCumulative.Checked = false;
+        statusStripLabelExEntropy.Checked = false;
+        statusStripLabelExCrossHair.Checked = false;
     }
 
     /// <summary>

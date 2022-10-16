@@ -163,26 +163,24 @@ public partial class FrmMain : Form
         this.SuspendLayout();
 
         // Testing string resources
-        //StringResources.StringRM = StringsRM;
         StringResources.Culture = _settings.AppCulture;
-
 
         // Update the form's tittle
         SetFormTitle(this, String.Empty);
 
         // Update ToolStrip
-        this.toolStripMain_Exit.Text = StringResources.ToolStripExit;
-        this.toolStripMain_Exit.ToolTipText = StringResources.ToolTipExit;
-        this.toolStripMain_Open.Text = StringResources.ToolStripOpen;
-        this.toolStripMain_Open.ToolTipText = StringResources.ToolTipOpen;
-        this.toolStripMain_Export.Text = StringResources.ToolStripExport;
-        this.toolStripMain_Export.ToolTipText = StringResources.ToolTipExport;
+        toolStripMain_Exit.Text = StringResources.ToolStripExit;
+        toolStripMain_Exit.ToolTipText = StringResources.ToolTipExit;
+        toolStripMain_Open.Text = StringResources.ToolStripOpen;
+        toolStripMain_Open.ToolTipText = StringResources.ToolTipOpen;
+        toolStripMain_Export.Text = StringResources.ToolStripExport;
+        toolStripMain_Export.ToolTipText = StringResources.ToolTipExport;
         stripComboSeries.ToolTipText = StringResources.ToolTipCboSeries;
         stripComboWindows.ToolTipText = StringResources.ToolTipCboWindows;
-        this.toolStripMain_Settings.Text = StringResources.ToolStripSettings;
-        this.toolStripMain_Settings.ToolTipText = StringResources.ToolTipSettings;
-        this.toolStripMain_About.Text = StringResources.ToolStripAbout;
-        this.toolStripMain_About.ToolTipText = StringResources.ToolTipAbout;
+        toolStripMain_Settings.Text = StringResources.ToolStripSettings;
+        toolStripMain_Settings.ToolTipText = StringResources.ToolTipSettings;
+        toolStripMain_About.Text = StringResources.ToolStripAbout;
+        toolStripMain_About.ToolTipText = StringResources.ToolTipAbout;
 
         // Update StatusStrip
         statusStripLabelCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;

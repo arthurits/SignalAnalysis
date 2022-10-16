@@ -8,7 +8,7 @@ class ToolStripStatusLabelEx : System.Windows.Forms.ToolStripStatusLabel
     // Another example could be
     // https://www.codeproject.com/Articles/21419/Label-with-ProgressBar-in-a-StatusStrip
 
-    private bool _checked;
+    private bool _checked = false;
     public System.Drawing.Brush CheckedBorder { get; set; } = System.Drawing.Brushes.SteelBlue;
     public System.Drawing.Brush CheckedBackground { get; set; } = System.Drawing.Brushes.LightSkyBlue;
     public System.Drawing.Color ForeColorChecked { get; set; } = Color.Black;

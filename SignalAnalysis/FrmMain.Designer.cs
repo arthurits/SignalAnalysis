@@ -382,7 +382,7 @@ partial class FrmMain
             this.statusStripLabelEmpty.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelEmpty.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-            this.statusStripLabelEmpty.Size = new System.Drawing.Size(697, 23);
+            this.statusStripLabelEmpty.Size = new System.Drawing.Size(656, 23);
             this.statusStripLabelEmpty.Spring = true;
             this.statusStripLabelEmpty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -392,7 +392,7 @@ partial class FrmMain
             this.statusStripLabelCulture.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelCulture.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelCulture.Name = "statusStripLabelCulture";
-            this.statusStripLabelCulture.Size = new System.Drawing.Size(60, 23);
+            this.statusStripLabelCulture.Size = new System.Drawing.Size(70, 23);
             this.statusStripLabelCulture.ToolTipText = "User interface language";
             this.statusStripLabelCulture.Click += new System.EventHandler(this.Language_Click);
             // 
@@ -400,9 +400,12 @@ partial class FrmMain
             // 
             this.statusStripLabelExPower.AutoSize = false;
             this.statusStripLabelExPower.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExPower.Checked = false;
+            this.statusStripLabelExPower.Checked = true;
             this.statusStripLabelExPower.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExPower.Name = "LabelExPower";
+            this.statusStripLabelExPower.ForeColor = System.Drawing.Color.Black;
+            this.statusStripLabelExPower.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelExPower.ForeColorUnchecked = System.Drawing.Color.LightGray;
+            this.statusStripLabelExPower.Name = "statusStripLabelExPower";
             this.statusStripLabelExPower.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelExPower.Text = "P";
             this.statusStripLabelExPower.ToolTipText = "Power spectra (dB)";
@@ -412,9 +415,12 @@ partial class FrmMain
             // 
             this.statusStripLabelExCumulative.AutoSize = false;
             this.statusStripLabelExCumulative.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExCumulative.Checked = true;
+            this.statusStripLabelExCumulative.Checked = false;
             this.statusStripLabelExCumulative.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExCumulative.Name = "LabelExCumulative";
+            this.statusStripLabelExCumulative.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelExCumulative.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelExCumulative.ForeColorUnchecked = System.Drawing.Color.LightGray;
+            this.statusStripLabelExCumulative.Name = "statusStripLabelExCumulative";
             this.statusStripLabelExCumulative.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelExCumulative.Text = "F";
             this.statusStripLabelExCumulative.ToolTipText = "Cumulative fractal dimension";
@@ -424,9 +430,12 @@ partial class FrmMain
             // 
             this.statusStripLabelExEntropy.AutoSize = false;
             this.statusStripLabelExEntropy.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExEntropy.Checked = true;
+            this.statusStripLabelExEntropy.Checked = false;
             this.statusStripLabelExEntropy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExEntropy.Name = "LabelExEntropy";
+            this.statusStripLabelExEntropy.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelExEntropy.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelExEntropy.ForeColorUnchecked = System.Drawing.Color.LightGray;
+            this.statusStripLabelExEntropy.Name = "statusStripLabelExEntropy";
             this.statusStripLabelExEntropy.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelExEntropy.Text = "E";
             this.statusStripLabelExEntropy.ToolTipText = "Approximate and sample entropy";
@@ -436,9 +445,12 @@ partial class FrmMain
             // 
             this.statusStripLabelExCrossHair.AutoSize = false;
             this.statusStripLabelExCrossHair.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExCrossHair.Checked = true;
+            this.statusStripLabelExCrossHair.Checked = false;
             this.statusStripLabelExCrossHair.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExCrossHair.Name = "LabelExCrossHair";
+            this.statusStripLabelExCrossHair.ForeColor = System.Drawing.Color.LightGray;
+            this.statusStripLabelExCrossHair.ForeColorChecked = System.Drawing.Color.Black;
+            this.statusStripLabelExCrossHair.ForeColorUnchecked = System.Drawing.Color.LightGray;
+            this.statusStripLabelExCrossHair.Name = "statusStripLabelExCrossHair";
             this.statusStripLabelExCrossHair.Size = new System.Drawing.Size(28, 23);
             this.statusStripLabelExCrossHair.Text = "C";
             this.statusStripLabelExCrossHair.ToolTipText = "Plot\'s crosshair mode";
