@@ -11,6 +11,20 @@ public class ClassSettings
     public string FileName { get; set; } = "configuration.json";
 
     /// <summary>
+    /// Remember window position on start up
+    /// </summary>
+    [JsonPropertyName("Window position")]
+    public bool WindowPosition { get; set; } = false;
+    [JsonPropertyName("Window top")]
+    public int WindowTop { get; set; } = 0;
+    [JsonPropertyName("Window left")]
+    public int WindowLeft { get; set; } = 0;
+    [JsonPropertyName("Window width")]
+    public int WindowWidth { get; set; } = 900;
+    [JsonPropertyName("Window height")]
+    public int WindowHeight { get; set; } = 760;
+
+    /// <summary>
     /// Array starting index analysis
     /// </summary>
     [JsonPropertyName("Array index start")]

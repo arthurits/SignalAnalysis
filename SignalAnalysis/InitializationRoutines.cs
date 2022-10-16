@@ -11,11 +11,11 @@ partial class FrmMain
     {
         toolStripMain.Renderer = new customRenderer<ToolStripButton>(System.Drawing.Brushes.SteelBlue, System.Drawing.Brushes.LightSkyBlue);
 
-        toolStripMain_Exit.Image = new System.Drawing.Icon(GraphicsResources.IconExit, 48, 48).ToBitmap();
-        toolStripMain_Open.Image = new System.Drawing.Icon(GraphicsResources.IconOpen, 48, 48).ToBitmap();
-        toolStripMain_Export.Image = new System.Drawing.Icon(GraphicsResources.IconExport, 48, 48).ToBitmap();
-        toolStripMain_Settings.Image = new System.Drawing.Icon(GraphicsResources.IconSettings, 48, 48).ToBitmap();
-        toolStripMain_About.Image = new System.Drawing.Icon(GraphicsResources.IconAbout, 48, 48).ToBitmap();
+        toolStripMain_Exit.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExit, 48);
+        toolStripMain_Open.Image = GraphicsResources.LoadIcon(GraphicsResources.IconOpen, 48);
+        toolStripMain_Export.Image = GraphicsResources.LoadIcon(GraphicsResources.IconExport, 48);
+        toolStripMain_Settings.Image = GraphicsResources.LoadIcon(GraphicsResources.IconSettings, 48);
+        toolStripMain_About.Image = GraphicsResources.LoadIcon(GraphicsResources.IconAbout, 48);
 
         this.tspTop.Join(this.toolStripMain);
 

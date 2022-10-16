@@ -5,7 +5,7 @@ namespace SignalAnalysis;
 partial class FrmMain
 {
     /// <summary>
-    /// Loads all settings from file _sett.FileName into class instance _settings
+    /// Loads all settings from file <see cref="ClassSettings.FileName"/> into variable <see cref="_settings"/>.
     /// Shows MessageBox error if unsuccessful
     /// </summary>
     private void LoadProgramSettingsJSON()
@@ -14,10 +14,8 @@ partial class FrmMain
         {
             var jsonString = File.ReadAllText(_settings.FileName);
             _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
-            
-            //this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            //this.DesktopLocation = new Point(_settings.Wnd_Left, _settings.Wnd_Top);
-            //this.ClientSize = new Size(_settings.Wnd_Width, _settings.Wnd_Height);
+
+            ApplySettingsJSON(_settings.WindowPosition);
         }
         catch (FileNotFoundException)
         {
@@ -33,6 +31,7 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
+
     }
 
     /// <summary>
@@ -40,10 +39,10 @@ partial class FrmMain
     /// </summary>
     private void SaveProgramSettingsJSON()
     {
-        //_settings.Wnd_Left = DesktopLocation.X;
-        //_settings.Wnd_Top = DesktopLocation.Y;
-        //_settings.Wnd_Width = ClientSize.Width;
-        //_settings.Wnd_Height = ClientSize.Height;
+        _settings.WindowLeft = DesktopLocation.X;
+        _settings.WindowTop = DesktopLocation.Y;
+        _settings.WindowWidth = ClientSize.Width;
+        _settings.WindowHeight = ClientSize.Height;
 
         var options = new JsonSerializerOptions
         {
@@ -53,4 +52,17 @@ partial class FrmMain
         File.WriteAllText(_settings.FileName, jsonString);
     }
 
+    /// <summary>
+    /// Update UI with settings
+    /// </summary>
+    /// <param name="WindowPosition"><see langword="True"/> if the window position and size should be applied. <see langword="False"/> if omitted</param>
+    private void ApplySettingsJSON(bool WindowPosition = false)
+    {
+        if (WindowPosition)
+        {
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
+            this.ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
+        }
+    }
 }
