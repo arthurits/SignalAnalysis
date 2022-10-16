@@ -233,6 +233,7 @@ partial class FrmMain
                           MessageBoxButtons.OK,
                           MessageBoxIcon.Stop);
                 }
+                _settings.CumulativeDimension = false;
                 this.statusStripLabelExCumulative.Checked = false;
             }
             );

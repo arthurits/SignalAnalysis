@@ -9,7 +9,7 @@ public partial class FrmMain : Form
     
     DateTime nStart;
     ClassSettings _settings = new();
-    Stats Results = new();
+    SignalStats Results = new();
     
     Task statsTask = Task.CompletedTask;
     private CancellationTokenSource tokenSource = new();

@@ -241,7 +241,7 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the text file</param>
     /// <param name="results">Numeric results read from the file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadTextData(string FileName, Stats? results)
+    private bool ReadTextData(string FileName, SignalStats? results)
     {
         double readValue;
         int nPoints = 0;
@@ -463,7 +463,7 @@ partial class FrmMain
     /// <param name="results">Numeric results read from the file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     /// <exception cref="FormatException"></exception>
-    private bool ReadBinData(string FileName, Stats? results)
+    private bool ReadBinData(string FileName, SignalStats? results)
     {
         int nPoints;
         bool result = true;
@@ -557,7 +557,7 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the json file</param>
     /// <param name="results">Numeric results read from the file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadJsonData(string FileName, Stats? results)
+    private bool ReadJsonData(string FileName, SignalStats? results)
     {
         int nPoints = 0;
         bool result = true;

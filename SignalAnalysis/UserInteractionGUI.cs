@@ -37,7 +37,7 @@ partial class FrmMain
             if (_settings.RememberFileDialogPath) _settings.UserOpenPath = Path.GetDirectoryName(filePath) ?? string.Empty;
 
             // Read the data file in the corresponding format
-            Stats? results = null;
+            SignalStats? results = null;
             bool boolRead = Path.GetExtension(filePath).ToLower() switch
             {
                 ".elux" => ReadELuxData(filePath),
@@ -194,25 +194,25 @@ partial class FrmMain
             // Update the settings
             switch (label.Name)
             {
-                case "LabelExPower":
+                case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
                     ComboWindow_SelectedIndexChanged(null, EventArgs.Empty);
                     break;
-                case "LabelExCumulative":
+                case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
                     if (_settings.CumulativeDimension)
                         UpdateStatsPlots(stripComboSeries.SelectedIndex);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
-                case "LabelExEntropy":
+                case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
                     if (_settings.Entropy)
                         UpdateStatsPlots(stripComboSeries.SelectedIndex);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
-                case "LabelExCrossHair":
+                case "statusStripLabelExCrossHair":
                     _settings.CrossHair = label.Checked;
                     if (plotOriginal is not null && plotOriginal.Plot.GetPlottables().Length > 0)
                     {
