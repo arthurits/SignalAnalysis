@@ -40,6 +40,8 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader03", fileCulture) ?? "End time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
+            //if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
+            //    throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
