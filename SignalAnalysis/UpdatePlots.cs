@@ -222,14 +222,20 @@ partial class FrmMain
         }
         catch (OperationCanceledException)
         {
-            using (new CenterWinDialog(this))
+            // This is needed beacuse this exception is thrown while the cumulative fractal dimension is computed from another Task in "UpdateStatsPlots".
+            Invoke(() =>
             {
-                MessageBox.Show(this,
-                      StringResources.MsgBoxTaskCancel,
-                      StringResources.MsgBoxTaskCancelTitle,
-                      MessageBoxButtons.OK,
-                      MessageBoxIcon.Stop);
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show(this,
+                          StringResources.MsgBoxTaskCancel,
+                          StringResources.MsgBoxTaskCancelTitle,
+                          MessageBoxButtons.OK,
+                          MessageBoxIcon.Stop);
+                }
+                this.statusStripLabelExCumulative.Checked = false;
             }
+            );
         }
         finally
         {

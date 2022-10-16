@@ -178,19 +178,6 @@ partial class FrmMain
             UpdateUI_Language();
     }
 
-    private void LabelEx_CheckedChanged(object? sender, EventArgs e)
-    {
-        //if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
-        //{
-        //    var label = LabelEx;
-        //    // Change the text color
-        //    if (label.Checked)
-        //        label.ForeColor = Color.Black;
-        //    else
-        //        label.ForeColor = Color.LightGray;
-        //}
-    }
-
     private void LabelEx_Click(object? sender, EventArgs e)
     {
         if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
