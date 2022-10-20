@@ -38,6 +38,8 @@ partial class FrmMain
 
             // Read the data file in the corresponding format
             SignalStats? results = null;
+            SignalData data = Data;
+            Data = new();
             bool boolRead = Path.GetExtension(filePath).ToLower() switch
             {
                 ".elux" => ReadELuxData(filePath),
@@ -51,6 +53,7 @@ partial class FrmMain
             {
                 PopulateComboSeries();
                 SetFormTitle(this, openDlg.FileName);
+                UpdateUI_MeasuringTime();
 
                 if (results is not null)
                 {
@@ -58,6 +61,8 @@ partial class FrmMain
                     txtStats.Text = Results.ToString(_settings.AppCulture);
                 }
             }
+            else
+                Data = data;
 
             // Restore the cursor
             Cursor.Current = cursor;

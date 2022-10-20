@@ -157,6 +157,30 @@ public partial class FrmMain : Form
     }
 
     /// <summary>
+    /// Shows the measuring time in the StatusStrip control
+    /// </summary>
+    private void UpdateUI_MeasuringTime()
+    {
+        TimeSpan nTime = Data.MeasuringTime;
+
+        if (nTime == TimeSpan.Zero)
+        {
+            statusStripLabelEmpty.Text = string.Empty;
+            statusStripLabelEmpty.ToolTipText = string.Empty;
+        }
+        else
+        {
+            statusStripLabelEmpty.Text = $"{nTime.Days} {StringResources.FileHeader22}, " +
+                $"{nTime.Hours} {StringResources.FileHeader23}, " +
+                $"{nTime.Minutes} {StringResources.FileHeader24}, " +
+                $"{nTime.Seconds} {StringResources.FileHeader25} " +
+                $"{StringResources.FileHeader26} " +
+                $"{nTime.Milliseconds} {StringResources.FileHeader27}";
+            statusStripLabelEmpty.ToolTipText = statusStripLabelEmpty.Text;
+        }
+    }
+
+    /// <summary>
     /// Updates the UI language of all controls
     /// </summary>
     private void UpdateUI_Language()
@@ -168,6 +192,8 @@ public partial class FrmMain : Form
 
         // Update the form's tittle
         SetFormTitle(this, String.Empty);
+
+        UpdateUI_MeasuringTime();
 
         // Update ToolStrip
         toolStripMain_Exit.Text = StringResources.ToolStripExit;
