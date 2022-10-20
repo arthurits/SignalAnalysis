@@ -5,21 +5,21 @@ partial class FrmMain
     {
         plotOriginal.Clear();
         //plotOriginal.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
-        //plotOriginal.Plot.AddSignal(_signalData[cboSeries.SelectedIndex], nSampleFreq, label: cboSeries.SelectedItem.ToString());
+        //plotOriginal.Plot.AddSignal(Data.Data[cboSeries.SelectedIndex], Data.SampleFrequency, label: cboSeries.SelectedItem.ToString());
 
         switch (_settings.AxisType)
         {
             case AxisType.Points:
-                plotOriginal.Plot.AddSignal(signal, nSampleFreq / nSampleFreq, label: strLabel);
+                plotOriginal.Plot.AddSignal(signal, Data.SampleFrequency / Data.SampleFrequency, label: strLabel);
                 plotOriginal.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
-                plotOriginal.Plot.AddSignal(signal, nSampleFreq, label: strLabel);
+                plotOriginal.Plot.AddSignal(signal, Data.SampleFrequency, label: strLabel);
                 plotOriginal.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
-                var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * nSampleFreq, label: strLabel);
-                sig.OffsetX = nStart.ToOADate();
+                var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * Data.SampleFrequency, label: strLabel);
+                sig.OffsetX = Data.StartTime.ToOADate();
                 plotOriginal.Plot.XAxis.DateTimeFormat(true);
                 break;
         }
@@ -39,7 +39,7 @@ partial class FrmMain
 
         plotWindow.Clear();
         //plotWindow.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
-        var plot = plotWindow.Plot.AddSignal(kernel, nSampleFreq, Color.Crimson);
+        var plot = plotWindow.Plot.AddSignal(kernel, Data.SampleFrequency, Color.Crimson);
         plot.LineWidth = 1.0;
         plot.MarkerSize = 5;
         plot.MarkerShape = ScottPlot.MarkerShape.filledCircle;
@@ -54,7 +54,7 @@ partial class FrmMain
     {
         plotApplied.Clear();
         //plotApplied.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
-        plotApplied.Plot.AddSignal(signal, nSampleFreq);
+        plotApplied.Plot.AddSignal(signal, Data.SampleFrequency);
         plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
         plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
         plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
@@ -64,16 +64,16 @@ partial class FrmMain
 
     private void UpdateFractal(double[] signal, string seriesName = "", bool progressive = false)
     {
-        if (_signalData.Length == 0) return;
+        if (Data.Data.Length == 0) return;
 
         plotFractal.Clear();
         if (progressive && FractalDimension.DimensionCumulative.Length > 0)
         {
-            plotFractal.Plot.AddSignal(FractalDimension.DimensionCumulative, nSampleFreq, label: seriesName);
+            plotFractal.Plot.AddSignal(FractalDimension.DimensionCumulative, Data.SampleFrequency, label: seriesName);
         }
         else
         {
-            plotFractal.Plot.AddLine(0, double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle, (0, signal.Length / nSampleFreq));
+            plotFractal.Plot.AddLine(0, double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle, (0, signal.Length / Data.SampleFrequency));
         }
         plotFractal.Plot.Title((StringResources.PlotFractalTitle1) +
             " " +
@@ -126,7 +126,7 @@ partial class FrmMain
             if (frequency is not null && frequency.Length > 0)
                 plotFFT.Plot.AddScatter(frequency, signal);
             else
-                plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / nSampleFreq);
+                plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / Data.SampleFrequency);
         }
         plotFFT.Plot.Title(StringResources.PlotFFTTitle);
         plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
@@ -144,7 +144,7 @@ partial class FrmMain
     private async Task UpdateStatsPlots(int series)
     {
         // Extract the values 
-        var signal = _signalData[series][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        var signal = Data.Data[series][_settings.IndexStart..(_settings.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
         string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
@@ -209,7 +209,7 @@ partial class FrmMain
             Results.Average = avg;
 
             // Compute fractal values
-            FractalDimension.ComputeDimension(nSampleFreq, signal, token, progressive);
+            FractalDimension.ComputeDimension(Data.SampleFrequency, signal, token, progressive);
             Results.FractalDimension = FractalDimension.DimensionSingle;
             Results.FractalVariance = FractalDimension.VarianceH;
 
@@ -286,7 +286,7 @@ partial class FrmMain
                     Results.FFTmagnitude = signalFFT;
 
                     signalFFT = _settings.PowerSpectra ? Results.FFTpower : Results.FFTmagnitude;
-                    Results.FFTfrequencies = FftSharp.Transform.FFTfreq(nSampleFreq, signalFFT.Length);
+                    Results.FFTfrequencies = FftSharp.Transform.FFTfreq(Data.SampleFrequency, signalFFT.Length);
                 }
                 catch (Exception ex)
                 {

@@ -72,8 +72,8 @@ partial class FrmMain
 
         // Extract the values to be exported
         double[] signal = Array.Empty<double>();
-        if (_signalData.Length > 0)
-            signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (Data.Data.Length > 0)
+            signal = Data.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
 
         // Exit if there is no data to be saved
         if (signal.Length == 0)

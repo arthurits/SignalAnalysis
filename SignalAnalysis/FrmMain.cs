@@ -2,14 +2,15 @@ namespace SignalAnalysis;
 
 public partial class FrmMain : Form
 {
-    private double[][] _signalData = Array.Empty<double[]>();
+    //private double[][] _signalData = Array.Empty<double[]>();
     private string[] seriesLabels = Array.Empty<string>();
-    private int nSeries = 0;
-    double nSampleFreq = 0.0;
+    //private int nSeries = 0;
+    //double nSampleFreq = 0.0;
     
-    DateTime nStart;
+    //DateTime nStart;
     ClassSettings _settings = new();
     SignalStats Results = new();
+    SignalData Data = new();
     
     Task statsTask = Task.CompletedTask;
     private CancellationTokenSource tokenSource = new();
@@ -107,7 +108,7 @@ public partial class FrmMain : Form
         // Move the focus away in order to deselect the text
         this.tableLayoutPanel1.Focus();
 
-        if (_signalData.Length == 0) return;
+        if (Data.Data.Length == 0) return;
 
         //statusStripLabelExEntropy.Checked = false;
         //_settings.Entropy = false;
@@ -124,7 +125,7 @@ public partial class FrmMain : Form
         if (stripComboSeries.SelectedIndex < 0) return;
 
         // Extract the values 
-        var signal = _signalData[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        var signal = Data.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
         UpdateWindowPlots(signal);

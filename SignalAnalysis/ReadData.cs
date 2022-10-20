@@ -9,8 +9,11 @@ partial class FrmMain
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool ReadELuxData(string FileName)
     {
-        int nPoints = 0;
-        bool result = true;
+        DateTime start;
+        DateTime end;
+        int points = 0, series = 0;
+        bool result = false;
+        double sampleFreq;
         string? strLine;
 
         try
@@ -32,7 +35,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
-            if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
+            if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out start))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
 
             strLine = sr.ReadLine();    // End time
@@ -40,8 +43,8 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader03", fileCulture) ?? "End time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
-            //if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
-            //    throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
+            if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out end))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
@@ -54,20 +57,20 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader18));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader18", fileCulture) ?? "Number of sensors"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader18));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries))
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out series))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader18));
-            if (nSeries == 0)
+            if (series <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader18));
-            nSeries += 6;
+            series += 6;
 
             strLine = sr.ReadLine();    // Number of data points
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader05", fileCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out points))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            if (nPoints == 0)
+            if (points <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
 
             strLine = sr.ReadLine();    // Sampling frequency
@@ -75,9 +78,9 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader06", fileCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out sampleFreq))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            if (nSampleFreq <= 0)
+            if (sampleFreq <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
 
             strLine = sr.ReadLine();    // Empty line
@@ -93,7 +96,16 @@ partial class FrmMain
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
 
-            result = InitializeDataArrays(sr, nPoints, fileCulture);
+            result = InitializeDataArrays(sr, points, series, fileCulture);
+
+            // Store information regarding the signal
+            Data.StartTime = start;
+            Data.EndTime = end;
+            Data.MeasuringTime = end - start;
+            Data.SeriesNumber = series;
+            Data.SeriesPoints = points;
+            Data.SampleFrequency = sampleFreq;
+            
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -138,8 +150,9 @@ partial class FrmMain
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool ReadSigData(string FileName)
     {
-        int nPoints = 0;
+        int points = 0, series = 0;
         bool result = false;
+        double sampleFreq;
         string? strLine;
 
         try
@@ -159,9 +172,9 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader17", fileCulture) ?? "Number of series"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nSeries))
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out series))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
-            if (nSeries == 0)
+            if (series <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
 
             strLine = sr.ReadLine();    // Number of data points
@@ -169,9 +182,9 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader05", fileCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out points))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            if (nPoints == 0)
+            if (points <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
 
             strLine = sr.ReadLine();    // Sampling frequency
@@ -179,9 +192,9 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader06", fileCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out sampleFreq))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            if (nSampleFreq <= 0)
+            if (sampleFreq <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
 
             strLine = sr.ReadLine();    // Empty line
@@ -197,7 +210,13 @@ partial class FrmMain
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
 
-            result = InitializeDataArrays(sr, nPoints, fileCulture);
+            result = InitializeDataArrays(sr, points, series, fileCulture);
+
+            // Store information regarding the signal
+            Data.SeriesNumber = series;
+            Data.SeriesPoints = points;
+            Data.SampleFrequency = sampleFreq;
+            Data.MeasuringTime = new(Data.StartTime.AddSeconds(Data.SampleFrequency * Data.SeriesPoints).Ticks);
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -243,9 +262,13 @@ partial class FrmMain
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private bool ReadTextData(string FileName, SignalStats? results)
     {
-        double readValue;
-        int nPoints = 0;
+
+        DateTime start;
+        DateTime end;
+        int points = 0, series = 0;
         bool result = false;
+        double sampleFreq;
+        double readValue;
         string? strLine;
 
         if (results is null) results = new();
@@ -269,7 +292,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
             fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
-            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out nStart))
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out start))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
 
             strLine = sr.ReadLine();    // End time
@@ -277,6 +300,8 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader03", fileCulture) ?? "End time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader03));
+            if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out end))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
 
             strLine = sr.ReadLine();    // Total measuring time
             if (strLine is null)
@@ -289,9 +314,9 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader17", fileCulture) ?? "Number of series"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out series))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
-            if (nPoints <= 0)
+            if (series <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader17));
 
             strLine = sr.ReadLine();    // Number of data points
@@ -299,9 +324,9 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader05", fileCulture) ?? "Number of data points"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out nPoints))
+            if (!int.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out points))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
-            if (nPoints <= 0)
+            if (points <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader05));
 
             strLine = sr.ReadLine();    // Sampling frequency
@@ -309,9 +334,9 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader06", fileCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out nSampleFreq))
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out sampleFreq))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
-            if (nSampleFreq <= 0)
+            if (sampleFreq <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
 
             strLine = sr.ReadLine();    // Average illuminance
@@ -416,10 +441,18 @@ partial class FrmMain
             seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
-            seriesLabels = seriesLabels[1..];
-            nSeries = seriesLabels.Length;
+            series = seriesLabels.Length;
 
-            result = InitializeDataArrays(sr, nPoints, fileCulture, true);
+            result = InitializeDataArrays(sr, points, series, fileCulture, true);
+
+            // Store information regarding the signal
+            Data.StartTime = start;
+            Data.EndTime = end;
+            Data.MeasuringTime = end - start;
+            Data.SeriesNumber = series;
+            Data.SeriesPoints = points;
+            Data.SampleFrequency = sampleFreq;
+            Data.SeriesLabels = seriesLabels[1..];
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -465,8 +498,11 @@ partial class FrmMain
     /// <exception cref="FormatException"></exception>
     private bool ReadBinData(string FileName, SignalStats? results)
     {
-        int nPoints;
+        DateTime start;
+        DateTime end;
+        int points = 0, series = 0, dummy = 0;
         bool result = true;
+        double sampleFreq;
 
         if (results is null) results = new();
 
@@ -481,16 +517,16 @@ partial class FrmMain
             if (!strLine.Contains($"{StringResources.FileHeader01} (", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
 
-            nStart = br.ReadDateTime();     // start time
-            br.ReadDateTime();              // end time
-            int dummy = br.ReadInt32();     // days
+            start = br.ReadDateTime();      // start time
+            end = br.ReadDateTime();        // end time
+            dummy = br.ReadInt32();         // days
             dummy = br.ReadInt32();         // hours
             dummy = br.ReadInt32();         // minutes
             dummy = br.ReadInt32();         // seconds
             dummy = br.ReadInt32();         // milliseconds
-            nPoints = br.ReadInt32();       // number of series
-            nPoints = br.ReadInt32();       // number of data points
-            nSampleFreq = br.ReadDouble();  // sampling frequency
+            series = br.ReadInt32();        // number of series
+            points = br.ReadInt32();        // number of data points
+            sampleFreq = br.ReadDouble();   // sampling frequency
             results.Average = br.ReadDouble();
             results.Maximum = br.ReadDouble();
             results.Minimum = br.ReadDouble();
@@ -508,25 +544,32 @@ partial class FrmMain
             seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
-            seriesLabels = seriesLabels[1..];
-            nSeries = seriesLabels.Length;
+            Data.SeriesLabels = seriesLabels[1..];
+            series = seriesLabels.Length;
+
+            Data.StartTime = start;
+            Data.EndTime = end;
+            Data.MeasuringTime = end - start;
+            Data.SeriesNumber = Data.SeriesLabels.Length;
+            Data.SeriesPoints = points;
+            Data.SampleFrequency = sampleFreq;
 
             // Read data into array
             _settings.IndexStart = 0;
-            _settings.IndexEnd = nPoints - 1;
+            _settings.IndexEnd = points - 1;
 
             // Initialize data arrays
-            _signalData = new double[nSeries][];
-            for (int i = 0; i < nSeries; i++)
-                _signalData[i] = new double[nPoints];
+            Data.Data = new double[series][];
+            for (int i = 0; i < series; i++)
+                Data.Data[i] = new double[points];
 
             // Read data into _signalData
-            for (int row = 0; row < nSeries; row++)
+            for (int row = 0; row < series; row++)
             {
-                for (int col = 0; col < _signalData[row].Length; col++)
+                for (int col = 0; col < Data.Data[row].Length; col++)
                 {
                     br.ReadDateTime();
-                    _signalData[row][col] = br.ReadDouble();
+                    Data.Data[row][col] = br.ReadDouble();
                 }
             }
 
@@ -557,9 +600,9 @@ partial class FrmMain
     /// <param name="FileName">Path (including name) of the json file</param>
     /// <param name="results">Numeric results read from the file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadJsonData(string FileName, SignalStats? results)
+    private bool ReadJsonData(string FileName, SignalData? data, SignalStats? results)
     {
-        int nPoints = 0;
+        int points = 0;
         bool result = true;
 
         return result;
@@ -590,7 +633,7 @@ partial class FrmMain
     /// <param name="culture">Culture to parse the read data into numeric values</param>
     /// <param name="IsFirstColumDateTime"><see langword="True"/> if successfull</param>
     /// <returns><see langword="True"/> if the first data-column is a DateTime value and thus it will be ingnores, <see langword="false"/> otherwise</returns>
-    private bool InitializeDataArrays(StreamReader sr, int points, System.Globalization.CultureInfo culture, bool IsFirstColumDateTime = false)
+    private bool InitializeDataArrays(StreamReader sr, int points, int series, System.Globalization.CultureInfo culture, bool IsFirstColumDateTime = false)
     {
         bool result = true;
         string? strLine;
@@ -600,14 +643,14 @@ partial class FrmMain
             _settings.IndexEnd = points - 1;
 
             // Initialize data arrays
-            _signalData = new double[nSeries][];
-            for (int i = 0; i < nSeries; i++)
-                _signalData[i] = new double[points];
+            Data.Data = new double[series][];
+            for (int i = 0; i < series; i++)
+                Data.Data[i] = new double[points];
 
             // Read data into _signalData
-            for (int i = 0; i < _signalData.Length; i++)
+            for (int i = 0; i < Data.Data.Length; i++)
             {
-                _signalData[i] = new double[points];
+                Data.Data[i] = new double[points];
             }
             string[] data;
             int col = 0, row = 0;
@@ -616,7 +659,7 @@ partial class FrmMain
                 data = strLine.Split("\t");
                 for (col = IsFirstColumDateTime ? 1 : 0; col < data.Length; col++)
                 {
-                    if (!double.TryParse(data[col], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, culture, out _signalData[col - (IsFirstColumDateTime ? 1 : 0)][row]))
+                    if (!double.TryParse(data[col], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, culture, out Data.Data[col - (IsFirstColumDateTime ? 1 : 0)][row]))
                         throw new FormatException(data[col].ToString());
                 }
                 row++;

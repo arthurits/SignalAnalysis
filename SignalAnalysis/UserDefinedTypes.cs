@@ -50,8 +50,6 @@ public class SignalStats
 /// </summary>
 public class SignalData
 {
-    public string Name { get; set; } = String.Empty;
-
     public DateTime StartTime { get; set; } = DateTime.MinValue;
 
     public DateTime EndTime { get; set; } = DateTime.MinValue;
