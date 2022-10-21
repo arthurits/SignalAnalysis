@@ -3,11 +3,12 @@
 partial class FrmMain
 {
     /// <summary>
-    /// Reads data from an elux-formatted file and stores it into _signalData.
+    /// Reads data from an elux-formatted file and stores it into a <see cref="SignalData"/> parameter.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the elux file</param>
+    /// <param name="fileName">Path (including name) of the elux file</param>
+    /// <param name="signal"><see cref="SignalData"/> variable to store data read from the elux file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadELuxData(string FileName)
+    private bool ReadELuxData(string fileName, SignalData signal)
     {
         DateTime start;
         DateTime end;
@@ -19,7 +20,7 @@ partial class FrmMain
 
         try
         {
-            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
             
             strLine = sr.ReadLine();    // ErgoLux data
@@ -97,17 +98,19 @@ partial class FrmMain
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
 
-            result = InitializeDataArrays(sr, points, series, fileCulture);
+            result = InitializeDataArrays(sr, ref signal.Data, series, points, fileCulture);
 
             // Store information regarding the signal
-            Signal.StartTime = start;
-            Signal.EndTime = end;
-            Signal.MeasuringTime = end - start;
-            Signal.SeriesNumber = series;
-            Signal.SeriesPoints = points;
-            Signal.SampleFrequency = sampleFreq;
-            Signal.SeriesLabels = seriesLabels;
-            
+            signal.StartTime = start;
+            signal.EndTime = end;
+            signal.MeasuringTime = end - start;
+            signal.SeriesNumber = series;
+            signal.SeriesPoints = points;
+            signal.SampleFrequency = sampleFreq;
+            signal.SeriesLabels = seriesLabels;
+            //signal.SeriesLabels = new string [seriesLabels.Length];
+            //Array.Copy(seriesLabels, signal.SeriesLabels, seriesLabels.Length);
+
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -146,11 +149,12 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Readas data from a signal-formatted file and stores it into _signalData.
+    /// Readas data from a signal-formatted file and stores it into a <see cref="SignalData"/> parameter.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the sig file</param>
+    /// <param name="fileName">Path (including name) of the sig file</param>
+    /// <param name="signal"><see cref="SignalData"/> variable to store data read from the elux file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadSigData(string FileName)
+    private bool ReadSigData(string fileName, SignalData signal)
     {
         int points = 0, series = 0;
         bool result = false;
@@ -160,7 +164,7 @@ partial class FrmMain
 
         try
         {
-            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
             strLine = sr.ReadLine();    // SignalAnalysis data
@@ -213,14 +217,14 @@ partial class FrmMain
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
 
-            result = InitializeDataArrays(sr, points, series, fileCulture);
+            result = InitializeDataArrays(sr, ref signal.Data, series, points, fileCulture);
 
             // Store information regarding the signal
-            Signal.SeriesNumber = series;
-            Signal.SeriesPoints = points;
-            Signal.SampleFrequency = sampleFreq;
-            Signal.SeriesLabels = seriesLabels;
-            Signal.MeasuringTime = new(Signal.StartTime.AddSeconds(Signal.SampleFrequency * Signal.SeriesPoints).Ticks);
+            signal.SeriesNumber = series;
+            signal.SeriesPoints = points;
+            signal.SampleFrequency = sampleFreq;
+            signal.SeriesLabels = seriesLabels;
+            signal.MeasuringTime = new(signal.StartTime.AddSeconds((signal.SeriesPoints - 1)/ signal.SampleFrequency).Ticks);
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -259,12 +263,13 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Reads data from a text-formatted file and stores it into _signalData.
+    /// Reads data from a text-formatted file and stores it into a <see cref="SignalData"/> parameter.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the text file</param>
-    /// <param name="results">Numeric results read from the file</param>
+    /// <param name="fileName">Path (including name) of the text file</param>
+    /// <param name="signal"><see cref="SignalData"/> variable to store data read from the elux file</param>
+    /// <param name="results"><see cref="SignalStats"/> variable to store the numerical results (entropies, dimensions, stats) read from the elux file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadTextData(string FileName, SignalStats? results)
+    private bool ReadTextData(string fileName, SignalData signal, SignalStats? results)
     {
 
         DateTime start;
@@ -280,7 +285,7 @@ partial class FrmMain
 
         try
         {
-            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var sr = new StreamReader(fs, System.Text.Encoding.UTF8);
 
             strLine = sr.ReadLine();    // SignalAnalysis data
@@ -448,16 +453,18 @@ partial class FrmMain
                 throw new FormatException(StringResources.FileHeader20);
             series = seriesLabels.Length;
 
-            result = InitializeDataArrays(sr, points, series, fileCulture, true);
+            result = InitializeDataArrays(sr, ref signal.Data, series, points, fileCulture, true);
 
             // Store information regarding the signal
-            Signal.StartTime = start;
-            Signal.EndTime = end;
-            Signal.MeasuringTime = end - start;
-            Signal.SeriesNumber = series;
-            Signal.SeriesPoints = points;
-            Signal.SampleFrequency = sampleFreq;
-            Signal.SeriesLabels = seriesLabels[1..];
+            signal.StartTime = start;
+            signal.EndTime = end;
+            signal.MeasuringTime = end - start;
+            signal.SeriesNumber = series;
+            signal.SeriesPoints = points;
+            signal.SampleFrequency = sampleFreq;
+            seriesLabels = seriesLabels[1..];
+            signal.SeriesLabels = seriesLabels;
+
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -495,13 +502,14 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Reads data from a binary-formatted file and stores it into _signalData.
+    /// Reads data from a binary-formatted file and stores it into a <see cref="SignalData"/> parameter.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the text file</param>
-    /// <param name="results">Numeric results read from the file</param>
+    /// <param name="fileName">Path (including name) of the text file</param>
+    /// <param name="signal"><see cref="SignalData"/> variable to store data read from the elux file</param>
+    /// <param name="results"><see cref="SignalStats"/> variable to store the numerical results (entropies, dimensions, stats) read from the elux file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     /// <exception cref="FormatException"></exception>
-    private bool ReadBinData(string FileName, SignalStats? results)
+    private bool ReadBinData(string fileName, SignalData signal, SignalStats? results)
     {
         DateTime start;
         DateTime end;
@@ -514,7 +522,7 @@ partial class FrmMain
 
         try
         {
-            using var fs = File.Open(FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var br = new BinaryReader(fs, System.Text.Encoding.UTF8);
 
             string strLine = br.ReadString();   // SignalAnalysis data
@@ -551,32 +559,35 @@ partial class FrmMain
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
             
+            seriesLabels = seriesLabels[1..];
             series = seriesLabels.Length;
 
-            Signal.StartTime = start;
-            Signal.EndTime = end;
-            Signal.MeasuringTime = end - start;
-            Signal.SeriesLabels = seriesLabels[1..];
-            Signal.SeriesNumber = Signal.SeriesLabels.Length;
-            Signal.SeriesPoints = points;
-            Signal.SampleFrequency = sampleFreq;
+            signal.StartTime = start;
+            signal.EndTime = end;
+            signal.MeasuringTime = end - start;
+            signal.SeriesPoints = points;
+            signal.SampleFrequency = sampleFreq;
+            signal.SeriesLabels = seriesLabels;
+            //signal.SeriesLabels = new string[seriesLabels.Length];
+            //Array.Copy(seriesLabels, signal.SeriesLabels, seriesLabels.Length);
+            signal.SeriesNumber = signal.SeriesLabels.Length;
 
             // Read data into array
             _settings.IndexStart = 0;
             _settings.IndexEnd = points - 1;
 
             // Initialize data arrays
-            Signal.Data = new double[series][];
+            signal.Data = new double[series][];
             for (int i = 0; i < series; i++)
-                Signal.Data[i] = new double[points];
+                signal.Data[i] = new double[points];
 
             // Read data into _signalData
             for (int row = 0; row < series; row++)
             {
-                for (int col = 0; col < Signal.Data[row].Length; col++)
+                for (int col = 0; col < signal.Data[row].Length; col++)
                 {
                     br.ReadDateTime();
-                    Signal.Data[row][col] = br.ReadDouble();
+                    signal.Data[row][col] = br.ReadDouble();
                 }
             }
 
@@ -602,12 +613,13 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Reads data from a json file and stores it into _signalData.
+    /// Reads data from a json file and stores it into a <see cref="SignalData"/> parameter.
     /// </summary>
-    /// <param name="FileName">Path (including name) of the json file</param>
-    /// <param name="results">Numeric results read from the file</param>
+    /// <param name="fileName">Path (including name) of the json file</param>
+    /// <param name="signal"><see cref="SignalData"/> variable to store data read from the elux file</param>
+    /// <param name="results"><see cref="SignalStats"/> variable to store the numerical results (entropies, dimensions, stats) read from the elux file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool ReadJsonData(string FileName, SignalData? data, SignalStats? results)
+    private bool ReadJsonData(string fileName, SignalData signal, SignalStats? results)
     {
         int points = 0;
         bool result = true;
@@ -625,7 +637,8 @@ partial class FrmMain
         bool result = false;
 
         using (new CenterWinDialog(this))
-            MessageBox.Show(string.Format(StringResources.ReadNotimplementedError, Path.GetExtension(FileName).ToUpper()),
+            MessageBox.Show(this,
+                string.Format(StringResources.ReadNotimplementedError, Path.GetExtension(FileName).ToUpper()),
                 StringResources.ReadNotimplementedErrorTitle,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
@@ -634,13 +647,16 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Reads and parse the data into a numeric format.
+    /// Reads and parse the <see cref="StreamReader"/> data into an array.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>
+    /// <param name="dataPoints">Array where the read data will be stored</param>
+    /// <param name="series">Number of series of the array (first dimension)</param>
+    /// <param name="points">Number of points in each serie (second dimension)</param>
     /// <param name="culture">Culture to parse the read data into numeric values</param>
-    /// <param name="IsFirstColumDateTime"><see langword="True"/> if successfull</param>
+    /// <param name="isFirstColumDateTime"><see langword="True"/> if the first element in the <see cref="StreamReader"/> row is a <see cref="DateTime"/> value and so it will be ignored</param>
     /// <returns><see langword="True"/> if the first data-column is a DateTime value and thus it will be ingnores, <see langword="false"/> otherwise</returns>
-    private bool InitializeDataArrays(StreamReader sr, int points, int series, System.Globalization.CultureInfo culture, bool IsFirstColumDateTime = false)
+    private bool InitializeDataArrays(StreamReader sr, ref double[][] dataPoints, int series, int points, System.Globalization.CultureInfo culture, bool isFirstColumDateTime = false)
     {
         bool result = true;
         string? strLine;
@@ -650,23 +666,23 @@ partial class FrmMain
             _settings.IndexEnd = points - 1;
 
             // Initialize data arrays
-            Signal.Data = new double[series][];
+            dataPoints = new double[series][];
             for (int i = 0; i < series; i++)
-                Signal.Data[i] = new double[points];
+                dataPoints[i] = new double[points];
 
             // Read data into _signalData
-            for (int i = 0; i < Signal.Data.Length; i++)
+            for (int i = 0; i < dataPoints.Length; i++)
             {
-                Signal.Data[i] = new double[points];
+                dataPoints[i] = new double[points];
             }
             string[] data;
             int col = 0, row = 0;
             while ((strLine = sr.ReadLine()) != null)
             {
                 data = strLine.Split("\t");
-                for (col = IsFirstColumDateTime ? 1 : 0; col < data.Length; col++)
+                for (col = isFirstColumDateTime ? 1 : 0; col < data.Length; col++)
                 {
-                    if (!double.TryParse(data[col], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, culture, out Signal.Data[col - (IsFirstColumDateTime ? 1 : 0)][row]))
+                    if (!double.TryParse(data[col], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, culture, out dataPoints[col - (isFirstColumDateTime ? 1 : 0)][row]))
                         throw new FormatException(data[col].ToString());
                 }
                 row++;

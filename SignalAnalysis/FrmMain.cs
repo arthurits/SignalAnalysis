@@ -2,16 +2,12 @@ namespace SignalAnalysis;
 
 public partial class FrmMain : Form
 {
-    //private double[][] _signalData = Array.Empty<double[]>();
-    //private string[] seriesLabels = Array.Empty<string>();
-    //private int nSeries = 0;
-    //double nSampleFreq = 0.0;
-    
-    //DateTime nStart;
+    // Program data
     ClassSettings _settings = new();
     SignalStats Results = new();
     SignalData Signal = new();
     
+    // Task variables
     Task statsTask = Task.CompletedTask;
     private CancellationTokenSource tokenSource = new();
     private CancellationToken token = CancellationToken.None;

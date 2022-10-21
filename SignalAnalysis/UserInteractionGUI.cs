@@ -38,31 +38,31 @@ partial class FrmMain
 
             // Read the data file in the corresponding format
             SignalStats? results = null;
-            SignalData data = Signal;
-            Signal = new();
+            SignalData signalData = new();
             bool boolRead = Path.GetExtension(filePath).ToLower() switch
             {
-                ".elux" => ReadELuxData(filePath),
-                ".sig" => ReadSigData(filePath),
-                ".txt" => ReadTextData(filePath, results = new()),
-                ".bin" => ReadBinData(filePath, results = new()),
+                ".elux" => ReadELuxData(filePath, signalData),
+                ".sig" => ReadSigData(filePath, signalData),
+                ".txt" => ReadTextData(filePath, signalData, results = new()),
+                ".bin" => ReadBinData(filePath, signalData, results = new()),
                 _ => ReadNotImplemented(filePath)
             };
 
             if (boolRead)
             {
-                PopulateComboSeries();
-                SetFormTitle(this, openDlg.FileName);
-                UpdateUI_MeasuringTime();
-
+                // Data
+                Signal = signalData;
                 if (results is not null)
                 {
                     Results = results;
                     txtStats.Text = Results.ToString(_settings.AppCulture);
                 }
+
+                // Update UI
+                PopulateComboSeries();
+                SetFormTitle(this, openDlg.FileName);
+                UpdateUI_MeasuringTime();
             }
-            else
-                Signal = data;
 
             // Restore the cursor
             Cursor.Current = cursor;
