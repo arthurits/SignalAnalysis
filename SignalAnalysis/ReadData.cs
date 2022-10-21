@@ -14,6 +14,7 @@ partial class FrmMain
         int points = 0, series = 0;
         bool result = false;
         double sampleFreq;
+        string[] seriesLabels;
         string? strLine;
 
         try
@@ -99,12 +100,13 @@ partial class FrmMain
             result = InitializeDataArrays(sr, points, series, fileCulture);
 
             // Store information regarding the signal
-            Data.StartTime = start;
-            Data.EndTime = end;
-            Data.MeasuringTime = end - start;
-            Data.SeriesNumber = series;
-            Data.SeriesPoints = points;
-            Data.SampleFrequency = sampleFreq;
+            Signal.StartTime = start;
+            Signal.EndTime = end;
+            Signal.MeasuringTime = end - start;
+            Signal.SeriesNumber = series;
+            Signal.SeriesPoints = points;
+            Signal.SampleFrequency = sampleFreq;
+            Signal.SeriesLabels = seriesLabels;
             
         }
         catch (System.Globalization.CultureNotFoundException ex)
@@ -153,6 +155,7 @@ partial class FrmMain
         int points = 0, series = 0;
         bool result = false;
         double sampleFreq;
+        string[] seriesLabels;
         string? strLine;
 
         try
@@ -213,10 +216,11 @@ partial class FrmMain
             result = InitializeDataArrays(sr, points, series, fileCulture);
 
             // Store information regarding the signal
-            Data.SeriesNumber = series;
-            Data.SeriesPoints = points;
-            Data.SampleFrequency = sampleFreq;
-            Data.MeasuringTime = new(Data.StartTime.AddSeconds(Data.SampleFrequency * Data.SeriesPoints).Ticks);
+            Signal.SeriesNumber = series;
+            Signal.SeriesPoints = points;
+            Signal.SampleFrequency = sampleFreq;
+            Signal.SeriesLabels = seriesLabels;
+            Signal.MeasuringTime = new(Signal.StartTime.AddSeconds(Signal.SampleFrequency * Signal.SeriesPoints).Ticks);
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -269,6 +273,7 @@ partial class FrmMain
         bool result = false;
         double sampleFreq;
         double readValue;
+        string[] seriesLabels;
         string? strLine;
 
         if (results is null) results = new();
@@ -446,13 +451,13 @@ partial class FrmMain
             result = InitializeDataArrays(sr, points, series, fileCulture, true);
 
             // Store information regarding the signal
-            Data.StartTime = start;
-            Data.EndTime = end;
-            Data.MeasuringTime = end - start;
-            Data.SeriesNumber = series;
-            Data.SeriesPoints = points;
-            Data.SampleFrequency = sampleFreq;
-            Data.SeriesLabels = seriesLabels[1..];
+            Signal.StartTime = start;
+            Signal.EndTime = end;
+            Signal.MeasuringTime = end - start;
+            Signal.SeriesNumber = series;
+            Signal.SeriesPoints = points;
+            Signal.SampleFrequency = sampleFreq;
+            Signal.SeriesLabels = seriesLabels[1..];
         }
         catch (System.Globalization.CultureNotFoundException ex)
         {
@@ -503,6 +508,7 @@ partial class FrmMain
         int points = 0, series = 0, dummy = 0;
         bool result = true;
         double sampleFreq;
+        string[] seriesLabels;
 
         if (results is null) results = new();
 
@@ -544,32 +550,33 @@ partial class FrmMain
             seriesLabels = strLine.Split('\t');
             if (seriesLabels == Array.Empty<string>())
                 throw new FormatException(StringResources.FileHeader20);
-            Data.SeriesLabels = seriesLabels[1..];
+            
             series = seriesLabels.Length;
 
-            Data.StartTime = start;
-            Data.EndTime = end;
-            Data.MeasuringTime = end - start;
-            Data.SeriesNumber = Data.SeriesLabels.Length;
-            Data.SeriesPoints = points;
-            Data.SampleFrequency = sampleFreq;
+            Signal.StartTime = start;
+            Signal.EndTime = end;
+            Signal.MeasuringTime = end - start;
+            Signal.SeriesLabels = seriesLabels[1..];
+            Signal.SeriesNumber = Signal.SeriesLabels.Length;
+            Signal.SeriesPoints = points;
+            Signal.SampleFrequency = sampleFreq;
 
             // Read data into array
             _settings.IndexStart = 0;
             _settings.IndexEnd = points - 1;
 
             // Initialize data arrays
-            Data.Data = new double[series][];
+            Signal.Data = new double[series][];
             for (int i = 0; i < series; i++)
-                Data.Data[i] = new double[points];
+                Signal.Data[i] = new double[points];
 
             // Read data into _signalData
             for (int row = 0; row < series; row++)
             {
-                for (int col = 0; col < Data.Data[row].Length; col++)
+                for (int col = 0; col < Signal.Data[row].Length; col++)
                 {
                     br.ReadDateTime();
-                    Data.Data[row][col] = br.ReadDouble();
+                    Signal.Data[row][col] = br.ReadDouble();
                 }
             }
 
@@ -643,14 +650,14 @@ partial class FrmMain
             _settings.IndexEnd = points - 1;
 
             // Initialize data arrays
-            Data.Data = new double[series][];
+            Signal.Data = new double[series][];
             for (int i = 0; i < series; i++)
-                Data.Data[i] = new double[points];
+                Signal.Data[i] = new double[points];
 
             // Read data into _signalData
-            for (int i = 0; i < Data.Data.Length; i++)
+            for (int i = 0; i < Signal.Data.Length; i++)
             {
-                Data.Data[i] = new double[points];
+                Signal.Data[i] = new double[points];
             }
             string[] data;
             int col = 0, row = 0;
@@ -659,7 +666,7 @@ partial class FrmMain
                 data = strLine.Split("\t");
                 for (col = IsFirstColumDateTime ? 1 : 0; col < data.Length; col++)
                 {
-                    if (!double.TryParse(data[col], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, culture, out Data.Data[col - (IsFirstColumDateTime ? 1 : 0)][row]))
+                    if (!double.TryParse(data[col], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, culture, out Signal.Data[col - (IsFirstColumDateTime ? 1 : 0)][row]))
                         throw new FormatException(data[col].ToString());
                 }
                 row++;

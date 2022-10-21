@@ -38,8 +38,8 @@ partial class FrmMain
 
             // Read the data file in the corresponding format
             SignalStats? results = null;
-            SignalData data = Data;
-            Data = new();
+            SignalData data = Signal;
+            Signal = new();
             bool boolRead = Path.GetExtension(filePath).ToLower() switch
             {
                 ".elux" => ReadELuxData(filePath),
@@ -62,7 +62,7 @@ partial class FrmMain
                 }
             }
             else
-                Data = data;
+                Signal = data;
 
             // Restore the cursor
             Cursor.Current = cursor;
@@ -77,8 +77,8 @@ partial class FrmMain
 
         // Extract the values to be exported
         double[] signal = Array.Empty<double>();
-        if (Data.Data.Length > 0)
-            signal = Data.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        if (Signal.Data.Length > 0)
+            signal = Signal.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
 
         // Exit if there is no data to be saved
         if (signal.Length == 0)

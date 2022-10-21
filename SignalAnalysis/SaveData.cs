@@ -25,11 +25,11 @@ partial class FrmMain
 
             // Save the header text into the file
             string content = string.Empty;
-            TimeSpan nTime = Data.StartTime.AddSeconds((signal.Length - 1) / Data.SampleFrequency) - Data.StartTime; // At least there should be 1 point
+            TimeSpan nTime = Signal.StartTime.AddSeconds((signal.Length - 1) / Signal.SampleFrequency) - Signal.StartTime; // At least there should be 1 point
 
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine($"{StringResources.FileHeader02}: {Data.StartTime.AddSeconds(ArrIndexInit / Data.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader03}: {Data.StartTime.AddSeconds((signal.Length - 1 + ArrIndexInit) / Data.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader02}: {Signal.StartTime.AddSeconds(ArrIndexInit / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader03}: {Signal.StartTime.AddSeconds((signal.Length - 1 + ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader04}: " +
                 $"{nTime.Days} {StringResources.FileHeader22}, " +
                 $"{nTime.Hours} {StringResources.FileHeader23}, " +
@@ -39,7 +39,7 @@ partial class FrmMain
                 $"{nTime.Milliseconds} {StringResources.FileHeader27}");
             sw.WriteLine($"{StringResources.FileHeader17}: 1");
             sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader06}: {Data.SampleFrequency.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader07}: {Results.Average.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader08}: {Results.Maximum.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader09}: {Results.Minimum.ToString(_settings.AppCulture)}");
@@ -57,7 +57,7 @@ partial class FrmMain
             // Save the numerical values
             for (int j = 0; j < signal.Length; j++)
             {
-                time = Data.StartTime.AddSeconds((j+ ArrIndexInit) / Data.SampleFrequency).ToString(fullPattern, _settings.AppCulture);
+                time = Signal.StartTime.AddSeconds((j+ ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture);
                 content = $"{time}\t{signal[j].ToString(_settings.DataFormat, _settings.AppCulture)}";
                 
                 //trying to write data to csv
@@ -110,7 +110,7 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
             sw.WriteLine($"{StringResources.FileHeader17}: 1");
             sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader06}: {Data.SampleFrequency.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
             sw.WriteLine();
             sw.WriteLine($"{SeriesName}");
 
@@ -154,12 +154,12 @@ partial class FrmMain
             using var bw = new BinaryWriter(fs, System.Text.Encoding.UTF8, false);
             
             string content = string.Empty;
-            TimeSpan nTime = Data.StartTime.AddSeconds((signal.Length - 1) / Data.SampleFrequency) - Data.StartTime; // At least there should be 1 point
+            TimeSpan nTime = Signal.StartTime.AddSeconds((signal.Length - 1) / Signal.SampleFrequency) - Signal.StartTime; // At least there should be 1 point
 
             // Save the header text into the file
             bw.Write($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            bw.Write(Data.StartTime.AddSeconds(ArrIndexInit / Data.SampleFrequency));
-            bw.Write(Data.StartTime.AddSeconds((signal.Length - 1 + ArrIndexInit) / Data.SampleFrequency));
+            bw.Write(Signal.StartTime.AddSeconds(ArrIndexInit / Signal.SampleFrequency));
+            bw.Write(Signal.StartTime.AddSeconds((signal.Length - 1 + ArrIndexInit) / Signal.SampleFrequency));
             bw.Write(nTime.Days);
             bw.Write(nTime.Hours);
             bw.Write(nTime.Minutes);
@@ -167,7 +167,7 @@ partial class FrmMain
             bw.Write(nTime.Milliseconds);
             bw.Write(1);
             bw.Write(signal.Length);
-            bw.Write(Data.SampleFrequency);
+            bw.Write(Signal.SampleFrequency);
             bw.Write(Results.Average);
             bw.Write(Results.Maximum);
             bw.Write(Results.Minimum);
@@ -184,7 +184,7 @@ partial class FrmMain
             // Save the numerical values
             for (int j = 0; j < signal.Length; j++)
             {
-                bw.Write(Data.StartTime.AddSeconds((j + ArrIndexInit) / Data.SampleFrequency));
+                bw.Write(Signal.StartTime.AddSeconds((j + ArrIndexInit) / Signal.SampleFrequency));
                 bw.Write(signal[j]);   
             }
 

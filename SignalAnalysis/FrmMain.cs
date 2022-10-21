@@ -3,14 +3,14 @@ namespace SignalAnalysis;
 public partial class FrmMain : Form
 {
     //private double[][] _signalData = Array.Empty<double[]>();
-    private string[] seriesLabels = Array.Empty<string>();
+    //private string[] seriesLabels = Array.Empty<string>();
     //private int nSeries = 0;
     //double nSampleFreq = 0.0;
     
     //DateTime nStart;
     ClassSettings _settings = new();
     SignalStats Results = new();
-    SignalData Data = new();
+    SignalData Signal = new();
     
     Task statsTask = Task.CompletedTask;
     private CancellationTokenSource tokenSource = new();
@@ -88,8 +88,8 @@ public partial class FrmMain : Form
         }
         else
         {
-            stripComboSeries.Items.AddRange(seriesLabels);
-            stripComboSeries.Text = seriesLabels[0];
+            stripComboSeries.Items.AddRange(Signal.SeriesLabels);
+            stripComboSeries.Text = Signal.SeriesLabels[0];
         }
 
     }
@@ -108,7 +108,7 @@ public partial class FrmMain : Form
         // Move the focus away in order to deselect the text
         this.tableLayoutPanel1.Focus();
 
-        if (Data.Data.Length == 0) return;
+        if (Signal.Data.Length == 0) return;
 
         //statusStripLabelExEntropy.Checked = false;
         //_settings.Entropy = false;
@@ -125,7 +125,7 @@ public partial class FrmMain : Form
         if (stripComboSeries.SelectedIndex < 0) return;
 
         // Extract the values 
-        var signal = Data.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        var signal = Signal.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
         UpdateWindowPlots(signal);
@@ -161,7 +161,7 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_MeasuringTime()
     {
-        TimeSpan nTime = Data.MeasuringTime;
+        TimeSpan nTime = Signal.MeasuringTime;
 
         if (nTime == TimeSpan.Zero)
         {
