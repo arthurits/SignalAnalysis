@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis;
+﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+
+namespace SignalAnalysis;
 partial class FrmMain
 {
     private void UpdateOriginal(double[] signal, string strLabel = "")
@@ -94,10 +96,11 @@ partial class FrmMain
         {
             Random rand = new(0);
             double std = Math.Sqrt(variance);
-            double[] values = ScottPlot.DataGen.RandomNormal(rand, pointCount: 1000, mean: mean, stdDev: std);
+            //double[] values = ScottPlot.DataGen.RandomNormal(rand, pointCount: 1000, mean: mean, stdDev: std);
 
             // create a Population object from the data
-            var pop = new ScottPlot.Statistics.Population(values);
+            //var pop = new ScottPlot.Statistics.Population(values);
+            var pop = new ScottPlot.Statistics.Population(rand, pointCount: 1000, mean: mean, stdDev: std);
 
             //(double[] counts, double[] binEdges) = ScottPlot.Statistics.Common.Histogram(values, min: mean - 3 * std, max: mean + 3 * std, binSize: pop.span/100);
             //double[] curveXs = binEdges;
@@ -144,7 +147,7 @@ partial class FrmMain
     private async Task UpdateStatsPlots(int series)
     {
         // Extract the values 
-        var signal = Signal.Data[series][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        double[] signal = Signal.Data[series][_settings.IndexStart..(_settings.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
         string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
@@ -290,14 +293,17 @@ partial class FrmMain
                 }
                 catch (Exception ex)
                 {
-                    using (new CenterWinDialog(this))
+                    Invoke(() =>
                     {
-                        MessageBox.Show(this,
-                            String.Format(_settings.AppCulture, StringResources.MsgBoxErrorFFT, ex.Message),
-                            StringResources.MsgBoxErrorFFTTitle,
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
+                        using (new CenterWinDialog(this))
+                        {
+                            MessageBox.Show(this,
+                                String.Format(_settings.AppCulture, StringResources.MsgBoxErrorFFT, ex.Message),
+                                StringResources.MsgBoxErrorFFTTitle,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+                    });
                 }
             });
         await statsTask;
@@ -317,6 +323,78 @@ partial class FrmMain
         // Restore the cursor
         this.UseWaitCursor = false;
         Cursor.Current = cursor;
+    }
+
+
+
+
+    private double[] NormalDistributionX(int pointCount = 100, double mean = .5, double stdDev = .5, double maxSdMultiple = 3)
+    {
+        double[] values = new double[pointCount];
+        for (int i = 0; i < pointCount; i++)
+            values[i] = (-maxSdMultiple + 2 * maxSdMultiple * (double)i / pointCount) * stdDev + mean;
+        return values;
+    }
+
+    private double[] NormalDistributionY(int pointCount = 100, double maxSdMultiple = 3)
+    {
+        double[] values = new double[pointCount];
+        for (int i = 0; i < pointCount; i++)
+            values[i] = Phi(-maxSdMultiple + 2 * maxSdMultiple * (double)i / pointCount);
+        return values;
+    }
+
+    private double[] RandomNormal(Random rand, int pointCount, double mean = .5, double stdDev = .5)
+    {
+        if (rand == null)
+            rand = new Random(0);
+        double[] values = new double[pointCount];
+        for (int i = 0; i < values.Length; i++)
+            values[i] = RandomNormalValue(rand, mean, stdDev);
+
+        return values;
+    }
+
+    /// <summary>
+    /// Generates a single value from a normal distribution.
+    /// </summary>
+    /// <param name="rand">The Random object to use.</param>
+    /// <param name="mean">The mean of the distribution.</param>
+    /// <param name="stdDev">The standard deviation of the distribution.</param>
+    /// <param name="maxSdMultiple">The maximum distance from the mean to generate, given as a multiple of the standard deviation.</param>
+    /// <returns>A single value from a normal distribution.</returns>
+    public double RandomNormalValue(Random rand, double mean, double stdDev)
+    {
+        return Phi(mean + stdDev);
+    }
+
+    /// <summary>
+    /// The function Φ(x) is the cumulative density function (CDF) of a standard normal (Gaussian) random variable. It is closely related to the error function erf(x).
+    /// </summary>
+    /// <param name="x">Normalized standard variable</param>
+    /// <returns>The probability in the range [0, 1]</returns>
+    /// <seealso cref="https://www.johndcook.com/blog/csharp_phi/"/>
+    private double Phi(double x)
+    {
+        // constants
+        double a1 = 0.254829592;
+        double a2 = -0.284496736;
+        double a3 = 1.421413741;
+        double a4 = -1.453152027;
+        double a5 = 1.061405429;
+        double p = 0.3275911;
+
+        // Save the sign of x
+        int sign = 1;
+        if (x < 0)
+            sign = -1;
+        x = Math.Abs(x) / Math.Sqrt(2.0);
+
+        // A&S formula 7.1.26
+        double t = 1.0 / (1.0 + p * x);
+        double y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.Exp(-x * x);
+
+        return 0.5 * (1.0 + sign * y);
     }
 }
 

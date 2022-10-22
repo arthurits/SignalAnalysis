@@ -5,7 +5,7 @@ namespace SignalAnalysis;
 public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
-    public ClassSettings? Settings;
+    private ClassSettings? Settings;
 
     public FrmSettings()
     {
@@ -23,16 +23,29 @@ public partial class FrmSettings : Form
 
     private void Accept_Click(object sender, EventArgs e)
     {
-        DialogResult = DialogResult.Cancel;
+        DialogResult = DialogResult.None;
+
+        if (Settings is null) return;
 
         if (!int.TryParse(txtStart.Text, out int num)) return;
-        if (num < 0) return;
-        if (Settings is null) return;
-        
+        if (num < 0)
+        {
+            txtStart.SelectionStart = 0;
+            txtStart.SelectionLength = txtStart.Text.Length;
+            txtStart.Focus();
+            return;
+        }
         Settings.IndexStart = num;
 
         if (!int.TryParse(txtEnd.Text, out num)) return;
-        if (num > 0 && num <= Settings.IndexStart) return;
+        //if (num > 0 && num <= Settings.IndexStart) return;
+        if (num < Settings.IndexStart || num > Settings.IndexEnd)
+        {
+            txtEnd.SelectionStart = 0;
+            txtEnd.SelectionLength = txtEnd.Text.Length;
+            txtEnd.Focus();
+            return;
+        }
         Settings.IndexEnd = num;
 
         Settings.PowerSpectra = chkPower.Checked;

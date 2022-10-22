@@ -155,8 +155,11 @@ partial class FrmMain
         frm.ShowDialog(this);
         if (frm.DialogResult == DialogResult.OK)
         {
-            //_settings = frm.Settings;
-            ComboSeries_SelectedIndexChanged(this, EventArgs.Empty);
+            Signal.IndexStart = _settings.IndexStart;
+            Signal.IndexEnd = _settings.IndexEnd;
+
+            // Update UI
+            //ComboSeries_SelectedIndexChanged(this, EventArgs.Empty);
 
             statusStripLabelExPower.Checked = _settings.PowerSpectra;
             statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
@@ -164,6 +167,8 @@ partial class FrmMain
             statusStripLabelExCrossHair.Checked = _settings.CrossHair;
 
             UpdateUI_Language();
+
+            UpdateStatsPlots(stripComboSeries.SelectedIndex);
         }
 
     }

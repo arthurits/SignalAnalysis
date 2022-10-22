@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis;
+﻿using System.Text.Json.Serialization;
+
+namespace SignalAnalysis;
 
 
 public class SignalStats
@@ -65,4 +67,14 @@ public class SignalData
     public double[][] Data = Array.Empty<double[]>();
 
     public string[] SeriesLabels = Array.Empty<string>();
+
+    /// <summary>
+    /// Array starting index
+    /// </summary>
+    public int IndexStart { get; set; } = 0;
+    
+    /// <summary>
+    /// Array ending index
+    /// </summary>
+    public int IndexEnd { get; set; } = 0;
 }
