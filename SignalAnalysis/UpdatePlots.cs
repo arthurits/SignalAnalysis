@@ -96,11 +96,13 @@ partial class FrmMain
         {
             Random rand = new(0);
             double std = Math.Sqrt(variance);
-            //double[] values = ScottPlot.DataGen.RandomNormal(rand, pointCount: 1000, mean: mean, stdDev: std);
+            double[] values = ScottPlot.DataGen.RandomNormal(rand, pointCount: 1000, mean: mean, stdDev: std);
+            for (int i = 0; i < values.Length; i++)
+                values[i] = SampleGaussian(rand, mean, std);
 
             // create a Population object from the data
-            //var pop = new ScottPlot.Statistics.Population(values);
-            var pop = new ScottPlot.Statistics.Population(rand, pointCount: 1000, mean: mean, stdDev: std);
+            var pop = new ScottPlot.Statistics.Population(values);
+            //var pop = new ScottPlot.Statistics.Population(rand, pointCount: 1000, mean: mean, stdDev: std);
 
             //(double[] counts, double[] binEdges) = ScottPlot.Statistics.Common.Histogram(values, min: mean - 3 * std, max: mean + 3 * std, binSize: pop.span/100);
             //double[] curveXs = binEdges;
@@ -395,6 +397,20 @@ partial class FrmMain
         double y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.Exp(-x * x);
 
         return 0.5 * (1.0 + sign * y);
+    }
+
+    public double SampleGaussian(Random random, double mean, double stddev)
+    {
+        // The method requires sampling from a uniform random of (0,1]
+        // but Random.NextDouble() returns a sample of [0,1).
+        //double x1 = 1 - random.NextDouble(); 
+        //double x2 = 1 - random.NextDouble();
+
+        double x1 = 1 - ((1 + (double)random.Next()) / Int32.MaxValue); // Returns a 32-bit signed integer that is greater than or equal to 0 and less than Int32.MaxValue.
+        double x2 = 1 - ((1 + (double)random.Next()) / Int32.MaxValue);
+
+        double y1 = Math.Sqrt(-2.0 * Math.Log(x1)) * Math.Cos(2.0 * Math.PI * x2);
+        return y1 * stddev + mean;
     }
 }
 
