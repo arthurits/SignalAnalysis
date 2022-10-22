@@ -399,18 +399,23 @@ partial class FrmMain
         return 0.5 * (1.0 + sign * y);
     }
 
-    public double SampleGaussian(Random random, double mean, double stddev)
+    public double SampleGaussian(Random random, double mean, double stdDev)
     {
         // The method requires sampling from a uniform random of (0,1]
         // but Random.NextDouble() returns a sample of [0,1).
         //double x1 = 1 - random.NextDouble(); 
         //double x2 = 1 - random.NextDouble();
 
-        double x1 = 1 - ((1 + (double)random.Next()) / Int32.MaxValue); // Returns a 32-bit signed integer that is greater than or equal to 0 and less than Int32.MaxValue.
-        double x2 = 1 - ((1 + (double)random.Next()) / Int32.MaxValue);
+        double u1 = NextDouble(random);
+        double u2 = NextDouble(random);
 
-        double y1 = Math.Sqrt(-2.0 * Math.Log(x1)) * Math.Cos(2.0 * Math.PI * x2);
-        return y1 * stddev + mean;
+        double y1 = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+        return mean + stdDev * y1;
+
+        double NextDouble(Random random)
+        {
+            return ((double)random.Next(1, Int32.MaxValue)) / Int32.MaxValue;    // Returns a 32-bit signed integer that is greater than or equal to 0 and less than Int32.MaxValue.
+        }
     }
 }
 
