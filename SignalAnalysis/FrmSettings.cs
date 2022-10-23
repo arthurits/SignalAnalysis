@@ -205,7 +205,7 @@ public partial class FrmSettings : Form
         this.tabGUI.Text = StringResources.TabGUI;
 
         this.lblStart.Text = StringResources.LblStart;
-        this.lblEnd.Text = StringResources.LblEnd;
+        this.lblEnd.Text = String.Format(StringResources.LblEnd, Settings?.IndexMax);
         this.grpAxis.Text = StringResources.GrpAxis;
         this.radPoints.Text = StringResources.RadPoints;
         this.radSeconds.Text = StringResources.RadSeconds;

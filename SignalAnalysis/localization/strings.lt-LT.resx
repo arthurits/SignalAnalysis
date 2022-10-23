@@ -279,7 +279,7 @@ Vietoj jų bus naudojamos numatytos reikšmės.</value>
     <value>Skaitmeninė duomenų formatavimo eilutė</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Masyvo indekso pabaiga</value>
+    <value>Masyvo indekso pabaiga (maks {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Pasirinkti seriją</value>

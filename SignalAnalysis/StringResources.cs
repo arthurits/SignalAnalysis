@@ -143,7 +143,7 @@ public static class StringResources
     public static string TabGUI => StringRM.GetString("strTabGUI", Culture) ?? "User interface";
 
     public static string LblStart => StringRM.GetString("strLblStart", Culture) ?? "Array index start";
-    public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end";
+    public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end (max {0})";
     public static string GrpAxis => StringRM.GetString("strGrpAxis", Culture) ?? "Abscissa axis";
     public static string RadPoints => StringRM.GetString("strRadPoints", Culture) ?? "Data points";
     public static string RadSeconds => StringRM.GetString("strRadSeconds", Culture) ?? "Seconds";

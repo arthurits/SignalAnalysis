@@ -145,7 +145,7 @@
     <value>Vorherigen Pfaad wiederherstellen</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropie (ungefähre &amp;&amp; Muster)</value>
+    <value>Entropie (ungefähre und Muster)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Stärke (dB)</value>
@@ -278,7 +278,7 @@ Standardwerte werden verwendet.</value>
     <value>Numerische Datenformatierungszeichenfolge</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Array Index Ende</value>
+    <value>Array Index Ende  (max {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Serienauswahl</value>

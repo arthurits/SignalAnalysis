@@ -145,7 +145,7 @@
     <value>Remember open/save dialog previous path</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropy (approximate &amp;&amp; sample)</value>
+    <value>Entropy (approximate and sample)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Power (dB)</value>
@@ -279,7 +279,7 @@ Default values will be used instead.</value>
     <value>Numeric data-formatting string</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Array index end</value>
+    <value>Array index end (max {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Select series</value>

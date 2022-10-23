@@ -278,7 +278,7 @@ Verranno utilizzati i valori di default.</value>
     <value>Stringa del formato dati numerico</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Indice finale</value>
+    <value>Indice finale (max {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Seleziona serie</value>

@@ -145,7 +145,7 @@
     <value>Husk den senest anvendte sti i åbn/gem-dialogboksen</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropi (omtrentlig &amp;&amp; prøve)</value>
+    <value>Entropi (omtrentlig og prøve)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Kraft (dB)</value>
@@ -278,7 +278,7 @@ Standardværdier vil blive benyttet i stedet.</value>
     <value>Numerisk dataformateringsstreng</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Array-indeksslutt</value>
+    <value>Array-indeksslutt (max {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Vælg serie</value>

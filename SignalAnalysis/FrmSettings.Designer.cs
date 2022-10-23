@@ -113,7 +113,7 @@
             // chkCrossHair
             // 
             this.chkCrossHair.AutoSize = true;
-            this.chkCrossHair.Location = new System.Drawing.Point(17, 173);
+            this.chkCrossHair.Location = new System.Drawing.Point(17, 179);
             this.chkCrossHair.Name = "chkCrossHair";
             this.chkCrossHair.Size = new System.Drawing.Size(156, 23);
             this.chkCrossHair.TabIndex = 19;
@@ -123,7 +123,7 @@
             // chkEntropy
             // 
             this.chkEntropy.AutoSize = true;
-            this.chkEntropy.Location = new System.Drawing.Point(17, 144);
+            this.chkEntropy.Location = new System.Drawing.Point(17, 151);
             this.chkEntropy.Name = "chkEntropy";
             this.chkEntropy.Size = new System.Drawing.Size(226, 23);
             this.chkEntropy.TabIndex = 18;
@@ -133,7 +133,7 @@
             // chkCumulative
             // 
             this.chkCumulative.AutoSize = true;
-            this.chkCumulative.Location = new System.Drawing.Point(17, 115);
+            this.chkCumulative.Location = new System.Drawing.Point(17, 123);
             this.chkCumulative.Name = "chkCumulative";
             this.chkCumulative.Size = new System.Drawing.Size(205, 23);
             this.chkCumulative.TabIndex = 17;
@@ -143,7 +143,7 @@
             // chkPower
             // 
             this.chkPower.AutoSize = true;
-            this.chkPower.Location = new System.Drawing.Point(17, 86);
+            this.chkPower.Location = new System.Drawing.Point(17, 95);
             this.chkPower.Name = "chkPower";
             this.chkPower.Size = new System.Drawing.Size(93, 23);
             this.chkPower.TabIndex = 16;
@@ -155,7 +155,7 @@
             this.grpAxis.Controls.Add(this.radTime);
             this.grpAxis.Controls.Add(this.radSeconds);
             this.grpAxis.Controls.Add(this.radPoints);
-            this.grpAxis.Location = new System.Drawing.Point(255, 12);
+            this.grpAxis.Location = new System.Drawing.Point(257, 12);
             this.grpAxis.Name = "grpAxis";
             this.grpAxis.Size = new System.Drawing.Size(168, 146);
             this.grpAxis.TabIndex = 15;
@@ -197,22 +197,23 @@
             // 
             // txtEnd
             // 
-            this.txtEnd.Location = new System.Drawing.Point(132, 50);
+            this.txtEnd.Location = new System.Drawing.Point(164, 52);
             this.txtEnd.Name = "txtEnd";
-            this.txtEnd.Size = new System.Drawing.Size(84, 25);
+            this.txtEnd.Size = new System.Drawing.Size(71, 25);
             this.txtEnd.TabIndex = 14;
             // 
             // txtStart
             // 
-            this.txtStart.Location = new System.Drawing.Point(132, 16);
+            this.txtStart.Location = new System.Drawing.Point(164, 14);
             this.txtStart.Name = "txtStart";
-            this.txtStart.Size = new System.Drawing.Size(84, 25);
+            this.txtStart.Size = new System.Drawing.Size(71, 25);
             this.txtStart.TabIndex = 13;
             // 
             // lblEnd
             // 
             this.lblEnd.AutoSize = true;
-            this.lblEnd.Location = new System.Drawing.Point(17, 53);
+            this.lblEnd.Location = new System.Drawing.Point(13, 55);
+            this.lblEnd.MaximumSize = new System.Drawing.Size(150, 0);
             this.lblEnd.Name = "lblEnd";
             this.lblEnd.Size = new System.Drawing.Size(108, 19);
             this.lblEnd.TabIndex = 12;
@@ -221,7 +222,8 @@
             // lblStart
             // 
             this.lblStart.AutoSize = true;
-            this.lblStart.Location = new System.Drawing.Point(17, 19);
+            this.lblStart.Location = new System.Drawing.Point(13, 17);
+            this.lblStart.MaximumSize = new System.Drawing.Size(150, 0);
             this.lblStart.Name = "lblStart";
             this.lblStart.Size = new System.Drawing.Size(113, 19);
             this.lblStart.TabIndex = 11;
@@ -243,7 +245,7 @@
             // 
             // txtDataFormat
             // 
-            this.txtDataFormat.Location = new System.Drawing.Point(260, 181);
+            this.txtDataFormat.Location = new System.Drawing.Point(260, 173);
             this.txtDataFormat.Name = "txtDataFormat";
             this.txtDataFormat.Size = new System.Drawing.Size(74, 25);
             this.txtDataFormat.TabIndex = 3;
@@ -251,7 +253,8 @@
             // lblDataFormat
             // 
             this.lblDataFormat.AutoSize = true;
-            this.lblDataFormat.Location = new System.Drawing.Point(19, 184);
+            this.lblDataFormat.Location = new System.Drawing.Point(19, 176);
+            this.lblDataFormat.MaximumSize = new System.Drawing.Size(240, 0);
             this.lblDataFormat.Name = "lblDataFormat";
             this.lblDataFormat.Size = new System.Drawing.Size(201, 19);
             this.lblDataFormat.TabIndex = 2;
@@ -265,7 +268,7 @@
             this.grpCulture.Controls.Add(this.radCurrentCulture);
             this.grpCulture.Location = new System.Drawing.Point(19, 8);
             this.grpCulture.Name = "grpCulture";
-            this.grpCulture.Size = new System.Drawing.Size(304, 139);
+            this.grpCulture.Size = new System.Drawing.Size(304, 135);
             this.grpCulture.TabIndex = 1;
             this.grpCulture.TabStop = false;
             this.grpCulture.Text = "UI and data format";
@@ -275,7 +278,7 @@
             this.cboAllCultures.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cboAllCultures.Enabled = false;
             this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(40, 105);
+            this.cboAllCultures.Location = new System.Drawing.Point(40, 101);
             this.cboAllCultures.Name = "cboAllCultures";
             this.cboAllCultures.Size = new System.Drawing.Size(190, 25);
             this.cboAllCultures.TabIndex = 3;
@@ -284,7 +287,7 @@
             // radUserCulture
             // 
             this.radUserCulture.AutoSize = true;
-            this.radUserCulture.Location = new System.Drawing.Point(18, 80);
+            this.radUserCulture.Location = new System.Drawing.Point(18, 75);
             this.radUserCulture.Name = "radUserCulture";
             this.radUserCulture.Size = new System.Drawing.Size(108, 23);
             this.radUserCulture.TabIndex = 2;
@@ -296,7 +299,7 @@
             // radInvariantCulture
             // 
             this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(18, 53);
+            this.radInvariantCulture.Location = new System.Drawing.Point(18, 48);
             this.radInvariantCulture.Name = "radInvariantCulture";
             this.radInvariantCulture.Size = new System.Drawing.Size(196, 23);
             this.radInvariantCulture.TabIndex = 1;
@@ -308,7 +311,7 @@
             // radCurrentCulture
             // 
             this.radCurrentCulture.AutoSize = true;
-            this.radCurrentCulture.Location = new System.Drawing.Point(18, 26);
+            this.radCurrentCulture.Location = new System.Drawing.Point(18, 22);
             this.radCurrentCulture.Name = "radCurrentCulture";
             this.radCurrentCulture.Size = new System.Drawing.Size(189, 23);
             this.radCurrentCulture.TabIndex = 0;
@@ -320,7 +323,7 @@
             // chkDlgPath
             // 
             this.chkDlgPath.AutoSize = true;
-            this.chkDlgPath.Location = new System.Drawing.Point(23, 153);
+            this.chkDlgPath.Location = new System.Drawing.Point(23, 148);
             this.chkDlgPath.Name = "chkDlgPath";
             this.chkDlgPath.Size = new System.Drawing.Size(290, 23);
             this.chkDlgPath.TabIndex = 0;

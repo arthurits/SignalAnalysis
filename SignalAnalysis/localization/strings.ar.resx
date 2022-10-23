@@ -145,7 +145,7 @@
     <value>مسار الحوار السابق فتح/حفظ</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>قصور (تقريبا &amp;&amp; نسبة)</value>
+    <value>قصور (تقريبا و نسبة)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>القوة (dB)</value>
@@ -279,7 +279,7 @@
     <value>صيغة الملف ارقام او حروف</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>نهاية المصفوفة</value>
+    <value>نهاية المصفوفة (أقصى {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>إختار السلالة</value>

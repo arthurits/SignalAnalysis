@@ -145,7 +145,7 @@
     <value>Recordar la ruta previa al abrir/guardar</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropía (aproximada, muestra)</value>
+    <value>Entropía (aproximada y de muestra)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Espectro (dB)</value>
@@ -279,7 +279,7 @@ Se utilizarán los valores por defecto.</value>
     <value>Cadena de formato numérico</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Índice final</value>
+    <value>Índice final (máx {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Seleccionar serie</value>

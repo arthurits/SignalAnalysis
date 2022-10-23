@@ -145,7 +145,7 @@
     <value>আগের পথ খোলা/সংরক্ষণ ডায়ালগ মনে রাখবেন</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>এনট্রপি (আনুমানিক &amp;&amp; নমুনা)</value>
+    <value>এনট্রপি (আনুমানিক এবং নমুনা)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>শক্তি (dB)</value>
@@ -279,7 +279,7 @@
     <value>সংখ্যাসূচক ডেটা-ফরম্যাটিং স্ট্রিং</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>অ্যারে সূচক শেষ</value>
+    <value>অ্যারে সূচক শেষ (সর্বোচ্চ {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>সিরিজ নির্বাচন করুন</value>

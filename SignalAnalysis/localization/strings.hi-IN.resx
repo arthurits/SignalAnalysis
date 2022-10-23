@@ -145,7 +145,7 @@
     <value>पिछले पथ को खोलें/सहेजें संवाद याद रखें</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>एन्ट्रॉपी (अनुमानित &amp;&amp; नमूना)</value>
+    <value>एन्ट्रॉपी (अनुमानित और नमूना)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>पावर (डीबी)</value>
@@ -278,7 +278,7 @@
     <value>संख्यात्मक डेटा-स्वरूपण स्ट्रिंग</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>ऐरे इंडेक्स एंड</value>
+    <value>ऐरे इंडेक्स एंड (मैक्स {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>श्रृंखला का चयन करें</value>

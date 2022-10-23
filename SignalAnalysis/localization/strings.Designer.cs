@@ -142,7 +142,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entropy (approximate &amp;&amp; sample).
+        ///   Looks up a localized string similar to Entropy (approximate and sample).
         /// </summary>
         internal static string strChkEntropy {
             get {
@@ -534,7 +534,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Array index end.
+        ///   Looks up a localized string similar to Array index end (max {0}).
         /// </summary>
         internal static string strLblEnd {
             get {
