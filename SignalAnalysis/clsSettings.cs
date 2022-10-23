@@ -35,6 +35,11 @@ public class ClassSettings
     [JsonPropertyName("Array index end")]
     public int IndexEnd { get; set; } = 0;
     /// <summary>
+    /// Array maximum index
+    /// </summary>
+    [JsonPropertyName("Array index max")]
+    public int IndexMax { get; set; } = 0;
+    /// <summary>
     /// True if the power spectra is to be computed
     /// </summary>
     [JsonPropertyName("Compute power spectra")]

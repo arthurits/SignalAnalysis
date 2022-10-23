@@ -108,6 +108,8 @@ partial class FrmMain
             signal.SeriesPoints = points;
             signal.SampleFrequency = sampleFreq;
             signal.SeriesLabels = seriesLabels;
+            signal.IndexStart = 0;
+            signal.IndexEnd = signal.SeriesPoints - 1;
             //signal.SeriesLabels = new string [seriesLabels.Length];
             //Array.Copy(seriesLabels, signal.SeriesLabels, seriesLabels.Length);
 
@@ -224,6 +226,8 @@ partial class FrmMain
             signal.SeriesPoints = points;
             signal.SampleFrequency = sampleFreq;
             signal.SeriesLabels = seriesLabels;
+            signal.IndexStart = 0;
+            signal.IndexEnd = signal.SeriesPoints - 1;
             signal.MeasuringTime = new(signal.StartTime.AddSeconds((signal.SeriesPoints - 1)/ signal.SampleFrequency).Ticks);
         }
         catch (System.Globalization.CultureNotFoundException ex)
@@ -462,6 +466,8 @@ partial class FrmMain
             signal.SeriesNumber = series;
             signal.SeriesPoints = points;
             signal.SampleFrequency = sampleFreq;
+            signal.IndexStart = 0;
+            signal.IndexEnd = signal.SeriesPoints - 1;
             seriesLabels = seriesLabels[1..];
             signal.SeriesLabels = seriesLabels;
 
@@ -568,13 +574,11 @@ partial class FrmMain
             signal.SeriesPoints = points;
             signal.SampleFrequency = sampleFreq;
             signal.SeriesLabels = seriesLabels;
+            signal.IndexStart = 0;
+            signal.IndexEnd = signal.SeriesPoints - 1;
             //signal.SeriesLabels = new string[seriesLabels.Length];
             //Array.Copy(seriesLabels, signal.SeriesLabels, seriesLabels.Length);
             signal.SeriesNumber = signal.SeriesLabels.Length;
-
-            // Read data into array
-            _settings.IndexStart = 0;
-            _settings.IndexEnd = points - 1;
 
             // Initialize data arrays
             signal.Data = new double[series][];
@@ -662,9 +666,6 @@ partial class FrmMain
         string? strLine;
 
         try {
-            _settings.IndexStart = 0;
-            _settings.IndexEnd = points - 1;
-
             // Initialize data arrays
             dataPoints = new double[series][];
             for (int i = 0; i < series; i++)

@@ -121,7 +121,7 @@ public partial class FrmMain : Form
         if (stripComboSeries.SelectedIndex < 0) return;
 
         // Extract the values 
-        var signal = Signal.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        var signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
         UpdateWindowPlots(signal);
@@ -157,21 +157,24 @@ public partial class FrmMain : Form
     /// </summary>
     private void UpdateUI_MeasuringTime()
     {
-        TimeSpan nTime = Signal.MeasuringTime;
+        double seconds = Signal.IndexEnd - Signal.IndexStart;
+        seconds /= Signal.SampleFrequency == 0 ? 1 : Signal.SampleFrequency;
+        TimeSpan TimeSlice = TimeSpan.FromSeconds(seconds);
+        //TimeSlice = Signal.MeasuringTime;
 
-        if (nTime == TimeSpan.Zero)
+        if (TimeSlice == TimeSpan.Zero)
         {
             statusStripLabelEmpty.Text = string.Empty;
             statusStripLabelEmpty.ToolTipText = string.Empty;
         }
         else
         {
-            statusStripLabelEmpty.Text = $"{nTime.Days} {StringResources.FileHeader22}, " +
-                $"{nTime.Hours} {StringResources.FileHeader23}, " +
-                $"{nTime.Minutes} {StringResources.FileHeader24}, " +
-                $"{nTime.Seconds} {StringResources.FileHeader25} " +
+            statusStripLabelEmpty.Text = $"{TimeSlice.Days} {StringResources.FileHeader22}, " +
+                $"{TimeSlice.Hours} {StringResources.FileHeader23}, " +
+                $"{TimeSlice.Minutes} {StringResources.FileHeader24}, " +
+                $"{TimeSlice.Seconds} {StringResources.FileHeader25} " +
                 $"{StringResources.FileHeader26} " +
-                $"{nTime.Milliseconds} {StringResources.FileHeader27}";
+                $"{TimeSlice.Milliseconds} {StringResources.FileHeader27}";
             statusStripLabelEmpty.ToolTipText = statusStripLabelEmpty.Text;
         }
     }

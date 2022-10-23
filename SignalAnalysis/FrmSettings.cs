@@ -39,7 +39,7 @@ public partial class FrmSettings : Form
 
         if (!int.TryParse(txtEnd.Text, out num)) return;
         //if (num > 0 && num <= Settings.IndexStart) return;
-        if (num < Settings.IndexStart || num > Settings.IndexEnd)
+        if (num < Settings.IndexStart || num > Settings.IndexMax)
         {
             txtEnd.SelectionStart = 0;
             txtEnd.SelectionLength = txtEnd.Text.Length;

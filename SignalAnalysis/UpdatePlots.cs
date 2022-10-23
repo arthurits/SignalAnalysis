@@ -149,7 +149,7 @@ partial class FrmMain
     private async Task UpdateStatsPlots(int series)
     {
         // Extract the values 
-        double[] signal = Signal.Data[series][_settings.IndexStart..(_settings.IndexEnd + 1)];
+        double[] signal = Signal.Data[series][Signal.IndexStart..(Signal.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
         string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
@@ -401,20 +401,15 @@ partial class FrmMain
 
     public double SampleGaussian(Random random, double mean, double stdDev)
     {
-        // The method requires sampling from a uniform random of (0,1]
-        // but Random.NextDouble() returns a sample of [0,1).
-        //double x1 = 1 - random.NextDouble(); 
-        //double x2 = 1 - random.NextDouble();
-
         double u1 = NextDouble(random);
         double u2 = NextDouble(random);
 
-        double y1 = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+        double y1 = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);  // Math.Cos is also fine
         return mean + stdDev * y1;
 
         double NextDouble(Random random)
         {
-            return ((double)random.Next(1, Int32.MaxValue)) / Int32.MaxValue;    // Returns a 32-bit signed integer that is greater than or equal to 0 and less than Int32.MaxValue.
+            return ((double)random.Next(1, Int32.MaxValue)) / Int32.MaxValue;   // random.Next includes 1 and exludes Int32MaxValue
         }
     }
 }

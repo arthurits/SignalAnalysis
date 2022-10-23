@@ -78,7 +78,7 @@ partial class FrmMain
         // Extract the values to be exported
         double[] signal = Array.Empty<double>();
         if (Signal.Data.Length > 0)
-            signal = Signal.Data[stripComboSeries.SelectedIndex][_settings.IndexStart..(_settings.IndexEnd + 1)];
+            signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
 
         // Exit if there is no data to be saved
         if (signal.Length == 0)
@@ -151,6 +151,9 @@ partial class FrmMain
 
     private void Settings_Click(object? sender, EventArgs e)
     {
+        _settings.IndexStart = Signal.IndexStart;
+        _settings.IndexEnd = Signal.IndexEnd;
+        _settings.IndexMax = Signal.SeriesPoints > 0 ? Signal.SeriesPoints - 1 : 0;
         FrmSettings frm = new(_settings);
         frm.ShowDialog(this);
         if (frm.DialogResult == DialogResult.OK)
