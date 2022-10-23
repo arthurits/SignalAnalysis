@@ -145,7 +145,7 @@
     <value>Prisiminti ankstesnį atviro/išsaugoto dialogo kelią</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropija (apytikslė &amp;&amp; pavyzdys)</value>
+    <value>Entropija (apytikslė ir pavyzdys)</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Galia (dB)</value>
