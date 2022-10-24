@@ -142,7 +142,7 @@
     <value>Kumulative fraktale Dimension</value>
   </data>
   <data name="strChkDlgPath" xml:space="preserve">
-    <value>Vorherigen Pfaad wiederherstellen</value>
+    <value>Vorherigen Pfad wiederherstellen</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropie (ungefähre und Muster)</value>
