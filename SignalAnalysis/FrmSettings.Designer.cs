@@ -235,10 +235,10 @@
             this.tabGUI.Controls.Add(this.lblDataFormat);
             this.tabGUI.Controls.Add(this.grpCulture);
             this.tabGUI.Controls.Add(this.chkDlgPath);
-            this.tabGUI.Location = new System.Drawing.Point(4, 26);
+            this.tabGUI.Location = new System.Drawing.Point(4, 24);
             this.tabGUI.Name = "tabGUI";
             this.tabGUI.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGUI.Size = new System.Drawing.Size(441, 229);
+            this.tabGUI.Size = new System.Drawing.Size(441, 231);
             this.tabGUI.TabIndex = 1;
             this.tabGUI.Text = "User interface";
             this.tabGUI.UseVisualStyleBackColor = true;
@@ -353,6 +353,8 @@
             this.Controls.Add(this.btnCancel);
             this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmSettings";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
