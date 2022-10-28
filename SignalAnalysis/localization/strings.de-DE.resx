@@ -224,7 +224,7 @@ Standardwerte werden verwendet.</value>
     <value>Anzahl der Sensoren</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>Fehlende Leezeile.</value>
+    <value>Fehlende Leerzeile.</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
     <value>Fehlende Spaltenüberschriften (Seriennamen).</value>
@@ -298,15 +298,15 @@ Standardwerte werden verwendet.</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>Unerwarteter Fehler beim Öffnen der Datei.
-Bitte versuchen Sie es später wieder oder kontaktieren den Entwickler.
+Bitte versuchen Sie es später erneut oder kontaktieren den Entwickler.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
     <value>Fehler beim Öffnen</value>
   </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
-    <value>Unerwarteter Fehler beim Spiechern der Datei.
-Bitte versuchen Sie es später wieder oder kontaktieren den Entwickler.
+    <value>Unerwarteter Fehler beim Speichern der Datei.
+Bitte versuchen Sie es später erneut oder kontaktieren Sie den Entwickler.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
@@ -346,7 +346,7 @@ wurde gestoppt.</value>
     <value>Stopp</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
-    <value>ErgoLux Datein (*.elux)|*.elux|SignalAnalysis Datein (*.sig)|*.sig|Textdateien (*.txt)|*.txt|Binärdateien (*.bin)|*.bin|Alle Dateien (*.*)|*.*</value>
+    <value>ErgoLux Dateien (*.elux)|*.elux|SignalAnalysis Dateien (*.sig)|*.sig|Textdateien (*.txt)|*.txt|Binärdateien (*.bin)|*.bin|Alle Dateien (*.*)|*.*</value>
   </data>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Datendateien öffnen</value>
@@ -453,7 +453,7 @@ wurde gestoppt.</value>
     <value>Daten von Datei {0} konnten nicht gelesen werden.</value>
   </data>
   <data name="strReadNotimplementedErrorTitle" xml:space="preserve">
-    <value>Nicht eingebaut</value>
+    <value>Nicht implementiert</value>
   </data>
   <data name="strSaveDlgFilter" xml:space="preserve">
     <value>Textdatei (*.txt)|*.txt|SignalAnalysis Datei (*.sig)|*.sig|Binärdateien (*.bin)|*.bin|Ergebnisdatei (*.results)|*.results|Alle Dateien (*.*)|*.*</value>
