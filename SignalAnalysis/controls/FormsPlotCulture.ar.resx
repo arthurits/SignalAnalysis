@@ -118,30 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strFileDlgFileName" xml:space="preserve">
-    <value>Plot.png</value>
+    <value>رسم بياني.png</value>
   </data>
   <data name="strFileDlgFilter" xml:space="preserve">
-    <value>PNG Files (*.png)|*.png;*.png|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg|BMP Files (*.bmp)|*.bmp;*.bmp|All files (*.*)|*.*</value>
+    <value>ملفات PNG (*.png)|*.png;*.png|ملفات JPG (*.jpg, *.jpeg)|*.jpg;*.jpeg|ملفات BMP (*.bmp)|*.bmp;*.bmp|كل الملفات (*.*)|*.*</value>
   </data>
   <data name="strMenuCopy" xml:space="preserve">
-    <value>Copy image</value>
+    <value>انسخ الصورة</value>
   </data>
   <data name="strMenuCrossHair" xml:space="preserve">
-    <value>Show crosshair</value>
+    <value>عرض علامة التقاطع</value>
   </data>
   <data name="strMenuDetach" xml:space="preserve">
-    <value>Detach legend</value>
+    <value>افصل الأسطورة</value>
   </data>
   <data name="strMenuHelp" xml:space="preserve">
-    <value>Help</value>
+    <value>يساعد</value>
   </data>
   <data name="strMenuOpen" xml:space="preserve">
-    <value>Open in new window</value>
+    <value>افتح في نافذة جديدة</value>
   </data>
   <data name="strMenuSave" xml:space="preserve">
-    <value>Save image as...</value>
+    <value>حفظ الصورة حسب...</value>
   </data>
   <data name="strMenuZoom" xml:space="preserve">
-    <value>Zoom to fit data</value>
+    <value>تكبير لملاءمة البيانات</value>
   </data>
 </root>
