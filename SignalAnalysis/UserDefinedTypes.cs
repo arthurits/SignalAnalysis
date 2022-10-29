@@ -19,16 +19,16 @@ public class SignalStats
         IdealEntropy = IdealEn;
     }
 
-    public double Maximum { get; set; }
-    public double Minimum { get; set; }
-    public double Average { get; set; }
-    public double FractalDimension { get; set; }
-    public double FractalVariance { get; set; }
-    public double ApproximateEntropy { get; set; }
-    public double SampleEntropy { get; set; }
-    public double ShannonEntropy { get; set; }      // The Shannon entropy value of a message
-    public double EntropyBit { get; set; }          // The entropy bit value of a message
-    public double IdealEntropy { get; set; }        // The ideal entropy value of a message
+    public double Maximum { get; set; } = 0;
+    public double Minimum { get; set; } = 0;
+    public double Average { get; set; } = 0;
+    public double FractalDimension { get; set; } = 0;
+    public double FractalVariance { get; set; } = 0;
+    public double ApproximateEntropy { get; set; } = 0;
+    public double SampleEntropy { get; set; } = 0;
+    public double ShannonEntropy { get; set; } = 0; // The Shannon entropy value of a message
+    public double EntropyBit { get; set; } = 0;     // The entropy bit value of a message
+    public double IdealEntropy { get; set; } = 0;   // The ideal entropy value of a message
 
     public double[] FFTpower { get; set; } = Array.Empty<double>();
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();

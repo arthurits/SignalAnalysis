@@ -84,7 +84,7 @@ partial class FrmMain
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 620);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.TabStop = true;
             // 
             // plotFFT
@@ -101,7 +101,7 @@ partial class FrmMain
             this.plotFFT.ShowCrossHairVertical = false;
             this.plotFFT.Size = new System.Drawing.Size(852, 167);
             this.plotFFT.SnapToPoint = false;
-            this.plotFFT.TabIndex = 5;
+            this.plotFFT.TabIndex = 2;
             // 
             // tableLayoutPanel2
             // 
@@ -120,7 +120,7 @@ partial class FrmMain
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 240F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 173);
-            this.tableLayoutPanel2.TabIndex = 4;
+            this.tableLayoutPanel2.TabIndex = 1;
             // 
             // plotOriginal
             // 
@@ -179,7 +179,7 @@ partial class FrmMain
             this.txtStats.ReadOnly = true;
             this.txtStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtStats.Size = new System.Drawing.Size(854, 95);
-            this.txtStats.TabIndex = 6;
+            this.txtStats.TabIndex = 1;
             // 
             // tableLayoutPanel3
             // 
@@ -195,7 +195,7 @@ partial class FrmMain
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(860, 173);
-            this.tableLayoutPanel3.TabIndex = 7;
+            this.tableLayoutPanel3.TabIndex = 1;
             // 
             // plotFractal
             // 
@@ -211,7 +211,7 @@ partial class FrmMain
             this.plotFractal.ShowCrossHairVertical = false;
             this.plotFractal.Size = new System.Drawing.Size(565, 167);
             this.plotFractal.SnapToPoint = false;
-            this.plotFractal.TabIndex = 4;
+            this.plotFractal.TabIndex = 1;
             // 
             // plotFractalDistribution
             // 
@@ -382,7 +382,7 @@ partial class FrmMain
             this.statusStripLabelEmpty.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.statusStripLabelEmpty.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-            this.statusStripLabelEmpty.Size = new System.Drawing.Size(656, 23);
+            this.statusStripLabelEmpty.Size = new System.Drawing.Size(687, 23);
             this.statusStripLabelEmpty.Spring = true;
             this.statusStripLabelEmpty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
