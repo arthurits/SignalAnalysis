@@ -489,16 +489,17 @@ partial class FrmMain
     }
 
     #endregion
-    private TableLayoutPanel tableLayoutPanel1;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     private ScottPlot.FormsPlotCrossHair plotOriginal;
-    private TableLayoutPanel tableLayoutPanel2;
     private ScottPlot.FormsPlotCrossHair plotWindow;
     private ScottPlot.FormsPlotCrossHair plotApplied;
-    private ScottPlot.FormsPlotCrossHair plotFFT;
-    private TextBox txtStats;
-    private TableLayoutPanel tableLayoutPanel3;
     private ScottPlot.FormsPlotCrossHair plotFractal;
     private ScottPlot.FormsPlotCrossHair plotFractalDistribution;
+    private ScottPlot.FormsPlotCrossHair plotFFT;
+    private System.Windows.Forms.TextBox txtStats;
+    private System.Windows.Forms.StatusStrip statusStrip;
     private System.Windows.Forms.ToolStripPanel tspTop;
     private System.Windows.Forms.ToolStripPanel tspBottom;
     private System.Windows.Forms.ToolStrip toolStripMain;
@@ -512,7 +513,6 @@ partial class FrmMain
     private System.Windows.Forms.ToolStripButton toolStripMain_Settings;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     private System.Windows.Forms.ToolStripButton toolStripMain_About;
-    private System.Windows.Forms.StatusStrip statusStrip;
     private System.Windows.Forms.ToolStripStatusLabel statusStripLabelEmpty;
     private System.Windows.Forms.ToolStripStatusLabel statusStripLabelCulture;
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExPower;

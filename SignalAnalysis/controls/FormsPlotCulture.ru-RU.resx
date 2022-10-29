@@ -112,30 +112,36 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strFileDlgFileName" xml:space="preserve">
+    <value>Графический.png</value>
+  </data>
+  <data name="strFileDlgFilter" xml:space="preserve">
+    <value>PNG файлы (*.png)|*.png;*.png|JPG файлы (*.jpg, *.jpeg)|*.jpg;*.jpeg|BMP файлы (*.bmp)|*.bmp;*.bmp|Все файлы (*.*)|*.*</value>
+  </data>
   <data name="strMenuCopy" xml:space="preserve">
-    <value>Copy image</value>
+    <value>Копировать изображение</value>
   </data>
   <data name="strMenuCrossHair" xml:space="preserve">
-    <value>Show crosshair</value>
+    <value>Показать перекрестие</value>
   </data>
   <data name="strMenuDetach" xml:space="preserve">
-    <value>Detach legend</value>
+    <value>Отсоединить легенду</value>
   </data>
   <data name="strMenuHelp" xml:space="preserve">
-    <value>Help</value>
+    <value>Помощь</value>
   </data>
   <data name="strMenuOpen" xml:space="preserve">
-    <value>Open in new window</value>
+    <value>Открыть в новом окне</value>
   </data>
   <data name="strMenuSave" xml:space="preserve">
-    <value>Save image as...</value>
+    <value>Сохранить изображение как...</value>
   </data>
   <data name="strMenuZoom" xml:space="preserve">
-    <value>Zoom to fit data</value>
+    <value>Масштабировать, чтобы соответствовать данным</value>
   </data>
 </root>

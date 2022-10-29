@@ -112,30 +112,36 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strFileDlgFileName" xml:space="preserve">
+    <value>Schaubild.png</value>
+  </data>
+  <data name="strFileDlgFilter" xml:space="preserve">
+    <value>PNG Dateien (*.png)|*.png;*.png|JPG Dateien (*.jpg, *.jpeg)|*.jpg;*.jpeg|BMP Dateien (*.bmp)|*.bmp;*.bmp|Alle Dateien (*.*)|*.*</value>
+  </data>
   <data name="strMenuCopy" xml:space="preserve">
-    <value>Copiar imagen</value>
+    <value>Bild kopieren</value>
   </data>
   <data name="strMenuCrossHair" xml:space="preserve">
-    <value>Mostrar punto de mira</value>
+    <value>Fadenkreuz anzeigen</value>
   </data>
   <data name="strMenuDetach" xml:space="preserve">
-    <value>Separar la leyenda</value>
+    <value>Legende lösen</value>
   </data>
   <data name="strMenuHelp" xml:space="preserve">
-    <value>Ayuda</value>
+    <value>Hilfe</value>
   </data>
   <data name="strMenuOpen" xml:space="preserve">
-    <value>Abrir en una nueva ventana</value>
+    <value>In einem neuen Fenster öffnen</value>
   </data>
   <data name="strMenuSave" xml:space="preserve">
-    <value>Guardar imagen como...</value>
+    <value>Bild speichern als...</value>
   </data>
   <data name="strMenuZoom" xml:space="preserve">
-    <value>Ajustar datos a la ventana</value>
+    <value>Zoomen, um Daten anzupassen</value>
   </data>
 </root>
