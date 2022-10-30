@@ -404,6 +404,9 @@ partial class FrmMain
         double u1 = NextDouble(random);
         double u2 = NextDouble(random);
 
+        //double u1 = UniformOpenInterval(random);
+        //double u2 = UniformOpenInterval(random);
+
         double y1 = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);  // Math.Cos is also fine
         return mean + stdDev * y1;
 
@@ -411,6 +414,18 @@ partial class FrmMain
         {
             return ((double)random.Next(1, Int32.MaxValue)) / Int32.MaxValue;   // random.Next includes 1 and exludes Int32MaxValue
         }
+
+        double UniformOpenInterval(Random random)
+        {
+            double subtrahend = 0;
+            while (subtrahend == 0)
+            {
+                subtrahend = random.NextDouble();
+            }
+            return subtrahend;
+            // The simpler 1.0 - rand.NextDouble() actually grabs from the interval [0, 1), not (0, 1)
+        }
+
     }
 }
 
