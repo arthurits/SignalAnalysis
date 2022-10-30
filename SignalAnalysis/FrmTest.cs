@@ -24,10 +24,13 @@ namespace SignalAnalysis
 
             // https://github.com/ScottPlot/ScottPlot/issues/2007
             // https://scottplot.net/cookbook/4.1/category/plottable-axis-line-and-span/
-            var test = this.formsPlot1.Plot.AddCrosshair(0, 0);
-            test.VerticalLine.DragEnabled = true;
-            test.HorizontalLine.DragEnabled = true;
-            
+            var crossHair = this.formsPlot1.Plot.AddCrosshair(0, 0);
+            crossHair.VerticalLine.DragEnabled = true;
+            crossHair.HorizontalLine.DragEnabled = true;
+
+            var VLine1 = formsPlot1.Plot.AddVerticalLine(5, Color.Blue);
+            VLine1.DragEnabled = true;
+
             //ScottPlot.Crosshair2 ch = new();
             //this.formsPlot1.Plot.Add(ch);
 
