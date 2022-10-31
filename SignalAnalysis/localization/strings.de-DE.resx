@@ -136,7 +136,7 @@
     <value>&amp;Einstellungen</value>
   </data>
   <data name="strChkCrossHair" xml:space="preserve">
-    <value>Show plots' crosshair</value>
+    <value>Fadenkreuze von Plots anzeigen</value>
   </data>
   <data name="strChkCumulative" xml:space="preserve">
     <value>Kumulative fraktale Dimension</value>
