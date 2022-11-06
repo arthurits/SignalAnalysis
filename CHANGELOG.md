@@ -2,18 +2,18 @@
 
 ## SignalAnalysis 1.2
 * Multilanguage support:
-  ** German (de-DE) _Thanks @Am1ga and @Senuros_
-  ** Norwegian (nb-NO) _Thanks @rubjo_
-  ** Bangla (bn-BD) _Thanks @sarequl_
-  ** Danish (da-DK) _Thanks @afskylia_
-  ** Hindi (hi-IN) _Thanks @fadkeabhi_
-  ** Italian (it-IT) _Thanks @Pyr0x1_
-  ** Arabic (ar) _Thanks @mazen-r_
-  ** Portuguese (pt-BR) _Thanks @lhardt_
-  ** Russian (ru-RU) _Thanks @Ujjwal-soni98_
-  ** Lithuanian (lt-LT) _Thanks @mantasio_
-  ** Dutch (nl-BE) _Thanks @cvc04_
-  ** Turkish (tr-TR) _Thanks @faisalahammad_
+  * German (de-DE). _Thanks @Am1ga and @Senuros_.
+  * Norwegian (nb-NO). _Thanks @rubjo_.
+  * Bangla (bn-BD). _Thanks @sarequl_.
+  * Danish (da-DK). _Thanks @afskylia_.
+  * Hindi (hi-IN). _Thanks @fadkeabhi_.
+  * Italian (it-IT). _Thanks @Pyr0x1_.
+  * Arabic (ar). _Thanks @mazen-r_.
+  * Portuguese (pt-BR). _Thanks @lhardt_.
+  * Russian (ru-RU). _Thanks @Ujjwal-soni98_.
+  * Lithuanian (lt-LT). _Thanks @mantasio_.
+  * Dutch (nl-BE). _Thanks @cvc04_.
+  * Turkish (tr-TR). _Thanks @faisalahammad_.
 * [ScottPlott] (https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.59.
 * Corrections related to reading files, UI controls, and showing total time in status bar.
 
