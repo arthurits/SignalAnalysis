@@ -226,7 +226,15 @@ public partial class FrmSettings : Form
         this.btnCancel.Text = StringResources.BtnCancel;
         this.btnAccept.Text = StringResources.BtnAccept;
 
-        // Reposition controls to compensate for the culture text length in labels
+        // Relocate controls
+        RelocateControls();
+    }
+
+    /// <summary>
+    /// Relocate controls to compensate for the culture text length in labels
+    /// </summary>
+    private void RelocateControls()
+    {
         int width = Math.Max(this.lblStart.Width, this.lblEnd.Width);
         this.txtStart.Left = this.lblStart.Left + width;
         this.txtEnd.Left = this.lblEnd.Left + width;
@@ -236,5 +244,4 @@ public partial class FrmSettings : Form
         this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
-
 }
