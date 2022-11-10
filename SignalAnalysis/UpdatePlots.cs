@@ -96,13 +96,13 @@ partial class FrmMain
         {
             Random rand = new(0);
             double std = Math.Sqrt(variance);
-            double[] values = ScottPlot.DataGen.RandomNormal(rand, pointCount: 1000, mean: mean, stdDev: std);
-            for (int i = 0; i < values.Length; i++)
-                values[i] = SampleGaussian(rand, mean, std);
+            //double[] values = ScottPlot.DataGen.RandomNormal(rand, pointCount: 1000, mean: mean, stdDev: std);
+            //for (int i = 0; i < values.Length; i++)
+            //    values[i] = SampleGaussian(rand, mean, std);
 
             // create a Population object from the data
-            var pop = new ScottPlot.Statistics.Population(values);
-            //var pop = new ScottPlot.Statistics.Population(rand, pointCount: 1000, mean: mean, stdDev: std);
+            //var pop = new ScottPlot.Statistics.Population(values);
+            var pop = new ScottPlot.Statistics.Population(rand, pointCount: 1000, mean: mean, stdDev: std);
 
             //(double[] counts, double[] binEdges) = ScottPlot.Statistics.Common.Histogram(values, min: mean - 3 * std, max: mean + 3 * std, binSize: pop.span/100);
             //double[] curveXs = binEdges;
