@@ -2,7 +2,7 @@
 
 ## SignalAnalysis 1.2
 * Multilanguage support:
-  * German (de-DE). _Thanks @Am1ga and @Senuros_.
+  * German (de-DE). _Thanks @m1ga and @Senuros_.
   * Norwegian (nb-NO). _Thanks @rubjo_.
   * Bangla (bn-BD). _Thanks @sarequl_.
   * Danish (da-DK). _Thanks @afskylia_.
