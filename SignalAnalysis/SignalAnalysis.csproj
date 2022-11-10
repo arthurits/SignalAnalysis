@@ -7,6 +7,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>images\logo.ico</ApplicationIcon>
+    <Version>$(VersionPrefix)1.2</Version>
+    <Authors>Arthurits</Authors>
+    <Company>Arthurits Ltd.</Company>
+    <Copyright>Copyright © 2022</Copyright>
+    <Description>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, and entropy for signals (elux files as well as generic ones).
+
+No commercial use allowed whatsoever. Contact the author for any inquires.
+
+If you find this software useful, please consider supporting it!</Description>
   </PropertyGroup>
 
   <ItemGroup>
