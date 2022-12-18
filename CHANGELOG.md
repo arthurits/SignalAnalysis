@@ -1,5 +1,8 @@
 # SignalAnalysis changelog
 
+## SignalAnalysis 1.3
+* Target .NET 7.
+
 ## SignalAnalysis 1.2
 * Multilanguage support:
   * German (de-DE). _Thanks @m1ga and @Senuros_.
