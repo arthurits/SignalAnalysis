@@ -40,6 +40,7 @@
             this.formsPlot1.Name = "formsPlot1";
             this.formsPlot1.Size = new System.Drawing.Size(800, 450);
             this.formsPlot1.TabIndex = 0;
+            this.formsPlot1.Load += new System.EventHandler(this.formsPlot1_Load);
             // 
             // FrmTest
             // 
@@ -50,6 +51,7 @@
             this.Name = "FrmTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmTest";
+            this.Shown += new System.EventHandler(this.FrmTest_Shown);
             this.ResumeLayout(false);
 
         }

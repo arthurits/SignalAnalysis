@@ -25,6 +25,8 @@ namespace SignalAnalysis
             // https://github.com/ScottPlot/ScottPlot/issues/2007
             // https://scottplot.net/cookbook/4.1/category/plottable-axis-line-and-span/
             var crossHair = this.formsPlot1.Plot.AddCrosshair(0, 0);
+            crossHair.VerticalLine.DragLimitMin = -1;
+            crossHair.VerticalLine.DragLimitMax = 10;
             crossHair.VerticalLine.DragEnabled = true;
             crossHair.HorizontalLine.DragEnabled = true;
 
@@ -40,6 +42,30 @@ namespace SignalAnalysis
             ////ch.LineStyle = ScottPlot.LineStyle.Dash;
             ////ch.Color = System.Drawing.Color.Blue;
             //ch.LineWidth = 2;
+        }
+
+        private void FrmTest_Shown(object sender, EventArgs e)
+        {
+            var crossHair = this.formsPlot1.Plot.AddCrosshair(0, 0);
+            crossHair.VerticalLine.DragLimitMin = -1;
+            crossHair.VerticalLine.DragLimitMax = 10;
+            crossHair.VerticalLine.DragEnabled = true;
+            crossHair.HorizontalLine.DragEnabled = true;
+
+            var VLine1 = formsPlot1.Plot.AddVerticalLine(5, Color.Blue);
+            VLine1.DragEnabled = true;
+        }
+
+        private void formsPlot1_Load(object sender, EventArgs e)
+        {
+            var crossHair = this.formsPlot1.Plot.AddCrosshair(0, 0);
+            crossHair.VerticalLine.DragLimitMin = -1;
+            crossHair.VerticalLine.DragLimitMax = 10;
+            crossHair.VerticalLine.DragEnabled = true;
+            crossHair.HorizontalLine.DragEnabled = true;
+
+            var VLine1 = formsPlot1.Plot.AddVerticalLine(5, Color.Blue);
+            VLine1.DragEnabled = true;
         }
     }
 }
