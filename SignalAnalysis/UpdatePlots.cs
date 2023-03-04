@@ -1,4 +1,4 @@
-﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+﻿
 
 namespace SignalAnalysis;
 partial class FrmMain
@@ -140,22 +140,71 @@ partial class FrmMain
         plotFFT.Refresh();
     }
 
-    private async Task UpdateDerivative(double[] signal)
+    private async Task UpdateDerivative(double[] signal, string strLabel = "")
     {
         plotDerivative.Clear();
+
+        Function<int> func = new(DataFunction);
 
         // Run the intensive code on a separate task
         statsTask = Task.Run(() =>
         {
-            
+            Derivative<int> derivative = new(func, 1 / Signal.SampleFrequency, DerivativeMethod.CenteredFivePoint);
+            Results.Derivative = new double[signal.Length];
+
+            for (int i = 2; i < signal.Length - 2; i++)
+                Results.Derivative[i] = derivative[i];
         });
         await statsTask;
+
+        ScottPlot.Plottable.SignalPlot pOriginal;
+        ScottPlot.Plottable.SignalPlot pDerivative;
+
+        switch (_settings.AxisType)
+        {
+            case AxisType.Points:
+                pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, label: strLabel);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, label: "Derivative");
+                plotDerivative.Plot.XAxis.DateTimeFormat(false);
+                pOriginal.YAxisIndex = 0;
+                pOriginal.XAxisIndex = 0;
+                pDerivative.YAxisIndex = 0;
+                plotDerivative.Plot.YAxis2.Ticks(true);
+                plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
+                break;
+            case AxisType.Seconds:
+                pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency, label: strLabel);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, label: "Derivative");
+                plotDerivative.Plot.XAxis.DateTimeFormat(false);
+                pOriginal.YAxisIndex = 0;
+                pOriginal.XAxisIndex = 0;
+                pDerivative.YAxisIndex = 0;
+                plotDerivative.Plot.YAxis2.Ticks(true);
+                plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
+                break;
+            case AxisType.DateTime:
+                pOriginal = plotDerivative.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, label: strLabel);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, label: "Derivative");
+                pOriginal.OffsetX = Signal.StartTime.ToOADate();
+                plotDerivative.Plot.XAxis.DateTimeFormat(true);
+                pOriginal.YAxisIndex = 0;
+                pOriginal.XAxisIndex = 0;
+                pDerivative.YAxisIndex = 0;
+                plotDerivative.Plot.YAxis2.Ticks(true);
+                plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
+                break;
+        }
 
         plotDerivative.Plot.Title(StringResources.PlotDerivativeTitle);
         plotDerivative.Plot.XLabel(StringResources.PlotDerivativeXLabel);
         plotDerivative.Plot.YLabel(StringResources.PlotDerivativeYLabel);
         plotDerivative.Plot.AxisAuto(0, null);
         plotDerivative.Refresh();
+
+        double DataFunction(int index)
+        {
+            return signal[index];
+        }
     }
 
     /// <summary>
@@ -196,7 +245,7 @@ partial class FrmMain
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
         UpdateFractalDistribution(Results.FractalDimension, Results.FractalVariance);
         await UpdateWindowPlots(signal);
-        await UpdateDerivative(signal);
+        await UpdateDerivative(signal, seriesName ?? string.Empty);
 
         txtStats.Text = Results.ToString(_settings.AppCulture);
 

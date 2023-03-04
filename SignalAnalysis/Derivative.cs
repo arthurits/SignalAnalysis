@@ -30,7 +30,7 @@ class Function<T> : IFunction<T>
     }
 }
 
-public class Derivative<T, TResult> where T : INumber<T>
+public class Derivative<T> where T : INumber<T>
 {
     private readonly IFunction<T> func;
     private readonly DerivativeMethod method = DerivativeMethod.CenteredThreePoint;
@@ -73,7 +73,7 @@ public class Derivative<T, TResult> where T : INumber<T>
         double step2 = step * 2;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(1)]) / (step2 * 6),
+            TypeCode.Int32 => (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)] + (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) * 8) / (step2 * 6),
             _ => (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)] + (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) * 8) / (step2 * 6)
         };
         
