@@ -767,6 +767,33 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Derivative.
+        /// </summary>
+        internal static string strPlotDerivativeTitle {
+            get {
+                return ResourceManager.GetString("strPlotDerivativeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time (seconds).
+        /// </summary>
+        internal static string strPlotDerivativeXLabel {
+            get {
+                return ResourceManager.GetString("strPlotDerivativeXLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amplitude / seconds.
+        /// </summary>
+        internal static string strPlotDerivativeYLabel {
+            get {
+                return ResourceManager.GetString("strPlotDerivativeYLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fast Fourier transform.
         /// </summary>
         internal static string strPlotFFTTitle {

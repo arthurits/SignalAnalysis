@@ -516,4 +516,10 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Lingua dell'interfaccia utente</value>
   </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tempo (secondi)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>Ampiezza / secondi</value>
+  </data>
 </root>

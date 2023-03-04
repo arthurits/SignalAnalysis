@@ -133,6 +133,10 @@ public static class StringResources
     public static string PlotFFTYLabelPow => StringRM.GetString("strPlotFFTYLabelPow", Culture) ?? "Power (dB)";
     public static string PlotFFTYLabelMag => StringRM.GetString("strPlotFFTYLabelMag", Culture) ?? "Magnitude (RMS²)";
     public static string PlotFFTXLabel => StringRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
+    public static string PlotDerivativeTitle => StringRM.GetString("strPlotDerivativeTitle", Culture) ?? "Derivative";
+    public static string PlotDerivativeXLabel => StringRM.GetString("strPlotDerivativeXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotDerivativeYLabel => StringRM.GetString("strPlotDerivativeYLabel", Culture) ?? "Amplitude / seconds";
+    
 
     public static string BtnAccept => StringRM.GetString("strBtnAccept", Culture) ?? "&Accept";
     public static string BtnCancel => StringRM.GetString("strBtnCancel", Culture) ?? "&Cancel";

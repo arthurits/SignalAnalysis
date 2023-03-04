@@ -30,6 +30,8 @@ public class SignalStats
     public double EntropyBit { get; set; } = 0;     // The entropy bit value of a message
     public double IdealEntropy { get; set; } = 0;   // The ideal entropy value of a message
 
+    public double[] Derivative { get; set; } = Array.Empty<double>();
+
     public double[] FFTpower { get; set; } = Array.Empty<double>();
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
     public double[] FFTfrequencies { get; set; } = Array.Empty<double>();

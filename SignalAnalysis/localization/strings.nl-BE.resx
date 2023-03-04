@@ -518,4 +518,10 @@ dimensie is gestopt.</value>
   <data name="strPlotAppliedTitle" xml:space="preserve">
     <value>Signaal in venster</value>
   </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tijd (seconden)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>Amplitude / seconden</value>
+  </data>
 </root>

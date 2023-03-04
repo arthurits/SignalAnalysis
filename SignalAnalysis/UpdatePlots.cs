@@ -140,6 +140,24 @@ partial class FrmMain
         plotFFT.Refresh();
     }
 
+    private async Task UpdateDerivative(double[] signal)
+    {
+        plotDerivative.Clear();
+
+        // Run the intensive code on a separate task
+        statsTask = Task.Run(() =>
+        {
+            
+        });
+        await statsTask;
+
+        plotDerivative.Plot.Title(StringResources.PlotDerivativeTitle);
+        plotDerivative.Plot.XLabel(StringResources.PlotDerivativeXLabel);
+        plotDerivative.Plot.YLabel(StringResources.PlotDerivativeYLabel);
+        plotDerivative.Plot.AxisAuto(0, null);
+        plotDerivative.Refresh();
+    }
+
     /// <summary>
     /// Compute stats and update the plots and results
     /// This is the main computing function that calls sub-functions
@@ -178,6 +196,7 @@ partial class FrmMain
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
         UpdateFractalDistribution(Results.FractalDimension, Results.FractalVariance);
         await UpdateWindowPlots(signal);
+        await UpdateDerivative(signal);
 
         txtStats.Text = Results.ToString(_settings.AppCulture);
 

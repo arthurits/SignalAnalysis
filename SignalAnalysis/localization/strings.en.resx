@@ -519,4 +519,13 @@ dimension has been stopped.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>User interface language</value>
   </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivative</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>Amplitude / seconds</value>
+  </data>
 </root>

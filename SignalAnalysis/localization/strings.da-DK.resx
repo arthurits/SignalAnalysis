@@ -518,4 +518,10 @@ er blevet stoppet.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Brugergrænsefladens sprog</value>
   </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tid (sekunder)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>Amplitude / sekunder</value>
+  </data>
 </root>

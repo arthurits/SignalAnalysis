@@ -28,464 +28,475 @@ partial class FrmMain
     /// </summary>
     private void InitializeComponent()
     {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.plotFFT = new ScottPlot.FormsPlotCrossHair();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.plotOriginal = new ScottPlot.FormsPlotCrossHair();
-            this.plotWindow = new ScottPlot.FormsPlotCrossHair();
-            this.plotApplied = new ScottPlot.FormsPlotCrossHair();
-            this.txtStats = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.plotFractal = new ScottPlot.FormsPlotCrossHair();
-            this.plotFractalDistribution = new ScottPlot.FormsPlotCrossHair();
-            this.tspTop = new System.Windows.Forms.ToolStripPanel();
-            this.tspBottom = new System.Windows.Forms.ToolStripPanel();
-            this.toolStripMain = new System.Windows.Forms.ToolStrip();
-            this.toolStripMain_Exit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripMain_Open = new System.Windows.Forms.ToolStripButton();
-            this.toolStripMain_Export = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.stripComboSeries = new System.Windows.Forms.ToolStripComboBox();
-            this.stripComboWindows = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMain_Settings = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMain_About = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.statusStripLabelEmpty = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelCulture = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelExPower = new System.Windows.Forms.ToolStripStatusLabelEx();
-            this.statusStripLabelExCumulative = new System.Windows.Forms.ToolStripStatusLabelEx();
-            this.statusStripLabelExEntropy = new System.Windows.Forms.ToolStripStatusLabelEx();
-            this.statusStripLabelExCrossHair = new System.Windows.Forms.ToolStripStatusLabelEx();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.toolStripMain.SuspendLayout();
-            this.statusStrip.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.plotFFT, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtStats, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 74);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 620);
-            this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.TabStop = true;
-            // 
-            // plotFFT
-            // 
-            this.plotFFT.BackColor = System.Drawing.Color.Transparent;
-            this.plotFFT.CrossHairColor = System.Drawing.Color.Red;
-            this.plotFFT.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotFFT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFFT.Location = new System.Drawing.Point(4, 349);
-            this.plotFFT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotFFT.Name = "plotFFT";
-            this.plotFFT.ShowCrossHair = false;
-            this.plotFFT.ShowCrossHairHorizontal = false;
-            this.plotFFT.ShowCrossHairVertical = false;
-            this.plotFFT.Size = new System.Drawing.Size(852, 167);
-            this.plotFFT.SnapToPoint = false;
-            this.plotFFT.TabIndex = 2;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Controls.Add(this.plotOriginal, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.plotWindow, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.plotApplied, 2, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 240F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(860, 173);
-            this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // plotOriginal
-            // 
-            this.plotOriginal.BackColor = System.Drawing.Color.Transparent;
-            this.plotOriginal.CrossHairColor = System.Drawing.Color.Red;
-            this.plotOriginal.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotOriginal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotOriginal.Location = new System.Drawing.Point(4, 3);
-            this.plotOriginal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotOriginal.Name = "plotOriginal";
-            this.plotOriginal.ShowCrossHair = false;
-            this.plotOriginal.ShowCrossHairHorizontal = false;
-            this.plotOriginal.ShowCrossHairVertical = false;
-            this.plotOriginal.Size = new System.Drawing.Size(278, 167);
-            this.plotOriginal.SnapToPoint = false;
-            this.plotOriginal.TabIndex = 2;
-            // 
-            // plotWindow
-            // 
-            this.plotWindow.BackColor = System.Drawing.Color.Transparent;
-            this.plotWindow.CrossHairColor = System.Drawing.Color.Red;
-            this.plotWindow.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotWindow.Location = new System.Drawing.Point(290, 3);
-            this.plotWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotWindow.Name = "plotWindow";
-            this.plotWindow.ShowCrossHair = false;
-            this.plotWindow.ShowCrossHairHorizontal = false;
-            this.plotWindow.ShowCrossHairVertical = false;
-            this.plotWindow.Size = new System.Drawing.Size(278, 167);
-            this.plotWindow.SnapToPoint = false;
-            this.plotWindow.TabIndex = 3;
-            // 
-            // plotApplied
-            // 
-            this.plotApplied.BackColor = System.Drawing.Color.Transparent;
-            this.plotApplied.CrossHairColor = System.Drawing.Color.Red;
-            this.plotApplied.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotApplied.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotApplied.Location = new System.Drawing.Point(576, 3);
-            this.plotApplied.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotApplied.Name = "plotApplied";
-            this.plotApplied.ShowCrossHair = false;
-            this.plotApplied.ShowCrossHairHorizontal = false;
-            this.plotApplied.ShowCrossHairVertical = false;
-            this.plotApplied.Size = new System.Drawing.Size(280, 167);
-            this.plotApplied.SnapToPoint = false;
-            this.plotApplied.TabIndex = 4;
-            // 
-            // txtStats
-            // 
-            this.txtStats.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtStats.Location = new System.Drawing.Point(3, 522);
-            this.txtStats.Multiline = true;
-            this.txtStats.Name = "txtStats";
-            this.txtStats.ReadOnly = true;
-            this.txtStats.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtStats.Size = new System.Drawing.Size(854, 95);
-            this.txtStats.TabIndex = 1;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.Controls.Add(this.plotFractal, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.plotFractalDistribution, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 173);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(860, 173);
-            this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // plotFractal
-            // 
-            this.plotFractal.BackColor = System.Drawing.Color.Transparent;
-            this.plotFractal.CrossHairColor = System.Drawing.Color.Red;
-            this.plotFractal.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotFractal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFractal.Location = new System.Drawing.Point(4, 3);
-            this.plotFractal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotFractal.Name = "plotFractal";
-            this.plotFractal.ShowCrossHair = false;
-            this.plotFractal.ShowCrossHairHorizontal = false;
-            this.plotFractal.ShowCrossHairVertical = false;
-            this.plotFractal.Size = new System.Drawing.Size(565, 167);
-            this.plotFractal.SnapToPoint = false;
-            this.plotFractal.TabIndex = 1;
-            // 
-            // plotFractalDistribution
-            // 
-            this.plotFractalDistribution.CrossHairColor = System.Drawing.Color.Red;
-            this.plotFractalDistribution.CultureUI = new System.Globalization.CultureInfo("en-US");
-            this.plotFractalDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotFractalDistribution.Location = new System.Drawing.Point(577, 3);
-            this.plotFractalDistribution.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.plotFractalDistribution.Name = "plotFractalDistribution";
-            this.plotFractalDistribution.ShowCrossHair = false;
-            this.plotFractalDistribution.ShowCrossHairHorizontal = false;
-            this.plotFractalDistribution.ShowCrossHairVertical = false;
-            this.plotFractalDistribution.Size = new System.Drawing.Size(279, 167);
-            this.plotFractalDistribution.SnapToPoint = false;
-            this.plotFractalDistribution.TabIndex = 5;
-            // 
-            // tspTop
-            // 
-            this.tspTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tspTop.Location = new System.Drawing.Point(0, 0);
-            this.tspTop.Name = "tspTop";
-            this.tspTop.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.tspTop.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tspTop.Size = new System.Drawing.Size(884, 0);
-            // 
-            // tspBottom
-            // 
-            this.tspBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tspBottom.Location = new System.Drawing.Point(0, 721);
-            this.tspBottom.Name = "tspBottom";
-            this.tspBottom.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.tspBottom.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.tspBottom.Size = new System.Drawing.Size(884, 0);
-            // 
-            // toolStripMain
-            // 
-            this.toolStripMain.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toolStripMain.ImageScalingSize = new System.Drawing.Size(48, 48);
-            this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMain_Exit,
-            this.toolStripMain_Open,
-            this.toolStripMain_Export,
-            this.toolStripSeparator1,
-            this.stripComboSeries,
-            this.stripComboWindows,
-            this.toolStripSeparator2,
-            this.toolStripMain_Settings,
-            this.toolStripSeparator3,
-            this.toolStripMain_About});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 0);
-            this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStripMain.Size = new System.Drawing.Size(884, 27);
-            this.toolStripMain.TabIndex = 2;
-            this.toolStripMain.Text = "Main toolbar";
-            // 
-            // toolStripMain_Exit
-            // 
-            this.toolStripMain_Exit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripMain_Exit.Name = "toolStripMain_Exit";
-            this.toolStripMain_Exit.Size = new System.Drawing.Size(34, 24);
-            this.toolStripMain_Exit.Text = "Exit";
-            this.toolStripMain_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMain_Exit.ToolTipText = "Export data and data analysis";
-            this.toolStripMain_Exit.Click += new System.EventHandler(this.Exit_Click);
-            // 
-            // toolStripMain_Open
-            // 
-            this.toolStripMain_Open.Name = "toolStripMain_Open";
-            this.toolStripMain_Open.Size = new System.Drawing.Size(47, 24);
-            this.toolStripMain_Open.Text = "Open";
-            this.toolStripMain_Open.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMain_Open.Click += new System.EventHandler(this.Open_Click);
-            // 
-            // toolStripMain_Export
-            // 
-            this.toolStripMain_Export.Name = "toolStripMain_Export";
-            this.toolStripMain_Export.Size = new System.Drawing.Size(52, 24);
-            this.toolStripMain_Export.Text = "Export";
-            this.toolStripMain_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMain_Export.Click += new System.EventHandler(this.Export_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // stripComboSeries
-            // 
-            this.stripComboSeries.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.stripComboSeries.DropDownHeight = 110;
-            this.stripComboSeries.DropDownWidth = 122;
-            this.stripComboSeries.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.stripComboSeries.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.stripComboSeries.IntegralHeight = false;
-            this.stripComboSeries.MaxDropDownItems = 9;
-            this.stripComboSeries.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
-            this.stripComboSeries.Name = "stripComboSeries";
-            this.stripComboSeries.Size = new System.Drawing.Size(120, 27);
-            this.stripComboSeries.ToolTipText = "Select data series";
-            this.stripComboSeries.SelectedIndexChanged += new System.EventHandler(this.ComboSeries_SelectedIndexChanged);
-            // 
-            // stripComboWindows
-            // 
-            this.stripComboWindows.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.stripComboWindows.DropDownHeight = 110;
-            this.stripComboWindows.DropDownWidth = 122;
-            this.stripComboWindows.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.stripComboWindows.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.stripComboWindows.IntegralHeight = false;
-            this.stripComboWindows.MaxDropDownItems = 9;
-            this.stripComboWindows.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
-            this.stripComboWindows.Name = "stripComboWindows";
-            this.stripComboWindows.Size = new System.Drawing.Size(120, 27);
-            this.stripComboWindows.ToolTipText = "Select FFT window";
-            this.stripComboWindows.SelectedIndexChanged += new System.EventHandler(this.ComboWindow_SelectedIndexChanged);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripMain_Settings
-            // 
-            this.toolStripMain_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripMain_Settings.Name = "toolStripMain_Settings";
-            this.toolStripMain_Settings.Size = new System.Drawing.Size(62, 24);
-            this.toolStripMain_Settings.Text = "Settings";
-            this.toolStripMain_Settings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMain_Settings.ToolTipText = "Settings for plots, data, and UI";
-            this.toolStripMain_Settings.Click += new System.EventHandler(this.Settings_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripMain_About
-            // 
-            this.toolStripMain_About.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripMain_About.Name = "toolStripMain_About";
-            this.toolStripMain_About.Size = new System.Drawing.Size(51, 24);
-            this.toolStripMain_About.Text = "About";
-            this.toolStripMain_About.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripMain_About.ToolTipText = "About this software";
-            this.toolStripMain_About.Click += new System.EventHandler(this.About_Click);
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusStripLabelEmpty,
-            this.statusStripLabelCulture,
-            this.statusStripLabelExPower,
-            this.statusStripLabelExCumulative,
-            this.statusStripLabelExEntropy,
-            this.statusStripLabelExCrossHair});
-            this.statusStrip.Location = new System.Drawing.Point(0, 693);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.statusStrip.ShowItemToolTips = true;
-            this.statusStrip.Size = new System.Drawing.Size(884, 28);
-            this.statusStrip.TabIndex = 1;
-            this.statusStrip.Text = "Status bar";
-            // 
-            // statusStripLabelEmpty
-            // 
-            this.statusStripLabelEmpty.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.statusStripLabelEmpty.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-            this.statusStripLabelEmpty.Size = new System.Drawing.Size(687, 23);
-            this.statusStripLabelEmpty.Spring = true;
-            this.statusStripLabelEmpty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // statusStripLabelCulture
-            // 
-            this.statusStripLabelCulture.AutoSize = false;
-            this.statusStripLabelCulture.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.statusStripLabelCulture.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelCulture.Name = "statusStripLabelCulture";
-            this.statusStripLabelCulture.Size = new System.Drawing.Size(70, 23);
-            this.statusStripLabelCulture.ToolTipText = "User interface language";
-            this.statusStripLabelCulture.Click += new System.EventHandler(this.Language_Click);
-            // 
-            // statusStripLabelExPower
-            // 
-            this.statusStripLabelExPower.AutoSize = false;
-            this.statusStripLabelExPower.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExPower.Checked = true;
-            this.statusStripLabelExPower.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExPower.ForeColor = System.Drawing.Color.Black;
-            this.statusStripLabelExPower.ForeColorChecked = System.Drawing.Color.Black;
-            this.statusStripLabelExPower.ForeColorUnchecked = System.Drawing.Color.LightGray;
-            this.statusStripLabelExPower.Name = "statusStripLabelExPower";
-            this.statusStripLabelExPower.Size = new System.Drawing.Size(28, 23);
-            this.statusStripLabelExPower.Text = "P";
-            this.statusStripLabelExPower.ToolTipText = "Power spectra (dB)";
-            this.statusStripLabelExPower.Click += new System.EventHandler(this.LabelEx_Click);
-            // 
-            // statusStripLabelExCumulative
-            // 
-            this.statusStripLabelExCumulative.AutoSize = false;
-            this.statusStripLabelExCumulative.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExCumulative.Checked = false;
-            this.statusStripLabelExCumulative.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExCumulative.ForeColor = System.Drawing.Color.LightGray;
-            this.statusStripLabelExCumulative.ForeColorChecked = System.Drawing.Color.Black;
-            this.statusStripLabelExCumulative.ForeColorUnchecked = System.Drawing.Color.LightGray;
-            this.statusStripLabelExCumulative.Name = "statusStripLabelExCumulative";
-            this.statusStripLabelExCumulative.Size = new System.Drawing.Size(28, 23);
-            this.statusStripLabelExCumulative.Text = "F";
-            this.statusStripLabelExCumulative.ToolTipText = "Cumulative fractal dimension";
-            this.statusStripLabelExCumulative.Click += new System.EventHandler(this.LabelEx_Click);
-            // 
-            // statusStripLabelExEntropy
-            // 
-            this.statusStripLabelExEntropy.AutoSize = false;
-            this.statusStripLabelExEntropy.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExEntropy.Checked = false;
-            this.statusStripLabelExEntropy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExEntropy.ForeColor = System.Drawing.Color.LightGray;
-            this.statusStripLabelExEntropy.ForeColorChecked = System.Drawing.Color.Black;
-            this.statusStripLabelExEntropy.ForeColorUnchecked = System.Drawing.Color.LightGray;
-            this.statusStripLabelExEntropy.Name = "statusStripLabelExEntropy";
-            this.statusStripLabelExEntropy.Size = new System.Drawing.Size(28, 23);
-            this.statusStripLabelExEntropy.Text = "E";
-            this.statusStripLabelExEntropy.ToolTipText = "Approximate and sample entropy";
-            this.statusStripLabelExEntropy.Click += new System.EventHandler(this.LabelEx_Click);
-            // 
-            // statusStripLabelExCrossHair
-            // 
-            this.statusStripLabelExCrossHair.AutoSize = false;
-            this.statusStripLabelExCrossHair.BackColor = System.Drawing.Color.Transparent;
-            this.statusStripLabelExCrossHair.Checked = false;
-            this.statusStripLabelExCrossHair.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.statusStripLabelExCrossHair.ForeColor = System.Drawing.Color.LightGray;
-            this.statusStripLabelExCrossHair.ForeColorChecked = System.Drawing.Color.Black;
-            this.statusStripLabelExCrossHair.ForeColorUnchecked = System.Drawing.Color.LightGray;
-            this.statusStripLabelExCrossHair.Name = "statusStripLabelExCrossHair";
-            this.statusStripLabelExCrossHair.Size = new System.Drawing.Size(28, 23);
-            this.statusStripLabelExCrossHair.Text = "C";
-            this.statusStripLabelExCrossHair.ToolTipText = "Plot\'s crosshair mode";
-            this.statusStripLabelExCrossHair.Click += new System.EventHandler(this.LabelEx_Click);
-            // 
-            // FrmMain
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 721);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.toolStripMain);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.tspBottom);
-            this.Controls.Add(this.tspTop);
-            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(900, 760);
-            this.Name = "FrmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Signal analysis";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
-            this.Shown += new System.EventHandler(this.FrmMain_Shown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmMain_KeyPress);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.toolStripMain.ResumeLayout(false);
-            this.toolStripMain.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+        tableLayoutPanel1 = new TableLayoutPanel();
+        tableLayoutPanel2 = new TableLayoutPanel();
+        plotOriginal = new ScottPlot.FormsPlotCrossHair();
+        plotWindow = new ScottPlot.FormsPlotCrossHair();
+        plotApplied = new ScottPlot.FormsPlotCrossHair();
+        txtStats = new TextBox();
+        tableLayoutPanel3 = new TableLayoutPanel();
+        plotFractal = new ScottPlot.FormsPlotCrossHair();
+        plotFractalDistribution = new ScottPlot.FormsPlotCrossHair();
+        tspTop = new ToolStripPanel();
+        tspBottom = new ToolStripPanel();
+        toolStripMain = new ToolStrip();
+        toolStripMain_Exit = new ToolStripButton();
+        toolStripMain_Open = new ToolStripButton();
+        toolStripMain_Export = new ToolStripButton();
+        toolStripSeparator1 = new ToolStripSeparator();
+        stripComboSeries = new ToolStripComboBox();
+        stripComboWindows = new ToolStripComboBox();
+        toolStripSeparator2 = new ToolStripSeparator();
+        toolStripMain_Settings = new ToolStripButton();
+        toolStripSeparator3 = new ToolStripSeparator();
+        toolStripMain_About = new ToolStripButton();
+        statusStrip = new StatusStrip();
+        statusStripLabelEmpty = new ToolStripStatusLabel();
+        statusStripLabelCulture = new ToolStripStatusLabel();
+        statusStripLabelExPower = new ToolStripStatusLabelEx();
+        statusStripLabelExCumulative = new ToolStripStatusLabelEx();
+        statusStripLabelExEntropy = new ToolStripStatusLabelEx();
+        statusStripLabelExCrossHair = new ToolStripStatusLabelEx();
+        tableLayoutPanel4 = new TableLayoutPanel();
+        plotFFT = new ScottPlot.FormsPlotCrossHair();
+        plotDerivative = new ScottPlot.FormsPlotCrossHair();
+        tableLayoutPanel1.SuspendLayout();
+        tableLayoutPanel2.SuspendLayout();
+        tableLayoutPanel3.SuspendLayout();
+        toolStripMain.SuspendLayout();
+        statusStrip.SuspendLayout();
+        tableLayoutPanel4.SuspendLayout();
+        SuspendLayout();
+        // 
+        // tableLayoutPanel1
+        // 
+        tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        tableLayoutPanel1.ColumnCount = 1;
+        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
+        tableLayoutPanel1.Controls.Add(txtStats, 0, 3);
+        tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 1);
+        tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 2);
+        tableLayoutPanel1.Location = new Point(12, 74);
+        tableLayoutPanel1.Name = "tableLayoutPanel1";
+        tableLayoutPanel1.RowCount = 4;
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16F));
+        tableLayoutPanel1.Size = new Size(860, 620);
+        tableLayoutPanel1.TabIndex = 0;
+        tableLayoutPanel1.TabStop = true;
+        // 
+        // tableLayoutPanel2
+        // 
+        tableLayoutPanel2.ColumnCount = 3;
+        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+        tableLayoutPanel2.Controls.Add(plotOriginal, 0, 0);
+        tableLayoutPanel2.Controls.Add(plotWindow, 1, 0);
+        tableLayoutPanel2.Controls.Add(plotApplied, 2, 0);
+        tableLayoutPanel2.Dock = DockStyle.Fill;
+        tableLayoutPanel2.Location = new Point(0, 0);
+        tableLayoutPanel2.Margin = new Padding(0);
+        tableLayoutPanel2.Name = "tableLayoutPanel2";
+        tableLayoutPanel2.RowCount = 1;
+        tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 240F));
+        tableLayoutPanel2.Size = new Size(860, 173);
+        tableLayoutPanel2.TabIndex = 1;
+        // 
+        // plotOriginal
+        // 
+        plotOriginal.BackColor = Color.Transparent;
+        plotOriginal.CrossHairColor = Color.Red;
+        plotOriginal.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotOriginal.Dock = DockStyle.Fill;
+        plotOriginal.Location = new Point(4, 3);
+        plotOriginal.Margin = new Padding(4, 3, 4, 3);
+        plotOriginal.Name = "plotOriginal";
+        plotOriginal.ShowCrossHair = false;
+        plotOriginal.ShowCrossHairHorizontal = false;
+        plotOriginal.ShowCrossHairVertical = false;
+        plotOriginal.Size = new Size(278, 167);
+        plotOriginal.SnapToPoint = false;
+        plotOriginal.TabIndex = 2;
+        // 
+        // plotWindow
+        // 
+        plotWindow.BackColor = Color.Transparent;
+        plotWindow.CrossHairColor = Color.Red;
+        plotWindow.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotWindow.Dock = DockStyle.Fill;
+        plotWindow.Location = new Point(290, 3);
+        plotWindow.Margin = new Padding(4, 3, 4, 3);
+        plotWindow.Name = "plotWindow";
+        plotWindow.ShowCrossHair = false;
+        plotWindow.ShowCrossHairHorizontal = false;
+        plotWindow.ShowCrossHairVertical = false;
+        plotWindow.Size = new Size(278, 167);
+        plotWindow.SnapToPoint = false;
+        plotWindow.TabIndex = 3;
+        // 
+        // plotApplied
+        // 
+        plotApplied.BackColor = Color.Transparent;
+        plotApplied.CrossHairColor = Color.Red;
+        plotApplied.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotApplied.Dock = DockStyle.Fill;
+        plotApplied.Location = new Point(576, 3);
+        plotApplied.Margin = new Padding(4, 3, 4, 3);
+        plotApplied.Name = "plotApplied";
+        plotApplied.ShowCrossHair = false;
+        plotApplied.ShowCrossHairHorizontal = false;
+        plotApplied.ShowCrossHairVertical = false;
+        plotApplied.Size = new Size(280, 167);
+        plotApplied.SnapToPoint = false;
+        plotApplied.TabIndex = 4;
+        // 
+        // txtStats
+        // 
+        txtStats.Dock = DockStyle.Fill;
+        txtStats.Location = new Point(3, 522);
+        txtStats.Multiline = true;
+        txtStats.Name = "txtStats";
+        txtStats.ReadOnly = true;
+        txtStats.ScrollBars = ScrollBars.Vertical;
+        txtStats.Size = new Size(854, 95);
+        txtStats.TabIndex = 1;
+        // 
+        // tableLayoutPanel3
+        // 
+        tableLayoutPanel3.ColumnCount = 2;
+        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.66666F));
+        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+        tableLayoutPanel3.Controls.Add(plotFractal, 0, 0);
+        tableLayoutPanel3.Controls.Add(plotFractalDistribution, 1, 0);
+        tableLayoutPanel3.Dock = DockStyle.Fill;
+        tableLayoutPanel3.Location = new Point(0, 173);
+        tableLayoutPanel3.Margin = new Padding(0);
+        tableLayoutPanel3.Name = "tableLayoutPanel3";
+        tableLayoutPanel3.RowCount = 1;
+        tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        tableLayoutPanel3.Size = new Size(860, 173);
+        tableLayoutPanel3.TabIndex = 1;
+        // 
+        // plotFractal
+        // 
+        plotFractal.BackColor = Color.Transparent;
+        plotFractal.CrossHairColor = Color.Red;
+        plotFractal.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotFractal.Dock = DockStyle.Fill;
+        plotFractal.Location = new Point(4, 3);
+        plotFractal.Margin = new Padding(4, 3, 4, 3);
+        plotFractal.Name = "plotFractal";
+        plotFractal.ShowCrossHair = false;
+        plotFractal.ShowCrossHairHorizontal = false;
+        plotFractal.ShowCrossHairVertical = false;
+        plotFractal.Size = new Size(565, 167);
+        plotFractal.SnapToPoint = false;
+        plotFractal.TabIndex = 1;
+        // 
+        // plotFractalDistribution
+        // 
+        plotFractalDistribution.CrossHairColor = Color.Red;
+        plotFractalDistribution.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotFractalDistribution.Dock = DockStyle.Fill;
+        plotFractalDistribution.Location = new Point(577, 3);
+        plotFractalDistribution.Margin = new Padding(4, 3, 4, 3);
+        plotFractalDistribution.Name = "plotFractalDistribution";
+        plotFractalDistribution.ShowCrossHair = false;
+        plotFractalDistribution.ShowCrossHairHorizontal = false;
+        plotFractalDistribution.ShowCrossHairVertical = false;
+        plotFractalDistribution.Size = new Size(279, 167);
+        plotFractalDistribution.SnapToPoint = false;
+        plotFractalDistribution.TabIndex = 5;
+        // 
+        // tspTop
+        // 
+        tspTop.Dock = DockStyle.Top;
+        tspTop.Location = new Point(0, 0);
+        tspTop.Name = "tspTop";
+        tspTop.Orientation = Orientation.Horizontal;
+        tspTop.RowMargin = new Padding(3, 0, 0, 0);
+        tspTop.Size = new Size(884, 0);
+        // 
+        // tspBottom
+        // 
+        tspBottom.Dock = DockStyle.Bottom;
+        tspBottom.Location = new Point(0, 721);
+        tspBottom.Name = "tspBottom";
+        tspBottom.Orientation = Orientation.Horizontal;
+        tspBottom.RowMargin = new Padding(3, 0, 0, 0);
+        tspBottom.Size = new Size(884, 0);
+        // 
+        // toolStripMain
+        // 
+        toolStripMain.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+        toolStripMain.ImageScalingSize = new Size(48, 48);
+        toolStripMain.Items.AddRange(new ToolStripItem[] { toolStripMain_Exit, toolStripMain_Open, toolStripMain_Export, toolStripSeparator1, stripComboSeries, stripComboWindows, toolStripSeparator2, toolStripMain_Settings, toolStripSeparator3, toolStripMain_About });
+        toolStripMain.Location = new Point(0, 0);
+        toolStripMain.Name = "toolStripMain";
+        toolStripMain.RenderMode = ToolStripRenderMode.Professional;
+        toolStripMain.Size = new Size(884, 27);
+        toolStripMain.TabIndex = 2;
+        toolStripMain.Text = "Main toolbar";
+        // 
+        // toolStripMain_Exit
+        // 
+        toolStripMain_Exit.ImageTransparentColor = Color.Magenta;
+        toolStripMain_Exit.Name = "toolStripMain_Exit";
+        toolStripMain_Exit.Size = new Size(34, 24);
+        toolStripMain_Exit.Text = "Exit";
+        toolStripMain_Exit.TextImageRelation = TextImageRelation.ImageAboveText;
+        toolStripMain_Exit.ToolTipText = "Export data and data analysis";
+        toolStripMain_Exit.Click += Exit_Click;
+        // 
+        // toolStripMain_Open
+        // 
+        toolStripMain_Open.Name = "toolStripMain_Open";
+        toolStripMain_Open.Size = new Size(47, 24);
+        toolStripMain_Open.Text = "Open";
+        toolStripMain_Open.TextImageRelation = TextImageRelation.ImageAboveText;
+        toolStripMain_Open.Click += Open_Click;
+        // 
+        // toolStripMain_Export
+        // 
+        toolStripMain_Export.Name = "toolStripMain_Export";
+        toolStripMain_Export.Size = new Size(52, 24);
+        toolStripMain_Export.Text = "Export";
+        toolStripMain_Export.TextImageRelation = TextImageRelation.ImageAboveText;
+        toolStripMain_Export.Click += Export_Click;
+        // 
+        // toolStripSeparator1
+        // 
+        toolStripSeparator1.Name = "toolStripSeparator1";
+        toolStripSeparator1.Size = new Size(6, 27);
+        // 
+        // stripComboSeries
+        // 
+        stripComboSeries.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        stripComboSeries.DropDownHeight = 110;
+        stripComboSeries.DropDownWidth = 122;
+        stripComboSeries.FlatStyle = FlatStyle.Standard;
+        stripComboSeries.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+        stripComboSeries.IntegralHeight = false;
+        stripComboSeries.MaxDropDownItems = 9;
+        stripComboSeries.MergeAction = MergeAction.MatchOnly;
+        stripComboSeries.Name = "stripComboSeries";
+        stripComboSeries.Size = new Size(120, 27);
+        stripComboSeries.ToolTipText = "Select data series";
+        stripComboSeries.SelectedIndexChanged += ComboSeries_SelectedIndexChanged;
+        // 
+        // stripComboWindows
+        // 
+        stripComboWindows.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        stripComboWindows.DropDownHeight = 110;
+        stripComboWindows.DropDownWidth = 122;
+        stripComboWindows.FlatStyle = FlatStyle.Standard;
+        stripComboWindows.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+        stripComboWindows.IntegralHeight = false;
+        stripComboWindows.MaxDropDownItems = 9;
+        stripComboWindows.MergeAction = MergeAction.MatchOnly;
+        stripComboWindows.Name = "stripComboWindows";
+        stripComboWindows.Size = new Size(120, 27);
+        stripComboWindows.ToolTipText = "Select FFT window";
+        stripComboWindows.SelectedIndexChanged += ComboWindow_SelectedIndexChanged;
+        // 
+        // toolStripSeparator2
+        // 
+        toolStripSeparator2.Name = "toolStripSeparator2";
+        toolStripSeparator2.Size = new Size(6, 27);
+        // 
+        // toolStripMain_Settings
+        // 
+        toolStripMain_Settings.ImageTransparentColor = Color.Magenta;
+        toolStripMain_Settings.Name = "toolStripMain_Settings";
+        toolStripMain_Settings.Size = new Size(62, 24);
+        toolStripMain_Settings.Text = "Settings";
+        toolStripMain_Settings.TextImageRelation = TextImageRelation.ImageAboveText;
+        toolStripMain_Settings.ToolTipText = "Settings for plots, data, and UI";
+        toolStripMain_Settings.Click += Settings_Click;
+        // 
+        // toolStripSeparator3
+        // 
+        toolStripSeparator3.Name = "toolStripSeparator3";
+        toolStripSeparator3.Size = new Size(6, 27);
+        // 
+        // toolStripMain_About
+        // 
+        toolStripMain_About.ImageTransparentColor = Color.Magenta;
+        toolStripMain_About.Name = "toolStripMain_About";
+        toolStripMain_About.Size = new Size(51, 24);
+        toolStripMain_About.Text = "About";
+        toolStripMain_About.TextImageRelation = TextImageRelation.ImageAboveText;
+        toolStripMain_About.ToolTipText = "About this software";
+        toolStripMain_About.Click += About_Click;
+        // 
+        // statusStrip
+        // 
+        statusStrip.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+        statusStrip.Items.AddRange(new ToolStripItem[] { statusStripLabelEmpty, statusStripLabelCulture, statusStripLabelExPower, statusStripLabelExCumulative, statusStripLabelExEntropy, statusStripLabelExCrossHair });
+        statusStrip.Location = new Point(0, 693);
+        statusStrip.Name = "statusStrip";
+        statusStrip.RenderMode = ToolStripRenderMode.Professional;
+        statusStrip.ShowItemToolTips = true;
+        statusStrip.Size = new Size(884, 28);
+        statusStrip.TabIndex = 1;
+        statusStrip.Text = "Status bar";
+        // 
+        // statusStripLabelEmpty
+        // 
+        statusStripLabelEmpty.BorderSides = ToolStripStatusLabelBorderSides.Right;
+        statusStripLabelEmpty.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelEmpty.Name = "statusStripLabelEmpty";
+        statusStripLabelEmpty.Size = new Size(687, 23);
+        statusStripLabelEmpty.Spring = true;
+        statusStripLabelEmpty.TextAlign = ContentAlignment.MiddleLeft;
+        // 
+        // statusStripLabelCulture
+        // 
+        statusStripLabelCulture.AutoSize = false;
+        statusStripLabelCulture.BorderSides = ToolStripStatusLabelBorderSides.Right;
+        statusStripLabelCulture.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelCulture.Name = "statusStripLabelCulture";
+        statusStripLabelCulture.Size = new Size(70, 23);
+        statusStripLabelCulture.ToolTipText = "User interface language";
+        statusStripLabelCulture.Click += Language_Click;
+        // 
+        // statusStripLabelExPower
+        // 
+        statusStripLabelExPower.AutoSize = false;
+        statusStripLabelExPower.BackColor = Color.Transparent;
+        statusStripLabelExPower.Checked = true;
+        statusStripLabelExPower.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExPower.ForeColor = Color.Black;
+        statusStripLabelExPower.ForeColorChecked = Color.Black;
+        statusStripLabelExPower.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExPower.Name = "statusStripLabelExPower";
+        statusStripLabelExPower.Size = new Size(28, 23);
+        statusStripLabelExPower.Text = "P";
+        statusStripLabelExPower.ToolTipText = "Power spectra (dB)";
+        statusStripLabelExPower.Click += LabelEx_Click;
+        // 
+        // statusStripLabelExCumulative
+        // 
+        statusStripLabelExCumulative.AutoSize = false;
+        statusStripLabelExCumulative.BackColor = Color.Transparent;
+        statusStripLabelExCumulative.Checked = false;
+        statusStripLabelExCumulative.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExCumulative.ForeColor = Color.LightGray;
+        statusStripLabelExCumulative.ForeColorChecked = Color.Black;
+        statusStripLabelExCumulative.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExCumulative.Name = "statusStripLabelExCumulative";
+        statusStripLabelExCumulative.Size = new Size(28, 23);
+        statusStripLabelExCumulative.Text = "F";
+        statusStripLabelExCumulative.ToolTipText = "Cumulative fractal dimension";
+        statusStripLabelExCumulative.Click += LabelEx_Click;
+        // 
+        // statusStripLabelExEntropy
+        // 
+        statusStripLabelExEntropy.AutoSize = false;
+        statusStripLabelExEntropy.BackColor = Color.Transparent;
+        statusStripLabelExEntropy.Checked = false;
+        statusStripLabelExEntropy.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExEntropy.ForeColor = Color.LightGray;
+        statusStripLabelExEntropy.ForeColorChecked = Color.Black;
+        statusStripLabelExEntropy.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExEntropy.Name = "statusStripLabelExEntropy";
+        statusStripLabelExEntropy.Size = new Size(28, 23);
+        statusStripLabelExEntropy.Text = "E";
+        statusStripLabelExEntropy.ToolTipText = "Approximate and sample entropy";
+        statusStripLabelExEntropy.Click += LabelEx_Click;
+        // 
+        // statusStripLabelExCrossHair
+        // 
+        statusStripLabelExCrossHair.AutoSize = false;
+        statusStripLabelExCrossHair.BackColor = Color.Transparent;
+        statusStripLabelExCrossHair.Checked = false;
+        statusStripLabelExCrossHair.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExCrossHair.ForeColor = Color.LightGray;
+        statusStripLabelExCrossHair.ForeColorChecked = Color.Black;
+        statusStripLabelExCrossHair.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExCrossHair.Name = "statusStripLabelExCrossHair";
+        statusStripLabelExCrossHair.Size = new Size(28, 23);
+        statusStripLabelExCrossHair.Text = "C";
+        statusStripLabelExCrossHair.ToolTipText = "Plot's crosshair mode";
+        statusStripLabelExCrossHair.Click += LabelEx_Click;
+        // 
+        // tableLayoutPanel4
+        // 
+        tableLayoutPanel4.ColumnCount = 2;
+        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        tableLayoutPanel4.Controls.Add(plotFFT, 0, 0);
+        tableLayoutPanel4.Controls.Add(plotDerivative, 1, 0);
+        tableLayoutPanel4.Dock = DockStyle.Fill;
+        tableLayoutPanel4.Location = new Point(0, 346);
+        tableLayoutPanel4.Margin = new Padding(0);
+        tableLayoutPanel4.Name = "tableLayoutPanel4";
+        tableLayoutPanel4.RowCount = 1;
+        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+        tableLayoutPanel4.Size = new Size(860, 173);
+        tableLayoutPanel4.TabIndex = 2;
+        // 
+        // plotFFT
+        // 
+        plotFFT.BackColor = Color.Transparent;
+        plotFFT.CrossHairColor = Color.Red;
+        plotFFT.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotFFT.Dock = DockStyle.Fill;
+        plotFFT.Location = new Point(4, 3);
+        plotFFT.Margin = new Padding(4, 3, 4, 3);
+        plotFFT.Name = "plotFFT";
+        plotFFT.ShowCrossHair = false;
+        plotFFT.ShowCrossHairHorizontal = false;
+        plotFFT.ShowCrossHairVertical = false;
+        plotFFT.Size = new Size(422, 167);
+        plotFFT.SnapToPoint = false;
+        plotFFT.TabIndex = 3;
+        // 
+        // plotDerivative
+        // 
+        plotDerivative.Dock = DockStyle.Fill;
+        plotDerivative.Location = new Point(434, 3);
+        plotDerivative.Margin = new Padding(4, 3, 4, 3);
+        plotDerivative.Name = "plotDerivative";
+        plotDerivative.Size = new Size(422, 167);
+        plotDerivative.TabIndex = 4;
+        // 
+        // FrmMain
+        // 
+        AutoScaleDimensions = new SizeF(7F, 17F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(884, 721);
+        Controls.Add(tableLayoutPanel1);
+        Controls.Add(toolStripMain);
+        Controls.Add(statusStrip);
+        Controls.Add(tspBottom);
+        Controls.Add(tspTop);
+        Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+        KeyPreview = true;
+        MinimumSize = new Size(900, 760);
+        Name = "FrmMain";
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "Signal analysis";
+        FormClosing += FrmMain_FormClosing;
+        Shown += FrmMain_Shown;
+        KeyPress += FrmMain_KeyPress;
+        tableLayoutPanel1.ResumeLayout(false);
+        tableLayoutPanel1.PerformLayout();
+        tableLayoutPanel2.ResumeLayout(false);
+        tableLayoutPanel3.ResumeLayout(false);
+        toolStripMain.ResumeLayout(false);
+        toolStripMain.PerformLayout();
+        statusStrip.ResumeLayout(false);
+        statusStrip.PerformLayout();
+        tableLayoutPanel4.ResumeLayout(false);
+        ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
@@ -497,7 +508,6 @@ partial class FrmMain
     private ScottPlot.FormsPlotCrossHair plotApplied;
     private ScottPlot.FormsPlotCrossHair plotFractal;
     private ScottPlot.FormsPlotCrossHair plotFractalDistribution;
-    private ScottPlot.FormsPlotCrossHair plotFFT;
     private System.Windows.Forms.TextBox txtStats;
     private System.Windows.Forms.StatusStrip statusStrip;
     private System.Windows.Forms.ToolStripPanel tspTop;
@@ -519,4 +529,7 @@ partial class FrmMain
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExCumulative;
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExEntropy;
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExCrossHair;
+    private TableLayoutPanel tableLayoutPanel4;
+    private ScottPlot.FormsPlotCrossHair plotFFT;
+    private ScottPlot.FormsPlotCrossHair plotDerivative;
 }

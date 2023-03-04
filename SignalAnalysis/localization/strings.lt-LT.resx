@@ -516,4 +516,10 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Vartotojo sąsajos kalba</value>
   </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Laikas (sekundės)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>Amplitudė / sekundės</value>
+  </data>
 </root>

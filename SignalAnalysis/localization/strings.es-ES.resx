@@ -520,4 +520,13 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Idioma de la interfaz de usuario</value>
   </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivada</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tiempo (segundos)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>Amplitud / segundos</value>
+  </data>
 </root>

@@ -519,4 +519,10 @@
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>ইউজার ইন্টারফেস ভাষা</value>
   </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>সময় (সেকেন্ড)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>প্রশস্ততা / সেকেন্ড</value>
+  </data>
 </root>

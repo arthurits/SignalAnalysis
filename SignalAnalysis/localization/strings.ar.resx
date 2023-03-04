@@ -519,4 +519,10 @@
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>لغة واجهة المستخدم</value>
   </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>الوقت (ثواني)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>السعة / واني</value>
+  </data>
 </root>

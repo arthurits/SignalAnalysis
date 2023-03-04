@@ -6,7 +6,7 @@ public partial class FrmMain : Form
     ClassSettings _settings = new();
     SignalStats Results = new();
     SignalData Signal = new();
-    
+
     // Task variables
     Task statsTask = Task.CompletedTask;
     private CancellationTokenSource tokenSource = new();
@@ -43,7 +43,7 @@ public partial class FrmMain : Form
         // Signal the native process (that launched us) to close the splash screen
         using var closeSplashEvent = new System.Threading.EventWaitHandle(false, System.Threading.EventResetMode.ManualReset, "CloseSplashScreenEvent");
         closeSplashEvent.Set();
-        
+
         // Move the focus away in order to deselect the text
         this.tableLayoutPanel1.Focus();
     }

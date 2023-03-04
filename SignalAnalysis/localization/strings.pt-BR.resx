@@ -519,4 +519,10 @@ foi interrompida.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Linguagem da Interface</value>
   </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tempo (segundos)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+    <value>Amplitude / segundos</value>
+  </data>
 </root>
