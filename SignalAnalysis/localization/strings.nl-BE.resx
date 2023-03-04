@@ -524,4 +524,7 @@ dimensie is gestopt.</value>
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>Amplitude / seconden</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Afgeleide</value>
+  </data>
 </root>

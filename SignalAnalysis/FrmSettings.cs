@@ -62,7 +62,13 @@ public partial class FrmSettings : Form
 
         Settings.AppCulture = _culture;
 
-        DialogResult = DialogResult.OK;
+        Settings.ExportDerivative = chkComputeDerivative.Checked;
+        Settings.DerivativeAlgorithm = DerivativeMethod.BackwardOnePoint;
+        if (radForwardOne.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.ForwardOnePoint;
+        if (radCentralThree.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.CenteredThreePoint;
+        if (radCentralFive.Checked) Settings.DerivativeAlgorithm= DerivativeMethod.CenteredFivePoint;
+
+            DialogResult = DialogResult.OK;
     }
 
     private void Cancel_Click(object sender, EventArgs e)
@@ -166,6 +172,24 @@ public partial class FrmSettings : Form
 
         chkDlgPath.Checked = settings.RememberFileDialogPath;
         txtDataFormat.Text = settings.DataFormat;
+
+        chkComputeDerivative.Checked = settings.ComputeDerivative;
+        chkDerivative.Checked = settings.ExportDerivative;
+        switch (settings.DerivativeAlgorithm)
+        {
+            case DerivativeMethod.BackwardOnePoint:
+                radBackwardOne.Checked = true;
+                break;
+            case DerivativeMethod.ForwardOnePoint:
+                radForwardOne.Checked = true;
+                break;
+            case DerivativeMethod.CenteredThreePoint:
+                radCentralThree.Checked = true;
+                break;
+            case DerivativeMethod.CenteredFivePoint:
+                radCentralFive.Checked = true;
+                break;
+        }
     }
 
     /// <summary>
@@ -222,6 +246,13 @@ public partial class FrmSettings : Form
         this.chkDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
 
+        //this.chkComputeDerivative.Text=
+        //    this.chkDerivative.Text=
+        //    this.radBackwardOne.Text=
+        //    this.radForwardOne.Text=
+        //    this.radCentralThree.Text=
+        //    this.radCentralFive.Text=
+
         this.btnReset.Text = StringResources.BtnReset;
         this.btnCancel.Text = StringResources.BtnCancel;
         this.btnAccept.Text = StringResources.BtnAccept;
@@ -243,5 +274,18 @@ public partial class FrmSettings : Form
 
         this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
+    }
+
+    private void radBackwardOne_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void radCentralFive_CheckedChanged(object sender, EventArgs e)
+    {
+    }
+
+    private void radCentralThree_CheckedChanged(object sender, EventArgs e)
+    {
     }
 }

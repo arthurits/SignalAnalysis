@@ -149,10 +149,36 @@ partial class FrmMain
         // Run the intensive code on a separate task
         statsTask = Task.Run(() =>
         {
-            Derivative<int> derivative = new(func, 1 / Signal.SampleFrequency, DerivativeMethod.CenteredFivePoint);
+            DerivativeMethod method = DerivativeMethod.BackwardOnePoint;
+            int indexStart = 1, indexEnd = signal.Length;
+            switch (_settings.DerivativeAlgorithm)
+            {
+                case DerivativeMethod.BackwardOnePoint:
+                    indexStart = 1;
+                    indexEnd = signal.Length;
+                    method = DerivativeMethod.BackwardOnePoint;
+                    break;
+                case DerivativeMethod.ForwardOnePoint:
+                    indexStart = 0;
+                    indexEnd = signal.Length - 1;
+                    method = DerivativeMethod.ForwardOnePoint;
+                    break;
+                case DerivativeMethod.CenteredThreePoint:
+                    indexStart = 1;
+                    indexEnd = signal.Length - 1;
+                    method = DerivativeMethod.CenteredThreePoint;
+                    break;
+                case DerivativeMethod.CenteredFivePoint:
+                    indexStart = 2;
+                    indexEnd = signal.Length - 2;
+                    method = DerivativeMethod.CenteredFivePoint;
+                    break;
+            }
+
+            Derivative<int> derivative = new(func, 1 / Signal.SampleFrequency, method);
             Results.Derivative = new double[signal.Length];
 
-            for (int i = 2; i < signal.Length - 2; i++)
+            for (int i = indexStart; i < indexEnd; i++)
                 Results.Derivative[i] = derivative[i];
         });
         await statsTask;
@@ -164,17 +190,17 @@ partial class FrmMain
         {
             case AxisType.Points:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, label: "Derivative");
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, label: StringResources.FileHeader28);
                 plotDerivative.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, label: "Derivative");
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, label: StringResources.FileHeader28);
                 plotDerivative.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, label: "Derivative");
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, label: StringResources.FileHeader28);
                 pOriginal.OffsetX = Signal.StartTime.ToOADate();
                 plotDerivative.Plot.XAxis.DateTimeFormat(true);
                 break;
@@ -182,7 +208,7 @@ partial class FrmMain
 
         pOriginal.YAxisIndex = 0;
         pOriginal.XAxisIndex = 0;
-        pDerivative.YAxisIndex = 0;
+        pDerivative.YAxisIndex = 1;
         plotDerivative.Plot.YAxis2.Ticks(true);
         plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
 
@@ -236,7 +262,9 @@ partial class FrmMain
         UpdateFractal(signal, seriesName ?? string.Empty, _settings.CumulativeDimension);
         UpdateFractalDistribution(Results.FractalDimension, Results.FractalVariance);
         await UpdateWindowPlots(signal);
-        await UpdateDerivative(signal, seriesName ?? string.Empty);
+        
+        if (_settings.ComputeDerivative)
+            await UpdateDerivative(signal, seriesName ?? string.Empty);
 
         txtStats.Text = Results.ToString(_settings.AppCulture);
 

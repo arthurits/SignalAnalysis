@@ -125,6 +125,24 @@ public class ClassSettings
     [JsonIgnore]
     public string? AppPath { get; set; } = Path.GetDirectoryName(Environment.ProcessPath);
 
+    /// <summary>
+    /// True if the derivative data is also exported
+    /// </summary>
+    [JsonPropertyName("Export derivative?")]
+    public bool ExportDerivative { get; set; } = true;
+
+    /// <summary>
+    /// True if the derivative will be computed
+    /// </summary>
+    [JsonPropertyName("Compute derivative?")]
+    public bool ComputeDerivative { get; set; } = true;
+
+    /// <summary>
+    /// Numerical derivative algorithm
+    /// </summary>
+    [JsonPropertyName("Derivative algorithm")]
+    public DerivativeMethod DerivativeAlgorithm { get; set; } = DerivativeMethod.CenteredThreePoint;
+
     public ClassSettings()
     {
     }

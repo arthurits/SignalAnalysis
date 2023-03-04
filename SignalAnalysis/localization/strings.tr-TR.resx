@@ -525,4 +525,7 @@ boyut durdurulmuştur.</value>
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>Genlik / saniye</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Türetilmiş</value>
+  </data>
 </root>

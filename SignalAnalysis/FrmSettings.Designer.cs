@@ -28,348 +28,455 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.tabSettings = new System.Windows.Forms.TabControl();
-            this.tabPlot = new System.Windows.Forms.TabPage();
-            this.chkCrossHair = new System.Windows.Forms.CheckBox();
-            this.chkEntropy = new System.Windows.Forms.CheckBox();
-            this.chkCumulative = new System.Windows.Forms.CheckBox();
-            this.chkPower = new System.Windows.Forms.CheckBox();
-            this.grpAxis = new System.Windows.Forms.GroupBox();
-            this.radTime = new System.Windows.Forms.RadioButton();
-            this.radSeconds = new System.Windows.Forms.RadioButton();
-            this.radPoints = new System.Windows.Forms.RadioButton();
-            this.txtEnd = new System.Windows.Forms.TextBox();
-            this.txtStart = new System.Windows.Forms.TextBox();
-            this.lblEnd = new System.Windows.Forms.Label();
-            this.lblStart = new System.Windows.Forms.Label();
-            this.tabGUI = new System.Windows.Forms.TabPage();
-            this.txtDataFormat = new System.Windows.Forms.TextBox();
-            this.lblDataFormat = new System.Windows.Forms.Label();
-            this.grpCulture = new System.Windows.Forms.GroupBox();
-            this.cboAllCultures = new System.Windows.Forms.ComboBox();
-            this.radUserCulture = new System.Windows.Forms.RadioButton();
-            this.radInvariantCulture = new System.Windows.Forms.RadioButton();
-            this.radCurrentCulture = new System.Windows.Forms.RadioButton();
-            this.chkDlgPath = new System.Windows.Forms.CheckBox();
-            this.btnReset = new System.Windows.Forms.Button();
-            this.tabSettings.SuspendLayout();
-            this.tabPlot.SuspendLayout();
-            this.grpAxis.SuspendLayout();
-            this.tabGUI.SuspendLayout();
-            this.grpCulture.SuspendLayout();
-            this.SuspendLayout();
+            btnCancel = new Button();
+            btnAccept = new Button();
+            tabSettings = new TabControl();
+            tabPlot = new TabPage();
+            chkCrossHair = new CheckBox();
+            chkEntropy = new CheckBox();
+            chkCumulative = new CheckBox();
+            chkPower = new CheckBox();
+            grpAxis = new GroupBox();
+            radTime = new RadioButton();
+            radSeconds = new RadioButton();
+            radPoints = new RadioButton();
+            txtEnd = new TextBox();
+            txtStart = new TextBox();
+            lblEnd = new Label();
+            lblStart = new Label();
+            tabGUI = new TabPage();
+            txtDataFormat = new TextBox();
+            lblDataFormat = new Label();
+            grpCulture = new GroupBox();
+            cboAllCultures = new ComboBox();
+            radUserCulture = new RadioButton();
+            radInvariantCulture = new RadioButton();
+            radCurrentCulture = new RadioButton();
+            chkDlgPath = new CheckBox();
+            tabDerivative = new TabPage();
+            chkComputeDerivative = new CheckBox();
+            grpDerivativeMethods = new GroupBox();
+            radCentralFive = new RadioButton();
+            radCentralThree = new RadioButton();
+            radForwardOne = new RadioButton();
+            radBackwardOne = new RadioButton();
+            chkDerivative = new CheckBox();
+            btnReset = new Button();
+            tabSettings.SuspendLayout();
+            tabPlot.SuspendLayout();
+            grpAxis.SuspendLayout();
+            tabGUI.SuspendLayout();
+            grpCulture.SuspendLayout();
+            tabDerivative.SuspendLayout();
+            grpDerivativeMethods.SuspendLayout();
+            SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(255, 279);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 30);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.Cancel_Click);
+            btnCancel.Location = new Point(255, 279);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(100, 30);
+            btnCancel.TabIndex = 5;
+            btnCancel.Text = "&Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += Cancel_Click;
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(361, 279);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(100, 30);
-            this.btnAccept.TabIndex = 6;
-            this.btnAccept.Text = "&Accept";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.Accept_Click);
+            btnAccept.Location = new Point(361, 279);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(100, 30);
+            btnAccept.TabIndex = 6;
+            btnAccept.Text = "&Accept";
+            btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += Accept_Click;
             // 
             // tabSettings
             // 
-            this.tabSettings.Controls.Add(this.tabPlot);
-            this.tabSettings.Controls.Add(this.tabGUI);
-            this.tabSettings.Location = new System.Drawing.Point(12, 14);
-            this.tabSettings.Name = "tabSettings";
-            this.tabSettings.SelectedIndex = 0;
-            this.tabSettings.Size = new System.Drawing.Size(449, 259);
-            this.tabSettings.TabIndex = 11;
+            tabSettings.Controls.Add(tabPlot);
+            tabSettings.Controls.Add(tabGUI);
+            tabSettings.Controls.Add(tabDerivative);
+            tabSettings.Location = new Point(12, 14);
+            tabSettings.Name = "tabSettings";
+            tabSettings.SelectedIndex = 0;
+            tabSettings.Size = new Size(449, 259);
+            tabSettings.TabIndex = 11;
             // 
             // tabPlot
             // 
-            this.tabPlot.Controls.Add(this.chkCrossHair);
-            this.tabPlot.Controls.Add(this.chkEntropy);
-            this.tabPlot.Controls.Add(this.chkCumulative);
-            this.tabPlot.Controls.Add(this.chkPower);
-            this.tabPlot.Controls.Add(this.grpAxis);
-            this.tabPlot.Controls.Add(this.txtEnd);
-            this.tabPlot.Controls.Add(this.txtStart);
-            this.tabPlot.Controls.Add(this.lblEnd);
-            this.tabPlot.Controls.Add(this.lblStart);
-            this.tabPlot.Location = new System.Drawing.Point(4, 26);
-            this.tabPlot.Name = "tabPlot";
-            this.tabPlot.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlot.Size = new System.Drawing.Size(441, 229);
-            this.tabPlot.TabIndex = 0;
-            this.tabPlot.Text = "Plotting";
-            this.tabPlot.UseVisualStyleBackColor = true;
+            tabPlot.Controls.Add(chkCrossHair);
+            tabPlot.Controls.Add(chkEntropy);
+            tabPlot.Controls.Add(chkCumulative);
+            tabPlot.Controls.Add(chkPower);
+            tabPlot.Controls.Add(grpAxis);
+            tabPlot.Controls.Add(txtEnd);
+            tabPlot.Controls.Add(txtStart);
+            tabPlot.Controls.Add(lblEnd);
+            tabPlot.Controls.Add(lblStart);
+            tabPlot.Location = new Point(4, 26);
+            tabPlot.Name = "tabPlot";
+            tabPlot.Padding = new Padding(3);
+            tabPlot.Size = new Size(441, 229);
+            tabPlot.TabIndex = 0;
+            tabPlot.Text = "Plotting";
+            tabPlot.UseVisualStyleBackColor = true;
             // 
             // chkCrossHair
             // 
-            this.chkCrossHair.AutoSize = true;
-            this.chkCrossHair.Location = new System.Drawing.Point(17, 194);
-            this.chkCrossHair.Name = "chkCrossHair";
-            this.chkCrossHair.Size = new System.Drawing.Size(156, 23);
-            this.chkCrossHair.TabIndex = 19;
-            this.chkCrossHair.Text = "Show plot\'s crosshair";
-            this.chkCrossHair.UseVisualStyleBackColor = true;
+            chkCrossHair.AutoSize = true;
+            chkCrossHair.Location = new Point(17, 194);
+            chkCrossHair.Name = "chkCrossHair";
+            chkCrossHair.Size = new Size(156, 23);
+            chkCrossHair.TabIndex = 19;
+            chkCrossHair.Text = "Show plot's crosshair";
+            chkCrossHair.UseVisualStyleBackColor = true;
             // 
             // chkEntropy
             // 
-            this.chkEntropy.AutoSize = true;
-            this.chkEntropy.Location = new System.Drawing.Point(17, 163);
-            this.chkEntropy.Name = "chkEntropy";
-            this.chkEntropy.Size = new System.Drawing.Size(226, 23);
-            this.chkEntropy.TabIndex = 18;
-            this.chkEntropy.Text = "Entropy (approximate && sample)";
-            this.chkEntropy.UseVisualStyleBackColor = true;
+            chkEntropy.AutoSize = true;
+            chkEntropy.Location = new Point(17, 163);
+            chkEntropy.Name = "chkEntropy";
+            chkEntropy.Size = new Size(226, 23);
+            chkEntropy.TabIndex = 18;
+            chkEntropy.Text = "Entropy (approximate && sample)";
+            chkEntropy.UseVisualStyleBackColor = true;
             // 
             // chkCumulative
             // 
-            this.chkCumulative.AutoSize = true;
-            this.chkCumulative.Location = new System.Drawing.Point(17, 132);
-            this.chkCumulative.Name = "chkCumulative";
-            this.chkCumulative.Size = new System.Drawing.Size(205, 23);
-            this.chkCumulative.TabIndex = 17;
-            this.chkCumulative.Text = "Cumulative fractal dimension";
-            this.chkCumulative.UseVisualStyleBackColor = true;
+            chkCumulative.AutoSize = true;
+            chkCumulative.Location = new Point(17, 132);
+            chkCumulative.Name = "chkCumulative";
+            chkCumulative.Size = new Size(205, 23);
+            chkCumulative.TabIndex = 17;
+            chkCumulative.Text = "Cumulative fractal dimension";
+            chkCumulative.UseVisualStyleBackColor = true;
             // 
             // chkPower
             // 
-            this.chkPower.AutoSize = true;
-            this.chkPower.Location = new System.Drawing.Point(17, 101);
-            this.chkPower.Name = "chkPower";
-            this.chkPower.Size = new System.Drawing.Size(93, 23);
-            this.chkPower.TabIndex = 16;
-            this.chkPower.Text = "Power (dB)";
-            this.chkPower.UseVisualStyleBackColor = true;
+            chkPower.AutoSize = true;
+            chkPower.Location = new Point(17, 101);
+            chkPower.Name = "chkPower";
+            chkPower.Size = new Size(93, 23);
+            chkPower.TabIndex = 16;
+            chkPower.Text = "Power (dB)";
+            chkPower.UseVisualStyleBackColor = true;
             // 
             // grpAxis
             // 
-            this.grpAxis.Controls.Add(this.radTime);
-            this.grpAxis.Controls.Add(this.radSeconds);
-            this.grpAxis.Controls.Add(this.radPoints);
-            this.grpAxis.Location = new System.Drawing.Point(257, 12);
-            this.grpAxis.Name = "grpAxis";
-            this.grpAxis.Size = new System.Drawing.Size(168, 146);
-            this.grpAxis.TabIndex = 15;
-            this.grpAxis.TabStop = false;
-            this.grpAxis.Text = "Abscissa axis";
+            grpAxis.Controls.Add(radTime);
+            grpAxis.Controls.Add(radSeconds);
+            grpAxis.Controls.Add(radPoints);
+            grpAxis.Location = new Point(257, 12);
+            grpAxis.Name = "grpAxis";
+            grpAxis.Size = new Size(168, 146);
+            grpAxis.TabIndex = 15;
+            grpAxis.TabStop = false;
+            grpAxis.Text = "Abscissa axis";
             // 
             // radTime
             // 
-            this.radTime.AutoSize = true;
-            this.radTime.Location = new System.Drawing.Point(22, 105);
-            this.radTime.Name = "radTime";
-            this.radTime.Size = new System.Drawing.Size(114, 23);
-            this.radTime.TabIndex = 2;
-            this.radTime.TabStop = true;
-            this.radTime.Text = "Date and time";
-            this.radTime.UseVisualStyleBackColor = true;
+            radTime.AutoSize = true;
+            radTime.Location = new Point(22, 105);
+            radTime.Name = "radTime";
+            radTime.Size = new Size(114, 23);
+            radTime.TabIndex = 2;
+            radTime.TabStop = true;
+            radTime.Text = "Date and time";
+            radTime.UseVisualStyleBackColor = true;
             // 
             // radSeconds
             // 
-            this.radSeconds.AutoSize = true;
-            this.radSeconds.Location = new System.Drawing.Point(22, 67);
-            this.radSeconds.Name = "radSeconds";
-            this.radSeconds.Size = new System.Drawing.Size(77, 23);
-            this.radSeconds.TabIndex = 1;
-            this.radSeconds.TabStop = true;
-            this.radSeconds.Text = "Seconds";
-            this.radSeconds.UseVisualStyleBackColor = true;
+            radSeconds.AutoSize = true;
+            radSeconds.Location = new Point(22, 67);
+            radSeconds.Name = "radSeconds";
+            radSeconds.Size = new Size(77, 23);
+            radSeconds.TabIndex = 1;
+            radSeconds.TabStop = true;
+            radSeconds.Text = "Seconds";
+            radSeconds.UseVisualStyleBackColor = true;
             // 
             // radPoints
             // 
-            this.radPoints.AutoSize = true;
-            this.radPoints.Location = new System.Drawing.Point(22, 30);
-            this.radPoints.Name = "radPoints";
-            this.radPoints.Size = new System.Drawing.Size(98, 23);
-            this.radPoints.TabIndex = 0;
-            this.radPoints.TabStop = true;
-            this.radPoints.Text = "Data points";
-            this.radPoints.UseVisualStyleBackColor = true;
+            radPoints.AutoSize = true;
+            radPoints.Location = new Point(22, 30);
+            radPoints.Name = "radPoints";
+            radPoints.Size = new Size(98, 23);
+            radPoints.TabIndex = 0;
+            radPoints.TabStop = true;
+            radPoints.Text = "Data points";
+            radPoints.UseVisualStyleBackColor = true;
             // 
             // txtEnd
             // 
-            this.txtEnd.Location = new System.Drawing.Point(164, 58);
-            this.txtEnd.Name = "txtEnd";
-            this.txtEnd.Size = new System.Drawing.Size(71, 25);
-            this.txtEnd.TabIndex = 14;
+            txtEnd.Location = new Point(164, 58);
+            txtEnd.Name = "txtEnd";
+            txtEnd.Size = new Size(71, 25);
+            txtEnd.TabIndex = 14;
             // 
             // txtStart
             // 
-            this.txtStart.Location = new System.Drawing.Point(164, 17);
-            this.txtStart.Name = "txtStart";
-            this.txtStart.Size = new System.Drawing.Size(71, 25);
-            this.txtStart.TabIndex = 13;
+            txtStart.Location = new Point(164, 17);
+            txtStart.Name = "txtStart";
+            txtStart.Size = new Size(71, 25);
+            txtStart.TabIndex = 13;
             // 
             // lblEnd
             // 
-            this.lblEnd.AutoSize = true;
-            this.lblEnd.Location = new System.Drawing.Point(13, 61);
-            this.lblEnd.MaximumSize = new System.Drawing.Size(150, 0);
-            this.lblEnd.Name = "lblEnd";
-            this.lblEnd.Size = new System.Drawing.Size(108, 19);
-            this.lblEnd.TabIndex = 12;
-            this.lblEnd.Text = "Array index end:";
+            lblEnd.AutoSize = true;
+            lblEnd.Location = new Point(13, 61);
+            lblEnd.MaximumSize = new Size(150, 0);
+            lblEnd.Name = "lblEnd";
+            lblEnd.Size = new Size(108, 19);
+            lblEnd.TabIndex = 12;
+            lblEnd.Text = "Array index end:";
             // 
             // lblStart
             // 
-            this.lblStart.AutoSize = true;
-            this.lblStart.Location = new System.Drawing.Point(13, 20);
-            this.lblStart.MaximumSize = new System.Drawing.Size(150, 0);
-            this.lblStart.Name = "lblStart";
-            this.lblStart.Size = new System.Drawing.Size(113, 19);
-            this.lblStart.TabIndex = 11;
-            this.lblStart.Text = "Array index start:";
+            lblStart.AutoSize = true;
+            lblStart.Location = new Point(13, 20);
+            lblStart.MaximumSize = new Size(150, 0);
+            lblStart.Name = "lblStart";
+            lblStart.Size = new Size(113, 19);
+            lblStart.TabIndex = 11;
+            lblStart.Text = "Array index start:";
             // 
             // tabGUI
             // 
-            this.tabGUI.Controls.Add(this.txtDataFormat);
-            this.tabGUI.Controls.Add(this.lblDataFormat);
-            this.tabGUI.Controls.Add(this.grpCulture);
-            this.tabGUI.Controls.Add(this.chkDlgPath);
-            this.tabGUI.Location = new System.Drawing.Point(4, 24);
-            this.tabGUI.Name = "tabGUI";
-            this.tabGUI.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGUI.Size = new System.Drawing.Size(441, 231);
-            this.tabGUI.TabIndex = 1;
-            this.tabGUI.Text = "User interface";
-            this.tabGUI.UseVisualStyleBackColor = true;
+            tabGUI.Controls.Add(txtDataFormat);
+            tabGUI.Controls.Add(lblDataFormat);
+            tabGUI.Controls.Add(grpCulture);
+            tabGUI.Controls.Add(chkDlgPath);
+            tabGUI.Location = new Point(4, 24);
+            tabGUI.Name = "tabGUI";
+            tabGUI.Padding = new Padding(3);
+            tabGUI.Size = new Size(441, 231);
+            tabGUI.TabIndex = 1;
+            tabGUI.Text = "User interface";
+            tabGUI.UseVisualStyleBackColor = true;
             // 
             // txtDataFormat
             // 
-            this.txtDataFormat.Location = new System.Drawing.Point(260, 185);
-            this.txtDataFormat.Name = "txtDataFormat";
-            this.txtDataFormat.Size = new System.Drawing.Size(74, 25);
-            this.txtDataFormat.TabIndex = 3;
+            txtDataFormat.Location = new Point(260, 185);
+            txtDataFormat.Name = "txtDataFormat";
+            txtDataFormat.Size = new Size(74, 25);
+            txtDataFormat.TabIndex = 3;
             // 
             // lblDataFormat
             // 
-            this.lblDataFormat.AutoSize = true;
-            this.lblDataFormat.Location = new System.Drawing.Point(19, 188);
-            this.lblDataFormat.MaximumSize = new System.Drawing.Size(240, 0);
-            this.lblDataFormat.Name = "lblDataFormat";
-            this.lblDataFormat.Size = new System.Drawing.Size(201, 19);
-            this.lblDataFormat.TabIndex = 2;
-            this.lblDataFormat.Text = "Numeric data-formatting string";
+            lblDataFormat.AutoSize = true;
+            lblDataFormat.Location = new Point(19, 188);
+            lblDataFormat.MaximumSize = new Size(240, 0);
+            lblDataFormat.Name = "lblDataFormat";
+            lblDataFormat.Size = new Size(201, 19);
+            lblDataFormat.TabIndex = 2;
+            lblDataFormat.Text = "Numeric data-formatting string";
             // 
             // grpCulture
             // 
-            this.grpCulture.Controls.Add(this.cboAllCultures);
-            this.grpCulture.Controls.Add(this.radUserCulture);
-            this.grpCulture.Controls.Add(this.radInvariantCulture);
-            this.grpCulture.Controls.Add(this.radCurrentCulture);
-            this.grpCulture.Location = new System.Drawing.Point(19, 8);
-            this.grpCulture.Name = "grpCulture";
-            this.grpCulture.Size = new System.Drawing.Size(304, 140);
-            this.grpCulture.TabIndex = 1;
-            this.grpCulture.TabStop = false;
-            this.grpCulture.Text = "UI and data format";
+            grpCulture.Controls.Add(cboAllCultures);
+            grpCulture.Controls.Add(radUserCulture);
+            grpCulture.Controls.Add(radInvariantCulture);
+            grpCulture.Controls.Add(radCurrentCulture);
+            grpCulture.Location = new Point(19, 8);
+            grpCulture.Name = "grpCulture";
+            grpCulture.Size = new Size(304, 140);
+            grpCulture.TabIndex = 1;
+            grpCulture.TabStop = false;
+            grpCulture.Text = "UI and data format";
             // 
             // cboAllCultures
             // 
-            this.cboAllCultures.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cboAllCultures.Enabled = false;
-            this.cboAllCultures.FormattingEnabled = true;
-            this.cboAllCultures.Location = new System.Drawing.Point(40, 106);
-            this.cboAllCultures.Name = "cboAllCultures";
-            this.cboAllCultures.Size = new System.Drawing.Size(190, 25);
-            this.cboAllCultures.TabIndex = 3;
-            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.AllCultures_SelectedValueChanged);
+            cboAllCultures.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cboAllCultures.Enabled = false;
+            cboAllCultures.FormattingEnabled = true;
+            cboAllCultures.Location = new Point(40, 106);
+            cboAllCultures.Name = "cboAllCultures";
+            cboAllCultures.Size = new Size(190, 25);
+            cboAllCultures.TabIndex = 3;
+            cboAllCultures.SelectedValueChanged += AllCultures_SelectedValueChanged;
             // 
             // radUserCulture
             // 
-            this.radUserCulture.AutoSize = true;
-            this.radUserCulture.Location = new System.Drawing.Point(18, 80);
-            this.radUserCulture.Name = "radUserCulture";
-            this.radUserCulture.Size = new System.Drawing.Size(108, 23);
-            this.radUserCulture.TabIndex = 2;
-            this.radUserCulture.TabStop = true;
-            this.radUserCulture.Text = "Select culture";
-            this.radUserCulture.UseVisualStyleBackColor = true;
-            this.radUserCulture.CheckedChanged += new System.EventHandler(this.UserCulture_CheckedChanged);
+            radUserCulture.AutoSize = true;
+            radUserCulture.Location = new Point(18, 80);
+            radUserCulture.Name = "radUserCulture";
+            radUserCulture.Size = new Size(108, 23);
+            radUserCulture.TabIndex = 2;
+            radUserCulture.TabStop = true;
+            radUserCulture.Text = "Select culture";
+            radUserCulture.UseVisualStyleBackColor = true;
+            radUserCulture.CheckedChanged += UserCulture_CheckedChanged;
             // 
             // radInvariantCulture
             // 
-            this.radInvariantCulture.AutoSize = true;
-            this.radInvariantCulture.Location = new System.Drawing.Point(18, 51);
-            this.radInvariantCulture.Name = "radInvariantCulture";
-            this.radInvariantCulture.Size = new System.Drawing.Size(196, 23);
-            this.radInvariantCulture.TabIndex = 1;
-            this.radInvariantCulture.TabStop = true;
-            this.radInvariantCulture.Text = "Invariant culture formatting";
-            this.radInvariantCulture.UseVisualStyleBackColor = true;
-            this.radInvariantCulture.CheckedChanged += new System.EventHandler(this.InvariantCulture_CheckedChanged);
+            radInvariantCulture.AutoSize = true;
+            radInvariantCulture.Location = new Point(18, 51);
+            radInvariantCulture.Name = "radInvariantCulture";
+            radInvariantCulture.Size = new Size(196, 23);
+            radInvariantCulture.TabIndex = 1;
+            radInvariantCulture.TabStop = true;
+            radInvariantCulture.Text = "Invariant culture formatting";
+            radInvariantCulture.UseVisualStyleBackColor = true;
+            radInvariantCulture.CheckedChanged += InvariantCulture_CheckedChanged;
             // 
             // radCurrentCulture
             // 
-            this.radCurrentCulture.AutoSize = true;
-            this.radCurrentCulture.Location = new System.Drawing.Point(18, 23);
-            this.radCurrentCulture.Name = "radCurrentCulture";
-            this.radCurrentCulture.Size = new System.Drawing.Size(189, 23);
-            this.radCurrentCulture.TabIndex = 0;
-            this.radCurrentCulture.TabStop = true;
-            this.radCurrentCulture.Text = "Current culture formatting";
-            this.radCurrentCulture.UseVisualStyleBackColor = true;
-            this.radCurrentCulture.CheckedChanged += new System.EventHandler(this.CurrentCulture_CheckedChanged);
+            radCurrentCulture.AutoSize = true;
+            radCurrentCulture.Location = new Point(18, 23);
+            radCurrentCulture.Name = "radCurrentCulture";
+            radCurrentCulture.Size = new Size(189, 23);
+            radCurrentCulture.TabIndex = 0;
+            radCurrentCulture.TabStop = true;
+            radCurrentCulture.Text = "Current culture formatting";
+            radCurrentCulture.UseVisualStyleBackColor = true;
+            radCurrentCulture.CheckedChanged += CurrentCulture_CheckedChanged;
             // 
             // chkDlgPath
             // 
-            this.chkDlgPath.AutoSize = true;
-            this.chkDlgPath.Location = new System.Drawing.Point(23, 154);
-            this.chkDlgPath.Name = "chkDlgPath";
-            this.chkDlgPath.Size = new System.Drawing.Size(290, 23);
-            this.chkDlgPath.TabIndex = 0;
-            this.chkDlgPath.Text = "Remember open/save dialog previous path";
-            this.chkDlgPath.UseVisualStyleBackColor = true;
+            chkDlgPath.AutoSize = true;
+            chkDlgPath.Location = new Point(23, 154);
+            chkDlgPath.Name = "chkDlgPath";
+            chkDlgPath.Size = new Size(290, 23);
+            chkDlgPath.TabIndex = 0;
+            chkDlgPath.Text = "Remember open/save dialog previous path";
+            chkDlgPath.UseVisualStyleBackColor = true;
+            // 
+            // tabDerivative
+            // 
+            tabDerivative.Controls.Add(chkComputeDerivative);
+            tabDerivative.Controls.Add(grpDerivativeMethods);
+            tabDerivative.Controls.Add(chkDerivative);
+            tabDerivative.Location = new Point(4, 26);
+            tabDerivative.Name = "tabDerivative";
+            tabDerivative.Padding = new Padding(3);
+            tabDerivative.Size = new Size(441, 229);
+            tabDerivative.TabIndex = 2;
+            tabDerivative.Text = "Derivative";
+            tabDerivative.UseVisualStyleBackColor = true;
+            // 
+            // chkComputeDerivative
+            // 
+            chkComputeDerivative.AutoSize = true;
+            chkComputeDerivative.Location = new Point(27, 10);
+            chkComputeDerivative.Name = "chkComputeDerivative";
+            chkComputeDerivative.Size = new Size(217, 23);
+            chkComputeDerivative.TabIndex = 2;
+            chkComputeDerivative.Text = "Compute numerical derivative?";
+            chkComputeDerivative.UseVisualStyleBackColor = true;
+            // 
+            // grpDerivativeMethods
+            // 
+            grpDerivativeMethods.Controls.Add(radCentralFive);
+            grpDerivativeMethods.Controls.Add(radCentralThree);
+            grpDerivativeMethods.Controls.Add(radForwardOne);
+            grpDerivativeMethods.Controls.Add(radBackwardOne);
+            grpDerivativeMethods.Location = new Point(27, 68);
+            grpDerivativeMethods.Name = "grpDerivativeMethods";
+            grpDerivativeMethods.Size = new Size(391, 146);
+            grpDerivativeMethods.TabIndex = 1;
+            grpDerivativeMethods.TabStop = false;
+            grpDerivativeMethods.Text = "Algorithms";
+            // 
+            // radCentralFive
+            // 
+            radCentralFive.AutoSize = true;
+            radCentralFive.Location = new Point(16, 114);
+            radCentralFive.Name = "radCentralFive";
+            radCentralFive.Size = new Size(195, 23);
+            radCentralFive.TabIndex = 3;
+            radCentralFive.TabStop = true;
+            radCentralFive.Text = "Central five point difference";
+            radCentralFive.UseVisualStyleBackColor = true;
+            radCentralFive.CheckedChanged += radCentralFive_CheckedChanged;
+            // 
+            // radCentralThree
+            // 
+            radCentralThree.AutoSize = true;
+            radCentralThree.Location = new Point(16, 85);
+            radCentralThree.Name = "radCentralThree";
+            radCentralThree.Size = new Size(208, 23);
+            radCentralThree.TabIndex = 2;
+            radCentralThree.TabStop = true;
+            radCentralThree.Text = "Central three-point difference";
+            radCentralThree.UseVisualStyleBackColor = true;
+            radCentralThree.CheckedChanged += radCentralThree_CheckedChanged;
+            // 
+            // radForwardOne
+            // 
+            radForwardOne.AutoSize = true;
+            radForwardOne.Location = new Point(16, 56);
+            radForwardOne.Name = "radForwardOne";
+            radForwardOne.Size = new Size(205, 23);
+            radForwardOne.TabIndex = 1;
+            radForwardOne.TabStop = true;
+            radForwardOne.Text = "Forward one-point difference";
+            radForwardOne.UseVisualStyleBackColor = true;
+            // 
+            // radBackwardOne
+            // 
+            radBackwardOne.AutoSize = true;
+            radBackwardOne.Location = new Point(16, 27);
+            radBackwardOne.Name = "radBackwardOne";
+            radBackwardOne.Size = new Size(213, 23);
+            radBackwardOne.TabIndex = 0;
+            radBackwardOne.TabStop = true;
+            radBackwardOne.Text = "Backward one-point difference";
+            radBackwardOne.UseVisualStyleBackColor = true;
+            radBackwardOne.CheckedChanged += radBackwardOne_CheckedChanged;
+            // 
+            // chkDerivative
+            // 
+            chkDerivative.AutoSize = true;
+            chkDerivative.Location = new Point(27, 39);
+            chkDerivative.Name = "chkDerivative";
+            chkDerivative.Size = new Size(167, 23);
+            chkDerivative.TabIndex = 0;
+            chkDerivative.Text = "Export derivative data?";
+            chkDerivative.UseVisualStyleBackColor = true;
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(12, 279);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(100, 30);
-            this.btnReset.TabIndex = 12;
-            this.btnReset.Text = "&Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.Reset_Click);
+            btnReset.Location = new Point(12, 279);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(100, 30);
+            btnReset.TabIndex = 12;
+            btnReset.Text = "&Reset";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += Reset_Click;
             // 
             // FrmSettings
             // 
-            this.AcceptButton = this.btnAccept;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(473, 321);
-            this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.tabSettings);
-            this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.btnCancel);
-            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FrmSettings";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Settings";
-            this.tabSettings.ResumeLayout(false);
-            this.tabPlot.ResumeLayout(false);
-            this.tabPlot.PerformLayout();
-            this.grpAxis.ResumeLayout(false);
-            this.grpAxis.PerformLayout();
-            this.tabGUI.ResumeLayout(false);
-            this.tabGUI.PerformLayout();
-            this.grpCulture.ResumeLayout(false);
-            this.grpCulture.PerformLayout();
-            this.ResumeLayout(false);
-
+            AcceptButton = btnAccept;
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnCancel;
+            ClientSize = new Size(473, 321);
+            Controls.Add(btnReset);
+            Controls.Add(tabSettings);
+            Controls.Add(btnAccept);
+            Controls.Add(btnCancel);
+            Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FrmSettings";
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Settings";
+            tabSettings.ResumeLayout(false);
+            tabPlot.ResumeLayout(false);
+            tabPlot.PerformLayout();
+            grpAxis.ResumeLayout(false);
+            grpAxis.PerformLayout();
+            tabGUI.ResumeLayout(false);
+            tabGUI.PerformLayout();
+            grpCulture.ResumeLayout(false);
+            grpCulture.PerformLayout();
+            tabDerivative.ResumeLayout(false);
+            tabDerivative.PerformLayout();
+            grpDerivativeMethods.ResumeLayout(false);
+            grpDerivativeMethods.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -400,5 +507,13 @@
         private Button btnReset;
         private ComboBox cboAllCultures;
         private RadioButton radUserCulture;
+        private TabPage tabDerivative;
+        private CheckBox chkComputeDerivative;
+        private GroupBox grpDerivativeMethods;
+        private RadioButton radCentralFive;
+        private RadioButton radCentralThree;
+        private RadioButton radForwardOne;
+        private RadioButton radBackwardOne;
+        private CheckBox chkDerivative;
     }
 }

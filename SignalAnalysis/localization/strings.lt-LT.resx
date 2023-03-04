@@ -522,4 +522,7 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>Amplitudė / sekundės</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Išvestinė</value>
+  </data>
 </root>

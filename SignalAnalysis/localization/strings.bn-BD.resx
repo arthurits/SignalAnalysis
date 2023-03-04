@@ -525,4 +525,7 @@
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>প্রশস্ততা / সেকেন্ড</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>ডেরিভেটিভ</value>
+  </data>
 </root>

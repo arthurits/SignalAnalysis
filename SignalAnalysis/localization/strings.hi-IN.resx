@@ -522,4 +522,7 @@
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>आयाम / सेकंड</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>व्युत्पन्न</value>
+  </data>
 </root>

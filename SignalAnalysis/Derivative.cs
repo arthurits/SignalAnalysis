@@ -45,10 +45,41 @@ public class Derivative<T> where T : INumber<T>
 
     public double this[T arg] => method switch
     {
+        DerivativeMethod.BackwardOnePoint => BackwardOnePoint(arg),
+        DerivativeMethod.ForwardOnePoint => ForwardOnePoint(arg),
         DerivativeMethod.CenteredThreePoint => CenteredThreePoint(arg),
         DerivativeMethod.CenteredFivePoint => CenteredFivePoint(arg),
         _ => throw new ArgumentOutOfRangeException(nameof(method), $"Not expected derivative method: {method}"),
     };
+
+    /// <summary>
+    /// [f(x) - f(x-h)] / h
+    /// https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948
+    /// </summary>
+    /// <returns></returns>
+    private double BackwardOnePoint(T arg)
+    {
+        //return  (func[arg + h] - func[arg - h]) / (h * 2);
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (func[arg] - func[arg - T.CreateChecked(1)]) / (step),
+            _ => (func[arg] - func[arg - T.CreateChecked(step)]) / (step)
+        };
+    }
+
+    /// <summary>
+    /// [f(x+h) - f(x)] / h
+    /// </summary>
+    /// <returns></returns>
+    private double ForwardOnePoint(T arg)
+    {
+        //return  (func[arg + h] - func[arg - h]) / (h * 2);
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (func[arg + T.CreateChecked(1)] - func[arg]) / (step),
+            _ => (func[arg + T.CreateChecked(step)] - func[arg]) / (step)
+        };
+    }
 
     /// <summary>
     /// [f(x+h) - f(x-h)] / 2h
@@ -82,6 +113,8 @@ public class Derivative<T> where T : INumber<T>
 
 public enum DerivativeMethod
 {
+    BackwardOnePoint,
+    ForwardOnePoint,
     CenteredThreePoint,
     CenteredFivePoint
 }

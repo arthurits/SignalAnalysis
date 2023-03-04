@@ -453,6 +453,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Derivative.
+        /// </summary>
+        internal static string strFileHeader28 {
+            get {
+                return ResourceManager.GetString("strFileHeader28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Section &apos;{0}&apos; is mis-formatted..
         /// </summary>
         internal static string strFileHeaderSection {

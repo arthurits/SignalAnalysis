@@ -524,4 +524,7 @@ er blevet stoppet.</value>
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>Amplitude / sekunder</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Afledt</value>
+  </data>
 </root>

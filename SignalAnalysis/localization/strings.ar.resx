@@ -525,4 +525,7 @@
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>السعة / واني</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>المشتق</value>
+  </data>
 </root>

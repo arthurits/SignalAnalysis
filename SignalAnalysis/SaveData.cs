@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+
+namespace SignalAnalysis;
 
 partial class FrmMain
 {
@@ -51,14 +53,14 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader15}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader16}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine();
-            sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}");
+            sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}{(_settings.ExportDerivative ? $"\t{StringResources.FileHeader28}" : "")}");
 
             string time;
             // Save the numerical values
             for (int j = 0; j < signal.Length; j++)
             {
                 time = Signal.StartTime.AddSeconds((j+ ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture);
-                content = $"{time}\t{signal[j].ToString(_settings.DataFormat, _settings.AppCulture)}";
+                content = $"{time}\t{signal[j].ToString(_settings.DataFormat, _settings.AppCulture)}{(_settings.ExportDerivative ? $"\t{Results.Derivative[j]}" : "")}";
                 
                 //trying to write data to csv
                 sw.WriteLine(content);

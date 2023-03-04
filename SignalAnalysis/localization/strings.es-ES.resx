@@ -529,4 +529,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotDerivativeYLabel" xml:space="preserve">
     <value>Amplitud / segundos</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Derivada</value>
+  </data>
 </root>
