@@ -268,6 +268,12 @@ public partial class FrmMain : Form
         plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);
         plotFFT.Refresh();
 
+        plotDerivative.CultureUI = _settings.AppCulture;
+        plotDerivative.Plot.Title(StringResources.PlotDerivativeTitle);
+        plotDerivative.Plot.XLabel(StringResources.PlotDerivativeXLabel);
+        plotDerivative.Plot.YLabel(StringResources.PlotDerivativeYLabel);
+        plotDerivative.Refresh();
+
         // Update the results text
         if (txtStats.Text.Length > 0)
             txtStats.Text = Results.ToString(_settings.AppCulture);
