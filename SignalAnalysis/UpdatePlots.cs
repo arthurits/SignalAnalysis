@@ -157,8 +157,8 @@ partial class FrmMain
         });
         await statsTask;
 
-        ScottPlot.Plottable.SignalPlot pOriginal;
-        ScottPlot.Plottable.SignalPlot pDerivative;
+        ScottPlot.Plottable.SignalPlot pOriginal = new();
+        ScottPlot.Plottable.SignalPlot pDerivative = new();
 
         switch (_settings.AxisType)
         {
@@ -166,34 +166,25 @@ partial class FrmMain
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, label: strLabel);
                 pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, label: "Derivative");
                 plotDerivative.Plot.XAxis.DateTimeFormat(false);
-                pOriginal.YAxisIndex = 0;
-                pOriginal.XAxisIndex = 0;
-                pDerivative.YAxisIndex = 0;
-                plotDerivative.Plot.YAxis2.Ticks(true);
-                plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
                 break;
             case AxisType.Seconds:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency, label: strLabel);
                 pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, label: "Derivative");
                 plotDerivative.Plot.XAxis.DateTimeFormat(false);
-                pOriginal.YAxisIndex = 0;
-                pOriginal.XAxisIndex = 0;
-                pDerivative.YAxisIndex = 0;
-                plotDerivative.Plot.YAxis2.Ticks(true);
-                plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
                 break;
             case AxisType.DateTime:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, label: strLabel);
                 pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, label: "Derivative");
                 pOriginal.OffsetX = Signal.StartTime.ToOADate();
                 plotDerivative.Plot.XAxis.DateTimeFormat(true);
-                pOriginal.YAxisIndex = 0;
-                pOriginal.XAxisIndex = 0;
-                pDerivative.YAxisIndex = 0;
-                plotDerivative.Plot.YAxis2.Ticks(true);
-                plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
                 break;
         }
+
+        pOriginal.YAxisIndex = 0;
+        pOriginal.XAxisIndex = 0;
+        pDerivative.YAxisIndex = 0;
+        plotDerivative.Plot.YAxis2.Ticks(true);
+        plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
 
         plotDerivative.Plot.Title(StringResources.PlotDerivativeTitle);
         plotDerivative.Plot.XLabel(StringResources.PlotDerivativeXLabel);
