@@ -146,6 +146,7 @@ public static class StringResources
     // Settings
     public static string TabPlot => StringRM.GetString("strTabPlot", Culture) ?? "Plotting";
     public static string TabGUI => StringRM.GetString("strTabGUI", Culture) ?? "User interface";
+    public static string TabDerivative => StringRM.GetString("strTabDerivative", Culture) ?? "Differentiation";
 
     public static string LblStart => StringRM.GetString("strLblStart", Culture) ?? "Array index start";
     public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end (max {0})";
@@ -157,6 +158,14 @@ public static class StringResources
     public static string ChkCumulative => StringRM.GetString("strChkCumulative", Culture) ?? "Cumulative fractal dimension";
     public static string ChkEntropy => StringRM.GetString("strChkEntropy", Culture) ?? "Entropy (approximate && sample)";
     public static string ChkCrossHair => StringRM.GetString("strChkCrossHair", Culture) ?? "Show plots' crosshair";
+
+    public static string ChkComputeDerivative => StringRM.GetString("strChkComputeDerivative", Culture) ?? "Compute numerical differentiation?";
+    public static string ChkExportDerivative => StringRM.GetString("strChkExportDerivative", Culture) ?? "Export derivative data?";
+    public static string GrpAlgorithms => StringRM.GetString("strGrpAlgorithms", Culture) ?? "Algorithms";
+    public static string RadBackwardOne => StringRM.GetString("strRadBackwardOne", Culture) ?? "Backward one-point difference";
+    public static string RadForwardOne => StringRM.GetString("strRadForwardOne", Culture) ?? "Forward one-point difference";
+    public static string RadCentralThree => StringRM.GetString("strRadCentralThree", Culture) ?? "Central three-point difference";
+    public static string RadCentralFive => StringRM.GetString("strRadCentralFive", Culture) ?? "Central five-point difference";
 
     public static string GrpCulture => StringRM.GetString("strGrpCulture", Culture) ?? "UI and data format";
     public static string RadCurrentCulture => StringRM.GetString("strRadCurrentCulture", Culture) ?? "Current culture formatting";

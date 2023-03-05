@@ -531,4 +531,28 @@ dimension has been stopped.</value>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivative</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Differentiation</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>Compute numerical differentiation?</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>Export derivative data?</value>
+  </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>Finite difference algorithms</value>
+  </data>
+  <data name="strRadBackwardOne" xml:space="preserve">
+    <value>Backward one-point difference</value>
+  </data>
+  <data name="strRadForwardOne" xml:space="preserve">
+    <value>Forward one-point difference</value>
+  </data>
+  <data name="strRadCentralThree" xml:space="preserve">
+    <value>Central three-point difference</value>
+  </data>
+  <data name="strRadCentralFive" xml:space="preserve">
+    <value>Central five-point difference</value>
+  </data>
 </root>

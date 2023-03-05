@@ -176,7 +176,7 @@ public partial class FrmSettings : Form
 
         chkComputeDerivative.Checked = settings.ComputeDerivative;
         chkExportDerivative.Enabled = settings.ComputeDerivative;
-        grpDerivativeMethods.Enabled = settings.ComputeDerivative;
+        grpAlgorithms.Enabled = settings.ComputeDerivative;
         chkExportDerivative.Checked = settings.ExportDerivative;
         switch (settings.DerivativeAlgorithm)
         {
@@ -230,6 +230,7 @@ public partial class FrmSettings : Form
 
         this.tabPlot.Text = StringResources.TabPlot;
         this.tabGUI.Text = StringResources.TabGUI;
+        this.tabDerivative.Text = StringResources.TabDerivative;
 
         this.lblStart.Text = StringResources.LblStart;
         this.lblEnd.Text = String.Format(StringResources.LblEnd, Settings?.IndexMax);
@@ -249,12 +250,13 @@ public partial class FrmSettings : Form
         this.chkDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
 
-        //this.chkComputeDerivative.Text=
-        //    this.chkDerivative.Text=
-        //    this.radBackwardOne.Text=
-        //    this.radForwardOne.Text=
-        //    this.radCentralThree.Text=
-        //    this.radCentralFive.Text=
+        this.chkComputeDerivative.Text = StringResources.ChkComputeDerivative;
+        this.chkExportDerivative.Text = StringResources.ChkExportDerivative;
+        this.grpAlgorithms.Text = StringResources.GrpAlgorithms;
+        this.radBackwardOne.Text = StringResources.RadBackwardOne;
+        this.radForwardOne.Text = StringResources.RadForwardOne;
+        this.radCentralThree.Text = StringResources.RadCentralThree;
+        this.radCentralFive.Text = StringResources.RadCentralFive;
 
         this.btnReset.Text = StringResources.BtnReset;
         this.btnCancel.Text = StringResources.BtnCancel;
@@ -281,7 +283,7 @@ public partial class FrmSettings : Form
 
     private void ComputeDerivative_CheckedChanged(object sender, EventArgs e)
     {
-        grpDerivativeMethods.Enabled = chkComputeDerivative.Checked;
+        grpAlgorithms.Enabled = chkComputeDerivative.Checked;
         chkExportDerivative.Enabled = chkComputeDerivative.Checked;
     }
 }

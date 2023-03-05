@@ -46,7 +46,7 @@
             lblStart = new Label();
             tabDerivative = new TabPage();
             chkComputeDerivative = new CheckBox();
-            grpDerivativeMethods = new GroupBox();
+            grpAlgorithms = new GroupBox();
             radCentralFive = new RadioButton();
             radCentralThree = new RadioButton();
             radForwardOne = new RadioButton();
@@ -66,7 +66,7 @@
             tabPlot.SuspendLayout();
             grpAxis.SuspendLayout();
             tabDerivative.SuspendLayout();
-            grpDerivativeMethods.SuspendLayout();
+            grpAlgorithms.SuspendLayout();
             tabGUI.SuspendLayout();
             grpCulture.SuspendLayout();
             SuspendLayout();
@@ -243,7 +243,7 @@
             // tabDerivative
             // 
             tabDerivative.Controls.Add(chkComputeDerivative);
-            tabDerivative.Controls.Add(grpDerivativeMethods);
+            tabDerivative.Controls.Add(grpAlgorithms);
             tabDerivative.Controls.Add(chkExportDerivative);
             tabDerivative.Location = new Point(4, 26);
             tabDerivative.Name = "tabDerivative";
@@ -264,18 +264,18 @@
             chkComputeDerivative.UseVisualStyleBackColor = true;
             chkComputeDerivative.CheckedChanged += ComputeDerivative_CheckedChanged;
             // 
-            // grpDerivativeMethods
+            // grpAlgorithms
             // 
-            grpDerivativeMethods.Controls.Add(radCentralFive);
-            grpDerivativeMethods.Controls.Add(radCentralThree);
-            grpDerivativeMethods.Controls.Add(radForwardOne);
-            grpDerivativeMethods.Controls.Add(radBackwardOne);
-            grpDerivativeMethods.Location = new Point(27, 68);
-            grpDerivativeMethods.Name = "grpDerivativeMethods";
-            grpDerivativeMethods.Size = new Size(391, 146);
-            grpDerivativeMethods.TabIndex = 1;
-            grpDerivativeMethods.TabStop = false;
-            grpDerivativeMethods.Text = "Algorithms";
+            grpAlgorithms.Controls.Add(radCentralFive);
+            grpAlgorithms.Controls.Add(radCentralThree);
+            grpAlgorithms.Controls.Add(radForwardOne);
+            grpAlgorithms.Controls.Add(radBackwardOne);
+            grpAlgorithms.Location = new Point(27, 68);
+            grpAlgorithms.Name = "grpAlgorithms";
+            grpAlgorithms.Size = new Size(391, 146);
+            grpAlgorithms.TabIndex = 1;
+            grpAlgorithms.TabStop = false;
+            grpAlgorithms.Text = "Algorithms";
             // 
             // radCentralFive
             // 
@@ -337,10 +337,10 @@
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 24);
+            tabGUI.Location = new Point(4, 26);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(441, 231);
+            tabGUI.Size = new Size(441, 229);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -468,8 +468,8 @@
             grpAxis.PerformLayout();
             tabDerivative.ResumeLayout(false);
             tabDerivative.PerformLayout();
-            grpDerivativeMethods.ResumeLayout(false);
-            grpDerivativeMethods.PerformLayout();
+            grpAlgorithms.ResumeLayout(false);
+            grpAlgorithms.PerformLayout();
             tabGUI.ResumeLayout(false);
             tabGUI.PerformLayout();
             grpCulture.ResumeLayout(false);
@@ -507,7 +507,7 @@
         private RadioButton radUserCulture;
         private TabPage tabDerivative;
         private CheckBox chkComputeDerivative;
-        private GroupBox grpDerivativeMethods;
+        private GroupBox grpAlgorithms;
         private RadioButton radCentralFive;
         private RadioButton radCentralThree;
         private RadioButton radForwardOne;

@@ -115,6 +115,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compute numerical differentiation?.
+        /// </summary>
+        internal static string strChkComputeDerivative {
+            get {
+                return ResourceManager.GetString("strChkComputeDerivative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show plots&apos; crosshair.
         /// </summary>
         internal static string strChkCrossHair {
@@ -147,6 +156,15 @@ namespace SignalAnalysis.localization {
         internal static string strChkEntropy {
             get {
                 return ResourceManager.GetString("strChkEntropy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export derivative data?.
+        /// </summary>
+        internal static string strChkExportDerivative {
+            get {
+                return ResourceManager.GetString("strChkExportDerivative", resourceCulture);
             }
         }
         
@@ -503,6 +521,15 @@ namespace SignalAnalysis.localization {
         internal static string strFrmTitleUnion {
             get {
                 return ResourceManager.GetString("strFrmTitleUnion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finite difference algorithms.
+        /// </summary>
+        internal static string strGrpAlgorithms {
+            get {
+                return ResourceManager.GetString("strGrpAlgorithms", resourceCulture);
             }
         }
         
@@ -956,11 +983,47 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backward one-point difference.
+        /// </summary>
+        internal static string strRadBackwardOne {
+            get {
+                return ResourceManager.GetString("strRadBackwardOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Central five-point difference.
+        /// </summary>
+        internal static string strRadCentralFive {
+            get {
+                return ResourceManager.GetString("strRadCentralFive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Central three-point difference.
+        /// </summary>
+        internal static string strRadCentralThree {
+            get {
+                return ResourceManager.GetString("strRadCentralThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current culture formatting.
         /// </summary>
         internal static string strRadCurrentCulture {
             get {
                 return ResourceManager.GetString("strRadCurrentCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forward one-point difference.
+        /// </summary>
+        internal static string strRadForwardOne {
+            get {
+                return ResourceManager.GetString("strRadForwardOne", resourceCulture);
             }
         }
         
@@ -1134,6 +1197,15 @@ namespace SignalAnalysis.localization {
         internal static string strStatusTipPower {
             get {
                 return ResourceManager.GetString("strStatusTipPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Differentiation.
+        /// </summary>
+        internal static string strTabDerivative {
+            get {
+                return ResourceManager.GetString("strTabDerivative", resourceCulture);
             }
         }
         
