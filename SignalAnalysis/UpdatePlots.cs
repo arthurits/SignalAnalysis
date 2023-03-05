@@ -209,6 +209,7 @@ partial class FrmMain
         pOriginal.YAxisIndex = 0;
         pOriginal.XAxisIndex = 0;
         pDerivative.YAxisIndex = 1;
+        pDerivative.XAxisIndex = 0;
         plotDerivative.Plot.YAxis2.Ticks(true);
         plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
 
@@ -279,7 +280,8 @@ partial class FrmMain
     /// <param name="signal">Signal data</param>
     /// <param name="progressive"><see langword>True</see> if the progressive fractal dimension is to be computed</param>
     /// <param name="entropy"><see langword="True"/> if all the entropy parameters are to be computed</param>
-    private void UpdateStats(double[] signal, bool progressive = false, bool entropy = false)
+    /// <param name="derivative"><see langword="True"/> if the derivative is computed</param>
+    private void UpdateStats(double[] signal, bool progressive = false, bool entropy = false, bool derivative = true)
     {
         if (signal.Length == 0) return;
 
@@ -310,6 +312,11 @@ partial class FrmMain
             {
                 (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
                 (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy) = Complexity.ShannonEntropy(signal);
+            }
+
+            if (derivative)
+            {
+
             }
         }
         catch (OperationCanceledException)

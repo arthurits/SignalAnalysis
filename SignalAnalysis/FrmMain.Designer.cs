@@ -37,6 +37,9 @@ partial class FrmMain
         tableLayoutPanel3 = new TableLayoutPanel();
         plotFractal = new ScottPlot.FormsPlotCrossHair();
         plotFractalDistribution = new ScottPlot.FormsPlotCrossHair();
+        tableLayoutPanel4 = new TableLayoutPanel();
+        plotFFT = new ScottPlot.FormsPlotCrossHair();
+        plotDerivative = new ScottPlot.FormsPlotCrossHair();
         tspTop = new ToolStripPanel();
         tspBottom = new ToolStripPanel();
         toolStripMain = new ToolStrip();
@@ -57,15 +60,13 @@ partial class FrmMain
         statusStripLabelExCumulative = new ToolStripStatusLabelEx();
         statusStripLabelExEntropy = new ToolStripStatusLabelEx();
         statusStripLabelExCrossHair = new ToolStripStatusLabelEx();
-        tableLayoutPanel4 = new TableLayoutPanel();
-        plotFFT = new ScottPlot.FormsPlotCrossHair();
-        plotDerivative = new ScottPlot.FormsPlotCrossHair();
+        statusStripLabelExDerivative = new ToolStripStatusLabelEx();
         tableLayoutPanel1.SuspendLayout();
         tableLayoutPanel2.SuspendLayout();
         tableLayoutPanel3.SuspendLayout();
+        tableLayoutPanel4.SuspendLayout();
         toolStripMain.SuspendLayout();
         statusStrip.SuspendLayout();
-        tableLayoutPanel4.SuspendLayout();
         SuspendLayout();
         // 
         // tableLayoutPanel1
@@ -213,6 +214,54 @@ partial class FrmMain
         plotFractalDistribution.SnapToPoint = false;
         plotFractalDistribution.TabIndex = 5;
         // 
+        // tableLayoutPanel4
+        // 
+        tableLayoutPanel4.ColumnCount = 2;
+        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        tableLayoutPanel4.Controls.Add(plotFFT, 0, 0);
+        tableLayoutPanel4.Controls.Add(plotDerivative, 1, 0);
+        tableLayoutPanel4.Dock = DockStyle.Fill;
+        tableLayoutPanel4.Location = new Point(0, 346);
+        tableLayoutPanel4.Margin = new Padding(0);
+        tableLayoutPanel4.Name = "tableLayoutPanel4";
+        tableLayoutPanel4.RowCount = 1;
+        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+        tableLayoutPanel4.Size = new Size(860, 173);
+        tableLayoutPanel4.TabIndex = 2;
+        // 
+        // plotFFT
+        // 
+        plotFFT.BackColor = Color.Transparent;
+        plotFFT.CrossHairColor = Color.Red;
+        plotFFT.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotFFT.Dock = DockStyle.Fill;
+        plotFFT.Location = new Point(4, 3);
+        plotFFT.Margin = new Padding(4, 3, 4, 3);
+        plotFFT.Name = "plotFFT";
+        plotFFT.ShowCrossHair = false;
+        plotFFT.ShowCrossHairHorizontal = false;
+        plotFFT.ShowCrossHairVertical = false;
+        plotFFT.Size = new Size(422, 167);
+        plotFFT.SnapToPoint = false;
+        plotFFT.TabIndex = 3;
+        // 
+        // plotDerivative
+        // 
+        plotDerivative.CrossHairColor = Color.Red;
+        plotDerivative.CultureUI = new System.Globalization.CultureInfo("es-ES");
+        plotDerivative.Dock = DockStyle.Fill;
+        plotDerivative.Location = new Point(434, 3);
+        plotDerivative.Margin = new Padding(4, 3, 4, 3);
+        plotDerivative.Name = "plotDerivative";
+        plotDerivative.ShowCrossHair = false;
+        plotDerivative.ShowCrossHairHorizontal = false;
+        plotDerivative.ShowCrossHairVertical = false;
+        plotDerivative.Size = new Size(422, 167);
+        plotDerivative.SnapToPoint = false;
+        plotDerivative.TabIndex = 4;
+        // 
         // tspTop
         // 
         tspTop.Dock = DockStyle.Top;
@@ -337,7 +386,7 @@ partial class FrmMain
         // statusStrip
         // 
         statusStrip.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-        statusStrip.Items.AddRange(new ToolStripItem[] { statusStripLabelEmpty, statusStripLabelCulture, statusStripLabelExPower, statusStripLabelExCumulative, statusStripLabelExEntropy, statusStripLabelExCrossHair });
+        statusStrip.Items.AddRange(new ToolStripItem[] { statusStripLabelEmpty, statusStripLabelCulture, statusStripLabelExPower, statusStripLabelExCumulative, statusStripLabelExEntropy, statusStripLabelExCrossHair, statusStripLabelExDerivative });
         statusStrip.Location = new Point(0, 693);
         statusStrip.Name = "statusStrip";
         statusStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -351,7 +400,7 @@ partial class FrmMain
         statusStripLabelEmpty.BorderSides = ToolStripStatusLabelBorderSides.Right;
         statusStripLabelEmpty.DisplayStyle = ToolStripItemDisplayStyle.Text;
         statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-        statusStripLabelEmpty.Size = new Size(687, 23);
+        statusStripLabelEmpty.Size = new Size(628, 23);
         statusStripLabelEmpty.Spring = true;
         statusStripLabelEmpty.TextAlign = ContentAlignment.MiddleLeft;
         // 
@@ -378,7 +427,7 @@ partial class FrmMain
         statusStripLabelExPower.Size = new Size(28, 23);
         statusStripLabelExPower.Text = "P";
         statusStripLabelExPower.ToolTipText = "Power spectra (dB)";
-        statusStripLabelExPower.Click += LabelEx_Click;
+        statusStripLabelExPower.Click += this.LabelEx_Click;
         // 
         // statusStripLabelExCumulative
         // 
@@ -393,7 +442,7 @@ partial class FrmMain
         statusStripLabelExCumulative.Size = new Size(28, 23);
         statusStripLabelExCumulative.Text = "F";
         statusStripLabelExCumulative.ToolTipText = "Cumulative fractal dimension";
-        statusStripLabelExCumulative.Click += LabelEx_Click;
+        statusStripLabelExCumulative.Click += this.LabelEx_Click;
         // 
         // statusStripLabelExEntropy
         // 
@@ -408,7 +457,7 @@ partial class FrmMain
         statusStripLabelExEntropy.Size = new Size(28, 23);
         statusStripLabelExEntropy.Text = "E";
         statusStripLabelExEntropy.ToolTipText = "Approximate and sample entropy";
-        statusStripLabelExEntropy.Click += LabelEx_Click;
+        statusStripLabelExEntropy.Click += this.LabelEx_Click;
         // 
         // statusStripLabelExCrossHair
         // 
@@ -423,49 +472,22 @@ partial class FrmMain
         statusStripLabelExCrossHair.Size = new Size(28, 23);
         statusStripLabelExCrossHair.Text = "C";
         statusStripLabelExCrossHair.ToolTipText = "Plot's crosshair mode";
-        statusStripLabelExCrossHair.Click += LabelEx_Click;
+        statusStripLabelExCrossHair.Click += this.LabelEx_Click;
         // 
-        // tableLayoutPanel4
+        // statusStripLabelExDerivative
         // 
-        tableLayoutPanel4.ColumnCount = 2;
-        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        tableLayoutPanel4.Controls.Add(plotFFT, 0, 0);
-        tableLayoutPanel4.Controls.Add(plotDerivative, 1, 0);
-        tableLayoutPanel4.Dock = DockStyle.Fill;
-        tableLayoutPanel4.Location = new Point(0, 346);
-        tableLayoutPanel4.Margin = new Padding(0);
-        tableLayoutPanel4.Name = "tableLayoutPanel4";
-        tableLayoutPanel4.RowCount = 1;
-        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        tableLayoutPanel4.Size = new Size(860, 173);
-        tableLayoutPanel4.TabIndex = 2;
-        // 
-        // plotFFT
-        // 
-        plotFFT.BackColor = Color.Transparent;
-        plotFFT.CrossHairColor = Color.Red;
-        plotFFT.CultureUI = new System.Globalization.CultureInfo("en-US");
-        plotFFT.Dock = DockStyle.Fill;
-        plotFFT.Location = new Point(4, 3);
-        plotFFT.Margin = new Padding(4, 3, 4, 3);
-        plotFFT.Name = "plotFFT";
-        plotFFT.ShowCrossHair = false;
-        plotFFT.ShowCrossHairHorizontal = false;
-        plotFFT.ShowCrossHairVertical = false;
-        plotFFT.Size = new Size(422, 167);
-        plotFFT.SnapToPoint = false;
-        plotFFT.TabIndex = 3;
-        // 
-        // plotDerivative
-        // 
-        plotDerivative.Dock = DockStyle.Fill;
-        plotDerivative.Location = new Point(434, 3);
-        plotDerivative.Margin = new Padding(4, 3, 4, 3);
-        plotDerivative.Name = "plotDerivative";
-        plotDerivative.Size = new Size(422, 167);
-        plotDerivative.TabIndex = 4;
+        statusStripLabelExDerivative.AutoSize = false;
+        statusStripLabelExDerivative.BackColor = Color.Transparent;
+        statusStripLabelExDerivative.Checked = false;
+        statusStripLabelExDerivative.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExDerivative.ForeColor = Color.LightGray;
+        statusStripLabelExDerivative.ForeColorChecked = Color.Black;
+        statusStripLabelExDerivative.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExDerivative.Name = "statusStripLabelExDerivative";
+        statusStripLabelExDerivative.Size = new Size(28, 23);
+        statusStripLabelExDerivative.Text = "D";
+        statusStripLabelExDerivative.ToolTipText = "Numerical differentiation";
+        statusStripLabelExDerivative.Click += this.LabelEx_Click;
         // 
         // FrmMain
         // 
@@ -490,11 +512,11 @@ partial class FrmMain
         tableLayoutPanel1.PerformLayout();
         tableLayoutPanel2.ResumeLayout(false);
         tableLayoutPanel3.ResumeLayout(false);
+        tableLayoutPanel4.ResumeLayout(false);
         toolStripMain.ResumeLayout(false);
         toolStripMain.PerformLayout();
         statusStrip.ResumeLayout(false);
         statusStrip.PerformLayout();
-        tableLayoutPanel4.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
@@ -532,4 +554,5 @@ partial class FrmMain
     private TableLayoutPanel tableLayoutPanel4;
     private ScottPlot.FormsPlotCrossHair plotFFT;
     private ScottPlot.FormsPlotCrossHair plotDerivative;
+    private ToolStripStatusLabelEx statusStripLabelExDerivative;
 }

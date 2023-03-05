@@ -31,10 +31,11 @@ partial class FrmMain
 
         tspBottom.Join(statusStrip);
 
-        statusStripLabelExPower.Checked = true;
-        statusStripLabelExCumulative.Checked = false;
-        statusStripLabelExEntropy.Checked = false;
-        statusStripLabelExCrossHair.Checked = false;
+        statusStripLabelExPower.Checked = _settings.PowerSpectra;
+        statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
+        statusStripLabelExEntropy.Checked = _settings.Entropy;
+        statusStripLabelExCrossHair.Checked = _settings.CrossHair;
+        statusStripLabelExDerivative.Checked = _settings.ComputeDerivative;
     }
 
     /// <summary>

@@ -252,6 +252,30 @@ partial class FrmMain
                         plotFFT.ShowCrossHair = label.Checked;
                         plotFFT.Refresh();
                     }
+                    if (plotDerivative is not null && plotDerivative.Plot.GetPlottables().Length > 0)
+                    {
+                        plotDerivative.ShowCrossHair = label.Checked;
+                        plotDerivative.Refresh();
+                    }
+                    break;
+                case "statusStripLabelExDerivative":
+                    _settings.ComputeDerivative = label.Checked;
+                    if (_settings.ComputeDerivative)
+                    {
+                        // Extract the values 
+                        double[] signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
+                        if (signal is null || signal.Length == 0) return;
+
+                        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
+
+                        UpdateDerivative(signal, seriesName ?? string.Empty);
+                    }
+                    else
+                    {
+                        plotDerivative.Clear();
+                        plotDerivative.Refresh();
+                    }
+
                     break;
             }
         }

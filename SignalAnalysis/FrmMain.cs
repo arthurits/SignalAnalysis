@@ -280,4 +280,5 @@ public partial class FrmMain : Form
 
         this.ResumeLayout();
     }
+
 }
