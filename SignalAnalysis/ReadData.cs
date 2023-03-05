@@ -586,13 +586,12 @@ partial class FrmMain
                 signal.Data[i] = new double[points];
 
             // Read data into _signalData
-            for (int row = 0; row < series; row++)
+            for (int col = 0; col < points; col++)
             {
-                for (int col = 0; col < signal.Data[row].Length; col++)
-                {
-                    br.ReadDateTime();
+                br.ReadDateTime();
+
+                for (int row = 0; row < series; row++)
                     signal.Data[row][col] = br.ReadDouble();
-                }
             }
 
         }

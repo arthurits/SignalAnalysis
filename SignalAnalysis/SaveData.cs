@@ -15,6 +15,13 @@ partial class FrmMain
     private bool SaveTextData(string fileName, double[] signal, int ArrIndexInit, string? SeriesName)
     {
         bool result = false;
+        int numSeries = 1;
+
+        if (_settings.ExportDerivative)
+        {
+            numSeries = 2;
+            SeriesName += $"\t{StringResources.FileHeader28}";
+        }
 
         try
         {
@@ -39,7 +46,7 @@ partial class FrmMain
                 $"{nTime.Seconds} {StringResources.FileHeader25} " +
                 $"{StringResources.FileHeader26} " +
                 $"{nTime.Milliseconds} {StringResources.FileHeader27}");
-            sw.WriteLine($"{StringResources.FileHeader17}: 1");
+            sw.WriteLine($"{StringResources.FileHeader17}: {numSeries}");
             sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader07}: {Results.Average.ToString(_settings.AppCulture)}");
@@ -53,16 +60,18 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader15}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader16}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine();
-            sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}{(_settings.ExportDerivative ? $"\t{StringResources.FileHeader28}" : "")}");
+            sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}");
 
             string time;
             // Save the numerical values
             for (int j = 0; j < signal.Length; j++)
             {
                 time = Signal.StartTime.AddSeconds((j+ ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture);
-                content = $"{time}\t{signal[j].ToString(_settings.DataFormat, _settings.AppCulture)}{(_settings.ExportDerivative ? $"\t{Results.Derivative[j]}" : "")}";
+                content = $"{time}\t{signal[j].ToString(_settings.DataFormat, _settings.AppCulture)}";
+                if (_settings.ExportDerivative)
+                    content += $"\t{Results.Derivative[j]}";
                 
-                //trying to write data to csv
+                //trying to write data to file
                 sw.WriteLine(content);
             }
 
@@ -96,6 +105,13 @@ partial class FrmMain
     private bool SaveSigData(string fileName, double[] signal, int ArrIndexInit, string? SeriesName)
     {
         bool result = false;
+        int numSeries = 1;
+
+        if (_settings.ExportDerivative)
+        {
+            numSeries = 2;
+            SeriesName += $"\t{StringResources.FileHeader28}";
+        }
 
         try
         {
@@ -110,7 +126,7 @@ partial class FrmMain
             string content = string.Empty;
 
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine($"{StringResources.FileHeader17}: 1");
+            sw.WriteLine($"{StringResources.FileHeader17}: {numSeries}");
             sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
             sw.WriteLine();
@@ -118,7 +134,14 @@ partial class FrmMain
 
             // Save the numerical values
             for (int j = 0; j < signal.Length; j++)
-                sw.WriteLine(signal[j].ToString(_settings.DataFormat, _settings.AppCulture));
+            {
+                content = signal[j].ToString(_settings.DataFormat, _settings.AppCulture);
+                if (_settings.ExportDerivative)
+                    content += $"\t{Results.Derivative[j]}";
+
+                // Trying to write data to file
+                sw.WriteLine(content);
+            }
 
             // Success!
             result = true;
@@ -149,7 +172,14 @@ partial class FrmMain
     private bool SaveBinaryData(string fileName, double[] signal, int ArrIndexInit, string? SeriesName)
     {
         bool result = false;
-        
+        int numSeries = 1;
+
+        if (_settings.ExportDerivative)
+        {
+            numSeries = 2;
+            SeriesName += $"\t{StringResources.FileHeader28}";
+        }
+
         try
         {
             using var fs = File.Open(fileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
@@ -167,7 +197,7 @@ partial class FrmMain
             bw.Write(nTime.Minutes);
             bw.Write(nTime.Seconds);
             bw.Write(nTime.Milliseconds);
-            bw.Write(1);
+            bw.Write(numSeries);
             bw.Write(signal.Length);
             bw.Write(Signal.SampleFrequency);
             bw.Write(Results.Average);
@@ -187,7 +217,9 @@ partial class FrmMain
             for (int j = 0; j < signal.Length; j++)
             {
                 bw.Write(Signal.StartTime.AddSeconds((j + ArrIndexInit) / Signal.SampleFrequency));
-                bw.Write(signal[j]);   
+                bw.Write(signal[j]);
+                if (_settings.ExportDerivative)
+                    bw.Write(Results.Derivative[j]);
             }
 
             // Success!
