@@ -1183,6 +1183,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numerical differentiation.
+        /// </summary>
+        internal static string strStatusTipDerivative {
+            get {
+                return ResourceManager.GetString("strStatusTipDerivative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compute the approximate and sample entropy.
         /// </summary>
         internal static string strStatusTipEntropy {

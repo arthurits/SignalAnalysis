@@ -521,41 +521,57 @@ dimension has been stopped.</value>
   </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>Derivative</value>
+    <comment>In plot derivative</comment>
   </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Time (seconds)</value>
+    <comment>In plot derivative</comment>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitude / sec</value>
+    <comment>In plot derivative</comment>
   </data>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivative</value>
+    <comment>Column text header in exported files</comment>
   </data>
   <data name="strTabDerivative" xml:space="preserve">
     <value>Differentiation</value>
+    <comment>Tab text in "settings" form</comment>
   </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>Compute numerical differentiation?</value>
+    <comment>In "settings" form</comment>
   </data>
   <data name="strChkExportDerivative" xml:space="preserve">
     <value>Export derivative data?</value>
+    <comment>In "settings" form</comment>
   </data>
   <data name="strGrpAlgorithms" xml:space="preserve">
     <value>Finite difference algorithms</value>
+    <comment>In "settings" form</comment>
   </data>
   <data name="strRadBackwardOne" xml:space="preserve">
     <value>Backward one-point difference</value>
+    <comment>In "settings" form, mathematical name</comment>
   </data>
   <data name="strRadForwardOne" xml:space="preserve">
     <value>Forward one-point difference</value>
+    <comment>In "settings" form, mathematical name</comment>
   </data>
   <data name="strRadCentralThree" xml:space="preserve">
     <value>Central three-point difference</value>
+    <comment>In "settings" form, mathematical name</comment>
   </data>
   <data name="strRadCentralFive" xml:space="preserve">
     <value>Central five-point difference</value>
+    <comment>In "settings" form, mathematical name</comment>
   </data>
   <data name="strPlotDerivativeYLabel2" xml:space="preserve">
     <value>Amplitude</value>
+    <comment>In plot derivative</comment>
+  </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>Numerical differentiation</value>
   </data>
 </root>
