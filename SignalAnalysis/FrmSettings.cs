@@ -62,13 +62,14 @@ public partial class FrmSettings : Form
 
         Settings.AppCulture = _culture;
 
-        Settings.ExportDerivative = chkComputeDerivative.Checked;
+        Settings.ComputeDerivative = chkComputeDerivative.Checked;
+        Settings.ExportDerivative = chkExportDerivative.Checked;
         Settings.DerivativeAlgorithm = DerivativeMethod.BackwardOnePoint;
         if (radForwardOne.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.ForwardOnePoint;
         if (radCentralThree.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.CenteredThreePoint;
-        if (radCentralFive.Checked) Settings.DerivativeAlgorithm= DerivativeMethod.CenteredFivePoint;
+        if (radCentralFive.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.CenteredFivePoint;
 
-            DialogResult = DialogResult.OK;
+        DialogResult = DialogResult.OK;
     }
 
     private void Cancel_Click(object sender, EventArgs e)
@@ -174,7 +175,9 @@ public partial class FrmSettings : Form
         txtDataFormat.Text = settings.DataFormat;
 
         chkComputeDerivative.Checked = settings.ComputeDerivative;
-        chkDerivative.Checked = settings.ExportDerivative;
+        chkExportDerivative.Enabled = settings.ComputeDerivative;
+        grpDerivativeMethods.Enabled = settings.ComputeDerivative;
+        chkExportDerivative.Checked = settings.ExportDerivative;
         switch (settings.DerivativeAlgorithm)
         {
             case DerivativeMethod.BackwardOnePoint:
@@ -276,16 +279,9 @@ public partial class FrmSettings : Form
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
 
-    private void radBackwardOne_CheckedChanged(object sender, EventArgs e)
+    private void ComputeDerivative_CheckedChanged(object sender, EventArgs e)
     {
-
-    }
-
-    private void radCentralFive_CheckedChanged(object sender, EventArgs e)
-    {
-    }
-
-    private void radCentralThree_CheckedChanged(object sender, EventArgs e)
-    {
+        grpDerivativeMethods.Enabled = chkComputeDerivative.Checked;
+        chkExportDerivative.Enabled = chkComputeDerivative.Checked;
     }
 }

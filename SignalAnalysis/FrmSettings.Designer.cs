@@ -44,6 +44,14 @@
             txtStart = new TextBox();
             lblEnd = new Label();
             lblStart = new Label();
+            tabDerivative = new TabPage();
+            chkComputeDerivative = new CheckBox();
+            grpDerivativeMethods = new GroupBox();
+            radCentralFive = new RadioButton();
+            radCentralThree = new RadioButton();
+            radForwardOne = new RadioButton();
+            radBackwardOne = new RadioButton();
+            chkExportDerivative = new CheckBox();
             tabGUI = new TabPage();
             txtDataFormat = new TextBox();
             lblDataFormat = new Label();
@@ -53,22 +61,14 @@
             radInvariantCulture = new RadioButton();
             radCurrentCulture = new RadioButton();
             chkDlgPath = new CheckBox();
-            tabDerivative = new TabPage();
-            chkComputeDerivative = new CheckBox();
-            grpDerivativeMethods = new GroupBox();
-            radCentralFive = new RadioButton();
-            radCentralThree = new RadioButton();
-            radForwardOne = new RadioButton();
-            radBackwardOne = new RadioButton();
-            chkDerivative = new CheckBox();
             btnReset = new Button();
             tabSettings.SuspendLayout();
             tabPlot.SuspendLayout();
             grpAxis.SuspendLayout();
-            tabGUI.SuspendLayout();
-            grpCulture.SuspendLayout();
             tabDerivative.SuspendLayout();
             grpDerivativeMethods.SuspendLayout();
+            tabGUI.SuspendLayout();
+            grpCulture.SuspendLayout();
             SuspendLayout();
             // 
             // btnCancel
@@ -94,8 +94,8 @@
             // tabSettings
             // 
             tabSettings.Controls.Add(tabPlot);
-            tabSettings.Controls.Add(tabGUI);
             tabSettings.Controls.Add(tabDerivative);
+            tabSettings.Controls.Add(tabGUI);
             tabSettings.Location = new Point(12, 14);
             tabSettings.Name = "tabSettings";
             tabSettings.SelectedIndex = 0;
@@ -240,6 +240,97 @@
             lblStart.TabIndex = 11;
             lblStart.Text = "Array index start:";
             // 
+            // tabDerivative
+            // 
+            tabDerivative.Controls.Add(chkComputeDerivative);
+            tabDerivative.Controls.Add(grpDerivativeMethods);
+            tabDerivative.Controls.Add(chkExportDerivative);
+            tabDerivative.Location = new Point(4, 26);
+            tabDerivative.Name = "tabDerivative";
+            tabDerivative.Padding = new Padding(3);
+            tabDerivative.Size = new Size(441, 229);
+            tabDerivative.TabIndex = 2;
+            tabDerivative.Text = "Derivative";
+            tabDerivative.UseVisualStyleBackColor = true;
+            // 
+            // chkComputeDerivative
+            // 
+            chkComputeDerivative.AutoSize = true;
+            chkComputeDerivative.Location = new Point(27, 10);
+            chkComputeDerivative.Name = "chkComputeDerivative";
+            chkComputeDerivative.Size = new Size(217, 23);
+            chkComputeDerivative.TabIndex = 2;
+            chkComputeDerivative.Text = "Compute numerical derivative?";
+            chkComputeDerivative.UseVisualStyleBackColor = true;
+            chkComputeDerivative.CheckedChanged += ComputeDerivative_CheckedChanged;
+            // 
+            // grpDerivativeMethods
+            // 
+            grpDerivativeMethods.Controls.Add(radCentralFive);
+            grpDerivativeMethods.Controls.Add(radCentralThree);
+            grpDerivativeMethods.Controls.Add(radForwardOne);
+            grpDerivativeMethods.Controls.Add(radBackwardOne);
+            grpDerivativeMethods.Location = new Point(27, 68);
+            grpDerivativeMethods.Name = "grpDerivativeMethods";
+            grpDerivativeMethods.Size = new Size(391, 146);
+            grpDerivativeMethods.TabIndex = 1;
+            grpDerivativeMethods.TabStop = false;
+            grpDerivativeMethods.Text = "Algorithms";
+            // 
+            // radCentralFive
+            // 
+            radCentralFive.AutoSize = true;
+            radCentralFive.Location = new Point(16, 114);
+            radCentralFive.Name = "radCentralFive";
+            radCentralFive.Size = new Size(195, 23);
+            radCentralFive.TabIndex = 3;
+            radCentralFive.TabStop = true;
+            radCentralFive.Text = "Central five point difference";
+            radCentralFive.UseVisualStyleBackColor = true;
+            // 
+            // radCentralThree
+            // 
+            radCentralThree.AutoSize = true;
+            radCentralThree.Location = new Point(16, 85);
+            radCentralThree.Name = "radCentralThree";
+            radCentralThree.Size = new Size(208, 23);
+            radCentralThree.TabIndex = 2;
+            radCentralThree.TabStop = true;
+            radCentralThree.Text = "Central three-point difference";
+            radCentralThree.UseVisualStyleBackColor = true;
+            // 
+            // radForwardOne
+            // 
+            radForwardOne.AutoSize = true;
+            radForwardOne.Location = new Point(16, 56);
+            radForwardOne.Name = "radForwardOne";
+            radForwardOne.Size = new Size(205, 23);
+            radForwardOne.TabIndex = 1;
+            radForwardOne.TabStop = true;
+            radForwardOne.Text = "Forward one-point difference";
+            radForwardOne.UseVisualStyleBackColor = true;
+            // 
+            // radBackwardOne
+            // 
+            radBackwardOne.AutoSize = true;
+            radBackwardOne.Location = new Point(16, 27);
+            radBackwardOne.Name = "radBackwardOne";
+            radBackwardOne.Size = new Size(213, 23);
+            radBackwardOne.TabIndex = 0;
+            radBackwardOne.TabStop = true;
+            radBackwardOne.Text = "Backward one-point difference";
+            radBackwardOne.UseVisualStyleBackColor = true;
+            // 
+            // chkExportDerivative
+            // 
+            chkExportDerivative.AutoSize = true;
+            chkExportDerivative.Location = new Point(27, 39);
+            chkExportDerivative.Name = "chkExportDerivative";
+            chkExportDerivative.Size = new Size(167, 23);
+            chkExportDerivative.TabIndex = 0;
+            chkExportDerivative.Text = "Export derivative data?";
+            chkExportDerivative.UseVisualStyleBackColor = true;
+            // 
             // tabGUI
             // 
             tabGUI.Controls.Add(txtDataFormat);
@@ -341,99 +432,6 @@
             chkDlgPath.Text = "Remember open/save dialog previous path";
             chkDlgPath.UseVisualStyleBackColor = true;
             // 
-            // tabDerivative
-            // 
-            tabDerivative.Controls.Add(chkComputeDerivative);
-            tabDerivative.Controls.Add(grpDerivativeMethods);
-            tabDerivative.Controls.Add(chkDerivative);
-            tabDerivative.Location = new Point(4, 26);
-            tabDerivative.Name = "tabDerivative";
-            tabDerivative.Padding = new Padding(3);
-            tabDerivative.Size = new Size(441, 229);
-            tabDerivative.TabIndex = 2;
-            tabDerivative.Text = "Derivative";
-            tabDerivative.UseVisualStyleBackColor = true;
-            // 
-            // chkComputeDerivative
-            // 
-            chkComputeDerivative.AutoSize = true;
-            chkComputeDerivative.Location = new Point(27, 10);
-            chkComputeDerivative.Name = "chkComputeDerivative";
-            chkComputeDerivative.Size = new Size(217, 23);
-            chkComputeDerivative.TabIndex = 2;
-            chkComputeDerivative.Text = "Compute numerical derivative?";
-            chkComputeDerivative.UseVisualStyleBackColor = true;
-            // 
-            // grpDerivativeMethods
-            // 
-            grpDerivativeMethods.Controls.Add(radCentralFive);
-            grpDerivativeMethods.Controls.Add(radCentralThree);
-            grpDerivativeMethods.Controls.Add(radForwardOne);
-            grpDerivativeMethods.Controls.Add(radBackwardOne);
-            grpDerivativeMethods.Location = new Point(27, 68);
-            grpDerivativeMethods.Name = "grpDerivativeMethods";
-            grpDerivativeMethods.Size = new Size(391, 146);
-            grpDerivativeMethods.TabIndex = 1;
-            grpDerivativeMethods.TabStop = false;
-            grpDerivativeMethods.Text = "Algorithms";
-            // 
-            // radCentralFive
-            // 
-            radCentralFive.AutoSize = true;
-            radCentralFive.Location = new Point(16, 114);
-            radCentralFive.Name = "radCentralFive";
-            radCentralFive.Size = new Size(195, 23);
-            radCentralFive.TabIndex = 3;
-            radCentralFive.TabStop = true;
-            radCentralFive.Text = "Central five point difference";
-            radCentralFive.UseVisualStyleBackColor = true;
-            radCentralFive.CheckedChanged += radCentralFive_CheckedChanged;
-            // 
-            // radCentralThree
-            // 
-            radCentralThree.AutoSize = true;
-            radCentralThree.Location = new Point(16, 85);
-            radCentralThree.Name = "radCentralThree";
-            radCentralThree.Size = new Size(208, 23);
-            radCentralThree.TabIndex = 2;
-            radCentralThree.TabStop = true;
-            radCentralThree.Text = "Central three-point difference";
-            radCentralThree.UseVisualStyleBackColor = true;
-            radCentralThree.CheckedChanged += radCentralThree_CheckedChanged;
-            // 
-            // radForwardOne
-            // 
-            radForwardOne.AutoSize = true;
-            radForwardOne.Location = new Point(16, 56);
-            radForwardOne.Name = "radForwardOne";
-            radForwardOne.Size = new Size(205, 23);
-            radForwardOne.TabIndex = 1;
-            radForwardOne.TabStop = true;
-            radForwardOne.Text = "Forward one-point difference";
-            radForwardOne.UseVisualStyleBackColor = true;
-            // 
-            // radBackwardOne
-            // 
-            radBackwardOne.AutoSize = true;
-            radBackwardOne.Location = new Point(16, 27);
-            radBackwardOne.Name = "radBackwardOne";
-            radBackwardOne.Size = new Size(213, 23);
-            radBackwardOne.TabIndex = 0;
-            radBackwardOne.TabStop = true;
-            radBackwardOne.Text = "Backward one-point difference";
-            radBackwardOne.UseVisualStyleBackColor = true;
-            radBackwardOne.CheckedChanged += radBackwardOne_CheckedChanged;
-            // 
-            // chkDerivative
-            // 
-            chkDerivative.AutoSize = true;
-            chkDerivative.Location = new Point(27, 39);
-            chkDerivative.Name = "chkDerivative";
-            chkDerivative.Size = new Size(167, 23);
-            chkDerivative.TabIndex = 0;
-            chkDerivative.Text = "Export derivative data?";
-            chkDerivative.UseVisualStyleBackColor = true;
-            // 
             // btnReset
             // 
             btnReset.Location = new Point(12, 279);
@@ -468,14 +466,14 @@
             tabPlot.PerformLayout();
             grpAxis.ResumeLayout(false);
             grpAxis.PerformLayout();
-            tabGUI.ResumeLayout(false);
-            tabGUI.PerformLayout();
-            grpCulture.ResumeLayout(false);
-            grpCulture.PerformLayout();
             tabDerivative.ResumeLayout(false);
             tabDerivative.PerformLayout();
             grpDerivativeMethods.ResumeLayout(false);
             grpDerivativeMethods.PerformLayout();
+            tabGUI.ResumeLayout(false);
+            tabGUI.PerformLayout();
+            grpCulture.ResumeLayout(false);
+            grpCulture.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -514,6 +512,6 @@
         private RadioButton radCentralThree;
         private RadioButton radForwardOne;
         private RadioButton radBackwardOne;
-        private CheckBox chkDerivative;
+        private CheckBox chkExportDerivative;
     }
 }
