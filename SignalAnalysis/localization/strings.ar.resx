@@ -522,7 +522,7 @@
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>الوقت (ثواني)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>السعة / واني</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">

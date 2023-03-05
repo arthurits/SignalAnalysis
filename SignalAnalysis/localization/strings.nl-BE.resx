@@ -521,7 +521,7 @@ dimensie is gestopt.</value>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tijd (seconden)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitude / seconden</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">

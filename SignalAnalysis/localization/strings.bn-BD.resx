@@ -522,7 +522,7 @@
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>সময় (সেকেন্ড)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>প্রশস্ততা / সেকেন্ড</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">

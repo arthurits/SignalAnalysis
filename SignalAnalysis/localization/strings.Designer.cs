@@ -821,11 +821,20 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amplitude / seconds.
+        ///   Looks up a localized string similar to Amplitude / sec.
         /// </summary>
-        internal static string strPlotDerivativeYLabel {
+        internal static string strPlotDerivativeYLabel1 {
             get {
-                return ResourceManager.GetString("strPlotDerivativeYLabel", resourceCulture);
+                return ResourceManager.GetString("strPlotDerivativeYLabel1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amplitude.
+        /// </summary>
+        internal static string strPlotDerivativeYLabel2 {
+            get {
+                return ResourceManager.GetString("strPlotDerivativeYLabel2", resourceCulture);
             }
         }
         

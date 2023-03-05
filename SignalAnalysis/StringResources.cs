@@ -136,8 +136,9 @@ public static class StringResources
     public static string PlotFFTXLabel => StringRM.GetString("strPlotFFTXLabel", Culture) ?? "Frequency (Hz)";
     public static string PlotDerivativeTitle => StringRM.GetString("strPlotDerivativeTitle", Culture) ?? "Derivative";
     public static string PlotDerivativeXLabel => StringRM.GetString("strPlotDerivativeXLabel", Culture) ?? "Time (seconds)";
-    public static string PlotDerivativeYLabel => StringRM.GetString("strPlotDerivativeYLabel", Culture) ?? "Amplitude / seconds";
-    
+    public static string PlotDerivativeYLabel1 => StringRM.GetString("strPlotDerivativeYLabel1", Culture) ?? "Amplitude / sec";
+    public static string PlotDerivativeYLabel2 => StringRM.GetString("strPlotDerivativeYLabel2", Culture) ?? "Amplitude";
+
 
     public static string BtnAccept => StringRM.GetString("strBtnAccept", Culture) ?? "&Accept";
     public static string BtnCancel => StringRM.GetString("strBtnCancel", Culture) ?? "&Cancel";

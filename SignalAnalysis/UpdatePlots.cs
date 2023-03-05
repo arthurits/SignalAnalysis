@@ -146,7 +146,7 @@ partial class FrmMain
 
         Function<int> func = new(DataFunction);
 
-        // Run the intensive code on a separate task
+        // Run the computation-intensive code on a separate task
         statsTask = Task.Run(() =>
         {
             DerivativeMethod method = DerivativeMethod.BackwardOnePoint;
@@ -183,39 +183,43 @@ partial class FrmMain
         });
         await statsTask;
 
+        // Plot data
         ScottPlot.Plottable.SignalPlot pOriginal = new();
         ScottPlot.Plottable.SignalPlot pDerivative = new();
 
         switch (_settings.AxisType)
         {
             case AxisType.Points:
-                pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, label: StringResources.FileHeader28);
+                pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, color: plotDerivative.Plot.Palette.Colors[0], label: StringResources.FileHeader28);
                 plotDerivative.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
-                pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, label: StringResources.FileHeader28);
+                pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, color: plotDerivative.Plot.Palette.Colors[0], label: StringResources.FileHeader28);
                 plotDerivative.Plot.XAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
-                pOriginal = plotDerivative.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, label: StringResources.FileHeader28);
+                pOriginal = plotDerivative.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, color: plotDerivative.Plot.Palette.Colors[0], label: StringResources.FileHeader28);
                 pOriginal.OffsetX = Signal.StartTime.ToOADate();
                 plotDerivative.Plot.XAxis.DateTimeFormat(true);
                 break;
         }
-
-        pOriginal.YAxisIndex = 0;
+        
+        pOriginal.YAxisIndex = 1;
         pOriginal.XAxisIndex = 0;
-        pDerivative.YAxisIndex = 1;
+        pDerivative.YAxisIndex = 0;
         pDerivative.XAxisIndex = 0;
+
         plotDerivative.Plot.YAxis2.Ticks(true);
-        plotDerivative.Plot.YAxis2.Color(pDerivative.Color);
+        plotDerivative.Plot.YAxis2.Color(pOriginal.Color);
+        plotDerivative.Plot.YAxis2.Label(StringResources.PlotDerivativeYLabel2);
 
         plotDerivative.Plot.Title(StringResources.PlotDerivativeTitle);
-        plotDerivative.Plot.XLabel(StringResources.PlotDerivativeXLabel);
-        plotDerivative.Plot.YLabel(StringResources.PlotDerivativeYLabel);
+        plotDerivative.Plot.XAxis.Label(StringResources.PlotDerivativeXLabel);
+        plotDerivative.Plot.YAxis.Color(pDerivative.Color);
+        plotDerivative.Plot.YAxis.Label(StringResources.PlotDerivativeYLabel1);
         plotDerivative.Plot.AxisAuto(0, null);
         plotDerivative.Refresh();
 

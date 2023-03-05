@@ -526,8 +526,8 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tiempo (segundos)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
-    <value>Amplitud / segundos</value>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitud / seg</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivada</value>
@@ -555,5 +555,8 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strRadCentralFive" xml:space="preserve">
     <value>Diferencias centrales de 5 puntos</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitud</value>
   </data>
 </root>

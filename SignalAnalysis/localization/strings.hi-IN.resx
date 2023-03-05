@@ -519,7 +519,7 @@
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>समय (सेकंड)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>आयाम / सेकंड</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">

@@ -270,8 +270,10 @@ public partial class FrmMain : Form
 
         plotDerivative.CultureUI = _settings.AppCulture;
         plotDerivative.Plot.Title(StringResources.PlotDerivativeTitle);
-        plotDerivative.Plot.XLabel(StringResources.PlotDerivativeXLabel);
-        plotDerivative.Plot.YLabel(StringResources.PlotDerivativeYLabel);
+        plotDerivative.Plot.XAxis.Label(StringResources.PlotDerivativeXLabel);
+        plotDerivative.Plot.YAxis.Label(StringResources.PlotDerivativeYLabel1);
+        plotDerivative.Plot.YAxis2.Label(StringResources.PlotDerivativeYLabel2);
+        plotDerivative.Plot.YAxis2.Ticks(true);
         plotDerivative.Refresh();
 
         // Update the results text

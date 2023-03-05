@@ -525,8 +525,8 @@ dimension has been stopped.</value>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Time (seconds)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
-    <value>Amplitude / seconds</value>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitude / sec</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivative</value>
@@ -554,5 +554,8 @@ dimension has been stopped.</value>
   </data>
   <data name="strRadCentralFive" xml:space="preserve">
     <value>Central five-point difference</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitude</value>
   </data>
 </root>

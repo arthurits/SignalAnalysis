@@ -519,7 +519,7 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Laikas (sekundės)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitudė / sekundės</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">

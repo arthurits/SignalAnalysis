@@ -519,7 +519,7 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tempo (secondi)</value>
   </data>
-  <data name="strPlotDerivativeYLabel" xml:space="preserve">
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Ampiezza / secondi</value>
   </data>
   <data name="strFileHeader28" xml:space="preserve">
