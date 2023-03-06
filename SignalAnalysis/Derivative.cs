@@ -142,6 +142,109 @@ public class Derivative<T> where T : INumber<T>
         };
         
     }
+    
+    /// <summary>
+    /// [-f(x-h) + f(0) + f(x+h)] / 2h
+    /// </summary>
+    /// <returns></returns>
+    private double SGLinearThreePoint (T arg)
+    {
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 2),
+            _ => (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 2)
+        };
+    }
+    
+    /// <summary>
+    /// [-2 * f(x-2h) - f(x-h) + f(0) + f(x+h) + 2 * f(x+2h)] / 10h
+    /// </summary>
+    /// <returns></returns>
+    private double SGLinearFivePoint (T arg)
+    {
+        double step2 = step * 2;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (2 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 10),
+            _ => (2 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 10)
+        };
+    }
+    
+    /// <summary>
+    /// [-3 * f(x-3h) - 2 * f(x-2h) - f(x-h) + f(0) + f(x+h) + 2 * f(x+2h) + 3 * f(x+3h)] / 28h
+    /// </summary>
+    /// <returns></returns>
+    private double SGLinearSevenPoint (T arg)
+    {
+        double step2 = step * 2;
+        double step3 = step * 2;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (3 * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 2 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 28),
+            _ => (3 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 2 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 28)
+        };
+    }
+    
+    /// <summary>
+    /// [-4 * f(x-4h) - 3 * f(x-3h) - 2 * f(x-2h) - f(x-h) + f(0) + f(x+h) + 2 * f(x+2h) + 3 * f(x+3h) + 4 * f(x+4h)] / 60h
+    /// </summary>
+    /// <returns></returns>
+    private double SGLinearninePoint (T arg)
+    {
+        double step2 = step * 2;
+        double step3 = step * 2;
+        double step4 = step * 2;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (4 * (func[arg + T.CreateChecked(4)] - func[arg - T.CreateChecked(4)]) + 3 * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 2 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 60),
+            _ => (4 * (func[arg + T.CreateChecked(step4)] - func[arg - T.CreateChecked(step4)]) + 3 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 2 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 60)
+        };
+    }
+    
+    /// <summary>
+    /// [f(x-2h) - 8f(x-h) + 8f(x+h) - f(x+2h)] / 12h
+    /// </summary>
+    /// <returns></returns>
+    private double SGCubicFivePoint (T arg)
+    {
+        double step2 = step * 2;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)] + (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) * 8) / (step2 * 6),
+            _ => (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)] + (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) * 8) / (step2 * 6)
+        };
+    }
+    
+    /// <summary>
+    /// [22 * f(x-3h) - 67 * f(x-2h) - 58 * f(x-h) + 0 * f(x) + 58 * f(x+h) + 67 * f(x+2h) - 22 * f(x+3h)] / 252h
+    /// </summary>
+    /// <returns></returns>
+    private double SGCubicSevenPoint (T arg)
+    {
+        double step2 = step * 2;
+        double step3 = step * 3;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (22 * (func[arg - T.CreateChecked(3)] - func[arg + T.CreateChecked(3)]) + 67 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + 58 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 252),
+            _ => (22 * (func[arg - T.CreateChecked(step3)] - func[arg + T.CreateChecked(step3)]) + 67 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + 58 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 252)
+        };
+    }
+    
+    /// <summary>
+    /// [86 * f(x-4h) - 142 * f(x-3h) - 67 * f(x-2h) - 58 * f(x-h) + 0 * f(x) + 58 * f(x+h) + 67 * f(x+2h) + 142 * f(x+3h) - 86 * f(x+4h)] / 1188h
+    /// </summary>
+    /// <returns></returns>
+    private double SGCubicNinePoint (T arg)
+    {
+        double step2 = step * 2;
+        double step3 = step * 3;
+        double step4 = step * 4;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (86 * (func[arg - T.CreateChecked(4)] - func[arg + T.CreateChecked(4)]) + 142 * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 193 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + 126 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 1188),
+            _ => (86 * (func[arg - T.CreateChecked(step4)] - func[arg + T.CreateChecked(step4)]) + 142 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 193 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + 126 * (func[arg + T.CreateChecked(step1)] - func[arg - T.CreateChecked(step1)])) / (step * 1188)
+        };
+    }
 }
 
 public enum DerivativeMethod
@@ -151,5 +254,12 @@ public enum DerivativeMethod
     CenteredThreePoint,
     CenteredFivePoint,
     CenteredSevenPoint,
-    CenteredNinePoint
+    CenteredNinePoint,
+    SGLinearThreePoint,
+    SGLinearFivePoint,
+    SGLinearSevenPoint,
+    SGLinearNinePoint,
+    SGCubicFivePoint,
+    SGCubicSevenPoint,
+    SGCubicNinePoint
 }
