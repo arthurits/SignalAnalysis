@@ -242,7 +242,7 @@ public class Derivative<T> where T : INumber<T>
         return Type.GetTypeCode(typeof(T)) switch
         {
             TypeCode.Int32 => (86 * (func[arg - T.CreateChecked(4)] - func[arg + T.CreateChecked(4)]) + 142 * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 193 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + 126 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 1188),
-            _ => (86 * (func[arg - T.CreateChecked(step4)] - func[arg + T.CreateChecked(step4)]) + 142 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 193 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + 126 * (func[arg + T.CreateChecked(step1)] - func[arg - T.CreateChecked(step1)])) / (step * 1188)
+            _ => (86 * (func[arg - T.CreateChecked(step4)] - func[arg + T.CreateChecked(step4)]) + 142 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 193 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + 126 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 1188)
         };
     }
 }
