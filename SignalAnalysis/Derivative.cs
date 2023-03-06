@@ -109,6 +109,39 @@ public class Derivative<T> where T : INumber<T>
         };
         
     }
+    
+    /// <summary>
+    /// [-f(x-3h) + 9f(x-2h) - 45f(x-h) + 0f(x) + 45f(x+h) −9f(x+2h) + f(x+3h)] / 60h
+    /// </summary>
+    /// <returns></returns>
+    private double CenteredSevenPoint(T arg)
+    {
+        double step2 = step * 2;
+        double step3 = step * 3;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)] + 9 * (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)]) + 45 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 60),
+            _ => (-func[arg - T.CreateChecked(step3)] + func[arg + T.CreateChecked(step3)] + 9 * (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)]) + 45 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 60)
+        };
+        
+    }
+    
+    /// <summary>
+    /// [f(x-4h) - 8/3 * f(x-3h) + 56 * f(x-2h) - 224 * f(x-h)	+ 0F(x) + 224 * f(x+h) − 56 * f(x+2h) + 8/3 * f(x+3h) - f(x+4h)] / 280h
+    /// </summary>
+    /// <returns></returns>
+    private double CenteredNinePoint(T arg)
+    {
+        double step2 = step * 2;
+        double step3 = step * 3;
+        double step4 = step * 4;
+        return Type.GetTypeCode(typeof(T)) switch
+        {
+            TypeCode.Int32 => (func[arg - T.CreateChecked(4)] - func[arg + T.CreateChecked(4)] + (8/3) * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 56 * (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)]) + 224 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 280),
+            _ => (func[arg - T.CreateChecked(step4)] - func[arg + T.CreateChecked(step4)] + (8/3) * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 56 * (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)]) + 224 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 280)
+        };
+        
+    }
 }
 
 public enum DerivativeMethod
@@ -116,5 +149,7 @@ public enum DerivativeMethod
     BackwardOnePoint,
     ForwardOnePoint,
     CenteredThreePoint,
-    CenteredFivePoint
+    CenteredFivePoint,
+    CenteredSevenPoint,
+    CenteredNinePoint
 }
