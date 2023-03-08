@@ -168,10 +168,18 @@ partial class FrmMain
             statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
             statusStripLabelExEntropy.Checked = _settings.Entropy;
             statusStripLabelExCrossHair.Checked = _settings.CrossHair;
+            statusStripLabelExDerivative.Checked = _settings.ComputeDerivative;
 
             UpdateUI_Language();
 
-            UpdateStatsPlots(stripComboSeries.SelectedIndex);
+            UpdateStatsPlots(stripComboSeries.SelectedIndex,
+                stats: true,
+                derivative: _settings.ComputeDerivative,
+                fractal: true,
+                progressive: _settings.CumulativeDimension,
+                entropy: _settings.Entropy,
+                fft: true,
+                powerSpectra: _settings.PowerSpectra);
         }
 
     }
