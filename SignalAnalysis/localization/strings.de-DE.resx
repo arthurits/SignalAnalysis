@@ -338,11 +338,11 @@ beenden wollen?</value>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Daten gespeichert</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Berechnung der Hausdorff-Besicovitch-Fraktal Dimension
 wurde gestoppt.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Stopp</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

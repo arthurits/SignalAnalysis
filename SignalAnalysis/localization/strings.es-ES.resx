@@ -340,11 +340,11 @@ en la función 'InitializeDataArrays'.
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Datos guardados</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>El cálculo de la dimensión fractal de
 Hausdorff-Besicovitch se ha detenido.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Fin</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
@@ -561,5 +561,41 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strStatusTipDerivative" xml:space="preserve">
     <value>Derivada numérica</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>El cálculo de la derivada numérica se ha detenido.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>El cálculo de la entropía se ha detenido.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Fin</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Fin</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Error en la entropía</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Error en la estadística</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Error en la derivada</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular
+los valores de entropía.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular
+los estadísticos descriptivos.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular
+la derivada numérica.
+{0}</value>
   </data>
 </root>

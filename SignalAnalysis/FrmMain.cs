@@ -110,7 +110,14 @@ public partial class FrmMain : Form
         //_settings.Entropy = false;
 
         // Update stats and plots
-        UpdateStatsPlots(stripComboSeries.SelectedIndex);
+        UpdateStatsPlots(stripComboSeries.SelectedIndex,
+            stats: true,
+            derivative: _settings.ComputeDerivative,
+            fractal: true,
+            progressive: _settings.CumulativeDimension,
+            entropy: _settings.Entropy,
+            fft: true,
+            powerSpectra: _settings.PowerSpectra);
     }
 
     private void ComboWindow_SelectedIndexChanged(object? sender, EventArgs e)
@@ -124,7 +131,15 @@ public partial class FrmMain : Form
         var signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
         if (signal is null || signal.Length == 0) return;
 
-        UpdateWindowPlots(signal);
+        //UpdateWindowPlots(signal);
+        UpdateStatsPlots(stripComboSeries.SelectedIndex,
+            stats: false,
+            derivative: false,
+            fractal: false,
+            progressive: false,
+            entropy: false,
+            fft: true,
+            powerSpectra: _settings.PowerSpectra);
     }
 
     /// <summary>

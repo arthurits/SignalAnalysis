@@ -1,3 +1,5 @@
+using FftSharp.Windows;
+
 namespace SignalAnalysis;
 
 // This class implements the computation of the fractal dimension of a discrete curve according to 
@@ -37,7 +39,7 @@ public static class FractalDimension
             {
                 DimensionCumulative[i] = ComputeH(xValues, yValues, i).dimension;
                 if (ct.IsCancellationRequested)
-                    ct.ThrowIfCancellationRequested();
+                    throw new OperationCanceledException("CancelFractal", ct);
             }
         }
     }
@@ -53,7 +55,7 @@ public static class FractalDimension
             {
                 DimensionCumulative[i] = ComputeH(samplingFreq, yValues, i).dimension;
                 if (ct.IsCancellationRequested)
-                    ct.ThrowIfCancellationRequested();
+                    throw new OperationCanceledException("CancelFractal", ct);
             }
         }
     }
@@ -309,7 +311,7 @@ public class Complexity
                         break;
                     }
                     if (ct.IsCancellationRequested)
-                        ct.ThrowIfCancellationRequested();
+                        throw new OperationCanceledException("CancelEntropy", ct);
                 }
                 if (isEqual)
                 {

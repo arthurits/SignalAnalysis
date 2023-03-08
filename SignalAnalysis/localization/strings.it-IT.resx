@@ -337,10 +337,10 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Dati salvati</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Il calcolo della dimensione frattale di Hausdorff-Besicovitch è stato fermato.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Ferma</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

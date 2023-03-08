@@ -338,11 +338,11 @@ Probeer het later opnieuw of neem contact op met de software-engineer.
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Gegevens opgeslagen</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Berekening van de Hausdorff-Besicovitch fractal
 dimensie is gestopt.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Stop</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

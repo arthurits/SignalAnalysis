@@ -209,19 +209,20 @@ partial class FrmMain
             {
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
-                    ComboWindow_SelectedIndexChanged(null, EventArgs.Empty);
+                    //ComboWindow_SelectedIndexChanged(null, EventArgs.Empty);
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: true, powerSpectra: _settings.PowerSpectra);
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
                     if (_settings.CumulativeDimension)
-                        UpdateStatsPlots(stripComboSeries.SelectedIndex);
+                        UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
                     if (_settings.Entropy)
-                        UpdateStatsPlots(stripComboSeries.SelectedIndex);
+                        UpdateStatsPlots(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
@@ -262,13 +263,7 @@ partial class FrmMain
                     _settings.ComputeDerivative = label.Checked;
                     if (_settings.ComputeDerivative)
                     {
-                        // Extract the values 
-                        double[] signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
-                        if (signal is null || signal.Length == 0) return;
-
-                        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
-
-                        UpdateDerivative(signal, seriesName ?? string.Empty);
+                        UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
                     }
                     else
                     {

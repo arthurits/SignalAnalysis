@@ -337,10 +337,10 @@
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>डेटा सहेजा गया</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>हॉसडॉर्फ-बेसिकोविच फ्रैक्टल आयाम की गणना रोक दी गई है।</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>विराम</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

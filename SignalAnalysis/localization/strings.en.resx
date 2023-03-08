@@ -339,12 +339,12 @@ the application?</value>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Data saved</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Computation of the Hausdorff-Besicovitch fractal
 dimension has been stopped.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
-    <value>Stop</value>
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
     <value>ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*</value>
@@ -560,5 +560,35 @@ dimension has been stopped.</value>
   </data>
   <data name="strStatusTipDerivative" xml:space="preserve">
     <value>Numerical differentiation</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>Numerical differentiation has been stopped.</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Unexpected error while computing entropy values.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Entropy error</value>
+  </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Unexpected error while computing numerical differentiation.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Differentiation error</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Unexpected error while computing descriptive statistics values.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Statistics error</value>
   </data>
 </root>

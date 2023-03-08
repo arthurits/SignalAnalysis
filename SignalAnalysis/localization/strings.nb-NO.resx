@@ -339,11 +339,11 @@ programmet?</value>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Data lagret</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Beregning av Hausdorff-Besicovitch fraktaldimensjonen
 har stoppet.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Stoppe</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

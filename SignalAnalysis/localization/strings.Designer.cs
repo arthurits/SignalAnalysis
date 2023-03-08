@@ -606,6 +606,63 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unexpected error while computing numerical differentiation.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorDerivative {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDerivative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Differentiation error.
+        /// </summary>
+        internal static string strMsgBoxErrorDerivativeTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDerivativeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected error while computing descriptive statistics values.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorDescriptiveStats {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDescriptiveStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics error.
+        /// </summary>
+        internal static string strMsgBoxErrorDescriptiveStatsTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorDescriptiveStatsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected error while computing entropy values.
+        ///{0}.
+        /// </summary>
+        internal static string strMsgBoxErrorEntropy {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorEntropy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entropy error.
+        /// </summary>
+        internal static string strMsgBoxErrorEntropyTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorEntropyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected error while computing the FFT.
         ///{0}.
         /// </summary>
@@ -621,6 +678,24 @@ namespace SignalAnalysis.localization {
         internal static string strMsgBoxErrorFFTTitle {
             get {
                 return ResourceManager.GetString("strMsgBoxErrorFFTTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string strMsgBoxErrorFractal {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorFractal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string strMsgBoxErrorFractalTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxErrorFractalTitle", resourceCulture);
             }
         }
         
@@ -739,21 +814,57 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Computation of the Hausdorff-Besicovitch fractal
-        ///dimension has been stopped..
+        ///   Looks up a localized string similar to Numerical differentiation has been stopped..
         /// </summary>
-        internal static string strMsgBoxTaskCancel {
+        internal static string strMsgBoxTaskDerivativeCancel {
             get {
-                return ResourceManager.GetString("strMsgBoxTaskCancel", resourceCulture);
+                return ResourceManager.GetString("strMsgBoxTaskDerivativeCancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string strMsgBoxTaskCancelTitle {
+        internal static string strMsgBoxTaskDerivativeCancelTitle {
             get {
-                return ResourceManager.GetString("strMsgBoxTaskCancelTitle", resourceCulture);
+                return ResourceManager.GetString("strMsgBoxTaskDerivativeCancelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string strMsgBoxTaskEntropyCancel {
+            get {
+                return ResourceManager.GetString("strMsgBoxTaskEntropyCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string strMsgBoxTaskEntropyCancelTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxTaskEntropyCancelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Computation of the Hausdorff-Besicovitch fractal
+        ///dimension has been stopped..
+        /// </summary>
+        internal static string strMsgBoxTaskFractalCancel {
+            get {
+                return ResourceManager.GetString("strMsgBoxTaskFractalCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string strMsgBoxTaskFractalCancelTitle {
+            get {
+                return ResourceManager.GetString("strMsgBoxTaskFractalCancelTitle", resourceCulture);
             }
         }
         

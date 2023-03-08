@@ -336,11 +336,11 @@ Bandykite dar kartą vėliau arba susisiekite su programinės įrangos inžinier
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Duomenys išsaugoti</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Hausdorff-Besicovitch fraktalo matmens
 skaičiavimas buvo sustabdytas.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Sustabdyti</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

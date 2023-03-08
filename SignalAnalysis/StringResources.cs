@@ -61,8 +61,16 @@ public static class StringResources
 
     public static string MsgBoxExitTitle => StringRM.GetString("strMsgBoxExitTitle", Culture) ?? "Exit?";
     public static string MsgBoxExit => StringRM.GetString("strMsgBoxExit", Culture) ?? "Are you sure you want to exit" + Environment.NewLine + "the application?";
+    public static string MsgBoxErrorEntropy => StringRM.GetString("strMsgBoxErrorEntropy", Culture) ?? "Unexpected error while computing entropy values." + Environment.NewLine + "{0}";
+    public static string MsgBoxErrorEntropyTitle => StringRM.GetString("strMsgBoxErrorEntropyTitle", Culture) ?? "Entropy error";
+    public static string MsgBoxErrorDerivative => StringRM.GetString("strMsgBoxErrorDerivative", Culture) ?? "Unexpected error while computing numerical differentiation." + Environment.NewLine + "{0}";
+    public static string MsgBoxErrorDerivativeTitle => StringRM.GetString("strMsgBoxErrorDerivativeTitle", Culture) ?? "Differentiation error";
+    public static string MsgBoxErrorDescriptiveStats => StringRM.GetString("strMsgBoxErrorDescriptiveStats", Culture) ?? "Unexpected error while computing descriptive statistics values." + Environment.NewLine + "{0}";
+    public static string MsgBoxErrorDescriptiveStatsTitle => StringRM.GetString("strMsgBoxErrorDescriptiveStatsTitle", Culture) ?? "Statistics error";
     public static string MsgBoxErrorFFT => StringRM.GetString("strMsgBoxErrorFFT", Culture) ?? "Unexpected error while computing the FFT." + Environment.NewLine + "{0}";
     public static string MsgBoxErrorFFTTitle => StringRM.GetString("strMsgBoxErrorFFTTitle", Culture) ?? "FFT error";
+    public static string MsgBoxErrorFractal => StringRM.GetString("strMsgBoxErrorFractal", Culture) ?? "Unexpected error while computing the fractal dimension." + Environment.NewLine + "{0}";
+    public static string MsgBoxErrorFractalTitle => StringRM.GetString("strMsgBoxErrorFractalTitle", Culture) ?? "Fractal error";
     public static string MsgBoxErrorOpenData => StringRM.GetString("strMsgBoxErrorOpenData", Culture) ?? "An unexpected error happened while opening file data." + Environment.NewLine + "Please try again later or contact the software engineer." + Environment.NewLine + "{0}";
     public static string MsgBoxErrorOpenDataTitle => StringRM.GetString("strMsgBoxErrorOpenDataTitle", Culture) ?? "Error opening data";
     public static string MsgBoxErrorSaveData => StringRM.GetString("strMsgBoxErrorSaveData", Culture) ?? "An unexpected error happened while saving file data." + Environment.NewLine + "Please try again later or contact the software engineer." + Environment.NewLine + "{0}";
@@ -73,8 +81,12 @@ public static class StringResources
     public static string MsgBoxOKSaveDataTitle => StringRM.GetString("strMsgBoxOKSaveDataTitle", Culture) ?? "Data saved";
     public static string MsgBoxNoData => StringRM.GetString("strMsgBoxNoData", Culture) ?? "There is no data available to be saved.";
     public static string MsgBoxNoDataTitle => StringRM.GetString("strMsgBoxNoDataTitle", Culture) ?? "No data";
-    public static string MsgBoxTaskCancel => StringRM.GetString("strMsgBoxTaskCancel", Culture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.";
-    public static string MsgBoxTaskCancelTitle => StringRM.GetString("strMsgBoxTaskCancelTitle", Culture) ?? "Stop";
+    public static string MsgBoxTaskFractalCancel => StringRM.GetString("strMsgBoxTaskFractalCancel", Culture) ?? $"Computation of the Hausdorff-Besicovitch fractal{Environment.NewLine}dimension has been stopped.";
+    public static string MsgBoxTaskFractalCancelTitle => StringRM.GetString("strMsgBoxTaskFractalCancelTitle", Culture) ?? "Cancel";
+    public static string MsgBoxTaskEntropyCancel => StringRM.GetString("strMsgBoxTaskEntropyCancel", Culture) ?? $"Entropy computation has been stopped.";
+    public static string MsgBoxTaskEntropyCancelTitle => StringRM.GetString("strMsgBoxTaskEntropyCancelTitle", Culture) ?? "Cancel";
+    public static string MsgBoxTaskDerivativeCancel => StringRM.GetString("strMsgBoxTaskDerivativeCancel", Culture) ?? $"Numerical differentiation has been stopped.";
+    public static string MsgBoxTaskDerivativeCancelTitle => StringRM.GetString("strMsgBoxTaskDerivativeCancelTitle", Culture) ?? "Cancel";
 
     public static string ErrorDeserialize => StringRM.GetString("strErrorDeserialize", Culture) ?? "Error loading settings file." +
             Environment.NewLine + Environment.NewLine + "{0}" +

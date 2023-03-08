@@ -339,11 +339,11 @@ uygulama?</value>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Veri kaydedildi</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Hausdorff-Besicovitch fraktalının hesaplanması
 boyut durdurulmuştur.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Durmak</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

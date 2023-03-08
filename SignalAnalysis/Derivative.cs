@@ -49,6 +49,15 @@ public class Derivative<T> where T : INumber<T>
         DerivativeMethod.ForwardOnePoint => ForwardOnePoint(arg),
         DerivativeMethod.CenteredThreePoint => CenteredThreePoint(arg),
         DerivativeMethod.CenteredFivePoint => CenteredFivePoint(arg),
+        DerivativeMethod.CenteredSevenPoint => CenteredSevenPoint(arg),
+        DerivativeMethod.CenteredNinePoint => CenteredNinePoint(arg),
+        DerivativeMethod.SGLinearThreePoint => SGLinearThreePoint(arg),
+        DerivativeMethod.SGLinearFivePoint => SGLinearFivePoint(arg),
+        DerivativeMethod.SGLinearSevenPoint => SGLinearSevenPoint(arg),
+        DerivativeMethod.SGLinearNinePoint => SGLinearNinePoint(arg),
+        DerivativeMethod.SGCubicFivePoint => SGCubicFivePoint(arg),
+        DerivativeMethod.SGCubicSevenPoint => SGCubicSevenPoint(arg),
+        DerivativeMethod.SGCubicNinePoint => SGCubicNinePoint(arg),
         _ => throw new ArgumentOutOfRangeException(nameof(method), $"Not expected derivative method: {method}"),
     };
 
@@ -189,7 +198,7 @@ public class Derivative<T> where T : INumber<T>
     /// [-4 * f(x-4h) - 3 * f(x-3h) - 2 * f(x-2h) - f(x-h) + f(0) + f(x+h) + 2 * f(x+2h) + 3 * f(x+3h) + 4 * f(x+4h)] / 60h
     /// </summary>
     /// <returns></returns>
-    private double SGLinearninePoint (T arg)
+    private double SGLinearNinePoint (T arg)
     {
         double step2 = step * 2;
         double step3 = step * 2;

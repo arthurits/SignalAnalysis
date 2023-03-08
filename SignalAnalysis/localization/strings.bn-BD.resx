@@ -339,11 +339,11 @@
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>ডেটা সংরক্ষিত</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>হাউসডর্ফ-বেসিকোভিচ ফ্র্যাক্টাল মাত্রার গণনা
 বন্ধ করা হয়েছে.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>বন্ধ</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">

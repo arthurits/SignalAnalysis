@@ -339,11 +339,11 @@ sair da aplicação?</value>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Dados salvos</value>
   </data>
-  <data name="strMsgBoxTaskCancel" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>A computação do fractal da dimensão Hausdorff-Besicovitch
 foi interrompida.</value>
   </data>
-  <data name="strMsgBoxTaskCancelTitle" xml:space="preserve">
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>Interrupção</value>
   </data>
   <data name="strOpenDlgFilter" xml:space="preserve">
