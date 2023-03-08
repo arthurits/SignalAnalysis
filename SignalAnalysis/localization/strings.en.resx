@@ -591,4 +591,14 @@ dimension has been stopped.</value>
   <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
     <value>Statistics error</value>
   </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Unexpected error while computing the fractal dimension.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Fractal error</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>Entropy computation has been stopped.</value>
+  </data>
 </root>

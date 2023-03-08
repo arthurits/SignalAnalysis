@@ -573,9 +573,10 @@ dimension has been stopped.</value>
   </data>
   <data name="strStatusTipDerivative" xml:space="preserve">
     <value>Numerical differentiation</value>
+    <comment>Tooltip in the lower right corner button</comment>
   </data>
   <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value></value>
+    <value>Entropy computation has been stopped.</value>
   </data>
   <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
     <value>Cancel</value>
@@ -587,10 +588,11 @@ dimension has been stopped.</value>
     <value>Cancel</value>
   </data>
   <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value></value>
+    <value>Unexpected error while computing the fractal dimension.
+{0}</value>
   </data>
   <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value></value>
+    <value>Fractal error</value>
   </data>
   <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
     <value>Statistics error</value>

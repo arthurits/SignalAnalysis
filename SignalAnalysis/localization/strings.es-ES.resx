@@ -598,4 +598,11 @@ los estadísticos descriptivos.
 la derivada numérica.
 {0}</value>
   </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Error en dimensión fractal</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular la dimensión fractal.
+{0}</value>
+  </data>
 </root>

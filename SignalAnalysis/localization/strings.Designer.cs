@@ -682,7 +682,8 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Unexpected error while computing the fractal dimension.
+        ///{0}.
         /// </summary>
         internal static string strMsgBoxErrorFractal {
             get {
@@ -691,7 +692,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Fractal error.
         /// </summary>
         internal static string strMsgBoxErrorFractalTitle {
             get {
@@ -832,7 +833,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Entropy computation has been stopped..
         /// </summary>
         internal static string strMsgBoxTaskEntropyCancel {
             get {
