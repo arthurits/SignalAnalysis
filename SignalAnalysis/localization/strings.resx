@@ -615,4 +615,8 @@ dimension has been stopped.</value>
   <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
     <value>Entropy error</value>
   </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
+    <comment>Algorithms to be displayed as options in a ComboBox</comment>
+  </data>
 </root>
