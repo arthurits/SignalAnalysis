@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Data;
+using System.Globalization;
 
 namespace SignalAnalysis;
 
@@ -64,10 +65,7 @@ public partial class FrmSettings : Form
 
         Settings.ComputeDerivative = chkComputeDerivative.Checked;
         Settings.ExportDerivative = chkExportDerivative.Checked;
-        Settings.DerivativeAlgorithm = DerivativeMethod.BackwardOnePoint;
-        if (radForwardOne.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.ForwardOnePoint;
-        if (radCentralThree.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.CenteredThreePoint;
-        if (radCentralFive.Checked) Settings.DerivativeAlgorithm = DerivativeMethod.CenteredFivePoint;
+        Settings.DerivativeAlgorithm = (DerivativeMethod)cboAlgorithms.SelectedValue;
 
         DialogResult = DialogResult.OK;
     }
@@ -175,24 +173,31 @@ public partial class FrmSettings : Form
         txtDataFormat.Text = settings.DataFormat;
 
         chkComputeDerivative.Checked = settings.ComputeDerivative;
-        chkExportDerivative.Enabled = settings.ComputeDerivative;
-        grpAlgorithms.Enabled = settings.ComputeDerivative;
         chkExportDerivative.Checked = settings.ExportDerivative;
-        switch (settings.DerivativeAlgorithm)
-        {
-            case DerivativeMethod.BackwardOnePoint:
-                radBackwardOne.Checked = true;
-                break;
-            case DerivativeMethod.ForwardOnePoint:
-                radForwardOne.Checked = true;
-                break;
-            case DerivativeMethod.CenteredThreePoint:
-                radCentralThree.Checked = true;
-                break;
-            case DerivativeMethod.CenteredFivePoint:
-                radCentralFive.Checked = true;
-                break;
-        }
+        lblAlgorithms.Enabled = settings.ComputeDerivative;
+        cboAlgorithms.Enabled = settings.ComputeDerivative;
+        FillAlgorithms();
+
+    }
+
+    /// <summary>
+    /// Databind the algorithms to the combobox
+    /// </summary>
+    private void FillAlgorithms()
+    {
+        // Get the all the algorithms
+        string[] strAlgorithms = StringResources.DifferentiationAlgorithms.Split(", ");
+
+        DataTable table = new();
+        table.Columns.Add("Display", typeof(String));
+        table.Columns.Add("Value", typeof(Int32));
+        for (int i = 0; i < strAlgorithms.Length; i++)
+            table.Rows.Add(strAlgorithms[i], i);
+
+        cboAlgorithms.DataSource = table;
+        cboAlgorithms.DisplayMember = "Display";
+        cboAlgorithms.ValueMember = "Value";
+        cboAlgorithms.SelectedValue = (int)Settings.DerivativeAlgorithm;
     }
 
     /// <summary>
@@ -252,11 +257,8 @@ public partial class FrmSettings : Form
 
         this.chkComputeDerivative.Text = StringResources.ChkComputeDerivative;
         this.chkExportDerivative.Text = StringResources.ChkExportDerivative;
-        this.grpAlgorithms.Text = StringResources.GrpAlgorithms;
-        this.radBackwardOne.Text = StringResources.RadBackwardOne;
-        this.radForwardOne.Text = StringResources.RadForwardOne;
-        this.radCentralThree.Text = StringResources.RadCentralThree;
-        this.radCentralFive.Text = StringResources.RadCentralFive;
+        this.lblAlgorithms.Text = StringResources.GrpAlgorithms;
+        FillAlgorithms();
 
         this.btnReset.Text = StringResources.BtnReset;
         this.btnCancel.Text = StringResources.BtnCancel;
@@ -283,7 +285,8 @@ public partial class FrmSettings : Form
 
     private void ComputeDerivative_CheckedChanged(object sender, EventArgs e)
     {
-        grpAlgorithms.Enabled = chkComputeDerivative.Checked;
         chkExportDerivative.Enabled = chkComputeDerivative.Checked;
+        cboAlgorithms.Enabled = chkComputeDerivative.Checked;
+        lblAlgorithms.Enabled = chkComputeDerivative.Checked;
     }
 }

@@ -194,16 +194,16 @@ partial class FrmMain
     /// <returns></returns>
     private async Task UpdateStatsPlots(int series, bool stats = false, bool derivative = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
+        // Clip signal data to the user-specified bounds 
+        if (Signal.Data is null || Signal.Data.Length == 0) return;
+        double[] signalClipped = Signal.Data[series][Signal.IndexStart..(Signal.IndexEnd + 1)];
+        if (signalClipped is null || signalClipped.Length == 0) return;
+        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
+
         // Show waiting cursor
         var cursor = this.Cursor;
         Cursor.Current = Cursors.WaitCursor;
         this.UseWaitCursor = true;
-
-        // Clip signal data to the user-specified bounds 
-        double[] signalClipped = Signal.Data[series][Signal.IndexStart..(Signal.IndexEnd + 1)];
-        if (signalClipped is null || signalClipped.Length == 0) return;
-
-        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
 
         // Compute data;
         double[] signalWindowed = Array.Empty<double>();
