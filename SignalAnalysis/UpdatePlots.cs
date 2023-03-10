@@ -340,14 +340,43 @@ partial class FrmMain
         Derivative<int> derivative = new(func, 1 / Signal.SampleFrequency, _settings.DerivativeAlgorithm);
         Results.Derivative = new double[signal.Length];
 
-        Results.Derivative = derivative.DerivateArray(signal);
+        // Results.Derivative = derivative.DerivateArray(signal);
 
-        //for (int i = 0; i < signal.Length; i++)
-        //{
-        //    Results.Derivative[i] = derivative[i];
-        //    if (token.IsCancellationRequested)
-        //        throw new OperationCanceledException("CancelDerivative", token);
-        //}
+        int indexStart = 0, indexEnd = signal.Length - 1;
+        switch (_settings.DerivativeAlgorithm)
+        {
+            case DerivativeMethod.BackwardOnePoint:
+                indexStart = 1;
+                indexEnd = signal.Length;
+                break;
+            case DerivativeMethod.ForwardOnePoint:
+                indexStart = 0;
+                indexEnd = signal.Length - 1;
+                break;
+            case DerivativeMethod.CenteredThreePoint or DerivativeMethod.SGLinearThreePoint:
+                indexStart = 1;
+                indexEnd = signal.Length - 1;
+                break;
+            case DerivativeMethod.CenteredFivePoint or DerivativeMethod.SGLinearFivePoint or DerivativeMethod.SGCubicFivePoint:
+                indexStart = 2;
+                indexEnd = signal.Length - 2;
+                break;
+            case DerivativeMethod.CenteredSevenPoint or DerivativeMethod.SGLinearSevenPoint or DerivativeMethod.SGCubicSevenPoint:
+                indexStart = 3;
+                indexEnd = signal.Length - 3;
+                break;
+            case DerivativeMethod.CenteredNinePoint or DerivativeMethod.SGLinearNinePoint or DerivativeMethod.SGCubicNinePoint:
+                indexStart = 4;
+                indexEnd = signal.Length - 4;
+                break;
+        }
+
+        for (int i = indexStart; i < indexEnd; i++)
+        {
+            Results.Derivative[i] = derivative[i];
+            if (token.IsCancellationRequested)
+                throw new OperationCanceledException("CancelDerivative", token);
+        }
 
         // Local function
         double DataFunction(int index)
