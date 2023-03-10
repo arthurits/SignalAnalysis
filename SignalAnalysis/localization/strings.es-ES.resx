@@ -608,4 +608,7 @@ la derivada numérica.
   <data name="strDifferentiationAlgorithms" xml:space="preserve">
     <value>Diferencia hacia atrás de 1 punto, Diferencia hacia adelante de 1 punto, Diferencias centrales de 3 puntos, Diferencias centrales de 5 puntos, Diferencias centrales de 7 puntos, Diferencias centrales de 9 puntos, Savitzky–Golay lineal de 3 puntos, Savitzky–Golay lineal de 5 puntos, Savitzky–Golay lineal de 7 puntos, Savitzky–Golay lineal de 9 puntos, Savitzky–Golay cúbico de 5 puntos, Savitzky–Golay cúbico de 7 puntos, Savitzky–Golay cúbico de 9 puntos</value>
   </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>Algoritmo de diferenciación</value>
+  </data>
 </root>
