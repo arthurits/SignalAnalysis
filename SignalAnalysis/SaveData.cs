@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 partial class FrmMain
 {
