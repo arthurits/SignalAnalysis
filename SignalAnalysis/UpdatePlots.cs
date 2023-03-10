@@ -340,12 +340,14 @@ partial class FrmMain
         Derivative<int> derivative = new(func, 1 / Signal.SampleFrequency, _settings.DerivativeAlgorithm);
         Results.Derivative = new double[signal.Length];
 
-        for (int i = 0; i < signal.Length; i++)
-        {
-            Results.Derivative[i] = derivative[i];
-            if (token.IsCancellationRequested)
-                throw new OperationCanceledException("CancelDerivative", token);
-        }
+        Results.Derivative = derivative.DerivateArray(signal);
+
+        //for (int i = 0; i < signal.Length; i++)
+        //{
+        //    Results.Derivative[i] = derivative[i];
+        //    if (token.IsCancellationRequested)
+        //        throw new OperationCanceledException("CancelDerivative", token);
+        //}
 
         // Local function
         double DataFunction(int index)

@@ -32,18 +32,18 @@ class Function<T> : IFunction<T>
 
 public class Derivative<T> where T : INumber<T>
 {
-    private readonly IFunction<T> func;
-    private readonly DerivativeMethod method = DerivativeMethod.CenteredThreePoint;
-    public readonly double step = 10e-6;
+    private IFunction<T> Function { get; set; }
+    private DerivativeMethod Method { get; set; } = DerivativeMethod.CenteredThreePoint;
+    public double Step { get; set; }  = 10e-6;
 
     public Derivative(IFunction<T> func, double step, DerivativeMethod method = DerivativeMethod.CenteredThreePoint)
     {
-        this.func = func;
-        this.method = method;
-        this.step = step;
+        this.Function = func;
+        this.Method = method;
+        this.Step = step;
     }
 
-    public double this[T arg] => method switch
+    public double this[T arg] => Method switch
     {
         DerivativeMethod.BackwardOnePoint => BackwardOnePoint(arg),
         DerivativeMethod.ForwardOnePoint => ForwardOnePoint(arg),
@@ -58,8 +58,48 @@ public class Derivative<T> where T : INumber<T>
         DerivativeMethod.SGCubicFivePoint => SGCubicFivePoint(arg),
         DerivativeMethod.SGCubicSevenPoint => SGCubicSevenPoint(arg),
         DerivativeMethod.SGCubicNinePoint => SGCubicNinePoint(arg),
-        _ => throw new ArgumentOutOfRangeException(nameof(method), $"Not expected derivative method: {method}"),
+        _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected derivative method: {Method}"),
     };
+
+    public double[] DerivateArray(double[] array)
+    {
+        int indexStart = 0, indexEnd = array.Length - 1;
+        double[] result = new double[array.Length];
+
+        switch (Method)
+        {
+            case DerivativeMethod.BackwardOnePoint:
+                indexStart = 1;
+                indexEnd = array.Length;
+                break;
+            case DerivativeMethod.ForwardOnePoint:
+                indexStart = 0;
+                indexEnd = array.Length - 1;
+                break;
+            case DerivativeMethod.CenteredThreePoint or DerivativeMethod.SGLinearThreePoint:
+                indexStart = 1;
+                indexEnd = array.Length - 1;
+                break;
+            case DerivativeMethod.CenteredFivePoint or DerivativeMethod.SGLinearFivePoint or DerivativeMethod.SGCubicFivePoint:
+                indexStart = 2;
+                indexEnd = array.Length - 2;
+                break;
+            case DerivativeMethod.CenteredSevenPoint or DerivativeMethod.SGLinearSevenPoint or DerivativeMethod.SGCubicSevenPoint:
+                indexStart = 3;
+                indexEnd = array.Length - 3;
+                break;
+            case DerivativeMethod.CenteredNinePoint or DerivativeMethod.SGLinearNinePoint or DerivativeMethod.SGCubicNinePoint:
+                indexStart = 4;
+                indexEnd = array.Length - 4;
+                break;
+        }
+
+        for (int i = indexStart; i < indexEnd; i++)
+            result[i] = this[T.CreateChecked(i)];
+
+        return result;
+
+    }
 
     /// <summary>
     /// [f(x) - f(x-h)] / h
@@ -71,8 +111,8 @@ public class Derivative<T> where T : INumber<T>
         //return  (func[arg + h] - func[arg - h]) / (h * 2);
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg] - func[arg - T.CreateChecked(1)]) / (step),
-            _ => (func[arg] - func[arg - T.CreateChecked(step)]) / (step)
+            TypeCode.Int32 => (Function[arg] - Function[arg - T.CreateChecked(1)]) / (Step),
+            _ => (Function[arg] - Function[arg - T.CreateChecked(Step)]) / (Step)
         };
     }
 
@@ -85,8 +125,8 @@ public class Derivative<T> where T : INumber<T>
         //return  (func[arg + h] - func[arg - h]) / (h * 2);
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg + T.CreateChecked(1)] - func[arg]) / (step),
-            _ => (func[arg + T.CreateChecked(step)] - func[arg]) / (step)
+            TypeCode.Int32 => (Function[arg + T.CreateChecked(1)] - Function[arg]) / (Step),
+            _ => (Function[arg + T.CreateChecked(Step)] - Function[arg]) / (Step)
         };
     }
 
@@ -99,8 +139,8 @@ public class Derivative<T> where T : INumber<T>
         //return  (func[arg + h] - func[arg - h]) / (h * 2);
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 2),
-            _ => (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 2)
+            TypeCode.Int32 => (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)]) / (Step * 2),
+            _ => (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)]) / (Step * 2)
         };
     }
 
@@ -110,11 +150,11 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double CenteredFivePoint(T arg)
     {
-        double step2 = step * 2;
+        double step2 = Step * 2;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)] + (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) * 8) / (step2 * 6),
-            _ => (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)] + (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) * 8) / (step2 * 6)
+            TypeCode.Int32 => (Function[arg - T.CreateChecked(2)] - Function[arg + T.CreateChecked(2)] + (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)]) * 8) / (step2 * 6),
+            _ => (Function[arg - T.CreateChecked(step2)] - Function[arg + T.CreateChecked(step2)] + (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)]) * 8) / (step2 * 6)
         };
         
     }
@@ -125,12 +165,12 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double CenteredSevenPoint(T arg)
     {
-        double step2 = step * 2;
-        double step3 = step * 3;
+        double step2 = Step * 2;
+        double step3 = Step * 3;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)] + 9 * (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)]) + 45 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 60),
-            _ => (-func[arg - T.CreateChecked(step3)] + func[arg + T.CreateChecked(step3)] + 9 * (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)]) + 45 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 60)
+            TypeCode.Int32 => (Function[arg + T.CreateChecked(3)] - Function[arg - T.CreateChecked(3)] + 9 * (Function[arg - T.CreateChecked(2)] - Function[arg + T.CreateChecked(2)]) + 45 * (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)])) / (Step * 60),
+            _ => (-Function[arg - T.CreateChecked(step3)] + Function[arg + T.CreateChecked(step3)] + 9 * (Function[arg - T.CreateChecked(step2)] - Function[arg + T.CreateChecked(step2)]) + 45 * (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)])) / (Step * 60)
         };
         
     }
@@ -141,13 +181,13 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double CenteredNinePoint(T arg)
     {
-        double step2 = step * 2;
-        double step3 = step * 3;
-        double step4 = step * 4;
+        double step2 = Step * 2;
+        double step3 = Step * 3;
+        double step4 = Step * 4;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg - T.CreateChecked(4)] - func[arg + T.CreateChecked(4)] + (8/3) * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 56 * (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)]) + 224 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 280),
-            _ => (func[arg - T.CreateChecked(step4)] - func[arg + T.CreateChecked(step4)] + (8/3) * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 56 * (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)]) + 224 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 280)
+            TypeCode.Int32 => (Function[arg - T.CreateChecked(4)] - Function[arg + T.CreateChecked(4)] + (8/3) * (Function[arg + T.CreateChecked(3)] - Function[arg - T.CreateChecked(3)]) + 56 * (Function[arg - T.CreateChecked(2)] - Function[arg + T.CreateChecked(2)]) + 224 * (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)])) / (Step * 280),
+            _ => (Function[arg - T.CreateChecked(step4)] - Function[arg + T.CreateChecked(step4)] + (8/3) * (Function[arg + T.CreateChecked(step3)] - Function[arg - T.CreateChecked(step3)]) + 56 * (Function[arg - T.CreateChecked(step2)] - Function[arg + T.CreateChecked(step2)]) + 224 * (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)])) / (Step * 280)
         };
         
     }
@@ -160,8 +200,8 @@ public class Derivative<T> where T : INumber<T>
     {
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 2),
-            _ => (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 2)
+            TypeCode.Int32 => (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)]) / (Step * 2),
+            _ => (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)]) / (Step * 2)
         };
     }
     
@@ -171,11 +211,11 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double SGLinearFivePoint (T arg)
     {
-        double step2 = step * 2;
+        double step2 = Step * 2;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (2 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 10),
-            _ => (2 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 10)
+            TypeCode.Int32 => (2 * (Function[arg + T.CreateChecked(2)] - Function[arg - T.CreateChecked(2)]) + Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)]) / (Step * 10),
+            _ => (2 * (Function[arg + T.CreateChecked(step2)] - Function[arg - T.CreateChecked(step2)]) + Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)]) / (Step * 10)
         };
     }
     
@@ -185,12 +225,12 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double SGLinearSevenPoint (T arg)
     {
-        double step2 = step * 2;
-        double step3 = step * 2;
+        double step2 = Step * 2;
+        double step3 = Step * 2;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (3 * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 2 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 28),
-            _ => (3 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 2 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 28)
+            TypeCode.Int32 => (3 * (Function[arg + T.CreateChecked(3)] - Function[arg - T.CreateChecked(3)]) + 2 * (Function[arg + T.CreateChecked(2)] - Function[arg - T.CreateChecked(2)]) + Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)]) / (Step * 28),
+            _ => (3 * (Function[arg + T.CreateChecked(step3)] - Function[arg - T.CreateChecked(step3)]) + 2 * (Function[arg + T.CreateChecked(step2)] - Function[arg - T.CreateChecked(step2)]) + Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)]) / (Step * 28)
         };
     }
     
@@ -200,13 +240,13 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double SGLinearNinePoint (T arg)
     {
-        double step2 = step * 2;
-        double step3 = step * 2;
-        double step4 = step * 2;
+        double step2 = Step * 2;
+        double step3 = Step * 2;
+        double step4 = Step * 2;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (4 * (func[arg + T.CreateChecked(4)] - func[arg - T.CreateChecked(4)]) + 3 * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 2 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) / (step * 60),
-            _ => (4 * (func[arg + T.CreateChecked(step4)] - func[arg - T.CreateChecked(step4)]) + 3 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 2 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) / (step * 60)
+            TypeCode.Int32 => (4 * (Function[arg + T.CreateChecked(4)] - Function[arg - T.CreateChecked(4)]) + 3 * (Function[arg + T.CreateChecked(3)] - Function[arg - T.CreateChecked(3)]) + 2 * (Function[arg + T.CreateChecked(2)] - Function[arg - T.CreateChecked(2)]) + Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)]) / (Step * 60),
+            _ => (4 * (Function[arg + T.CreateChecked(step4)] - Function[arg - T.CreateChecked(step4)]) + 3 * (Function[arg + T.CreateChecked(step3)] - Function[arg - T.CreateChecked(step3)]) + 2 * (Function[arg + T.CreateChecked(step2)] - Function[arg - T.CreateChecked(step2)]) + Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)]) / (Step * 60)
         };
     }
     
@@ -216,11 +256,11 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double SGCubicFivePoint (T arg)
     {
-        double step2 = step * 2;
+        double step2 = Step * 2;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (func[arg - T.CreateChecked(2)] - func[arg + T.CreateChecked(2)] + (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)]) * 8) / (step2 * 6),
-            _ => (func[arg - T.CreateChecked(step2)] - func[arg + T.CreateChecked(step2)] + (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)]) * 8) / (step2 * 6)
+            TypeCode.Int32 => (Function[arg - T.CreateChecked(2)] - Function[arg + T.CreateChecked(2)] + (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)]) * 8) / (step2 * 6),
+            _ => (Function[arg - T.CreateChecked(step2)] - Function[arg + T.CreateChecked(step2)] + (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)]) * 8) / (step2 * 6)
         };
     }
     
@@ -230,12 +270,12 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double SGCubicSevenPoint (T arg)
     {
-        double step2 = step * 2;
-        double step3 = step * 3;
+        double step2 = Step * 2;
+        double step3 = Step * 3;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (22 * (func[arg - T.CreateChecked(3)] - func[arg + T.CreateChecked(3)]) + 67 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + 58 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 252),
-            _ => (22 * (func[arg - T.CreateChecked(step3)] - func[arg + T.CreateChecked(step3)]) + 67 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + 58 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 252)
+            TypeCode.Int32 => (22 * (Function[arg - T.CreateChecked(3)] - Function[arg + T.CreateChecked(3)]) + 67 * (Function[arg + T.CreateChecked(2)] - Function[arg - T.CreateChecked(2)]) + 58 * (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)])) / (Step * 252),
+            _ => (22 * (Function[arg - T.CreateChecked(step3)] - Function[arg + T.CreateChecked(step3)]) + 67 * (Function[arg + T.CreateChecked(step2)] - Function[arg - T.CreateChecked(step2)]) + 58 * (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)])) / (Step * 252)
         };
     }
     
@@ -245,13 +285,13 @@ public class Derivative<T> where T : INumber<T>
     /// <returns></returns>
     private double SGCubicNinePoint (T arg)
     {
-        double step2 = step * 2;
-        double step3 = step * 3;
-        double step4 = step * 4;
+        double step2 = Step * 2;
+        double step3 = Step * 3;
+        double step4 = Step * 4;
         return Type.GetTypeCode(typeof(T)) switch
         {
-            TypeCode.Int32 => (86 * (func[arg - T.CreateChecked(4)] - func[arg + T.CreateChecked(4)]) + 142 * (func[arg + T.CreateChecked(3)] - func[arg - T.CreateChecked(3)]) + 193 * (func[arg + T.CreateChecked(2)] - func[arg - T.CreateChecked(2)]) + 126 * (func[arg + T.CreateChecked(1)] - func[arg - T.CreateChecked(1)])) / (step * 1188),
-            _ => (86 * (func[arg - T.CreateChecked(step4)] - func[arg + T.CreateChecked(step4)]) + 142 * (func[arg + T.CreateChecked(step3)] - func[arg - T.CreateChecked(step3)]) + 193 * (func[arg + T.CreateChecked(step2)] - func[arg - T.CreateChecked(step2)]) + 126 * (func[arg + T.CreateChecked(step)] - func[arg - T.CreateChecked(step)])) / (step * 1188)
+            TypeCode.Int32 => (86 * (Function[arg - T.CreateChecked(4)] - Function[arg + T.CreateChecked(4)]) + 142 * (Function[arg + T.CreateChecked(3)] - Function[arg - T.CreateChecked(3)]) + 193 * (Function[arg + T.CreateChecked(2)] - Function[arg - T.CreateChecked(2)]) + 126 * (Function[arg + T.CreateChecked(1)] - Function[arg - T.CreateChecked(1)])) / (Step * 1188),
+            _ => (86 * (Function[arg - T.CreateChecked(step4)] - Function[arg + T.CreateChecked(step4)]) + 142 * (Function[arg + T.CreateChecked(step3)] - Function[arg - T.CreateChecked(step3)]) + 193 * (Function[arg + T.CreateChecked(step2)] - Function[arg - T.CreateChecked(step2)]) + 126 * (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)])) / (Step * 1188)
         };
     }
 }
