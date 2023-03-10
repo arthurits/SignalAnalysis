@@ -206,6 +206,18 @@ partial class FrmMain
             if (sampleFreq <= 0)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader06));
 
+            strLine = sr.ReadLine();    // Differentiation
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader29));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader29", fileCulture) ?? "Numerical differentiation"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader16));
+
+            if (strLine[(strLine.IndexOf(":") + 2)..] != "-")
+            {
+                string[] str = StringResources.GetString("strDifferentiationAlgorithms", fileCulture).Split(", ");
+                _settings.DerivativeAlgorithm = (DerivativeMethod)Array.IndexOf(str, strLine[(strLine.IndexOf(":") + 2)..]);
+            }
+
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)
                 throw new FormatException(StringResources.FileHeader19);
@@ -446,7 +458,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Differentiation
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader29));
-            if (!strLine.Contains($"{StringResources.GetString("strStatusTipDerivative", fileCulture) ?? "Numerical differentiation"}: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader29", fileCulture) ?? "Numerical differentiation"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader16));
             
             if (strLine[(strLine.IndexOf(":") + 2)..] != "-")

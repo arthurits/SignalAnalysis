@@ -59,7 +59,7 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader14}: {Results.ShannonEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader15}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader16}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
-            if (_settings.ComputeDerivative)
+            if (_settings.ExportDerivative && _settings.ComputeDerivative)
                 sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
             else
                 sw.WriteLine($"{StringResources.FileHeader29}: -");
@@ -72,7 +72,7 @@ partial class FrmMain
             {
                 time = Signal.StartTime.AddSeconds((j+ ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture);
                 content = $"{time}\t{signal[j].ToString(_settings.DataFormat, _settings.AppCulture)}";
-                if (_settings.ExportDerivative)
+                if (_settings.ExportDerivative && _settings.ComputeDerivative)
                     content += $"\t{Results.Derivative[j]}";
                 
                 //trying to write data to file
@@ -133,6 +133,10 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader17}: {numSeries}");
             sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
+            if (_settings.ExportDerivative && _settings.ComputeDerivative)
+                sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
+            else
+                sw.WriteLine($"{StringResources.FileHeader29}: -");
             sw.WriteLine();
             sw.WriteLine($"{SeriesName}");
 
