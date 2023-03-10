@@ -59,6 +59,10 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader14}: {Results.ShannonEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader15}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader16}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
+            if (_settings.ComputeDerivative)
+                sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
+            else
+                sw.WriteLine($"{StringResources.FileHeader29}: -");
             sw.WriteLine();
             sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}");
 

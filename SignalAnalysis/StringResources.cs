@@ -48,6 +48,7 @@ public static class StringResources
     public static string FileHeader26 => StringRM.GetString("strFileHeader26", Culture) ?? "and";
     public static string FileHeader27 => StringRM.GetString("strFileHeader27", Culture) ?? "milliseconds";
     public static string FileHeader28 => StringRM.GetString("strFileHeader28", Culture) ?? "Derivative";
+    public static string FileHeader29 => StatusTipDerivative;
 
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 

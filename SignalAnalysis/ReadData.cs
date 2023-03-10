@@ -278,7 +278,7 @@ partial class FrmMain
 
         DateTime start;
         DateTime end;
-        int points = 0, series = 0;
+        int points = 0, series = 0; 
         bool result = false;
         double sampleFreq;
         double readValue;
@@ -442,6 +442,19 @@ partial class FrmMain
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader16));
             results.IdealEntropy = readValue;
+
+            strLine = sr.ReadLine();    // Differentiation
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader29));
+            if (!strLine.Contains($"{StringResources.GetString("strStatusTipDerivative", fileCulture) ?? "Numerical differentiation"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader16));
+            
+            if (strLine[(strLine.IndexOf(":") + 2)..] != "-")
+            {
+                string[] str = StringResources.GetString("strDifferentiationAlgorithms", fileCulture).Split(", ");
+                _settings.DerivativeAlgorithm = (DerivativeMethod)Array.IndexOf(str, strLine[(strLine.IndexOf(":") + 2)..]);
+            }
+
 
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)
