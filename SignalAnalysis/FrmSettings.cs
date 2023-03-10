@@ -6,7 +6,8 @@ namespace SignalAnalysis;
 public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
-    private ClassSettings? Settings;
+    private readonly ClassSettings? Settings;
+    private int _derivativeAlgorithm;
 
     public FrmSettings()
     {
@@ -19,6 +20,7 @@ public partial class FrmSettings : Form
     {
         Settings = settings;
         _culture = settings.AppCulture;
+        _derivativeAlgorithm = (int)settings.DerivativeAlgorithm;
         UpdateControls(settings);
     }
 
@@ -65,7 +67,7 @@ public partial class FrmSettings : Form
 
         Settings.ComputeDerivative = chkComputeDerivative.Checked;
         Settings.ExportDerivative = chkExportDerivative.Checked;
-        Settings.DerivativeAlgorithm = (DerivativeMethod)cboAlgorithms.SelectedValue;
+        Settings.DerivativeAlgorithm = (DerivativeMethod)_derivativeAlgorithm;
 
         DialogResult = DialogResult.OK;
     }
@@ -117,7 +119,7 @@ public partial class FrmSettings : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            _culture = new((string)cboAllCultures.SelectedValue ?? String.Empty);
+            _culture = new((string)(cboAllCultures.SelectedValue ?? String.Empty));
             UpdateUI_Language();
         }
     }
@@ -130,6 +132,13 @@ public partial class FrmSettings : Form
             _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
         }
+    }
+
+    private void Algorithms_SelectedValueChanged(object sender, EventArgs e)
+    {
+        var cbo = sender as ComboBox;
+        if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedIndex > -1)
+            _derivativeAlgorithm = cbo.SelectedIndex;
     }
 
     /// <summary>
@@ -185,19 +194,15 @@ public partial class FrmSettings : Form
     /// </summary>
     private void FillAlgorithms()
     {
+        if (Settings is null) return;
+
         // Get the all the algorithms
         string[] strAlgorithms = StringResources.DifferentiationAlgorithms.Split(", ");
 
-        DataTable table = new();
-        table.Columns.Add("Display", typeof(String));
-        table.Columns.Add("Value", typeof(Int32));
-        for (int i = 0; i < strAlgorithms.Length; i++)
-            table.Rows.Add(strAlgorithms[i], i);
-
-        cboAlgorithms.DataSource = table;
-        cboAlgorithms.DisplayMember = "Display";
+        cboAlgorithms.DisplayMember = "DisplayName";
         cboAlgorithms.ValueMember = "Value";
-        cboAlgorithms.SelectedValue = (int)Settings.DerivativeAlgorithm;
+        cboAlgorithms.DataSource = strAlgorithms;
+        cboAlgorithms.SelectedIndex = _derivativeAlgorithm;
     }
 
     /// <summary>
@@ -289,4 +294,6 @@ public partial class FrmSettings : Form
         cboAlgorithms.Enabled = chkComputeDerivative.Checked;
         lblAlgorithms.Enabled = chkComputeDerivative.Checked;
     }
+
+
 }

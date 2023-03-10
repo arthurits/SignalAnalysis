@@ -266,6 +266,7 @@
             cboAlgorithms.Name = "cboAlgorithms";
             cboAlgorithms.Size = new Size(223, 25);
             cboAlgorithms.TabIndex = 3;
+            cboAlgorithms.SelectionChangeCommitted += Algorithms_SelectedValueChanged;
             // 
             // chkComputeDerivative
             // 
@@ -294,10 +295,10 @@
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 24);
+            tabGUI.Location = new Point(4, 26);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(441, 231);
+            tabGUI.Size = new Size(441, 229);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -341,7 +342,7 @@
             cboAllCultures.Name = "cboAllCultures";
             cboAllCultures.Size = new Size(190, 25);
             cboAllCultures.TabIndex = 3;
-            cboAllCultures.SelectedValueChanged += AllCultures_SelectedValueChanged;
+            cboAllCultures.SelectionChangeCommitted += AllCultures_SelectedValueChanged;
             // 
             // radUserCulture
             // 
