@@ -109,11 +109,11 @@ partial class FrmMain
         bool result = false;
         int numSeries = 1;
 
-        if (_settings.ExportDerivative)
-        {
-            numSeries = 2;
-            SeriesName += $"\t{StringResources.FileHeader28}";
-        }
+        //if (_settings.ExportDerivative)
+        //{
+        //    numSeries = 2;
+        //    SeriesName += $"\t{StringResources.FileHeader28}";
+        //}
 
         try
         {
@@ -131,10 +131,10 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader17}: {numSeries}");
             sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
-            if (_settings.ExportDerivative && _settings.ComputeDerivative)
-                sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
-            else
-                sw.WriteLine($"{StringResources.FileHeader29}: -");
+            //if (_settings.ExportDerivative && _settings.ComputeDerivative)
+            //    sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
+            //else
+            //    sw.WriteLine($"{StringResources.FileHeader29}: -");
             sw.WriteLine();
             sw.WriteLine($"{SeriesName}");
 
@@ -142,8 +142,8 @@ partial class FrmMain
             for (int j = 0; j < signal.Length; j++)
             {
                 content = signal[j].ToString(_settings.DataFormat, _settings.AppCulture);
-                if (_settings.ExportDerivative)
-                    content += $"\t{Results.Derivative[j]}";
+                //if (_settings.ExportDerivative)
+                //    content += $"\t{Results.Derivative[j]}";
 
                 // Trying to write data to file
                 sw.WriteLine(content);
