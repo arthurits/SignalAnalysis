@@ -632,4 +632,7 @@ la derivada numérica.
   <data name="strLblIntegration" xml:space="preserve">
     <value>Algoritmos de cuadratura</value>
   </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Integración numérica</value>
+  </data>
 </root>

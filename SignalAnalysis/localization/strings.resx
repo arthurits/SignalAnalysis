@@ -623,6 +623,7 @@ dimension has been stopped.</value>
   </data>
   <data name="strFileHeader29" xml:space="preserve">
     <value>Differentiation algorithm</value>
+    <comment>Column text header in exported files</comment>
   </data>
   <data name="strTabIntegration" xml:space="preserve">
     <value>Integration</value>
@@ -630,9 +631,11 @@ dimension has been stopped.</value>
   </data>
   <data name="strFileHeader30" xml:space="preserve">
     <value>Integration algorithm</value>
+    <comment>Column text header in exported files</comment>
   </data>
   <data name="strFileHeader31" xml:space="preserve">
     <value>Integral value</value>
+    <comment>Column text header in exported files</comment>
   </data>
   <data name="strIntegrationAlgorithms" xml:space="preserve">
     <value>Midpoint rule, Trapezoid rule, Simpson's 1/3 rule</value>
@@ -649,5 +652,9 @@ dimension has been stopped.</value>
   <data name="strLblIntegration" xml:space="preserve">
     <value>Quadrature algorithms</value>
     <comment>In "settings" form, tab "Integration"</comment>
+  </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Numerical integration</value>
+    <comment>Tooltip in the lower right corner button</comment>
   </data>
 </root>

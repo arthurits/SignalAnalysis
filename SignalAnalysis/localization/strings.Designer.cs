@@ -1394,6 +1394,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numerical integration.
+        /// </summary>
+        internal static string strStatusTipIntegration {
+            get {
+                return ResourceManager.GetString("strStatusTipIntegration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Plot either FFT power spectra(dB) or magnitude.
         /// </summary>
         internal static string strStatusTipPower {

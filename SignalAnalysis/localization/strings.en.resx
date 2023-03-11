@@ -628,4 +628,7 @@ dimension has been stopped.</value>
   <data name="strLblIntegration" xml:space="preserve">
     <value>Quadrature algorithms</value>
   </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Numerical integration</value>
+  </data>
 </root>
