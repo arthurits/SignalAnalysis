@@ -476,9 +476,11 @@ dimension has been stopped.</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>User interface</value>
+    <comment>Tab text in "settings" form</comment>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Plotting</value>
+    <comment>Tab text in "settings" form</comment>
   </data>
   <data name="strToolStripAbout" xml:space="preserve">
     <value>About</value>
@@ -541,15 +543,15 @@ dimension has been stopped.</value>
   </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>Compute numerical differentiation?</value>
-    <comment>In "settings" form</comment>
+    <comment>In "settings" form, tab "Derivative"</comment>
   </data>
   <data name="strChkExportDerivative" xml:space="preserve">
     <value>Export derivative data?</value>
-    <comment>In "settings" form</comment>
+    <comment>In "settings" form, tab "Derivative"</comment>
   </data>
   <data name="strGrpAlgorithms" xml:space="preserve">
     <value>Finite difference algorithms</value>
-    <comment>In "settings" form</comment>
+    <comment>In "settings" form, tab "Derivative"</comment>
   </data>
   <data name="strRadBackwardOne" xml:space="preserve">
     <value>Backward one-point difference</value>
@@ -621,5 +623,31 @@ dimension has been stopped.</value>
   </data>
   <data name="strFileHeader29" xml:space="preserve">
     <value>Differentiation algorithm</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integration</value>
+    <comment>Tab text in "settings" form</comment>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Integration algorithm</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Integral value</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Midpoint rule, Trapezoid rule, Simpson's 1/3 rule</value>
+    <comment>Algorithms to be displayed as options in a ComboBox</comment>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>Compute numerical integration?</value>
+    <comment>In "settings" form, tab "Integration"</comment>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>Export numerical integration?</value>
+    <comment>In "settings" form, tab "Integration"</comment>
+  </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Quadrature algorithms</value>
+    <comment>In "settings" form, tab "Integration"</comment>
   </data>
 </root>

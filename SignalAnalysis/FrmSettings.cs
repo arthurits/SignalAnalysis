@@ -8,6 +8,7 @@ public partial class FrmSettings : Form
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly ClassSettings? Settings;
     private int _derivativeAlgorithm;
+    private int _integrationAlgorithm;
 
     public FrmSettings()
     {
@@ -21,6 +22,7 @@ public partial class FrmSettings : Form
         Settings = settings;
         _culture = settings.AppCulture;
         _derivativeAlgorithm = (int)settings.DerivativeAlgorithm;
+        _integrationAlgorithm = (int)settings.IntegrationAlgorithm;
         UpdateControls(settings);
     }
 
@@ -65,9 +67,15 @@ public partial class FrmSettings : Form
 
         Settings.AppCulture = _culture;
 
+        // Differentiation
         Settings.ComputeDerivative = chkComputeDerivative.Checked;
         Settings.ExportDerivative = chkExportDerivative.Checked;
         Settings.DerivativeAlgorithm = (DerivativeMethod)_derivativeAlgorithm;
+
+        // Integration
+        Settings.ComputeIntegration = chkComputeIntegration.Checked;
+        Settings.ExportIntegration = chkExportIntegration.Checked;
+        Settings.IntegrationAlgorithm = (IntegrationMethod)_integrationAlgorithm;
 
         DialogResult = DialogResult.OK;
     }
@@ -134,11 +142,18 @@ public partial class FrmSettings : Form
         }
     }
 
-    private void Algorithms_SelectedValueChanged(object sender, EventArgs e)
+    private void Differentiation_SelectionChangeCommitted(object sender, EventArgs e)
     {
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedIndex > -1)
             _derivativeAlgorithm = cbo.SelectedIndex;
+    }
+
+    private void Integration_SelectionChangeCommitted(object sender, EventArgs e)
+    {
+        var cbo = sender as ComboBox;
+        if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedIndex > -1)
+            _integrationAlgorithm = cbo.SelectedIndex;
     }
 
     /// <summary>
@@ -185,6 +200,11 @@ public partial class FrmSettings : Form
         chkExportDerivative.Checked = settings.ExportDerivative;
         lblAlgorithms.Enabled = settings.ComputeDerivative;
         cboAlgorithms.Enabled = settings.ComputeDerivative;
+
+        chkComputeIntegration.Checked = settings.ComputeIntegration;
+        chkExportIntegration.Checked = settings.ExportIntegration;
+        lblIntegration.Enabled = settings.ComputeIntegration;
+        cboIntegration.Enabled = settings.ComputeIntegration;
         FillAlgorithms();
 
     }
@@ -196,13 +216,20 @@ public partial class FrmSettings : Form
     {
         if (Settings is null) return;
 
-        // Get the all the algorithms
+        // Get the all the differentiation algorithms
         string[] strAlgorithms = StringResources.DifferentiationAlgorithms.Split(", ");
 
         cboAlgorithms.DisplayMember = "DisplayName";
         cboAlgorithms.ValueMember = "Value";
         cboAlgorithms.DataSource = strAlgorithms;
         cboAlgorithms.SelectedIndex = _derivativeAlgorithm;
+
+        // Get the all the integration algorithms
+        strAlgorithms = StringResources.IntegrationAlgorithms.Split(", ");
+        cboIntegration.DisplayMember = "DisplayName";
+        cboIntegration.ValueMember = "Value";
+        cboIntegration.DataSource = strAlgorithms;
+        cboIntegration.SelectedIndex = _integrationAlgorithm;
     }
 
     /// <summary>
@@ -241,6 +268,7 @@ public partial class FrmSettings : Form
         this.tabPlot.Text = StringResources.TabPlot;
         this.tabGUI.Text = StringResources.TabGUI;
         this.tabDerivative.Text = StringResources.TabDerivative;
+        this.tabIntegration.Text = StringResources.TabIntegration;
 
         this.lblStart.Text = StringResources.LblStart;
         this.lblEnd.Text = String.Format(StringResources.LblEnd, Settings?.IndexMax);
@@ -263,6 +291,9 @@ public partial class FrmSettings : Form
         this.chkComputeDerivative.Text = StringResources.ChkComputeDerivative;
         this.chkExportDerivative.Text = StringResources.ChkExportDerivative;
         this.lblAlgorithms.Text = StringResources.GrpAlgorithms;
+        this.chkComputeIntegration.Text = StringResources.ChkComputeIntegration;
+        this.chkExportIntegration.Text = StringResources.ChkExportIntegration;
+        this.lblIntegration.Text = StringResources.LblIntegration;
         FillAlgorithms();
 
         this.btnReset.Text = StringResources.BtnReset;

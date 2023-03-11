@@ -4,6 +4,23 @@ namespace SignalAnalysis;
 
 //https://stackoverflow.com/questions/373186/mathematical-function-differentiation-with-c
 
+public enum DerivativeMethod
+{
+    BackwardOnePoint,
+    ForwardOnePoint,
+    CenteredThreePoint,
+    CenteredFivePoint,
+    CenteredSevenPoint,
+    CenteredNinePoint,
+    SGLinearThreePoint,
+    SGLinearFivePoint,
+    SGLinearSevenPoint,
+    SGLinearNinePoint,
+    SGCubicFivePoint,
+    SGCubicSevenPoint,
+    SGCubicNinePoint
+}
+
 public interface IFunction<T>
 {
     // Since operator () can't be overloaded, we'll use this trick.
@@ -294,21 +311,4 @@ public class Derivative<T> where T : INumber<T>
             _ => (86 * (Function[arg - T.CreateChecked(step4)] - Function[arg + T.CreateChecked(step4)]) + 142 * (Function[arg + T.CreateChecked(step3)] - Function[arg - T.CreateChecked(step3)]) + 193 * (Function[arg + T.CreateChecked(step2)] - Function[arg - T.CreateChecked(step2)]) + 126 * (Function[arg + T.CreateChecked(Step)] - Function[arg - T.CreateChecked(Step)])) / (Step * 1188)
         };
     }
-}
-
-public enum DerivativeMethod
-{
-    BackwardOnePoint,
-    ForwardOnePoint,
-    CenteredThreePoint,
-    CenteredFivePoint,
-    CenteredSevenPoint,
-    CenteredNinePoint,
-    SGLinearThreePoint,
-    SGLinearFivePoint,
-    SGLinearSevenPoint,
-    SGLinearNinePoint,
-    SGCubicFivePoint,
-    SGCubicSevenPoint,
-    SGCubicNinePoint
 }

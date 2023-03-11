@@ -49,6 +49,8 @@ public static class StringResources
     public static string FileHeader27 => StringRM.GetString("strFileHeader27", Culture) ?? "milliseconds";
     public static string FileHeader28 => StringRM.GetString("strFileHeader28", Culture) ?? "Derivative";
     public static string FileHeader29 => StringRM.GetString("strFileHeader29", Culture) ?? "Differentiation algorithm";
+    public static string FileHeader30 => StringRM.GetString("strFileHeader30", Culture) ?? "Integration algorithm";
+    public static string FileHeader31 => StringRM.GetString("strFileHeader31", Culture) ?? "Integral value";
 
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 
@@ -162,6 +164,7 @@ public static class StringResources
     public static string TabPlot => StringRM.GetString("strTabPlot", Culture) ?? "Plotting";
     public static string TabGUI => StringRM.GetString("strTabGUI", Culture) ?? "User interface";
     public static string TabDerivative => StringRM.GetString("strTabDerivative", Culture) ?? "Differentiation";
+    public static string TabIntegration => StringRM.GetString("strTabIntegration", Culture) ?? "Integration";
 
     public static string LblStart => StringRM.GetString("strLblStart", Culture) ?? "Array index start";
     public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end (max {0})";
@@ -182,6 +185,11 @@ public static class StringResources
     public static string RadCentralThree => StringRM.GetString("strRadCentralThree", Culture) ?? "Central three-point difference";
     public static string RadCentralFive => StringRM.GetString("strRadCentralFive", Culture) ?? "Central five-point difference";
     public static string DifferentiationAlgorithms => StringRM.GetString("strDifferentiationAlgorithms", Culture) ?? "Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point";
+
+    public static string ChkComputeIntegration => StringRM.GetString("strChkComputeIntegration", Culture) ?? "Compute numerical integration?";
+    public static string ChkExportIntegration => StringRM.GetString("strChkExportIntegration", Culture) ?? "Export numerical integration?";
+    public static string LblIntegration => StringRM.GetString("strLblIntegration", Culture) ?? "Quadrature algorithms";
+    public static string IntegrationAlgorithms => StringRM.GetString("strIntegrationAlgorithms", Culture) ?? "Midpoint rule, Trapezoid rule, Simpson's 1/3 rule";
 
     public static string GrpCulture => StringRM.GetString("strGrpCulture", Culture) ?? "UI and data format";
     public static string RadCurrentCulture => StringRM.GetString("strRadCurrentCulture", Culture) ?? "Current culture formatting";

@@ -124,6 +124,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compute numerical integration?.
+        /// </summary>
+        internal static string strChkComputeIntegration {
+            get {
+                return ResourceManager.GetString("strChkComputeIntegration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show plots&apos; crosshair.
         /// </summary>
         internal static string strChkCrossHair {
@@ -165,6 +174,15 @@ namespace SignalAnalysis.localization {
         internal static string strChkExportDerivative {
             get {
                 return ResourceManager.GetString("strChkExportDerivative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export numerical integration?.
+        /// </summary>
+        internal static string strChkExportIntegration {
+            get {
+                return ResourceManager.GetString("strChkExportIntegration", resourceCulture);
             }
         }
         
@@ -498,6 +516,24 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Integration algorithm.
+        /// </summary>
+        internal static string strFileHeader30 {
+            get {
+                return ResourceManager.GetString("strFileHeader30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integral value.
+        /// </summary>
+        internal static string strFileHeader31 {
+            get {
+                return ResourceManager.GetString("strFileHeader31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Section &apos;{0}&apos; is mis-formatted..
         /// </summary>
         internal static string strFileHeaderSection {
@@ -570,6 +606,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Midpoint rule, Trapezoid rule, Simpson&apos;s 1/3 rule.
+        /// </summary>
+        internal static string strIntegrationAlgorithms {
+            get {
+                return ResourceManager.GetString("strIntegrationAlgorithms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data-file path.
         /// </summary>
         internal static string strLblData {
@@ -593,6 +638,15 @@ namespace SignalAnalysis.localization {
         internal static string strLblEnd {
             get {
                 return ResourceManager.GetString("strLblEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quadrature algorithms.
+        /// </summary>
+        internal static string strLblIntegration {
+            get {
+                return ResourceManager.GetString("strLblIntegration", resourceCulture);
             }
         }
         
@@ -1363,6 +1417,15 @@ namespace SignalAnalysis.localization {
         internal static string strTabGUI {
             get {
                 return ResourceManager.GetString("strTabGUI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integration.
+        /// </summary>
+        internal static string strTabIntegration {
+            get {
+                return ResourceManager.GetString("strTabIntegration", resourceCulture);
             }
         }
         

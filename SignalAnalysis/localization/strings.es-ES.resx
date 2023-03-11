@@ -611,4 +611,25 @@ la derivada numérica.
   <data name="strFileHeader29" xml:space="preserve">
     <value>Algoritmo de diferenciación</value>
   </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integración</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Algoritmo de integración</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Valor de la integral</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Punto medio, Método trapezoidal, Simpson 1/3</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>¿Exportar el resultado de la integración?</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>¿Calcular la integral numérica?</value>
+  </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Algoritmos de cuadratura</value>
+  </data>
 </root>

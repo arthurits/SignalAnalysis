@@ -607,4 +607,25 @@ dimension has been stopped.</value>
   <data name="strFileHeader29" xml:space="preserve">
     <value>Differentiation algorithm</value>
   </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integration</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Integral value</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Integration algorithm</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Midpoint rule, Trapezoid rule, Simpson's 1/3 rule</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>Compute numerical integration?</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>Export numerical integration?</value>
+  </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Quadrature algorithms</value>
+  </data>
 </root>

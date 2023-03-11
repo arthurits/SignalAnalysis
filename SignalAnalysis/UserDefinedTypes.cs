@@ -32,6 +32,8 @@ public class SignalStats
 
     public double[] Derivative { get; set; } = Array.Empty<double>();
 
+    public double Integral { get; set; } = -1;
+
     public double[] FFTpower { get; set; } = Array.Empty<double>();
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
     public double[] FFTfrequencies { get; set; } = Array.Empty<double>();
@@ -46,7 +48,8 @@ public class SignalStats
         StringResources.FileHeader13 + ": " + SampleEntropy.ToString("0.########", culture) + Environment.NewLine +
         StringResources.FileHeader14 + ": " + ShannonEntropy.ToString("0.########", culture) + Environment.NewLine +
         StringResources.FileHeader15 + ": " + EntropyBit.ToString("0.########", culture) + Environment.NewLine +
-        StringResources.FileHeader16 + ": " + IdealEntropy.ToString("0.########", culture);
+        StringResources.FileHeader16 + ": " + IdealEntropy.ToString("0.########", culture) + Environment.NewLine +
+        StringResources.FileHeader31 + ": " + Integral.ToString("0.########", culture);
 }
 
 /// <summary>

@@ -49,6 +49,11 @@
             cboAlgorithms = new ComboBox();
             chkComputeDerivative = new CheckBox();
             chkExportDerivative = new CheckBox();
+            tabIntegration = new TabPage();
+            cboIntegration = new ComboBox();
+            lblIntegration = new Label();
+            chkExportIntegration = new CheckBox();
+            chkComputeIntegration = new CheckBox();
             tabGUI = new TabPage();
             txtDataFormat = new TextBox();
             lblDataFormat = new Label();
@@ -63,6 +68,7 @@
             tabPlot.SuspendLayout();
             grpAxis.SuspendLayout();
             tabDerivative.SuspendLayout();
+            tabIntegration.SuspendLayout();
             tabGUI.SuspendLayout();
             grpCulture.SuspendLayout();
             SuspendLayout();
@@ -91,6 +97,7 @@
             // 
             tabSettings.Controls.Add(tabPlot);
             tabSettings.Controls.Add(tabDerivative);
+            tabSettings.Controls.Add(tabIntegration);
             tabSettings.Controls.Add(tabGUI);
             tabSettings.Location = new Point(12, 14);
             tabSettings.Name = "tabSettings";
@@ -266,7 +273,7 @@
             cboAlgorithms.Name = "cboAlgorithms";
             cboAlgorithms.Size = new Size(223, 25);
             cboAlgorithms.TabIndex = 3;
-            cboAlgorithms.SelectionChangeCommitted += Algorithms_SelectedValueChanged;
+            cboAlgorithms.SelectionChangeCommitted += Differentiation_SelectionChangeCommitted;
             // 
             // chkComputeDerivative
             // 
@@ -289,16 +296,68 @@
             chkExportDerivative.Text = "Export derivative data?";
             chkExportDerivative.UseVisualStyleBackColor = true;
             // 
+            // tabIntegration
+            // 
+            tabIntegration.Controls.Add(cboIntegration);
+            tabIntegration.Controls.Add(lblIntegration);
+            tabIntegration.Controls.Add(chkExportIntegration);
+            tabIntegration.Controls.Add(chkComputeIntegration);
+            tabIntegration.Location = new Point(4, 26);
+            tabIntegration.Name = "tabIntegration";
+            tabIntegration.Padding = new Padding(3);
+            tabIntegration.Size = new Size(441, 229);
+            tabIntegration.TabIndex = 3;
+            tabIntegration.Text = "Integration";
+            tabIntegration.UseVisualStyleBackColor = true;
+            // 
+            // cboIntegration
+            // 
+            cboIntegration.FormattingEnabled = true;
+            cboIntegration.Location = new Point(63, 150);
+            cboIntegration.Name = "cboIntegration";
+            cboIntegration.Size = new Size(223, 25);
+            cboIntegration.TabIndex = 3;
+            cboIntegration.SelectionChangeCommitted += Integration_SelectionChangeCommitted;
+            // 
+            // lblIntegration
+            // 
+            lblIntegration.AutoSize = true;
+            lblIntegration.Location = new Point(63, 122);
+            lblIntegration.Name = "lblIntegration";
+            lblIntegration.Size = new Size(149, 19);
+            lblIntegration.TabIndex = 2;
+            lblIntegration.Text = "Quadrature algorithms";
+            // 
+            // chkExportIntegration
+            // 
+            chkExportIntegration.AutoSize = true;
+            chkExportIntegration.Location = new Point(27, 78);
+            chkExportIntegration.Name = "chkExportIntegration";
+            chkExportIntegration.Size = new Size(207, 23);
+            chkExportIntegration.TabIndex = 1;
+            chkExportIntegration.Text = "Export numerical integration?";
+            chkExportIntegration.UseVisualStyleBackColor = true;
+            // 
+            // chkComputeIntegration
+            // 
+            chkComputeIntegration.AutoSize = true;
+            chkComputeIntegration.Location = new Point(27, 38);
+            chkComputeIntegration.Name = "chkComputeIntegration";
+            chkComputeIntegration.Size = new Size(225, 23);
+            chkComputeIntegration.TabIndex = 0;
+            chkComputeIntegration.Text = "Compute numerical integration?";
+            chkComputeIntegration.UseVisualStyleBackColor = true;
+            // 
             // tabGUI
             // 
             tabGUI.Controls.Add(txtDataFormat);
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 26);
+            tabGUI.Location = new Point(4, 24);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(441, 229);
+            tabGUI.Size = new Size(441, 231);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -426,6 +485,8 @@
             grpAxis.PerformLayout();
             tabDerivative.ResumeLayout(false);
             tabDerivative.PerformLayout();
+            tabIntegration.ResumeLayout(false);
+            tabIntegration.PerformLayout();
             tabGUI.ResumeLayout(false);
             tabGUI.PerformLayout();
             grpCulture.ResumeLayout(false);
@@ -466,5 +527,10 @@
         private CheckBox chkExportDerivative;
         private Label lblAlgorithms;
         private ComboBox cboAlgorithms;
+        private TabPage tabIntegration;
+        private ComboBox cboIntegration;
+        private Label lblIntegration;
+        private CheckBox chkExportIntegration;
+        private CheckBox chkComputeIntegration;
     }
 }

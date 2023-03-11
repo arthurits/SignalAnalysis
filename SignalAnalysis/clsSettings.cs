@@ -126,7 +126,7 @@ public class ClassSettings
     public string? AppPath { get; set; } = Path.GetDirectoryName(Environment.ProcessPath);
 
     /// <summary>
-    /// True if the derivative data is also exported
+    /// True if the derivative data will be exported
     /// </summary>
     [JsonPropertyName("Export derivative?")]
     public bool ExportDerivative { get; set; } = true;
@@ -142,6 +142,24 @@ public class ClassSettings
     /// </summary>
     [JsonPropertyName("Derivative algorithm")]
     public DerivativeMethod DerivativeAlgorithm { get; set; } = DerivativeMethod.CenteredThreePoint;
+
+    /// <summary>
+    /// True if the integral value will be exported
+    /// </summary>
+    [JsonPropertyName("Export integration?")]
+    public bool ExportIntegration { get; set; } = true;
+
+    /// <summary>
+    /// True if the integral will be computed
+    /// </summary>
+    [JsonPropertyName("Compute integration?")]
+    public bool ComputeIntegration { get; set; } = true;
+
+    /// <summary>
+    /// Numerical integration algorithm
+    /// </summary>
+    [JsonPropertyName("Quadrature algorithm")]
+    public IntegrationMethod IntegrationAlgorithm { get; set; } = IntegrationMethod.TrapezoidRule;
 
     public ClassSettings()
     {
