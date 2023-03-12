@@ -61,6 +61,16 @@ partial class FrmMain
                 sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
             else
                 sw.WriteLine($"{StringResources.FileHeader29}: -");
+            if (_settings.ExportIntegration && _settings.ComputeIntegration)
+            {
+                sw.WriteLine($"{StringResources.FileHeader30}: {StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader31}: {Results.Integral.ToString(_settings.AppCulture)}");
+            }
+            else
+            {
+                sw.WriteLine($"{StringResources.FileHeader30}: -");
+                sw.WriteLine($"{StringResources.FileHeader31}: -");
+            }
             sw.WriteLine();
             sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}");
 

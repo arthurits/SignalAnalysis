@@ -61,6 +61,7 @@ partial class FrmMain
         statusStripLabelExEntropy = new ToolStripStatusLabelEx();
         statusStripLabelExCrossHair = new ToolStripStatusLabelEx();
         statusStripLabelExDerivative = new ToolStripStatusLabelEx();
+        statusStripLabelExIntegration = new ToolStripStatusLabelEx();
         tableLayoutPanel1.SuspendLayout();
         tableLayoutPanel2.SuspendLayout();
         tableLayoutPanel3.SuspendLayout();
@@ -386,7 +387,7 @@ partial class FrmMain
         // statusStrip
         // 
         statusStrip.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-        statusStrip.Items.AddRange(new ToolStripItem[] { statusStripLabelEmpty, statusStripLabelCulture, statusStripLabelExPower, statusStripLabelExCumulative, statusStripLabelExEntropy, statusStripLabelExCrossHair, statusStripLabelExDerivative });
+        statusStrip.Items.AddRange(new ToolStripItem[] { statusStripLabelEmpty, statusStripLabelCulture, statusStripLabelExPower, statusStripLabelExCumulative, statusStripLabelExEntropy, statusStripLabelExCrossHair, statusStripLabelExDerivative, statusStripLabelExIntegration });
         statusStrip.Location = new Point(0, 693);
         statusStrip.Name = "statusStrip";
         statusStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -400,7 +401,7 @@ partial class FrmMain
         statusStripLabelEmpty.BorderSides = ToolStripStatusLabelBorderSides.Right;
         statusStripLabelEmpty.DisplayStyle = ToolStripItemDisplayStyle.Text;
         statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-        statusStripLabelEmpty.Size = new Size(628, 23);
+        statusStripLabelEmpty.Size = new Size(600, 23);
         statusStripLabelEmpty.Spring = true;
         statusStripLabelEmpty.TextAlign = ContentAlignment.MiddleLeft;
         // 
@@ -427,7 +428,7 @@ partial class FrmMain
         statusStripLabelExPower.Size = new Size(28, 23);
         statusStripLabelExPower.Text = "P";
         statusStripLabelExPower.ToolTipText = "Power spectra (dB)";
-        statusStripLabelExPower.Click += this.LabelEx_Click;
+        statusStripLabelExPower.Click += LabelEx_Click;
         // 
         // statusStripLabelExCumulative
         // 
@@ -442,7 +443,7 @@ partial class FrmMain
         statusStripLabelExCumulative.Size = new Size(28, 23);
         statusStripLabelExCumulative.Text = "F";
         statusStripLabelExCumulative.ToolTipText = "Cumulative fractal dimension";
-        statusStripLabelExCumulative.Click += this.LabelEx_Click;
+        statusStripLabelExCumulative.Click += LabelEx_Click;
         // 
         // statusStripLabelExEntropy
         // 
@@ -457,7 +458,7 @@ partial class FrmMain
         statusStripLabelExEntropy.Size = new Size(28, 23);
         statusStripLabelExEntropy.Text = "E";
         statusStripLabelExEntropy.ToolTipText = "Approximate and sample entropy";
-        statusStripLabelExEntropy.Click += this.LabelEx_Click;
+        statusStripLabelExEntropy.Click += LabelEx_Click;
         // 
         // statusStripLabelExCrossHair
         // 
@@ -472,7 +473,7 @@ partial class FrmMain
         statusStripLabelExCrossHair.Size = new Size(28, 23);
         statusStripLabelExCrossHair.Text = "C";
         statusStripLabelExCrossHair.ToolTipText = "Plot's crosshair mode";
-        statusStripLabelExCrossHair.Click += this.LabelEx_Click;
+        statusStripLabelExCrossHair.Click += LabelEx_Click;
         // 
         // statusStripLabelExDerivative
         // 
@@ -487,7 +488,22 @@ partial class FrmMain
         statusStripLabelExDerivative.Size = new Size(28, 23);
         statusStripLabelExDerivative.Text = "D";
         statusStripLabelExDerivative.ToolTipText = "Numerical differentiation";
-        statusStripLabelExDerivative.Click += this.LabelEx_Click;
+        statusStripLabelExDerivative.Click += LabelEx_Click;
+        // 
+        // statusStripLabelExIntegration
+        // 
+        statusStripLabelExIntegration.AutoSize = false;
+        statusStripLabelExIntegration.BackColor = Color.Transparent;
+        statusStripLabelExIntegration.Checked = false;
+        statusStripLabelExIntegration.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExIntegration.ForeColor = Color.LightGray;
+        statusStripLabelExIntegration.ForeColorChecked = Color.Black;
+        statusStripLabelExIntegration.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExIntegration.Name = "statusStripLabelExIntegration";
+        statusStripLabelExIntegration.Size = new Size(28, 23);
+        statusStripLabelExIntegration.Text = "I";
+        statusStripLabelExIntegration.ToolTipText = "Numerical integration";
+        statusStripLabelExIntegration.Click += LabelEx_Click;
         // 
         // FrmMain
         // 
@@ -555,4 +571,5 @@ partial class FrmMain
     private ScottPlot.FormsPlotCrossHair plotFFT;
     private ScottPlot.FormsPlotCrossHair plotDerivative;
     private ToolStripStatusLabelEx statusStripLabelExDerivative;
+    private ToolStripStatusLabelEx statusStripLabelExIntegration;
 }

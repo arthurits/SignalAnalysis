@@ -192,7 +192,7 @@ partial class FrmMain
     /// </summary>
     /// <param name="serie">The series to be computed</param>
     /// <returns></returns>
-    private async Task UpdateStatsPlots(int series, bool stats = false, bool derivative = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
+    private async Task UpdateStatsPlots(int series, bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -219,6 +219,7 @@ partial class FrmMain
                 // UpdateStats(signalClipped, _settings.CumulativeDimension, _settings.Entropy);
                 if (stats) ComputeStatistics(signalClipped);
                 if (derivative) ComputeDerivative(signalClipped);
+                if (integral) ComputeIntegral(signalClipped);
                 if (fractal) ComputeFractal(signalClipped, progressive);
                 if (entropy) ComputeEntropy(signalClipped);
                 if (fft) signalWindowed = ComputeFFT(signalClipped, window);
@@ -291,7 +292,7 @@ partial class FrmMain
 
         // Show text results
         if (stats || fractal || entropy)
-            txtStats.Text = Results.ToString(_settings.AppCulture);
+            txtStats.Text = Results.ToString(_settings.AppCulture, _settings.ComputeIntegration);
 
         // Restore the cursor
         this.UseWaitCursor = false;
@@ -378,6 +379,28 @@ partial class FrmMain
                 throw new OperationCanceledException("CancelDerivative", token);
         }
 
+        // Local function
+        double DataFunction(int index)
+        {
+            if (index < 0)
+                return 0;
+
+            if (index >= signal.Length)
+                return 0;
+
+            return signal[index];
+        }
+    }
+
+    private void ComputeIntegral(double[] signal)
+    {
+        Function<int> func = new(DataFunction);
+
+        Integration<int> integral = new(func, 1 / Signal.SampleFrequency, _settings.IntegrationAlgorithm);
+        //Results.Integral = new double[signal.Length];
+
+        Results.Integral = integral.IntegrateArray(signal);
+        
         // Local function
         double DataFunction(int index)
         {

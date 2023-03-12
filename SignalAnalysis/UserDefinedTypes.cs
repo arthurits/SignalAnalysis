@@ -38,7 +38,7 @@ public class SignalStats
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
     public double[] FFTfrequencies { get; set; } = Array.Empty<double>();
 
-    public string ToString(System.Globalization.CultureInfo culture) =>
+    public string ToString(System.Globalization.CultureInfo culture, bool integral = false) =>
         StringResources.FileHeader07 + ": " + Average.ToString("0.######", culture) + Environment.NewLine +
         StringResources.FileHeader08 + ": " + Maximum.ToString("0.##", culture) + Environment.NewLine +
         StringResources.FileHeader09 + ": " + Minimum.ToString("0.##", culture) + Environment.NewLine +
@@ -48,8 +48,8 @@ public class SignalStats
         StringResources.FileHeader13 + ": " + SampleEntropy.ToString("0.########", culture) + Environment.NewLine +
         StringResources.FileHeader14 + ": " + ShannonEntropy.ToString("0.########", culture) + Environment.NewLine +
         StringResources.FileHeader15 + ": " + EntropyBit.ToString("0.########", culture) + Environment.NewLine +
-        StringResources.FileHeader16 + ": " + IdealEntropy.ToString("0.########", culture) + Environment.NewLine +
-        StringResources.FileHeader31 + ": " + Integral.ToString("0.########", culture);
+        StringResources.FileHeader16 + ": " + IdealEntropy.ToString("0.########", culture) +
+        $"{(integral ? Environment.NewLine + StringResources.FileHeader31 + ": " + Integral.ToString("0.########", culture) : string.Empty)}";
 }
 
 /// <summary>

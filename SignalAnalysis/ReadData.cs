@@ -458,15 +458,33 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Differentiation
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader29));
-            if (!strLine.Contains($"{StringResources.GetString("strFileHeader29", fileCulture) ?? "Numerical differentiation"}: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader29", fileCulture) ?? "Differentiation algorithm"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader29));
-            
             if (strLine[(strLine.IndexOf(":") + 2)..] != "-")
             {
                 string[] str = StringResources.GetString("strDifferentiationAlgorithms", fileCulture).Split(", ");
                 _settings.DerivativeAlgorithm = (DerivativeMethod)Array.IndexOf(str, strLine[(strLine.IndexOf(":") + 2)..]);
             }
 
+            strLine = sr.ReadLine();    // Integration algorithm
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader30));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader30", fileCulture) ?? "Integration algorithm"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader30));
+            if (strLine[(strLine.IndexOf(":") + 2)..] != "-")
+            {
+                string[] str = StringResources.GetString("strIntegrationAlgorithms", fileCulture).Split(", ");
+                _settings.IntegrationAlgorithm = (IntegrationMethod)Array.IndexOf(str, strLine[(strLine.IndexOf(":") + 2)..]);
+            }
+
+            strLine = sr.ReadLine();    // Integral value
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader31));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader31", fileCulture) ?? "Integral value"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader31));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader16));
+            results.Integral = readValue;
 
             strLine = sr.ReadLine();    // Empty line
             if (strLine is null)

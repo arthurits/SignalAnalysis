@@ -36,6 +36,7 @@ partial class FrmMain
         statusStripLabelExEntropy.Checked = _settings.Entropy;
         statusStripLabelExCrossHair.Checked = _settings.CrossHair;
         statusStripLabelExDerivative.Checked = _settings.ComputeDerivative;
+        statusStripLabelExIntegration.Checked = _settings.ComputeIntegration;
     }
 
     /// <summary>

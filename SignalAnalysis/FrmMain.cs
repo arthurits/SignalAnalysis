@@ -231,6 +231,7 @@ public partial class FrmMain : Form
         statusStripLabelExEntropy.ToolTipText = StringResources.StatusTipEntropy;
         statusStripLabelExCrossHair.ToolTipText = StringResources.StatusTipCrossHair;
         statusStripLabelExDerivative.ToolTipText = StringResources.StatusTipDerivative;
+        statusStripLabelExIntegration.ToolTipText = StringResources.StatusTipIntegration;
 
         // Update plots
         plotOriginal.CultureUI = _settings.AppCulture;

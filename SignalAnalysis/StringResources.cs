@@ -129,6 +129,7 @@ public static class StringResources
     public static string StatusTipEntropy => StringRM.GetString("strStatusTipEntropy", Culture) ?? "Approximate and sample entropy";
     public static string StatusTipCrossHair => StringRM.GetString("strStatusTipCrossHair", Culture) ?? "Plot's crosshair mode";
     public static string StatusTipDerivative => StringRM.GetString("strStatusTipDerivative", Culture) ?? "Numerical differentiation";
+    public static string StatusTipIntegration => StringRM.GetString("strStatusTipIntegration", Culture) ?? "Numerical integration";
 
     public static string PlotOriginalTitle => StringRM.GetString("strPlotOriginalTitle", Culture) ?? "Input signal";
     public static string PlotOriginalYLabel => StringRM.GetString("strPlotOriginalYLabel", Culture) ?? "Amplitude";

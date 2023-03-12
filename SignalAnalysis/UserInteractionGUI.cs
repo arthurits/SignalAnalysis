@@ -175,6 +175,7 @@ partial class FrmMain
             UpdateStatsPlots(stripComboSeries.SelectedIndex,
                 stats: true,
                 derivative: _settings.ComputeDerivative,
+                integral: _settings.ComputeIntegration,
                 fractal: true,
                 progressive: _settings.CumulativeDimension,
                 entropy: _settings.Entropy,
@@ -278,7 +279,10 @@ partial class FrmMain
                         plotDerivative.Clear();
                         plotDerivative.Refresh();
                     }
-
+                    break;
+                case "statusStripLabelExIntegration":
+                    _settings.ComputeIntegration = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
                     break;
             }
         }
