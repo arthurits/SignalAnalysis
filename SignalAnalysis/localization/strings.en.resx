@@ -617,7 +617,7 @@ dimension has been stopped.</value>
     <value>Integration algorithm</value>
   </data>
   <data name="strIntegrationAlgorithms" xml:space="preserve">
-    <value>Midpoint rule, Trapezoid rule, Simpson's 1/3 rule</value>
+    <value>Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method</value>
   </data>
   <data name="strChkComputeIntegration" xml:space="preserve">
     <value>Compute numerical integration?</value>

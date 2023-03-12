@@ -190,7 +190,7 @@ public static class StringResources
     public static string ChkComputeIntegration => StringRM.GetString("strChkComputeIntegration", Culture) ?? "Compute numerical integration?";
     public static string ChkExportIntegration => StringRM.GetString("strChkExportIntegration", Culture) ?? "Export numerical integration?";
     public static string LblIntegration => StringRM.GetString("strLblIntegration", Culture) ?? "Quadrature algorithms";
-    public static string IntegrationAlgorithms => StringRM.GetString("strIntegrationAlgorithms", Culture) ?? "Midpoint rule, Trapezoid rule, Simpson's 1/3 rule";
+    public static string IntegrationAlgorithms => StringRM.GetString("strIntegrationAlgorithms", Culture) ?? "Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method";
 
     public static string GrpCulture => StringRM.GetString("strGrpCulture", Culture) ?? "UI and data format";
     public static string RadCurrentCulture => StringRM.GetString("strRadCurrentCulture", Culture) ?? "Current culture formatting";

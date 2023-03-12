@@ -606,7 +606,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Midpoint rule, Trapezoid rule, Simpson&apos;s 1/3 rule.
+        ///   Looks up a localized string similar to Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson&apos;s 1/3 rule, Simpson&apos;s 3/8 rule, Simpson&apos;s composite rule, Romberg&apos;s method.
         /// </summary>
         internal static string strIntegrationAlgorithms {
             get {

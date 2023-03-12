@@ -621,7 +621,7 @@ la derivada numérica.
     <value>Valor de la integral</value>
   </data>
   <data name="strIntegrationAlgorithms" xml:space="preserve">
-    <value>Punto medio, Método trapezoidal, Simpson 1/3</value>
+    <value>Punto izquierdo, Punto medio, Punto derecho, Método trapezoidal, Simpson 1/3, Simpson 3/8, Simpson compuesto, Método de Romberg</value>
   </data>
   <data name="strChkExportIntegration" xml:space="preserve">
     <value>¿Exportar el resultado de la integración?</value>
