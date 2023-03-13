@@ -140,50 +140,49 @@ public class Integration<T> where T : INumber<T>
     ///// <param name=""></param>
     ///// <param name=""></param>
     ///// <param name="">pointer to the function to be integrated</param>
-    ///// <param name="a">lower limit</param>
-    ///// <param name="b">upper limit</param>
-    ///// <param name="max_steps">maximum steps of the procedure</param>
-    ///// <param name="acc">desired accuracy</param>
+    ///// <param name="lowerLimit">lower limit</param>
+    ///// <param name="upperLimit">upper limit</param>
+    ///// <param name="maxSteps">maximum steps of the procedure</param>
+    ///// <param name="epsilon">desired accuracy</param>
     ///// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
-    //private double Romberg((double (* f)(double), double a, double b, size_t max_steps, double acc)
-    //{
-    //    double R1[max_steps], R2[max_steps]; // buffers
+    private double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps, double epsilon = = 1E-8)
+    {
+        double[] R1 = new double[maxSteps]; // buffer previous row
+        double[] R2 = new double[maxSteps];   // buffer current row
     //    double* Rp = &R1[0], *Rc = &R2[0]; // Rp is previous row, Rc is current row
-    //    double h = b - a; //step size
-    //    Rp[0] = (f(a) + f(b)) * h * 0.5; // first trapezoidal step
+        double h = upperLimit - lowerLimit; //step size
+    
+    // First trapezoidal step
+        R1[0] = (funtion(lowerLimit) + function(upperLimit)) * h * 0.5;
 
     //    print_row(0, Rp);
 
-    //    for (size_t i = 1; i < max_steps; ++i)
-    //    {
-    //        h /= 2.;
-    //        double c = 0;
-    //        size_t ep = 1 << (i - 1); //2^(n-1)
-    //        for (size_t j = 1; j <= ep; ++j)
-    //        {
-    //            c += f(a + (2 * j - 1) * h);
-    //        }
-    //        Rc[0] = h * c + .5 * Rp[0]; // R(i,0)
+        for (int i = 1; i < maxSteps; ++i)
+        {
+            h /= 2.;
+            double c = 0;
+            int ep = 1 << (i - 1); //2^(n-1)
+            for (int j = 1; j <= ep; ++j)
+                c += function(lowerLimit + (2 * j - 1) * h);
+            R2[0] = h * c + .5 * R1[0]; // R(i,0)
 
-    //        for (size_t j = 1; j <= i; ++j)
-    //        {
-    //            double n_k = pow(4, j);
-    //            Rc[j] = (n_k * Rc[j - 1] - Rp[j - 1]) / (n_k - 1); // compute R(i,j)
-    //        }
+            for (int j = 1; j <= i; ++j)
+            {
+                double n_k = Math.Pow(4, j);
+                R2[j] = (n_k * R2[j - 1] - R1[j - 1]) / (n_k - 1); // compute R(i,j)
+            }
 
     //        // Print ith row of R, R[i,i] is the best estimate so far
     //        print_row(i, Rc);
 
-    //        if (i > 1 && fabs(Rp[i - 1] - Rc[i]) < acc)
-    //        {
-    //            return Rc[i];
-    //        }
+            if (i > 1 && Math.Abs(R1[i - 1] - R2[i]) < acc)
+                return R2[i];
 
-    //        // swap Rn and Rc as we only need the last row
-    //        double* rt = Rp;
-    //        Rp = Rc;
-    //        Rc = rt;
-    //    }
-    //    return Rp[max_steps - 1]; // return our best guess
-    //}
+            // swap Rn and Rc as we only need the last row
+            double* rt = Rp;
+            R1 = R2;
+            R2 = rt;
+        }
+        return R1[maxSteps - 1]; // return our best guess
+    }
 }
