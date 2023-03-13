@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis;
+﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+
+namespace SignalAnalysis;
 
 partial class FrmMain
 {
@@ -275,9 +277,10 @@ partial class FrmMain
     /// </summary>
     /// <param name="fileName">Path (including name) of the results file</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private bool SaveResultsData(string fileName)
+    private bool SaveResultsData(string fileName, double[]? signal = null, int ArrIndexInit = 0)
     {
         bool result = false;
+        bool derivative = false;
 
         try
         {
@@ -285,18 +288,52 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine(Results.ToString(_settings.AppCulture));
+            sw.WriteLine(Results.ToString(_settings.AppCulture, false));
+            if (_settings.ExportDerivative && _settings.ComputeDerivative)
+            {
+                sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
+                derivative = true;
+            }
+                
+            if (_settings.ExportIntegration && _settings.ComputeIntegration)
+            {
+                sw.WriteLine($"{StringResources.FileHeader30}: {StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader31}: {Results.Integral.ToString(_settings.AppCulture)}");
+            }
+
             sw.WriteLine();
             sw.WriteLine($"{StringResources.PlotFFTXLabel}\t{StringResources.PlotFFTYLabelMag}\t{StringResources.PlotFFTYLabelPow}");
 
-            // Save the numerical values
+            // Save the FFT numerical values
             for (int j = 0; j < Results.FFTfrequencies.Length; j++)
             {
                 //trying to write data to text file
                 sw.WriteLine($"{Results.FFTfrequencies[j].ToString("0.########", _settings.AppCulture)}\t" +
                     $"{Results.FFTmagnitude[j].ToString("0.########", _settings.AppCulture)}\t" +
-                    $"{Results.FFTpower[j].ToString("0.########", _settings.AppCulture)}"
+                    $"{Results.FFTpower[j].ToString("0.########", _settings.AppCulture)}" +
+                    $"{(derivative ? $"\t{Results.Derivative[j]}" : string.Empty)}"
                     );
+            }
+
+            // Save the differentiation values
+            if (derivative && signal is not null)
+            {
+                sw.WriteLine();
+                sw.WriteLine($"{(derivative ? $"\t{StringResources.FileHeader28}" : string.Empty)}");
+
+
+                string time;
+                // Append millisecond pattern to current culture's full date time pattern
+                string fullPattern = _settings.AppCulture.DateTimeFormat.FullDateTimePattern;
+                fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", _settings.MillisecondsFormat);
+
+                for (int j = 0; j < Results.Derivative.Length; j++)
+                {
+                    time = Signal.StartTime.AddSeconds((j + ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture);
+
+                    //trying to write data to file
+                    sw.WriteLine($"{time}\t{signal[j].ToString(_settings.DataFormat, _settings.AppCulture)}\t{Results.Derivative[j]}");
+                }
             }
 
             // Success!

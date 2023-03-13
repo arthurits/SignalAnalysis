@@ -72,10 +72,13 @@ public class Integration<T> where T : INumber<T>
                 indexEnd = array.Length - 1;
                 loopIncrement = 3;
                 break;
+            case IntegrationMethod.Romberg:
+                Romberg(array, 0, array.Length - 1);
+                break;
         }
 
-        for (int i = indexStart; i < indexEnd; i += loopIncrement)
-            result += this[T.CreateChecked(i)];
+        //for (int i = indexStart; i < indexEnd; i += loopIncrement)
+        //    result += this[T.CreateChecked(i)];
 
         return result;
     }
@@ -134,18 +137,18 @@ public class Integration<T> where T : INumber<T>
     }
 
 
-    ///// <summary>
-    ///// https://en.wikipedia.org/wiki/Romberg%27s_method
-    ///// </summary>
-    ///// <param name=""></param>
-    ///// <param name=""></param>
-    ///// <param name="">pointer to the function to be integrated</param>
-    ///// <param name="lowerLimit">lower limit</param>
-    ///// <param name="upperLimit">upper limit</param>
-    ///// <param name="maxSteps">maximum steps of the procedure</param>
-    ///// <param name="epsilon">desired accuracy</param>
-    ///// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
-    private double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps, double epsilon = = 1E-8)
+    /// <summary>
+    /// https://en.wikipedia.org/wiki/Romberg%27s_method
+    /// </summary>
+    /// <param name=""></param>
+    /// <param name=""></param>
+    /// <param name="">pointer to the function to be integrated</param>
+    /// <param name="lowerLimit">lower limit</param>
+    /// <param name="upperLimit">upper limit</param>
+    /// <param name="maxSteps">maximum steps of the procedure</param>
+    /// <param name="epsilon">desired accuracy</param>
+    /// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
+    private double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 100, double epsilon = 1E-8)
     {
         double[] R1 = new double[maxSteps]; // buffer previous row
         double[] R2 = new double[maxSteps];   // buffer current row
@@ -153,13 +156,13 @@ public class Integration<T> where T : INumber<T>
         double h = upperLimit - lowerLimit; //step size
     
     // First trapezoidal step
-        R1[0] = (funtion(lowerLimit) + function(upperLimit)) * h * 0.5;
+        R1[0] = (function(lowerLimit) + function(upperLimit)) * h * 0.5;
 
     //    print_row(0, Rp);
 
         for (int i = 1; i < maxSteps; ++i)
         {
-            h /= 2.;
+            h /= 2;
             double c = 0;
             int ep = 1 << (i - 1); //2^(n-1)
             for (int j = 1; j <= ep; ++j)
@@ -175,14 +178,37 @@ public class Integration<T> where T : INumber<T>
     //        // Print ith row of R, R[i,i] is the best estimate so far
     //        print_row(i, Rc);
 
-            if (i > 1 && Math.Abs(R1[i - 1] - R2[i]) < acc)
+            if (i > 1 && Math.Abs(R1[i - 1] - R2[i]) < epsilon)
                 return R2[i];
 
             // swap Rn and Rc as we only need the last row
-            double* rt = Rp;
-            R1 = R2;
-            R2 = rt;
+            //double* rt = Rp;
+            Array.Copy(R2, R1, i);
+            Array.Clear(R2, 0, i+1);
+            //R1 = R2;
+            //R2 = rt;
         }
         return R1[maxSteps - 1]; // return our best guess
+    }
+
+    /// <summary>
+    /// https://en.wikipedia.org/wiki/Romberg%27s_method
+    /// </summary>
+    /// <param name=""></param>
+    /// <param name=""></param>
+    /// <param name="">pointer to the function to be integrated</param>
+    /// <param name="lowerLimit">lower limit</param>
+    /// <param name="upperLimit">upper limit</param>
+    /// <param name="maxSteps">maximum steps of the procedure</param>
+    /// <param name="epsilon">desired accuracy</param>
+    /// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
+    private double Romberg(double[] array, double lowerLimit, double upperLimit, int maxSteps = 100, double epsilon = 1E-8)
+    {
+        return Romberg(Function, lowerLimit, upperLimit, maxSteps, epsilon);
+
+        double Function(double index)
+        {
+            return array[(int)index];
+        }
     }
 }

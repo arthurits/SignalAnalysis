@@ -399,7 +399,7 @@ partial class FrmMain
         Integration<int> integral = new(func, 1 / Signal.SampleFrequency, _settings.IntegrationAlgorithm);
         //Results.Integral = new double[signal.Length];
 
-        Results.Integral = integral.IntegrateArray(signal);
+        Results.Integral = integral.Integrate(signal, 0, signal.Length);
         
         // Local function
         double DataFunction(int index)
