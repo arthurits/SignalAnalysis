@@ -14,79 +14,85 @@ public enum IntegrationMethod
     Romberg
 }
 
-public class Integration<T> where T : INumber<T>
+public class Integration
 {
-    private IFunction<T> Function { get; set; }
     private IntegrationMethod Method { get; set; } = IntegrationMethod.TrapezoidRule;
-    public double Step { get; set; } = 10e-6;
-    /// <summary>
-    /// True if the absolute value of the integral is computed. False if negative area values are considered
-    /// </summary>
-    public bool AbsoluteValue { get; set; } = true;
 
-    public Integration(IFunction<T> func, double step, IntegrationMethod method = IntegrationMethod.TrapezoidRule, bool absolute = true)
+    public Integration(IntegrationMethod method = IntegrationMethod.TrapezoidRule)
     {
-        this.Function = func;
         this.Method = method;
-        this.Step = step;
-        this.AbsoluteValue = absolute;
     }
 
-    //public double this[T arg] => Method switch
-    //{
-    //    IntegrationMethod.MidPointRule => MidPointRule(arg),
-    //    IntegrationMethod.TrapezoidRule => TrapezoidRule(arg),
-    //    IntegrationMethod.SimpsonRule3 => SimpsonRule3(arg),
-    //    IntegrationMethod.SimpsonRule8 => SimpsonRule8(arg),
-    //    IntegrationMethod.SimpsonComposite => SimpsonComposite(arg),
-    //    _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected integration method: {Method}"),
-    //};
-
-    public double Integrate(Func<double, double> function, double lowerLimit = 0, double upperLimit = 1, int intervals = 1)
+    /// <summary>
+    /// Computes the numerical integral of a function
+    /// </summary>
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    public double Integrate(Func<double, double> function, double lowerLimit = 0, double upperLimit = 1, int segments = 1, bool absoluteIntegral = false)
     {
         double result = -1;
         int i = 0;
 
         switch (Method)
         {
+            case IntegrationMethod.LeftPointRule:
+                result = Integration.LeftPointRule(function, lowerLimit, upperLimit, segments, absoluteIntegral);
+                break;
             case IntegrationMethod.MidPointRule:
-                ;
+                result = MidPointRule(function, lowerLimit, upperLimit, segments, absoluteIntegral);
+                break;
+            case IntegrationMethod.RightPointRule:
+                result = RightPointRule(function, lowerLimit, upperLimit, segments, absoluteIntegral);
                 break;
             case IntegrationMethod.TrapezoidRule:
-                result = TrapezoidalUniformRule(function, lowerLimit, upperLimit, intervals);
+                result = TrapezoidalUniformRule(function, lowerLimit, upperLimit, segments, absoluteIntegral);
                 break;
             case IntegrationMethod.SimpsonRule3:
-                i = intervals % 2;
-                result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i);
-                result += SimpsonRule3(function, lowerLimit, upperLimit - i, intervals - i);
+                i = segments % 2;
+                result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i, absoluteIntegral);
+                result += SimpsonRule3(function, lowerLimit, upperLimit - i, segments - i, absoluteIntegral);
                 break;
             case IntegrationMethod.SimpsonRule8:
-                i = intervals % 3;
-                if (i==1)
-                    result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i);
+                i = segments % 3;
+                if (i == 1)
+                    result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i, absoluteIntegral);
                 else
-                    result = SimpsonRule3(function, upperLimit - i, upperLimit, i);
-                result += SimpsonRule8(function, lowerLimit, upperLimit - i, intervals - i);
+                    result = SimpsonRule3(function, upperLimit - i, upperLimit, i, absoluteIntegral);
+                result += SimpsonRule8(function, lowerLimit, upperLimit - i, segments - i, absoluteIntegral);
                 break;
             case IntegrationMethod.SimpsonComposite:
-                ;
+                if (segments < 8)
+                    result = 0;
+                else
+                    result = SimpsonComposite(function, lowerLimit, upperLimit, segments, absoluteIntegral);
                 break;
             case IntegrationMethod.Romberg:
-                result = Romberg(function, lowerLimit, upperLimit);
+                result = Romberg(function, lowerLimit, upperLimit, absoluteIntegral: absoluteIntegral);
                 break;
         }
 
         return result;
     }
 
-    public double Integrate(double[] array, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1)
+    /// <summary>
+    /// Computes the numerical integral of uniformly-spaced tabular data
+    /// </summary>
+    /// <param name="array">1D array containing the data</param>
+    /// <param name="lowerIndex">Integral lower limit</param>
+    /// <param name="upperIndex">Integral upper limit</param>
+    /// <param name="samplingFrequency">Data sampling frequency</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    public double Integrate(double[] array, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1, bool absoluteIntegral = false)
     {
-        //upperIndex -= upperIndex - lowerIndex % 2;
-
-        //return Integrate(Function, lowerIndex/samplingFrequency, upperIndex/samplingFrequency);
-
-        double result = Integrate(Function, lowerIndex, upperIndex, (upperIndex-lowerIndex));
+        // Compute the array and adjust the result by the sampling frequency. This is only possible when data is uniformly spaced.
+        double result = Integrate(Function, lowerIndex, upperIndex, (upperIndex - lowerIndex), absoluteIntegral);
         result /= samplingFrequency;
+        
         return result;
 
         double Function(double index)
@@ -96,74 +102,96 @@ public class Integration<T> where T : INumber<T>
     }
 
 
-    public double IntegrateArray(double[] array)
+    /// <summary>
+    /// Computes the numerical integral using the left-point rule. Data is assumed to be uniformly spaced.
+    /// </summary>
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    private static double LeftPointRule(Func<double, double> function, double lowerLimit, double upperLimit, double segments = 1, bool absoluteIntegral = false)
     {
-        int indexStart = 0, indexEnd = array.Length - 1, loopIncrement = 1;
         double result = 0;
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit;
 
-        switch (Method)
+        for (int j = 0; j < segments; j++)
         {
-            case IntegrationMethod.MidPointRule:
-                indexStart = 1;
-                indexEnd = array.Length;
-                break;
-            case IntegrationMethod.TrapezoidRule:
-                indexStart = 0;
-                indexEnd = array.Length - 1;
-                break;
-            case IntegrationMethod.SimpsonRule3:
-                indexStart = 1;
-                indexEnd = array.Length - 1;
-                loopIncrement = 2;
-                break;
-            case IntegrationMethod.SimpsonRule8:
-                indexStart = 3;
-                indexEnd = array.Length - 1;
-                loopIncrement = 3;
-                break;
-            case IntegrationMethod.SimpsonComposite:
-                indexStart = 3;
-                indexEnd = array.Length - 1;
-                loopIncrement = 3;
-                break;
-            case IntegrationMethod.Romberg:
-                //Romberg(array, 0, array.Length - 1);
-                break;
+            result += absoluteIntegral ? Math.Abs(function(x)) : function(x);
+            x += step;
         }
 
-        //for (int i = indexStart; i < indexEnd; i += loopIncrement)
-        //    result += this[T.CreateChecked(i)];
-
-        return result;
-    }
-
-    private double MidPointRule(T arg)
-    {
-        //return  (func[arg - h] + func[arg]) / (h);
-        return Type.GetTypeCode(typeof(T)) switch
-        {
-            TypeCode.Int32 => Step * (Function[arg - T.CreateChecked(1)] + Function[arg]) / (double)2,
-            _ => Step * (Function[arg - T.CreateChecked(Step)] - Function[arg]) / (double)2
-        };
+        return step * result;
     }
 
     /// <summary>
-    /// 
+    /// Computes the numerical integral using the trapezoidal rule. Data is assumed to be uniformly spaced.
     /// </summary>
-    /// <param name="function"></param>
-    /// <param name="lowerLimit"></param>
-    /// <param name="upperLimit"></param>
-    /// <param name="interval"></param>
-    /// <returns></returns>
-    private double TrapezoidalUniformRule(Func<double, double> function, double lowerLimit, double upperLimit, double intervals = 1)
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    private static double MidPointRule(Func<double, double> function, double lowerLimit, double upperLimit, double segments = 1, bool absoluteIntegral = false)
     {
-        if (intervals == 0 || lowerLimit >= upperLimit) return 0;
+        double result = 0;
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit + step / 2;
+
+        for (int j = 0; j < segments; j++)
+        {
+            result += absoluteIntegral ? Math.Abs(function(x)) : function(x);
+            x += step;
+        }
+
+        return step * result;
+    }
+
+    /// <summary>
+    /// Computes the numerical integral using the left-point rule. Data is assumed to be uniformly spaced.
+    /// </summary>
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    private static double RightPointRule(Func<double, double> function, double lowerLimit, double upperLimit, double segments = 1, bool absoluteIntegral = false)
+    {
+        double result = 0;
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit;
+
+        for (int j = 0; j < segments; j++)
+        {
+            x += step;
+            result += absoluteIntegral ? Math.Abs(function(x)) : function(x);
+        }
+
+        return step * result;
+    }
+
+    /// <summary>
+    /// Computes the numerical integral using the trapezoidal rule. Data is assumed to be uniformly spaced.
+    /// </summary>
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    private static double TrapezoidalUniformRule(Func<double, double> function, double lowerLimit, double upperLimit, double segments = 1, bool absoluteIntegral = false)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return 0;
 
         double result = (function(lowerLimit) + function(upperLimit)) / 2;
 
-        double step = (upperLimit - lowerLimit) / intervals;
+        double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit;
-        for (int j = 1; j < intervals; j++)
+        for (int j = 1; j < segments; j++)
         {
             x += step;
             result += function(x);
@@ -171,13 +199,22 @@ public class Integration<T> where T : INumber<T>
         return step * result;
     }
 
-    private double SimpsonRule3(Func<double, double> function, double lowerLimit, double upperLimit, int intervals = 1)
+    /// <summary>
+    /// Computes the numerical integral using Simpson's 1/3 rule. Data is assumed to be uniformly spaced.
+    /// </summary>
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    private static double SimpsonRule3(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1, bool absoluteIntegral = false)
     {
         double result = function(lowerLimit) + function(upperLimit);
         
-        double step = (upperLimit - lowerLimit) / intervals;
+        double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit;
-        for (int j = 1; j < intervals; j++)
+        for (int j = 1; j < segments; j++)
         {
             x += step;
             result += (2 << (j % 2)) * function(x);
@@ -186,13 +223,22 @@ public class Integration<T> where T : INumber<T>
         return result * step / 3;
     }
 
-    private double SimpsonRule8(Func<double, double> function, double lowerLimit, double upperLimit, int intervals = 1)
+    /// <summary>
+    /// Computes the numerical integral using Simpson's 3/8 rule. Data is assumed to be uniformly spaced.
+    /// </summary>
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    private static double SimpsonRule8(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1, bool absoluteIntegral = false)
     {
         double result = function(lowerLimit) + function(upperLimit);
 
-        double step = (upperLimit - lowerLimit) / intervals;
+        double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit;
-        for (int j = 1; j < intervals; j++)
+        for (int j = 1; j < segments; j++)
         {
             x += step;
             if (j % 3 == 0)
@@ -204,27 +250,40 @@ public class Integration<T> where T : INumber<T>
         return result * step * 3 / 8;
     }
 
-    // https://en.wikipedia.org/wiki/Simpson%27s_rule
-    private double SimpsonRule8(T arg)
-    {
-        //return  (func[arg + h] - func[arg - h]) / (h * 2);
-        return Type.GetTypeCode(typeof(T)) switch
-        {
-            TypeCode.Int32 => Step * 3* (Function[arg - T.CreateChecked(3)] + 3 * Function[arg - T.CreateChecked(2)] + 3 * Function[arg - T.CreateChecked(1)] + Function[arg]) / (double)8,
-            _ => Step * 3 * (Function[arg - T.CreateChecked(Step)] + 3 * Function[arg - T.CreateChecked(Step)] + 3 * Function[arg - T.CreateChecked(Step)] + Function[arg]) / (double)8
-        };
-    }
+
 
     // https://en.wikipedia.org/wiki/Simpson%27s_rule
     // http://mathforcollege.com/nm/mws/gen/07int/mws_gen_int_txt_simpson3by8.pdf
-    private double SimpsonComposite(T arg)
+
+    /// <summary>
+    /// Computes the numerical integral using Simpson's composite rule. Data is assumed to be uniformly spaced.
+    /// </summary>
+    /// <param name="function">Function to be integrated</param>
+    /// <param name="lowerLimit">Integral lower limit</param>
+    /// <param name="upperLimit">Integral upper limit</param>
+    /// <param name="segments">Number of equal segments the integration interval is divided into</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <returns>The estimated integral value</returns>
+    private static double SimpsonComposite(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1, bool absoluteIntegral = false)
     {
-        //return  (func[arg + h] - func[arg - h]) / (h * 2);
-        return Type.GetTypeCode(typeof(T)) switch
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit;
+
+        double result = 17 * (function(x) + function(x));
+        x += step;
+        result += 59 * (function(x) + function(x));
+        x += step;
+        result += 43 * (function(x) + function(x));
+        x += step;
+        result += 49 * (function(x) + function(x));
+
+        for (int j = 4; j < segments - 3; j++)
         {
-            TypeCode.Int32 => Step * (Function[arg - T.CreateChecked(3)] + 3 * Function[arg - T.CreateChecked(2)] + 3 * Function[arg - T.CreateChecked(1)] + Function[arg]) / (double)48,
-            _ => Step * (Function[arg - T.CreateChecked(Step)] + 3 * Function[arg - T.CreateChecked(Step)] + 3 * Function[arg - T.CreateChecked(Step)] + Function[arg]) / (double)48
-        };
+            x += step;
+            result += 48 * function(x);
+        }
+
+        return result * step / 48;
     }
 
 
@@ -238,8 +297,9 @@ public class Integration<T> where T : INumber<T>
     /// <param name="upperLimit">upper limit</param>
     /// <param name="maxSteps">maximum steps of the procedure</param>
     /// <param name="epsilon">desired accuracy</param>
+    /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
     /// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
-    private double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-3)
+    private static double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-3, bool absoluteIntegral = false)
     {
         double[] R1 = new double[maxSteps]; // buffer previous row
         double[] R2 = new double[maxSteps];   // buffer current row
