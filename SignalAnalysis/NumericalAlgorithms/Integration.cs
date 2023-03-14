@@ -32,19 +32,20 @@ public class Integration<T> where T : INumber<T>
         this.AbsoluteValue = absolute;
     }
 
-    public double this[T arg] => Method switch
-    {
-        IntegrationMethod.MidPointRule => MidPointRule(arg),
-        IntegrationMethod.TrapezoidRule => TrapezoidRule(arg),
-        IntegrationMethod.SimpsonRule3 => SimpsonRule3(arg),
-        IntegrationMethod.SimpsonRule8 => SimpsonRule8(arg),
-        IntegrationMethod.SimpsonComposite => SimpsonComposite(arg),
-        _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected integration method: {Method}"),
-    };
+    //public double this[T arg] => Method switch
+    //{
+    //    IntegrationMethod.MidPointRule => MidPointRule(arg),
+    //    IntegrationMethod.TrapezoidRule => TrapezoidRule(arg),
+    //    IntegrationMethod.SimpsonRule3 => SimpsonRule3(arg),
+    //    IntegrationMethod.SimpsonRule8 => SimpsonRule8(arg),
+    //    IntegrationMethod.SimpsonComposite => SimpsonComposite(arg),
+    //    _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected integration method: {Method}"),
+    //};
 
-    public double Integrate(Func<double, double> function, double lowerLimit = 0, double upperLimit = 1)
+    public double Integrate(Func<double, double> function, double lowerLimit = 0, double upperLimit = 1, int intervals = 1)
     {
         double result = -1;
+        int i = 0;
 
         switch (Method)
         {
@@ -52,13 +53,20 @@ public class Integration<T> where T : INumber<T>
                 ;
                 break;
             case IntegrationMethod.TrapezoidRule:
-                ;
+                result = TrapezoidalUniformRule(function, lowerLimit, upperLimit, intervals);
                 break;
             case IntegrationMethod.SimpsonRule3:
-                ;
+                i = intervals % 2;
+                result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i);
+                result += SimpsonRule3(function, lowerLimit, upperLimit - i, intervals - i);
                 break;
             case IntegrationMethod.SimpsonRule8:
-                ;
+                i = intervals % 3;
+                if (i==1)
+                    result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i);
+                else
+                    result = SimpsonRule3(function, upperLimit - i, upperLimit, i);
+                result += SimpsonRule8(function, lowerLimit, upperLimit - i, intervals - i);
                 break;
             case IntegrationMethod.SimpsonComposite:
                 ;
@@ -71,13 +79,14 @@ public class Integration<T> where T : INumber<T>
         return result;
     }
 
-    public double Integrate(double[] array, double lowerIndex = 0, double upperIndex = 1, double samplingFrequency = 1)
+    public double Integrate(double[] array, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1)
     {
         //upperIndex -= upperIndex - lowerIndex % 2;
 
         //return Integrate(Function, lowerIndex/samplingFrequency, upperIndex/samplingFrequency);
 
-        double result = Integrate(Function, lowerIndex, upperIndex) / samplingFrequency;
+        double result = Integrate(Function, lowerIndex, upperIndex, (upperIndex-lowerIndex));
+        result /= samplingFrequency;
         return result;
 
         double Function(double index)
@@ -138,24 +147,61 @@ public class Integration<T> where T : INumber<T>
         };
     }
 
-    private double TrapezoidRule(T arg)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="function"></param>
+    /// <param name="lowerLimit"></param>
+    /// <param name="upperLimit"></param>
+    /// <param name="interval"></param>
+    /// <returns></returns>
+    private double TrapezoidalUniformRule(Func<double, double> function, double lowerLimit, double upperLimit, double intervals = 1)
     {
-        //return  (func[arg - h] + func[arg]) / (h);
-        return Type.GetTypeCode(typeof(T)) switch
+        if (intervals == 0 || lowerLimit >= upperLimit) return 0;
+
+        double result = (function(lowerLimit) + function(upperLimit)) / 2;
+
+        double step = (upperLimit - lowerLimit) / intervals;
+        double x = lowerLimit;
+        for (int j = 1; j < intervals; j++)
         {
-            TypeCode.Int32 => Step * (Function[arg - T.CreateChecked(1)] + Function[arg]) / (double)2,
-            _ => Step * (Function[arg - T.CreateChecked(Step)] - Function[arg]) / (double)2
-        };
+            x += step;
+            result += function(x);
+        }
+        return step * result;
     }
 
-    private double SimpsonRule3(T arg)
+    private double SimpsonRule3(Func<double, double> function, double lowerLimit, double upperLimit, int intervals = 1)
     {
-        //return  (func[arg + h] - func[arg - h]) / (h * 2);
-        return Type.GetTypeCode(typeof(T)) switch
+        double result = function(lowerLimit) + function(upperLimit);
+        
+        double step = (upperLimit - lowerLimit) / intervals;
+        double x = lowerLimit;
+        for (int j = 1; j < intervals; j++)
         {
-            TypeCode.Int32 => Step * (Function[arg - T.CreateChecked(1)] + 4 * Function[arg] + Function[arg + T.CreateChecked(1)]) / (double)3,
-            _ => Step * (Function[arg - T.CreateChecked(Step)] + 4 * Function[arg] + Function[arg + T.CreateChecked(Step)]) / (double)3
-        };
+            x += step;
+            result += (2 << (j % 2)) * function(x);
+        }
+
+        return result * step / 3;
+    }
+
+    private double SimpsonRule8(Func<double, double> function, double lowerLimit, double upperLimit, int intervals = 1)
+    {
+        double result = function(lowerLimit) + function(upperLimit);
+
+        double step = (upperLimit - lowerLimit) / intervals;
+        double x = lowerLimit;
+        for (int j = 1; j < intervals; j++)
+        {
+            x += step;
+            if (j % 3 == 0)
+                result += 2 * function(x);
+            else
+                result += 3 * function(x);
+        }
+
+        return result * step * 3 / 8;
     }
 
     // https://en.wikipedia.org/wiki/Simpson%27s_rule
@@ -221,7 +267,7 @@ public class Integration<T> where T : INumber<T>
                 return R2[i];
 
             // swap Rn and Rc as we only need the last row
-            Array.Copy(R2, R1, i);
+            Array.Copy(R2, R1, i+1);
             Array.Clear(R2, 0, i+1);
         }
         return R1[maxSteps - 1]; // return our best guess
