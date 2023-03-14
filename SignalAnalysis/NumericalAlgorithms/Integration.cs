@@ -71,13 +71,18 @@ public class Integration<T> where T : INumber<T>
         return result;
     }
 
-    public double Integrate(double[] array, double lowerLimit = 0, double upperLimit = 1)
+    public double Integrate(double[] array, double lowerIndex = 0, double upperIndex = 1, double samplingFrequency = 1)
     {
-        return Integrate(Function, lowerLimit, upperLimit);
+        //upperIndex -= upperIndex - lowerIndex % 2;
+
+        //return Integrate(Function, lowerIndex/samplingFrequency, upperIndex/samplingFrequency);
+
+        double result = Integrate(Function, lowerIndex, upperIndex) / samplingFrequency;
+        return result;
 
         double Function(double index)
         {
-            return array[(int)index];
+            return array[(int)(index)];
         }
     }
 
@@ -194,7 +199,7 @@ public class Integration<T> where T : INumber<T>
         double[] R2 = new double[maxSteps];   // buffer current row
         double h = upperLimit - lowerLimit; //step size
     
-    // First trapezoidal step
+        // First trapezoidal step
         R1[0] = (function(lowerLimit) + function(upperLimit)) * h * 0.5;
 
         for (int i = 1; i < maxSteps; ++i)
