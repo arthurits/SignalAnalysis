@@ -394,23 +394,14 @@ partial class FrmMain
 
     private void ComputeIntegral(double[] signal)
     {
-        Function<int> func = new(DataFunction);
-
-        Integration integral = new(_settings.IntegrationAlgorithm);
-
-        Results.Integral = integral.Integrate(signal, signal.GetLowerBound(0), signal.GetUpperBound(0)-1, Signal.SampleFrequency);
+        Results.Integral = Integration.Integrate(
+            array: signal,
+            method: _settings.IntegrationAlgorithm,
+            lowerIndex: signal.GetLowerBound(0),
+            upperIndex: signal.GetUpperBound(0),
+            samplingFrequency: Signal.SampleFrequency,
+            absoluteIntegral: false);
         
-        // Local function
-        double DataFunction(int index)
-        {
-            if (index < 0)
-                return 0;
-
-            if (index >= signal.Length)
-                return 0;
-
-            return signal[index];
-        }
     }
 
     private void ComputeFractal(double[] signal, bool progressive = false)
