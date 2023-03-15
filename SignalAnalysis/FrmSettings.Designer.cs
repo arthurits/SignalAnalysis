@@ -50,6 +50,7 @@
             chkComputeDerivative = new CheckBox();
             chkExportDerivative = new CheckBox();
             tabIntegration = new TabPage();
+            chkAbsolute = new CheckBox();
             cboIntegration = new ComboBox();
             lblIntegration = new Label();
             chkExportIntegration = new CheckBox();
@@ -298,6 +299,7 @@
             // 
             // tabIntegration
             // 
+            tabIntegration.Controls.Add(chkAbsolute);
             tabIntegration.Controls.Add(cboIntegration);
             tabIntegration.Controls.Add(lblIntegration);
             tabIntegration.Controls.Add(chkExportIntegration);
@@ -310,10 +312,20 @@
             tabIntegration.Text = "Integration";
             tabIntegration.UseVisualStyleBackColor = true;
             // 
+            // chkAbsolute
+            // 
+            chkAbsolute.AutoSize = true;
+            chkAbsolute.Location = new Point(27, 68);
+            chkAbsolute.Name = "chkAbsolute";
+            chkAbsolute.Size = new Size(253, 23);
+            chkAbsolute.TabIndex = 4;
+            chkAbsolute.Text = "Compute the absolute-value integral";
+            chkAbsolute.UseVisualStyleBackColor = true;
+            // 
             // cboIntegration
             // 
             cboIntegration.FormattingEnabled = true;
-            cboIntegration.Location = new Point(63, 150);
+            cboIntegration.Location = new Point(63, 166);
             cboIntegration.Name = "cboIntegration";
             cboIntegration.Size = new Size(223, 25);
             cboIntegration.TabIndex = 3;
@@ -322,7 +334,7 @@
             // lblIntegration
             // 
             lblIntegration.AutoSize = true;
-            lblIntegration.Location = new Point(63, 122);
+            lblIntegration.Location = new Point(63, 138);
             lblIntegration.Name = "lblIntegration";
             lblIntegration.Size = new Size(149, 19);
             lblIntegration.TabIndex = 2;
@@ -331,7 +343,7 @@
             // chkExportIntegration
             // 
             chkExportIntegration.AutoSize = true;
-            chkExportIntegration.Location = new Point(27, 78);
+            chkExportIntegration.Location = new Point(27, 100);
             chkExportIntegration.Name = "chkExportIntegration";
             chkExportIntegration.Size = new Size(207, 23);
             chkExportIntegration.TabIndex = 1;
@@ -341,12 +353,13 @@
             // chkComputeIntegration
             // 
             chkComputeIntegration.AutoSize = true;
-            chkComputeIntegration.Location = new Point(27, 38);
+            chkComputeIntegration.Location = new Point(27, 36);
             chkComputeIntegration.Name = "chkComputeIntegration";
             chkComputeIntegration.Size = new Size(225, 23);
             chkComputeIntegration.TabIndex = 0;
             chkComputeIntegration.Text = "Compute numerical integration?";
             chkComputeIntegration.UseVisualStyleBackColor = true;
+            chkComputeIntegration.CheckedChanged += ComputeIntegration_CheckedChanged;
             // 
             // tabGUI
             // 
@@ -532,5 +545,6 @@
         private Label lblIntegration;
         private CheckBox chkExportIntegration;
         private CheckBox chkComputeIntegration;
+        private CheckBox chkAbsolute;
     }
 }

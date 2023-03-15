@@ -69,11 +69,13 @@ public partial class FrmSettings : Form
 
         // Differentiation
         Settings.ComputeDerivative = chkComputeDerivative.Checked;
+        Settings.AbsoluteIntegral = chkAbsolute.Checked;
         Settings.ExportDerivative = chkExportDerivative.Checked;
         Settings.DerivativeAlgorithm = (DerivativeMethod)_derivativeAlgorithm;
 
         // Integration
         Settings.ComputeIntegration = chkComputeIntegration.Checked;
+        Settings.AbsoluteIntegral = chkAbsolute.Checked;
         Settings.ExportIntegration = chkExportIntegration.Checked;
         Settings.IntegrationAlgorithm = (IntegrationMethod)_integrationAlgorithm;
 
@@ -102,6 +104,21 @@ public partial class FrmSettings : Form
         {
             UpdateControls(new ClassSettings());
         }
+    }
+
+    private void ComputeDerivative_CheckedChanged(object sender, EventArgs e)
+    {
+        chkExportDerivative.Enabled = chkComputeDerivative.Checked;
+        cboAlgorithms.Enabled = chkComputeDerivative.Checked;
+        lblAlgorithms.Enabled = chkComputeDerivative.Checked;
+    }
+
+    private void ComputeIntegration_CheckedChanged(object sender, EventArgs e)
+    {
+        chkAbsolute.Enabled = chkComputeIntegration.Checked;
+        chkExportIntegration.Enabled = chkComputeIntegration.Checked;
+        cboIntegration.Enabled = chkComputeIntegration.Checked;
+        lblIntegration.Enabled = chkComputeIntegration.Checked;
     }
 
     private void CurrentCulture_CheckedChanged(object sender, EventArgs e)
@@ -202,6 +219,7 @@ public partial class FrmSettings : Form
         cboAlgorithms.Enabled = settings.ComputeDerivative;
 
         chkComputeIntegration.Checked = settings.ComputeIntegration;
+        chkAbsolute.Checked = settings.AbsoluteIntegral;
         chkExportIntegration.Checked = settings.ExportIntegration;
         lblIntegration.Enabled = settings.ComputeIntegration;
         cboIntegration.Enabled = settings.ComputeIntegration;
@@ -292,6 +310,7 @@ public partial class FrmSettings : Form
         this.chkExportDerivative.Text = StringResources.ChkExportDerivative;
         this.lblAlgorithms.Text = StringResources.GrpAlgorithms;
         this.chkComputeIntegration.Text = StringResources.ChkComputeIntegration;
+        //this.chkAbsolute.Text = StringResources.ChkAbsolute;
         this.chkExportIntegration.Text = StringResources.ChkExportIntegration;
         this.lblIntegration.Text = StringResources.LblIntegration;
         FillAlgorithms();
@@ -318,13 +337,5 @@ public partial class FrmSettings : Form
         this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
-
-    private void ComputeDerivative_CheckedChanged(object sender, EventArgs e)
-    {
-        chkExportDerivative.Enabled = chkComputeDerivative.Checked;
-        cboAlgorithms.Enabled = chkComputeDerivative.Checked;
-        lblAlgorithms.Enabled = chkComputeDerivative.Checked;
-    }
-
 
 }

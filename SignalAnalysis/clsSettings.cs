@@ -161,6 +161,12 @@ public class ClassSettings
     [JsonPropertyName("Quadrature algorithm")]
     public IntegrationMethod IntegrationAlgorithm { get; set; } = IntegrationMethod.TrapezoidRule;
 
+    /// <summary>
+    /// True if the absolute value integral is computed
+    /// </summary>
+    [JsonPropertyName("Absolute integral")]
+    public bool AbsoluteIntegral { get; set; } = false;
+
     public ClassSettings()
     {
     }

@@ -400,7 +400,7 @@ partial class FrmMain
             lowerIndex: signal.GetLowerBound(0),
             upperIndex: signal.GetUpperBound(0),
             samplingFrequency: Signal.SampleFrequency,
-            absoluteIntegral: false);
+            absoluteIntegral: _settings.AbsoluteIntegral);
         
     }
 
