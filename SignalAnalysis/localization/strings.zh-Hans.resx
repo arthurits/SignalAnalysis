@@ -628,4 +628,7 @@
   <data name="strStatusTipIntegration" xml:space="preserve">
     <value>数值积分</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>计算绝对值积分？</value>
+  </data>
 </root>
