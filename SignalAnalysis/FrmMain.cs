@@ -1,4 +1,4 @@
-namespace SignalAnalysis;
+ï»¿namespace SignalAnalysis;
 
 public partial class FrmMain : Form
 {
@@ -261,10 +261,10 @@ public partial class FrmMain : Form
         //    " " +
         //    (_settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty) +
         //    " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
-        //    " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
+        //    " â€” Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
 
         plotFractal.Plot.Title(String.Format(_settings.AppCulture,
-            "{0} {1} (H = {2:0.00####} — Var(H) = {3:0.00####})",
+            "{0} {1} (H = {2:0.00####} â€” Var(H) = {3:0.00####})",
             StringResources.PlotFractalTitle1,
             _settings.CumulativeDimension ? StringResources.PlotFractalTitle2 : String.Empty,
             double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle,
