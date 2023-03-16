@@ -1,5 +1,12 @@
 # SignalAnalysis changelog
 
+## SignalAnalysis 1.4
+* Add Simplified Chinese (zh-Hans) translation. _Thanks @myd7349_.
+* Add numerical differentiation.
+* Add numerical integration.
+* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.61.
+* Minor bugs corrections.
+
 ## SignalAnalysis 1.3
 * Target .NET 7.
 
