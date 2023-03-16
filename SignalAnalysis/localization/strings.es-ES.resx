@@ -635,4 +635,7 @@ la derivada numérica.
   <data name="strStatusTipIntegration" xml:space="preserve">
     <value>Integración numérica</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>¿Calcular el valor absoluto de la integral?</value>
+  </data>
 </root>

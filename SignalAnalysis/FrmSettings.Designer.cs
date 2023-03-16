@@ -250,10 +250,10 @@
             tabDerivative.Controls.Add(cboAlgorithms);
             tabDerivative.Controls.Add(chkComputeDerivative);
             tabDerivative.Controls.Add(chkExportDerivative);
-            tabDerivative.Location = new Point(4, 26);
+            tabDerivative.Location = new Point(4, 24);
             tabDerivative.Name = "tabDerivative";
             tabDerivative.Padding = new Padding(3);
-            tabDerivative.Size = new Size(441, 229);
+            tabDerivative.Size = new Size(441, 231);
             tabDerivative.TabIndex = 2;
             tabDerivative.Text = "Derivative";
             tabDerivative.UseVisualStyleBackColor = true;
@@ -317,9 +317,9 @@
             chkAbsolute.AutoSize = true;
             chkAbsolute.Location = new Point(27, 68);
             chkAbsolute.Name = "chkAbsolute";
-            chkAbsolute.Size = new Size(253, 23);
+            chkAbsolute.Size = new Size(259, 23);
             chkAbsolute.TabIndex = 4;
-            chkAbsolute.Text = "Compute the absolute-value integral";
+            chkAbsolute.Text = "Compute the absolute-value integral?";
             chkAbsolute.UseVisualStyleBackColor = true;
             // 
             // cboIntegration

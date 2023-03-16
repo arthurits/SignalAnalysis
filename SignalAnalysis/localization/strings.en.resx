@@ -631,4 +631,7 @@ dimension has been stopped.</value>
   <data name="strStatusTipIntegration" xml:space="preserve">
     <value>Numerical integration</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>Compute the absolute-value integral?</value>
+  </data>
 </root>

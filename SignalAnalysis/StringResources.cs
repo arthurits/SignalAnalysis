@@ -188,6 +188,7 @@ public static class StringResources
     public static string DifferentiationAlgorithms => StringRM.GetString("strDifferentiationAlgorithms", Culture) ?? "Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point";
 
     public static string ChkComputeIntegration => StringRM.GetString("strChkComputeIntegration", Culture) ?? "Compute numerical integration?";
+    public static string ChkAbsoluteIntegral => StringRM.GetString("strChkAbsoluteIntegral", Culture) ?? "Compute the absolute-value integral?";
     public static string ChkExportIntegration => StringRM.GetString("strChkExportIntegration", Culture) ?? "Export numerical integration?";
     public static string LblIntegration => StringRM.GetString("strLblIntegration", Culture) ?? "Quadrature algorithms";
     public static string IntegrationAlgorithms => StringRM.GetString("strIntegrationAlgorithms", Culture) ?? "Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method";

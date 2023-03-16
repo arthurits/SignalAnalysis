@@ -310,7 +310,7 @@ public partial class FrmSettings : Form
         this.chkExportDerivative.Text = StringResources.ChkExportDerivative;
         this.lblAlgorithms.Text = StringResources.GrpAlgorithms;
         this.chkComputeIntegration.Text = StringResources.ChkComputeIntegration;
-        //this.chkAbsolute.Text = StringResources.ChkAbsolute;
+        this.chkAbsolute.Text = StringResources.ChkAbsoluteIntegral;
         this.chkExportIntegration.Text = StringResources.ChkExportIntegration;
         this.lblIntegration.Text = StringResources.LblIntegration;
         FillAlgorithms();

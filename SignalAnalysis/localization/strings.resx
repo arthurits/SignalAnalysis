@@ -657,4 +657,8 @@ dimension has been stopped.</value>
     <value>Numerical integration</value>
     <comment>Tooltip in the lower right corner button</comment>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>Compute the absolute-value integral?</value>
+    <comment>In "settings" form, tab "Integration"</comment>
+  </data>
 </root>

@@ -115,6 +115,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compute the absolute-value integral?.
+        /// </summary>
+        internal static string strChkAbsoluteIntegral {
+            get {
+                return ResourceManager.GetString("strChkAbsoluteIntegral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compute numerical differentiation?.
         /// </summary>
         internal static string strChkComputeDerivative {
