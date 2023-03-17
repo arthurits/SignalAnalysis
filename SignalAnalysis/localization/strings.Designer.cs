@@ -543,6 +543,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to : .
+        /// </summary>
+        internal static string strFileHeaderColon {
+            get {
+                return ResourceManager.GetString("strFileHeaderColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Section &apos;{0}&apos; is mis-formatted..
         /// </summary>
         internal static string strFileHeaderSection {

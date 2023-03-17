@@ -638,4 +638,7 @@ la derivada numérica.
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>¿Calcular el valor absoluto de la integral?</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

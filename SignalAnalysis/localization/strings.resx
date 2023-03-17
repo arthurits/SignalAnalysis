@@ -661,4 +661,7 @@ dimension has been stopped.</value>
     <value>Compute the absolute-value integral?</value>
     <comment>In "settings" form, tab "Integration"</comment>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

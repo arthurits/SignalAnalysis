@@ -528,4 +528,7 @@
   <data name="strFileHeader28" xml:space="preserve">
     <value>ডেরিভেটিভ</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

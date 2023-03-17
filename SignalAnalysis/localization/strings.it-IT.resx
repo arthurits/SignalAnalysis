@@ -525,4 +525,7 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivata</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

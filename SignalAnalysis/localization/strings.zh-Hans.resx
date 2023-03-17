@@ -631,4 +631,7 @@
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>计算绝对值积分？</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

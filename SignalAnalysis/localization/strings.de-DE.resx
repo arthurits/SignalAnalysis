@@ -609,4 +609,7 @@ wurde gestoppt.</value>
   <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
     <value>Die Entropieberechnung wurde gestoppt.</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
 </root>

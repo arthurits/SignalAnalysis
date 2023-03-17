@@ -37,41 +37,41 @@ partial class FrmMain
             TimeSpan nTime = Signal.StartTime.AddSeconds((signal.Length - 1) / Signal.SampleFrequency) - Signal.StartTime; // At least there should be 1 point
 
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine($"{StringResources.FileHeader02}: {Signal.StartTime.AddSeconds(ArrIndexInit / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader03}: {Signal.StartTime.AddSeconds((signal.Length - 1 + ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader04}: " +
+            sw.WriteLine($"{StringResources.FileHeader02}{StringResources.FileHeaderColon}{Signal.StartTime.AddSeconds(ArrIndexInit / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader03}{StringResources.FileHeaderColon}{Signal.StartTime.AddSeconds((signal.Length - 1 + ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader04}{StringResources.FileHeaderColon}" +
                 $"{nTime.Days} {StringResources.FileHeader22}, " +
                 $"{nTime.Hours} {StringResources.FileHeader23}, " +
                 $"{nTime.Minutes} {StringResources.FileHeader24}, " +
                 $"{nTime.Seconds} {StringResources.FileHeader25} " +
                 $"{StringResources.FileHeader26} " +
                 $"{nTime.Milliseconds} {StringResources.FileHeader27}");
-            sw.WriteLine($"{StringResources.FileHeader17}: {numSeries}");
-            sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader07}: {Results.Average.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader08}: {Results.Maximum.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader09}: {Results.Minimum.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader10}: {Results.FractalDimension.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader11}: {Results.FractalVariance.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader12}: {Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader13}: {Results.SampleEntropy.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader14}: {Results.ShannonEntropy.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader15}: {Results.EntropyBit.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader16}: {Results.IdealEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader17}{StringResources.FileHeaderColon}{numSeries}");
+            sw.WriteLine($"{StringResources.FileHeader05}{StringResources.FileHeaderColon}{signal.Length.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader06}{StringResources.FileHeaderColon}{Signal.SampleFrequency.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Results.Average.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Results.Maximum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Results.Minimum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{Results.FractalDimension.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{Results.FractalVariance.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{Results.SampleEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{Results.ShannonEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{Results.EntropyBit.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{Results.IdealEntropy.ToString(_settings.AppCulture)}");
             if (_settings.ExportDerivative && _settings.ComputeDerivative)
-                sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader29}{StringResources.FileHeaderColon}{StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
             else
-                sw.WriteLine($"{StringResources.FileHeader29}: -");
+                sw.WriteLine($"{StringResources.FileHeader29}{StringResources.FileHeaderColon}-");
             if (_settings.ExportIntegration && _settings.ComputeIntegration)
             {
-                sw.WriteLine($"{StringResources.FileHeader30}: {StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm]}");
-                sw.WriteLine($"{StringResources.FileHeader31}: {Results.Integral.ToString(_settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader30}{StringResources.FileHeaderColon}{StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader31}{StringResources.FileHeaderColon}{Results.Integral.ToString(_settings.AppCulture)}");
             }
             else
             {
-                sw.WriteLine($"{StringResources.FileHeader30}: -");
-                sw.WriteLine($"{StringResources.FileHeader31}: -");
+                sw.WriteLine($"{StringResources.FileHeader30}{StringResources.FileHeaderColon}-");
+                sw.WriteLine($"{StringResources.FileHeader31}{StringResources.FileHeaderColon}-");
             }
             sw.WriteLine();
             sw.WriteLine($"{StringResources.FileHeader21}\t{SeriesName}");
@@ -140,9 +140,9 @@ partial class FrmMain
             string content = string.Empty;
 
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine($"{StringResources.FileHeader17}: {numSeries}");
-            sw.WriteLine($"{StringResources.FileHeader05}: {signal.Length.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader06}: {Signal.SampleFrequency.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader17}{StringResources.FileHeaderColon}{numSeries}");
+            sw.WriteLine($"{StringResources.FileHeader05}{StringResources.FileHeaderColon}{signal.Length.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader06}{StringResources.FileHeaderColon}{Signal.SampleFrequency.ToString(_settings.AppCulture)}");
             //if (_settings.ExportDerivative && _settings.ComputeDerivative)
             //    sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
             //else
@@ -291,14 +291,14 @@ partial class FrmMain
             sw.WriteLine(Results.ToString(_settings.AppCulture, false));
             if (_settings.ExportDerivative && _settings.ComputeDerivative)
             {
-                sw.WriteLine($"{StringResources.FileHeader29}: {StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader29}{StringResources.FileHeaderColon}{StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
                 derivative = true;
             }
                 
             if (_settings.ExportIntegration && _settings.ComputeIntegration)
             {
-                sw.WriteLine($"{StringResources.FileHeader30}: {StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm]}");
-                sw.WriteLine($"{StringResources.FileHeader31}: {Results.Integral.ToString(_settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader30}{StringResources.FileHeaderColon}{StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader31}{StringResources.FileHeaderColon}{Results.Integral.ToString(_settings.AppCulture)}");
             }
 
             sw.WriteLine();
