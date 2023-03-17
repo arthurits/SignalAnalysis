@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 public enum IntegrationMethod
 {
@@ -15,7 +13,7 @@ public enum IntegrationMethod
 }
 
 /// <summary>
-/// Numerical integration algorithms
+/// Numerical integration algorithms. Data is expected to be uniformly spaced.
 /// </summary>
 public static class Integration
 {
@@ -68,7 +66,7 @@ public static class Integration
                     result = SimpsonComposite(function, lowerLimit, upperLimit, segments, absoluteIntegral);
                 break;
             case IntegrationMethod.Romberg:
-                if (BitOperations.IsPow2(segments)) // Check if segments is a power of 2. The classic way to do it is: (x != 0) && ((x & (x - 1)) == 0)
+                if (System.Numerics.BitOperations.IsPow2(segments)) // Check if segments is a power of 2. The classic way to do it was: (x != 0) && ((x & (x - 1)) == 0)
                     result = Romberg(function, lowerLimit, upperLimit, maxSteps: (int)Math.Log2(segments) + 1, absoluteIntegral: absoluteIntegral);
                 break;
         }
@@ -305,7 +303,7 @@ public static class Integration
     /// <param name="epsilon">desired accuracy</param>
     /// <param name="absoluteIntegral">True if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
     /// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
-    private static double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-3, bool absoluteIntegral = false)
+    private static double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-6, bool absoluteIntegral = false)
     {
         double[] R1 = new double[maxSteps]; // buffer previous row
         double[] R2 = new double[maxSteps];   // buffer current row
