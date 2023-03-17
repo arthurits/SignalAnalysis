@@ -1,8 +1,12 @@
-﻿
+﻿namespace SignalAnalysis;
 
-namespace SignalAnalysis;
 partial class FrmMain
 {
+    /// <summary>
+    /// Plots the original data into <see cref="plotOriginal"/>.
+    /// </summary>
+    /// <param name="signal">Data values to be plotted</param>
+    /// <param name="strLabel">Text to show in the legend</param>
     private void PlotOriginal(double[] signal, string strLabel = "")
     {
         plotOriginal.Clear();
@@ -33,6 +37,11 @@ partial class FrmMain
         plotOriginal.Refresh();
     }
 
+    /// <summary>
+    /// Plots the windowing function into <see cref="plotWindow"/> that has been applied to the signal data before the FFT transform.
+    /// </summary>
+    /// <param name="window">Window function</param>
+    /// <param name="points">Number of points to be plotted</param>
     private void PlotKernel(FftSharp.IWindow window, int points)
     {
         double[] kernel = window.Create(points);
@@ -52,6 +61,10 @@ partial class FrmMain
         plotWindow.Refresh();
     }
 
+    /// <summary>
+    /// Plots the windowed signal values into <see cref="plotApplied"/>
+    /// </summary>
+    /// <param name="signal">Data values to be plotted</param>
     private void PlotWindowedSignal(double[] signal)
     {
         plotApplied.Clear();
@@ -64,6 +77,12 @@ partial class FrmMain
         plotApplied.Refresh();
     }
 
+    /// <summary>
+    /// Plots the fractal value into <see cref="plotFractal"/>.
+    /// </summary>
+    /// <param name="signal">Data values to be plotted</param>
+    /// <param name="seriesName">Text to show in the legend</param>
+    /// <param name="progressive"><see langword="True"/> if signal contains the cumulativive fractal values</param>
     private void PlotFractal(double[] signal, string seriesName = "", bool progressive = false)
     {
         if (Signal.Data.Length == 0) return;
@@ -88,6 +107,11 @@ partial class FrmMain
         plotFractal.Refresh();
     }
 
+    /// <summary>
+    /// Plots the fractal distribution data into <see cref="plotFractalDistribution"/> and draws a vertical line at the mean point.
+    /// </summary>
+    /// <param name="mean">Mean value</param>
+    /// <param name="variance">Variance</param>
     private void PlotFractalDistribution(double mean, double variance)
     {
         plotFractalDistribution.Clear();
@@ -122,6 +146,11 @@ partial class FrmMain
         plotFractalDistribution.Refresh();
     }
 
+    /// <summary>
+    /// Plots the FFT data into <see cref="plotFFT"/>.
+    /// </summary>
+    /// <param name="signal">Data values to be plotted</param>
+    /// <param name="frequency">Sampling frequency of the signal data</param>
     private void PlotFFT(double[] signal, double[]? frequency = null)
     {
         // Plot the results
@@ -140,6 +169,11 @@ partial class FrmMain
         plotFFT.Refresh();
     }
 
+    /// <summary>
+    /// Plots the derivative data into <see cref="plotDerivative"/>.
+    /// </summary>
+    /// <param name="signal">Data values to be plotted</param>
+    /// <param name="strLabel">Text to show in the legend</param>
     private void PlotDerivative(double[] signal, string strLabel = "")
     {
         plotDerivative.Clear();
@@ -190,7 +224,15 @@ partial class FrmMain
     /// Compute stats and update the plots and results
     /// This is the main computing function that calls sub-functions
     /// </summary>
-    /// <param name="serie">The series to be computed</param>
+    /// <param name="series">Data series to be analised</param>
+    /// <param name="stats"><see langword="True"/> if the descriptive statistics will be computed</param>
+    /// <param name="derivative"><see langword="True"/> if the derivative will be computed</param>
+    /// <param name="integral"><see langword="True"/> if the integral will be computed</param>
+    /// <param name="fractal"><see langword="True"/> if the fractal dimension will be computed</param>
+    /// <param name="progressive"><see langword="True"/> if the </param>
+    /// <param name="entropy"><see langword="True"/></param>
+    /// <param name="fft"><see langword="True"/></param>
+    /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
     /// <returns></returns>
     private async Task UpdateStatsPlots(int series, bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
@@ -212,6 +254,7 @@ partial class FrmMain
         tokenSource = new();
         token = tokenSource.Token;
         Results = new();
+
         statsTask = Task.Run(() =>
         {
             try
@@ -299,6 +342,11 @@ partial class FrmMain
         Cursor.Current = cursor;
     }
 
+
+    /// <summary>
+    /// Computes the maximum, minimum and average values.
+    /// </summary>
+    /// <param name="signal">1D data array values</param>
     private void ComputeStatistics(double[] signal)
     {
         try
@@ -334,6 +382,11 @@ partial class FrmMain
         }
     }
 
+    /// <summary>
+    /// Computes the derivative of a 1D data array.
+    /// </summary>
+    /// <param name="signal">1D data array values whose values are expected to be uniformly spaced</param>
+    /// <exception cref="OperationCanceledException">This is thrown if the token is cancelled whenever the user presses the ESC button</exception>
     private void ComputeDerivative(double[] signal)
     {
         Function<int> func = new(DataFunction);
@@ -392,6 +445,10 @@ partial class FrmMain
         }
     }
 
+    /// <summary>
+    /// Computes the integral value of a 1D data array.
+    /// </summary>
+    /// <param name="signal">1D data array values whose values are expected to be uniformly spaced</param>
     private void ComputeIntegral(double[] signal)
     {
         Results.Integral = Integration.Integrate(
@@ -404,6 +461,11 @@ partial class FrmMain
         
     }
 
+    /// <summary>
+    /// Computes the fractal dimension of a 1D data array.
+    /// </summary>
+    /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
+    /// <param name="progressive"></param>
     private void ComputeFractal(double[] signal, bool progressive = false)
     {
         // Compute fractal values
@@ -412,12 +474,22 @@ partial class FrmMain
         Results.FractalVariance = FractalDimension.VarianceH;
     }
 
+    /// <summary>
+    /// Computes entropy values (Shannon, approximate, entropy bit, and ideal entropy).
+    /// </summary>
+    /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
     private void ComputeEntropy(double[] signal)
     {
         (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
         (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy) = Complexity.ShannonEntropy(signal);
     }
 
+    /// <summary>
+    /// Computes the FFT 
+    /// </summary>
+    /// <param name="signal">1D data array whose values are expected to be uniformly spaced and and a power of 2 (otherwise it's rounded down to the closest 2^n)</param>
+    /// <param name="window">Window function</param>
+    /// <returns>The windowed signal</returns>
     private double[] ComputeFFT(double[] signal, IWindow? window)
     {
         //IWindow window = (IWindow)stripComboWindows.SelectedItem;
@@ -466,253 +538,4 @@ partial class FrmMain
         return signalWindow;
     }
 
-
-    // Below code is deprecated. ToDo: review and delete it
-
-    /// <summary>
-    /// Compute the signal stats
-    /// </summary>
-    /// <param name="signal">Signal data</param>
-    /// <param name="progressive"><see langword>True</see> if the progressive fractal dimension is to be computed</param>
-    /// <param name="entropy"><see langword="True"/> if all the entropy parameters are to be computed</param>
-    /// <param name="derivative"><see langword="True"/> if the derivative is computed</param>
-    private void UpdateStats(double[] signal, bool progressive = false, bool entropy = false, bool derivative = true)
-    {
-        if (signal.Length == 0) return;
-
-        try
-        {
-            // Compute average, max, and min descriptive statistics
-            double max = signal[0], min = signal[0], sum = 0;
-
-            for (int i = 0; i < signal.Length; i++)
-            {
-                if (signal[i] > max) max = signal[i];
-                if (signal[i] < min) min = signal[i];
-                sum += signal[i];
-            }
-            double avg = sum / signal.Length;
-
-            Results.Maximum = max;
-            Results.Minimum = min;
-            Results.Average = avg;
-
-            // Compute fractal values
-            FractalDimension.ComputeDimension(Signal.SampleFrequency, signal, token, progressive);
-            Results.FractalDimension = FractalDimension.DimensionSingle;
-            Results.FractalVariance = FractalDimension.VarianceH;
-
-            // Compute entropy values
-            if (entropy)
-            {
-                (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
-                (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy) = Complexity.ShannonEntropy(signal);
-            }
-
-            if (derivative)
-            {
-
-            }
-        }
-        catch (OperationCanceledException)
-        {
-            // This is needed beacuse this exception is thrown while the cumulative fractal dimension is computed from another Task in "UpdateStatsPlots".
-            Invoke(() =>
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show(this,
-                          StringResources.MsgBoxTaskFractalCancel,
-                          StringResources.MsgBoxTaskFractalCancelTitle,
-                          MessageBoxButtons.OK,
-                          MessageBoxIcon.Stop);
-                }
-                _settings.CumulativeDimension = false;
-                this.statusStripLabelExCumulative.Checked = false;
-            }
-            );
-        }
-        finally
-        {
-            tokenSource.Dispose();
-        }
-
-    }
-
-    /// <summary>
-    /// Updates the FFT related plots: FFT window, windowed signal, and signal FFT spectrum
-    /// </summary>
-    /// <param name="signal">Signal data</param>
-    private async Task UpdateWindowPlots(double[] signal)
-    {
-        IWindow window = (IWindow)stripComboWindows.SelectedItem;
-        if (window is null) return;
-
-        double[] signalWindow = Array.Empty<double>();
-        double[] signalFFT = Array.Empty<double>();
-        //double[] freq = Array.Empty<double>();
-
-        // Show a waiting cursor
-        var cursor = this.Cursor;
-        Cursor.Current = Cursors.WaitCursor;
-        this.UseWaitCursor = true;
-
-        // Run the intensive code on a separate task
-        statsTask = Task.Run(() =>
-        {
-            // Round down to the next integer (Adjust to the lowest power of 2)
-            int power2 = (int)Math.Floor(Math.Log2(signal.Length));
-            //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
-
-            // Apply window to signal
-            signalWindow = new double[(int)Math.Pow(2, power2)];
-            Array.Copy(signal, signalWindow, Math.Min(signalWindow.Length, signal.Length));
-            window.ApplyInPlace(signalWindow);
-
-            try
-            {
-                signalFFT = FftSharp.Transform.FFTpower(signalWindow);
-                // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
-                signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
-                Results.FFTpower = signalFFT;
-
-                signalFFT = FftSharp.Transform.FFTmagnitude(signalWindow);
-                Results.FFTmagnitude = signalFFT;
-
-                signalFFT = _settings.PowerSpectra ? Results.FFTpower : Results.FFTmagnitude;
-                Results.FFTfrequencies = FftSharp.Transform.FFTfreq(Signal.SampleFrequency, signalFFT.Length);
-            }
-            catch (Exception ex)
-            {
-                Invoke(() =>
-                {
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show(this,
-                            String.Format(_settings.AppCulture, StringResources.MsgBoxErrorFFT, ex.Message),
-                            StringResources.MsgBoxErrorFFTTitle,
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
-                });
-            }
-        });
-        await statsTask;
-
-        // Update plots
-        _settings.CrossHair = false;
-        statusStripLabelExCrossHair.Checked = false;
-        plotOriginal.ShowCrossHair = false;
-        plotOriginal.Refresh();
-        plotFractal.ShowCrossHair = false;
-        plotFractal.Refresh();
-        PlotKernel(window, signal.Length);
-        PlotWindowedSignal(signalWindow);
-        PlotFFT(signalFFT);
-        //UpdateFFT(signalFFT, Results.FFTfrequencies);
-
-        // Restore the cursor
-        this.UseWaitCursor = false;
-        Cursor.Current = cursor;
-    }
-
-
-    private double[] NormalDistributionX(int pointCount = 100, double mean = .5, double stdDev = .5, double maxSdMultiple = 3)
-    {
-        double[] values = new double[pointCount];
-        for (int i = 0; i < pointCount; i++)
-            values[i] = (-maxSdMultiple + 2 * maxSdMultiple * (double)i / pointCount) * stdDev + mean;
-        return values;
-    }
-
-    private double[] NormalDistributionY(int pointCount = 100, double maxSdMultiple = 3)
-    {
-        double[] values = new double[pointCount];
-        for (int i = 0; i < pointCount; i++)
-            values[i] = Phi(-maxSdMultiple + 2 * maxSdMultiple * (double)i / pointCount);
-        return values;
-    }
-
-    private double[] RandomNormal(Random rand, int pointCount, double mean = .5, double stdDev = .5)
-    {
-        if (rand == null)
-            rand = new Random(0);
-        double[] values = new double[pointCount];
-        for (int i = 0; i < values.Length; i++)
-            values[i] = RandomNormalValue(rand, mean, stdDev);
-
-        return values;
-    }
-
-    /// <summary>
-    /// Generates a single value from a normal distribution.
-    /// </summary>
-    /// <param name="rand">The Random object to use.</param>
-    /// <param name="mean">The mean of the distribution.</param>
-    /// <param name="stdDev">The standard deviation of the distribution.</param>
-    /// <param name="maxSdMultiple">The maximum distance from the mean to generate, given as a multiple of the standard deviation.</param>
-    /// <returns>A single value from a normal distribution.</returns>
-    public double RandomNormalValue(Random rand, double mean, double stdDev)
-    {
-        return Phi(mean + stdDev);
-    }
-
-    /// <summary>
-    /// The function Φ(x) is the cumulative density function (CDF) of a standard normal (Gaussian) random variable. It is closely related to the error function erf(x).
-    /// </summary>
-    /// <param name="x">Normalized standard variable</param>
-    /// <returns>The probability in the range [0, 1]</returns>
-    /// <seealso cref="https://www.johndcook.com/blog/csharp_phi/"/>
-    private double Phi(double x)
-    {
-        // constants
-        double a1 = 0.254829592;
-        double a2 = -0.284496736;
-        double a3 = 1.421413741;
-        double a4 = -1.453152027;
-        double a5 = 1.061405429;
-        double p = 0.3275911;
-
-        // Save the sign of x
-        int sign = 1;
-        if (x < 0)
-            sign = -1;
-        x = Math.Abs(x) / Math.Sqrt(2.0);
-
-        // A&S formula 7.1.26
-        double t = 1.0 / (1.0 + p * x);
-        double y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.Exp(-x * x);
-
-        return 0.5 * (1.0 + sign * y);
-    }
-
-    public double SampleGaussian(Random random, double mean, double stdDev)
-    {
-        double u1 = NextDouble(random);
-        double u2 = NextDouble(random);
-
-        //double u1 = UniformOpenInterval(random);
-        //double u2 = UniformOpenInterval(random);
-
-        double y1 = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);  // Math.Cos is also fine
-        return mean + stdDev * y1;
-
-        double NextDouble(Random random)
-        {
-            return ((double)random.Next(1, Int32.MaxValue)) / Int32.MaxValue;   // random.Next includes 1 and exludes Int32MaxValue
-        }
-
-        double UniformOpenInterval(Random random)
-        {
-            double subtrahend = 0;
-            while (subtrahend == 0)
-            {
-                subtrahend = random.NextDouble();
-            }
-            return subtrahend;
-            // The simpler 1.0 - rand.NextDouble() actually grabs from the interval [0, 1), not (0, 1)
-        }
-
-    }
 }
-
