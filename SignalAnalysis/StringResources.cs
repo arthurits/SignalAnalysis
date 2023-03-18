@@ -204,7 +204,18 @@ public static class StringResources
     public static string DlgReset => StringRM.GetString("strDlgReset", Culture) ?? "Do you want to reset all fields" +
             Environment.NewLine + "to their default values?";
     public static string DlgResetTitle => StringRM.GetString("strDlgResetTitle", Culture) ?? "Reset settings?";
-    
+
+
+    // Form about
+    public static string AboutProductName => StringRM.GetString("strAboutProductName", Culture) ?? "Product name: {0}";
+    public static string AboutVersion => StringRM.GetString("strAboutVersion", Culture) ?? "Version {0}";
+    public static string AboutCopyright => StringRM.GetString("strAboutCopyright", Culture) ?? "Copyright {0}";
+    public static string AboutCompanyName => StringRM.GetString("strAboutCompanyName", Culture) ?? "Developed by {0}";
+    public static string AboutDescription => StringRM.GetString("strAboutDescription", Culture) ?? "Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones)." +
+        Environment.NewLine + Environment.NewLine + "No commercial use allowed whatsoever.Contact the author for any inquires." +
+        Environment.NewLine + Environment.NewLine + "If you find this software useful, please consider supporting it!";
+
+
     // Unused strings
     public static string LblData => StringRM.GetString("strLblData", Culture) ?? "Data-file path";
     public static string LblSeries => StringRM.GetString("strLblSeries", Culture) ?? "Select series";
@@ -212,5 +223,7 @@ public static class StringResources
     public static string BtnData => StringRM.GetString("strBtnData", Culture) ?? "Select data";
     public static string BtnExport => StringRM.GetString("strBtnExport", Culture) ?? "&Export";
     public static string BtnSettings => StringRM.GetString("strBtnSettings", Culture) ?? "&Settings";
+
+
 
 }

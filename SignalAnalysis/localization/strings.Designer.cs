@@ -61,6 +61,55 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Developed by {0}.
+        /// </summary>
+        internal static string strAboutCompanyName {
+            get {
+                return ResourceManager.GetString("strAboutCompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copyright {0}.
+        /// </summary>
+        internal static string strAboutCopyright {
+            get {
+                return ResourceManager.GetString("strAboutCopyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
+        ///
+        ///No commercial use allowed whatsoever.Contact the author for any inquires.
+        ///
+        ///If you find this software useful, please consider supporting it!.
+        /// </summary>
+        internal static string strAboutDescription {
+            get {
+                return ResourceManager.GetString("strAboutDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product name: {0}.
+        /// </summary>
+        internal static string strAboutProductName {
+            get {
+                return ResourceManager.GetString("strAboutProductName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version {0}.
+        /// </summary>
+        internal static string strAboutVersion {
+            get {
+                return ResourceManager.GetString("strAboutVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Accept.
         /// </summary>
         internal static string strBtnAccept {

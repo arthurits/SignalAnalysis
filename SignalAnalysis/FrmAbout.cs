@@ -97,11 +97,11 @@ partial class FrmAbout : Form
     {
         InitializeComponent();
         // this.Text = String.Format("About {0}", AssemblyTitle);
-        this.labelProductName.Text = AssemblyProduct;
-        this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-        this.labelCopyright.Text = AssemblyCopyright;
-        this.labelCompanyName.Text = AssemblyCompany;
-        this.textBoxDescription.Text = AssemblyDescription;
+        this.labelProductName.Text = String.Format(StringResources.AboutProductName, AssemblyProduct);
+        this.labelVersion.Text = String.Format(StringResources.AboutVersion, AssemblyVersion);
+        this.labelCopyright.Text = String.Format(StringResources.AboutCopyright, AssemblyCopyright);
+        this.labelCompanyName.Text = String.Format(StringResources.AboutCompanyName, AssemblyCompany);
+        this.textBoxDescription.Text = String.Format(StringResources.AboutDescription, AssemblyDescription);
 
         // Set form icons and images
         //if (System.IO.File.Exists(path + @"\images\about.ico")) this.Icon = new Icon(path + @"\images\about.ico");

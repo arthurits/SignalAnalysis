@@ -634,4 +634,23 @@ dimension has been stopped.</value>
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>Compute the absolute-value integral?</value>
   </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
+
+No commercial use allowed whatsoever.Contact the author for any inquires.
+
+If you find this software useful, please consider supporting it!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Product name: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Developed by {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Copyright {0}</value>
+  </data>
 </root>

@@ -27,155 +27,138 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.labelProductName = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
-            this.labelCopyright = new System.Windows.Forms.Label();
-            this.labelCompanyName = new System.Windows.Forms.Label();
-            this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.okButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
-            this.SuspendLayout();
+            tableLayoutPanel = new TableLayoutPanel();
+            logoPictureBox = new PictureBox();
+            labelProductName = new Label();
+            labelVersion = new Label();
+            labelCopyright = new Label();
+            labelCompanyName = new Label();
+            textBoxDescription = new TextBox();
+            tableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)logoPictureBox).BeginInit();
+            SuspendLayout();
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.84173F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.15827F));
-            this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelVersion, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.labelCopyright, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.labelCompanyName, 1, 3);
-            this.tableLayoutPanel.Controls.Add(this.textBoxDescription, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.okButton, 1, 5);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel.Location = new System.Drawing.Point(12, 11);
-            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 6;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(556, 326);
-            this.tableLayoutPanel.TabIndex = 0;
+            tableLayoutPanel.ColumnCount = 2;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 47.84173F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 52.15827F));
+            tableLayoutPanel.Controls.Add(logoPictureBox, 0, 0);
+            tableLayoutPanel.Controls.Add(labelProductName, 1, 0);
+            tableLayoutPanel.Controls.Add(labelVersion, 1, 1);
+            tableLayoutPanel.Controls.Add(labelCopyright, 1, 2);
+            tableLayoutPanel.Controls.Add(labelCompanyName, 1, 3);
+            tableLayoutPanel.Controls.Add(textBoxDescription, 1, 4);
+            tableLayoutPanel.Dock = DockStyle.Fill;
+            tableLayoutPanel.Location = new Point(12, 11);
+            tableLayoutPanel.Margin = new Padding(4);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowCount = 5;
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 9F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 9F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 9F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 9F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 64F));
+            tableLayoutPanel.Size = new Size(556, 336);
+            tableLayoutPanel.TabIndex = 0;
             // 
             // logoPictureBox
             // 
-            this.logoPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.logoPictureBox.Location = new System.Drawing.Point(5, 35);
-            this.logoPictureBox.Margin = new System.Windows.Forms.Padding(4);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);
-            this.logoPictureBox.Size = new System.Drawing.Size(256, 256);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
+            logoPictureBox.Anchor = AnchorStyles.None;
+            logoPictureBox.Location = new Point(5, 40);
+            logoPictureBox.Margin = new Padding(4);
+            logoPictureBox.Name = "logoPictureBox";
+            tableLayoutPanel.SetRowSpan(logoPictureBox, 5);
+            logoPictureBox.Size = new Size(256, 256);
+            logoPictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+            logoPictureBox.TabIndex = 12;
+            logoPictureBox.TabStop = false;
             // 
             // labelProductName
             // 
-            this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Location = new System.Drawing.Point(274, 0);
-            this.labelProductName.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 21);
-            this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(278, 21);
-            this.labelProductName.TabIndex = 19;
-            this.labelProductName.Text = "Nombre de producto";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            labelProductName.Dock = DockStyle.Fill;
+            labelProductName.Location = new Point(274, 0);
+            labelProductName.Margin = new Padding(8, 0, 4, 0);
+            labelProductName.MaximumSize = new Size(0, 21);
+            labelProductName.Name = "labelProductName";
+            labelProductName.Size = new Size(278, 21);
+            labelProductName.TabIndex = 19;
+            labelProductName.Text = "Product name";
+            labelProductName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelVersion
             // 
-            this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(274, 29);
-            this.labelVersion.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelVersion.MaximumSize = new System.Drawing.Size(0, 21);
-            this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(278, 21);
-            this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "Version";
-            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            labelVersion.Dock = DockStyle.Fill;
+            labelVersion.Location = new Point(274, 30);
+            labelVersion.Margin = new Padding(8, 0, 4, 0);
+            labelVersion.MaximumSize = new Size(0, 21);
+            labelVersion.Name = "labelVersion";
+            labelVersion.Size = new Size(278, 21);
+            labelVersion.TabIndex = 0;
+            labelVersion.Text = "Version";
+            labelVersion.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
             // 
-            this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(274, 58);
-            this.labelCopyright.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 21);
-            this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(278, 21);
-            this.labelCopyright.TabIndex = 21;
-            this.labelCopyright.Text = "Copyright";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            labelCopyright.Dock = DockStyle.Fill;
+            labelCopyright.Location = new Point(274, 60);
+            labelCopyright.Margin = new Padding(8, 0, 4, 0);
+            labelCopyright.MaximumSize = new Size(0, 21);
+            labelCopyright.Name = "labelCopyright";
+            labelCopyright.Size = new Size(278, 21);
+            labelCopyright.TabIndex = 21;
+            labelCopyright.Text = "Copyright";
+            labelCopyright.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelCompanyName
             // 
-            this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompanyName.Location = new System.Drawing.Point(274, 87);
-            this.labelCompanyName.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 21);
-            this.labelCompanyName.Name = "labelCompanyName";
-            this.labelCompanyName.Size = new System.Drawing.Size(278, 21);
-            this.labelCompanyName.TabIndex = 22;
-            this.labelCompanyName.Text = "Nombre de la compañía";
-            this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            labelCompanyName.Dock = DockStyle.Fill;
+            labelCompanyName.Location = new Point(274, 90);
+            labelCompanyName.Margin = new Padding(8, 0, 4, 0);
+            labelCompanyName.MaximumSize = new Size(0, 21);
+            labelCompanyName.Name = "labelCompanyName";
+            labelCompanyName.Size = new Size(278, 21);
+            labelCompanyName.TabIndex = 22;
+            labelCompanyName.Text = "Company name";
+            labelCompanyName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.BackColor = System.Drawing.Color.White;
-            this.textBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(277, 120);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(11, 4, 4, 4);
-            this.textBoxDescription.Multiline = true;
-            this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.ReadOnly = true;
-            this.textBoxDescription.Size = new System.Drawing.Size(275, 171);
-            this.textBoxDescription.TabIndex = 23;
-            this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Text = "Descripción";
-            // 
-            // okButton
-            // 
-            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(452, 299);
-            this.okButton.Margin = new System.Windows.Forms.Padding(4);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(100, 23);
-            this.okButton.TabIndex = 24;
-            this.okButton.Text = "&Accept";
-            this.okButton.Visible = false;
+            textBoxDescription.BackColor = Color.White;
+            textBoxDescription.BorderStyle = BorderStyle.None;
+            textBoxDescription.Dock = DockStyle.Fill;
+            textBoxDescription.Location = new Point(277, 124);
+            textBoxDescription.Margin = new Padding(11, 4, 4, 4);
+            textBoxDescription.Multiline = true;
+            textBoxDescription.Name = "textBoxDescription";
+            textBoxDescription.ReadOnly = true;
+            textBoxDescription.Size = new Size(275, 208);
+            textBoxDescription.TabIndex = 23;
+            textBoxDescription.TabStop = false;
+            textBoxDescription.Text = "Descripción";
             // 
             // FrmAbout
             // 
-            this.AcceptButton = this.okButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(580, 348);
-            this.ControlBox = false;
-            this.Controls.Add(this.tableLayoutPanel);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FrmAbout";
-            this.Padding = new System.Windows.Forms.Padding(12, 11, 12, 11);
-            this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.tableLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 16F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(580, 358);
+            ControlBox = false;
+            Controls.Add(tableLayoutPanel);
+            Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Margin = new Padding(4);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "FrmAbout";
+            Padding = new Padding(12, 11, 12, 11);
+            ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Hide;
+            StartPosition = FormStartPosition.CenterParent;
+            tableLayoutPanel.ResumeLayout(false);
+            tableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)logoPictureBox).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -187,6 +170,5 @@
         private System.Windows.Forms.Label labelCopyright;
         private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Button okButton;
     }
 }
