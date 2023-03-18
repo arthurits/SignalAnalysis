@@ -144,8 +144,9 @@ public partial class FrmSettings : Form
         cboAllCultures.Enabled = radUserCulture.Checked;
         if (cboAllCultures.Enabled)
         {
-            _culture = new((string)(cboAllCultures.SelectedValue ?? String.Empty));
-            UpdateUI_Language();
+            _culture = new((string)(cboAllCultures.SelectedValue ?? string.Empty));
+            if (_culture.Name != string.Empty)
+                UpdateUI_Language();
         }
     }
 
