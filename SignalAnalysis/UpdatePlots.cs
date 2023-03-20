@@ -335,7 +335,10 @@ partial class FrmMain
 
         // Show text results
         if (stats || fractal || entropy)
-            txtStats.Text = Results.ToString(_settings.AppCulture, _settings.ComputeIntegration);
+            txtStats.Text = Results.ToString(
+                _settings.AppCulture,
+                _settings.ComputeIntegration,
+                _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 
         // Restore the cursor
         this.UseWaitCursor = false;

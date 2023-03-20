@@ -1,7 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace SignalAnalysis;
-
+﻿namespace SignalAnalysis;
 
 public class SignalStats
 {
@@ -32,13 +29,13 @@ public class SignalStats
 
     public double[] Derivative { get; set; } = Array.Empty<double>();
 
-    public double Integral { get; set; } = -1;
+    public double Integral { get; set; } = 0;
 
     public double[] FFTpower { get; set; } = Array.Empty<double>();
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
     public double[] FFTfrequencies { get; set; } = Array.Empty<double>();
 
-    public string ToString(System.Globalization.CultureInfo culture, bool integral = false) =>
+    public string ToString(System.Globalization.CultureInfo culture, bool integral = false, string integralAlgorithm = "") =>
         $"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Average.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Maximum.ToString("0.##", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Minimum.ToString("0.##", culture)}{Environment.NewLine}" +
@@ -49,6 +46,7 @@ public class SignalStats
         $"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{ShannonEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{EntropyBit.ToString("0.########", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}" +
+        $"{(integralAlgorithm != string.Empty ? $"{Environment.NewLine}{StringResources.FileHeader30}{StringResources.FileHeaderColon}{integralAlgorithm}" : string.Empty)}" +
         $"{(integral ? Environment.NewLine + StringResources.FileHeader31 + StringResources.FileHeaderColon + Integral.ToString("0.########", culture) : string.Empty)}";
 }
 

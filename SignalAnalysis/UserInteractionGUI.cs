@@ -55,7 +55,10 @@ partial class FrmMain
                 if (results is not null)
                 {
                     Results = results;
-                    txtStats.Text = Results.ToString(_settings.AppCulture);
+                    txtStats.Text = Results.ToString(
+                        _settings.AppCulture,
+                        _settings.ComputeIntegration,
+                        _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
                 }
 
                 // Update UI

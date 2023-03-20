@@ -135,7 +135,7 @@ public class ClassSettings
     /// True if the derivative will be computed
     /// </summary>
     [JsonPropertyName("Compute derivative?")]
-    public bool ComputeDerivative { get; set; } = true;
+    public bool ComputeDerivative { get; set; } = false;
 
     /// <summary>
     /// Numerical derivative algorithm
@@ -153,7 +153,7 @@ public class ClassSettings
     /// True if the integral will be computed
     /// </summary>
     [JsonPropertyName("Compute integration?")]
-    public bool ComputeIntegration { get; set; } = true;
+    public bool ComputeIntegration { get; set; } = false;
 
     /// <summary>
     /// Numerical integration algorithm

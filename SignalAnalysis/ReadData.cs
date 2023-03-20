@@ -693,7 +693,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Reads and parse the <see cref="StreamReader"/> data into an array.
+    /// Reads and parses the <see cref="StreamReader"/> data into an array.
     /// </summary>
     /// <param name="sr">This reader should be pointing to the beginning of the numeric data section</param>
     /// <param name="dataPoints">Array where the read data will be stored</param>

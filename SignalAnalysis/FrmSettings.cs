@@ -150,9 +150,9 @@ public partial class FrmSettings : Form
     private void UserCulture_CheckedChanged(object sender, EventArgs e)
     {
         cboAllCultures.Enabled = radUserCulture.Checked;
-        if (cboAllCultures.Enabled)
+        if (cboAllCultures.Enabled && cboAllCultures.SelectedValue is not null)
         {
-            _culture = new((string)(cboAllCultures.SelectedValue ?? string.Empty));
+            _culture = new((string)cboAllCultures.SelectedValue);
             if (_culture.Name != string.Empty)
                 UpdateUI_Language();
                 

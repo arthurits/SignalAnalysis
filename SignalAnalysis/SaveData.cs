@@ -1,6 +1,4 @@
-﻿using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 partial class FrmMain
 {

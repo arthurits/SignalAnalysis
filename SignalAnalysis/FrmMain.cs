@@ -297,7 +297,10 @@ public partial class FrmMain : Form
 
         // Update the results text
         if (txtStats.Text.Length > 0)
-            txtStats.Text = Results.ToString(_settings.AppCulture);
+            txtStats.Text = Results.ToString(
+                _settings.AppCulture,
+                _settings.ComputeIntegration,
+                _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 
         this.ResumeLayout();
     }

@@ -79,15 +79,17 @@ public partial class FrmLanguage : Form
     private void UserCulture_CheckedChanged(object sender, EventArgs e)
     {
         cboAllCultures.Enabled = radUserCulture.Checked;
-        if (cboAllCultures.Enabled)
+        if (cboAllCultures.Enabled && cboAllCultures.SelectedValue is not null)
         {
-            _culture = new((string)(cboAllCultures.SelectedValue ?? String.Empty));
+            _culture = new((string)cboAllCultures.SelectedValue);
             if (_culture.Name != string.Empty)
+            {
                 UpdateUI_Language();
-                
-            int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
-            cboAllCultures.SelectedIndex = index;
+
+                int index = cboAllCultures.SelectedIndex;
+                FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
+                cboAllCultures.SelectedIndex = index;
+            }
         }
     }
 
