@@ -127,6 +127,10 @@ public partial class FrmSettings : Form
         {
             _culture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
+            
+            int index = cboAllCultures.SelectedIndex;
+            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+            cboAllCultures.SelectedIndex = index;
         }
     }
 
@@ -136,6 +140,10 @@ public partial class FrmSettings : Form
         {
             _culture = System.Globalization.CultureInfo.InvariantCulture;
             UpdateUI_Language();
+            
+            int index = cboAllCultures.SelectedIndex;
+            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+            cboAllCultures.SelectedIndex = index;
         }
     }
 
@@ -147,16 +155,22 @@ public partial class FrmSettings : Form
             _culture = new((string)(cboAllCultures.SelectedValue ?? string.Empty));
             if (_culture.Name != string.Empty)
                 UpdateUI_Language();
+                
+            int index = cboAllCultures.SelectedIndex;
+            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+            cboAllCultures.SelectedIndex = index;
         }
     }
 
-    private void AllCultures_SelectedValueChanged(object sender, EventArgs e)
+    private void AllCultures_SelectionChangeCommitted(object sender, EventArgs e)
     {
         var cbo = sender as ComboBox;
         if (cbo is not null && cbo.Items.Count > 0 && cbo.SelectedValue is not null)
         {
             _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
+            
+            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
         }
     }
 
@@ -258,11 +272,19 @@ public partial class FrmSettings : Form
     private void FillDefinedCultures(string baseName, System.Reflection.Assembly assembly)
     {
         string cultureName = _culture.Name;
+        string _cultureUI = CultureInfo.CurrentUICulture.Name;
+
+        // Retrieve the culture list using the culture currently selected. The UI culture needs to be temporarily changed
+        CultureInfo.CurrentUICulture = new CultureInfo(cultureName);
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
+        
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
         cboAllCultures.DataSource = cultures.ToArray();
         cboAllCultures.SelectedValue = cultureName;
+        
+        // Reset the UI culture to its previous value
+        CultureInfo.CurrentUICulture = new(_cultureUI);
     }
 
     /// <summary>
