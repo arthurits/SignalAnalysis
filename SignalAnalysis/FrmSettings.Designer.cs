@@ -414,7 +414,7 @@
             cboAllCultures.Name = "cboAllCultures";
             cboAllCultures.Size = new Size(190, 25);
             cboAllCultures.TabIndex = 3;
-            cboAllCultures.SelectionChangeCommitted += AllCultures_SelectedValueChanged;
+            cboAllCultures.SelectionChangeCommitted += AllCultures_SelectionChangeCommitted;
             // 
             // radUserCulture
             // 
