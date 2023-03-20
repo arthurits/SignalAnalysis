@@ -46,7 +46,7 @@
             this.cboAllCultures.Name = "cboAllCultures";
             this.cboAllCultures.Size = new System.Drawing.Size(190, 25);
             this.cboAllCultures.TabIndex = 3;
-            this.cboAllCultures.SelectedValueChanged += new System.EventHandler(this.AllCultures_SelectedValueChanged);
+            this.cboAllCultures.SelectionChangeCommitted += AllCultures_SelectionChangeCommitted;
             // 
             // radCurrentCulture
             // 
