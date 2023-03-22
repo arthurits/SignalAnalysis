@@ -164,8 +164,14 @@ public class ClassSettings
     /// <summary>
     /// True if the absolute value integral is computed
     /// </summary>
-    [JsonPropertyName("Absolute integral")]
+    [JsonPropertyName("Compute the absolute-value integral?")]
     public bool AbsoluteIntegral { get; set; } = false;
+
+    /// <summary>
+    /// True if the data fed to the integration routines is rounded upwards (with the last value) towards the nearest multiple needed by each algorithm.
+    /// </summary>
+    [JsonPropertyName("Upward-pad data to be integrated?")]
+    public bool PadIntegral { get; set; } = false;
 
     public ClassSettings()
     {

@@ -451,16 +451,42 @@ partial class FrmMain
     /// <summary>
     /// Computes the integral value of a 1D data array.
     /// </summary>
-    /// <param name="signal">1D data array values whose values are expected to be uniformly spaced</param>
+    /// <param name="signal">1D data array, whose values are expected to be uniformly spaced</param>
     private void ComputeIntegral(double[] signal)
     {
+        double[] newSignal = signal;
+        double lastValue = signal.Last();
+        double subtract = 0;
+
+        if (_settings.PadIntegral)
+        {
+            switch (_settings.IntegrationAlgorithm)
+            {
+                case IntegrationMethod.SimpsonRule3:
+                    break;
+                case IntegrationMethod.SimpsonRule8:
+                    break;
+                case IntegrationMethod.Romberg: // This needs to be padded to the upward power of 2
+                    if (!System.Numerics.BitOperations.IsPow2(signal.Length - 1))
+                    {
+                        newSignal = new double[1 + (int)Math.Pow(2, Math.Round(Math.Log2(signal.Length - 1), MidpointRounding.ToPositiveInfinity))];
+                        Array.Copy(signal, newSignal, signal.Length);
+                        Array.Fill(newSignal, lastValue, signal.Length, newSignal.Length - signal.Length);
+                        subtract = lastValue * (newSignal.Length - signal.Length) / Signal.SampleFrequency; // This is the rectangle area under the upward-padded data
+                    }
+                    break;
+            }
+        }
+
         Results.Integral = Integration.Integrate(
-            array: signal,
+            array: newSignal,
             method: _settings.IntegrationAlgorithm,
-            lowerIndex: signal.GetLowerBound(0),
-            upperIndex: signal.GetUpperBound(0),
+            lowerIndex: newSignal.GetLowerBound(0),
+            upperIndex: newSignal.GetUpperBound(0),
             samplingFrequency: Signal.SampleFrequency,
             absoluteIntegral: _settings.AbsoluteIntegral);
+
+        Results.Integral -= subtract;
         
     }
 
