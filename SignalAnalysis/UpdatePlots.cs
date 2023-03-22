@@ -459,7 +459,7 @@ partial class FrmMain
         double subtract = 0;
         int padding;
 
-        if (!_settings.PadIntegral)
+        if (_settings.PadIntegral)
         {
             switch (_settings.IntegrationAlgorithm)
             {
