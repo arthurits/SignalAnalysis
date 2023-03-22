@@ -457,14 +457,31 @@ partial class FrmMain
         double[] newSignal = signal;
         double lastValue = signal.Last();
         double subtract = 0;
+        int padding;
 
-        if (_settings.PadIntegral)
+        if (!_settings.PadIntegral)
         {
             switch (_settings.IntegrationAlgorithm)
             {
                 case IntegrationMethod.SimpsonRule3:
+                    padding = (signal.Length - 1) % 2;
+                    if (padding > 0)
+                    {
+                        newSignal = new double[signal.Length + padding];
+                        Array.Copy(signal, newSignal, signal.Length);
+                        Array.Fill(newSignal, lastValue, signal.Length, newSignal.Length - signal.Length);
+                        subtract = lastValue * (newSignal.Length - signal.Length) / Signal.SampleFrequency; // This is the rectangle area under the upward-padded data
+                    }
                     break;
                 case IntegrationMethod.SimpsonRule8:
+                    padding = 3 - (signal.Length - 1) % 3;
+                    if (padding > 0 && padding < 3)
+                    {
+                        newSignal = new double[signal.Length + padding];
+                        Array.Copy(signal, newSignal, signal.Length);
+                        Array.Fill(newSignal, lastValue, signal.Length, newSignal.Length - signal.Length);
+                        subtract = lastValue * (newSignal.Length - signal.Length) / Signal.SampleFrequency; // This is the rectangle area under the upward-padded data
+                    }
                     break;
                 case IntegrationMethod.Romberg: // This needs to be padded to the upward power of 2
                     if (!System.Numerics.BitOperations.IsPow2(signal.Length - 1))

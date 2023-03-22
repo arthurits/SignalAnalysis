@@ -55,7 +55,7 @@ public static class Integration
                 i = segments % 3;
                 if (i == 1)
                     result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i, absoluteIntegral);
-                else
+                else if (i == 2)
                     result = SimpsonRule3(function, upperLimit - i, upperLimit, i, absoluteIntegral);
                 result += SimpsonRule8(function, lowerLimit, upperLimit - i, segments - i, absoluteIntegral);
                 break;
@@ -109,6 +109,8 @@ public static class Integration
     /// <returns>The estimated integral value</returns>
     private static double LeftPointRule(Func<double, double> function, double lowerLimit, double upperLimit, double segments = 1, bool absoluteIntegral = false)
     {
+        if (segments == 0 || lowerLimit >= upperLimit) return 0;
+
         double result = 0;
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit;
@@ -133,6 +135,8 @@ public static class Integration
     /// <returns>The estimated integral value</returns>
     private static double MidPointRule(Func<double, double> function, double lowerLimit, double upperLimit, double segments = 1, bool absoluteIntegral = false)
     {
+        if (segments == 0 || lowerLimit >= upperLimit) return 0;
+
         double result = 0;
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit + step / 2;
@@ -157,6 +161,8 @@ public static class Integration
     /// <returns>The estimated integral value</returns>
     private static double RightPointRule(Func<double, double> function, double lowerLimit, double upperLimit, double segments = 1, bool absoluteIntegral = false)
     {
+        if (segments == 0 || lowerLimit >= upperLimit) return 0;
+
         double result = 0;
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit;
@@ -208,6 +214,8 @@ public static class Integration
     /// <returns>The estimated integral value</returns>
     private static double SimpsonRule3(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1, bool absoluteIntegral = false)
     {
+        if (segments == 0 || lowerLimit >= upperLimit) return 0;
+
         double result = functionAbs(lowerLimit) + functionAbs(upperLimit);
         
         double step = (upperLimit - lowerLimit) / segments;
@@ -234,6 +242,8 @@ public static class Integration
     /// <returns>The estimated integral value</returns>
     private static double SimpsonRule8(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1, bool absoluteIntegral = false)
     {
+        if (segments == 0 || lowerLimit >= upperLimit) return 0;
+
         double result = functionAbs(lowerLimit) + functionAbs(upperLimit);
 
         double step = (upperLimit - lowerLimit) / segments;
@@ -268,6 +278,8 @@ public static class Integration
     /// <returns>The estimated integral value</returns>
     private static double SimpsonComposite(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1, bool absoluteIntegral = false)
     {
+        if (segments == 0 || lowerLimit >= upperLimit) return 0;
+
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit;
 
