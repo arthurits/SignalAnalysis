@@ -334,7 +334,7 @@ partial class FrmMain
         //await UpdateWindowPlots(signalClipped);
 
         // Show text results
-        if (stats || fractal || entropy)
+        //if (stats || fractal || entropy || integral)
             txtStats.Text = Results.ToString(
                 _settings.AppCulture,
                 _settings.ComputeIntegration,
