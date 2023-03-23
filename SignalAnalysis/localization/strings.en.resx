@@ -637,7 +637,7 @@ dimension has been stopped.</value>
   <data name="strAboutDescription" xml:space="preserve">
     <value>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
 
-No commercial use allowed whatsoever.Contact the author for any inquires.
+No commercial use allowed whatsoever. Contact the author for any inquiries.
 
 If you find this software useful, please consider supporting it!</value>
   </data>

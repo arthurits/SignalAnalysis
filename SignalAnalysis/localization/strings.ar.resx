@@ -225,10 +225,10 @@
     <value>عدد الحساسات</value>
   </data>
   <data name="strFileHeader19" xml:space="preserve">
-    <value>يوجد سطر فارغ</value>
+    <value>يوجد سطر فارغ.</value>
   </data>
   <data name="strFileHeader20" xml:space="preserve">
-    <value>عنوان العامود فارغ (إسم السلالة)</value>
+    <value>عنوان العامود فارغ (إسم السلالة).</value>
   </data>
   <data name="strFileHeader21" xml:space="preserve">
     <value>الوقت</value>
@@ -530,5 +530,39 @@
   </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>اسم المنتج: {0}</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>طور بواسطة {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>إصدار {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>حقوق النشر {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>أداة تحليل تتميز بالإحصاءات الوصفية الأساسية ، FFT (تحويل فورييه السريع) ، البعد الكسري ، التمايز ، التكامل ، والإنتروبيا للإشارات (ملفات elux بالإضافة إلى الملفات العامة).
+
+لا يسمح بأي استخدام تجاري على الإطلاق. تواصل مع المؤلف لأية استفسارات.
+
+إذا وجدت هذا البرنامج مفيدًا ، فالرجاء التفكير في دعمه!</value>
+  </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>احسب القيمة المطلقة للتكامل؟</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>احسب المشتق العددي؟</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>احسب التكامل العددي؟</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>تصدير المشتق؟</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>تصدير التكامل العددي؟</value>
   </data>
 </root>

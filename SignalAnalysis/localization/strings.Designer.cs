@@ -81,7 +81,7 @@ namespace SignalAnalysis.localization {
         /// <summary>
         ///   Looks up a localized string similar to Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
         ///
-        ///No commercial use allowed whatsoever.Contact the author for any inquires.
+        ///No commercial use allowed whatsoever. Contact the author for any inquiries.
         ///
         ///If you find this software useful, please consider supporting it!.
         /// </summary>
