@@ -528,4 +528,23 @@
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>संस्करण {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>प्रोडक्ट का नाम: {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>कॉपीराइट {0}</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>द्वारा विकसित {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>बुनियादी वर्णनात्मक आंकड़े, एफएफटी (फास्ट फूरियर ट्रांसफॉर्म), फ्रैक्टल आयाम, भेदभाव, एकीकरण, और सिग्नल के लिए एंट्रॉपी (एलक्स फाइलों के साथ-साथ सामान्य वाले) की विशेषता वाला विश्लेषण उपकरण।
+
+किसी भी व्यावसायिक उपयोग की अनुमति नहीं है। किसी भी पूछताछ के लिए लेखक से संपर्क करें।
+
+यदि आपको यह सॉफ़्टवेयर उपयोगी लगता है, तो कृपया इसका समर्थन करने पर विचार करें!</value>
+  </data>
 </root>
