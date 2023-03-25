@@ -528,4 +528,23 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>{0} versija</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produkto pavadinimas: {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Autorių teisės {0} m</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Sukūrė {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analizės įrankis, kuriame yra pagrindinė aprašomoji statistika, FFT (greitasis Furjė transformavimas), fraktalinis matmuo, signalų diferenciacija, integracija ir entropija (elux failai, taip pat bendrieji).
+
+Joks komercinis naudojimas neleidžiamas. Dėl bet kokių klausimų kreipkitės į autorių.
+
+Jei ši programinė įranga jums naudinga, apsvarstykite galimybę ją palaikyti!</value>
+  </data>
 </root>
