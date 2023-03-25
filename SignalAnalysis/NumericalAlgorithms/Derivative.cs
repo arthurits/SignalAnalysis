@@ -83,43 +83,49 @@ public class Derivative<T> where T : INumber<T>
         double[] result = new double[segments + 1];
 
         int indexStart = 0, indexEnd = segments;
-        switch (method)
-        {
-            case DerivativeMethod.BackwardOnePoint:
-                indexStart = 1;
-                indexEnd = signal.Length;
-                break;
-            case DerivativeMethod.ForwardOnePoint:
-                indexStart = 0;
-                indexEnd = signal.Length - 1;
-                break;
-            case DerivativeMethod.CenteredThreePoint or DerivativeMethod.SGLinearThreePoint:
-                indexStart = 1;
-                indexEnd = signal.Length - 1;
-                break;
-            case DerivativeMethod.CenteredFivePoint or DerivativeMethod.SGLinearFivePoint or DerivativeMethod.SGCubicFivePoint:
-                indexStart = 2;
-                indexEnd = signal.Length - 2;
-                break;
-            case DerivativeMethod.CenteredSevenPoint or DerivativeMethod.SGLinearSevenPoint or DerivativeMethod.SGCubicSevenPoint:
-                indexStart = 3;
-                indexEnd = signal.Length - 3;
-                break;
-            case DerivativeMethod.CenteredNinePoint or DerivativeMethod.SGLinearNinePoint or DerivativeMethod.SGCubicNinePoint:
-                indexStart = 4;
-                indexEnd = signal.Length - 4;
-                break;
-        }
+        //switch (method)
+        //{
+        //    case DerivativeMethod.BackwardOnePoint:
+        //        indexStart = 1;
+        //        indexEnd = signal.Length;
+        //        break;
+        //    case DerivativeMethod.ForwardOnePoint:
+        //        indexStart = 0;
+        //        indexEnd = signal.Length - 1;
+        //        break;
+        //    case DerivativeMethod.CenteredThreePoint or DerivativeMethod.SGLinearThreePoint:
+        //        indexStart = 1;
+        //        indexEnd = signal.Length - 1;
+        //        break;
+        //    case DerivativeMethod.CenteredFivePoint or DerivativeMethod.SGLinearFivePoint or DerivativeMethod.SGCubicFivePoint:
+        //        indexStart = 2;
+        //        indexEnd = signal.Length - 2;
+        //        break;
+        //    case DerivativeMethod.CenteredSevenPoint or DerivativeMethod.SGLinearSevenPoint or DerivativeMethod.SGCubicSevenPoint:
+        //        indexStart = 3;
+        //        indexEnd = signal.Length - 3;
+        //        break;
+        //    case DerivativeMethod.CenteredNinePoint or DerivativeMethod.SGLinearNinePoint or DerivativeMethod.SGCubicNinePoint:
+        //        indexStart = 4;
+        //        indexEnd = signal.Length - 4;
+        //        break;
+        //}
 
 
         return result;
     }
 
-    public double[] Derivate(double[] array)
+    public double[] Derivate(double[] array, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int segments = 1)
     {
-        double[] result = new double[array.Length];
+        double[] result = Derivate(Function, method, lowerLimit, upperLimit, segments);
 
         return result;
+
+        // Convert the data array to a function
+        double Function(double index)
+        {
+            return array[(int)(index)];
+        }
     }
 
     public double[] DerivateArray(double[] array)
