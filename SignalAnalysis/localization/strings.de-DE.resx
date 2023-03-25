@@ -612,4 +612,23 @@ wurde gestoppt.</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analysetool mit grundlegender deskriptiver Statistik, FFT (Fast Fourier Transformation), fraktaler Dimension, Differentiation, Integration und Entropie für Signale (sowohl Elux-Dateien als auch generische).
+
+Jegliche kommerzielle Nutzung ist nicht gestattet. Wenden Sie sich bei Fragen an den Autor.
+
+Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstützen!</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Entwickelt von {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Urheberrechte {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktname: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
 </root>
