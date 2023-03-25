@@ -528,4 +528,23 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Strumento di analisi con statistiche descrittive di base, FFT (trasformata veloce di Fourier), dimensione frattale, differenziazione, integrazione ed entropia per segnali (file elux e file generici).
+
+Non è consentito alcun uso commerciale. Contatta l'autore per qualsiasi richiesta.
+
+Se trovi utile questo software, considera di supportarlo!</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Sviluppato da {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Diritto d'autore {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Nome del prodotto: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versione {0}</value>
+  </data>
 </root>
