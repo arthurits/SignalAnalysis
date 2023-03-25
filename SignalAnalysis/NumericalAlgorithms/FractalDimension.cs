@@ -2,16 +2,13 @@ using FftSharp.Windows;
 
 namespace SignalAnalysis;
 
-// This class implements the computation of the fractal dimension of a discrete curve according to 
-// Carlos Sevcik's "A procedure to estimate the fractal dimension of waveforms" (https://arxiv.org/abs/1003.5266)
+/// <summary>
+/// This class implements the computation of the fractal dimension of a discrete curve according to
+/// Carlos Sevcik's "A procedure to estimate the fractal dimension of waveforms"
+/// <seealso cref="https://arxiv.org/abs/1003.5266"/>
+/// </summary>
 public static class FractalDimension
 {
-    //private int _nPoints;
-    //private double _xMax;
-    //private double _xMin;
-    //private double _yMax;
-    //private double _yMin;
-    //private double _length;
 
     /// <summary>
     /// Hausdorff-Besicovitch dimension for each cumulative segment
@@ -264,132 +261,3 @@ public static class FractalDimension
         return (highest, lowest);
     }
 }
-
-// https://www.codeproject.com/Articles/27030/Approximate-and-Sample-Entropies-Complexity-Metric
-// https://pdfs.semanticscholar.org/6841/efb4c40a74c1faa9f36e6d949d1ee330bfa9.pdf
-// https://en.wikipedia.org/wiki/Sample_entropy
-public class Complexity
-{
-    /// <summary>
-    /// Computes the approximate and sample entropies of a physiological time-series signals (typically used to diagnose diseased states).
-    /// ApEn reflects the likelihood that similar patterns of observations will not be followed by additional similar observations. A time series containing many repetitive patterns has a relatively small ApEn; a less predictable process has a higher ApEn.
-    /// A smaller value of SampEn also indicates more self-similarity in data set or less noise.
-    /// </summary>
-    /// <param name="data"></param>
-    /// <param name="dim">Embedding dimension</param>
-    /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
-    /// <param name="std">Standard deviation of the population</param>
-    /// <returns>AppEn and SampEn</returns>
-    public static (double AppEn, double SampEn) Entropy(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
-    {
-        long upper = data.Length - (dim + 1) + 1;
-        bool isEqual;
-        int AppEn_Cum, AppEn_Cum1;
-        int SampEn_Cum = 0, SampEn_Cum1 = 0;
-        double sum = 0.0;
-        double appEn, sampEn;
-        double tolerance;
-        if (std.HasValue)
-            tolerance = std.Value * fTol;
-        else
-            tolerance = StdDev<double>(data) * fTol;
-
-
-        for (uint i = 0; i < upper; i++)
-        {
-            AppEn_Cum = 0;
-            AppEn_Cum1 = 0;
-            for (uint j = 0; j < upper; j++)
-            {
-                isEqual = true;
-                //m - length series
-                for (uint k = 0; k < dim; k++)
-                {
-                    if (Math.Abs(data[i + k] - data[j + k]) > tolerance)
-                    {
-                        isEqual = false;
-                        break;
-                    }
-                    if (ct.IsCancellationRequested)
-                        throw new OperationCanceledException("CancelEntropy", ct);
-                }
-                if (isEqual)
-                {
-                    AppEn_Cum++;
-                    SampEn_Cum++;
-                }
-
-                //m+1 - length series
-                if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
-                {
-                    AppEn_Cum1++;
-                    SampEn_Cum1++;
-                }
-            }
-
-            if (AppEn_Cum > 0 && AppEn_Cum1 > 0)
-                sum += Math.Log((double)AppEn_Cum / (double)AppEn_Cum1);
-        }
-
-        appEn = sum / (double)(data.Length - dim);
-        sampEn = SampEn_Cum > 0 && SampEn_Cum1 > 0 ? Math.Log((double)SampEn_Cum / (double)SampEn_Cum1) : 0.0;
-
-        return (appEn, sampEn);
-    }
-
-    /// <summary>
-    /// Computes the Shannon entropy, the entropy bit, and the ideal entropy for a vector of numeric values
-    /// </summary>
-    /// <param name="data">Numeric values vector</param>
-    /// <returns>The Shannon entropy value, the entropy bit, and the ideal entropy</returns>
-    public static (double Entropy, double EntropyBit, double IdealEntropy) ShannonEntropy<T>(IEnumerable<T> data)
-    {
-        double entropy = 0;
-        double entropyBit;
-        double entropyIdeal;
-        double prob;
-
-        // Convert into an enumerable of doubles.
-        IEnumerable<double> values = data.Select(value => Convert.ToDouble(value));
-        int nLength = values.Count();
-        double nSum = values.Sum();
-
-        // Compute the Shannon entropy
-        foreach (double s in values)
-        {
-            if (s > 0)
-            {
-                prob = s / nSum;
-                entropy -= prob * Math.Log2(prob);
-            }
-        }
-
-        // https://github.com/wqyeo/Shannon-Entropy/blob/master/EntropyCal.cs
-        entropyBit = Math.Ceiling(entropy) * nLength;
-
-        // https://stackoverflow.com/questions/2979174/how-do-i-compute-the-approximate-entropy-of-a-bit-string
-        prob = 1.0 / nLength;
-        entropyIdeal = -1.0 * nLength * prob * Math.Log(prob);
-
-        return (entropy, entropyBit, entropyIdeal);
-    }
-
-    /// <summary>
-    /// Computes the standard deviation of a data series.
-    /// </summary>
-    /// <param name="values">Data values</param>
-    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
-    /// <returns>Standard deviation. A value equal to -1 indicates insufficient data points.</returns>
-    public static double StdDev<T>(IEnumerable<T> values, bool asSample = false)
-    {
-        // Convert into an enumerable of doubles.
-        IEnumerable<double> doubles = values.Select(value => Convert.ToDouble(value));
-
-        // Then compute the standard deviation
-        double avg = System.Linq.Enumerable.Average(doubles);
-        double sum = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));
-        double denominator = values.Count() - (asSample ? 1 : 0);
-        return denominator > 0.0 ? Math.Sqrt(sum / denominator) : -1;
-    }
-}
-
