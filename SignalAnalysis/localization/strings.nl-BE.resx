@@ -530,4 +530,23 @@ dimensie is gestopt.</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Ontwikkeld door {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Auteursrechten {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Productnaam: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versie {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analysetool met beschrijvende basisstatistieken, FFT (snelle Fourier-transformatie), fractale dimensie, differentiatie, integratie en entropie voor signalen (zowel elux-bestanden als generieke).
+
+Geen enkel commercieel gebruik toegestaan. Neem voor vragen contact op met de auteur.
+
+Als u deze software nuttig vindt, overweeg dan om deze te ondersteunen!</value>
+  </data>
 </root>
