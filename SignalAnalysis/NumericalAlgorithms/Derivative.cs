@@ -78,6 +78,50 @@ public class Derivative<T> where T : INumber<T>
         _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected derivative method: {Method}"),
     };
 
+    public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int segments = 1)
+    {
+        double[] result = new double[segments + 1];
+
+        int indexStart = 0, indexEnd = segments;
+        switch (method)
+        {
+            case DerivativeMethod.BackwardOnePoint:
+                indexStart = 1;
+                indexEnd = signal.Length;
+                break;
+            case DerivativeMethod.ForwardOnePoint:
+                indexStart = 0;
+                indexEnd = signal.Length - 1;
+                break;
+            case DerivativeMethod.CenteredThreePoint or DerivativeMethod.SGLinearThreePoint:
+                indexStart = 1;
+                indexEnd = signal.Length - 1;
+                break;
+            case DerivativeMethod.CenteredFivePoint or DerivativeMethod.SGLinearFivePoint or DerivativeMethod.SGCubicFivePoint:
+                indexStart = 2;
+                indexEnd = signal.Length - 2;
+                break;
+            case DerivativeMethod.CenteredSevenPoint or DerivativeMethod.SGLinearSevenPoint or DerivativeMethod.SGCubicSevenPoint:
+                indexStart = 3;
+                indexEnd = signal.Length - 3;
+                break;
+            case DerivativeMethod.CenteredNinePoint or DerivativeMethod.SGLinearNinePoint or DerivativeMethod.SGCubicNinePoint:
+                indexStart = 4;
+                indexEnd = signal.Length - 4;
+                break;
+        }
+
+
+        return result;
+    }
+
+    public double[] Derivate(double[] array)
+    {
+        double[] result = new double[array.Length];
+
+        return result;
+    }
+
     public double[] DerivateArray(double[] array)
     {
         int indexStart = 0, indexEnd = array.Length - 1;
