@@ -323,11 +323,6 @@ public static class Integration
         double functionAbs(double x) => absoluteIntegral ? Math.Abs(function(x)) : function(x);
     }
 
-
-
-    // https://en.wikipedia.org/wiki/Simpson%27s_rule
-    // http://mathforcollege.com/nm/mws/gen/07int/mws_gen_int_txt_simpson3by8.pdf
-
     /// <summary>
     /// Computes the numerical integral using Simpson's composite rule. Data is assumed to be uniformly spaced.
     /// </summary>
@@ -336,6 +331,8 @@ public static class Integration
     /// <param name="upperLimit">Integral upper limit</param>
     /// <param name="segments">Number of equal segments the integration interval is divided into</param>
     /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Simpson%27s_rule"/>
+    /// <seealso cref="http://mathforcollege.com/nm/mws/gen/07int/mws_gen_int_txt_simpson3by8.pdf"/>
     /// <returns>The estimated integral value</returns>
     private static double SimpsonComposite(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1, bool absoluteIntegral = false)
     {
@@ -365,16 +362,15 @@ public static class Integration
 
 
     /// <summary>
-    /// https://en.wikipedia.org/wiki/Romberg%27s_method
+    /// Computes the numerical integral using the Romberg method: trapezoidal rule plus Richardson's extrapolation
     /// </summary>
-    /// <param name=""></param>
-    /// <param name=""></param>
-    /// <param name="">pointer to the function to be integrated</param>
+    /// <param name="function">Function to be integrated function to be integrated</param>
     /// <param name="lowerLimit">lower limit</param>
     /// <param name="upperLimit">upper limit</param>
     /// <param name="maxSteps">maximum steps of the procedure</param>
     /// <param name="epsilon">desired accuracy</param>
     /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Romberg%27s_method"/>
     /// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
     private static double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-6, bool absoluteIntegral = false)
     {
