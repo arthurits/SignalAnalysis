@@ -78,48 +78,53 @@ public class Derivative<T> where T : INumber<T>
         _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected derivative method: {Method}"),
     };
 
+    /// <summary>
+    /// Computes the numerical derivative of a function
+    /// </summary>
+    /// <param name="function"></param>
+    /// <param name="method"></param>
+    /// <param name="lowerLimit"></param>
+    /// <param name="upperLimit"></param>
+    /// <param name="segments"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int segments = 1)
     {
-        double[] result = new double[segments + 1];
+        return method switch
+        {
+            DerivativeMethod.BackwardOnePoint => BackwardOnePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.ForwardOnePoint => ForwardOnePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.CenteredThreePoint => CenteredThreePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.CenteredFivePoint => CenteredFivePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.CenteredSevenPoint => CenteredSevenPoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.CenteredNinePoint => CenteredNinePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGLinearThreePoint => SGLinearThreePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGLinearFivePoint => SGLinearFivePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGLinearSevenPoint => SGLinearSevenPoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGLinearNinePoint => SGLinearNinePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGCubicFivePoint => SGCubicFivePoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGCubicSevenPoint => SGCubicSevenPoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGCubicNinePoint => SGCubicNinePoint(function, lowerLimit, upperLimit, segments),
+            _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected derivative method: {Method}"),
+        };
 
-        int indexStart = 0, indexEnd = segments;
-        //switch (method)
-        //{
-        //    case DerivativeMethod.BackwardOnePoint:
-        //        indexStart = 1;
-        //        indexEnd = signal.Length;
-        //        break;
-        //    case DerivativeMethod.ForwardOnePoint:
-        //        indexStart = 0;
-        //        indexEnd = signal.Length - 1;
-        //        break;
-        //    case DerivativeMethod.CenteredThreePoint or DerivativeMethod.SGLinearThreePoint:
-        //        indexStart = 1;
-        //        indexEnd = signal.Length - 1;
-        //        break;
-        //    case DerivativeMethod.CenteredFivePoint or DerivativeMethod.SGLinearFivePoint or DerivativeMethod.SGCubicFivePoint:
-        //        indexStart = 2;
-        //        indexEnd = signal.Length - 2;
-        //        break;
-        //    case DerivativeMethod.CenteredSevenPoint or DerivativeMethod.SGLinearSevenPoint or DerivativeMethod.SGCubicSevenPoint:
-        //        indexStart = 3;
-        //        indexEnd = signal.Length - 3;
-        //        break;
-        //    case DerivativeMethod.CenteredNinePoint or DerivativeMethod.SGLinearNinePoint or DerivativeMethod.SGCubicNinePoint:
-        //        indexStart = 4;
-        //        indexEnd = signal.Length - 4;
-        //        break;
-        //}
-
-
-        return result;
+        //return result;
     }
 
+    /// <summary>
+    /// Computes the numerical derivative of a data table. Data is expected to be uniformly spaced.
+    /// </summary>
+    /// <param name="array"></param>
+    /// <param name="method"></param>
+    /// <param name="lowerLimit"></param>
+    /// <param name="upperLimit"></param>
+    /// <param name="segments"></param>
+    /// <returns></returns>
     public double[] Derivate(double[] array, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int segments = 1)
     {
-        double[] result = Derivate(Function, method, lowerLimit, upperLimit, segments);
+        return Derivate(Function, method, lowerLimit, upperLimit, segments);
 
-        return result;
+        //return result;
 
         // Convert the data array to a function
         double Function(double index)
@@ -167,6 +172,308 @@ public class Derivative<T> where T : INumber<T>
         return result;
 
     }
+
+    private double[] BackwardOnePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        for (int j = 1; j <= segments; j++)
+        {
+            result[j] = (function(x) - function(x - step)) / step;
+            x += step;
+        }
+        
+        return result;
+    }
+
+    private double[] ForwardOnePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit;
+
+        result[segments] = 0;
+        for (int j = 0; j < segments; j++)
+        {
+            result[j] = (function(x + step) - function(x)) / step;
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] CenteredThreePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[segments] = 0;
+        for (int j = 1; j < segments; j++)
+        {
+            result[j] = (function(x + step) - function(x - step)) / step;
+            x += step;
+        }
+
+        return result;
+    }
+
+    // https://en.wikipedia.org/wiki/Finite_difference_coefficient
+    private double[] CenteredFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        for (int j = 2; j < segments - 1; j++)
+        {
+            result[j] = (function(x - step2) - function(x + step2) + (function(x + step) - function(x - step)) * 8) / (step * 12);
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] CenteredSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[2] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        result[segments - 2] = 0;
+        for (int j = 3; j < segments - 2; j++)
+        {
+            result[j] = (function(x + step3) - function(x - step3) + 9 * (function(x - step2) - function(x + step2)) + 45 * (function(x + step) - function(x - step))) / (step * 60);
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] CenteredNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double step4 = 4 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[2] = 0;
+        result[3] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        result[segments - 2] = 0;
+        result[segments - 3] = 0;
+        for (int j = 4; j < segments - 3; j++)
+        {
+            result[j] = (function(x - step4) - function(x + step4) + (8 / 3) * (function(x + step3) - function(x - step3)) + 56 * (function(x - step2) - function(x + step2)) + 224 * (function(x + step) - function(x - step))) / (step * 280);
+            x += step;
+        }
+
+        return result;
+    }
+
+
+    private double[] SGLinearThreePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[segments] = 0;
+        for (int j = 1; j < segments; j++)
+        {
+            result[j] = (function(x + step) - function(x - step)) / step;
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] SGLinearFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        for (int j = 2; j < segments - 1; j++)
+        {
+            result[j] = (2 * (function(x + step2) - function(x - step2)) + function(x + step) - function(x - step)) / (step * 10);
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] SGLinearSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[2] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        result[segments - 2] = 0;
+        for (int j = 3; j < segments - 2; j++)
+        {
+            result[j] = (3 * (function(x + step3) - function(x - step3)) + 2 * (function(x + step2) - function(x - step2)) + function(x + step) - function(x - step)) / (step * 28);
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] SGLinearNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double step4 = 4 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[2] = 0;
+        result[3] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        result[segments - 2] = 0;
+        result[segments - 3] = 0;
+        for (int j = 4; j < segments - 3; j++)
+        {
+            result[j] = (4 * (function(x + step4) - function(x - step4)) + 3 * (function(x + step3) - function(x - step3)) + 2 * (function(x + step2) - function(x - step2)) + function(x + step) - function(x - step)) / (step * 60);
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] SGCubicFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        for (int j = 2; j < segments - 1; j++)
+        {
+            result[j] = (function(x - step2) - function(x + step2) + 8 * (function(x + step) - function(x - step))) / (step * 12);
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] SGCubicSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double step3 = 3* step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[2] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        result[segments - 2] = 0;
+        for (int j = 3; j < segments - 2; j++)
+        {
+            result[j] = (22 * (function(x - step3) - function(x + step3)) + 67 * (function(x + step2) - function(x - step2)) + 58 * (function(x + step) - function(x - step))) / (step * 252);
+            x += step;
+        }
+
+        return result;
+    }
+
+    private double[] SGCubicNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    {
+        if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
+
+        double[] result = new double[segments + 1];
+        double step = (upperLimit - lowerLimit) / segments;
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double step4 = 4 * step;
+        double x = lowerLimit;
+
+        result[0] = 0;
+        result[1] = 0;
+        result[2] = 0;
+        result[3] = 0;
+        result[segments] = 0;
+        result[segments - 1] = 0;
+        result[segments - 2] = 0;
+        result[segments - 3] = 0;
+        for (int j = 4; j < segments - 3; j++)
+        {
+            result[j] = (86 * (function(x - step4) - function(x + step4)) + 142 * (function(x + step3) - function(x - step3)) + 193 * (function(x + step2) - function(x - step2)) + 126 * (function(x + step) - function(x - step))) / (step * 1188);
+            x += step;
+        }
+
+        return result;
+    }
+
 
     /// <summary>
     /// [f(x) - f(x-h)] / h
