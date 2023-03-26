@@ -531,4 +531,23 @@ foi interrompida.</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Ferramenta de análise com estatísticas descritivas básicas, FFT (transformada rápida de Fourier), dimensão fractal, diferenciação, integração e entropia para sinais (arquivos elux e genéricos).
+
+Nenhum uso comercial permitido. Entre em contato com o autor para qualquer dúvida.
+
+Se você achar este software útil, considere apoiá-lo!</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Desenvolvido por {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Direitos autorais {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Nome do produto: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versão {0}</value>
+  </data>
 </root>
