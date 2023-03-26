@@ -634,4 +634,23 @@
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>开发者 {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>版权所有 {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>产品名称：{0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>具有基本描述性统计、FFT（快速傅立叶变换）、分形维数、微分、积分和信号熵（elux 文件以及通用文件）的分析工具。
+
+严禁任何商业用途。如有任何疑问，请联系作者。
+
+如果您觉得这个软件有用，请考虑支持它！</value>
+  </data>
 </root>
