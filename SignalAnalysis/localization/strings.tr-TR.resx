@@ -531,4 +531,23 @@ boyut durdurulmuştur.</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Temel tanımlayıcı istatistikler, FFT (hızlı Fourier dönüşümü), fraktal boyut, farklılaşma, entegrasyon ve sinyaller için entropi (elux dosyaları ve jenerik dosyalar) içeren analiz aracı.
+
+Hiçbir şekilde ticari kullanıma izin verilmez. Herhangi bir sorunuz için yazarla iletişime geçin.
+
+Bu yazılımı yararlı bulursanız, lütfen desteklemeyi düşünün!</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Tarafından geliştirilmiş {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Telif hakkı {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Ürün adı: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Sürüm {0}</value>
+  </data>
 </root>
