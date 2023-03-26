@@ -304,7 +304,7 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-
+    // https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter
     private double[] SGLinearThreePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
