@@ -531,4 +531,23 @@ har stoppet.</value>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Utviklet av {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Opphavsrett {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktnavn: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versjon {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analyseverktøy med grunnleggende beskrivende statistikk, FFT (rask Fourier-transformasjon), fraktal dimensjon, differensiering, integrasjon og entropi for signaler (elux-filer så vel som generiske).
+
+Ingen kommersiell bruk tillatt overhodet. Kontakt forfatteren for eventuelle spørsmål.
+
+Hvis du synes denne programvaren er nyttig, kan du vurdere å støtte den!</value>
+  </data>
 </root>
