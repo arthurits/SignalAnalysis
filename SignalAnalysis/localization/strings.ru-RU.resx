@@ -531,4 +531,23 @@
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Инструмент анализа с базовой описательной статистикой, БПФ (быстрое преобразование Фурье), фрактальной размерностью, дифференцированием, интегрированием и энтропией для сигналов (файлы elux, а также общие файлы).
+
+Никакое коммерческое использование не допускается. Свяжитесь с автором по любым вопросам.
+
+Если вы найдете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
+  </data>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Разработано компанией {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Авторские права {0}</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Наименование товара: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Версия {0}</value>
+  </data>
 </root>
