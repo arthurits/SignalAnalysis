@@ -435,6 +435,15 @@ partial class FrmMain
                 throw new OperationCanceledException("CancelDerivative", token);
         }
 
+        // For testing purposes before replacing the above code. Check if both implementations return the same results
+        //var test = derivative.Derivate(signal, _settings.DerivativeAlgorithm, 0, signal.Length - 1, Signal.SampleFrequency);
+        //for (int i = 0; i< test.Length; i++)
+        //{
+        //    if (Results.Derivative[i] != test[i])
+        //        MessageBox.Show($"Not equal at index {i} with values {Results.Derivative[i]} and {test[i]}", "Error");
+        //}
+
+
         // Local function
         double DataFunction(int index)
         {

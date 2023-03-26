@@ -116,13 +116,18 @@ public class Derivative<T> where T : INumber<T>
     /// </summary>
     /// <param name="array"></param>
     /// <param name="method"></param>
-    /// <param name="lowerLimit"></param>
-    /// <param name="upperLimit"></param>
-    /// <param name="segments"></param>
+    /// <param name="lowerIndex"></param>
+    /// <param name="upperIndex"></param>
+    /// <param name="samplingFrequency"></param>
     /// <returns></returns>
-    public double[] Derivate(double[] array, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int segments = 1)
+    public double[] Derivate(double[] array, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1)
     {
-        return Derivate(Function, method, lowerLimit, upperLimit, segments);
+        double[] result = Derivate(Function, method, lowerIndex, upperIndex, upperIndex - lowerIndex);
+
+        for (int i = 0; i < result.Length; i++)
+            result[i] *= samplingFrequency;
+
+        return result;
 
         //return result;
 
@@ -179,10 +184,10 @@ public class Derivative<T> where T : INumber<T>
 
         double[] result = new double[segments + 1];
         double step = (upperLimit - lowerLimit) / segments;
-        double x = lowerLimit;
+        double x = lowerLimit + step;
 
         result[0] = 0;
-        for (int j = 1; j <= segments; j++)
+        for (int j = 1; j < segments + 1; j++)
         {
             result[j] = (function(x) - function(x - step)) / step;
             x += step;
@@ -215,13 +220,13 @@ public class Derivative<T> where T : INumber<T>
 
         double[] result = new double[segments + 1];
         double step = (upperLimit - lowerLimit) / segments;
-        double x = lowerLimit;
+        double x = lowerLimit + step;
 
         result[0] = 0;
         result[segments] = 0;
         for (int j = 1; j < segments; j++)
         {
-            result[j] = (function(x + step) - function(x - step)) / step;
+            result[j] = (function(x + step) - function(x - step)) / (2 * step);
             x += step;
         }
 
@@ -236,7 +241,7 @@ public class Derivative<T> where T : INumber<T>
         double[] result = new double[segments + 1];
         double step = (upperLimit - lowerLimit) / segments;
         double step2 = 2 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step2;
 
         result[0] = 0;
         result[1] = 0;
@@ -259,7 +264,7 @@ public class Derivative<T> where T : INumber<T>
         double step = (upperLimit - lowerLimit) / segments;
         double step2 = 2 * step;
         double step3 = 3 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step3;
 
         result[0] = 0;
         result[1] = 0;
@@ -285,7 +290,7 @@ public class Derivative<T> where T : INumber<T>
         double step2 = 2 * step;
         double step3 = 3 * step;
         double step4 = 4 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step4;
 
         result[0] = 0;
         result[1] = 0;
@@ -311,13 +316,13 @@ public class Derivative<T> where T : INumber<T>
 
         double[] result = new double[segments + 1];
         double step = (upperLimit - lowerLimit) / segments;
-        double x = lowerLimit;
+        double x = lowerLimit + step;
 
         result[0] = 0;
         result[segments] = 0;
         for (int j = 1; j < segments; j++)
         {
-            result[j] = (function(x + step) - function(x - step)) / step;
+            result[j] = (function(x + step) - function(x - step)) / (2 * step);
             x += step;
         }
 
@@ -331,7 +336,7 @@ public class Derivative<T> where T : INumber<T>
         double[] result = new double[segments + 1];
         double step = (upperLimit - lowerLimit) / segments;
         double step2 = 2 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step2;
 
         result[0] = 0;
         result[1] = 0;
@@ -354,7 +359,7 @@ public class Derivative<T> where T : INumber<T>
         double step = (upperLimit - lowerLimit) / segments;
         double step2 = 2 * step;
         double step3 = 3 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step3;
 
         result[0] = 0;
         result[1] = 0;
@@ -380,7 +385,7 @@ public class Derivative<T> where T : INumber<T>
         double step2 = 2 * step;
         double step3 = 3 * step;
         double step4 = 4 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step4;
 
         result[0] = 0;
         result[1] = 0;
@@ -406,7 +411,7 @@ public class Derivative<T> where T : INumber<T>
         double[] result = new double[segments + 1];
         double step = (upperLimit - lowerLimit) / segments;
         double step2 = 2 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step2;
 
         result[0] = 0;
         result[1] = 0;
@@ -428,8 +433,8 @@ public class Derivative<T> where T : INumber<T>
         double[] result = new double[segments + 1];
         double step = (upperLimit - lowerLimit) / segments;
         double step2 = 2 * step;
-        double step3 = 3* step;
-        double x = lowerLimit;
+        double step3 = 3 * step;
+        double x = lowerLimit + step3;
 
         result[0] = 0;
         result[1] = 0;
@@ -455,7 +460,7 @@ public class Derivative<T> where T : INumber<T>
         double step2 = 2 * step;
         double step3 = 3 * step;
         double step4 = 4 * step;
-        double x = lowerLimit;
+        double x = lowerLimit + step4;
 
         result[0] = 0;
         result[1] = 0;
