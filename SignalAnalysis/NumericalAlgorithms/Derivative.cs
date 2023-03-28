@@ -95,7 +95,7 @@ public class Derivative<T> where T : INumber<T>
     /// <param name="upperLimit">Differentiation upper limit</param>
     /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
     /// <returns>1D array (vector) with the discrete derivate at each point</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at enum DerivativeMethod</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at <see cref="DerivativeMethod"/></exception>
     public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int segments = 1)
     {
         return method switch
@@ -118,35 +118,35 @@ public class Derivative<T> where T : INumber<T>
     }
 
     /// <summary>
-    /// Computes the numerical derivative of a function
+    /// Computes the numerical derivative of a function.
     /// </summary>
     /// <param name="function">Function to be derivated</param>
     /// <param name="method">Differentiation algorithm</param>
     /// <param name="lowerLimit">Differentiation lower limit</param>
     /// <param name="upperLimit">Differentiation upper limit</param>
-    /// <param name="step">Step value between points</param>
+    /// <param name="step">Step value between points. This should ba a multiple of the interval length.</param>
     /// <returns>1D array (vector) with the discrete derivate at each point</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at enum DerivativeMethod</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at <see cref="DerivativeMethod"/></exception>
     public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, double step = 1)
     {
         // Needs further checking
-        return Derivate(function, methos, lowerLimit, upperLimit, (upperLimit - lowerLimit) / step);
+        return Derivate(function, method, lowerLimit, upperLimit, (upperLimit - lowerLimit) / step);
     }
-    
-        /// <summary>
+
+    /// <summary>
     /// Computes the numerical derivative of a function
     /// </summary>
     /// <param name="function">Function to be derivated</param>
     /// <param name="method">Differentiation algorithm</param>
     /// <param name="lowerLimit">Differentiation lower limit</param>
     /// <param name="upperLimit">Differentiation upper limit</param>
-    /// <param name="points">Number of points</param>
+    /// <param name="points">Number of points in the differentiation interval</param>
     /// <returns>1D array (vector) with the discrete derivate at each point</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at enum DerivativeMethod</exception>
-    public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int points = 1)
+    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at <see cref="DerivativeMethod"/></exception>
+    public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, Int16 points = 2)
     {
         // Needs further checking
-        return Derivate(function, methos, lowerLimit, upperLimit, points + 1);
+        return Derivate(function, method, lowerLimit, upperLimit, points + 1);
     }
     
     /// <summary>
@@ -157,7 +157,7 @@ public class Derivative<T> where T : INumber<T>
     /// <param name="lowerIndex">Differentiation lower limit</param>
     /// <param name="upperIndex">Differentiation upper limit</param>
     /// <param name="samplingFrequency">Data sampling frequency</param>
-    /// <returns>1D array (vector) with the discrete derivate for each point in the "array"</returns>
+    /// <returns>1D array (vector) with the discrete derivate for each point in <paramref name="array"/></returns>
     public double[] Derivate(double[] array, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1)
     {
         double[] result = Derivate(Function, method, lowerIndex, upperIndex, upperIndex - lowerIndex);
