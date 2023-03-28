@@ -2,8 +2,9 @@
 
 namespace SignalAnalysis;
 
-//https://stackoverflow.com/questions/373186/mathematical-function-differentiation-with-c
-
+/// <summary>
+/// Differentiation algorithms
+/// </summary>
 public enum DerivativeMethod
 {
     BackwardOnePoint,
@@ -21,6 +22,10 @@ public enum DerivativeMethod
     SGCubicNinePoint
 }
 
+/// <summary>
+/// This idea comes from https://stackoverflow.com/questions/373186/mathematical-function-differentiation-with-c
+/// However, this will be replaced for a more direct approach
+/// </summary>
 public interface IFunction<T>
 {
     // Since operator () can't be overloaded, we'll use this trick.
@@ -47,6 +52,9 @@ class Function<T> : IFunction<T>
     }
 }
 
+/// <summary>
+/// Numerical differentiatin computation. Data is expected to be uniformly spaced.
+/// </summary>
 public class Derivative<T> where T : INumber<T>
 {
     private IFunction<T> Function { get; set; }
@@ -81,13 +89,13 @@ public class Derivative<T> where T : INumber<T>
     /// <summary>
     /// Computes the numerical derivative of a function
     /// </summary>
-    /// <param name="function"></param>
-    /// <param name="method"></param>
-    /// <param name="lowerLimit"></param>
-    /// <param name="upperLimit"></param>
-    /// <param name="segments"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="method">Differentiation algorithm</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate at each point</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at enum DerivativeMethod</exception>
     public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int segments = 1)
     {
         return method switch
@@ -105,21 +113,51 @@ public class Derivative<T> where T : INumber<T>
             DerivativeMethod.SGCubicFivePoint => SGCubicFivePoint(function, lowerLimit, upperLimit, segments),
             DerivativeMethod.SGCubicSevenPoint => SGCubicSevenPoint(function, lowerLimit, upperLimit, segments),
             DerivativeMethod.SGCubicNinePoint => SGCubicNinePoint(function, lowerLimit, upperLimit, segments),
-            _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected derivative method: {Method}"),
+            _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected derivative method: {Method}")
         };
-
-        //return result;
     }
 
     /// <summary>
+    /// Computes the numerical derivative of a function
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="method">Differentiation algorithm</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="step">Step value between points</param>
+    /// <returns>1D array (vector) with the discrete derivate at each point</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at enum DerivativeMethod</exception>
+    public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, double step = 1)
+    {
+        // Needs further checking
+        return Derivate(function, methos, lowerLimit, upperLimit, (upperLimit - lowerLimit) / step);
+    }
+    
+        /// <summary>
+    /// Computes the numerical derivative of a function
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="method">Differentiation algorithm</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="points">Number of points</param>
+    /// <returns>1D array (vector) with the discrete derivate at each point</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at enum DerivativeMethod</exception>
+    public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, int points = 1)
+    {
+        // Needs further checking
+        return Derivate(function, methos, lowerLimit, upperLimit, points + 1);
+    }
+    
+    /// <summary>
     /// Computes the numerical derivative of a data table. Data is expected to be uniformly spaced.
     /// </summary>
-    /// <param name="array"></param>
-    /// <param name="method"></param>
-    /// <param name="lowerIndex"></param>
-    /// <param name="upperIndex"></param>
-    /// <param name="samplingFrequency"></param>
-    /// <returns></returns>
+    /// <param name="array">1D array (vector) containing the original data to be differentiated</param>
+    /// <param name="method">Differentiation algorithm</param>
+    /// <param name="lowerIndex">Differentiation lower limit</param>
+    /// <param name="upperIndex">Differentiation upper limit</param>
+    /// <param name="samplingFrequency">Data sampling frequency</param>
+    /// <returns>1D array (vector) with the discrete derivate for each point in the "array"</returns>
     public double[] Derivate(double[] array, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1)
     {
         double[] result = Derivate(Function, method, lowerIndex, upperIndex, upperIndex - lowerIndex);
@@ -178,6 +216,11 @@ public class Derivative<T> where T : INumber<T>
 
     }
 
+    /// <summary>
+    /// [f(x) - f(x-h)] / h
+    /// https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948
+    /// </summary>
+    /// <returns></returns>
     private double[] BackwardOnePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
