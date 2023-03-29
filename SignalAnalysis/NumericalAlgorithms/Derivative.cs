@@ -108,10 +108,10 @@ public class Derivative<T> where T : INumber<T>
             DerivativeMethod.CenteredNinePoint => CenteredNinePoint(function, lowerLimit, upperLimit, segments),
             DerivativeMethod.SGLinearThreePoint => SGLinearThreePoint(function, lowerLimit, upperLimit, segments),
             DerivativeMethod.SGLinearFivePoint => SGLinearFivePoint(function, lowerLimit, upperLimit, segments),
-            DerivativeMethod.SGLinearSevenPoint => SGLinearSevenPoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGLinearSevenPoint => Derivative<T>.SGLinearSevenPoint(function, lowerLimit, upperLimit, segments),
             DerivativeMethod.SGLinearNinePoint => SGLinearNinePoint(function, lowerLimit, upperLimit, segments),
             DerivativeMethod.SGCubicFivePoint => SGCubicFivePoint(function, lowerLimit, upperLimit, segments),
-            DerivativeMethod.SGCubicSevenPoint => SGCubicSevenPoint(function, lowerLimit, upperLimit, segments),
+            DerivativeMethod.SGCubicSevenPoint => Derivative<T>.SGCubicSevenPoint(function, lowerLimit, upperLimit, segments),
             DerivativeMethod.SGCubicNinePoint => SGCubicNinePoint(function, lowerLimit, upperLimit, segments),
             _ => throw new ArgumentOutOfRangeException(nameof(Method), $"Not expected derivative method: {Method}")
         };
@@ -225,11 +225,16 @@ public class Derivative<T> where T : INumber<T>
     }
 
     /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the backwards one-point finite difference.
     /// [f(x) - f(x-h)] / h
-    /// https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948
     /// </summary>
-    /// <returns></returns>
-    private double[] BackwardOnePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
+    private static double[] BackwardOnePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -247,7 +252,31 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] ForwardOnePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using the backwards one-point finite difference.
+    /// [f(x) - f(x-h)] / h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
+    private static double BackwardOnePoint(Func<double, double> function, double abscissa = 1, double step = 1)
+    {
+        return (function(abscissa) - function(abscissa - step)) / step;
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the forwards one-point finite difference.
+    /// [f(x+h) - f(x)] / h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
+    private static double[] ForwardOnePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -265,7 +294,31 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] CenteredThreePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using the forwards one-point finite difference.
+    /// [f(x+h) - f(x)] / h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
+    private static double ForwardOnePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        return (function(abscissa + step) - function(abscissa)) / step;
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the central three-points finite difference.
+    /// [f(x+h) - f(x-h)] / 2h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
+    private static double[] CenteredThreePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -284,8 +337,31 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    // https://en.wikipedia.org/wiki/Finite_difference_coefficient
-    private double[] CenteredFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using the central three-points finite difference.
+    /// [f(x+h) - f(x-h)] / 2h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
+    private static double CenteredThreePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        return (function(abscissa + step) - function(abscissa - step)) / (2 * step);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the central five-points finite difference.
+    /// [-f(x+2h) + 8f(x+h) - 8f(x-h) + f(x-2h)] / 12h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
+    private static double[] CenteredFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -307,7 +383,32 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] CenteredSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using the central five-points finite difference.
+    /// [-f(x+2h) + 8f(x+h) - 8f(x-h) + f(x-2h)] / 12h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
+    private static double CenteredFivePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        return (function(abscissa - step2) - function(abscissa + step2) + (function(abscissa + step) - function(abscissa - step)) * 8) / (step * 12);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the central seven-points finite difference.
+    /// [f(x+3h) - 9f(x+2h) + 45f(x+h) - 45f(x-h) + 9f(x-2h) - f(x-3h)] / 60h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
+    private static double[] CenteredSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -332,7 +433,33 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] CenteredNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using the central seven-points finite difference.
+    /// [f(x+3h) - 9f(x+2h) + 45f(x+h) - 45f(x-h) + 9f(x-2h) - f(x-3h)] / 60h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
+    private static double CenteredSevenPoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        return (function(abscissa + step3) - function(abscissa - step3) + 9 * (function(abscissa - step2) - function(abscissa + step2)) + 45 * (function(abscissa + step) - function(abscissa - step))) / (step * 60);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the central nine-points finite difference.
+    /// [-f(x+4h) + 32/3f(x+3h) - 56f(x+2h) + 224f(x+h) - 224f(x-h) + 56f(x-2h) - 32/3f(x-3h) + f(x-4h)] / 280h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
+    private static double[] CenteredNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -353,15 +480,42 @@ public class Derivative<T> where T : INumber<T>
         result[segments - 3] = 0;
         for (int j = 4; j < segments - 3; j++)
         {
-            result[j] = (function(x - step4) - function(x + step4) + (8 / 3) * (function(x + step3) - function(x - step3)) + 56 * (function(x - step2) - function(x + step2)) + 224 * (function(x + step) - function(x - step))) / (step * 280);
+            result[j] = (function(x - step4) - function(x + step4) + (32 / 3) * (function(x + step3) - function(x - step3)) + 56 * (function(x - step2) - function(x + step2)) + 224 * (function(x + step) - function(x - step))) / (step * 280);
             x += step;
         }
 
         return result;
     }
 
-    // https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter
-    private double[] SGLinearThreePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using the central nine-points finite difference.
+    /// [-f(x+4h) + 32/3f(x+3h) - 56f(x+2h) + 224f(x+h) - 224f(x-h) + 56f(x-2h) - 32/3f(x-3h) + f(x-4h)] / 280h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
+    private static double CenteredNinePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double step4 = 4 * step;
+        return (function(abscissa - step4) - function(abscissa + step4) + (32 / 3) * (function(abscissa + step3) - function(abscissa - step3)) + 56 * (function(abscissa - step2) - function(abscissa + step2)) + 224 * (function(abscissa + step) - function(abscissa - step))) / (step * 280);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the Savitzky-Golay linear three-point coefficients.
+    /// The formula is the same as <see cref="CenteredThreePoint(Func{double, double}, double, double, int)"/>
+    /// [f(x+h) - f(x-h)] / 2h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double[] SGLinearThreePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -380,7 +534,32 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] SGLinearFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using Savitzky-Golay's linear three-point coefficients.
+    /// The formula is the same as <see cref="CenteredThreePoint(Func{double, double}, double, double)"/>
+    /// [f(x+h) - f(x-h)] / 2h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
+    private static double SGLinearThreePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        return (function(abscissa + step) - function(abscissa - step)) / (2 * step);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the Savitzky-Golay linear five-point coefficients.
+    /// [2f(x+2h) + f(x+h) - f(x-h) - 2f(x-2h)] / 10h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double[] SGLinearFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -402,7 +581,32 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] SGLinearSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using Savitzky-Golay's linear five-point coefficients.
+    /// [2f(x+2h) + f(x+h) - f(x-h) - 2f(x-2h)] / 10h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double SGLinearFivePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        return (2 * (function(abscissa + step2) - function(abscissa - step2)) + function(abscissa + step) - function(abscissa - step)) / (step * 10);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the Savitzky-Golay linear seven-point coefficients.
+    /// [3f(x+3h) + 2f(x+2h) + f(x+h) - f(x-h) - 2f(x-2h) - 3f(x-3h)] / 28h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double[] SGLinearSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -427,7 +631,33 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] SGLinearNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using Savitzky-Golay's linear seven-point coefficients.
+    /// [3f(x+3h) + 2f(x+2h) + f(x+h) - f(x-h) - 2f(x-2h) - 3f(x-3h)] / 28h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double SGLinearSevenPoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        return (3 * (function(abscissa + step3) - function(abscissa - step3)) + 2 * (function(abscissa + step2) - function(abscissa - step2)) + function(abscissa + step) - function(abscissa - step)) / (step * 28);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the Savitzky-Golay linear nine-point coefficients.
+    /// [4f(x+4h) + 3f(x+3h) + 2f(x+2h) + f(x+h) - f(x-h) - 2f(x-2h) - 3f(x-3h) - 4f(x-4h)] / 60h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double[] SGLinearNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -455,7 +685,35 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] SGCubicFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using Savitzky-Golay's linear nine-point coefficients.
+    /// [4f(x+4h) + 3f(x+3h) + 2f(x+2h) + f(x+h) - f(x-h) - 2f(x-2h) - 3f(x-3h) - 4f(x-4h)] / 60h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double SGLinearNinePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double step4 = 4 * step;
+        return (4 * (function(abscissa + step4) - function(abscissa - step4)) + 3 * (function(abscissa + step3) - function(abscissa - step3)) + 2 * (function(abscissa + step2) - function(abscissa - step2)) + function(abscissa + step) - function(abscissa - step)) / (step * 60);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the Savitzky-Golay cubic/quartic five-point coefficients.
+    /// The formula is the same as <see cref="CenteredFivePoint(Func{double, double}, double, double, int)"/>
+    /// [-f(x+2h) + 8f(x+h) - 8f(x-h) - f(x-2h)] / 12h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double[] SGCubicFivePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -477,7 +735,33 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
-    private double[] SGCubicSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
+    /// <summary>
+    /// Point derivative using Savitzky-Golay's cubic/quartic five-point coefficients.
+    /// The formula is the same as <see cref="CenteredFivePoint(Func{double, double}, double, double)"/>
+    /// [-f(x+2h) + 8f(x+h) - 8f(x-h) - f(x-2h)] / 12h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double SGCubicFivePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        return (function(abscissa - step2) - function(abscissa + step2) + 8 * (function(abscissa + step) - function(abscissa - step))) / (step * 12);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the Savitzky-Golay cubic/quartic seven-point coefficients.
+    /// [-22f(x+3h) + 67f(x+2h) + 58f(x+h) - 58f(x-h) - 67f(x-2h) + 22f(x-3h)] / 252h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double[] SGCubicSevenPoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
 
@@ -502,6 +786,32 @@ public class Derivative<T> where T : INumber<T>
         return result;
     }
 
+    /// <summary>
+    /// Point derivative using Savitzky-Golay's cubic/quartic seven-point coefficients.
+    /// [-22f(x+3h) + 67f(x+2h) + 58f(x+h) - 58f(x-h) - 67f(x-2h) + 22f(x-3h)] / 252h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double SGCubicSevenPoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        return (22 * (function(abscissa - step3) - function(abscissa + step3)) + 67 * (function(abscissa + step2) - function(abscissa - step2)) + 58 * (function(abscissa + step) - function(abscissa - step))) / (step * 252);
+    }
+
+    /// <summary>
+    /// Computes the derivative of a function (which is discretised) using the Savitzky-Golay cubic/quartic nine-point coefficients.
+    /// [-86f(x+4h) + 142f(x+3h) + 193f(x+2h) + 126f(x+h) - 126f(x-h) - 193f(x-2h) + 142f(x-3h) - 86f(x-4h)] / 1188h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="lowerLimit">Differentiation lower limit</param>
+    /// <param name="upperLimit">Differentiation upper limit</param>
+    /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
+    /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
     private double[] SGCubicNinePoint(Func<double, double> function, double lowerLimit, double upperLimit, int segments = 1)
     {
         if (segments == 0 || lowerLimit >= upperLimit) return Array.Empty<double>();
@@ -529,6 +839,25 @@ public class Derivative<T> where T : INumber<T>
 
         return result;
     }
+
+    /// <summary>
+    /// Point derivative using Savitzky-Golay's cubic/quartic nine-point coefficients.
+    /// [-86f(x+4h) + 142f(x+3h) + 193f(x+2h) + 126f(x+h) - 126f(x-h) - 193f(x-2h) + 142f(x-3h) - 86f(x-4h)] / 1188h
+    /// </summary>
+    /// <param name="function">Function to be derivated</param>
+    /// <param name="abscissa">Abscissa value where the derivative will be computed at</param>
+    /// <param name="step">The absissa increment between this point and the previous one</param>
+    /// <returns>Derivative value</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
+    private static double SGCubicNinePoint(Func<double, double> function, double abscissa = 0, double step = 1)
+    {
+        double step2 = 2 * step;
+        double step3 = 3 * step;
+        double step4 = 4 * step;
+        return (86 * (function(abscissa - step4) - function(abscissa + step4)) + 142 * (function(abscissa + step3) - function(abscissa - step3)) + 193 * (function(abscissa + step2) - function(abscissa - step2)) + 126 * (function(abscissa + step) - function(abscissa - step))) / (step * 1188);
+    }
+
+
 
 
     /// <summary>
