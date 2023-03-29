@@ -392,69 +392,7 @@ partial class FrmMain
     /// <exception cref="OperationCanceledException">This is thrown if the token is cancelled whenever the user presses the ESC button</exception>
     private void ComputeDerivative(double[] signal)
     {
-        Function<int> func = new(DataFunction);
-
-        Derivative<int> derivative = new(func, 1 / Signal.SampleFrequency, _settings.DerivativeAlgorithm);
-        Results.Derivative = new double[signal.Length];
-
-        // Results.Derivative = derivative.DerivateArray(signal);
-
-        int indexStart = 0, indexEnd = signal.Length - 1;
-        switch (_settings.DerivativeAlgorithm)
-        {
-            case DerivativeMethod.BackwardOnePoint:
-                indexStart = 1;
-                indexEnd = signal.Length;
-                break;
-            case DerivativeMethod.ForwardOnePoint:
-                indexStart = 0;
-                indexEnd = signal.Length - 1;
-                break;
-            case DerivativeMethod.CenteredThreePoint or DerivativeMethod.SGLinearThreePoint:
-                indexStart = 1;
-                indexEnd = signal.Length - 1;
-                break;
-            case DerivativeMethod.CenteredFivePoint or DerivativeMethod.SGLinearFivePoint or DerivativeMethod.SGCubicFivePoint:
-                indexStart = 2;
-                indexEnd = signal.Length - 2;
-                break;
-            case DerivativeMethod.CenteredSevenPoint or DerivativeMethod.SGLinearSevenPoint or DerivativeMethod.SGCubicSevenPoint:
-                indexStart = 3;
-                indexEnd = signal.Length - 3;
-                break;
-            case DerivativeMethod.CenteredNinePoint or DerivativeMethod.SGLinearNinePoint or DerivativeMethod.SGCubicNinePoint:
-                indexStart = 4;
-                indexEnd = signal.Length - 4;
-                break;
-        }
-
-        for (int i = indexStart; i < indexEnd; i++)
-        {
-            Results.Derivative[i] = derivative[i];
-            if (token.IsCancellationRequested)
-                throw new OperationCanceledException("CancelDerivative", token);
-        }
-
-        // For testing purposes before replacing the above code. Check if both implementations return the same results
-        //var test = derivative.Derivate(signal, _settings.DerivativeAlgorithm, 0, signal.Length - 1, Signal.SampleFrequency);
-        //for (int i = 0; i< test.Length; i++)
-        //{
-        //    if (Results.Derivative[i] != test[i])
-        //        MessageBox.Show($"Not equal at index {i} with values {Results.Derivative[i]} and {test[i]}", "Error");
-        //}
-
-
-        // Local function
-        double DataFunction(int index)
-        {
-            if (index < 0)
-                return 0;
-
-            if (index >= signal.Length)
-                return 0;
-
-            return signal[index];
-        }
+        Results.Derivative = Derivative.Derivate(signal, _settings.DerivativeAlgorithm, 0, signal.Length - 1, Signal.SampleFrequency);
     }
 
     /// <summary>
