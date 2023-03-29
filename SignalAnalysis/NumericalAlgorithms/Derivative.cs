@@ -171,11 +171,15 @@ public class Derivative<T> where T : INumber<T>
 
         return result;
 
-        //return result;
-
         // Convert the data array to a function
         double Function(double index)
         {
+            if (index < 0)
+                return Double.NaN;
+
+            if (index >= array.Length)
+                return Double.NaN;
+
             return array[(int)(index)];
         }
     }

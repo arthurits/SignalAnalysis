@@ -93,7 +93,7 @@ public static class Integration
         // Compute the array and adjust the result by the sampling frequency. This is only possible when data is uniformly spaced.
         double result = Integrate(Function, method, lowerIndex, upperIndex, (upperIndex - lowerIndex), absoluteIntegral);
         
-        // Subtract the are under the data that was added to match the algorithm-required number of segments
+        // Subtract the area under the data that was added to match the algorithm-required number of segments
         result -= subtract;
 
         // Adjust the result by the sampling frequency. This is only possible when data is uniformly spaced.
@@ -104,6 +104,12 @@ public static class Integration
         // Convert the data array to a function
         double Function(double index)
         {
+            if (index < 0)
+                return Double.NaN;
+
+            if (index >= array.Length)
+                return Double.NaN;
+
             return array[(int)(index)];
         }
     }
