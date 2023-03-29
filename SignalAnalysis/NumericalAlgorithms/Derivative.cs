@@ -129,8 +129,12 @@ public class Derivative<T> where T : INumber<T>
     /// <exception cref="ArgumentOutOfRangeException">Exception thrown when the method isn't defined at <see cref="DerivativeMethod"/></exception>
     public double[] Derivate(Func<double, double> function, DerivativeMethod method = DerivativeMethod.CenteredThreePoint, double lowerLimit = 0, double upperLimit = 1, double step = 1)
     {
+        // Compute the number of segments in the interval, rounded (truncated) to the lowest integer.
+        int segments = (int)Math.Round((upperLimit - lowerLimit) / step, MidpointRounding.ToZero);
+        double uLimit = lowerLimit + segments * step;
+
         // Needs further checking
-        return Derivate(function, method, lowerLimit, upperLimit, (upperLimit - lowerLimit) / step);
+        return Derivate(function, method, lowerLimit, uLimit, segments);
     }
 
     /// <summary>
