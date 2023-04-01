@@ -19,6 +19,10 @@ partial class FrmMain
 
         this.tspTop.Join(this.toolStripMain);
 
+        // Events for ToolStripComboBox
+        stripComboSeries.ComboBox.SelectionChangeCommitted += ComboSeries_SelectionChangeCommitted;
+        stripComboWindows.ComboBox.SelectionChangeCommitted += ComboWindow_SelectionChangeCommitted;
+
         return;
     }
 

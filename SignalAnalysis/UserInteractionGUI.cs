@@ -52,6 +52,13 @@ partial class FrmMain
             {
                 // Data
                 Signal = signalData;
+
+                // Update UI
+                PopulateComboSeries();
+                SetFormTitle(this, openDlg.FileName);
+                UpdateUI_MeasuringTime();
+
+                // Check if computations are needed
                 if (results is not null)
                 {
                     Results = results;
@@ -60,12 +67,22 @@ partial class FrmMain
                         _settings.ComputeIntegration,
                         _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
                 }
-
-                // Update UI
-                PopulateComboSeries();
-                SetFormTitle(this, openDlg.FileName);
-                UpdateUI_MeasuringTime();
+                else
+                {
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex,
+                                    deletePreviousResults: true,
+                                    stats: true,
+                                    derivative: _settings.ComputeDerivative,
+                                    integral: _settings.ComputeIntegration,
+                                    fractal: true,
+                                    progressive: _settings.CumulativeDimension,
+                                    entropy: _settings.Entropy,
+                                    fft: true,
+                                    powerSpectra: _settings.PowerSpectra);
+                }
             }
+
+            
 
             // Restore the cursor
             Cursor.Current = cursor;
@@ -177,6 +194,7 @@ partial class FrmMain
             UpdateUI_Language();
 
             UpdateStatsPlots(stripComboSeries.SelectedIndex,
+                deletePreviousResults: false,
                 stats: true,
                 derivative: _settings.ComputeDerivative,
                 integral: _settings.ComputeIntegration,
@@ -223,19 +241,19 @@ partial class FrmMain
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
                     //ComboWindow_SelectedIndexChanged(null, EventArgs.Empty);
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: true, powerSpectra: _settings.PowerSpectra);
+                    //UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: true, powerSpectra: _settings.PowerSpectra);
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
                     if (_settings.CumulativeDimension)
-                        UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
+                        //UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
                     if (_settings.Entropy)
-                        UpdateStatsPlots(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
+                        //UpdateStatsPlots(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
@@ -276,7 +294,7 @@ partial class FrmMain
                     _settings.ComputeDerivative = label.Checked;
                     if (_settings.ComputeDerivative)
                     {
-                        UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
+                        //UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
                     }
                     else
                     {
@@ -286,10 +304,83 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExIntegration":
                     _settings.ComputeIntegration = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
+                    //UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
                     break;
             }
+
+            UpdateStatsPlots(stripComboSeries.SelectedIndex,
+                        deletePreviousResults: false,
+                        stats: true,
+                        derivative: _settings.ComputeDerivative,
+                        integral: _settings.ComputeIntegration,
+                        fractal: true,
+                        progressive: _settings.CumulativeDimension,
+                        entropy: _settings.Entropy,
+                        fft: true,
+                        powerSpectra: _settings.PowerSpectra);
         }
     }
 
+    private void PopulateComboSeries(params string[] values)
+    {
+        stripComboSeries.Items.Clear();
+        if (values.Length != 0)
+        {
+            stripComboSeries.Items.AddRange(values);
+            stripComboSeries.Text = values[0];
+        }
+        else
+        {
+            stripComboSeries.Items.AddRange(Signal.SeriesLabels);
+            stripComboSeries.Text = Signal.SeriesLabels[0];
+        }
+
+    }
+
+    private void ComboSeries_SelectionChangeCommitted(object? sender, EventArgs e)
+    {
+        // Move the focus away in order to deselect the text
+        //this.tableLayoutPanel1.Focus();
+
+        if (Signal.Data.Length == 0) return;
+
+        //statusStripLabelExEntropy.Checked = false;
+        //_settings.Entropy = false;
+
+        // Update stats and plots
+        UpdateStatsPlots(stripComboSeries.SelectedIndex,
+            deletePreviousResults: false,
+            stats: true,
+            derivative: _settings.ComputeDerivative,
+            integral: _settings.ComputeIntegration,
+            fractal: true,
+            progressive: _settings.CumulativeDimension,
+            entropy: _settings.Entropy,
+            fft: true,
+            powerSpectra: _settings.PowerSpectra);
+    }
+
+    private void ComboWindow_SelectionChangeCommitted(object? sender, EventArgs e)
+    {
+        // Move the focus away in order to deselect the text
+        //this.tableLayoutPanel1.Focus();
+
+        if (stripComboSeries.SelectedIndex < 0) return;
+
+        // Extract the values 
+        var signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
+        if (signal is null || signal.Length == 0) return;
+
+        //UpdateWindowPlots(signal);
+        UpdateStatsPlots(stripComboSeries.SelectedIndex,
+            deletePreviousResults: true,
+            stats: false,
+            derivative: false,
+            integral: false,
+            fractal: false,
+            progressive: false,
+            entropy: false,
+            fft: true,
+            powerSpectra: _settings.PowerSpectra);
+    }
 }

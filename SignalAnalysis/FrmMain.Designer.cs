@@ -337,7 +337,6 @@ partial class FrmMain
         stripComboSeries.Name = "stripComboSeries";
         stripComboSeries.Size = new Size(120, 27);
         stripComboSeries.ToolTipText = "Select data series";
-        stripComboSeries.SelectedIndexChanged += ComboSeries_SelectedIndexChanged;
         // 
         // stripComboWindows
         // 
@@ -352,7 +351,6 @@ partial class FrmMain
         stripComboWindows.Name = "stripComboWindows";
         stripComboWindows.Size = new Size(120, 27);
         stripComboWindows.ToolTipText = "Select FFT window";
-        stripComboWindows.SelectedIndexChanged += ComboWindow_SelectedIndexChanged;
         // 
         // toolStripSeparator2
         // 
@@ -401,7 +399,7 @@ partial class FrmMain
         statusStripLabelEmpty.BorderSides = ToolStripStatusLabelBorderSides.Right;
         statusStripLabelEmpty.DisplayStyle = ToolStripItemDisplayStyle.Text;
         statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-        statusStripLabelEmpty.Size = new Size(600, 23);
+        statusStripLabelEmpty.Size = new Size(631, 23);
         statusStripLabelEmpty.Spring = true;
         statusStripLabelEmpty.TextAlign = ContentAlignment.MiddleLeft;
         // 

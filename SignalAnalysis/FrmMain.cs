@@ -74,74 +74,16 @@ public partial class FrmMain : Form
             tokenSource.Cancel();
     }
 
-    private void PopulateComboSeries(params string[] values)
-    {
-        stripComboSeries.Items.Clear();
-        if (values.Length != 0)
-        {
-            stripComboSeries.Items.AddRange(values);
-            stripComboSeries.Text = values[0];
-        }
-        else
-        {
-            stripComboSeries.Items.AddRange(Signal.SeriesLabels);
-            stripComboSeries.Text = Signal.SeriesLabels[0];
-        }
 
-    }
     private void PopulateComboWindow()
     {
         IWindow[] windows = Window.GetWindows();
         stripComboWindows.Items.AddRange(windows);
         stripComboWindows.SelectedIndex = windows.ToList().FindIndex(x => x.Name == "Hanning");
+        //stripComboWindows.Text = windows[5].Name;
 
         // Move the focus away in order to deselect the text
         this.tableLayoutPanel1.Focus();
-    }
-
-    private void ComboSeries_SelectedIndexChanged(object? sender, EventArgs e)
-    {
-        // Move the focus away in order to deselect the text
-        this.tableLayoutPanel1.Focus();
-
-        if (Signal.Data.Length == 0) return;
-
-        //statusStripLabelExEntropy.Checked = false;
-        //_settings.Entropy = false;
-
-        // Update stats and plots
-        UpdateStatsPlots(stripComboSeries.SelectedIndex,
-            stats: true,
-            derivative: _settings.ComputeDerivative,
-            integral: _settings.ComputeIntegration,
-            fractal: true,
-            progressive: _settings.CumulativeDimension,
-            entropy: _settings.Entropy,
-            fft: true,
-            powerSpectra: _settings.PowerSpectra);
-    }
-
-    private void ComboWindow_SelectedIndexChanged(object? sender, EventArgs e)
-    {
-        // Move the focus away in order to deselect the text
-        this.tableLayoutPanel1.Focus();
-
-        if (stripComboSeries.SelectedIndex < 0) return;
-
-        // Extract the values 
-        var signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
-        if (signal is null || signal.Length == 0) return;
-
-        //UpdateWindowPlots(signal);
-        UpdateStatsPlots(stripComboSeries.SelectedIndex,
-            stats: false,
-            derivative: false,
-            integral: false,
-            fractal: false,
-            progressive: false,
-            entropy: false,
-            fft: true,
-            powerSpectra: _settings.PowerSpectra);
     }
 
     /// <summary>

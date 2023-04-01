@@ -225,6 +225,7 @@ partial class FrmMain
     /// This is the main computing function that calls sub-functions
     /// </summary>
     /// <param name="series">Data series to be analised</param>
+    /// <param name="deletePreviousResults"><see langword="True"/> if the previous results data should be delete and new results should be reinitialised</param>
     /// <param name="stats"><see langword="True"/> if the descriptive statistics will be computed</param>
     /// <param name="derivative"><see langword="True"/> if the derivative will be computed</param>
     /// <param name="integral"><see langword="True"/> if the integral will be computed</param>
@@ -234,7 +235,7 @@ partial class FrmMain
     /// <param name="fft"><see langword="True"/></param>
     /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
     /// <returns></returns>
-    private async Task UpdateStatsPlots(int series, bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
+    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = true,  bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -253,7 +254,9 @@ partial class FrmMain
         tokenSource?.Dispose();
         tokenSource = new();
         token = tokenSource.Token;
-        Results = new();
+
+        if (deletePreviousResults)
+            Results = new();
 
         statsTask = Task.Run(() =>
         {
