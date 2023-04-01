@@ -201,7 +201,7 @@ partial class FrmMain
                 plotDerivative.Plot.XAxis.DateTimeFormat(true);
                 break;
         }
-        
+
         pOriginal.YAxisIndex = 1;
         pOriginal.XAxisIndex = 0;
         pDerivative.YAxisIndex = 0;
@@ -215,7 +215,7 @@ partial class FrmMain
         plotDerivative.Plot.XAxis.Label(StringResources.PlotDerivativeXLabel);
         plotDerivative.Plot.YAxis.Color(pDerivative.Color);
         plotDerivative.Plot.YAxis.Label(StringResources.PlotDerivativeYLabel1);
-        plotDerivative.Plot.AxisAuto(0, null);
+        //plotDerivative.Plot.AxisAuto(0, null);
         plotDerivative.Refresh();
 
     }

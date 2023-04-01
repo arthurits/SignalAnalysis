@@ -24,7 +24,7 @@ public enum DerivativeMethod
 
 /// <summary>
 /// This idea comes from https://stackoverflow.com/questions/373186/mathematical-function-differentiation-with-c
-/// However, this will be replaced for a more direct approach
+/// However, this approach has been replaced for a more direct one.
 /// </summary>
 public interface IFunction<T>
 {
@@ -51,6 +51,7 @@ class Function<T> : IFunction<T>
         }
     }
 }
+
 
 /// <summary>
 /// Numerical differentiatin computation. Data is expected to be uniformly spaced.
@@ -89,7 +90,7 @@ public static class Derivative
     }
 
     /// <summary>
-    /// Computes the numerical derivative of a function.
+    /// Computes the numerical derivative of a function. Not yet tested.
     /// </summary>
     /// <param name="function">Function to be derivated</param>
     /// <param name="method">Differentiation algorithm</param>
@@ -109,7 +110,7 @@ public static class Derivative
     }
 
     /// <summary>
-    /// Computes the numerical derivative of a function
+    /// Computes the numerical derivative of a function. Not yet tested.
     /// </summary>
     /// <param name="function">Function to be derivated</param>
     /// <param name="method">Differentiation algorithm</param>
