@@ -235,25 +235,19 @@ partial class FrmMain
             else
                 label.ForeColor = Color.LightGray;
 
-            // Update the settings
+            // Update settings values
             switch (label.Name)
             {
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
-                    //ComboWindow_SelectedIndexChanged(null, EventArgs.Empty);
-                    //UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: true, powerSpectra: _settings.PowerSpectra);
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    if (_settings.CumulativeDimension)
-                        //UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
-                    if (_settings.Entropy)
-                        //UpdateStatsPlots(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
@@ -292,11 +286,7 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExDerivative":
                     _settings.ComputeDerivative = label.Checked;
-                    if (_settings.ComputeDerivative)
-                    {
-                        //UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
-                    }
-                    else
+                    if (_settings.ComputeDerivative == false)
                     {
                         plotDerivative.Clear();
                         plotDerivative.Refresh();
@@ -304,10 +294,10 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExIntegration":
                     _settings.ComputeIntegration = label.Checked;
-                    //UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
                     break;
             }
 
+            // Run the needed computations
             UpdateStatsPlots(stripComboSeries.SelectedIndex,
                         deletePreviousResults: false,
                         stats: true,
