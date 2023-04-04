@@ -279,7 +279,7 @@ naar hun standaardwaarden?</value>
     <value>Tekenreeks voor numerieke gegevensopmaak</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Einde matrixindex</value>
+    <value>Einde matrixindex (max {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Selecteer serie</value>
