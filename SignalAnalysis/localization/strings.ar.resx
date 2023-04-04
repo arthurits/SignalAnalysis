@@ -158,11 +158,11 @@
     <value>إستعادة جميع الاعدادات ؟</value>
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
-    <value>.مشكلة في تحميل ملف الإعدادات
+    <value>مشكلة في تحميل ملف الإعدادات.
 
 {0}
 
-سيتم إستعادة القيم الأصلية</value>
+سيتم إستعادة القيم الأصلية.</value>
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>مشكلة</value>
@@ -328,20 +328,20 @@
     <value>خطأ</value>
   </data>
   <data name="strMsgBoxNoData" xml:space="preserve">
-    <value>لا يوجد بيانات لحفظها</value>
+    <value>لا يوجد بيانات لحفظها.</value>
   </data>
   <data name="strMsgBoxNoDataTitle" xml:space="preserve">
     <value>لا يوجد بيانات</value>
   </data>
   <data name="strMsgBoxOKSaveData" xml:space="preserve">
-    <value>تم حفظ البيانات بنجاح للقرص</value>
+    <value>تم حفظ البيانات بنجاح للقرص.</value>
   </data>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>تم حفظ البيانات</value>
   </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>حساب كسور هاسكو بدروفيتش
-إتجاهات توقفت</value>
+إتجاهات توقفت.</value>
   </data>
   <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
     <value>توقف</value>
