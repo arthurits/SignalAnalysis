@@ -168,7 +168,7 @@
     <value>Ошибка</value>
   </data>
   <data name="strFileHeader00" xml:space="preserve">
-    <value>  Данные ErgoLux</value>
+    <value>Данные ErgoLux</value>
   </data>
   <data name="strFileHeader01" xml:space="preserve">
     <value>Данные анализа сигналов</value>
@@ -252,7 +252,7 @@
     <value>миллисекунды</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
-    <value>Раздел '{0}' имеет неправильный формат. </value>
+    <value>Раздел '{0}' имеет неправильный формат.</value>
   </data>
   <data name="strFrmLanguage" xml:space="preserve">
     <value>Выберите культуру</value>
@@ -279,7 +279,7 @@
     <value>Строка форматирования числовых данных</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
-    <value>Конец индекса массива</value>
+    <value>Конец индекса массива (макс. {0})</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Выберите серию</value>
