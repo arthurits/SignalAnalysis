@@ -1,11 +1,17 @@
 # SignalAnalysis changelog
 
+## SignalAnalysis 1.5
+* Update Russian (ru-RU) translation. _Thanks @shmudivel_.
+* Update time-related (days, hours, minutes, seconds, and miliseconds) grammar issues for all cultures/languages
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.62.
+* Minor bug corrections.
+
 ## SignalAnalysis 1.4
 * Add Simplified Chinese (zh-Hans) translation. _Thanks @myd7349_.
 * Add numerical differentiation.
 * Add numerical integration.
 * [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.61.
-* Minor bugs corrections.
+* Minor bug corrections.
 
 ## SignalAnalysis 1.3
 * Target .NET 7.
