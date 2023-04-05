@@ -234,22 +234,22 @@
     <value>Время</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>дни</value>
+    <value>дн.</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>часы</value>
+    <value>ч.</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>минуты</value>
+    <value>мин.</value>
   </data>
   <data name="strFileHeader25" xml:space="preserve">
-    <value>секунды</value>
+    <value>сек.</value>
   </data>
   <data name="strFileHeader26" xml:space="preserve">
-    <value>а также</value>
+    <value>и</value>
   </data>
   <data name="strFileHeader27" xml:space="preserve">
-    <value>миллисекунды</value>
+    <value>мc.</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Раздел '{0}' имеет неправильный формат.</value>
