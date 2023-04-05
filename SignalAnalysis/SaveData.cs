@@ -38,12 +38,12 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader02}{StringResources.FileHeaderColon}{Signal.StartTime.AddSeconds(ArrIndexInit / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader03}{StringResources.FileHeaderColon}{Signal.StartTime.AddSeconds((signal.Length - 1 + ArrIndexInit) / Signal.SampleFrequency).ToString(fullPattern, _settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader04}{StringResources.FileHeaderColon}" +
-                $"{nTime.Days} {StringResources.FileHeader22}, " +
-                $"{nTime.Hours} {StringResources.FileHeader23}, " +
-                $"{nTime.Minutes} {StringResources.FileHeader24}, " +
-                $"{nTime.Seconds} {StringResources.FileHeader25} " +
+                $"{nTime.Days} {GetTimeString(StringResources.FileHeader22, nTime.Days)}, " +
+                $"{nTime.Hours} {GetTimeString(StringResources.FileHeader23, nTime.Hours)}, " +
+                $"{nTime.Minutes} {GetTimeString(StringResources.FileHeader24, nTime.Minutes)}, " +
+                $"{nTime.Seconds} {GetTimeString(StringResources.FileHeader25, nTime.Seconds)} " +
                 $"{StringResources.FileHeader26} " +
-                $"{nTime.Milliseconds} {StringResources.FileHeader27}");
+                $"{nTime.Milliseconds} {GetTimeString(StringResources.FileHeader27, nTime.Milliseconds)}");
             sw.WriteLine($"{StringResources.FileHeader17}{StringResources.FileHeaderColon}{numSeries}");
             sw.WriteLine($"{StringResources.FileHeader05}{StringResources.FileHeaderColon}{signal.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader06}{StringResources.FileHeaderColon}{Signal.SampleFrequency.ToString(_settings.AppCulture)}");

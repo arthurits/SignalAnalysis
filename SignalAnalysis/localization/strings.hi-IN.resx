@@ -236,7 +236,7 @@
     <value>दिन</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>घंटे</value>
+    <value>घंटे, घंटा, घंटे</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
     <value>मिनट</value>

@@ -234,16 +234,16 @@
     <value>الوقت</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>الأيام</value>
+    <value>يوم, يوم, أيام, الأيام</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>الساعات</value>
+    <value>ساعة, ساعة, ساعاتين, الساعات</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>الدقائق</value>
+    <value>دقيقة, دقيقة, دقيقة, الدقائق</value>
   </data>
   <data name="strFileHeader25" xml:space="preserve">
-    <value>الثواني</value>
+    <value>ثواني, ثانية, ثانية, الثواني</value>
   </data>
   <data name="strFileHeader26" xml:space="preserve">
     <value>و</value>

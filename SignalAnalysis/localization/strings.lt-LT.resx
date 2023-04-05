@@ -234,22 +234,22 @@ Vietoj jų bus naudojamos numatytos reikšmės.</value>
     <value>Laikas</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>dienos</value>
+    <value>dienų, diena, dienos</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>valandos</value>
+    <value>valandų, valandą, valandos</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>minutės</value>
+    <value>minučių, minutę, minutės</value>
   </data>
   <data name="strFileHeader25" xml:space="preserve">
-    <value>sekundės</value>
+    <value>sekundžių, sekundė, sekundės</value>
   </data>
   <data name="strFileHeader26" xml:space="preserve">
     <value>ir</value>
   </data>
   <data name="strFileHeader27" xml:space="preserve">
-    <value>milisekundės</value>
+    <value>milisekundžių, milisekundė, milisekundės</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sekcija '{0}' netinkamai suformatuota.</value>

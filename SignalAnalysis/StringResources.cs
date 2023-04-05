@@ -42,12 +42,12 @@ public static class StringResources
     public static string FileHeader19 => StringRM.GetString("strFileHeader19", Culture) ?? "Missing an empty line.";
     public static string FileHeader20 => StringRM.GetString("strFileHeader20", Culture) ?? "Missing column headers (series names).";
     public static string FileHeader21 => StringRM.GetString("strFileHeader21", Culture) ?? "Time";
-    public static string FileHeader22 => StringRM.GetString("strFileHeader22", Culture) ?? "days";
-    public static string FileHeader23 => StringRM.GetString("strFileHeader23", Culture) ?? "hours";
-    public static string FileHeader24 => StringRM.GetString("strFileHeader24", Culture) ?? "minutes";
-    public static string FileHeader25 => StringRM.GetString("strFileHeader25", Culture) ?? "seconds";
+    public static string FileHeader22 => StringRM.GetString("strFileHeader22", Culture) ?? "days, day, days";
+    public static string FileHeader23 => StringRM.GetString("strFileHeader23", Culture) ?? "hours, hour, hours";
+    public static string FileHeader24 => StringRM.GetString("strFileHeader24", Culture) ?? "minutes, minute, minutes";
+    public static string FileHeader25 => StringRM.GetString("strFileHeader25", Culture) ?? "seconds, second, seconds";
     public static string FileHeader26 => StringRM.GetString("strFileHeader26", Culture) ?? "and";
-    public static string FileHeader27 => StringRM.GetString("strFileHeader27", Culture) ?? "milliseconds";
+    public static string FileHeader27 => StringRM.GetString("strFileHeader27", Culture) ?? "milliseconds, millisecond, milliseconds";
     public static string FileHeader28 => StringRM.GetString("strFileHeader28", Culture) ?? "Derivative";
     public static string FileHeader29 => StringRM.GetString("strFileHeader29", Culture) ?? "Differentiation algorithm";
     public static string FileHeader30 => StringRM.GetString("strFileHeader30", Culture) ?? "Integration algorithm";

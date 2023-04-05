@@ -233,22 +233,22 @@ Verranno utilizzati i valori di default.</value>
     <value>Tempo</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>giorni</value>
+    <value>giorni, giorno, giorni</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>ore</value>
+    <value>ore, ora, ore</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>minuti</value>
+    <value>minuti, minuto, minuti</value>
   </data>
   <data name="strFileHeader25" xml:space="preserve">
-    <value>secondi</value>
+    <value>secondi, secondo, secondi</value>
   </data>
   <data name="strFileHeader26" xml:space="preserve">
     <value>e</value>
   </data>
   <data name="strFileHeader27" xml:space="preserve">
-    <value>millisecondi</value>
+    <value>millisecondi, millisecondo, millisecondi</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La sezione '{0}' è mal formattata.</value>

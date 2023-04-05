@@ -234,22 +234,22 @@ naar hun standaardwaarden?</value>
     <value>Tijd</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>dagen</value>
+    <value>dagen, dag, dagen</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
     <value>uur</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>minuten</value>
+    <value>minuten, minuut, minuten</value>
   </data>
   <data name="strFileHeader25" xml:space="preserve">
-    <value>seconden</value>
+    <value>seconden, seconde, seconden</value>
   </data>
   <data name="strFileHeader26" xml:space="preserve">
     <value>en</value>
   </data>
   <data name="strFileHeader27" xml:space="preserve">
-    <value>milliseconden</value>
+    <value>millisecondemilliseconden, milliseconde, millisecondenn</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sectie '{0}' is verkeerd opgemaakt.</value>

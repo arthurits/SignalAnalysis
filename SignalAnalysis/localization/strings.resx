@@ -234,22 +234,22 @@ Default values will be used instead.</value>
     <value>Time</value>
   </data>
   <data name="strFileHeader22" xml:space="preserve">
-    <value>days</value>
+    <value>days, day, days</value>
   </data>
   <data name="strFileHeader23" xml:space="preserve">
-    <value>hours</value>
+    <value>hours, hour, hours</value>
   </data>
   <data name="strFileHeader24" xml:space="preserve">
-    <value>minutes</value>
+    <value>minutes, minute, minutes</value>
   </data>
   <data name="strFileHeader25" xml:space="preserve">
-    <value>seconds</value>
+    <value>seconds, second, seconds</value>
   </data>
   <data name="strFileHeader26" xml:space="preserve">
     <value>and</value>
   </data>
   <data name="strFileHeader27" xml:space="preserve">
-    <value>milliseconds</value>
+    <value>milliseconds, millisecond, milliseconds</value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Section '{0}' is mis-formatted.</value>
