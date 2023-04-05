@@ -4,7 +4,7 @@
 * Add Simplified Chinese (zh-Hans) translation. _Thanks @myd7349_.
 * Add numerical differentiation.
 * Add numerical integration.
-* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.61.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.61.
 * Minor bugs corrections.
 
 ## SignalAnalysis 1.3
@@ -24,7 +24,7 @@
   * Lithuanian (lt-LT). _Thanks @mantasio_.
   * Dutch (nl-BE). _Thanks @cvc04_.
   * Turkish (tr-TR). _Thanks @faisalahammad_.
-* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.59.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.59.
 * Corrections related to reading files, UI controls, and showing total time in status bar.
 
 ## SignalAnalysis 1.1
@@ -32,7 +32,7 @@ This release features the following improvements:
 * String resources are accessed from a static class.
 * Application icon has been simplified for small size.
 * Template files are named correctly according to the culture.
-* [ScottPlott](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.51.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.51.
 
 ## SignalAnalysis 1.0
 Initial release. Options include:
