@@ -128,12 +128,12 @@ public partial class FrmMain : Form
         }
         else
         {
-            statusStripLabelEmpty.Text = $"{TimeSlice.Days} {GetTimeString(StringResources.FileHeader22, TimeSlice.Days)}, " +
-                $"{TimeSlice.Hours} {GetTimeString(StringResources.FileHeader23, TimeSlice.Hours)}, " +
-                $"{TimeSlice.Minutes} {GetTimeString(StringResources.FileHeader24, TimeSlice.Minutes)}, " +
-                $"{TimeSlice.Seconds} {GetTimeString(StringResources.FileHeader25, TimeSlice.Seconds)} " +
+            statusStripLabelEmpty.Text = $"{TimeSlice.Days} {GetSubstring(StringResources.FileHeader22, TimeSlice.Days)}, " +
+                $"{TimeSlice.Hours} {GetSubstring(StringResources.FileHeader23, TimeSlice.Hours)}, " +
+                $"{TimeSlice.Minutes} {GetSubstring(StringResources.FileHeader24, TimeSlice.Minutes)}, " +
+                $"{TimeSlice.Seconds} {GetSubstring(StringResources.FileHeader25, TimeSlice.Seconds)} " +
                 $"{StringResources.FileHeader26} " +
-                $"{TimeSlice.Milliseconds} {GetTimeString(StringResources.FileHeader27, TimeSlice.Milliseconds)}";
+                $"{TimeSlice.Milliseconds} {GetSubstring(StringResources.FileHeader27, TimeSlice.Milliseconds)}";
             statusStripLabelEmpty.ToolTipText = statusStripLabelEmpty.Text;
         }
     }
@@ -141,19 +141,21 @@ public partial class FrmMain : Form
     /// <summary>
     /// Extracts the given substring from a string with multiple values delimited by <paramref name="strSplit"/>
     /// </summary>
-    /// <param name="strValues">String with multiples values</param>
-    /// <param name="time">Index from wich the substring will be returned.
-    /// If this is bigger that the number of values in <paramref name="strValues"/>, then the last one is returned</param>
-    /// <param name="strSplit">String used as delimiter</param>
-    /// <returns>Substring at (array)position determined by <paramref name="time"/></returns>
-    private string GetTimeString(string strValues, int time = 0, string strSplit = ", ")
+    /// <param name="strValues">String with multiples values delimited by <paramref name="strSplit"/></param>
+    /// <param name="index">Index pointing the substring to be returned.
+    /// If this is bigger that the number of values in <paramref name="strValues"/>, then the last one is returned.</param>
+    /// <param name="strSplit">String used as delimiter in <paramref name="strValues"/>.</param>
+    /// <returns>Substring at (array)position determined by <paramref name="index"/>.</returns>
+    private string GetSubstring(string strValues, int index = 0, string strSplit = ", ")
     {
         string[] arrValues = strValues.Split(strSplit);
         int uBound = arrValues.GetUpperBound(0);
-        if (time >= uBound)
+        if (index >= uBound)
             return arrValues[uBound];
+        else if (index <=0)
+            return arrValues[0];
         else
-            return arrValues[time % uBound];
+            return arrValues[index];
     }
 
     /// <summary>
