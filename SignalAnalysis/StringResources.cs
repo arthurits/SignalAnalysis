@@ -182,10 +182,6 @@ public static class StringResources
     public static string ChkComputeDerivative => StringRM.GetString("strChkComputeDerivative", Culture) ?? "Compute numerical differentiation?";
     public static string ChkExportDerivative => StringRM.GetString("strChkExportDerivative", Culture) ?? "Export derivative data?";
     public static string GrpAlgorithms => StringRM.GetString("strGrpAlgorithms", Culture) ?? "Algorithms";
-    public static string RadBackwardOne => StringRM.GetString("strRadBackwardOne", Culture) ?? "Backward one-point difference";
-    public static string RadForwardOne => StringRM.GetString("strRadForwardOne", Culture) ?? "Forward one-point difference";
-    public static string RadCentralThree => StringRM.GetString("strRadCentralThree", Culture) ?? "Central three-point difference";
-    public static string RadCentralFive => StringRM.GetString("strRadCentralFive", Culture) ?? "Central five-point difference";
     public static string DifferentiationAlgorithms => StringRM.GetString("strDifferentiationAlgorithms", Culture) ?? "Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point";
 
     public static string ChkComputeIntegration => StringRM.GetString("strChkComputeIntegration", Culture) ?? "Compute numerical integration?";
