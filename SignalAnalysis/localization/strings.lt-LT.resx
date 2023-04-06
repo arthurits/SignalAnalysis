@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Sukūrė {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Autorių teisės {0} m</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analizės įrankis, kuriame yra pagrindinė aprašomoji statistika, FFT (greitasis Furjė transformavimas), fraktalinis matmuo, signalų diferenciacija, integracija ir entropija (elux failai, taip pat bendrieji).
+
+Joks komercinis naudojimas neleidžiamas. Dėl bet kokių klausimų kreipkitės į autorių.
+
+Jei ši programinė įranga jums naudinga, apsvarstykite galimybę ją palaikyti!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produkto pavadinimas: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>{0} versija</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Sutikti</value>
   </data>
@@ -251,6 +270,12 @@ Vietoj jų bus naudojamos numatytos reikšmės.</value>
   <data name="strFileHeader27" xml:space="preserve">
     <value>milisekundžių, milisekundė, milisekundės</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Išvestinė</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sekcija '{0}' netinkamai suformatuota.</value>
   </data>
@@ -357,6 +382,12 @@ skaičiavimas buvo sustabdytas.</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitudė</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Laikas (sekundės)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitudė / sekundės</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Greitoji Furjė transformacija</value>
@@ -515,36 +546,5 @@ skaičiavimas buvo sustabdytas.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Vartotojo sąsajos kalba</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Laikas (sekundės)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Amplitudė / sekundės</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Išvestinė</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>{0} versija</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Produkto pavadinimas: {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Autorių teisės {0} m</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Sukūrė {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Analizės įrankis, kuriame yra pagrindinė aprašomoji statistika, FFT (greitasis Furjė transformavimas), fraktalinis matmuo, signalų diferenciacija, integracija ir entropija (elux failai, taip pat bendrieji).
-
-Joks komercinis naudojimas neleidžiamas. Dėl bet kokių klausimų kreipkitės į autorių.
-
-Jei ši programinė įranga jums naudinga, apsvarstykite galimybę ją palaikyti!</value>
   </data>
 </root>

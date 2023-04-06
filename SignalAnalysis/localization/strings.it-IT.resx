@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Sviluppato da {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Diritto d'autore {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Strumento di analisi con statistiche descrittive di base, FFT (trasformata veloce di Fourier), dimensione frattale, differenziazione, integrazione ed entropia per segnali (file elux e file generici).
+
+Non è consentito alcun uso commerciale. Contatta l'autore per qualsiasi richiesta.
+
+Se trovi utile questo software, considera di supportarlo!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Nome del prodotto: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versione {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Accetta</value>
   </data>
@@ -250,6 +269,12 @@ Verranno utilizzati i valori di default.</value>
   <data name="strFileHeader27" xml:space="preserve">
     <value>millisecondi, millisecondo, millisecondi</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Derivata</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La sezione '{0}' è mal formattata.</value>
   </data>
@@ -357,6 +382,12 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Ampiezza</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tempo (secondi)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Ampiezza / secondi</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Fast Fourier transform</value>
@@ -515,36 +546,5 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Lingua dell'interfaccia utente</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Tempo (secondi)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Ampiezza / secondi</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Derivata</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Strumento di analisi con statistiche descrittive di base, FFT (trasformata veloce di Fourier), dimensione frattale, differenziazione, integrazione ed entropia per segnali (file elux e file generici).
-
-Non è consentito alcun uso commerciale. Contatta l'autore per qualsiasi richiesta.
-
-Se trovi utile questo software, considera di supportarlo!</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Sviluppato da {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Diritto d'autore {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Nome del prodotto: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Versione {0}</value>
   </data>
 </root>

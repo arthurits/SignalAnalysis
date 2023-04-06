@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Udviklet af {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Ophavsret {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analyseværktøj med grundlæggende beskrivende statistik, FFT (hurtig Fourier-transformation), fraktal dimension, differentiering, integration og entropi for signaler (elux-filer såvel som generiske).
+
+Ingen kommerciel brug tilladt overhovedet. Kontakt forfatteren for eventuelle spørgsmål.
+
+Hvis du finder denne software nyttig, så overvej at støtte den!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktnavn: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Godkend</value>
   </data>
@@ -250,6 +269,12 @@ Standardværdier vil blive benyttet i stedet.</value>
   <data name="strFileHeader27" xml:space="preserve">
     <value>millisekunder, millisekund, millisekunder</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Afledt</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sektion '{0}' har ugyldigt format.</value>
   </data>
@@ -359,6 +384,12 @@ er blevet stoppet.</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tid (sekunder)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitude / sekunder</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Fast Fourier Transform</value>
@@ -517,36 +548,5 @@ er blevet stoppet.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Brugergrænsefladens sprog</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Tid (sekunder)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Amplitude / sekunder</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Afledt</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Analyseværktøj med grundlæggende beskrivende statistik, FFT (hurtig Fourier-transformation), fraktal dimension, differentiering, integration og entropi for signaler (elux-filer såvel som generiske).
-
-Ingen kommerciel brug tilladt overhovedet. Kontakt forfatteren for eventuelle spørgsmål.
-
-Hvis du finder denne software nyttig, så overvej at støtte den!</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Udviklet af {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Ophavsret {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Produktnavn: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
   </data>
 </root>

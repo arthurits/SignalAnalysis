@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Developed by {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Copyright {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
+
+No commercial use allowed whatsoever. Contact the author for any inquiries.
+
+If you find this software useful, please consider supporting it!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Product name: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Accept</value>
   </data>
@@ -135,6 +154,15 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Settings</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>Compute the absolute-value integral?</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>Compute numerical differentiation?</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>Compute numerical integration?</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Show plots' crosshair</value>
   </data>
@@ -147,8 +175,17 @@
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropy (approximate and sample)</value>
   </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>Export derivative data?</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>Export numerical integration?</value>
+  </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Power (dB)</value>
+  </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Do you want to reset all fields
@@ -251,6 +288,18 @@ Default values will be used instead.</value>
   <data name="strFileHeader27" xml:space="preserve">
     <value>milliseconds, millisecond, milliseconds</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Derivative</value>
+  </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>Differentiation algorithm</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Integration algorithm</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Integral value</value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Section '{0}' is mis-formatted.</value>
   </data>
@@ -266,11 +315,17 @@ Default values will be used instead.</value>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>Finite difference algorithms</value>
+  </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Abscissa axis</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI and data format</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Data-file path</value>
@@ -281,6 +336,9 @@ Default values will be used instead.</value>
   <data name="strLblEnd" xml:space="preserve">
     <value>Array index end (max {0})</value>
   </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Quadrature algorithms</value>
+  </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Select series</value>
   </data>
@@ -290,12 +348,40 @@ Default values will be used instead.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Window</value>
   </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Unexpected error while computing numerical differentiation.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Differentiation error</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Unexpected error while computing descriptive statistics values.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Statistics error</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Unexpected error while computing entropy values.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Entropy error</value>
+  </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
     <value>Unexpected error while computing the FFT.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
     <value>FFT error</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Unexpected error while computing the fractal dimension.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Fractal error</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>An unexpected error happened while opening data file.
@@ -339,6 +425,18 @@ the application?</value>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Data saved</value>
   </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>Numerical differentiation has been stopped.</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>Entropy computation has been stopped.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Computation of the Hausdorff-Besicovitch fractal
 dimension has been stopped.</value>
@@ -359,6 +457,18 @@ dimension has been stopped.</value>
     <value>Time (seconds)</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivative</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitude / sec</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
     <value>Amplitude</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
@@ -412,8 +522,20 @@ dimension has been stopped.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strRadBackwardOne" xml:space="preserve">
+    <value>Backward one-point difference</value>
+  </data>
+  <data name="strRadCentralFive" xml:space="preserve">
+    <value>Central five-point difference</value>
+  </data>
+  <data name="strRadCentralThree" xml:space="preserve">
+    <value>Central three-point difference</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Current culture formatting</value>
+  </data>
+  <data name="strRadForwardOne" xml:space="preserve">
+    <value>Forward one-point difference</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Invariant culture formatting</value>
@@ -465,17 +587,29 @@ dimension has been stopped.</value>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Show plot's crosshair mode</value>
   </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>Numerical differentiation</value>
+  </data>
   <data name="strStatusTipEntropy" xml:space="preserve">
     <value>Compute the approximate and sample entropy</value>
   </data>
   <data name="strStatusTipFractal" xml:space="preserve">
     <value>Compute the cumulative fractal dimension (CPU intensive)</value>
   </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Numerical integration</value>
+  </data>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Plot either FFT power spectra(dB) or magnitude</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Differentiation</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>User interface</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integration</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Plotting</value>
@@ -518,139 +652,5 @@ dimension has been stopped.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>User interface language</value>
-  </data>
-  <data name="strPlotDerivativeTitle" xml:space="preserve">
-    <value>Derivative</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Time (seconds)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Amplitude / sec</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Derivative</value>
-  </data>
-  <data name="strTabDerivative" xml:space="preserve">
-    <value>Differentiation</value>
-  </data>
-  <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>Compute numerical differentiation?</value>
-  </data>
-  <data name="strChkExportDerivative" xml:space="preserve">
-    <value>Export derivative data?</value>
-  </data>
-  <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>Finite difference algorithms</value>
-  </data>
-  <data name="strRadBackwardOne" xml:space="preserve">
-    <value>Backward one-point difference</value>
-  </data>
-  <data name="strRadForwardOne" xml:space="preserve">
-    <value>Forward one-point difference</value>
-  </data>
-  <data name="strRadCentralThree" xml:space="preserve">
-    <value>Central three-point difference</value>
-  </data>
-  <data name="strRadCentralFive" xml:space="preserve">
-    <value>Central five-point difference</value>
-  </data>
-  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
-    <value>Amplitude</value>
-  </data>
-  <data name="strStatusTipDerivative" xml:space="preserve">
-    <value>Numerical differentiation</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
-    <value>Numerical differentiation has been stopped.</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>Unexpected error while computing entropy values.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>Entropy error</value>
-  </data>
-  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>Unexpected error while computing numerical differentiation.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
-    <value>Differentiation error</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>Unexpected error while computing descriptive statistics values.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
-    <value>Statistics error</value>
-  </data>
-  <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>Unexpected error while computing the fractal dimension.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value>Fractal error</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value>Entropy computation has been stopped.</value>
-  </data>
-  <data name="strDifferentiationAlgorithms" xml:space="preserve">
-    <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
-  </data>
-  <data name="strFileHeader29" xml:space="preserve">
-    <value>Differentiation algorithm</value>
-  </data>
-  <data name="strTabIntegration" xml:space="preserve">
-    <value>Integration</value>
-  </data>
-  <data name="strFileHeader31" xml:space="preserve">
-    <value>Integral value</value>
-  </data>
-  <data name="strFileHeader30" xml:space="preserve">
-    <value>Integration algorithm</value>
-  </data>
-  <data name="strIntegrationAlgorithms" xml:space="preserve">
-    <value>Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method</value>
-  </data>
-  <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>Compute numerical integration?</value>
-  </data>
-  <data name="strChkExportIntegration" xml:space="preserve">
-    <value>Export numerical integration?</value>
-  </data>
-  <data name="strLblIntegration" xml:space="preserve">
-    <value>Quadrature algorithms</value>
-  </data>
-  <data name="strStatusTipIntegration" xml:space="preserve">
-    <value>Numerical integration</value>
-  </data>
-  <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>Compute the absolute-value integral?</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
-
-No commercial use allowed whatsoever. Contact the author for any inquiries.
-
-If you find this software useful, please consider supporting it!</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Product name: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Developed by {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Copyright {0}</value>
   </data>
 </root>

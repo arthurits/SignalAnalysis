@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Ontwikkeld door {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Auteursrechten {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analysetool met beschrijvende basisstatistieken, FFT (snelle Fourier-transformatie), fractale dimensie, differentiatie, integratie en entropie voor signalen (zowel elux-bestanden als generieke).
+
+Geen enkel commercieel gebruik toegestaan. Neem voor vragen contact op met de auteur.
+
+Als u deze software nuttig vindt, overweeg dan om deze te ondersteunen!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Productnaam: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versie {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Aanvaarden</value>
   </data>
@@ -134,6 +153,25 @@
   </data>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Instellingen</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>Toon crosshair van plot</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>Cumulatieve fractale dimensie</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Onthoud open/opslaan dialoog vorig pad</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>Entropie (bij benadering &amp;&amp; steekproef)</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>Vermogen (dB)</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>Wilt u alle velden resetten
+naar hun standaardwaarden?</value>
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>Reset instellingen?</value>
@@ -166,6 +204,9 @@ In plaats daarvan worden standaardwaarden gebruikt.</value>
   <data name="strFileHeader05" xml:space="preserve">
     <value>Aantal gegevenspunten</value>
   </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Steekproeffrequentie</value>
+  </data>
   <data name="strFileHeader07" xml:space="preserve">
     <value>Gemiddelde</value>
   </data>
@@ -183,28 +224,6 @@ In plaats daarvan worden standaardwaarden gebruikt.</value>
   </data>
   <data name="strFileHeader12" xml:space="preserve">
     <value>Geschatte entropie</value>
-  </data>
-  <data name="strChkCrossHair" xml:space="preserve">
-    <value>Toon crosshair van plot</value>
-  </data>
-  <data name="strChkCumulative" xml:space="preserve">
-    <value>Cumulatieve fractale dimensie</value>
-  </data>
-  <data name="strChkDlgPath" xml:space="preserve">
-    <value>Onthoud open/opslaan dialoog vorig pad</value>
-  </data>
-  <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropie (bij benadering &amp;&amp; steekproef)</value>
-  </data>
-  <data name="strChkPower" xml:space="preserve">
-    <value>Vermogen (dB)</value>
-  </data>
-  <data name="strDlgReset" xml:space="preserve">
-    <value>Wilt u alle velden resetten
-naar hun standaardwaarden?</value>
-  </data>
-  <data name="strFileHeader06" xml:space="preserve">
-    <value>Steekproeffrequentie</value>
   </data>
   <data name="strFileHeader13" xml:space="preserve">
     <value>Steekproefentropie</value>
@@ -250,6 +269,12 @@ naar hun standaardwaarden?</value>
   </data>
   <data name="strFileHeader27" xml:space="preserve">
     <value>millisecondemilliseconden, milliseconde, millisecondenn</value>
+  </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Afgeleide</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sectie '{0}' is verkeerd opgemaakt.</value>
@@ -351,11 +376,20 @@ dimensie is gestopt.</value>
   <data name="strOpenDlgTitle" xml:space="preserve">
     <value>Gegevensbestand openen</value>
   </data>
+  <data name="strPlotAppliedTitle" xml:space="preserve">
+    <value>Signaal in venster</value>
+  </data>
   <data name="strPlotAppliedXLabel" xml:space="preserve">
     <value>Tijd (seconden)</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tijd (seconden)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitude / seconden</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Snelle Fourier-transformatie</value>
@@ -514,39 +548,5 @@ dimensie is gestopt.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Taal gebruikersinterface</value>
-  </data>
-  <data name="strPlotAppliedTitle" xml:space="preserve">
-    <value>Signaal in venster</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Tijd (seconden)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Amplitude / seconden</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Afgeleide</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Ontwikkeld door {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Auteursrechten {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Productnaam: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Versie {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Analysetool met beschrijvende basisstatistieken, FFT (snelle Fourier-transformatie), fractale dimensie, differentiatie, integratie en entropie voor signalen (zowel elux-bestanden als generieke).
-
-Geen enkel commercieel gebruik toegestaan. Neem voor vragen contact op met de auteur.
-
-Als u deze software nuttig vindt, overweeg dan om deze te ondersteunen!</value>
   </data>
 </root>

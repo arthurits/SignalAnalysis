@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Desarrollado por {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Copyright {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Aplicación para el análisis de señales (archivos elux y otros genéricos): cálculo de estadísticas descriptivas, transformada de Fourier (FFT), dimensión fractal, derivada, integral y entropía.
+
+Prohibido expresamente cualquier uso con fines comerciales o lucrativos. Póngase en contacto con el autor para cualquier consulta.
+
+Si la presente esta aplicación le resulta útil y práctica, por favor considere apoyarla mediante un donativo.</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Nombre del producto: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versión {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Aceptar</value>
   </data>
@@ -135,6 +154,15 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Opciones</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>¿Calcular el valor absoluto de la integral?</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>¿Calcular la derivada numérica?</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>¿Calcular la integral numérica?</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Cruz (mira) gráfica</value>
   </data>
@@ -147,8 +175,17 @@
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropía (aproximada y de muestra)</value>
   </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>¿Exportar los datos de la derivada?</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>¿Exportar el resultado de la integración?</value>
+  </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Espectro (dB)</value>
+  </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>Diferencia hacia atrás de 1 punto, Diferencia hacia adelante de 1 punto, Diferencias centrales de 3 puntos, Diferencias centrales de 5 puntos, Diferencias centrales de 7 puntos, Diferencias centrales de 9 puntos, Savitzky–Golay lineal de 3 puntos, Savitzky–Golay lineal de 5 puntos, Savitzky–Golay lineal de 7 puntos, Savitzky–Golay lineal de 9 puntos, Savitzky–Golay cúbico de 5 puntos, Savitzky–Golay cúbico de 7 puntos, Savitzky–Golay cúbico de 9 puntos</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>¿Está seguro de que desea restablecer todos
@@ -251,6 +288,21 @@ Se utilizarán los valores por defecto.</value>
   <data name="strFileHeader27" xml:space="preserve">
     <value>milisegundos, milisegundo, milisegundos</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Derivada</value>
+  </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>Algoritmo de diferenciación</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Algoritmo de integración</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Valor de la integral</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>La sección '{0}' tiene formato incorrecto.</value>
   </data>
@@ -266,11 +318,17 @@ Se utilizarán los valores por defecto.</value>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>Algoritmos de diferencias finitas</value>
+  </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Eje de abscisas</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Formato de datos e interfaz</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Punto izquierdo, Punto medio, Punto derecho, Método trapezoidal, Simpson 1/3, Simpson 3/8, Simpson compuesto, Método de Romberg</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Ruta del archivo de datos</value>
@@ -281,6 +339,9 @@ Se utilizarán los valores por defecto.</value>
   <data name="strLblEnd" xml:space="preserve">
     <value>Índice final (máx {0})</value>
   </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Algoritmos de cuadratura</value>
+  </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Seleccionar serie</value>
   </data>
@@ -290,12 +351,43 @@ Se utilizarán los valores por defecto.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Ventana</value>
   </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular
+la derivada numérica.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Error en la derivada</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular
+los estadísticos descriptivos.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Error en la estadística</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular
+los valores de entropía.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Error en la entropía</value>
+  </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
     <value>Se produjo un error inesperado al calcular la FFT.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
     <value>Error en FFT</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Se produjo un error inesperado al calcular la dimensión fractal.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Error en dimensión fractal</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>Se ha producido un error inesperado al abrir el archivo de datos.
@@ -340,6 +432,18 @@ en la función 'InitializeDataArrays'.
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Datos guardados</value>
   </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>El cálculo de la derivada numérica se ha detenido.</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Fin</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>El cálculo de la entropía se ha detenido.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Fin</value>
+  </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>El cálculo de la dimensión fractal de
 Hausdorff-Besicovitch se ha detenido.</value>
@@ -360,6 +464,18 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Tiempo (segundos)</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
+    <value>Amplitud</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivada</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tiempo (segundos)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitud / seg</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
     <value>Amplitud</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
@@ -413,8 +529,20 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitud</value>
   </data>
+  <data name="strRadBackwardOne" xml:space="preserve">
+    <value>Diferencia hacia atrás de 1 punto</value>
+  </data>
+  <data name="strRadCentralFive" xml:space="preserve">
+    <value>Diferencias centrales de 5 puntos</value>
+  </data>
+  <data name="strRadCentralThree" xml:space="preserve">
+    <value>Diferencias centrales de 3 puntos</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Referencia cultural actual</value>
+  </data>
+  <data name="strRadForwardOne" xml:space="preserve">
+    <value>Diferencia hacia adelante de 1 punto</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Referencia cultural invariable</value>
@@ -466,17 +594,29 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Activar la cruz (mira) gráfica en los gráficos</value>
   </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>Derivada numérica</value>
+  </data>
   <data name="strStatusTipEntropy" xml:space="preserve">
     <value>Calcular la entropía (aproximada, muestra)</value>
   </data>
   <data name="strStatusTipFractal" xml:space="preserve">
     <value>Calcular la dimensión fractal acumulada (elevado uso de la CPU)</value>
   </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Integración numérica</value>
+  </data>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Mostrar el espectro (dB) o la magnitud de la FFT</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Derivada</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Interfaz de usuario</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integración</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Gráficos</value>
@@ -519,145 +659,5 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Idioma de la interfaz de usuario</value>
-  </data>
-  <data name="strPlotDerivativeTitle" xml:space="preserve">
-    <value>Derivada</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Tiempo (segundos)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Amplitud / seg</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Derivada</value>
-  </data>
-  <data name="strTabDerivative" xml:space="preserve">
-    <value>Derivada</value>
-  </data>
-  <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>¿Calcular la derivada numérica?</value>
-  </data>
-  <data name="strChkExportDerivative" xml:space="preserve">
-    <value>¿Exportar los datos de la derivada?</value>
-  </data>
-  <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>Algoritmos de diferencias finitas</value>
-  </data>
-  <data name="strRadBackwardOne" xml:space="preserve">
-    <value>Diferencia hacia atrás de 1 punto</value>
-  </data>
-  <data name="strRadForwardOne" xml:space="preserve">
-    <value>Diferencia hacia adelante de 1 punto</value>
-  </data>
-  <data name="strRadCentralThree" xml:space="preserve">
-    <value>Diferencias centrales de 3 puntos</value>
-  </data>
-  <data name="strRadCentralFive" xml:space="preserve">
-    <value>Diferencias centrales de 5 puntos</value>
-  </data>
-  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
-    <value>Amplitud</value>
-  </data>
-  <data name="strStatusTipDerivative" xml:space="preserve">
-    <value>Derivada numérica</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
-    <value>El cálculo de la derivada numérica se ha detenido.</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value>El cálculo de la entropía se ha detenido.</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
-    <value>Fin</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
-    <value>Fin</value>
-  </data>
-  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>Error en la entropía</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
-    <value>Error en la estadística</value>
-  </data>
-  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
-    <value>Error en la derivada</value>
-  </data>
-  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>Se produjo un error inesperado al calcular
-los valores de entropía.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>Se produjo un error inesperado al calcular
-los estadísticos descriptivos.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>Se produjo un error inesperado al calcular
-la derivada numérica.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value>Error en dimensión fractal</value>
-  </data>
-  <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>Se produjo un error inesperado al calcular la dimensión fractal.
-{0}</value>
-  </data>
-  <data name="strDifferentiationAlgorithms" xml:space="preserve">
-    <value>Diferencia hacia atrás de 1 punto, Diferencia hacia adelante de 1 punto, Diferencias centrales de 3 puntos, Diferencias centrales de 5 puntos, Diferencias centrales de 7 puntos, Diferencias centrales de 9 puntos, Savitzky–Golay lineal de 3 puntos, Savitzky–Golay lineal de 5 puntos, Savitzky–Golay lineal de 7 puntos, Savitzky–Golay lineal de 9 puntos, Savitzky–Golay cúbico de 5 puntos, Savitzky–Golay cúbico de 7 puntos, Savitzky–Golay cúbico de 9 puntos</value>
-  </data>
-  <data name="strFileHeader29" xml:space="preserve">
-    <value>Algoritmo de diferenciación</value>
-  </data>
-  <data name="strTabIntegration" xml:space="preserve">
-    <value>Integración</value>
-  </data>
-  <data name="strFileHeader30" xml:space="preserve">
-    <value>Algoritmo de integración</value>
-  </data>
-  <data name="strFileHeader31" xml:space="preserve">
-    <value>Valor de la integral</value>
-  </data>
-  <data name="strIntegrationAlgorithms" xml:space="preserve">
-    <value>Punto izquierdo, Punto medio, Punto derecho, Método trapezoidal, Simpson 1/3, Simpson 3/8, Simpson compuesto, Método de Romberg</value>
-  </data>
-  <data name="strChkExportIntegration" xml:space="preserve">
-    <value>¿Exportar el resultado de la integración?</value>
-  </data>
-  <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>¿Calcular la integral numérica?</value>
-  </data>
-  <data name="strLblIntegration" xml:space="preserve">
-    <value>Algoritmos de cuadratura</value>
-  </data>
-  <data name="strStatusTipIntegration" xml:space="preserve">
-    <value>Integración numérica</value>
-  </data>
-  <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>¿Calcular el valor absoluto de la integral?</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Aplicación para el análisis de señales (archivos elux y otros genéricos): cálculo de estadísticas descriptivas, transformada de Fourier (FFT), dimensión fractal, derivada, integral y entropía.
-
-Prohibido expresamente cualquier uso con fines comerciales o lucrativos. Póngase en contacto con el autor para cualquier consulta.
-
-Si la presente esta aplicación le resulta útil y práctica, por favor considere apoyarla mediante un donativo.</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Copyright {0}</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Desarrollado por {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Nombre del producto: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Versión {0}</value>
   </data>
 </root>

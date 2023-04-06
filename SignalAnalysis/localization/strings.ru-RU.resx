@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Разработано компанией {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Авторские права {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Инструмент анализа с базовой описательной статистикой, БПФ (быстрое преобразование Фурье), фрактальной размерностью, дифференцированием, интегрированием и энтропией для сигналов (файлы elux, а также общие файлы).
+
+Никакое коммерческое использование не допускается. Свяжитесь с автором по любым вопросам.
+
+Если вы найдете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Наименование товара: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Версия {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;принимать</value>
   </data>
@@ -251,6 +270,12 @@
   <data name="strFileHeader27" xml:space="preserve">
     <value>миллисекунд, миллисекунда, миллисекунды, миллисекунды, миллисекунды, миллисекунд</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Производная</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Раздел '{0}' имеет неправильный формат.</value>
   </data>
@@ -360,6 +385,12 @@
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Амплитуда</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Время (секунды)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Амплитуда / секунды</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Быстрое преобразование Фурье</value>
@@ -518,36 +549,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Язык пользовательского интерфейса</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Время (секунды)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Амплитуда / секунды</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Производная</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Инструмент анализа с базовой описательной статистикой, БПФ (быстрое преобразование Фурье), фрактальной размерностью, дифференцированием, интегрированием и энтропией для сигналов (файлы elux, а также общие файлы).
-
-Никакое коммерческое использование не допускается. Свяжитесь с автором по любым вопросам.
-
-Если вы найдете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Разработано компанией {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Авторские права {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Наименование товара: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Версия {0}</value>
   </data>
 </root>

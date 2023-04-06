@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>开发者 {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>版权所有 {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>具有基本描述性统计、FFT（快速傅立叶变换）、分形维数、微分、积分和信号熵（elux 文件以及通用文件）的分析工具。
+
+严禁任何商业用途。如有任何疑问，请联系作者。
+
+如果您觉得这个软件有用，请考虑支持它！</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>产品名称：{0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>确认(&amp;A)</value>
   </data>
@@ -135,6 +154,15 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>设置(&amp;S)</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>计算绝对值积分？</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>计算数值微分？</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>计算数值积分？</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>显示图表十字线</value>
   </data>
@@ -147,8 +175,17 @@
   <data name="strChkEntropy" xml:space="preserve">
     <value>熵（近似和样本）</value>
   </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>导出微分数据？</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>导出数值积分？</value>
+  </data>
   <data name="strChkPower" xml:space="preserve">
     <value>功率（dB）</value>
+  </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>向后一点差分, 向前一点差分, 中心三点差分, 中心五点差分, 中心七点差分, 中心九点差分, Savitzky–Golay 三点线性, Savitzky–Golay 五点线性, Savitzky–Golay 七点线性, Savitzky–Golay 九点线性, Savitzky–Golay 五点三次, Savitzky–Golay 七点三次, Savitzky–Golay 九点三次</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>您想将所有字段重置为默认值吗？</value>
@@ -250,6 +287,21 @@
   <data name="strFileHeader27" xml:space="preserve">
     <value>毫秒</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>导数</value>
+  </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>微分算法</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>积分算法</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>积分值</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>节“{0}”格式不正确。</value>
   </data>
@@ -265,11 +317,17 @@
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>有限差分算法</value>
+  </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>横坐标</value>
   </data>
   <data name="strGrpCulture" xml:space="preserve">
     <value>用户界面及数据格式</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>左端点法, 中点法, 右端点法, 梯形法, 辛普森 1/3 法, 辛普森 3/8 法, 辛普森法, 龙贝格法</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>数据文件路径</value>
@@ -280,6 +338,9 @@
   <data name="strLblEnd" xml:space="preserve">
     <value>数组索引结束（上限 {0}）</value>
   </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>求积算法</value>
+  </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>选择序列</value>
   </data>
@@ -289,12 +350,40 @@
   <data name="strLblWindow" xml:space="preserve">
     <value>窗</value>
   </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>计算数值微分时出现意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>微分错误</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>计算描述性统计量时发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>统计错误</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>计算熵值时发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>熵错误</value>
+  </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
     <value>计算 FFT 时发生了意外错误。
 {0}</value>
   </data>
   <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
     <value>FFT 错误</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>计算分形维数时发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>分形错误</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>在打开数据文件时发生了意外错误。
@@ -337,6 +426,18 @@
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>数据已保存</value>
   </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>数值微分已停止。</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>熵计算已停止。</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>取消</value>
+  </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Hausdorff-Besicovitch 分形维数的计算已停止。</value>
   </data>
@@ -356,6 +457,18 @@
     <value>时间（秒）</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
+    <value>幅值</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>导数</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>幅值/秒</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
     <value>幅值</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
@@ -409,8 +522,20 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>幅值</value>
   </data>
+  <data name="strRadBackwardOne" xml:space="preserve">
+    <value>向后一点差分</value>
+  </data>
+  <data name="strRadCentralFive" xml:space="preserve">
+    <value>中心五点差分</value>
+  </data>
+  <data name="strRadCentralThree" xml:space="preserve">
+    <value>中心三点差分</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>当前区域格式</value>
+  </data>
+  <data name="strRadForwardOne" xml:space="preserve">
+    <value>向前一点差分</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>区域无关格式</value>
@@ -462,17 +587,29 @@
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>显示图表十字线模式</value>
   </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>数值微分</value>
+  </data>
   <data name="strStatusTipEntropy" xml:space="preserve">
     <value>计算近似熵和样本熵</value>
   </data>
   <data name="strStatusTipFractal" xml:space="preserve">
     <value>计算累积分形维数（计算量较大）</value>
   </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>数值积分</value>
+  </data>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>绘制 FFT 功率谱（db）或幅度谱</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>微分</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>用户界面</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>积分</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>绘图</value>
@@ -515,142 +652,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>用户界面语言</value>
-  </data>
-  <data name="strPlotDerivativeTitle" xml:space="preserve">
-    <value>导数</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>时间（秒）</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>幅值/秒</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>导数</value>
-  </data>
-  <data name="strTabDerivative" xml:space="preserve">
-    <value>微分</value>
-  </data>
-  <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>计算数值微分？</value>
-  </data>
-  <data name="strChkExportDerivative" xml:space="preserve">
-    <value>导出微分数据？</value>
-  </data>
-  <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>有限差分算法</value>
-  </data>
-  <data name="strRadBackwardOne" xml:space="preserve">
-    <value>向后一点差分</value>
-  </data>
-  <data name="strRadForwardOne" xml:space="preserve">
-    <value>向前一点差分</value>
-  </data>
-  <data name="strRadCentralThree" xml:space="preserve">
-    <value>中心三点差分</value>
-  </data>
-  <data name="strRadCentralFive" xml:space="preserve">
-    <value>中心五点差分</value>
-  </data>
-  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
-    <value>幅值</value>
-  </data>
-  <data name="strStatusTipDerivative" xml:space="preserve">
-    <value>数值微分</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
-    <value>数值微分已停止。</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
-    <value>取消</value>
-  </data>
-  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>计算熵值时发生了意外错误。
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>熵错误</value>
-  </data>
-  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>计算数值微分时出现意外错误。
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
-    <value>微分错误</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>计算描述性统计量时发生了意外错误。
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
-    <value>统计错误</value>
-  </data>
-  <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>计算分形维数时发生了意外错误。
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value>分形错误</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value>熵计算已停止。</value>
-  </data>
-  <data name="strDifferentiationAlgorithms" xml:space="preserve">
-    <value>向后一点差分, 向前一点差分, 中心三点差分, 中心五点差分, 中心七点差分, 中心九点差分, Savitzky–Golay 三点线性, Savitzky–Golay 五点线性, Savitzky–Golay 七点线性, Savitzky–Golay 九点线性, Savitzky–Golay 五点三次, Savitzky–Golay 七点三次, Savitzky–Golay 九点三次</value>
-  </data>
-  <data name="strFileHeader29" xml:space="preserve">
-    <value>微分算法</value>
-  </data>
-  <data name="strTabIntegration" xml:space="preserve">
-    <value>积分</value>
-  </data>
-  <data name="strFileHeader31" xml:space="preserve">
-    <value>积分值</value>
-  </data>
-  <data name="strFileHeader30" xml:space="preserve">
-    <value>积分算法</value>
-  </data>
-  <data name="strIntegrationAlgorithms" xml:space="preserve">
-    <value>左端点法, 中点法, 右端点法, 梯形法, 辛普森 1/3 法, 辛普森 3/8 法, 辛普森法, 龙贝格法</value>
-  </data>
-  <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>计算数值积分？</value>
-  </data>
-  <data name="strChkExportIntegration" xml:space="preserve">
-    <value>导出数值积分？</value>
-  </data>
-  <data name="strLblIntegration" xml:space="preserve">
-    <value>求积算法</value>
-  </data>
-  <data name="strStatusTipIntegration" xml:space="preserve">
-    <value>数值积分</value>
-  </data>
-  <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>计算绝对值积分？</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>开发者 {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>版权所有 {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>产品名称：{0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>版本 {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>具有基本描述性统计、FFT（快速傅立叶变换）、分形维数、微分、积分和信号熵（elux 文件以及通用文件）的分析工具。
-
-严禁任何商业用途。如有任何疑问，请联系作者。
-
-如果您觉得这个软件有用，请考虑支持它！</value>
   </data>
 </root>

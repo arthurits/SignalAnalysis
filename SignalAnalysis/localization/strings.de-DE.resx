@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Entwickelt von {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Urheberrechte {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analysetool mit grundlegender deskriptiver Statistik, FFT (Fast Fourier Transformation), fraktaler Dimension, Differentiation, Integration und Entropie für Signale (sowohl Elux-Dateien als auch generische).
+
+Jegliche kommerzielle Nutzung ist nicht gestattet. Wenden Sie sich bei Fragen an den Autor.
+
+Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstützen!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktname: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;Akzeptieren</value>
   </data>
@@ -135,6 +154,15 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Einstellungen</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>Betrags Integral berechnen?</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>Numerische Differentiation berechnen?</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>Numerische Integration berechnen?</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Fadenkreuze von Plots anzeigen</value>
   </data>
@@ -146,6 +174,12 @@
   </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>Entropie (ungefähre und Muster)</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>Derivatdaten exportieren?</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>Numerische Integration exportieren?</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Stärke (dB)</value>
@@ -250,6 +284,21 @@ Standardwerte werden verwendet.</value>
   <data name="strFileHeader27" xml:space="preserve">
     <value>Millisekunden, Millisekunde, Millisekunden</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Ableitung</value>
+  </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>Differenzierung Algorithmus</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Integration Algorithmus</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Integraler Wert</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Sektion '{0}' ist falsch formatiert.</value>
   </data>
@@ -264,6 +313,9 @@ Standardwerte werden verwendet.</value>
   </data>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
+  </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>Finite-Differenzen-Algorithmen</value>
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Abszissenachse</value>
@@ -280,6 +332,9 @@ Standardwerte werden verwendet.</value>
   <data name="strLblEnd" xml:space="preserve">
     <value>Array Index Ende  (max {0})</value>
   </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Quadratur-Algorithmen</value>
+  </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Serienauswahl</value>
   </data>
@@ -289,12 +344,40 @@ Standardwerte werden verwendet.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Fenster</value>
   </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Unerwarteter Fehler beim Berechnen der numerischen Differentiation.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Differenzierung Fehler</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Unerwarteter Fehler beim Berechnen deskriptiver Statistikwerte.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Fehler beim Statistik</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Unerwarteter Fehler beim Berechnen der Entropiewerte.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Fehler beim Entropie</value>
+  </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
     <value>Unbekannter Fehler beim verarbeiten der FFT.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
     <value>FFT Fehler</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Unerwarteter Fehler beim Berechnen der fraktalen Dimension.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Fehler beim Fraktal</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>Unerwarteter Fehler beim Öffnen der Datei.
@@ -338,6 +421,18 @@ beenden wollen?</value>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Daten gespeichert</value>
   </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>Die numerische Differenzierung wurde gestoppt.</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>Die Entropieberechnung wurde gestoppt.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Berechnung der Hausdorff-Besicovitch-Fraktal Dimension
 wurde gestoppt.</value>
@@ -359,6 +454,12 @@ wurde gestoppt.</value>
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Zeit (Sekunden)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitude / Sekunden</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Fast Fourier-Transform</value>
@@ -464,17 +565,29 @@ wurde gestoppt.</value>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Fadenkreuz-Modus des Diagramms anzeigen</value>
   </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>Numerische Differenzierung</value>
+  </data>
   <data name="strStatusTipEntropy" xml:space="preserve">
     <value>Berechnen Sie die Näherungs- und Stichprobenentropie</value>
   </data>
   <data name="strStatusTipFractal" xml:space="preserve">
     <value>Kumulative fraktale Dimension berechnen (CPU intensiv)</value>
   </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Numerische Integration</value>
+  </data>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>FFT Energiekurve (dB) oder Größe plotten</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Ableitung</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Oberfläche</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integration</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Plotten</value>
@@ -517,118 +630,5 @@ wurde gestoppt.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Sprache der Oberfläche</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>Zeit (Sekunden)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>Amplitude / Sekunden</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>Ableitung</value>
-  </data>
-  <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>Betrags Integral berechnen?</value>
-  </data>
-  <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>Numerische Differentiation berechnen?</value>
-  </data>
-  <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>Numerische Integration berechnen?</value>
-  </data>
-  <data name="strChkExportDerivative" xml:space="preserve">
-    <value>Derivatdaten exportieren?</value>
-  </data>
-  <data name="strChkExportIntegration" xml:space="preserve">
-    <value>Numerische Integration exportieren?</value>
-  </data>
-  <data name="strFileHeader29" xml:space="preserve">
-    <value>Differenzierung Algorithmus</value>
-  </data>
-  <data name="strFileHeader30" xml:space="preserve">
-    <value>Integration Algorithmus</value>
-  </data>
-  <data name="strFileHeader31" xml:space="preserve">
-    <value>Integraler Wert</value>
-  </data>
-  <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>Finite-Differenzen-Algorithmen</value>
-  </data>
-  <data name="strLblIntegration" xml:space="preserve">
-    <value>Quadratur-Algorithmen</value>
-  </data>
-  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>Unerwarteter Fehler beim Berechnen der numerischen Differentiation.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
-    <value>Differenzierung Fehler</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
-    <value>Fehler beim Statistik</value>
-  </data>
-  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>Fehler beim Entropie</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>Unerwarteter Fehler beim Berechnen deskriptiver Statistikwerte.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>Unerwarteter Fehler beim Berechnen der Entropiewerte.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value>Fehler beim Fraktal</value>
-  </data>
-  <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>Unerwarteter Fehler beim Berechnen der fraktalen Dimension.
-{0}</value>
-  </data>
-  <data name="strStatusTipDerivative" xml:space="preserve">
-    <value>Numerische Differenzierung</value>
-  </data>
-  <data name="strStatusTipIntegration" xml:space="preserve">
-    <value>Numerische Integration</value>
-  </data>
-  <data name="strTabDerivative" xml:space="preserve">
-    <value>Ableitung</value>
-  </data>
-  <data name="strTabIntegration" xml:space="preserve">
-    <value>Integration</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
-    <value>Die numerische Differenzierung wurde gestoppt.</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value>Die Entropieberechnung wurde gestoppt.</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>Analysetool mit grundlegender deskriptiver Statistik, FFT (Fast Fourier Transformation), fraktaler Dimension, Differentiation, Integration und Entropie für Signale (sowohl Elux-Dateien als auch generische).
-
-Jegliche kommerzielle Nutzung ist nicht gestattet. Wenden Sie sich bei Fragen an den Autor.
-
-Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstützen!</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>Entwickelt von {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>Urheberrechte {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>Produktname: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>Version {0}</value>
   </data>
 </root>

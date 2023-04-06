@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>طور بواسطة {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>حقوق النشر {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>أداة تحليل تتميز بالإحصاءات الوصفية الأساسية ، FFT (تحويل فورييه السريع) ، البعد الكسري ، التمايز ، التكامل ، والإنتروبيا للإشارات (ملفات elux بالإضافة إلى الملفات العامة).
+
+لا يسمح بأي استخدام تجاري على الإطلاق. تواصل مع المؤلف لأية استفسارات.
+
+إذا وجدت هذا البرنامج مفيدًا ، فالرجاء التفكير في دعمه!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>اسم المنتج: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>إصدار {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;قبول</value>
   </data>
@@ -135,6 +154,15 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;الإعدادات</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>احسب القيمة المطلقة للتكامل؟</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>احسب المشتق العددي؟</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>احسب التكامل العددي؟</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>عرض تقاطع الرسم</value>
   </data>
@@ -146,6 +174,12 @@
   </data>
   <data name="strChkEntropy" xml:space="preserve">
     <value>قصور (تقريبا و نسبة)</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>تصدير المشتق؟</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>تصدير التكامل العددي؟</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>القوة (dB)</value>
@@ -250,6 +284,12 @@
   </data>
   <data name="strFileHeader27" xml:space="preserve">
     <value>الثواني بالمللي</value>
+  </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>المشتق</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
   </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>قسم '{0}' منسق.</value>
@@ -360,6 +400,12 @@
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>السعة</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>الوقت (ثواني)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>السعة / واني</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>تحويل فورييه السريع</value>
@@ -518,51 +564,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>لغة واجهة المستخدم</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>الوقت (ثواني)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>السعة / واني</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>المشتق</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>اسم المنتج: {0}</value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>طور بواسطة {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>إصدار {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>حقوق النشر {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>أداة تحليل تتميز بالإحصاءات الوصفية الأساسية ، FFT (تحويل فورييه السريع) ، البعد الكسري ، التمايز ، التكامل ، والإنتروبيا للإشارات (ملفات elux بالإضافة إلى الملفات العامة).
-
-لا يسمح بأي استخدام تجاري على الإطلاق. تواصل مع المؤلف لأية استفسارات.
-
-إذا وجدت هذا البرنامج مفيدًا ، فالرجاء التفكير في دعمه!</value>
-  </data>
-  <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>احسب القيمة المطلقة للتكامل؟</value>
-  </data>
-  <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>احسب المشتق العددي؟</value>
-  </data>
-  <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>احسب التكامل العددي؟</value>
-  </data>
-  <data name="strChkExportDerivative" xml:space="preserve">
-    <value>تصدير المشتق؟</value>
-  </data>
-  <data name="strChkExportIntegration" xml:space="preserve">
-    <value>تصدير التكامل العددي؟</value>
   </data>
 </root>

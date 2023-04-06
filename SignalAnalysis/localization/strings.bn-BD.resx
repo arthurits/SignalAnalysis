@@ -117,6 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>নির্মাণে {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>কপিরাইট {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>মৌলিক বর্ণনামূলক পরিসংখ্যান, এফএফটি (দ্রুত ফুরিয়ার ট্রান্সফর্ম), ফ্র্যাক্টাল ডাইমেনশন, ডিফারেন্সিয়েশন, ইন্টিগ্রেশন এবং সিগন্যালের জন্য এনট্রপি (এলাক্স ফাইলের পাশাপাশি জেনেরিক ফাইল) সমন্বিত বিশ্লেষণ টুল।
+
+কোনো বাণিজ্যিক ব্যবহারের অনুমতি নেই. কোন অনুসন্ধানের জন্য লেখকের সাথে যোগাযোগ করুন.
+
+আপনি যদি এই সফ্টওয়্যারটিকে দরকারী মনে করেন, তাহলে অনুগ্রহ করে এটিকে সমর্থন করার কথা বিবেচনা করুন!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>পণ্যের নাম: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>সংস্করণ {0}</value>
+  </data>
   <data name="strBtnAccept" xml:space="preserve">
     <value>&amp;গ্রহণ করুন</value>
   </data>
@@ -251,6 +270,12 @@
   <data name="strFileHeader27" xml:space="preserve">
     <value>মিলিসেকেন্ড</value>
   </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>ডেরিভেটিভ</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>বিভাগ '{0}' ভুল ফর্ম্যাট করা হয়েছে.</value>
   </data>
@@ -360,6 +385,12 @@
   </data>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>প্রশস্ততা</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>সময় (সেকেন্ড)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>প্রশস্ততা / সেকেন্ড</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>ফাস্ট ফোরিয়ার ট্রান্সফর্ম</value>
@@ -518,36 +549,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>ইউজার ইন্টারফেস ভাষা</value>
-  </data>
-  <data name="strPlotDerivativeXLabel" xml:space="preserve">
-    <value>সময় (সেকেন্ড)</value>
-  </data>
-  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
-    <value>প্রশস্ততা / সেকেন্ড</value>
-  </data>
-  <data name="strFileHeader28" xml:space="preserve">
-    <value>ডেরিভেটিভ</value>
-  </data>
-  <data name="strFileHeaderColon" xml:space="preserve">
-    <value>: </value>
-  </data>
-  <data name="strAboutCompanyName" xml:space="preserve">
-    <value>নির্মাণে {0}</value>
-  </data>
-  <data name="strAboutCopyright" xml:space="preserve">
-    <value>কপিরাইট {0}</value>
-  </data>
-  <data name="strAboutProductName" xml:space="preserve">
-    <value>পণ্যের নাম: {0}</value>
-  </data>
-  <data name="strAboutVersion" xml:space="preserve">
-    <value>সংস্করণ {0}</value>
-  </data>
-  <data name="strAboutDescription" xml:space="preserve">
-    <value>মৌলিক বর্ণনামূলক পরিসংখ্যান, এফএফটি (দ্রুত ফুরিয়ার ট্রান্সফর্ম), ফ্র্যাক্টাল ডাইমেনশন, ডিফারেন্সিয়েশন, ইন্টিগ্রেশন এবং সিগন্যালের জন্য এনট্রপি (এলাক্স ফাইলের পাশাপাশি জেনেরিক ফাইল) সমন্বিত বিশ্লেষণ টুল।
-
-কোনো বাণিজ্যিক ব্যবহারের অনুমতি নেই. কোন অনুসন্ধানের জন্য লেখকের সাথে যোগাযোগ করুন.
-
-আপনি যদি এই সফ্টওয়্যারটিকে দরকারী মনে করেন, তাহলে অনুগ্রহ করে এটিকে সমর্থন করার কথা বিবেচনা করুন!</value>
   </data>
 </root>
