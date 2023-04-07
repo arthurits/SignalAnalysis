@@ -174,8 +174,11 @@ partial class FrmMain
         _settings.IndexStart = Signal.IndexStart;
         _settings.IndexEnd = Signal.IndexEnd;
         _settings.IndexMax = Signal.SeriesPoints > 0 ? Signal.SeriesPoints - 1 : 0;
+        
         FrmSettings frm = new(_settings);
+        frm.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
         frm.ShowDialog(this);
+
         if (frm.DialogResult == DialogResult.OK)
         {
             Signal.IndexStart = _settings.IndexStart;
@@ -216,6 +219,7 @@ partial class FrmMain
     private void Language_Click(object? sender, EventArgs e)
     {
         FrmLanguage frm = new(_settings);
+        frm.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
         frm.ShowDialog();
 
         if (frm.DialogResult == DialogResult.OK)
