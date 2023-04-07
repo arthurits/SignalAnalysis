@@ -240,14 +240,17 @@ partial class FrmMain
             {
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: _settings.PowerSpectra, powerSpectra: _settings.PowerSpectra);
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: _settings.CumulativeDimension, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
@@ -286,6 +289,7 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExDerivative":
                     _settings.ComputeDerivative = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
                     if (_settings.ComputeDerivative == false)
                     {
                         plotDerivative.Clear();
@@ -294,20 +298,9 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExIntegration":
                     _settings.ComputeIntegration = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
                     break;
             }
-
-            // Run the needed computations
-            UpdateStatsPlots(stripComboSeries.SelectedIndex,
-                        deletePreviousResults: false,
-                        stats: true,
-                        derivative: _settings.ComputeDerivative,
-                        integral: _settings.ComputeIntegration,
-                        fractal: true,
-                        progressive: _settings.CumulativeDimension,
-                        entropy: _settings.Entropy,
-                        fft: true,
-                        powerSpectra: _settings.PowerSpectra);
         }
     }
 
@@ -363,7 +356,7 @@ partial class FrmMain
 
         //UpdateWindowPlots(signal);
         UpdateStatsPlots(stripComboSeries.SelectedIndex,
-            deletePreviousResults: true,
+            deletePreviousResults: false,
             stats: false,
             derivative: false,
             integral: false,

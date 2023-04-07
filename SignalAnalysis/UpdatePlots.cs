@@ -235,7 +235,7 @@ partial class FrmMain
     /// <param name="fft"><see langword="True"/></param>
     /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
     /// <returns></returns>
-    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = true,  bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
+    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false,  bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -262,7 +262,6 @@ partial class FrmMain
         {
             try
             {
-                // UpdateStats(signalClipped, _settings.CumulativeDimension, _settings.Entropy);
                 if (stats) ComputeStatistics(signalClipped);
                 if (derivative) ComputeDerivative(signalClipped);
                 if (integral) ComputeIntegral(signalClipped);
@@ -316,8 +315,6 @@ partial class FrmMain
         await statsTask;
 
         // Show results on plots
-        // Update plots and results
-        //    UpdateBasicPlots(signal, seriesName);
         _settings.CrossHair = false;
         statusStripLabelExCrossHair.Checked = false;
         if (stats) PlotOriginal(signalClipped, seriesName ?? string.Empty);
@@ -333,8 +330,6 @@ partial class FrmMain
             if (signalWindowed.Length > 0) PlotWindowedSignal(signalWindowed);
             PlotFFT(powerSpectra ? Results.FFTpower : Results.FFTmagnitude);
         }
-
-        //await UpdateWindowPlots(signalClipped);
 
         // Show text results
         //if (stats || fractal || entropy || integral)
@@ -395,7 +390,12 @@ partial class FrmMain
     /// <exception cref="OperationCanceledException">This is thrown if the token is cancelled whenever the user presses the ESC button</exception>
     private void ComputeDerivative(double[] signal)
     {
-        Results.Derivative = Derivative.Derivate(signal, _settings.DerivativeAlgorithm, 0, signal.Length - 1, Signal.SampleFrequency);
+        Results.Derivative = Derivative.Derivate(
+            array: signal,
+            method: _settings.DerivativeAlgorithm,
+            lowerIndex: 0,
+            upperIndex: signal.Length - 1,
+            samplingFrequency: Signal.SampleFrequency);
     }
 
     /// <summary>
@@ -404,7 +404,6 @@ partial class FrmMain
     /// <param name="signal">1D data array, whose values are expected to be uniformly spaced</param>
     private void ComputeIntegral(double[] signal)
     {
-
         Results.Integral = Integration.Integrate(
             array: signal,
             method: _settings.IntegrationAlgorithm,
@@ -412,8 +411,7 @@ partial class FrmMain
             upperIndex: signal.GetUpperBound(0),
             samplingFrequency: Signal.SampleFrequency,
             absoluteIntegral: _settings.AbsoluteIntegral,
-            pad: _settings.PadIntegral);
-        
+            pad: _settings.PadIntegral);   
     }
 
     /// <summary>
