@@ -1243,47 +1243,11 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backward one-point difference.
-        /// </summary>
-        internal static string strRadBackwardOne {
-            get {
-                return ResourceManager.GetString("strRadBackwardOne", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Central five-point difference.
-        /// </summary>
-        internal static string strRadCentralFive {
-            get {
-                return ResourceManager.GetString("strRadCentralFive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Central three-point difference.
-        /// </summary>
-        internal static string strRadCentralThree {
-            get {
-                return ResourceManager.GetString("strRadCentralThree", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Current culture formatting.
         /// </summary>
         internal static string strRadCurrentCulture {
             get {
                 return ResourceManager.GetString("strRadCurrentCulture", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Forward one-point difference.
-        /// </summary>
-        internal static string strRadForwardOne {
-            get {
-                return ResourceManager.GetString("strRadForwardOne", resourceCulture);
             }
         }
         

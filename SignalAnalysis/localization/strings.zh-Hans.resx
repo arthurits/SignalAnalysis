@@ -522,20 +522,8 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>幅值</value>
   </data>
-  <data name="strRadBackwardOne" xml:space="preserve">
-    <value>向后一点差分</value>
-  </data>
-  <data name="strRadCentralFive" xml:space="preserve">
-    <value>中心五点差分</value>
-  </data>
-  <data name="strRadCentralThree" xml:space="preserve">
-    <value>中心三点差分</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>当前区域格式</value>
-  </data>
-  <data name="strRadForwardOne" xml:space="preserve">
-    <value>向前一点差分</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>区域无关格式</value>

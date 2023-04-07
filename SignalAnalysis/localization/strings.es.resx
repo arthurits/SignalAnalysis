@@ -529,20 +529,8 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitud</value>
   </data>
-  <data name="strRadBackwardOne" xml:space="preserve">
-    <value>Diferencia hacia atrás de 1 punto</value>
-  </data>
-  <data name="strRadCentralFive" xml:space="preserve">
-    <value>Diferencias centrales de 5 puntos</value>
-  </data>
-  <data name="strRadCentralThree" xml:space="preserve">
-    <value>Diferencias centrales de 3 puntos</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Referencia cultural actual</value>
-  </data>
-  <data name="strRadForwardOne" xml:space="preserve">
-    <value>Diferencia hacia adelante de 1 punto</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Referencia cultural invariable</value>

@@ -547,24 +547,8 @@ dimension has been stopped.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
-  <data name="strRadBackwardOne" xml:space="preserve">
-    <value>Backward one-point difference</value>
-    <comment>No need, since they are already listed in strDifferentiationAlgorithms</comment>
-  </data>
-  <data name="strRadCentralFive" xml:space="preserve">
-    <value>Central five-point difference</value>
-    <comment>No need, since they are already listed in strDifferentiationAlgorithms</comment>
-  </data>
-  <data name="strRadCentralThree" xml:space="preserve">
-    <value>Central three-point difference</value>
-    <comment>No need, since they are already listed in strDifferentiationAlgorithms</comment>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Current culture formatting</value>
-  </data>
-  <data name="strRadForwardOne" xml:space="preserve">
-    <value>Forward one-point difference</value>
-    <comment>No need, since they are already listed in strDifferentiationAlgorithms</comment>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Invariant culture formatting</value>

@@ -300,6 +300,9 @@ Default values will be used instead.</value>
   <data name="strFileHeader31" xml:space="preserve">
     <value>Integral value</value>
   </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
   <data name="strFileHeaderSection" xml:space="preserve">
     <value>Section '{0}' is mis-formatted.</value>
   </data>
@@ -522,20 +525,8 @@ dimension has been stopped.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
-  <data name="strRadBackwardOne" xml:space="preserve">
-    <value>Backward one-point difference</value>
-  </data>
-  <data name="strRadCentralFive" xml:space="preserve">
-    <value>Central five-point difference</value>
-  </data>
-  <data name="strRadCentralThree" xml:space="preserve">
-    <value>Central three-point difference</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Current culture formatting</value>
-  </data>
-  <data name="strRadForwardOne" xml:space="preserve">
-    <value>Forward one-point difference</value>
   </data>
   <data name="strRadInvariantCulture" xml:space="preserve">
     <value>Invariant culture formatting</value>
