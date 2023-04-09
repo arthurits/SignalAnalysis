@@ -19,7 +19,7 @@ If you find this software useful, please consider supporting it!</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ScottPlot.WinForms" Version="4.1.60" />
+    <PackageReference Include="ScottPlot.WinForms" Version="4.1.62" />
   </ItemGroup>
 
   <ItemGroup>
