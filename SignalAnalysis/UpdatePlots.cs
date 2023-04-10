@@ -19,22 +19,22 @@ partial class FrmMain
         {
             case AxisType.Points:
                 plotOriginal.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, label: strLabel);
-                plotOriginal.Plot.XAxis.DateTimeFormat(false);
+                plotOriginal.Plot.BottomAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
                 plotOriginal.Plot.AddSignal(signal, Signal.SampleFrequency, label: strLabel);
-                plotOriginal.Plot.XAxis.DateTimeFormat(false);
+                plotOriginal.Plot.BottomAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
                 var sig = plotOriginal.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, label: strLabel);
                 sig.OffsetX = Signal.StartTime.ToOADate();
-                plotOriginal.Plot.XAxis.DateTimeFormat(true);
+                plotOriginal.Plot.BottomAxis.DateTimeFormat(true);
                 break;
         }
 
         plotOriginal.Plot.Title(StringResources.PlotOriginalTitle);
-        plotOriginal.Plot.YLabel(StringResources.PlotOriginalYLabel);
-        plotOriginal.Plot.XLabel(StringResources.PlotOriginalXLabel);
+        plotOriginal.Plot.LeftAxis.Label(StringResources.PlotOriginalYLabel);
+        plotOriginal.Plot.BottomAxis.Label(StringResources.PlotOriginalXLabel);
         //plotOriginal.Plot.AxisAuto(0);
         plotOriginal.Refresh();
     }
@@ -58,8 +58,8 @@ partial class FrmMain
         plot.MarkerShape = ScottPlot.MarkerShape.filledCircle;
         //plotWindow.Plot.AxisAuto(0);
         plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
-        plotWindow.Plot.YLabel(StringResources.PlotWindowYLabel);
-        plotWindow.Plot.XLabel(StringResources.PlotWindowXLabel);
+        plotWindow.Plot.LeftAxis.Label(StringResources.PlotWindowYLabel);
+        plotWindow.Plot.BottomAxis.Label(StringResources.PlotWindowXLabel);
         plotWindow.Refresh();
     }
 
@@ -73,8 +73,8 @@ partial class FrmMain
         //plotApplied.Plot.Clear(typeof(ScottPlot.Plottable.SignalPlot));
         plotApplied.Plot.AddSignal(signal, Signal.SampleFrequency);
         plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
-        plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
-        plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
+        plotApplied.Plot.LeftAxis.Label(StringResources.PlotAppliedYLabel);
+        plotApplied.Plot.BottomAxis.Label(StringResources.PlotAppliedXLabel);
         //plotApplied.Plot.AxisAuto(0);
         plotApplied.Refresh();
     }
@@ -103,8 +103,8 @@ partial class FrmMain
             (progressive ? StringResources.PlotFractalTitle2 : String.Empty) +
             " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
             " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
-        plotFractal.Plot.YLabel(StringResources.PlotFractalYLabel);
-        plotFractal.Plot.XLabel(StringResources.PlotFractalXLabel);
+        plotFractal.Plot.LeftAxis.Label(StringResources.PlotFractalYLabel);
+        plotFractal.Plot.BottomAxis.Label(StringResources.PlotFractalXLabel);
         plotFractal.Plot.AxisAuto(0);
         plotFractal.Refresh();
     }
@@ -142,8 +142,8 @@ partial class FrmMain
         }
 
         plotFractalDistribution.Plot.Title(StringResources.PlotFractalDistributionTitle);
-        plotFractalDistribution.Plot.XLabel(StringResources.PlotFractalDistributionXLabel);
-        plotFractalDistribution.Plot.YLabel(StringResources.PlotFractalDistributionYLabel);
+        plotFractalDistribution.Plot.BottomAxis.Label(StringResources.PlotFractalDistributionXLabel);
+        plotFractalDistribution.Plot.LeftAxis.Label(StringResources.PlotFractalDistributionYLabel);
         plotFractalDistribution.Plot.AxisAuto(0, null);
         plotFractalDistribution.Refresh();
     }
@@ -165,8 +165,8 @@ partial class FrmMain
                 plotFFT.Plot.AddSignal(signal, 2 * (double)(signal.Length - 1) / Signal.SampleFrequency);
         }
         plotFFT.Plot.Title(StringResources.PlotFFTTitle);
-        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
-        plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);
+        plotFFT.Plot.LeftAxis.Label(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
+        plotFFT.Plot.BottomAxis.Label(StringResources.PlotFFTXLabel);
         plotFFT.Plot.AxisAuto(0);
         plotFFT.Refresh();
     }
@@ -189,34 +189,34 @@ partial class FrmMain
             case AxisType.Points:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
                 pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, color: SharedExtensions.Convert(plotDerivative.Plot.Palette.Colors[0]), label: StringResources.FileHeader28);
-                plotDerivative.Plot.XAxis.DateTimeFormat(false);
+                plotDerivative.Plot.BottomAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
                 pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, color: SharedExtensions.Convert(plotDerivative.Plot.Palette.Colors[0]), label: StringResources.FileHeader28);
-                plotDerivative.Plot.XAxis.DateTimeFormat(false);
+                plotDerivative.Plot.BottomAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
                 pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, color: SharedExtensions.Convert(plotDerivative.Plot.Palette.Colors[0]), label: StringResources.FileHeader28);
                 pOriginal.OffsetX = Signal.StartTime.ToOADate();
-                plotDerivative.Plot.XAxis.DateTimeFormat(true);
+                plotDerivative.Plot.BottomAxis.DateTimeFormat(true);
                 break;
         }
 
-        pOriginal.YAxisIndex = 1;
-        pOriginal.XAxisIndex = 0;
-        pDerivative.YAxisIndex = 0;
-        pDerivative.XAxisIndex = 0;
+        pOriginal.YAxisIndex = plotDerivative.Plot.RightAxis.AxisIndex;
+        pOriginal.XAxisIndex = plotDerivative.Plot.BottomAxis.AxisIndex;
+        pDerivative.YAxisIndex = plotDerivative.Plot.LeftAxis.AxisIndex;
+        pDerivative.XAxisIndex = plotDerivative.Plot.BottomAxis.AxisIndex;
 
-        plotDerivative.Plot.YAxis2.Ticks(true);
-        plotDerivative.Plot.YAxis2.Color(pOriginal.Color);
-        plotDerivative.Plot.YAxis2.Label(StringResources.PlotDerivativeYLabel2);
+        plotDerivative.Plot.RightAxis.Ticks(true);
+        plotDerivative.Plot.RightAxis.Color(pOriginal.Color);
+        plotDerivative.Plot.RightAxis.Label(StringResources.PlotDerivativeYLabel2);
 
         plotDerivative.Plot.Title(StringResources.PlotDerivativeTitle);
-        plotDerivative.Plot.XAxis.Label(StringResources.PlotDerivativeXLabel);
-        plotDerivative.Plot.YAxis.Color(pDerivative.Color);
-        plotDerivative.Plot.YAxis.Label(StringResources.PlotDerivativeYLabel1);
+        plotDerivative.Plot.BottomAxis.Label(StringResources.PlotDerivativeXLabel);
+        plotDerivative.Plot.LeftAxis.Color(pDerivative.Color);
+        plotDerivative.Plot.LeftAxis.Label(StringResources.PlotDerivativeYLabel1);
         //plotDerivative.Plot.AxisAuto(0, null);
         plotDerivative.Refresh();
 

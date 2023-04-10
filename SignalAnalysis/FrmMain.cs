@@ -33,6 +33,7 @@ public partial class FrmMain : Form
         this.plotApplied.SnapToPoint = true;
         this.plotFractal.SnapToPoint = true;
         this.plotFFT.SnapToPoint = true;
+        this.plotDerivative.SnapToPoint = true;
 
         // Language initialization
         UpdateUI_Language();
@@ -200,22 +201,22 @@ public partial class FrmMain : Form
         // Update plots
         plotOriginal.CultureUI = _settings.AppCulture;
         plotOriginal.Plot.Title(StringResources.PlotOriginalTitle);
-        plotOriginal.Plot.YLabel(StringResources.PlotOriginalYLabel);
-        plotOriginal.Plot.XLabel(StringResources.PlotOriginalXLabel);
+        plotOriginal.Plot.LeftAxis.Label(StringResources.PlotOriginalYLabel);
+        plotOriginal.Plot.BottomAxis.Label(StringResources.PlotOriginalXLabel);
         plotOriginal.Refresh();
 
         plotWindow.CultureUI = _settings.AppCulture;
         IWindow window = (IWindow)stripComboWindows.SelectedItem;
         if (window is not null)
             plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
-        plotWindow.Plot.YLabel(StringResources.PlotWindowYLabel);
-        plotWindow.Plot.XLabel(StringResources.PlotWindowXLabel);
+        plotWindow.Plot.LeftAxis.Label(StringResources.PlotWindowYLabel);
+        plotWindow.Plot.BottomAxis.Label(StringResources.PlotWindowXLabel);
         plotWindow.Refresh();
 
         plotApplied.CultureUI = _settings.AppCulture;
         plotApplied.Plot.Title(StringResources.PlotAppliedTitle);
-        plotApplied.Plot.YLabel(StringResources.PlotAppliedYLabel);
-        plotApplied.Plot.XLabel(StringResources.PlotAppliedXLabel);
+        plotApplied.Plot.LeftAxis.Label(StringResources.PlotAppliedYLabel);
+        plotApplied.Plot.BottomAxis.Label(StringResources.PlotAppliedXLabel);
         plotApplied.Refresh();
 
         plotFractal.CultureUI = _settings.AppCulture;
@@ -233,20 +234,20 @@ public partial class FrmMain : Form
             double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH)
             );
 
-        plotFractal.Plot.YLabel(StringResources.PlotFractalYLabel);
-        plotFractal.Plot.XLabel(StringResources.PlotFractalXLabel);
+        plotFractal.Plot.LeftAxis.Label(StringResources.PlotFractalYLabel);
+        plotFractal.Plot.BottomAxis.Label(StringResources.PlotFractalXLabel);
         plotFractal.Refresh();
 
         plotFractalDistribution.CultureUI = _settings.AppCulture;
         plotFractalDistribution.Plot.Title(StringResources.PlotFractalDistributionTitle);
-        plotFractalDistribution.Plot.XLabel(StringResources.PlotFractalDistributionXLabel);
-        plotFractalDistribution.Plot.YLabel(StringResources.PlotFractalDistributionYLabel);
+        plotFractalDistribution.Plot.BottomAxis.Label(StringResources.PlotFractalDistributionXLabel);
+        plotFractalDistribution.Plot.LeftAxis.Label(StringResources.PlotFractalDistributionYLabel);
         plotFractalDistribution.Refresh();
 
         plotFFT.CultureUI = _settings.AppCulture;
         plotFFT.Plot.Title(StringResources.PlotFFTTitle);
-        plotFFT.Plot.YLabel(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
-        plotFFT.Plot.XLabel(StringResources.PlotFFTXLabel);
+        plotFFT.Plot.LeftAxis.Label(_settings.PowerSpectra ? StringResources.PlotFFTYLabelPow : StringResources.PlotFFTYLabelMag);
+        plotFFT.Plot.BottomAxis.Label(StringResources.PlotFFTXLabel);
         plotFFT.Refresh();
 
         plotDerivative.CultureUI = _settings.AppCulture;
