@@ -174,7 +174,7 @@ public static class Derivative
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit + step;
 
-        result[0] = 0;
+        result[0] = double.NaN;
         for (int j = 1; j < segments + 1; j++)
         {
             result[j] = (function(x) - function(x - step)) / step;
@@ -216,7 +216,7 @@ public static class Derivative
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit;
 
-        result[segments] = 0;
+        result[segments] = double.NaN;
         for (int j = 0; j < segments; j++)
         {
             result[j] = (function(x + step) - function(x)) / step;
@@ -258,8 +258,8 @@ public static class Derivative
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit + step;
 
-        result[0] = 0;
-        result[segments] = 0;
+        result[0] = double.NaN;
+        result[segments] = double.NaN;
         for (int j = 1; j < segments; j++)
         {
             result[j] = (function(x + step) - function(x - step)) / (2 * step);
@@ -302,10 +302,10 @@ public static class Derivative
         double step2 = 2 * step;
         double x = lowerLimit + step2;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
         for (int j = 2; j < segments - 1; j++)
         {
             result[j] = (function(x - step2) - function(x + step2) + (function(x + step) - function(x - step)) * 8) / (step * 12);
@@ -350,12 +350,12 @@ public static class Derivative
         double step3 = 3 * step;
         double x = lowerLimit + step3;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[2] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
-        result[segments - 2] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[2] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
+        result[segments - 2] = double.NaN;
         for (int j = 3; j < segments - 2; j++)
         {
             result[j] = (function(x + step3) - function(x - step3) + 9 * (function(x - step2) - function(x + step2)) + 45 * (function(x + step) - function(x - step))) / (step * 60);
@@ -402,14 +402,14 @@ public static class Derivative
         double step4 = 4 * step;
         double x = lowerLimit + step4;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[2] = 0;
-        result[3] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
-        result[segments - 2] = 0;
-        result[segments - 3] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[2] = double.NaN;
+        result[3] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
+        result[segments - 2] = double.NaN;
+        result[segments - 3] = double.NaN;
         for (int j = 4; j < segments - 3; j++)
         {
             result[j] = (function(x - step4) - function(x + step4) + (32 / 3) * (function(x + step3) - function(x - step3)) + 56 * (function(x - step2) - function(x + step2)) + 224 * (function(x + step) - function(x - step))) / (step * 280);
@@ -455,8 +455,8 @@ public static class Derivative
         double step = (upperLimit - lowerLimit) / segments;
         double x = lowerLimit + step;
 
-        result[0] = 0;
-        result[segments] = 0;
+        result[0] = double.NaN;
+        result[segments] = double.NaN;
         for (int j = 1; j < segments; j++)
         {
             result[j] = (function(x + step) - function(x - step)) / (2 * step);
@@ -500,10 +500,10 @@ public static class Derivative
         double step2 = 2 * step;
         double x = lowerLimit + step2;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
         for (int j = 2; j < segments - 1; j++)
         {
             result[j] = (2 * (function(x + step2) - function(x - step2)) + function(x + step) - function(x - step)) / (step * 10);
@@ -548,12 +548,12 @@ public static class Derivative
         double step3 = 3 * step;
         double x = lowerLimit + step3;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[2] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
-        result[segments - 2] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[2] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
+        result[segments - 2] = double.NaN;
         for (int j = 3; j < segments - 2; j++)
         {
             result[j] = (3 * (function(x + step3) - function(x - step3)) + 2 * (function(x + step2) - function(x - step2)) + function(x + step) - function(x - step)) / (step * 28);
@@ -600,14 +600,14 @@ public static class Derivative
         double step4 = 4 * step;
         double x = lowerLimit + step4;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[2] = 0;
-        result[3] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
-        result[segments - 2] = 0;
-        result[segments - 3] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[2] = double.NaN;
+        result[3] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
+        result[segments - 2] = double.NaN;
+        result[segments - 3] = double.NaN;
         for (int j = 4; j < segments - 3; j++)
         {
             result[j] = (4 * (function(x + step4) - function(x - step4)) + 3 * (function(x + step3) - function(x - step3)) + 2 * (function(x + step2) - function(x - step2)) + function(x + step) - function(x - step)) / (step * 60);
@@ -654,10 +654,10 @@ public static class Derivative
         double step2 = 2 * step;
         double x = lowerLimit + step2;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
         for (int j = 2; j < segments - 1; j++)
         {
             result[j] = (function(x - step2) - function(x + step2) + 8 * (function(x + step) - function(x - step))) / (step * 12);
@@ -703,12 +703,12 @@ public static class Derivative
         double step3 = 3 * step;
         double x = lowerLimit + step3;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[2] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
-        result[segments - 2] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[2] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
+        result[segments - 2] = double.NaN;
         for (int j = 3; j < segments - 2; j++)
         {
             result[j] = (22 * (function(x - step3) - function(x + step3)) + 67 * (function(x + step2) - function(x - step2)) + 58 * (function(x + step) - function(x - step))) / (step * 252);
@@ -755,14 +755,14 @@ public static class Derivative
         double step4 = 4 * step;
         double x = lowerLimit + step4;
 
-        result[0] = 0;
-        result[1] = 0;
-        result[2] = 0;
-        result[3] = 0;
-        result[segments] = 0;
-        result[segments - 1] = 0;
-        result[segments - 2] = 0;
-        result[segments - 3] = 0;
+        result[0] = double.NaN;
+        result[1] = double.NaN;
+        result[2] = double.NaN;
+        result[3] = double.NaN;
+        result[segments] = double.NaN;
+        result[segments - 1] = double.NaN;
+        result[segments - 2] = double.NaN;
+        result[segments - 3] = double.NaN;
         for (int j = 4; j < segments - 3; j++)
         {
             result[j] = (86 * (function(x - step4) - function(x + step4)) + 142 * (function(x + step3) - function(x - step3)) + 193 * (function(x + step2) - function(x - step2)) + 126 * (function(x + step) - function(x - step))) / (step * 1188);

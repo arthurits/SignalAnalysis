@@ -1,4 +1,5 @@
 ﻿using ScottPlot;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SignalAnalysis;
 
@@ -398,6 +399,20 @@ partial class FrmMain
             lowerIndex: 0,
             upperIndex: signal.Length - 1,
             samplingFrequency: Signal.SampleFrequency);
+
+        // Replacing NaN values using LinQ
+        Results.Derivative = Results.Derivative.Select(x => double.IsNaN(x) ? 0 : x).ToArray();
+
+        // Replacing NaN values using for loop
+        //double x;
+        //for (int i = 0; i < Results.Derivative.Length; i++)
+        //{
+        //    x = Results.Derivative[i];
+        //    Results.Derivative[i] = double.IsNaN(x) ? 0 : x;
+        //}
+
+        // This doesn't quite work
+        //Array.ForEach(Results.Derivative, x => x = double.IsNaN(x) ? 0 : x);
     }
 
     /// <summary>
