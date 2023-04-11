@@ -400,16 +400,26 @@ partial class FrmMain
             upperIndex: signal.Length - 1,
             samplingFrequency: Signal.SampleFrequency);
 
-        // Replacing NaN values using LinQ
+        // Replacing NaN values using LinQ since ScottPlot throws an exception for NaN values
+        //var watch = new System.Diagnostics.Stopwatch();
+        //watch.Start();
         Results.Derivative = Results.Derivative.Select(x => double.IsNaN(x) ? 0 : x).ToArray();
+        //watch.Stop();
+        //System.Diagnostics.Debug.WriteLine($"LinQ execution time: {watch.ElapsedMilliseconds} ms");
 
-        // Replacing NaN values using for loop
+        //if (!watch.IsRunning)
+        //    watch.Restart(); // Reset time to 0 and start measuring
+
+        // Replacing NaN values using a for loop
         //double x;
         //for (int i = 0; i < Results.Derivative.Length; i++)
         //{
         //    x = Results.Derivative[i];
         //    Results.Derivative[i] = double.IsNaN(x) ? 0 : x;
         //}
+        
+        //watch.Stop();
+        //System.Diagnostics.Debug.WriteLine($"For-loop execution time: {watch.ElapsedMilliseconds} ms");
 
         // This doesn't quite work
         //Array.ForEach(Results.Derivative, x => x = double.IsNaN(x) ? 0 : x);
