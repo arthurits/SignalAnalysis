@@ -2,7 +2,7 @@
 
 public class SignalStats
 {
-    public SignalStats(double Max = 0, double Min = 0, double Avg = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0)
+    public SignalStats(double Max = 0, double Min = 0, double Avg = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double IntegralValue = 0)
     {
         Maximum = Max;
         Minimum = Min;
@@ -14,6 +14,7 @@ public class SignalStats
         ShannonEntropy = ShannEn;
         EntropyBit = BitEn;
         IdealEntropy = IdealEn;
+        Integral = IntegralValue;
     }
 
     public double Maximum { get; set; } = 0;
