@@ -60,8 +60,9 @@ public partial class FrmMain : Form
                                                     MessageBoxIcon.Question,
                                                     MessageBoxDefaultButton.Button2))
             {
-                // Cancel
+                // Cancel the form's closing
                 e.Cancel = true;
+                return;
             }
         }
 
