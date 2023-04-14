@@ -6,6 +6,300 @@ namespace SignalAnalysis;
 partial class FrmMain
 {
     /// <summary>
+    /// Compute stats and update the plots and results
+    /// This is the main computing function that calls sub-functions
+    /// </summary>
+    /// <param name="series">Data series to be analised</param>
+    /// <param name="deletePreviousResults"><see langword="True"/> if the previous results data should be delete and new results should be reinitialised</param>
+    /// <param name="stats"><see langword="True"/> if the descriptive statistics will be computed</param>
+    /// <param name="derivative"><see langword="True"/> if the derivative will be computed</param>
+    /// <param name="integral"><see langword="True"/> if the integral will be computed</param>
+    /// <param name="fractal"><see langword="True"/> if the fractal dimension will be computed</param>
+    /// <param name="progressive"><see langword="True"/> if the </param>
+    /// <param name="entropy"><see langword="True"/></param>
+    /// <param name="fft"><see langword="True"/></param>
+    /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
+    /// <returns></returns>
+    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false,  bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
+    {
+        // Clip signal data to the user-specified bounds 
+        if (Signal.Data is null || Signal.Data.Length == 0) return;
+        double[] signalClipped = Signal.Data[series][Signal.IndexStart..(Signal.IndexEnd + 1)];
+        if (signalClipped is null || signalClipped.Length == 0) return;
+        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
+
+        // Show waiting cursor
+        var cursor = this.Cursor;
+        Cursor = Cursors.WaitCursor;
+        this.UseWaitCursor = true;
+
+        // Compute data;
+        double[] signalWindowed = Array.Empty<double>();
+        IWindow? window = (IWindow)stripComboWindows.SelectedItem;
+        tokenSource?.Dispose();
+        tokenSource = new();
+        token = tokenSource.Token;
+
+        if (deletePreviousResults)
+            Results = new();
+
+        statsTask = Task.Run(() =>
+        {
+            try
+            {
+                if (stats) ComputeStatistics(signalClipped);
+                if (derivative) ComputeDerivative(signalClipped);
+                if (integral) ComputeIntegral(signalClipped);
+                if (fractal) ComputeFractal(signalClipped, progressive);
+                if (entropy) ComputeEntropy(signalClipped);
+                if (fft) signalWindowed = ComputeFFT(signalClipped, window);
+            }
+            catch (OperationCanceledException ex)
+            {
+                // This is needed beacuse this exception is thrown while the cumulative fractal dimension is computed from another Task in "UpdateStatsPlots".
+                Invoke(() =>
+                {
+                    string msg = string.Empty;
+                    string title = string.Empty;
+                    switch (ex.Message)
+                    {
+                        case "CancelDerivative":
+                            msg = StringResources.MsgBoxTaskDerivativeCancel;
+                            title = StringResources.MsgBoxTaskDerivativeCancelTitle;
+                            _settings.ComputeDerivative = false;
+                            this.statusStripLabelExDerivative.Checked = false;
+                            break;
+                        case "CancelFractal":
+                            msg = StringResources.MsgBoxTaskFractalCancel;
+                            title = StringResources.MsgBoxTaskFractalCancelTitle;
+                            _settings.CumulativeDimension = false;
+                            this.statusStripLabelExCumulative.Checked = false;
+                            break;
+                        case "CancelEntropy":
+                            msg = StringResources.MsgBoxTaskEntropyCancel;
+                            title = StringResources.MsgBoxTaskEntropyCancelTitle;
+                            _settings.Entropy = false;
+                            this.statusStripLabelExEntropy.Checked = false;
+                            break;
+                    }
+                    using (new CenterWinDialog(this))
+                    {
+                        MessageBox.Show(this,
+                              msg,
+                              title,
+                              MessageBoxButtons.OK,
+                              MessageBoxIcon.Stop);
+                    }
+                });
+            }
+            finally
+            {
+                tokenSource.Dispose();
+            }
+        }, token);
+        await statsTask;
+
+        // Show results on plots
+        _settings.CrossHair = false;
+        statusStripLabelExCrossHair.Checked = false;
+        if (stats) PlotOriginal(signalClipped, seriesName ?? string.Empty);
+        if (derivative) PlotDerivative(signalClipped, seriesName ?? string.Empty);
+        if (fractal)
+        {
+            PlotFractal(signalClipped, seriesName ?? string.Empty, _settings.CumulativeDimension);
+            PlotFractalDistribution(Results.FractalDimension, Results.FractalVariance);
+        }
+        if (fft)
+        {
+            if (window is not null) PlotKernel(window, signalClipped.Length);
+            if (signalWindowed.Length > 0) PlotWindowedSignal(signalWindowed);
+            PlotFFT(powerSpectra ? Results.FFTpower : Results.FFTmagnitude);
+        }
+
+        // Show text results
+        //if (stats || fractal || entropy || integral)
+            txtStats.Text = Results.ToString(
+                _settings.AppCulture,
+                _settings.ComputeIntegration,
+                _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
+
+        // Restore the cursor
+        this.UseWaitCursor = false;
+        Cursor = cursor;
+    }
+
+    /// <summary>
+    /// Computes the maximum, minimum and average values.
+    /// </summary>
+    /// <param name="signal">1D data array values</param>
+    private void ComputeStatistics(double[] signal)
+    {
+        try
+        {
+            // Compute average, max, and min descriptive statistics
+            double max = signal[0], min = signal[0], sum = 0;
+
+            for (int i = 0; i < signal.Length; i++)
+            {
+                if (signal[i] > max) max = signal[i];
+                if (signal[i] < min) min = signal[i];
+                sum += signal[i];
+            }
+            double avg = sum / signal.Length;
+
+            Results.Maximum = max;
+            Results.Minimum = min;
+            Results.Average = avg;
+        }
+        catch (Exception ex)
+        {
+            Invoke(() =>
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show(this,
+                        String.Format(_settings.AppCulture, StringResources.MsgBoxErrorDescriptiveStats, ex.Message),
+                        StringResources.MsgBoxErrorDescriptiveStatsTitle,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            });
+        }
+    }
+
+    /// <summary>
+    /// Computes the derivative of a 1D data array.
+    /// </summary>
+    /// <param name="signal">1D data array values whose values are expected to be uniformly spaced</param>
+    /// <exception cref="OperationCanceledException">This is thrown if the token is cancelled whenever the user presses the ESC button</exception>
+    private void ComputeDerivative(double[] signal)
+    {
+        Results.Derivative = Derivative.Derivate(
+            array: signal,
+            method: _settings.DerivativeAlgorithm,
+            lowerIndex: 0,
+            upperIndex: signal.Length - 1,
+            samplingFrequency: Signal.SampleFrequency);
+
+        // Replacing NaN values using LinQ since ScottPlot throws an exception for NaN values
+        //var watch = new System.Diagnostics.Stopwatch();
+        //watch.Start();
+        Results.Derivative = Results.Derivative.Select(x => double.IsNaN(x) ? 0 : x).ToArray();
+        //watch.Stop();
+        //System.Diagnostics.Debug.WriteLine($"LinQ execution time: {watch.ElapsedMilliseconds} ms");
+
+        //if (!watch.IsRunning)
+        //    watch.Restart(); // Reset time to 0 and start measuring
+
+        // Replacing NaN values using a for loop
+        //double x;
+        //for (int i = 0; i < Results.Derivative.Length; i++)
+        //{
+        //    x = Results.Derivative[i];
+        //    Results.Derivative[i] = double.IsNaN(x) ? 0 : x;
+        //}
+        
+        //watch.Stop();
+        //System.Diagnostics.Debug.WriteLine($"For-loop execution time: {watch.ElapsedMilliseconds} ms");
+
+        // This doesn't quite work
+        //Array.ForEach(Results.Derivative, x => x = double.IsNaN(x) ? 0 : x);
+    }
+
+    /// <summary>
+    /// Computes the integral value of a 1D data array.
+    /// </summary>
+    /// <param name="signal">1D data array, whose values are expected to be uniformly spaced</param>
+    private void ComputeIntegral(double[] signal)
+    {
+        Results.Integral = Integration.Integrate(
+            array: signal,
+            method: _settings.IntegrationAlgorithm,
+            lowerIndex: signal.GetLowerBound(0),
+            upperIndex: signal.GetUpperBound(0),
+            samplingFrequency: Signal.SampleFrequency,
+            absoluteIntegral: _settings.AbsoluteIntegral,
+            pad: _settings.PadIntegral);   
+    }
+
+    /// <summary>
+    /// Computes the fractal dimension of a 1D data array.
+    /// </summary>
+    /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
+    /// <param name="progressive"></param>
+    private void ComputeFractal(double[] signal, bool progressive = false)
+    {
+        // Compute fractal values
+        FractalDimension.ComputeDimension(Signal.SampleFrequency, signal, token, progressive);
+        Results.FractalDimension = FractalDimension.DimensionSingle;
+        Results.FractalVariance = FractalDimension.VarianceH;
+    }
+
+    /// <summary>
+    /// Computes entropy values (Shannon, approximate, entropy bit, and ideal entropy).
+    /// </summary>
+    /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
+    private void ComputeEntropy(double[] signal)
+    {
+        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
+        (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy) = Complexity.ShannonEntropy(signal);
+    }
+
+    /// <summary>
+    /// Computes the FFT 
+    /// </summary>
+    /// <param name="signal">1D data array whose values are expected to be uniformly spaced and and a power of 2 (otherwise it's rounded down to the closest 2^n)</param>
+    /// <param name="window">Window function</param>
+    /// <returns>The windowed signal</returns>
+    private double[] ComputeFFT(double[] signal, IWindow? window)
+    {
+        //IWindow window = (IWindow)stripComboWindows.SelectedItem;
+        if (window is null) return Array.Empty<double>();
+
+        double[] signalWindow = Array.Empty<double>();
+        double[] signalFFT = Array.Empty<double>();
+
+        // Round down to the next integer (Adjust to the lowest power of 2)
+        int power2 = (int)Math.Floor(Math.Log2(signal.Length));
+        //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
+
+        // Apply window to signal
+        signalWindow = new double[(int)Math.Pow(2, power2)];
+        Array.Copy(signal, signalWindow, Math.Min(signalWindow.Length, signal.Length));
+        window.ApplyInPlace(signalWindow);
+
+        try
+        {
+            signalFFT = FftSharp.Transform.FFTpower(signalWindow);
+            // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
+            signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
+            Results.FFTpower = signalFFT;
+
+            signalFFT = FftSharp.Transform.FFTmagnitude(signalWindow);
+            Results.FFTmagnitude = signalFFT;
+
+            signalFFT = _settings.PowerSpectra ? Results.FFTpower : Results.FFTmagnitude;
+            Results.FFTfrequencies = FftSharp.Transform.FFTfreq(Signal.SampleFrequency, signalFFT.Length);
+        }
+        catch (Exception ex)
+        {
+            Invoke(() =>
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show(this,
+                        String.Format(_settings.AppCulture, StringResources.MsgBoxErrorFFT, ex.Message),
+                        StringResources.MsgBoxErrorFFTTitle,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            });
+        }
+
+        return signalWindow;
+    }
+
+    /// <summary>
     /// Plots the original data into <see cref="plotOriginal"/>.
     /// </summary>
     /// <param name="signal">Data values to be plotted</param>
@@ -222,300 +516,4 @@ partial class FrmMain
         plotDerivative.Refresh();
 
     }
-
-    /// <summary>
-    /// Compute stats and update the plots and results
-    /// This is the main computing function that calls sub-functions
-    /// </summary>
-    /// <param name="series">Data series to be analised</param>
-    /// <param name="deletePreviousResults"><see langword="True"/> if the previous results data should be delete and new results should be reinitialised</param>
-    /// <param name="stats"><see langword="True"/> if the descriptive statistics will be computed</param>
-    /// <param name="derivative"><see langword="True"/> if the derivative will be computed</param>
-    /// <param name="integral"><see langword="True"/> if the integral will be computed</param>
-    /// <param name="fractal"><see langword="True"/> if the fractal dimension will be computed</param>
-    /// <param name="progressive"><see langword="True"/> if the </param>
-    /// <param name="entropy"><see langword="True"/></param>
-    /// <param name="fft"><see langword="True"/></param>
-    /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
-    /// <returns></returns>
-    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false,  bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
-    {
-        // Clip signal data to the user-specified bounds 
-        if (Signal.Data is null || Signal.Data.Length == 0) return;
-        double[] signalClipped = Signal.Data[series][Signal.IndexStart..(Signal.IndexEnd + 1)];
-        if (signalClipped is null || signalClipped.Length == 0) return;
-        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
-
-        // Show waiting cursor
-        var cursor = this.Cursor;
-        Cursor = Cursors.WaitCursor;
-        this.UseWaitCursor = true;
-
-        // Compute data;
-        double[] signalWindowed = Array.Empty<double>();
-        IWindow? window = (IWindow)stripComboWindows.SelectedItem;
-        tokenSource?.Dispose();
-        tokenSource = new();
-        token = tokenSource.Token;
-
-        if (deletePreviousResults)
-            Results = new();
-
-        statsTask = Task.Run(() =>
-        {
-            try
-            {
-                if (stats) ComputeStatistics(signalClipped);
-                if (derivative) ComputeDerivative(signalClipped);
-                if (integral) ComputeIntegral(signalClipped);
-                if (fractal) ComputeFractal(signalClipped, progressive);
-                if (entropy) ComputeEntropy(signalClipped);
-                if (fft) signalWindowed = ComputeFFT(signalClipped, window);
-            }
-            catch (OperationCanceledException ex)
-            {
-                // This is needed beacuse this exception is thrown while the cumulative fractal dimension is computed from another Task in "UpdateStatsPlots".
-                Invoke(() =>
-                {
-                    string msg = string.Empty;
-                    string title = string.Empty;
-                    switch (ex.Message)
-                    {
-                        case "CancelDerivative":
-                            msg = StringResources.MsgBoxTaskDerivativeCancel;
-                            title = StringResources.MsgBoxTaskDerivativeCancelTitle;
-                            _settings.ComputeDerivative = false;
-                            this.statusStripLabelExDerivative.Checked = false;
-                            break;
-                        case "CancelFractal":
-                            msg = StringResources.MsgBoxTaskFractalCancel;
-                            title = StringResources.MsgBoxTaskFractalCancelTitle;
-                            _settings.CumulativeDimension = false;
-                            this.statusStripLabelExCumulative.Checked = false;
-                            break;
-                        case "CancelEntropy":
-                            msg = StringResources.MsgBoxTaskEntropyCancel;
-                            title = StringResources.MsgBoxTaskEntropyCancelTitle;
-                            _settings.Entropy = false;
-                            this.statusStripLabelExEntropy.Checked = false;
-                            break;
-                    }
-                    using (new CenterWinDialog(this))
-                    {
-                        MessageBox.Show(this,
-                              msg,
-                              title,
-                              MessageBoxButtons.OK,
-                              MessageBoxIcon.Stop);
-                    }
-                });
-            }
-            finally
-            {
-                tokenSource.Dispose();
-            }
-        }, token);
-        await statsTask;
-
-        // Show results on plots
-        _settings.CrossHair = false;
-        statusStripLabelExCrossHair.Checked = false;
-        if (stats) PlotOriginal(signalClipped, seriesName ?? string.Empty);
-        if (derivative) PlotDerivative(signalClipped, seriesName ?? string.Empty);
-        if (fractal)
-        {
-            PlotFractal(signalClipped, seriesName ?? string.Empty, _settings.CumulativeDimension);
-            PlotFractalDistribution(Results.FractalDimension, Results.FractalVariance);
-        }
-        if (fft)
-        {
-            if (window is not null) PlotKernel(window, signalClipped.Length);
-            if (signalWindowed.Length > 0) PlotWindowedSignal(signalWindowed);
-            PlotFFT(powerSpectra ? Results.FFTpower : Results.FFTmagnitude);
-        }
-
-        // Show text results
-        //if (stats || fractal || entropy || integral)
-            txtStats.Text = Results.ToString(
-                _settings.AppCulture,
-                _settings.ComputeIntegration,
-                _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
-
-        // Restore the cursor
-        this.UseWaitCursor = false;
-        Cursor = cursor;
-    }
-
-
-    /// <summary>
-    /// Computes the maximum, minimum and average values.
-    /// </summary>
-    /// <param name="signal">1D data array values</param>
-    private void ComputeStatistics(double[] signal)
-    {
-        try
-        {
-            // Compute average, max, and min descriptive statistics
-            double max = signal[0], min = signal[0], sum = 0;
-
-            for (int i = 0; i < signal.Length; i++)
-            {
-                if (signal[i] > max) max = signal[i];
-                if (signal[i] < min) min = signal[i];
-                sum += signal[i];
-            }
-            double avg = sum / signal.Length;
-
-            Results.Maximum = max;
-            Results.Minimum = min;
-            Results.Average = avg;
-        }
-        catch (Exception ex)
-        {
-            Invoke(() =>
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show(this,
-                        String.Format(_settings.AppCulture, StringResources.MsgBoxErrorDescriptiveStats, ex.Message),
-                        StringResources.MsgBoxErrorDescriptiveStatsTitle,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            });
-        }
-    }
-
-    /// <summary>
-    /// Computes the derivative of a 1D data array.
-    /// </summary>
-    /// <param name="signal">1D data array values whose values are expected to be uniformly spaced</param>
-    /// <exception cref="OperationCanceledException">This is thrown if the token is cancelled whenever the user presses the ESC button</exception>
-    private void ComputeDerivative(double[] signal)
-    {
-        Results.Derivative = Derivative.Derivate(
-            array: signal,
-            method: _settings.DerivativeAlgorithm,
-            lowerIndex: 0,
-            upperIndex: signal.Length - 1,
-            samplingFrequency: Signal.SampleFrequency);
-
-        // Replacing NaN values using LinQ since ScottPlot throws an exception for NaN values
-        //var watch = new System.Diagnostics.Stopwatch();
-        //watch.Start();
-        Results.Derivative = Results.Derivative.Select(x => double.IsNaN(x) ? 0 : x).ToArray();
-        //watch.Stop();
-        //System.Diagnostics.Debug.WriteLine($"LinQ execution time: {watch.ElapsedMilliseconds} ms");
-
-        //if (!watch.IsRunning)
-        //    watch.Restart(); // Reset time to 0 and start measuring
-
-        // Replacing NaN values using a for loop
-        //double x;
-        //for (int i = 0; i < Results.Derivative.Length; i++)
-        //{
-        //    x = Results.Derivative[i];
-        //    Results.Derivative[i] = double.IsNaN(x) ? 0 : x;
-        //}
-        
-        //watch.Stop();
-        //System.Diagnostics.Debug.WriteLine($"For-loop execution time: {watch.ElapsedMilliseconds} ms");
-
-        // This doesn't quite work
-        //Array.ForEach(Results.Derivative, x => x = double.IsNaN(x) ? 0 : x);
-    }
-
-    /// <summary>
-    /// Computes the integral value of a 1D data array.
-    /// </summary>
-    /// <param name="signal">1D data array, whose values are expected to be uniformly spaced</param>
-    private void ComputeIntegral(double[] signal)
-    {
-        Results.Integral = Integration.Integrate(
-            array: signal,
-            method: _settings.IntegrationAlgorithm,
-            lowerIndex: signal.GetLowerBound(0),
-            upperIndex: signal.GetUpperBound(0),
-            samplingFrequency: Signal.SampleFrequency,
-            absoluteIntegral: _settings.AbsoluteIntegral,
-            pad: _settings.PadIntegral);   
-    }
-
-    /// <summary>
-    /// Computes the fractal dimension of a 1D data array.
-    /// </summary>
-    /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
-    /// <param name="progressive"></param>
-    private void ComputeFractal(double[] signal, bool progressive = false)
-    {
-        // Compute fractal values
-        FractalDimension.ComputeDimension(Signal.SampleFrequency, signal, token, progressive);
-        Results.FractalDimension = FractalDimension.DimensionSingle;
-        Results.FractalVariance = FractalDimension.VarianceH;
-    }
-
-    /// <summary>
-    /// Computes entropy values (Shannon, approximate, entropy bit, and ideal entropy).
-    /// </summary>
-    /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
-    private void ComputeEntropy(double[] signal)
-    {
-        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
-        (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy) = Complexity.ShannonEntropy(signal);
-    }
-
-    /// <summary>
-    /// Computes the FFT 
-    /// </summary>
-    /// <param name="signal">1D data array whose values are expected to be uniformly spaced and and a power of 2 (otherwise it's rounded down to the closest 2^n)</param>
-    /// <param name="window">Window function</param>
-    /// <returns>The windowed signal</returns>
-    private double[] ComputeFFT(double[] signal, IWindow? window)
-    {
-        //IWindow window = (IWindow)stripComboWindows.SelectedItem;
-        if (window is null) return Array.Empty<double>();
-
-        double[] signalWindow = Array.Empty<double>();
-        double[] signalFFT = Array.Empty<double>();
-
-        // Round down to the next integer (Adjust to the lowest power of 2)
-        int power2 = (int)Math.Floor(Math.Log2(signal.Length));
-        //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
-
-        // Apply window to signal
-        signalWindow = new double[(int)Math.Pow(2, power2)];
-        Array.Copy(signal, signalWindow, Math.Min(signalWindow.Length, signal.Length));
-        window.ApplyInPlace(signalWindow);
-
-        try
-        {
-            signalFFT = FftSharp.Transform.FFTpower(signalWindow);
-            // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
-            signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
-            Results.FFTpower = signalFFT;
-
-            signalFFT = FftSharp.Transform.FFTmagnitude(signalWindow);
-            Results.FFTmagnitude = signalFFT;
-
-            signalFFT = _settings.PowerSpectra ? Results.FFTpower : Results.FFTmagnitude;
-            Results.FFTfrequencies = FftSharp.Transform.FFTfreq(Signal.SampleFrequency, signalFFT.Length);
-        }
-        catch (Exception ex)
-        {
-            Invoke(() =>
-            {
-                using (new CenterWinDialog(this))
-                {
-                    MessageBox.Show(this,
-                        String.Format(_settings.AppCulture, StringResources.MsgBoxErrorFFT, ex.Message),
-                        StringResources.MsgBoxErrorFFTTitle,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            });
-        }
-
-        return signalWindow;
-    }
-
 }
