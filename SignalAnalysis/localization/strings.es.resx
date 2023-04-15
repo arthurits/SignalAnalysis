@@ -195,7 +195,7 @@ los campos a sus valores por defecto?</value>
     <value>¿Restablecer opciones?</value>
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
-    <value>Error al leer el archivo de ajustes.
+    <value>Error al leer el archivo de configuración.
 
 {0}
 
