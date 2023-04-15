@@ -7,11 +7,12 @@ public partial class FrmLanguage : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly ClassSettings? Settings;
+    private readonly string _baseName = "SignalAnalysis.localization.strings";
 
     public FrmLanguage()
     {
         InitializeComponent();
-        FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
+        FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
     }
 
     public FrmLanguage(ClassSettings settings)
@@ -58,7 +59,7 @@ public partial class FrmLanguage : Form
             UpdateUI_Language();
             
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -71,7 +72,7 @@ public partial class FrmLanguage : Form
             UpdateUI_Language();
             
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -87,7 +88,7 @@ public partial class FrmLanguage : Form
                 UpdateUI_Language();
 
                 int index = cboAllCultures.SelectedIndex;
-                FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
+                FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
                 cboAllCultures.SelectedIndex = index;
             }
         }
@@ -100,7 +101,7 @@ public partial class FrmLanguage : Form
         {
             _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmLanguage).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
         }
     }
 

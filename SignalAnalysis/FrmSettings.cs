@@ -7,13 +7,14 @@ public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly ClassSettings? Settings;
+    private readonly string _baseName = "SignalAnalysis.localization.strings";
     private int _derivativeAlgorithm;
     private int _integrationAlgorithm;
 
     public FrmSettings()
     {
         InitializeComponent();
-        FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+        FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
     }
 
     public FrmSettings(ClassSettings settings)
@@ -129,7 +130,7 @@ public partial class FrmSettings : Form
             UpdateUI_Language();
             
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -142,7 +143,7 @@ public partial class FrmSettings : Form
             UpdateUI_Language();
             
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -157,7 +158,7 @@ public partial class FrmSettings : Form
                 UpdateUI_Language();
                 
             int index = cboAllCultures.SelectedIndex;
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
         }
     }
@@ -170,7 +171,7 @@ public partial class FrmSettings : Form
             _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
             
-            FillDefinedCultures("SignalAnalysis.localization.strings", typeof(FrmSettings).Assembly);
+            FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
         }
     }
 
