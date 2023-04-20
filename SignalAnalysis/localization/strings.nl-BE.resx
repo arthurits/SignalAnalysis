@@ -273,6 +273,9 @@ In plaats daarvan worden standaardwaarden gebruikt.</value>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Afgeleide</value>
   </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Variantie</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

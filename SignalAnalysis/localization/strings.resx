@@ -315,6 +315,9 @@ Default values will be used instead.</value>
     <value>Integral value</value>
     <comment>Column text header in exported files</comment>
   </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Variance</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

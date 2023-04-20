@@ -296,6 +296,9 @@ Standardwerte werden verwendet.</value>
   <data name="strFileHeader31" xml:space="preserve">
     <value>Integraler Wert</value>
   </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Varianz</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

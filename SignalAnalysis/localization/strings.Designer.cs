@@ -592,6 +592,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Variance.
+        /// </summary>
+        internal static string strFileHeader32 {
+            get {
+                return ResourceManager.GetString("strFileHeader32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to : .
         /// </summary>
         internal static string strFileHeaderColon {

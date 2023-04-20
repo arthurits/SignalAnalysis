@@ -273,6 +273,9 @@ Os valores padrão serão utilizados.</value>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivada</value>
   </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Variância</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

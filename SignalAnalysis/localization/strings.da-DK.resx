@@ -272,6 +272,9 @@ Standardværdier vil blive benyttet i stedet.</value>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Afledt</value>
   </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Varians</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

@@ -273,6 +273,9 @@ Standardverdier vil bli benyttet i stedet.</value>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivativ</value>
   </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Varians</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

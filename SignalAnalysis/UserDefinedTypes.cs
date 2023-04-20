@@ -2,11 +2,12 @@
 
 public class SignalStats
 {
-    public SignalStats(double Max = 0, double Min = 0, double Avg = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double IntegralValue = 0)
+    public SignalStats(double Max = 0, double Min = 0, double Avg = 0, double Var = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double IntegralValue = 0)
     {
         Maximum = Max;
         Minimum = Min;
         Average = Avg;
+        Variance = Var;
         FractalDimension = FractalDim;
         FractalVariance = FractalVar;
         ApproximateEntropy = AppEn;
@@ -20,6 +21,7 @@ public class SignalStats
     public double Maximum { get; set; } = 0;
     public double Minimum { get; set; } = 0;
     public double Average { get; set; } = 0;
+    public double Variance { get; set; } = 0;
     public double FractalDimension { get; set; } = 0;
     public double FractalVariance { get; set; } = 0;
     public double ApproximateEntropy { get; set; } = 0;
@@ -38,6 +40,7 @@ public class SignalStats
 
     public string ToString(System.Globalization.CultureInfo culture, bool integral = false, string integralAlgorithm = "") =>
         $"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Average.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"Variance{StringResources.FileHeaderColon}{Variance.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Maximum.ToString("0.##", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Minimum.ToString("0.##", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{FractalDimension.ToString("0.########", culture)}{Environment.NewLine}" +

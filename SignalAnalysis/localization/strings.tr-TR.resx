@@ -300,6 +300,9 @@ Bunun yerine varsayılan değerler kullanılacaktır.</value>
   <data name="strFileHeader31" xml:space="preserve">
     <value>Integral value</value>
   </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Varyans</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
