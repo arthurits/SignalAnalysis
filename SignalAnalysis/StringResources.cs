@@ -52,6 +52,7 @@ public static class StringResources
     public static string FileHeader29 => StringRM.GetString("strFileHeader29", Culture) ?? "Differentiation algorithm";
     public static string FileHeader30 => StringRM.GetString("strFileHeader30", Culture) ?? "Integration algorithm";
     public static string FileHeader31 => StringRM.GetString("strFileHeader31", Culture) ?? "Integral value";
+    public static string FileHeader32 => StringRM.GetString("strFileHeader32", Culture) ?? "Variance";
 
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 
