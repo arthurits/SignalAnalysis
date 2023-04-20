@@ -601,6 +601,51 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BoxPlot lower limit.
+        /// </summary>
+        internal static string strFileHeader33 {
+            get {
+                return ResourceManager.GetString("strFileHeader33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BoxPlot upper limit.
+        /// </summary>
+        internal static string strFileHeader34 {
+            get {
+                return ResourceManager.GetString("strFileHeader34", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quartile 1 (25%).
+        /// </summary>
+        internal static string strFileHeader35 {
+            get {
+                return ResourceManager.GetString("strFileHeader35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quartile 2 (50%).
+        /// </summary>
+        internal static string strFileHeader36 {
+            get {
+                return ResourceManager.GetString("strFileHeader36", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quartile 3 (75%).
+        /// </summary>
+        internal static string strFileHeader37 {
+            get {
+                return ResourceManager.GetString("strFileHeader37", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to : .
         /// </summary>
         internal static string strFileHeaderColon {

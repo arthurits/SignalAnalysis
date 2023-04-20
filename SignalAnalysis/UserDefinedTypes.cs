@@ -48,6 +48,11 @@ public class SignalStats
         $"{StringResources.FileHeader32}{StringResources.FileHeaderColon}{Variance.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Maximum.ToString("0.##", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Minimum.ToString("0.##", culture)}{Environment.NewLine}" +
+        $"{StringResources.FileHeader33}{StringResources.FileHeaderColon}{BoxPlotMin.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"{StringResources.FileHeader35}{StringResources.FileHeaderColon}{Q1.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"{StringResources.FileHeader36}{StringResources.FileHeaderColon}{Q2.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"{StringResources.FileHeader37}{StringResources.FileHeaderColon}{Q3.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"{StringResources.FileHeader34}{StringResources.FileHeaderColon}{BoxPlotMax.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{FractalDimension.ToString("0.########", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{FractalVariance.ToString("0.########", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +

@@ -142,6 +142,9 @@ partial class FrmMain
             // Compute variance
             (Results.Variance, _) = DescriptiveSatatistics.ComputeVariance(signal, Results.Average, true);
 
+            // Compute BoxPlot values
+            (Results.BoxPlotMin, Results.Q1, Results.Q2, Results.Q3, Results.BoxPlotMax) = DescriptiveSatatistics.ComputeBoxPlotValues(signal, false);
+
         }
         catch (Exception ex)
         {

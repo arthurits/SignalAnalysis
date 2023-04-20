@@ -53,6 +53,11 @@ public static class StringResources
     public static string FileHeader30 => StringRM.GetString("strFileHeader30", Culture) ?? "Integration algorithm";
     public static string FileHeader31 => StringRM.GetString("strFileHeader31", Culture) ?? "Integral value";
     public static string FileHeader32 => StringRM.GetString("strFileHeader32", Culture) ?? "Variance";
+    public static string FileHeader33 => StringRM.GetString("strFileHeader33", Culture) ?? "BoxPlot lower limit";
+    public static string FileHeader34 => StringRM.GetString("strFileHeader34", Culture) ?? "BoxPlot upper limit";
+    public static string FileHeader35 => StringRM.GetString("strFileHeader35", Culture) ?? "Quartile 1 (25%)";
+    public static string FileHeader36 => StringRM.GetString("strFileHeader36", Culture) ?? "Quartile 2 (50%)";
+    public static string FileHeader37 => StringRM.GetString("strFileHeader37", Culture) ?? "Quartile 3 (75%)";
 
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 

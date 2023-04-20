@@ -303,6 +303,21 @@ Se utilizarán los valores por defecto.</value>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Variancia</value>
   </data>
+  <data name="strFileHeader33" xml:space="preserve">
+    <value>BoxPlot límite inferior</value>
+  </data>
+  <data name="strFileHeader34" xml:space="preserve">
+    <value>BoxPlot límite superior</value>
+  </data>
+  <data name="strFileHeader35" xml:space="preserve">
+    <value>Cuartil 1 (25%)</value>
+  </data>
+  <data name="strFileHeader36" xml:space="preserve">
+    <value>Cuartil 2 (50%)</value>
+  </data>
+  <data name="strFileHeader37" xml:space="preserve">
+    <value>Cuartil 3 (75%)</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

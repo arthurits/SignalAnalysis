@@ -318,6 +318,21 @@ Default values will be used instead.</value>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Variance</value>
   </data>
+  <data name="strFileHeader33" xml:space="preserve">
+    <value>BoxPlot lower limit</value>
+  </data>
+  <data name="strFileHeader34" xml:space="preserve">
+    <value>BoxPlot upper limit</value>
+  </data>
+  <data name="strFileHeader35" xml:space="preserve">
+    <value>Quartile 1 (25%)</value>
+  </data>
+  <data name="strFileHeader36" xml:space="preserve">
+    <value>Quartile 2 (50%)</value>
+  </data>
+  <data name="strFileHeader37" xml:space="preserve">
+    <value>Quartile 3 (75%)</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
