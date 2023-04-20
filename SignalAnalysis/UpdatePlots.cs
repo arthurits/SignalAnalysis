@@ -157,17 +157,11 @@ partial class FrmMain
                 Results.Variance = 0.0;
             else
             {
-                double K = signal[0];
-                double Ex = 0.0;
-                double Ex2 = 0.0;
+                sum = 0.0;
                 for (int i = 0; i < signal.Length; i++)
-                {
-                    Ex += signal[i] - K;
-                    Ex2 += Math.Pow((signal[i] - K), 2);
-                }
-                Results.Variance = (Ex2 - Math.Pow(Ex, 2) / signal.Length) / (signal.Length);
+                    sum += Math.Pow(signal[i] - avg, 2);
+                Results.Variance = sum / signal.Length;
             }
-            
 
         }
         catch (Exception ex)
