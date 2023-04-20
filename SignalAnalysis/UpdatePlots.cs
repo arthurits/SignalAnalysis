@@ -137,31 +137,10 @@ partial class FrmMain
         try
         {
             // Compute average, max, and min descriptive statistics
-            double max = signal[0], min = signal[0], sum = 0;
-
-            for (int i = 0; i < signal.Length; i++)
-            {
-                if (signal[i] > max) max = signal[i];
-                if (signal[i] < min) min = signal[i];
-                sum += signal[i];
-            }
-            double avg = sum / signal.Length;
-
-            Results.Maximum = max;
-            Results.Minimum = min;
-            Results.Average = avg;
+            (Results.Average, Results.Maximum, Results.Minimum) = DescriptiveSatatistics.ComputeAverage(signal);
 
             // Compute variance
-            // https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
-            if (signal.Length <= 2)
-                Results.Variance = 0.0;
-            else
-            {
-                sum = 0.0;
-                for (int i = 0; i < signal.Length; i++)
-                    sum += Math.Pow(signal[i] - avg, 2);
-                Results.Variance = sum / signal.Length;
-            }
+            (Results.Variance, _) = DescriptiveSatatistics.ComputeVariance(signal, Results.Average, true);
 
         }
         catch (Exception ex)

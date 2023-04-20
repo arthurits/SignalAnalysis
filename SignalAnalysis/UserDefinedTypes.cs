@@ -22,6 +22,11 @@ public class SignalStats
     public double Minimum { get; set; } = 0;
     public double Average { get; set; } = 0;
     public double Variance { get; set; } = 0;
+    public double Q1 { get; set; } = 0;
+    public double Q2 { get; set; } = 0;
+    public double Q3 { get; set; } = 0;
+    public double BoxPlotMax { get; set; } = 0;
+    public double BoxPlotMin { get; set; } = 0;
     public double FractalDimension { get; set; } = 0;
     public double FractalVariance { get; set; } = 0;
     public double ApproximateEntropy { get; set; } = 0;
