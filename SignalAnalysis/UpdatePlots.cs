@@ -150,6 +150,25 @@ partial class FrmMain
             Results.Maximum = max;
             Results.Minimum = min;
             Results.Average = avg;
+
+            // Compute variance
+            // https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
+            if (signal.Length <= 2)
+                Results.Variance = 0.0;
+            else
+            {
+                double K = signal[0];
+                double Ex = 0.0;
+                double Ex2 = 0.0;
+                for (int i = 0; i < signal.Length; i++)
+                {
+                    Ex += signal[i] - K;
+                    Ex2 += Math.Pow((signal[i] - K), 2);
+                }
+                Results.Variance = (Ex2 - Math.Pow(Ex, 2) / signal.Length) / (signal.Length);
+            }
+            
+
         }
         catch (Exception ex)
         {

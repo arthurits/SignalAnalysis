@@ -374,6 +374,15 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader07));
             results.Average = readValue;
 
+            strLine = sr.ReadLine();    // Variance illuminance
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader32));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader32", fileCulture) ?? "Average"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader32));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader32));
+            results.Variance = readValue;
+
             strLine = sr.ReadLine();    // Maximum illuminance
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader08));
@@ -591,6 +600,7 @@ partial class FrmMain
             points = br.ReadInt32();        // number of data points
             sampleFreq = br.ReadDouble();   // sampling frequency
             results.Average = br.ReadDouble();
+            results.Variance = br.ReadDouble();
             results.Maximum = br.ReadDouble();
             results.Minimum = br.ReadDouble();
             results.FractalDimension = br.ReadDouble();

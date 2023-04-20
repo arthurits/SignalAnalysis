@@ -48,6 +48,7 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader05}{StringResources.FileHeaderColon}{signal.Length.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader06}{StringResources.FileHeaderColon}{Signal.SampleFrequency.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Results.Average.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader32}{StringResources.FileHeaderColon}{Results.Variance.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Results.Maximum.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Results.Minimum.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{Results.FractalDimension.ToString(_settings.AppCulture)}");
@@ -217,6 +218,7 @@ partial class FrmMain
             bw.Write(signal.Length);
             bw.Write(Signal.SampleFrequency);
             bw.Write(Results.Average);
+            bw.Write(Results.Variance);
             bw.Write(Results.Maximum);
             bw.Write(Results.Minimum);
             bw.Write(Results.FractalDimension);
