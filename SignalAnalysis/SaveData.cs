@@ -51,6 +51,11 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader32}{StringResources.FileHeaderColon}{Results.Variance.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Results.Maximum.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Results.Minimum.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader33}{StringResources.FileHeaderColon}{Results.BoxplotMin.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader35}{StringResources.FileHeaderColon}{Results.BoxplotQ1.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader36}{StringResources.FileHeaderColon}{Results.BoxplotQ2.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader37}{StringResources.FileHeaderColon}{Results.BoxplotQ3.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader34}{StringResources.FileHeaderColon}{Results.BoxplotMax.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{Results.FractalDimension.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{Results.FractalVariance.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
@@ -221,6 +226,11 @@ partial class FrmMain
             bw.Write(Results.Variance);
             bw.Write(Results.Maximum);
             bw.Write(Results.Minimum);
+            bw.Write(Results.BoxplotMin);
+            bw.Write(Results.BoxplotQ1);
+            bw.Write(Results.BoxplotQ2);
+            bw.Write(Results.BoxplotQ3);
+            bw.Write(Results.BoxplotMax);
             bw.Write(Results.FractalDimension);
             bw.Write(Results.FractalVariance);
             bw.Write(Results.ApproximateEntropy);

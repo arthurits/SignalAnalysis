@@ -377,7 +377,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // Variance illuminance
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader32));
-            if (!strLine.Contains($"{StringResources.GetString("strFileHeader32", fileCulture) ?? "Average"}: ", StringComparison.Ordinal))
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader32", fileCulture) ?? "Variance"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader32));
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader32));
@@ -400,6 +400,51 @@ partial class FrmMain
             if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader09));
             results.Minimum = readValue;
+
+            strLine = sr.ReadLine();    // Box plot minimum excluding outliers
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader33));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader33", fileCulture) ?? "Box plot lower limit"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader33));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader33));
+            results.BoxplotMin = readValue;
+
+            strLine = sr.ReadLine();    // Box plot Q1 quartile
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader35));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader35", fileCulture) ?? "Quartile 1 (25%)"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader35));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader35));
+            results.BoxplotQ1 = readValue;
+
+            strLine = sr.ReadLine();    // Box plot Q2 quartile
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader36));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader36", fileCulture) ?? "Quartile 2 (50%)"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader36));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader36));
+            results.BoxplotQ2 = readValue;
+
+            strLine = sr.ReadLine();    // Box plot Q3 quartile
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader37));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader37", fileCulture) ?? "Quartile 3 (75%)"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader37));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader37));
+            results.BoxplotQ3 = readValue;
+
+            strLine = sr.ReadLine();    // Box plot maximum excluding outliers
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader34));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader34", fileCulture) ?? "Box plot upper limit"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader34));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader34));
+            results.BoxplotMax = readValue;
 
             strLine = sr.ReadLine();    // Fractal dimension
             if (strLine is null)
@@ -603,6 +648,11 @@ partial class FrmMain
             results.Variance = br.ReadDouble();
             results.Maximum = br.ReadDouble();
             results.Minimum = br.ReadDouble();
+            results.BoxplotMin = br.ReadDouble();
+            results.BoxplotQ1 = br.ReadDouble();
+            results.BoxplotQ2 = br.ReadDouble();
+            results.BoxplotQ3 = br.ReadDouble();
+            results.BoxplotMax = br.ReadDouble();
             results.FractalDimension = br.ReadDouble();
             results.FractalVariance = br.ReadDouble();
             results.ApproximateEntropy = br.ReadDouble();
