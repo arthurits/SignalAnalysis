@@ -480,6 +480,9 @@ dimension has been stopped.</value>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Box plot</value>
+  </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>Derivative</value>
   </data>

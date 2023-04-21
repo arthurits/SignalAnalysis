@@ -404,6 +404,9 @@
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>السعة</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>مخطط صندوق</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>الوقت (ثواني)</value>
   </data>

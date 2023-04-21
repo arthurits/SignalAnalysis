@@ -154,7 +154,7 @@ public partial class FrmMain : Form
         int uBound = arrValues.GetUpperBound(0);
         if (index >= uBound)
             return arrValues[uBound];
-        else if (index <=0)
+        else if (index <= 0)
             return arrValues[0];
         else
             return arrValues[index];
@@ -269,4 +269,8 @@ public partial class FrmMain : Form
         this.ResumeLayout();
     }
 
+    private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+    {
+
+    }
 }

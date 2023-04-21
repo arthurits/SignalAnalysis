@@ -465,6 +465,9 @@ boyut durdurulmuştur.</value>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Genlik</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Kutu grafiği</value>
+  </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>Derivative</value>
   </data>

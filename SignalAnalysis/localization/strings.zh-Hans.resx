@@ -462,6 +462,9 @@
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>幅值</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>箱形图</value>
+  </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>导数</value>
   </data>

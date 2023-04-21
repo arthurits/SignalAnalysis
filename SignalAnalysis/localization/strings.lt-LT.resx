@@ -386,6 +386,9 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitudė</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Dėžutės sklypas</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Laikas (sekundės)</value>
   </data>

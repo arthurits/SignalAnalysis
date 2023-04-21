@@ -1108,6 +1108,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Box plot.
+        /// </summary>
+        internal static string strPlotBoxPlotTitle {
+            get {
+                return ResourceManager.GetString("strPlotBoxPlotTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Derivative.
         /// </summary>
         internal static string strPlotDerivativeTitle {

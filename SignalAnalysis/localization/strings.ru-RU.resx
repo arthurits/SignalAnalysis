@@ -389,6 +389,9 @@
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Амплитуда</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Ящик с усами</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Время (секунды)</value>
   </data>

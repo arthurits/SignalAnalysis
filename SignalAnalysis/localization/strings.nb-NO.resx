@@ -389,6 +389,9 @@ har stoppet.</value>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Boksplott</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tid (sekunder)</value>
   </data>

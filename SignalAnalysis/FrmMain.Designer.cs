@@ -31,15 +31,16 @@ partial class FrmMain
         tableLayoutPanel1 = new TableLayoutPanel();
         tableLayoutPanel2 = new TableLayoutPanel();
         plotOriginal = new ScottPlot.FormsPlotCrossHair();
-        plotWindow = new ScottPlot.FormsPlotCrossHair();
-        plotApplied = new ScottPlot.FormsPlotCrossHair();
+        plotBoxPlot = new ScottPlot.FormsPlot();
+        plotDerivative = new ScottPlot.FormsPlotCrossHair();
         txtStats = new TextBox();
         tableLayoutPanel3 = new TableLayoutPanel();
         plotFractal = new ScottPlot.FormsPlotCrossHair();
         plotFractalDistribution = new ScottPlot.FormsPlotCrossHair();
         tableLayoutPanel4 = new TableLayoutPanel();
+        plotApplied = new ScottPlot.FormsPlotCrossHair();
+        plotWindow = new ScottPlot.FormsPlotCrossHair();
         plotFFT = new ScottPlot.FormsPlotCrossHair();
-        plotDerivative = new ScottPlot.FormsPlotCrossHair();
         tspTop = new ToolStripPanel();
         tspBottom = new ToolStripPanel();
         toolStripMain = new ToolStrip();
@@ -93,21 +94,21 @@ partial class FrmMain
         // tableLayoutPanel2
         // 
         tableLayoutPanel2.ColumnCount = 3;
-        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
         tableLayoutPanel2.Controls.Add(plotOriginal, 0, 0);
-        tableLayoutPanel2.Controls.Add(plotWindow, 1, 0);
-        tableLayoutPanel2.Controls.Add(plotApplied, 2, 0);
+        tableLayoutPanel2.Controls.Add(plotBoxPlot, 1, 0);
+        tableLayoutPanel2.Controls.Add(plotDerivative, 2, 0);
         tableLayoutPanel2.Dock = DockStyle.Fill;
         tableLayoutPanel2.Location = new Point(0, 0);
         tableLayoutPanel2.Margin = new Padding(0);
         tableLayoutPanel2.Name = "tableLayoutPanel2";
         tableLayoutPanel2.RowCount = 1;
         tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 240F));
         tableLayoutPanel2.Size = new Size(860, 173);
         tableLayoutPanel2.TabIndex = 1;
+        tableLayoutPanel2.Paint += tableLayoutPanel2_Paint;
         // 
         // plotOriginal
         // 
@@ -121,41 +122,33 @@ partial class FrmMain
         plotOriginal.ShowCrossHair = false;
         plotOriginal.ShowCrossHairHorizontal = false;
         plotOriginal.ShowCrossHairVertical = false;
-        plotOriginal.Size = new Size(278, 167);
+        plotOriginal.Size = new Size(336, 167);
         plotOriginal.SnapToPoint = false;
         plotOriginal.TabIndex = 2;
         // 
-        // plotWindow
+        // plotBoxPlot
         // 
-        plotWindow.BackColor = Color.Transparent;
-        plotWindow.CrossHairColor = Color.Red;
-        plotWindow.CultureUI = new System.Globalization.CultureInfo("en-US");
-        plotWindow.Dock = DockStyle.Fill;
-        plotWindow.Location = new Point(290, 3);
-        plotWindow.Margin = new Padding(4, 3, 4, 3);
-        plotWindow.Name = "plotWindow";
-        plotWindow.ShowCrossHair = false;
-        plotWindow.ShowCrossHairHorizontal = false;
-        plotWindow.ShowCrossHairVertical = false;
-        plotWindow.Size = new Size(278, 167);
-        plotWindow.SnapToPoint = false;
-        plotWindow.TabIndex = 3;
+        plotBoxPlot.Dock = DockStyle.Fill;
+        plotBoxPlot.Location = new Point(348, 3);
+        plotBoxPlot.Margin = new Padding(4, 3, 4, 3);
+        plotBoxPlot.Name = "plotBoxPlot";
+        plotBoxPlot.Size = new Size(164, 167);
+        plotBoxPlot.TabIndex = 7;
         // 
-        // plotApplied
+        // plotDerivative
         // 
-        plotApplied.BackColor = Color.Transparent;
-        plotApplied.CrossHairColor = Color.Red;
-        plotApplied.CultureUI = new System.Globalization.CultureInfo("en-US");
-        plotApplied.Dock = DockStyle.Fill;
-        plotApplied.Location = new Point(576, 3);
-        plotApplied.Margin = new Padding(4, 3, 4, 3);
-        plotApplied.Name = "plotApplied";
-        plotApplied.ShowCrossHair = false;
-        plotApplied.ShowCrossHairHorizontal = false;
-        plotApplied.ShowCrossHairVertical = false;
-        plotApplied.Size = new Size(280, 167);
-        plotApplied.SnapToPoint = false;
-        plotApplied.TabIndex = 4;
+        plotDerivative.CrossHairColor = Color.Red;
+        plotDerivative.CultureUI = new System.Globalization.CultureInfo("es-ES");
+        plotDerivative.Dock = DockStyle.Fill;
+        plotDerivative.Location = new Point(520, 3);
+        plotDerivative.Margin = new Padding(4, 3, 4, 3);
+        plotDerivative.Name = "plotDerivative";
+        plotDerivative.ShowCrossHair = false;
+        plotDerivative.ShowCrossHairHorizontal = false;
+        plotDerivative.ShowCrossHairVertical = false;
+        plotDerivative.Size = new Size(336, 167);
+        plotDerivative.SnapToPoint = false;
+        plotDerivative.TabIndex = 6;
         // 
         // txtStats
         // 
@@ -217,20 +210,53 @@ partial class FrmMain
         // 
         // tableLayoutPanel4
         // 
-        tableLayoutPanel4.ColumnCount = 2;
+        tableLayoutPanel4.ColumnCount = 3;
         tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        tableLayoutPanel4.Controls.Add(plotApplied, 0, 0);
+        tableLayoutPanel4.Controls.Add(plotWindow, 0, 0);
         tableLayoutPanel4.Controls.Add(plotFFT, 0, 0);
-        tableLayoutPanel4.Controls.Add(plotDerivative, 1, 0);
         tableLayoutPanel4.Dock = DockStyle.Fill;
         tableLayoutPanel4.Location = new Point(0, 346);
         tableLayoutPanel4.Margin = new Padding(0);
         tableLayoutPanel4.Name = "tableLayoutPanel4";
         tableLayoutPanel4.RowCount = 1;
         tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
         tableLayoutPanel4.Size = new Size(860, 173);
         tableLayoutPanel4.TabIndex = 2;
+        // 
+        // plotApplied
+        // 
+        plotApplied.BackColor = Color.Transparent;
+        plotApplied.CrossHairColor = Color.Red;
+        plotApplied.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotApplied.Dock = DockStyle.Fill;
+        plotApplied.Location = new Point(649, 3);
+        plotApplied.Margin = new Padding(4, 3, 4, 3);
+        plotApplied.Name = "plotApplied";
+        plotApplied.ShowCrossHair = false;
+        plotApplied.ShowCrossHairHorizontal = false;
+        plotApplied.ShowCrossHairVertical = false;
+        plotApplied.Size = new Size(207, 167);
+        plotApplied.SnapToPoint = false;
+        plotApplied.TabIndex = 6;
+        // 
+        // plotWindow
+        // 
+        plotWindow.BackColor = Color.Transparent;
+        plotWindow.CrossHairColor = Color.Red;
+        plotWindow.CultureUI = new System.Globalization.CultureInfo("en-US");
+        plotWindow.Dock = DockStyle.Fill;
+        plotWindow.Location = new Point(434, 3);
+        plotWindow.Margin = new Padding(4, 3, 4, 3);
+        plotWindow.Name = "plotWindow";
+        plotWindow.ShowCrossHair = false;
+        plotWindow.ShowCrossHairHorizontal = false;
+        plotWindow.ShowCrossHairVertical = false;
+        plotWindow.Size = new Size(207, 167);
+        plotWindow.SnapToPoint = false;
+        plotWindow.TabIndex = 5;
         // 
         // plotFFT
         // 
@@ -247,21 +273,6 @@ partial class FrmMain
         plotFFT.Size = new Size(422, 167);
         plotFFT.SnapToPoint = false;
         plotFFT.TabIndex = 3;
-        // 
-        // plotDerivative
-        // 
-        plotDerivative.CrossHairColor = Color.Red;
-        plotDerivative.CultureUI = new System.Globalization.CultureInfo("es-ES");
-        plotDerivative.Dock = DockStyle.Fill;
-        plotDerivative.Location = new Point(434, 3);
-        plotDerivative.Margin = new Padding(4, 3, 4, 3);
-        plotDerivative.Name = "plotDerivative";
-        plotDerivative.ShowCrossHair = false;
-        plotDerivative.ShowCrossHairHorizontal = false;
-        plotDerivative.ShowCrossHairVertical = false;
-        plotDerivative.Size = new Size(422, 167);
-        plotDerivative.SnapToPoint = false;
-        plotDerivative.TabIndex = 4;
         // 
         // tspTop
         // 
@@ -540,8 +551,6 @@ partial class FrmMain
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     private ScottPlot.FormsPlotCrossHair plotOriginal;
-    private ScottPlot.FormsPlotCrossHair plotWindow;
-    private ScottPlot.FormsPlotCrossHair plotApplied;
     private ScottPlot.FormsPlotCrossHair plotFractal;
     private ScottPlot.FormsPlotCrossHair plotFractalDistribution;
     private System.Windows.Forms.TextBox txtStats;
@@ -567,7 +576,10 @@ partial class FrmMain
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExCrossHair;
     private TableLayoutPanel tableLayoutPanel4;
     private ScottPlot.FormsPlotCrossHair plotFFT;
-    private ScottPlot.FormsPlotCrossHair plotDerivative;
     private ToolStripStatusLabelEx statusStripLabelExDerivative;
     private ToolStripStatusLabelEx statusStripLabelExIntegration;
+    private ScottPlot.FormsPlotCrossHair plotWindow;
+    private ScottPlot.FormsPlotCrossHair plotDerivative;
+    private ScottPlot.FormsPlot plotBoxPlot;
+    private ScottPlot.FormsPlotCrossHair plotApplied;
 }

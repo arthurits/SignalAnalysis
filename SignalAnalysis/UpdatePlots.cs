@@ -1,5 +1,6 @@
 ﻿using ScottPlot;
 using System.Reflection.Metadata.Ecma335;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace SignalAnalysis;
 
@@ -20,7 +21,7 @@ partial class FrmMain
     /// <param name="fft"><see langword="True"/></param>
     /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
     /// <returns></returns>
-    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false,  bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
+    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false, bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -102,7 +103,11 @@ partial class FrmMain
         // Show results on plots
         _settings.CrossHair = false;
         statusStripLabelExCrossHair.Checked = false;
-        if (stats) PlotOriginal(signalClipped, seriesName ?? string.Empty);
+        if (stats)
+        {
+            PlotOriginal(signalClipped, seriesName ?? string.Empty);
+            PlotBoxPlot(signalClipped, seriesName ?? string.Empty);
+        }
         if (derivative) PlotDerivative(signalClipped, seriesName ?? string.Empty);
         if (fractal)
         {
@@ -118,10 +123,10 @@ partial class FrmMain
 
         // Show text results
         //if (stats || fractal || entropy || integral)
-            txtStats.Text = Results.ToString(
-                _settings.AppCulture,
-                _settings.ComputeIntegration,
-                _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
+        txtStats.Text = Results.ToString(
+            _settings.AppCulture,
+            _settings.ComputeIntegration,
+            _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 
         // Restore the cursor
         this.UseWaitCursor = false;
@@ -193,7 +198,7 @@ partial class FrmMain
         //    x = Results.Derivative[i];
         //    Results.Derivative[i] = double.IsNaN(x) ? 0 : x;
         //}
-        
+
         //watch.Stop();
         //System.Diagnostics.Debug.WriteLine($"For-loop execution time: {watch.ElapsedMilliseconds} ms");
 
@@ -214,7 +219,7 @@ partial class FrmMain
             upperIndex: signal.GetUpperBound(0),
             samplingFrequency: Signal.SampleFrequency,
             absoluteIntegral: _settings.AbsoluteIntegral,
-            pad: _settings.PadIntegral);   
+            pad: _settings.PadIntegral);
     }
 
     /// <summary>
@@ -327,6 +332,26 @@ partial class FrmMain
         plotOriginal.Plot.BottomAxis.Label(StringResources.PlotOriginalXLabel);
         //plotOriginal.Plot.AxisAuto(0);
         plotOriginal.Refresh();
+    }
+
+    /// <summary>
+    /// Plots the original data as a population BoxPlot <see cref="plotBoxPlot"/>.
+    /// </summary>
+    /// <param name="signal">Data values to be plotted</param>
+    /// <param name="strLabel">Text to show in the legend</param>
+    private void PlotBoxPlot(double[] signal, string strLabel = "")
+    {
+        foreach (var plot in plotBoxPlot.Plot.GetPlottables())
+            plotBoxPlot.Plot.Remove(plot);
+
+        plotBoxPlot.Plot.AddPopulation(new ScottPlot.Statistics.Population(signal), strLabel);
+
+        // Format plot
+        plotBoxPlot.Plot.Title(StringResources.PlotBoxPlotTitle);
+        plotBoxPlot.Plot.LeftAxis.Label(StringResources.PlotOriginalYLabel);
+        plotBoxPlot.Plot.XTicks(new string[] { strLabel });
+        plotBoxPlot.Plot.XAxis.Grid(false);
+        plotBoxPlot.Refresh();
     }
 
     /// <summary>

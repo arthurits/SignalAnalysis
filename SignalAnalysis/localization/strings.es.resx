@@ -484,6 +484,9 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitud</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Diagrama de caja</value>
+  </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>Derivada</value>
   </data>

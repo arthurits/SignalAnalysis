@@ -458,6 +458,9 @@ wurde gestoppt.</value>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Box-Plot</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Zeit (Sekunden)</value>
   </data>

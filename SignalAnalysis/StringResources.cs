@@ -141,6 +141,7 @@ public static class StringResources
     public static string PlotOriginalTitle => StringRM.GetString("strPlotOriginalTitle", Culture) ?? "Input signal";
     public static string PlotOriginalYLabel => StringRM.GetString("strPlotOriginalYLabel", Culture) ?? "Amplitude";
     public static string PlotOriginalXLabel => StringRM.GetString("strPlotOriginalXLabel", Culture) ?? "Time (seconds)";
+    public static string PlotBoxPlotTitle => StringRM.GetString("strPlotBoxPlotTitle", Culture) ?? "BoxPlot";
     public static string PlotWindowTitle => StringRM.GetString("strPlotWindowTitle", Culture) ?? "{0} window";
     public static string PlotWindowYLabel => StringRM.GetString("strPlotWindowYLabel", Culture) ?? "Amplitude";
     public static string PlotWindowXLabel => StringRM.GetString("strPlotWindowXLabel", Culture) ?? "Time (seconds)";

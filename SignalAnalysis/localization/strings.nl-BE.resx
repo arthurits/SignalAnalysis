@@ -388,6 +388,9 @@ dimensie is gestopt.</value>
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Boxplot</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tijd (seconden)</value>
   </data>

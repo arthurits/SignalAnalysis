@@ -389,6 +389,9 @@
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>প্রশস্ততা</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>বক্স চক্রান্ত</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>সময় (সেকেন্ড)</value>
   </data>

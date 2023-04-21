@@ -386,6 +386,9 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>Ampiezza</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Scatola e baffi</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tempo (secondi)</value>
   </data>

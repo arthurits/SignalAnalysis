@@ -386,6 +386,9 @@
   <data name="strPlotAppliedYLabel" xml:space="preserve">
     <value>आयाम</value>
   </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>रेखा - चित्र</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>समय (सेकंड)</value>
   </data>
