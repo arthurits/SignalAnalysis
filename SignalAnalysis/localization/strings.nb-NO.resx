@@ -154,6 +154,9 @@ Hvis du synes denne programvaren er nyttig, kan du vurdere å støtte den!</valu
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Innstillinger</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Boksplott</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Vis trådkors for utvalg</value>
   </data>
@@ -392,11 +395,20 @@ har stoppet.</value>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Boksplott</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivasjon</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tid (sekunder)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitude / sekunder</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitude</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Rask Fourier-transformasjon</value>

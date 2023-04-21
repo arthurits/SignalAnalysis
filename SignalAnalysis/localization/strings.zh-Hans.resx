@@ -157,6 +157,9 @@
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>计算绝对值积分？</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>箱形图</value>
+  </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>计算数值微分？</value>
   </data>
@@ -464,6 +467,9 @@
   </data>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>箱形图</value>
+  </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>幅值</value>
   </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>导数</value>

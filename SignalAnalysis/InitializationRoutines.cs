@@ -35,12 +35,14 @@ partial class FrmMain
 
         tspBottom.Join(statusStrip);
 
-        statusStripLabelExPower.Checked = _settings.PowerSpectra;
-        statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
-        statusStripLabelExEntropy.Checked = _settings.Entropy;
-        statusStripLabelExCrossHair.Checked = _settings.CrossHair;
+        ShowHideBoxplot(_settings.Boxplot);
+        statusStripLabelExBoxplot.Checked = _settings.Boxplot;
         statusStripLabelExDerivative.Checked = _settings.ComputeDerivative;
         statusStripLabelExIntegration.Checked = _settings.ComputeIntegration;
+        statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
+        statusStripLabelExPower.Checked = _settings.PowerSpectra;
+        statusStripLabelExEntropy.Checked = _settings.Entropy;
+        statusStripLabelExCrossHair.Checked = _settings.CrossHair;
     }
 
     /// <summary>

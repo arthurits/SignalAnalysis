@@ -154,6 +154,9 @@ Se você achar este software útil, considere apoiá-lo!</value>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Configurações</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Diagrama de caixa</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Mostrar cruz nos gráficos</value>
   </data>
@@ -392,11 +395,20 @@ foi interrompida.</value>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Diagrama de caixa</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivada</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tempo (segundos)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitude / segundos</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitude</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Transformada Rápida de Fourier</value>

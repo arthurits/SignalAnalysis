@@ -154,6 +154,9 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;সেটিংস</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>বক্স চক্রান্ত</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>প্লটের ক্রসহেয়ার দেখান</value>
   </data>
@@ -392,11 +395,20 @@
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>বক্স চক্রান্ত</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>প্রশস্ততা</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>ডেরিভেটিভ</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>সময় (সেকেন্ড)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>প্রশস্ততা / সেকেন্ড</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>প্রশস্ততা</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>ফাস্ট ফোরিয়ার ট্রান্সফর্ম</value>

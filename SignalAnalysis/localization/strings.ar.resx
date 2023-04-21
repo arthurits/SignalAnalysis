@@ -157,6 +157,9 @@
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>احسب القيمة المطلقة للتكامل؟</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>مخطط صندوق</value>
+  </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>احسب المشتق العددي؟</value>
   </data>
@@ -407,11 +410,20 @@
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>مخطط صندوق</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>السعة</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>مشتق</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>الوقت (ثواني)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>السعة / واني</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>السعة</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>تحويل فورييه السريع</value>

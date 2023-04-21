@@ -154,6 +154,9 @@ Jei ši programinė įranga jums naudinga, apsvarstykite galimybę ją palaikyti
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Nustatymai</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Dėžutės sklypas</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Rodyti braižo kryžiuką</value>
   </data>
@@ -389,11 +392,20 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Dėžutės sklypas</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitudė</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Išvestinė</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Laikas (sekundės)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitudė / sekundės</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitudė</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Greitoji Furjė transformacija</value>

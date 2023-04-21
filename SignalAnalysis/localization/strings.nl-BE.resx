@@ -154,6 +154,9 @@ Als u deze software nuttig vindt, overweeg dan om deze te ondersteunen!</value>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Instellingen</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Boxplot</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Toon crosshair van plot</value>
   </data>
@@ -391,11 +394,20 @@ dimensie is gestopt.</value>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Boxplot</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Afgeleide</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tijd (seconden)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitude / seconden</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitude</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Snelle Fourier-transformatie</value>

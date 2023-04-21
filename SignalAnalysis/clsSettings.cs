@@ -40,6 +40,11 @@ public class ClassSettings
     [JsonPropertyName("Array index max")]
     public int IndexMax { get; set; } = 0;
     /// <summary>
+    /// Show box plot (high CPU usage for big data sets)
+    /// </summary>
+    [JsonPropertyName("Show box plot")]
+    public bool Boxplot { get; set; } = true;
+    /// <summary>
     /// True if the power spectra is to be computed
     /// </summary>
     [JsonPropertyName("Compute power spectra")]

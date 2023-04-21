@@ -32,6 +32,7 @@
             btnAccept = new Button();
             tabSettings = new TabControl();
             tabPlot = new TabPage();
+            chkBoxplot = new CheckBox();
             chkCrossHair = new CheckBox();
             chkEntropy = new CheckBox();
             chkCumulative = new CheckBox();
@@ -76,7 +77,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(255, 279);
+            btnCancel.Location = new Point(262, 304);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(100, 30);
             btnCancel.TabIndex = 5;
@@ -86,7 +87,7 @@
             // 
             // btnAccept
             // 
-            btnAccept.Location = new Point(361, 279);
+            btnAccept.Location = new Point(368, 304);
             btnAccept.Name = "btnAccept";
             btnAccept.Size = new Size(100, 30);
             btnAccept.TabIndex = 6;
@@ -103,11 +104,12 @@
             tabSettings.Location = new Point(12, 14);
             tabSettings.Name = "tabSettings";
             tabSettings.SelectedIndex = 0;
-            tabSettings.Size = new Size(449, 259);
+            tabSettings.Size = new Size(460, 284);
             tabSettings.TabIndex = 11;
             // 
             // tabPlot
             // 
+            tabPlot.Controls.Add(chkBoxplot);
             tabPlot.Controls.Add(chkCrossHair);
             tabPlot.Controls.Add(chkEntropy);
             tabPlot.Controls.Add(chkCumulative);
@@ -120,15 +122,25 @@
             tabPlot.Location = new Point(4, 26);
             tabPlot.Name = "tabPlot";
             tabPlot.Padding = new Padding(3);
-            tabPlot.Size = new Size(441, 229);
+            tabPlot.Size = new Size(452, 254);
             tabPlot.TabIndex = 0;
             tabPlot.Text = "Plotting";
             tabPlot.UseVisualStyleBackColor = true;
             // 
+            // chkBoxplot
+            // 
+            chkBoxplot.AutoSize = true;
+            chkBoxplot.Location = new Point(17, 99);
+            chkBoxplot.Name = "chkBoxplot";
+            chkBoxplot.Size = new Size(78, 23);
+            chkBoxplot.TabIndex = 20;
+            chkBoxplot.Text = "Box plot";
+            chkBoxplot.UseVisualStyleBackColor = true;
+            // 
             // chkCrossHair
             // 
             chkCrossHair.AutoSize = true;
-            chkCrossHair.Location = new Point(17, 194);
+            chkCrossHair.Location = new Point(17, 219);
             chkCrossHair.Name = "chkCrossHair";
             chkCrossHair.Size = new Size(156, 23);
             chkCrossHair.TabIndex = 19;
@@ -138,7 +150,7 @@
             // chkEntropy
             // 
             chkEntropy.AutoSize = true;
-            chkEntropy.Location = new Point(17, 163);
+            chkEntropy.Location = new Point(17, 189);
             chkEntropy.Name = "chkEntropy";
             chkEntropy.Size = new Size(226, 23);
             chkEntropy.TabIndex = 18;
@@ -148,7 +160,7 @@
             // chkCumulative
             // 
             chkCumulative.AutoSize = true;
-            chkCumulative.Location = new Point(17, 132);
+            chkCumulative.Location = new Point(17, 159);
             chkCumulative.Name = "chkCumulative";
             chkCumulative.Size = new Size(205, 23);
             chkCumulative.TabIndex = 17;
@@ -158,7 +170,7 @@
             // chkPower
             // 
             chkPower.AutoSize = true;
-            chkPower.Location = new Point(17, 101);
+            chkPower.Location = new Point(17, 129);
             chkPower.Name = "chkPower";
             chkPower.Size = new Size(93, 23);
             chkPower.TabIndex = 16;
@@ -212,7 +224,7 @@
             // 
             // txtEnd
             // 
-            txtEnd.Location = new Point(164, 58);
+            txtEnd.Location = new Point(164, 56);
             txtEnd.Name = "txtEnd";
             txtEnd.Size = new Size(71, 25);
             txtEnd.TabIndex = 14;
@@ -227,7 +239,7 @@
             // lblEnd
             // 
             lblEnd.AutoSize = true;
-            lblEnd.Location = new Point(13, 61);
+            lblEnd.Location = new Point(13, 59);
             lblEnd.MaximumSize = new Size(150, 0);
             lblEnd.Name = "lblEnd";
             lblEnd.Size = new Size(108, 19);
@@ -250,10 +262,10 @@
             tabDerivative.Controls.Add(cboAlgorithms);
             tabDerivative.Controls.Add(chkComputeDerivative);
             tabDerivative.Controls.Add(chkExportDerivative);
-            tabDerivative.Location = new Point(4, 24);
+            tabDerivative.Location = new Point(4, 26);
             tabDerivative.Name = "tabDerivative";
             tabDerivative.Padding = new Padding(3);
-            tabDerivative.Size = new Size(441, 231);
+            tabDerivative.Size = new Size(452, 254);
             tabDerivative.TabIndex = 2;
             tabDerivative.Text = "Derivative";
             tabDerivative.UseVisualStyleBackColor = true;
@@ -307,7 +319,7 @@
             tabIntegration.Location = new Point(4, 26);
             tabIntegration.Name = "tabIntegration";
             tabIntegration.Padding = new Padding(3);
-            tabIntegration.Size = new Size(441, 229);
+            tabIntegration.Size = new Size(452, 254);
             tabIntegration.TabIndex = 3;
             tabIntegration.Text = "Integration";
             tabIntegration.UseVisualStyleBackColor = true;
@@ -315,7 +327,7 @@
             // chkAbsolute
             // 
             chkAbsolute.AutoSize = true;
-            chkAbsolute.Location = new Point(27, 68);
+            chkAbsolute.Location = new Point(27, 70);
             chkAbsolute.Name = "chkAbsolute";
             chkAbsolute.Size = new Size(259, 23);
             chkAbsolute.TabIndex = 4;
@@ -325,7 +337,7 @@
             // cboIntegration
             // 
             cboIntegration.FormattingEnabled = true;
-            cboIntegration.Location = new Point(63, 166);
+            cboIntegration.Location = new Point(63, 170);
             cboIntegration.Name = "cboIntegration";
             cboIntegration.Size = new Size(223, 25);
             cboIntegration.TabIndex = 3;
@@ -334,7 +346,7 @@
             // lblIntegration
             // 
             lblIntegration.AutoSize = true;
-            lblIntegration.Location = new Point(63, 138);
+            lblIntegration.Location = new Point(63, 142);
             lblIntegration.Name = "lblIntegration";
             lblIntegration.Size = new Size(149, 19);
             lblIntegration.TabIndex = 2;
@@ -343,7 +355,7 @@
             // chkExportIntegration
             // 
             chkExportIntegration.AutoSize = true;
-            chkExportIntegration.Location = new Point(27, 100);
+            chkExportIntegration.Location = new Point(27, 104);
             chkExportIntegration.Name = "chkExportIntegration";
             chkExportIntegration.Size = new Size(207, 23);
             chkExportIntegration.TabIndex = 1;
@@ -367,17 +379,17 @@
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 24);
+            tabGUI.Location = new Point(4, 26);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(441, 231);
+            tabGUI.Size = new Size(452, 254);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
             // 
             // txtDataFormat
             // 
-            txtDataFormat.Location = new Point(260, 185);
+            txtDataFormat.Location = new Point(260, 213);
             txtDataFormat.Name = "txtDataFormat";
             txtDataFormat.Size = new Size(74, 25);
             txtDataFormat.TabIndex = 3;
@@ -385,8 +397,8 @@
             // lblDataFormat
             // 
             lblDataFormat.AutoSize = true;
-            lblDataFormat.Location = new Point(19, 188);
-            lblDataFormat.MaximumSize = new Size(240, 0);
+            lblDataFormat.Location = new Point(19, 216);
+            lblDataFormat.MaximumSize = new Size(280, 0);
             lblDataFormat.Name = "lblDataFormat";
             lblDataFormat.Size = new Size(201, 19);
             lblDataFormat.TabIndex = 2;
@@ -398,9 +410,9 @@
             grpCulture.Controls.Add(radUserCulture);
             grpCulture.Controls.Add(radInvariantCulture);
             grpCulture.Controls.Add(radCurrentCulture);
-            grpCulture.Location = new Point(19, 8);
+            grpCulture.Location = new Point(19, 11);
             grpCulture.Name = "grpCulture";
-            grpCulture.Size = new Size(304, 140);
+            grpCulture.Size = new Size(408, 155);
             grpCulture.TabIndex = 1;
             grpCulture.TabStop = false;
             grpCulture.Text = "UI and data format";
@@ -410,7 +422,7 @@
             cboAllCultures.AutoCompleteMode = AutoCompleteMode.Suggest;
             cboAllCultures.Enabled = false;
             cboAllCultures.FormattingEnabled = true;
-            cboAllCultures.Location = new Point(40, 106);
+            cboAllCultures.Location = new Point(40, 118);
             cboAllCultures.Name = "cboAllCultures";
             cboAllCultures.Size = new Size(190, 25);
             cboAllCultures.TabIndex = 3;
@@ -419,7 +431,7 @@
             // radUserCulture
             // 
             radUserCulture.AutoSize = true;
-            radUserCulture.Location = new Point(18, 80);
+            radUserCulture.Location = new Point(18, 90);
             radUserCulture.Name = "radUserCulture";
             radUserCulture.Size = new Size(108, 23);
             radUserCulture.TabIndex = 2;
@@ -431,7 +443,7 @@
             // radInvariantCulture
             // 
             radInvariantCulture.AutoSize = true;
-            radInvariantCulture.Location = new Point(18, 51);
+            radInvariantCulture.Location = new Point(18, 58);
             radInvariantCulture.Name = "radInvariantCulture";
             radInvariantCulture.Size = new Size(196, 23);
             radInvariantCulture.TabIndex = 1;
@@ -443,7 +455,7 @@
             // radCurrentCulture
             // 
             radCurrentCulture.AutoSize = true;
-            radCurrentCulture.Location = new Point(18, 23);
+            radCurrentCulture.Location = new Point(18, 27);
             radCurrentCulture.Name = "radCurrentCulture";
             radCurrentCulture.Size = new Size(189, 23);
             radCurrentCulture.TabIndex = 0;
@@ -455,7 +467,7 @@
             // chkDlgPath
             // 
             chkDlgPath.AutoSize = true;
-            chkDlgPath.Location = new Point(23, 154);
+            chkDlgPath.Location = new Point(23, 175);
             chkDlgPath.Name = "chkDlgPath";
             chkDlgPath.Size = new Size(290, 23);
             chkDlgPath.TabIndex = 0;
@@ -464,7 +476,7 @@
             // 
             // btnReset
             // 
-            btnReset.Location = new Point(12, 279);
+            btnReset.Location = new Point(19, 304);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(100, 30);
             btnReset.TabIndex = 12;
@@ -478,7 +490,7 @@
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new Size(473, 321);
+            ClientSize = new Size(484, 346);
             Controls.Add(btnReset);
             Controls.Add(tabSettings);
             Controls.Add(btnAccept);
@@ -546,5 +558,6 @@
         private CheckBox chkExportIntegration;
         private CheckBox chkComputeIntegration;
         private CheckBox chkAbsolute;
+        private CheckBox chkBoxplot;
     }
 }

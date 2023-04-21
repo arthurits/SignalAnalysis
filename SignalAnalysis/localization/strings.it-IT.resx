@@ -154,6 +154,9 @@ Se trovi utile questo software, considera di supportarlo!</value>
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Impostazioni</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Diagramma a scatola e baffi</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Mostra il mirino dei grafici</value>
   </data>
@@ -389,11 +392,20 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Scatola e baffi</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Ampiezza</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivata</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Tempo (secondi)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Ampiezza / secondi</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Ampiezza</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Fast Fourier transform</value>

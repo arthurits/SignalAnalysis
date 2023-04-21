@@ -46,7 +46,7 @@ public partial class FrmMain : Form
         closeSplashEvent.Set();
 
         // Move the focus away in order to deselect the text
-        this.tableLayoutPanel1.Focus();
+        this.layoutGlobal.Focus();
     }
 
     private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -85,7 +85,7 @@ public partial class FrmMain : Form
         //stripComboWindows.Text = windows[5].Name;
 
         // Move the focus away in order to deselect the text
-        this.tableLayoutPanel1.Focus();
+        this.layoutGlobal.Focus();
     }
 
     /// <summary>
@@ -192,6 +192,7 @@ public partial class FrmMain : Form
         // Update StatusStrip
         statusStripLabelCulture.Text = _settings.AppCulture.Name == String.Empty ? "Invariant" : _settings.AppCulture.Name;
         statusStripLabelCulture.ToolTipText = StringResources.ToolTipUILanguage + ":" + Environment.NewLine + _settings.AppCulture.NativeName;
+        statusStripLabelExBoxplot.ToolTipText = StringResources.ChkBoxplot;
         statusStripLabelExPower.ToolTipText = StringResources.StatusTipPower;
         statusStripLabelExCumulative.ToolTipText = StringResources.StatusTipFractal;
         statusStripLabelExEntropy.ToolTipText = StringResources.StatusTipEntropy;
@@ -205,6 +206,11 @@ public partial class FrmMain : Form
         plotOriginal.Plot.LeftAxis.Label(StringResources.PlotOriginalYLabel);
         plotOriginal.Plot.BottomAxis.Label(StringResources.PlotOriginalXLabel);
         plotOriginal.Refresh();
+
+        plotBoxPlot.CultureUI = _settings.AppCulture;
+        plotBoxPlot.Plot.Title(StringResources.PlotBoxPlotTitle);
+        plotBoxPlot.Plot.LeftAxis.Label(StringResources.PlotBoxplotYLabel);
+        plotBoxPlot.Refresh();
 
         plotWindow.CultureUI = _settings.AppCulture;
         IWindow window = (IWindow)stripComboWindows.SelectedItem;
@@ -269,8 +275,4 @@ public partial class FrmMain : Form
         this.ResumeLayout();
     }
 
-    private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
 }

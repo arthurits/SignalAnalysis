@@ -157,6 +157,9 @@ If you find this software useful, please consider supporting it!</value>
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>Compute the absolute-value integral?</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Box plot</value>
+  </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>Compute numerical differentiation?</value>
   </data>
@@ -304,10 +307,10 @@ Default values will be used instead.</value>
     <value>Variance</value>
   </data>
   <data name="strFileHeader33" xml:space="preserve">
-    <value>BoxPlot lower limit</value>
+    <value>Box plot lower limit</value>
   </data>
   <data name="strFileHeader34" xml:space="preserve">
-    <value>BoxPlot upper limit</value>
+    <value>Box plot upper limit</value>
   </data>
   <data name="strFileHeader35" xml:space="preserve">
     <value>Quartile 1 (25%)</value>
@@ -482,6 +485,9 @@ dimension has been stopped.</value>
   </data>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Box plot</value>
+  </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitude</value>
   </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>Derivative</value>

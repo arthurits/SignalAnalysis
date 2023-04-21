@@ -157,6 +157,9 @@ Bu yazılımı yararlı bulursanız, lütfen desteklemeyi düşünün!</value>
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>Compute the absolute-value integral?</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Kutu grafiği</value>
+  </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>Compute numerical differentiation?</value>
   </data>
@@ -468,8 +471,11 @@ boyut durdurulmuştur.</value>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Kutu grafiği</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Genlik</value>
+  </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
-    <value>Derivative</value>
+    <value>Türev</value>
   </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Zaman (saniye)</value>

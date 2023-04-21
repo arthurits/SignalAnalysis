@@ -142,6 +142,7 @@ public static class StringResources
     public static string PlotOriginalYLabel => StringRM.GetString("strPlotOriginalYLabel", Culture) ?? "Amplitude";
     public static string PlotOriginalXLabel => StringRM.GetString("strPlotOriginalXLabel", Culture) ?? "Time (seconds)";
     public static string PlotBoxPlotTitle => StringRM.GetString("strPlotBoxPlotTitle", Culture) ?? "BoxPlot";
+    public static string PlotBoxplotYLabel => StringRM.GetString("strPlotBoxplotYLabel", Culture) ?? "Amplitude";
     public static string PlotWindowTitle => StringRM.GetString("strPlotWindowTitle", Culture) ?? "{0} window";
     public static string PlotWindowYLabel => StringRM.GetString("strPlotWindowYLabel", Culture) ?? "Amplitude";
     public static string PlotWindowXLabel => StringRM.GetString("strPlotWindowXLabel", Culture) ?? "Time (seconds)";
@@ -181,6 +182,7 @@ public static class StringResources
     public static string RadPoints => StringRM.GetString("strRadPoints", Culture) ?? "Data points";
     public static string RadSeconds => StringRM.GetString("strRadSeconds", Culture) ?? "Seconds";
     public static string RadTime => StringRM.GetString("strRadTime", Culture) ?? "Date and time";
+    public static string ChkBoxplot => StringRM.GetString("strChkBoxplot", Culture) ?? "Box plot";
     public static string ChkPower => StringRM.GetString("strChkPower", Culture) ?? "Power (dB)";
     public static string ChkCumulative => StringRM.GetString("strChkCumulative", Culture) ?? "Cumulative fractal dimension";
     public static string ChkEntropy => StringRM.GetString("strChkEntropy", Culture) ?? "Entropy (approximate && sample)";

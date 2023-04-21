@@ -28,19 +28,19 @@ partial class FrmMain
     /// </summary>
     private void InitializeComponent()
     {
-        tableLayoutPanel1 = new TableLayoutPanel();
-        tableLayoutPanel2 = new TableLayoutPanel();
+        layoutGlobal = new TableLayoutPanel();
+        layoutData = new TableLayoutPanel();
         plotOriginal = new ScottPlot.FormsPlotCrossHair();
-        plotBoxPlot = new ScottPlot.FormsPlot();
+        plotBoxPlot = new ScottPlot.FormsPlotCrossHair();
         plotDerivative = new ScottPlot.FormsPlotCrossHair();
-        txtStats = new TextBox();
-        tableLayoutPanel3 = new TableLayoutPanel();
+        layoutFractal = new TableLayoutPanel();
         plotFractal = new ScottPlot.FormsPlotCrossHair();
         plotFractalDistribution = new ScottPlot.FormsPlotCrossHair();
-        tableLayoutPanel4 = new TableLayoutPanel();
+        layoutFFT = new TableLayoutPanel();
         plotApplied = new ScottPlot.FormsPlotCrossHair();
         plotWindow = new ScottPlot.FormsPlotCrossHair();
         plotFFT = new ScottPlot.FormsPlotCrossHair();
+        txtStats = new TextBox();
         tspTop = new ToolStripPanel();
         tspBottom = new ToolStripPanel();
         toolStripMain = new ToolStrip();
@@ -63,52 +63,52 @@ partial class FrmMain
         statusStripLabelExCrossHair = new ToolStripStatusLabelEx();
         statusStripLabelExDerivative = new ToolStripStatusLabelEx();
         statusStripLabelExIntegration = new ToolStripStatusLabelEx();
-        tableLayoutPanel1.SuspendLayout();
-        tableLayoutPanel2.SuspendLayout();
-        tableLayoutPanel3.SuspendLayout();
-        tableLayoutPanel4.SuspendLayout();
+        statusStripLabelExBoxplot = new ToolStripStatusLabelEx();
+        layoutGlobal.SuspendLayout();
+        layoutData.SuspendLayout();
+        layoutFractal.SuspendLayout();
+        layoutFFT.SuspendLayout();
         toolStripMain.SuspendLayout();
         statusStrip.SuspendLayout();
         SuspendLayout();
         // 
-        // tableLayoutPanel1
+        // layoutGlobal
         // 
-        tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        tableLayoutPanel1.ColumnCount = 1;
-        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
-        tableLayoutPanel1.Controls.Add(txtStats, 0, 3);
-        tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 1);
-        tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 2);
-        tableLayoutPanel1.Location = new Point(12, 74);
-        tableLayoutPanel1.Name = "tableLayoutPanel1";
-        tableLayoutPanel1.RowCount = 4;
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 16F));
-        tableLayoutPanel1.Size = new Size(860, 620);
-        tableLayoutPanel1.TabIndex = 0;
-        tableLayoutPanel1.TabStop = true;
+        layoutGlobal.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        layoutGlobal.ColumnCount = 1;
+        layoutGlobal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        layoutGlobal.Controls.Add(layoutData, 0, 0);
+        layoutGlobal.Controls.Add(layoutFractal, 0, 1);
+        layoutGlobal.Controls.Add(layoutFFT, 0, 2);
+        layoutGlobal.Controls.Add(txtStats, 0, 3);
+        layoutGlobal.Location = new Point(12, 74);
+        layoutGlobal.Name = "layoutGlobal";
+        layoutGlobal.RowCount = 4;
+        layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
+        layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
+        layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 28F));
+        layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 16F));
+        layoutGlobal.Size = new Size(860, 620);
+        layoutGlobal.TabIndex = 0;
+        layoutGlobal.TabStop = true;
         // 
-        // tableLayoutPanel2
+        // layoutData
         // 
-        tableLayoutPanel2.ColumnCount = 3;
-        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
-        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-        tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
-        tableLayoutPanel2.Controls.Add(plotOriginal, 0, 0);
-        tableLayoutPanel2.Controls.Add(plotBoxPlot, 1, 0);
-        tableLayoutPanel2.Controls.Add(plotDerivative, 2, 0);
-        tableLayoutPanel2.Dock = DockStyle.Fill;
-        tableLayoutPanel2.Location = new Point(0, 0);
-        tableLayoutPanel2.Margin = new Padding(0);
-        tableLayoutPanel2.Name = "tableLayoutPanel2";
-        tableLayoutPanel2.RowCount = 1;
-        tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel2.Size = new Size(860, 173);
-        tableLayoutPanel2.TabIndex = 1;
-        tableLayoutPanel2.Paint += tableLayoutPanel2_Paint;
+        layoutData.ColumnCount = 3;
+        layoutData.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+        layoutData.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        layoutData.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+        layoutData.Controls.Add(plotOriginal, 0, 0);
+        layoutData.Controls.Add(plotBoxPlot, 1, 0);
+        layoutData.Controls.Add(plotDerivative, 2, 0);
+        layoutData.Dock = DockStyle.Fill;
+        layoutData.Location = new Point(0, 0);
+        layoutData.Margin = new Padding(0);
+        layoutData.Name = "layoutData";
+        layoutData.RowCount = 1;
+        layoutData.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        layoutData.Size = new Size(860, 173);
+        layoutData.TabIndex = 1;
         // 
         // plotOriginal
         // 
@@ -128,11 +128,17 @@ partial class FrmMain
         // 
         // plotBoxPlot
         // 
+        plotBoxPlot.CrossHairColor = Color.Red;
+        plotBoxPlot.CultureUI = new System.Globalization.CultureInfo("es-ES");
         plotBoxPlot.Dock = DockStyle.Fill;
         plotBoxPlot.Location = new Point(348, 3);
         plotBoxPlot.Margin = new Padding(4, 3, 4, 3);
         plotBoxPlot.Name = "plotBoxPlot";
+        plotBoxPlot.ShowCrossHair = false;
+        plotBoxPlot.ShowCrossHairHorizontal = false;
+        plotBoxPlot.ShowCrossHairVertical = false;
         plotBoxPlot.Size = new Size(164, 167);
+        plotBoxPlot.SnapToPoint = false;
         plotBoxPlot.TabIndex = 7;
         // 
         // plotDerivative
@@ -150,32 +156,21 @@ partial class FrmMain
         plotDerivative.SnapToPoint = false;
         plotDerivative.TabIndex = 6;
         // 
-        // txtStats
+        // layoutFractal
         // 
-        txtStats.Dock = DockStyle.Fill;
-        txtStats.Location = new Point(3, 522);
-        txtStats.Multiline = true;
-        txtStats.Name = "txtStats";
-        txtStats.ReadOnly = true;
-        txtStats.ScrollBars = ScrollBars.Vertical;
-        txtStats.Size = new Size(854, 95);
-        txtStats.TabIndex = 1;
-        // 
-        // tableLayoutPanel3
-        // 
-        tableLayoutPanel3.ColumnCount = 2;
-        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.66666F));
-        tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
-        tableLayoutPanel3.Controls.Add(plotFractal, 0, 0);
-        tableLayoutPanel3.Controls.Add(plotFractalDistribution, 1, 0);
-        tableLayoutPanel3.Dock = DockStyle.Fill;
-        tableLayoutPanel3.Location = new Point(0, 173);
-        tableLayoutPanel3.Margin = new Padding(0);
-        tableLayoutPanel3.Name = "tableLayoutPanel3";
-        tableLayoutPanel3.RowCount = 1;
-        tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel3.Size = new Size(860, 173);
-        tableLayoutPanel3.TabIndex = 1;
+        layoutFractal.ColumnCount = 2;
+        layoutFractal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.66666F));
+        layoutFractal.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+        layoutFractal.Controls.Add(plotFractal, 0, 0);
+        layoutFractal.Controls.Add(plotFractalDistribution, 1, 0);
+        layoutFractal.Dock = DockStyle.Fill;
+        layoutFractal.Location = new Point(0, 173);
+        layoutFractal.Margin = new Padding(0);
+        layoutFractal.Name = "layoutFractal";
+        layoutFractal.RowCount = 1;
+        layoutFractal.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        layoutFractal.Size = new Size(860, 173);
+        layoutFractal.TabIndex = 1;
         // 
         // plotFractal
         // 
@@ -208,23 +203,23 @@ partial class FrmMain
         plotFractalDistribution.SnapToPoint = false;
         plotFractalDistribution.TabIndex = 5;
         // 
-        // tableLayoutPanel4
+        // layoutFFT
         // 
-        tableLayoutPanel4.ColumnCount = 3;
-        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-        tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-        tableLayoutPanel4.Controls.Add(plotApplied, 0, 0);
-        tableLayoutPanel4.Controls.Add(plotWindow, 0, 0);
-        tableLayoutPanel4.Controls.Add(plotFFT, 0, 0);
-        tableLayoutPanel4.Dock = DockStyle.Fill;
-        tableLayoutPanel4.Location = new Point(0, 346);
-        tableLayoutPanel4.Margin = new Padding(0);
-        tableLayoutPanel4.Name = "tableLayoutPanel4";
-        tableLayoutPanel4.RowCount = 1;
-        tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        tableLayoutPanel4.Size = new Size(860, 173);
-        tableLayoutPanel4.TabIndex = 2;
+        layoutFFT.ColumnCount = 3;
+        layoutFFT.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        layoutFFT.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        layoutFFT.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+        layoutFFT.Controls.Add(plotApplied, 0, 0);
+        layoutFFT.Controls.Add(plotWindow, 0, 0);
+        layoutFFT.Controls.Add(plotFFT, 0, 0);
+        layoutFFT.Dock = DockStyle.Fill;
+        layoutFFT.Location = new Point(0, 346);
+        layoutFFT.Margin = new Padding(0);
+        layoutFFT.Name = "layoutFFT";
+        layoutFFT.RowCount = 1;
+        layoutFFT.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        layoutFFT.Size = new Size(860, 173);
+        layoutFFT.TabIndex = 2;
         // 
         // plotApplied
         // 
@@ -273,6 +268,17 @@ partial class FrmMain
         plotFFT.Size = new Size(422, 167);
         plotFFT.SnapToPoint = false;
         plotFFT.TabIndex = 3;
+        // 
+        // txtStats
+        // 
+        txtStats.Dock = DockStyle.Fill;
+        txtStats.Location = new Point(3, 522);
+        txtStats.Multiline = true;
+        txtStats.Name = "txtStats";
+        txtStats.ReadOnly = true;
+        txtStats.ScrollBars = ScrollBars.Vertical;
+        txtStats.Size = new Size(854, 95);
+        txtStats.TabIndex = 1;
         // 
         // tspTop
         // 
@@ -396,7 +402,7 @@ partial class FrmMain
         // statusStrip
         // 
         statusStrip.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-        statusStrip.Items.AddRange(new ToolStripItem[] { statusStripLabelEmpty, statusStripLabelCulture, statusStripLabelExPower, statusStripLabelExCumulative, statusStripLabelExEntropy, statusStripLabelExCrossHair, statusStripLabelExDerivative, statusStripLabelExIntegration });
+        statusStrip.Items.AddRange(new ToolStripItem[] { statusStripLabelEmpty, statusStripLabelCulture, statusStripLabelExBoxplot, statusStripLabelExDerivative, statusStripLabelExIntegration, statusStripLabelExCumulative, statusStripLabelExPower, statusStripLabelExEntropy, statusStripLabelExCrossHair });
         statusStrip.Location = new Point(0, 693);
         statusStrip.Name = "statusStrip";
         statusStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -410,7 +416,7 @@ partial class FrmMain
         statusStripLabelEmpty.BorderSides = ToolStripStatusLabelBorderSides.Right;
         statusStripLabelEmpty.DisplayStyle = ToolStripItemDisplayStyle.Text;
         statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-        statusStripLabelEmpty.Size = new Size(631, 23);
+        statusStripLabelEmpty.Size = new Size(572, 23);
         statusStripLabelEmpty.Spring = true;
         statusStripLabelEmpty.TextAlign = ContentAlignment.MiddleLeft;
         // 
@@ -514,12 +520,27 @@ partial class FrmMain
         statusStripLabelExIntegration.ToolTipText = "Numerical integration";
         statusStripLabelExIntegration.Click += LabelEx_Click;
         // 
+        // statusStripLabelExBoxplot
+        // 
+        statusStripLabelExBoxplot.AutoSize = false;
+        statusStripLabelExBoxplot.BackColor = Color.Transparent;
+        statusStripLabelExBoxplot.Checked = false;
+        statusStripLabelExBoxplot.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExBoxplot.ForeColor = Color.LightGray;
+        statusStripLabelExBoxplot.ForeColorChecked = Color.Black;
+        statusStripLabelExBoxplot.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExBoxplot.Name = "statusStripLabelExBoxplot";
+        statusStripLabelExBoxplot.Size = new Size(28, 23);
+        statusStripLabelExBoxplot.Text = "B";
+        statusStripLabelExBoxplot.ToolTipText = "Box plot";
+        statusStripLabelExBoxplot.Click += LabelEx_Click;
+        // 
         // FrmMain
         // 
         AutoScaleDimensions = new SizeF(7F, 17F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(884, 721);
-        Controls.Add(tableLayoutPanel1);
+        Controls.Add(layoutGlobal);
         Controls.Add(toolStripMain);
         Controls.Add(statusStrip);
         Controls.Add(tspBottom);
@@ -533,11 +554,11 @@ partial class FrmMain
         FormClosing += FrmMain_FormClosing;
         Shown += FrmMain_Shown;
         KeyPress += FrmMain_KeyPress;
-        tableLayoutPanel1.ResumeLayout(false);
-        tableLayoutPanel1.PerformLayout();
-        tableLayoutPanel2.ResumeLayout(false);
-        tableLayoutPanel3.ResumeLayout(false);
-        tableLayoutPanel4.ResumeLayout(false);
+        layoutGlobal.ResumeLayout(false);
+        layoutGlobal.PerformLayout();
+        layoutData.ResumeLayout(false);
+        layoutFractal.ResumeLayout(false);
+        layoutFFT.ResumeLayout(false);
         toolStripMain.ResumeLayout(false);
         toolStripMain.PerformLayout();
         statusStrip.ResumeLayout(false);
@@ -547,12 +568,18 @@ partial class FrmMain
     }
 
     #endregion
-    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+    private System.Windows.Forms.TableLayoutPanel layoutGlobal;
+    private System.Windows.Forms.TableLayoutPanel layoutData;
+    private System.Windows.Forms.TableLayoutPanel layoutFractal;
+    private System.Windows.Forms.TableLayoutPanel layoutFFT;
     private ScottPlot.FormsPlotCrossHair plotOriginal;
+    private ScottPlot.FormsPlotCrossHair plotDerivative;
+    private ScottPlot.FormsPlotCrossHair plotBoxPlot;
     private ScottPlot.FormsPlotCrossHair plotFractal;
     private ScottPlot.FormsPlotCrossHair plotFractalDistribution;
+    private ScottPlot.FormsPlotCrossHair plotFFT;
+    private ScottPlot.FormsPlotCrossHair plotWindow;
+    private ScottPlot.FormsPlotCrossHair plotApplied;
     private System.Windows.Forms.TextBox txtStats;
     private System.Windows.Forms.StatusStrip statusStrip;
     private System.Windows.Forms.ToolStripPanel tspTop;
@@ -574,12 +601,7 @@ partial class FrmMain
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExCumulative;
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExEntropy;
     private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExCrossHair;
-    private TableLayoutPanel tableLayoutPanel4;
-    private ScottPlot.FormsPlotCrossHair plotFFT;
-    private ToolStripStatusLabelEx statusStripLabelExDerivative;
-    private ToolStripStatusLabelEx statusStripLabelExIntegration;
-    private ScottPlot.FormsPlotCrossHair plotWindow;
-    private ScottPlot.FormsPlotCrossHair plotDerivative;
-    private ScottPlot.FormsPlot plotBoxPlot;
-    private ScottPlot.FormsPlotCrossHair plotApplied;
+    private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExDerivative;
+    private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExIntegration;
+    private System.Windows.Forms.ToolStripStatusLabelEx statusStripLabelExBoxplot;
 }

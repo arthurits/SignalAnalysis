@@ -72,6 +72,7 @@ partial class FrmMain
                     UpdateStatsPlots(stripComboSeries.SelectedIndex,
                                     deletePreviousResults: true,
                                     stats: true,
+                                    boxplot: _settings.Boxplot,
                                     derivative: _settings.ComputeDerivative,
                                     integral: _settings.ComputeIntegration,
                                     fractal: true,
@@ -187,18 +188,21 @@ partial class FrmMain
             // Update UI
             //ComboSeries_SelectedIndexChanged(this, EventArgs.Empty);
 
-            statusStripLabelExPower.Checked = _settings.PowerSpectra;
-            statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
-            statusStripLabelExEntropy.Checked = _settings.Entropy;
-            statusStripLabelExCrossHair.Checked = _settings.CrossHair;
+            ShowHideBoxplot(_settings.Boxplot);
+            statusStripLabelExBoxplot.Checked = _settings.Boxplot;
             statusStripLabelExDerivative.Checked = _settings.ComputeDerivative;
             statusStripLabelExIntegration.Checked = _settings.ComputeIntegration;
+            statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
+            statusStripLabelExPower.Checked = _settings.PowerSpectra;
+            statusStripLabelExEntropy.Checked = _settings.Entropy;
+            statusStripLabelExCrossHair.Checked = _settings.CrossHair;
 
             UpdateUI_Language();
 
             UpdateStatsPlots(stripComboSeries.SelectedIndex,
                 deletePreviousResults: false,
                 stats: true,
+                boxplot: _settings.Boxplot,
                 derivative: _settings.ComputeDerivative,
                 integral: _settings.ComputeIntegration,
                 fractal: true,
@@ -242,15 +246,33 @@ partial class FrmMain
             // Update settings values
             switch (label.Name)
             {
-                case "statusStripLabelExPower":
-                    _settings.PowerSpectra = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: _settings.PowerSpectra, powerSpectra: _settings.PowerSpectra);
+                case "statusStripLabelExBoxplot":
+                    _settings.Boxplot = label.Checked;
+                    ShowHideBoxplot(label.Checked);
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, boxplot: _settings.Boxplot);
+                    break;
+                case "statusStripLabelExDerivative":
+                    _settings.ComputeDerivative = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
+                    if (_settings.ComputeDerivative == false)
+                    {
+                        plotDerivative.Clear();
+                        plotDerivative.Refresh();
+                    }
+                    break;
+                case "statusStripLabelExIntegration":
+                    _settings.ComputeIntegration = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
                     UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: _settings.CumulativeDimension, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
+                    break;
+                case "statusStripLabelExPower":
+                    _settings.PowerSpectra = label.Checked;
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: _settings.PowerSpectra, powerSpectra: _settings.PowerSpectra);
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
@@ -291,19 +313,6 @@ partial class FrmMain
                         plotDerivative.Refresh();
                     }
                     break;
-                case "statusStripLabelExDerivative":
-                    _settings.ComputeDerivative = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
-                    if (_settings.ComputeDerivative == false)
-                    {
-                        plotDerivative.Clear();
-                        plotDerivative.Refresh();
-                    }
-                    break;
-                case "statusStripLabelExIntegration":
-                    _settings.ComputeIntegration = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
-                    break;
             }
         }
     }
@@ -338,6 +347,7 @@ partial class FrmMain
         UpdateStatsPlots(stripComboSeries.SelectedIndex,
             deletePreviousResults: false,
             stats: true,
+            boxplot: _settings.Boxplot,
             derivative: _settings.ComputeDerivative,
             integral: _settings.ComputeIntegration,
             fractal: true,
@@ -362,6 +372,7 @@ partial class FrmMain
         UpdateStatsPlots(stripComboSeries.SelectedIndex,
             deletePreviousResults: false,
             stats: false,
+            boxplot: _settings.Boxplot,
             derivative: false,
             integral: false,
             fractal: false,
@@ -369,5 +380,10 @@ partial class FrmMain
             entropy: false,
             fft: true,
             powerSpectra: _settings.PowerSpectra);
+    }
+
+    private void ShowHideBoxplot (bool show = true)
+    {
+        layoutData.ColumnStyles[1].Width = show ? 20F : 0F;
     }
 }

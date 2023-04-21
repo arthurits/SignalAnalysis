@@ -54,6 +54,7 @@ public partial class FrmSettings : Form
         }
         Settings.IndexEnd = num;
 
+        Settings.Boxplot = chkBoxplot.Checked;
         Settings.PowerSpectra = chkPower.Checked;
         Settings.CumulativeDimension = chkCumulative.Checked;
         Settings.Entropy = chkEntropy.Checked;
@@ -128,7 +129,7 @@ public partial class FrmSettings : Form
         {
             _culture = System.Globalization.CultureInfo.CurrentCulture;
             UpdateUI_Language();
-            
+
             int index = cboAllCultures.SelectedIndex;
             FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
@@ -141,7 +142,7 @@ public partial class FrmSettings : Form
         {
             _culture = System.Globalization.CultureInfo.InvariantCulture;
             UpdateUI_Language();
-            
+
             int index = cboAllCultures.SelectedIndex;
             FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
@@ -156,7 +157,7 @@ public partial class FrmSettings : Form
             _culture = new((string)cboAllCultures.SelectedValue);
             if (_culture.Name != string.Empty)
                 UpdateUI_Language();
-                
+
             int index = cboAllCultures.SelectedIndex;
             FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
             cboAllCultures.SelectedIndex = index;
@@ -170,7 +171,7 @@ public partial class FrmSettings : Form
         {
             _culture = new((string)cbo.SelectedValue);
             UpdateUI_Language();
-            
+
             FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
         }
     }
@@ -197,6 +198,7 @@ public partial class FrmSettings : Form
     {
         txtStart.Text = settings.IndexStart.ToString();
         txtEnd.Text = settings.IndexEnd.ToString();
+        chkBoxplot.Checked = settings.Boxplot;
         chkPower.Checked = settings.PowerSpectra;
         chkCumulative.Checked = settings.CumulativeDimension;
         chkEntropy.Checked = settings.Entropy;
@@ -278,12 +280,12 @@ public partial class FrmSettings : Form
         // Retrieve the culture list using the culture currently selected. The UI culture needs to be temporarily changed
         CultureInfo.CurrentUICulture = new CultureInfo(cultureName);
         var cultures = System.Globalization.GlobalizationUtilities.GetAvailableCultures(baseName, assembly);
-        
+
         cboAllCultures.DisplayMember = "DisplayName";
         cboAllCultures.ValueMember = "Name";
         cboAllCultures.DataSource = cultures.ToArray();
         cboAllCultures.SelectedValue = cultureName;
-        
+
         // Reset the UI culture to its previous value
         //CultureInfo.CurrentUICulture = new(_cultureUI);
     }
@@ -318,6 +320,7 @@ public partial class FrmSettings : Form
         this.radPoints.Text = StringResources.RadPoints;
         this.radSeconds.Text = StringResources.RadSeconds;
         this.radTime.Text = StringResources.RadTime;
+        this.chkBoxplot.Text = StringResources.ChkBoxplot;
         this.chkPower.Text = StringResources.ChkPower;
         this.chkCumulative.Text = StringResources.ChkCumulative;
         this.chkEntropy.Text = StringResources.ChkEntropy;

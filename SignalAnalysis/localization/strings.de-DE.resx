@@ -157,6 +157,9 @@ Wenn Sie diese Software nützlich finden, erwägen Sie bitte, sie zu unterstütz
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>Betrags Integral berechnen?</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Box-Plot</value>
+  </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>Numerische Differentiation berechnen?</value>
   </data>
@@ -461,11 +464,20 @@ wurde gestoppt.</value>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Box-Plot</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Ableitung</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>Zeit (Sekunden)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>Amplitude / Sekunden</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitude</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>Fast Fourier-Transform</value>

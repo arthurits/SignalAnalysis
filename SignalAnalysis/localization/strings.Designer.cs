@@ -173,6 +173,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Box plot.
+        /// </summary>
+        internal static string strChkBoxplot {
+            get {
+                return ResourceManager.GetString("strChkBoxplot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Compute numerical differentiation?.
         /// </summary>
         internal static string strChkComputeDerivative {
@@ -601,7 +610,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BoxPlot lower limit.
+        ///   Looks up a localized string similar to Box plot lower limit.
         /// </summary>
         internal static string strFileHeader33 {
             get {
@@ -610,7 +619,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BoxPlot upper limit.
+        ///   Looks up a localized string similar to Box plot upper limit.
         /// </summary>
         internal static string strFileHeader34 {
             get {
@@ -1113,6 +1122,15 @@ namespace SignalAnalysis.localization {
         internal static string strPlotBoxPlotTitle {
             get {
                 return ResourceManager.GetString("strPlotBoxPlotTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amplitude.
+        /// </summary>
+        internal static string strPlotBoxplotYLabel {
+            get {
+                return ResourceManager.GetString("strPlotBoxplotYLabel", resourceCulture);
             }
         }
         

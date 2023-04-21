@@ -13,6 +13,7 @@ partial class FrmMain
     /// <param name="series">Data series to be analised</param>
     /// <param name="deletePreviousResults"><see langword="True"/> if the previous results data should be delete and new results should be reinitialised</param>
     /// <param name="stats"><see langword="True"/> if the descriptive statistics will be computed</param>
+    /// <param name="boxplot"><see langword="True"/> if box plot is computed and shown</param>
     /// <param name="derivative"><see langword="True"/> if the derivative will be computed</param>
     /// <param name="integral"><see langword="True"/> if the integral will be computed</param>
     /// <param name="fractal"><see langword="True"/> if the fractal dimension will be computed</param>
@@ -21,7 +22,7 @@ partial class FrmMain
     /// <param name="fft"><see langword="True"/></param>
     /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
     /// <returns></returns>
-    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false, bool stats = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
+    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -103,11 +104,8 @@ partial class FrmMain
         // Show results on plots
         _settings.CrossHair = false;
         statusStripLabelExCrossHair.Checked = false;
-        if (stats)
-        {
-            PlotOriginal(signalClipped, seriesName ?? string.Empty);
-            PlotBoxPlot(signalClipped, seriesName ?? string.Empty);
-        }
+        if (stats) PlotOriginal(signalClipped, seriesName ?? string.Empty);
+        if (boxplot) PlotBoxPlot(signalClipped, seriesName ?? string.Empty);
         if (derivative) PlotDerivative(signalClipped, seriesName ?? string.Empty);
         if (fractal)
         {
@@ -348,7 +346,7 @@ partial class FrmMain
 
         // Format plot
         plotBoxPlot.Plot.Title(StringResources.PlotBoxPlotTitle);
-        plotBoxPlot.Plot.LeftAxis.Label(StringResources.PlotOriginalYLabel);
+        plotBoxPlot.Plot.LeftAxis.Label(StringResources.PlotBoxplotYLabel);
         plotBoxPlot.Plot.XTicks(new string[] { strLabel });
         plotBoxPlot.Plot.XAxis.Grid(false);
         plotBoxPlot.Refresh();

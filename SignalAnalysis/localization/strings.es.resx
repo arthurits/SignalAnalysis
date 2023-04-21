@@ -157,6 +157,9 @@ Si esta aplicación le resulta útil y práctica, por favor considere apoyarla m
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
     <value>¿Calcular el valor absoluto de la integral?</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Diagrama de caja</value>
+  </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
     <value>¿Calcular la derivada numérica?</value>
   </data>
@@ -304,10 +307,10 @@ Se utilizarán los valores por defecto.</value>
     <value>Variancia</value>
   </data>
   <data name="strFileHeader33" xml:space="preserve">
-    <value>BoxPlot límite inferior</value>
+    <value>Boxplot límite inferior</value>
   </data>
   <data name="strFileHeader34" xml:space="preserve">
-    <value>BoxPlot límite superior</value>
+    <value>Boxplot límite superior</value>
   </data>
   <data name="strFileHeader35" xml:space="preserve">
     <value>Cuartil 1 (25%)</value>
@@ -486,6 +489,9 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>Diagrama de caja</value>
+  </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitud</value>
   </data>
   <data name="strPlotDerivativeTitle" xml:space="preserve">
     <value>Derivada</value>

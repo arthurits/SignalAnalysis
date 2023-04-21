@@ -154,6 +154,9 @@
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;सेटिंग्स</value>
   </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>रेखा - चित्र</value>
+  </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>भूखंडों का क्रॉसहेयर दिखाएं</value>
   </data>
@@ -389,11 +392,20 @@
   <data name="strPlotBoxPlotTitle" xml:space="preserve">
     <value>रेखा - चित्र</value>
   </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>आयाम</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>व्युत्पन्न</value>
+  </data>
   <data name="strPlotDerivativeXLabel" xml:space="preserve">
     <value>समय (सेकंड)</value>
   </data>
   <data name="strPlotDerivativeYLabel1" xml:space="preserve">
     <value>आयाम / सेकंड</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>आयाम</value>
   </data>
   <data name="strPlotFFTTitle" xml:space="preserve">
     <value>फास्ट फूरियर ट्रांसफॉर्म</value>
