@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 public static class StringResources
 {

@@ -64,6 +64,7 @@ partial class FrmMain
                     Results = results;
                     txtStats.Text = Results.ToString(
                         _settings.AppCulture,
+                        _settings.Boxplot,
                         _settings.ComputeIntegration,
                         _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
                 }
@@ -384,6 +385,9 @@ partial class FrmMain
 
     private void ShowHideBoxplot (bool show = true)
     {
+        layoutGlobal.SuspendLayout();
         layoutData.ColumnStyles[1].Width = show ? 20F : 0F;
+        //layoutGlobal.ResumeLayout(false);
+        layoutGlobal.PerformLayout();
     }
 }

@@ -1,11 +1,4 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using ScottPlot.Drawing.Colormaps;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Drawing;
-using System.Reflection.Metadata;
-using System.Runtime.Intrinsics.X86;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 public static class DescriptiveSatatistics
 {
@@ -86,7 +79,6 @@ public static class DescriptiveSatatistics
     /// <param name="signal">1D array (vector) with values already sorted in ascending order</param>
     /// <returns>First quartile (Q1), median (Q2), third quartile (Q3)</returns>
     /// <seealso cref="https://stackoverflow.com/questions/14683467/finding-the-first-and-third-quartiles"/>
-    /// <seealso cref="https://www.geeksforgeeks.org/box-plot/"/>
     public static (double, double, double) Quartiles(double[] signal)
     {
         int midIndex = signal.Length / 2;   // If length is 4 or 5, then midIndex is 2. If length is 6 or 7 the midIndex is 3, etc.
@@ -148,7 +140,8 @@ public static class DescriptiveSatatistics
     /// <param name="signal">1D array (vector) with values</param>
     /// <param name="IsSorted"><see langword="True"/> if the array values are sorted in ascending order, false otherwise</param>
     /// <param name="factor">Factor to compute the minimum and maximun outliers limits</param>
-    /// <returns>Minimum limit, first quartile (Q1), Median (Q2), third quartile (Q3), maximum limit</returns>
+    /// <returns>Minimum value excluding outliers, first quartile (Q1), Median (Q2), third quartile (Q3), maximum value excluding outliers</returns>
+    /// <seealso cref="https://www.geeksforgeeks.org/box-plot/"/>
     public static (double minimum, double q1, double q2, double q3, double maximum) ComputeBoxPlotValues(double[] signal, bool IsSorted = true, double factor = 1.5)
     {
         double[] array = new double[signal.Length];
@@ -159,8 +152,28 @@ public static class DescriptiveSatatistics
         (double q1, double q2, double q3) = Quartiles(array);
 
         double iqr = q3 - q1;
+        double minimum = q1 - factor * iqr;
+        double maximum = q3 + factor * iqr;
 
-        return (q1 - factor * iqr, q1, q2, q3, q3 + factor * iqr);
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] >= minimum)
+            {
+                minimum = array[i];
+                break;
+            }
+        }
+
+        for (int i = array.Length - 1; i >= 0; i--)
+        {
+            if (array[i] <= maximum)
+            {
+                maximum = array[i];
+                break;
+            }
+        }
+
+        return (minimum, q1, q2, q3, maximum);
 
     }
 }

@@ -1,6 +1,4 @@
 ﻿using ScottPlot;
-using System.Reflection.Metadata.Ecma335;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace SignalAnalysis;
 
@@ -50,6 +48,7 @@ partial class FrmMain
             try
             {
                 if (stats) ComputeStatistics(signalClipped);
+                if (boxplot) ComputeBoxplot(signalClipped);
                 if (derivative) ComputeDerivative(signalClipped);
                 if (integral) ComputeIntegral(signalClipped);
                 if (fractal) ComputeFractal(signalClipped, progressive);
@@ -123,6 +122,7 @@ partial class FrmMain
         //if (stats || fractal || entropy || integral)
         txtStats.Text = Results.ToString(
             _settings.AppCulture,
+            _settings.Boxplot,
             _settings.ComputeIntegration,
             _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 
@@ -144,10 +144,6 @@ partial class FrmMain
 
             // Compute variance
             (Results.Variance, _) = DescriptiveSatatistics.ComputeVariance(signal, Results.Average, true);
-
-            // Compute BoxPlot values
-            (Results.BoxPlotMin, Results.Q1, Results.Q2, Results.Q3, Results.BoxPlotMax) = DescriptiveSatatistics.ComputeBoxPlotValues(signal, false);
-
         }
         catch (Exception ex)
         {
@@ -163,6 +159,16 @@ partial class FrmMain
                 }
             });
         }
+    }
+
+    /// <summary>
+    /// Computes box plot related values: quartiles Q1, Q2, and Q3, as well as minimum and maximum values excluding outliers
+    /// </summary>
+    /// <param name="signal">1D data array values</param>
+    private void ComputeBoxplot(double[] signal)
+    {
+        // Compute Box plot values
+        (Results.BoxplotMin, Results.BoxplotQ1, Results.BoxplotQ2, Results.BoxplotQ3, Results.BoxplotMax) = DescriptiveSatatistics.ComputeBoxPlotValues(signal, false);
     }
 
     /// <summary>

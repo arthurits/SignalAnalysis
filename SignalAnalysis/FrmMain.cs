@@ -269,6 +269,7 @@ public partial class FrmMain : Form
         if (txtStats.Text.Length > 0)
             txtStats.Text = Results.ToString(
                 _settings.AppCulture,
+                _settings.Boxplot,
                 _settings.ComputeIntegration,
                 _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 

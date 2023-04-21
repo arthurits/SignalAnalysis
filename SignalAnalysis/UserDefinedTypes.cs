@@ -22,11 +22,11 @@ public class SignalStats
     public double Minimum { get; set; } = 0;
     public double Average { get; set; } = 0;
     public double Variance { get; set; } = 0;
-    public double Q1 { get; set; } = 0;
-    public double Q2 { get; set; } = 0;
-    public double Q3 { get; set; } = 0;
-    public double BoxPlotMax { get; set; } = 0;
-    public double BoxPlotMin { get; set; } = 0;
+    public double BoxplotQ1 { get; set; } = 0;
+    public double BoxplotQ2 { get; set; } = 0;
+    public double BoxplotQ3 { get; set; } = 0;
+    public double BoxplotMax { get; set; } = 0;
+    public double BoxplotMin { get; set; } = 0;
     public double FractalDimension { get; set; } = 0;
     public double FractalVariance { get; set; } = 0;
     public double ApproximateEntropy { get; set; } = 0;
@@ -43,16 +43,16 @@ public class SignalStats
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
     public double[] FFTfrequencies { get; set; } = Array.Empty<double>();
 
-    public string ToString(System.Globalization.CultureInfo culture, bool integral = false, string integralAlgorithm = "") =>
+    public string ToString(System.Globalization.CultureInfo culture, bool boxplot = false, bool integral = false, string integralAlgorithm = "") =>
         $"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Average.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader32}{StringResources.FileHeaderColon}{Variance.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Maximum.ToString("0.##", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Minimum.ToString("0.##", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader33}{StringResources.FileHeaderColon}{BoxPlotMin.ToString("0.######", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader35}{StringResources.FileHeaderColon}{Q1.ToString("0.######", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader36}{StringResources.FileHeaderColon}{Q2.ToString("0.######", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader37}{StringResources.FileHeaderColon}{Q3.ToString("0.######", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader34}{StringResources.FileHeaderColon}{BoxPlotMax.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"{(boxplot ? $"{StringResources.FileHeader33}{StringResources.FileHeaderColon}{BoxplotMin.ToString("0.######", culture)}{Environment.NewLine}" : string.Empty)}"+
+        $"{(boxplot ? $"{StringResources.FileHeader35}{StringResources.FileHeaderColon}{BoxplotQ1.ToString("0.######", culture)}{Environment.NewLine}" : string.Empty)}" +
+        $"{(boxplot ? $"{StringResources.FileHeader36}{StringResources.FileHeaderColon}{BoxplotQ2.ToString("0.######", culture)}{Environment.NewLine}" : string.Empty)}" +
+        $"{(boxplot ? $"{StringResources.FileHeader37}{StringResources.FileHeaderColon}{BoxplotQ3.ToString("0.######", culture)}{Environment.NewLine}" : string.Empty)}" +
+        $"{(boxplot ? $"{StringResources.FileHeader34}{StringResources.FileHeaderColon}{BoxplotMax.ToString("0.######", culture)}{Environment.NewLine}" : string.Empty)}" +
         $"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{FractalDimension.ToString("0.########", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{FractalVariance.ToString("0.########", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
