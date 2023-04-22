@@ -140,11 +140,8 @@ partial class FrmMain
     {
         try
         {
-            // Compute average, max, and min descriptive statistics
-            (Results.Average, Results.Maximum, Results.Minimum) = DescriptiveSatatistics.ComputeAverage(signal);
-
-            // Compute variance
-            (Results.Variance, _) = DescriptiveSatatistics.ComputeVariance(signal, Results.Average, true);
+            // Compute average, variance, maximum, and minimum descriptive statistics
+            (Results.Average, Results.Variance, Results.Maximum, Results.Minimum) = DescriptiveSatatistics.ComputeAverage(signal);
         }
         catch (Exception ex)
         {
@@ -168,8 +165,25 @@ partial class FrmMain
     /// <param name="signal">1D data array values</param>
     private void ComputeBoxplot(double[] signal)
     {
-        // Compute Box plot values
-        (Results.BoxplotMin, Results.BoxplotQ1, Results.BoxplotQ2, Results.BoxplotQ3, Results.BoxplotMax) = DescriptiveSatatistics.ComputeBoxPlotValues(signal, false);
+        try
+        {
+            // Compute Box plot values
+            (Results.BoxplotMin, Results.BoxplotQ1, Results.BoxplotQ2, Results.BoxplotQ3, Results.BoxplotMax) = DescriptiveSatatistics.ComputeBoxPlotValues(signal, false);
+        }
+        catch (Exception ex)
+        {
+            Invoke(() =>
+            {
+                using (new CenterWinDialog(this))
+                {
+                    MessageBox.Show(this,
+                        String.Format(_settings.AppCulture, StringResources.MsgBoxErrorDescriptiveStats, ex.Message),
+                        StringResources.MsgBoxErrorDescriptiveStatsTitle,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            });
+        }
     }
 
     /// <summary>

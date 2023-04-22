@@ -1,50 +1,89 @@
-﻿namespace SignalAnalysis;
+﻿using ScottPlot.Statistics;
+
+namespace SignalAnalysis;
 
 public static class DescriptiveSatatistics
 {
     /// <summary>
-    /// 
+    /// Computes the average and variance from either a sample or a pupulation data set. It also computes the maximum and minimum values of the data set.
     /// </summary>
-    /// <param name="signal"></param>
-    /// <returns></returns>
-    public static (double average, double maximum, double minimum) ComputeAverage(double[] signal)
+    /// <param name="signal">1D array (vector) with values</param>
+    /// <param name="isPopulation">If <see langword="true"/>, assumes data from a finite population (n is used). If <see langword="false"/>, assumes data from a sample (n-1 is used)</param>
+    /// <returns>The average, variance, maximum and minimum</returns>
+    public static (double average, double variance, double maximum, double minimum) ComputeAverage(double[] signal, bool isPopulation = true)
     {
+        // Check input data set
+        if (signal is null || signal.Length == 0) return (0, 0, 0, 0);
+
         // Compute average, max, and min descriptive statistics
         double max = signal[0], min = signal[0], sum = 0;
+        double K = signal[0], Ex = 0, Ex2 = 0;
 
         for (int i = 0; i < signal.Length; i++)
         {
+            // Average computation
             if (signal[i] > max) max = signal[i];
             if (signal[i] < min) min = signal[i];
             sum += signal[i];
+
+            // Variance computation by shifting data
+            Ex += signal[i] - K;
+            Ex2 += Math.Pow((signal[i] - K), 2);
         }
         double avg = sum / signal.Length;
-        
-        return (avg, max, min);
+        double variance = (Ex2 - Math.Pow(Ex, 2) / signal.Length) / (isPopulation ? signal.Length : signal.Length - 1);
+
+        return (avg, variance, max, min);
     }
 
     /// <summary>
-    /// 
+    /// Computes the variance and the standard deviation from either a sample or a pupulation data set.
     /// </summary>
-    /// <param name="signal"></param>
-    /// <param name="average"></param>
-    /// <param name="IsPopulation">If <see langword="tTrue"/> then n is used, otherwise n-1</param>
+    /// <param name="signal">1D array (vector) with values</param>
+    /// <param name="average">Average of the data set</param>
+    /// <param name="isPopulation">If <see langword="true"/>, assumes data from a finite population (n is used). If <see langword="false"/>, assumes data from a sample (n-1 is used)</param>
     /// <returns>Variance and standard deviation</returns>
     /// <seealso cref="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance"/>
-    public static (double variance, double stddev) ComputeVariance(double[] signal, double average, bool IsPopulation = true)
+    public static (double variance, double stddev) ComputeVariance(double[] signal, double average, bool isPopulation = true)
     {
-        double variance, stddev;
-        double sum = 0;
-
         // If there's only 1 point
-        if (signal.Length <= 1) return (0, 0);
+        if (signal is null || signal.Length <= 1) return (0, 0);
 
+        double sum = 0;
         for (int i = 0; i < signal.Length; i++)
             sum += Math.Pow(signal[i] - average, 2);
         
-        variance = sum / (IsPopulation ? signal.Length : signal.Length - 1);
-        stddev = Math.Sqrt(variance);
+        double variance = sum / (isPopulation ? signal.Length : signal.Length - 1);
+        double stddev = Math.Sqrt(variance);
 
+        return (variance, stddev);
+    }
+
+    /// <summary>
+    /// Computes the variance and the standard deviation from either a sample or a pupulation data set.
+    /// To minimize numerical errors, data is shifted while computing variance (var(x-K) = var(x)).
+    /// </summary>
+    /// <param name="signal">1D array (vector) with values</param>
+    /// <param name="isPopulation">If <see langword="true"/>, assumes data from a finite population (n is used). If <see langword="false"/>, assumes data from a sample (n-1 is used)</param>
+    /// <returns>Variance and standard deviation</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance"/>
+    public static (double variance, double stddev) ComputeVariance(double[] signal, bool isPopulation = true)
+    {   
+        // Check input data set
+        if (signal is null || signal.Length <= 1) return (0, 0);
+
+        // Compute average, max, and min descriptive statistics
+        double K = signal[0], Ex = 0, Ex2 = 0;
+
+        for (int i = 0; i < signal.Length; i++)
+        {
+            // Variance computation by shifting data
+            Ex += signal[i] - K;
+            Ex2 += Math.Pow((signal[i] - K), 2);
+        }
+        double variance = (Ex2 - Math.Pow(Ex, 2) / signal.Length) / (isPopulation ? signal.Length : signal.Length - 1);
+        double stddev = Math.Sqrt(variance);
+        
         return (variance, stddev);
     }
 
