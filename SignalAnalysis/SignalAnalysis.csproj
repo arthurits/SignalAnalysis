@@ -41,6 +41,9 @@ If you find this software useful, please consider supporting it!</Description>
     <None Update="examples\Artificial light test.elux">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="examples\Random set - 50 pt.sig">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="examples\Signal format template file.sig">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
