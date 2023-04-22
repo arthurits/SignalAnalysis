@@ -522,8 +522,14 @@ er blevet stoppet.</value>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Plot enten FFT-energikurve(dB) eller størrelse</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Differentiering</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Brugergrænseflade</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integration</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Plot</value>

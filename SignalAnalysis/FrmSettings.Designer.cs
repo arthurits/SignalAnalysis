@@ -262,10 +262,10 @@
             tabDerivative.Controls.Add(cboAlgorithms);
             tabDerivative.Controls.Add(chkComputeDerivative);
             tabDerivative.Controls.Add(chkExportDerivative);
-            tabDerivative.Location = new Point(4, 26);
+            tabDerivative.Location = new Point(4, 24);
             tabDerivative.Name = "tabDerivative";
             tabDerivative.Padding = new Padding(3);
-            tabDerivative.Size = new Size(452, 254);
+            tabDerivative.Size = new Size(452, 256);
             tabDerivative.TabIndex = 2;
             tabDerivative.Text = "Derivative";
             tabDerivative.UseVisualStyleBackColor = true;
@@ -316,10 +316,10 @@
             tabIntegration.Controls.Add(lblIntegration);
             tabIntegration.Controls.Add(chkExportIntegration);
             tabIntegration.Controls.Add(chkComputeIntegration);
-            tabIntegration.Location = new Point(4, 26);
+            tabIntegration.Location = new Point(4, 24);
             tabIntegration.Name = "tabIntegration";
             tabIntegration.Padding = new Padding(3);
-            tabIntegration.Size = new Size(452, 254);
+            tabIntegration.Size = new Size(452, 256);
             tabIntegration.TabIndex = 3;
             tabIntegration.Text = "Integration";
             tabIntegration.UseVisualStyleBackColor = true;
@@ -391,14 +391,14 @@
             // 
             txtDataFormat.Location = new Point(260, 213);
             txtDataFormat.Name = "txtDataFormat";
-            txtDataFormat.Size = new Size(74, 25);
+            txtDataFormat.Size = new Size(75, 25);
             txtDataFormat.TabIndex = 3;
             // 
             // lblDataFormat
             // 
             lblDataFormat.AutoSize = true;
             lblDataFormat.Location = new Point(19, 216);
-            lblDataFormat.MaximumSize = new Size(280, 0);
+            lblDataFormat.MaximumSize = new Size(320, 0);
             lblDataFormat.Name = "lblDataFormat";
             lblDataFormat.Size = new Size(201, 19);
             lblDataFormat.TabIndex = 2;

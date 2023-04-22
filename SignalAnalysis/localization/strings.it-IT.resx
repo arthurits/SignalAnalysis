@@ -520,8 +520,14 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Traccia gli spettri di potenza (dB) o di grandezza della FFT</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Differenziazione</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Interfaccia utente</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integrazione</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Tracciamento</value>

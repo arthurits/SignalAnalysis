@@ -520,8 +520,14 @@
   <data name="strStatusTipPower" xml:space="preserve">
     <value>या तो एफएफटी पावर स्पेक्ट्रा (डीबी) या परिमाण प्लॉट करें</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>विभेदन</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>प्रयोक्ता इंटरफ़ेस</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>एकीकरण</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>अंकन</value>

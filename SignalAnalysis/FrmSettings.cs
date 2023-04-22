@@ -361,7 +361,7 @@ public partial class FrmSettings : Form
         this.lblStart.Top = this.txtStart.Top + (txtStart.Height - lblStart.Height) / 2;
         this.lblEnd.Top = this.txtEnd.Top + (txtEnd.Height - lblEnd.Height) / 2;
 
-        this.txtDataFormat.Left = this.lblDataFormat.Left + this.lblDataFormat.Width;
+        this.txtDataFormat.Left = 5 + this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
 

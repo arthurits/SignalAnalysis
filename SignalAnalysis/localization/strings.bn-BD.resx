@@ -523,8 +523,14 @@
   <data name="strStatusTipPower" xml:space="preserve">
     <value>হয় FFT পাওয়ার স্পেকট্রা(dB) বা মাত্রা</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>ডেরিভেটিভ</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>ব্যবহারকারী ইন্টারফেস</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>একীকরণ</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>চক্রান্ত</value>

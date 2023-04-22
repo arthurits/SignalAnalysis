@@ -523,8 +523,14 @@
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Постройте либо спектр мощности FFT (дБ), либо величину</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>дифференцирование</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Пользовательский интерфейс</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Интегрирование</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Заговор</value>

@@ -523,8 +523,14 @@ foi interrompida.</value>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Mostrar espectro da FFT (dB) ou magnitude</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Diferenciação</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Interface do usuário</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integração</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Gráficos</value>

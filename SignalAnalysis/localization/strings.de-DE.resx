@@ -599,7 +599,7 @@ wurde gestoppt.</value>
     <value>FFT Energiekurve (dB) oder Größe plotten</value>
   </data>
   <data name="strTabDerivative" xml:space="preserve">
-    <value>Ableitung</value>
+    <value>Differenzierung</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Oberfläche</value>

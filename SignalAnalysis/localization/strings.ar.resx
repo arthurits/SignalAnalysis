@@ -538,8 +538,14 @@
   <data name="strStatusTipPower" xml:space="preserve">
     <value>حساب أطياف القدرة(ديسيبل) أو الحجم</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>التفاضل</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>واجهة المستخدم</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>تكامل</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>التخطيط</value>

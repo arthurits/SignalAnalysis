@@ -522,8 +522,14 @@ dimensie is gestopt.</value>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Plot FFT-vermogensspectra (dB) of magnitude</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Differentiatie</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Gebruikersomgeving</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integratie</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Plotten</value>

@@ -606,13 +606,13 @@ boyut durdurulmuştur.</value>
     <value>FFT güç spektrumunu (dB) veya büyüklüğünü çizin</value>
   </data>
   <data name="strTabDerivative" xml:space="preserve">
-    <value>Differentiation</value>
+    <value>Farklılaşma</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Kullanıcı arayüzü</value>
   </data>
   <data name="strTabIntegration" xml:space="preserve">
-    <value>Integration</value>
+    <value>Entegrasyon</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Çizim</value>

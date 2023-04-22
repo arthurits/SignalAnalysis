@@ -520,8 +520,14 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Nubraižykite FFT galios spektrą (dB) arba magnitudę</value>
   </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Diferencijavimas</value>
+  </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Vartotojo sąsaja</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integracija</value>
   </data>
   <data name="strTabPlot" xml:space="preserve">
     <value>Braižybos</value>
