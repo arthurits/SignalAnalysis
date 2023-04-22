@@ -298,7 +298,7 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine(Results.ToString(_settings.AppCulture, false));
+            sw.WriteLine(Results.ToString(_settings.AppCulture,_settings.Boxplot,_settings.Entropy, false));
             if (_settings.ExportDerivative && _settings.ComputeDerivative)
             {
                 sw.WriteLine($"{StringResources.FileHeader29}{StringResources.FileHeaderColon}{StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");

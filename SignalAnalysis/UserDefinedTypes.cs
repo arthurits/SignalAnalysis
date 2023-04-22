@@ -43,39 +43,52 @@ public class SignalStats
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
     public double[] FFTfrequencies { get; set; } = Array.Empty<double>();
 
-    public string ToString(System.Globalization.CultureInfo culture, bool boxplot = false, bool integral = false, string integralAlgorithm = "")
+    /// <summary>
+    /// Gets a text-formatted result string
+    /// </summary>
+    /// <param name="culture">Culture used to format the string</param>
+    /// <param name="boxplot"><see langword="True"/> if the parameters defining the box plot are included in the string</param>
+    /// <param name="entropy"><see langword="True"/> if the entropy variables are included in the string</param>
+    /// <param name="integral"><see langword="True"/> if the integral value and the algorithm name are included in the string</param>
+    /// <param name="integralAlgorithm"><see langword="True"/>Integration algorithm name</param>
+    /// <returns>Results formatted as string</returns>
+    public string ToString(System.Globalization.CultureInfo culture, bool boxplot = false, bool entropy = false, bool integral = false, string integralAlgorithm = "")
     {
-        string toString;
+        string strTemp;
 
-        toString = $"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Average.ToString("0.######", culture)}{Environment.NewLine}" +
+        strTemp = $"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Average.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader32}{StringResources.FileHeaderColon}{Variance.ToString("0.######", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Maximum.ToString("0.##", culture)}{Environment.NewLine}" +
         $"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Minimum.ToString("0.##", culture)}{Environment.NewLine}";
         
         if (boxplot)
         {
-            toString += $"{StringResources.FileHeader33}{StringResources.FileHeaderColon}{BoxplotMin.ToString("0.######", culture)}{Environment.NewLine}" +
+            strTemp += $"{StringResources.FileHeader33}{StringResources.FileHeaderColon}{BoxplotMin.ToString("0.######", culture)}{Environment.NewLine}" +
                 $"{StringResources.FileHeader35}{StringResources.FileHeaderColon}{BoxplotQ1.ToString("0.######", culture)}{Environment.NewLine}" +
                 $"{StringResources.FileHeader36}{StringResources.FileHeaderColon}{BoxplotQ2.ToString("0.######", culture)}{Environment.NewLine}" +
                 $"{StringResources.FileHeader37}{StringResources.FileHeaderColon}{BoxplotQ3.ToString("0.######", culture)}{Environment.NewLine}" +
                 $"{StringResources.FileHeader34}{StringResources.FileHeaderColon}{BoxplotMax.ToString("0.######", culture)}{Environment.NewLine}";
         }
 
-        toString += $"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{FractalDimension.ToString("0.########", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{FractalVariance.ToString("0.########", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{ShannonEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{EntropyBit.ToString("0.########", culture)}{Environment.NewLine}" +
-        $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}";
+        strTemp += $"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{FractalDimension.ToString("0.########", culture)}{Environment.NewLine}" +
+        $"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{FractalVariance.ToString("0.########", culture)}{Environment.NewLine}";
+
+        if (entropy)
+        {
+            strTemp += $"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{ShannonEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{EntropyBit.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}";
+        }
         
         if (integral)
         {
-            toString += $"{Environment.NewLine}{StringResources.FileHeader30}{StringResources.FileHeaderColon}{integralAlgorithm}" +
+            strTemp += $"{Environment.NewLine}{StringResources.FileHeader30}{StringResources.FileHeaderColon}{integralAlgorithm}" +
                 $"{Environment.NewLine}{StringResources.FileHeader31}{StringResources.FileHeaderColon}{Integral.ToString("0.########", culture)}";
         }
 
-        return toString;
+        return strTemp;
     }
 }
 

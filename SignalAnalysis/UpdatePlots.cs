@@ -123,6 +123,7 @@ partial class FrmMain
         txtStats.Text = Results.ToString(
             _settings.AppCulture,
             _settings.Boxplot,
+            _settings.Entropy,
             _settings.ComputeIntegration,
             _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 
