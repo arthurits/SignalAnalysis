@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>images\logo.ico</ApplicationIcon>
-    <Version>$(VersionPrefix)1.4</Version>
+    <Version>$(VersionPrefix)1.5</Version>
     <Authors>Arthurits</Authors>
     <Company>Arthurits Ltd.</Company>
     <Copyright>© 2021-2023</Copyright>
@@ -45,6 +45,9 @@ If you find this software useful, please consider supporting it!</Description>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="examples\Signal format template file.sig">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="examples\Sine wave - 1 Hz - 1024 pt.sig">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="examples\Template - Elux format - EN.elux">
