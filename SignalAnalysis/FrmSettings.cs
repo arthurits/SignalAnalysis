@@ -86,6 +86,11 @@ public partial class FrmSettings : Form
 
     private void Cancel_Click(object sender, EventArgs e)
     {
+        if (Settings is not null)
+            StringResources.Culture = Settings.AppCulture;
+        else
+            StringResources.Culture = CultureInfo.InvariantCulture;
+
         DialogResult = DialogResult.Cancel;
     }
 
