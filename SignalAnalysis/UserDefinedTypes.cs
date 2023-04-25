@@ -79,13 +79,13 @@ public class SignalStats
             $"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{ShannonEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{EntropyBit.ToString("0.########", culture)}{Environment.NewLine}" +
-            $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}";
+            $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}{Environment.NewLine}";
         }
         
         if (integral)
         {
-            strTemp += $"{Environment.NewLine}{StringResources.FileHeader30}{StringResources.FileHeaderColon}{integralAlgorithm}" +
-                $"{Environment.NewLine}{StringResources.FileHeader31}{StringResources.FileHeaderColon}{Integral.ToString("0.########", culture)}";
+            strTemp += $"{StringResources.FileHeader30}{StringResources.FileHeaderColon}{integralAlgorithm}{Environment.NewLine}" +
+                $"{StringResources.FileHeader31}{StringResources.FileHeaderColon}{Integral.ToString("0.########", culture)}";
         }
 
         return strTemp;
