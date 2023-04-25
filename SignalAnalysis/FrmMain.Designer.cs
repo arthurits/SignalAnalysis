@@ -57,13 +57,13 @@ partial class FrmMain
         statusStrip = new StatusStrip();
         statusStripLabelEmpty = new ToolStripStatusLabel();
         statusStripLabelCulture = new ToolStripStatusLabel();
-        statusStripLabelExPower = new ToolStripStatusLabelEx();
-        statusStripLabelExCumulative = new ToolStripStatusLabelEx();
-        statusStripLabelExEntropy = new ToolStripStatusLabelEx();
-        statusStripLabelExCrossHair = new ToolStripStatusLabelEx();
+        statusStripLabelExBoxplot = new ToolStripStatusLabelEx();
         statusStripLabelExDerivative = new ToolStripStatusLabelEx();
         statusStripLabelExIntegration = new ToolStripStatusLabelEx();
-        statusStripLabelExBoxplot = new ToolStripStatusLabelEx();
+        statusStripLabelExCumulative = new ToolStripStatusLabelEx();
+        statusStripLabelExPower = new ToolStripStatusLabelEx();
+        statusStripLabelExEntropy = new ToolStripStatusLabelEx();
+        statusStripLabelExCrossHair = new ToolStripStatusLabelEx();
         layoutGlobal.SuspendLayout();
         layoutData.SuspendLayout();
         layoutFractal.SuspendLayout();
@@ -416,7 +416,7 @@ partial class FrmMain
         statusStripLabelEmpty.BorderSides = ToolStripStatusLabelBorderSides.Right;
         statusStripLabelEmpty.DisplayStyle = ToolStripItemDisplayStyle.Text;
         statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-        statusStripLabelEmpty.Size = new Size(572, 23);
+        statusStripLabelEmpty.Size = new Size(603, 23);
         statusStripLabelEmpty.Spring = true;
         statusStripLabelEmpty.TextAlign = ContentAlignment.MiddleLeft;
         // 
@@ -430,65 +430,20 @@ partial class FrmMain
         statusStripLabelCulture.ToolTipText = "User interface language";
         statusStripLabelCulture.Click += Language_Click;
         // 
-        // statusStripLabelExPower
+        // statusStripLabelExBoxplot
         // 
-        statusStripLabelExPower.AutoSize = false;
-        statusStripLabelExPower.BackColor = Color.Transparent;
-        statusStripLabelExPower.Checked = true;
-        statusStripLabelExPower.DisplayStyle = ToolStripItemDisplayStyle.Text;
-        statusStripLabelExPower.ForeColor = Color.Black;
-        statusStripLabelExPower.ForeColorChecked = Color.Black;
-        statusStripLabelExPower.ForeColorUnchecked = Color.LightGray;
-        statusStripLabelExPower.Name = "statusStripLabelExPower";
-        statusStripLabelExPower.Size = new Size(28, 23);
-        statusStripLabelExPower.Text = "P";
-        statusStripLabelExPower.ToolTipText = "Power spectra (dB)";
-        statusStripLabelExPower.Click += LabelEx_Click;
-        // 
-        // statusStripLabelExCumulative
-        // 
-        statusStripLabelExCumulative.AutoSize = false;
-        statusStripLabelExCumulative.BackColor = Color.Transparent;
-        statusStripLabelExCumulative.Checked = false;
-        statusStripLabelExCumulative.DisplayStyle = ToolStripItemDisplayStyle.Text;
-        statusStripLabelExCumulative.ForeColor = Color.LightGray;
-        statusStripLabelExCumulative.ForeColorChecked = Color.Black;
-        statusStripLabelExCumulative.ForeColorUnchecked = Color.LightGray;
-        statusStripLabelExCumulative.Name = "statusStripLabelExCumulative";
-        statusStripLabelExCumulative.Size = new Size(28, 23);
-        statusStripLabelExCumulative.Text = "F";
-        statusStripLabelExCumulative.ToolTipText = "Cumulative fractal dimension";
-        statusStripLabelExCumulative.Click += LabelEx_Click;
-        // 
-        // statusStripLabelExEntropy
-        // 
-        statusStripLabelExEntropy.AutoSize = false;
-        statusStripLabelExEntropy.BackColor = Color.Transparent;
-        statusStripLabelExEntropy.Checked = false;
-        statusStripLabelExEntropy.DisplayStyle = ToolStripItemDisplayStyle.Text;
-        statusStripLabelExEntropy.ForeColor = Color.LightGray;
-        statusStripLabelExEntropy.ForeColorChecked = Color.Black;
-        statusStripLabelExEntropy.ForeColorUnchecked = Color.LightGray;
-        statusStripLabelExEntropy.Name = "statusStripLabelExEntropy";
-        statusStripLabelExEntropy.Size = new Size(28, 23);
-        statusStripLabelExEntropy.Text = "E";
-        statusStripLabelExEntropy.ToolTipText = "Approximate and sample entropy";
-        statusStripLabelExEntropy.Click += LabelEx_Click;
-        // 
-        // statusStripLabelExCrossHair
-        // 
-        statusStripLabelExCrossHair.AutoSize = false;
-        statusStripLabelExCrossHair.BackColor = Color.Transparent;
-        statusStripLabelExCrossHair.Checked = false;
-        statusStripLabelExCrossHair.DisplayStyle = ToolStripItemDisplayStyle.Text;
-        statusStripLabelExCrossHair.ForeColor = Color.LightGray;
-        statusStripLabelExCrossHair.ForeColorChecked = Color.Black;
-        statusStripLabelExCrossHair.ForeColorUnchecked = Color.LightGray;
-        statusStripLabelExCrossHair.Name = "statusStripLabelExCrossHair";
-        statusStripLabelExCrossHair.Size = new Size(28, 23);
-        statusStripLabelExCrossHair.Text = "C";
-        statusStripLabelExCrossHair.ToolTipText = "Plot's crosshair mode";
-        statusStripLabelExCrossHair.Click += LabelEx_Click;
+        statusStripLabelExBoxplot.AutoSize = false;
+        statusStripLabelExBoxplot.BackColor = Color.Transparent;
+        statusStripLabelExBoxplot.Checked = false;
+        statusStripLabelExBoxplot.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExBoxplot.ForeColor = Color.LightGray;
+        statusStripLabelExBoxplot.ForeColorChecked = Color.Black;
+        statusStripLabelExBoxplot.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExBoxplot.Name = "statusStripLabelExBoxplot";
+        statusStripLabelExBoxplot.Size = new Size(28, 23);
+        statusStripLabelExBoxplot.Text = "B";
+        statusStripLabelExBoxplot.ToolTipText = "Box plot";
+        statusStripLabelExBoxplot.Click += LabelEx_Click;
         // 
         // statusStripLabelExDerivative
         // 
@@ -520,20 +475,65 @@ partial class FrmMain
         statusStripLabelExIntegration.ToolTipText = "Numerical integration";
         statusStripLabelExIntegration.Click += LabelEx_Click;
         // 
-        // statusStripLabelExBoxplot
+        // statusStripLabelExCumulative
         // 
-        statusStripLabelExBoxplot.AutoSize = false;
-        statusStripLabelExBoxplot.BackColor = Color.Transparent;
-        statusStripLabelExBoxplot.Checked = false;
-        statusStripLabelExBoxplot.DisplayStyle = ToolStripItemDisplayStyle.Text;
-        statusStripLabelExBoxplot.ForeColor = Color.LightGray;
-        statusStripLabelExBoxplot.ForeColorChecked = Color.Black;
-        statusStripLabelExBoxplot.ForeColorUnchecked = Color.LightGray;
-        statusStripLabelExBoxplot.Name = "statusStripLabelExBoxplot";
-        statusStripLabelExBoxplot.Size = new Size(28, 23);
-        statusStripLabelExBoxplot.Text = "B";
-        statusStripLabelExBoxplot.ToolTipText = "Box plot";
-        statusStripLabelExBoxplot.Click += LabelEx_Click;
+        statusStripLabelExCumulative.AutoSize = false;
+        statusStripLabelExCumulative.BackColor = Color.Transparent;
+        statusStripLabelExCumulative.Checked = false;
+        statusStripLabelExCumulative.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExCumulative.ForeColor = Color.LightGray;
+        statusStripLabelExCumulative.ForeColorChecked = Color.Black;
+        statusStripLabelExCumulative.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExCumulative.Name = "statusStripLabelExCumulative";
+        statusStripLabelExCumulative.Size = new Size(28, 23);
+        statusStripLabelExCumulative.Text = "F";
+        statusStripLabelExCumulative.ToolTipText = "Cumulative fractal dimension";
+        statusStripLabelExCumulative.Click += LabelEx_Click;
+        // 
+        // statusStripLabelExPower
+        // 
+        statusStripLabelExPower.AutoSize = false;
+        statusStripLabelExPower.BackColor = Color.Transparent;
+        statusStripLabelExPower.Checked = true;
+        statusStripLabelExPower.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExPower.ForeColor = Color.Black;
+        statusStripLabelExPower.ForeColorChecked = Color.Black;
+        statusStripLabelExPower.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExPower.Name = "statusStripLabelExPower";
+        statusStripLabelExPower.Size = new Size(28, 23);
+        statusStripLabelExPower.Text = "P";
+        statusStripLabelExPower.ToolTipText = "Power spectra (dB)";
+        statusStripLabelExPower.Click += LabelEx_Click;
+        // 
+        // statusStripLabelExEntropy
+        // 
+        statusStripLabelExEntropy.AutoSize = false;
+        statusStripLabelExEntropy.BackColor = Color.Transparent;
+        statusStripLabelExEntropy.Checked = false;
+        statusStripLabelExEntropy.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExEntropy.ForeColor = Color.LightGray;
+        statusStripLabelExEntropy.ForeColorChecked = Color.Black;
+        statusStripLabelExEntropy.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExEntropy.Name = "statusStripLabelExEntropy";
+        statusStripLabelExEntropy.Size = new Size(28, 23);
+        statusStripLabelExEntropy.Text = "E";
+        statusStripLabelExEntropy.ToolTipText = "Approximate and sample entropy";
+        statusStripLabelExEntropy.Click += LabelEx_Click;
+        // 
+        // statusStripLabelExCrossHair
+        // 
+        statusStripLabelExCrossHair.AutoSize = false;
+        statusStripLabelExCrossHair.BackColor = Color.Transparent;
+        statusStripLabelExCrossHair.Checked = false;
+        statusStripLabelExCrossHair.DisplayStyle = ToolStripItemDisplayStyle.Text;
+        statusStripLabelExCrossHair.ForeColor = Color.LightGray;
+        statusStripLabelExCrossHair.ForeColorChecked = Color.Black;
+        statusStripLabelExCrossHair.ForeColorUnchecked = Color.LightGray;
+        statusStripLabelExCrossHair.Name = "statusStripLabelExCrossHair";
+        statusStripLabelExCrossHair.Size = new Size(28, 23);
+        statusStripLabelExCrossHair.Text = "C";
+        statusStripLabelExCrossHair.ToolTipText = "Plot's crosshair mode";
+        statusStripLabelExCrossHair.Click += LabelEx_Click;
         // 
         // FrmMain
         // 
