@@ -9,7 +9,7 @@ partial class FrmMain
     /// This is the main computing function that calls sub-functions
     /// </summary>
     /// <param name="series">Data series to be analised</param>
-    /// <param name="deletePreviousResults"><see langword="True"/> if the previous results data should be delete and new results should be reinitialised</param>
+    /// <param name="deletePreviousResults"><see langword="True"/> if the previous results data should be deleted and new results should be reinitialised</param>
     /// <param name="stats"><see langword="True"/> if the descriptive statistics will be computed</param>
     /// <param name="boxplot"><see langword="True"/> if box plot is computed and shown</param>
     /// <param name="derivative"><see langword="True"/> if the derivative will be computed</param>
@@ -133,7 +133,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Computes the maximum, minimum and average values.
+    /// Computes the average, variance, maximum, and minimum values.
     /// </summary>
     /// <param name="signal">1D data array values</param>
     private void ComputeStatistics(double[] signal)
@@ -160,7 +160,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Computes box plot related values: quartiles Q1, Q2, and Q3, as well as minimum and maximum values excluding outliers
+    /// Computes boxplot-related values: quartiles Q1, Q2, and Q3, as well as minimum and maximum values excluding outliers
     /// </summary>
     /// <param name="signal">1D data array values</param>
     private void ComputeBoxplot(double[] signal)
