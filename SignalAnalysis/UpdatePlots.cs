@@ -15,10 +15,10 @@ partial class FrmMain
     /// <param name="derivative"><see langword="True"/> if the derivative will be computed</param>
     /// <param name="integral"><see langword="True"/> if the integral will be computed</param>
     /// <param name="fractal"><see langword="True"/> if the fractal dimension will be computed</param>
-    /// <param name="progressive"><see langword="True"/> if the </param>
-    /// <param name="entropy"><see langword="True"/></param>
-    /// <param name="fft"><see langword="True"/></param>
-    /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, false if the instead</param>
+    /// <param name="progressive"><see langword="True"/> if the progressive/cumulative fractal dimension is computed for each point</param>
+    /// <param name="entropy"><see langword="True"/> if the entropy values will be computed</param>
+    /// <param name="fft"><see langword="True"/> if the FFT will be computed</param>
+    /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, <see langword="false"/> if the amplitude is plotted instead</param>
     /// <returns></returns>
     private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
     {
@@ -104,7 +104,7 @@ partial class FrmMain
         _settings.CrossHair = false;
         statusStripLabelExCrossHair.Checked = false;
         if (stats) PlotOriginal(signalClipped, seriesName ?? string.Empty);
-        if (boxplot) PlotBoxPlot(signalClipped, seriesName ?? string.Empty);
+        if (boxplot) PlotBoxplot(signalClipped, seriesName ?? string.Empty);
         if (derivative) PlotDerivative(signalClipped, seriesName ?? string.Empty);
         if (fractal)
         {
@@ -358,7 +358,7 @@ partial class FrmMain
     /// </summary>
     /// <param name="signal">Data values to be plotted</param>
     /// <param name="strLabel">Text to show in the legend</param>
-    private void PlotBoxPlot(double[] signal, string strLabel = "")
+    private void PlotBoxplot(double[] signal, string strLabel = "")
     {
         foreach (var plot in plotBoxPlot.Plot.GetPlottables())
             plotBoxPlot.Plot.Remove(plot);
