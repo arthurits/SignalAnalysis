@@ -386,9 +386,6 @@ partial class FrmMain
 
     private void ShowHideBoxplot (bool show = true)
     {
-        layoutGlobal.SuspendLayout();
         layoutData.ColumnStyles[1].Width = show ? 20F : 0F;
-        //layoutGlobal.ResumeLayout(false);
-        layoutGlobal.PerformLayout();
     }
 }
