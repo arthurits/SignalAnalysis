@@ -268,7 +268,7 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: _settings.CumulativeDimension, progressive: _settings.CumulativeDimension);
+                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;

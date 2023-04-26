@@ -31,13 +31,16 @@ public static class FractalDimension
         else
         {
             DimensionCumulative = new double[yValues.Length];
-
-            for (int i = 0; i < yValues.Length; i++)
+            // Compute all but the last point
+            for (int i = 0; i < yValues.Length - 1; i++)
             {
                 DimensionCumulative[i] = ComputeH(xValues, yValues, i).dimension;
                 if (ct.IsCancellationRequested)
                     throw new OperationCanceledException("CancelFractal", ct);
             }
+            // Finally, compute the last point and get both the dimension and the variance
+            (DimensionSingle, VarianceH) = ComputeH(xValues, yValues, yValues.Length - 1);
+            DimensionCumulative[^1] = DimensionSingle;
         }
     }
 
@@ -48,12 +51,16 @@ public static class FractalDimension
         else
         {
             DimensionCumulative = new double[yValues.Length];
-            for (int i = 0; i < yValues.Length; i++)
+            // Compute all but the last point
+            for (int i = 0; i < yValues.Length - 1; i++)
             {
                 DimensionCumulative[i] = ComputeH(samplingFreq, yValues, i).dimension;
                 if (ct.IsCancellationRequested)
                     throw new OperationCanceledException("CancelFractal", ct);
             }
+            // Finally, compute the last point and get both the dimension and the variance
+            (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, yValues.Length - 1);
+            DimensionCumulative[^1] = DimensionSingle;
         }
     }
 

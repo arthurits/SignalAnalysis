@@ -432,11 +432,10 @@ partial class FrmMain
         {
             plotFractal.Plot.AddLine(0, double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle, (0, signal.Length / Signal.SampleFrequency));
         }
-        plotFractal.Plot.Title((StringResources.PlotFractalTitle1) +
-            " " +
-            (progressive ? StringResources.PlotFractalTitle2 : String.Empty) +
-            " (H = " + (double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle).ToString("0.00####", _settings.AppCulture) +
-            " — Var(H) = " + (double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH).ToString("0.00####", _settings.AppCulture) + ")");
+        plotFractal.Plot.Title($"{StringResources.PlotFractalTitle1}" +
+            $"{(progressive ? $" {StringResources.PlotFractalTitle2}" : String.Empty)}" +
+            $" (H = {Results.FractalDimension.ToString("0.00####", _settings.AppCulture)}" +
+            $" — Var(H) = {Results.FractalVariance.ToString("0.00####", _settings.AppCulture)})");
         plotFractal.Plot.LeftAxis.Label(StringResources.PlotFractalYLabel);
         plotFractal.Plot.BottomAxis.Label(StringResources.PlotFractalXLabel);
         plotFractal.Plot.AxisAuto(0);

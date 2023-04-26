@@ -240,6 +240,10 @@ public partial class FrmMain : Form
             double.IsNaN(FractalDimension.DimensionSingle) ? Results.FractalDimension : FractalDimension.DimensionSingle,
             double.IsNaN(FractalDimension.VarianceH) ? Results.FractalVariance : FractalDimension.VarianceH)
             );
+        plotFractal.Plot.Title($"{StringResources.PlotFractalTitle1}" +
+            $"{(_settings.CumulativeDimension ? $" {StringResources.PlotFractalTitle2}" : String.Empty)}" +
+            $" (H = {Results.FractalDimension.ToString("0.00####", _settings.AppCulture)}" +
+            $" — Var(H) = {Results.FractalVariance.ToString("0.00####", _settings.AppCulture)})");
 
         plotFractal.Plot.LeftAxis.Label(StringResources.PlotFractalYLabel);
         plotFractal.Plot.BottomAxis.Label(StringResources.PlotFractalXLabel);
