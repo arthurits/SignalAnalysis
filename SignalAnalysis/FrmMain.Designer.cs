@@ -99,7 +99,8 @@ partial class FrmMain
         toolStripMain.Name = "toolStripMain";
         toolStripMain.RenderMode = ToolStripRenderMode.Professional;
         toolStripMain.Size = new Size(884, 27);
-        toolStripMain.TabIndex = 2;
+        toolStripMain.TabIndex = 0;
+        toolStripMain.TabStop = true;
         toolStripMain.Text = "Main toolbar";
         // 
         // toolStripMain_Exit
@@ -347,7 +348,7 @@ partial class FrmMain
         layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Percent, 14F));
         layoutGlobal.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
         layoutGlobal.Size = new Size(860, 619);
-        layoutGlobal.TabIndex = 5;
+        layoutGlobal.TabIndex = 2;
         // 
         // layoutData
         // 
@@ -366,7 +367,7 @@ partial class FrmMain
         layoutData.RowCount = 1;
         layoutData.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         layoutData.Size = new Size(860, 176);
-        layoutData.TabIndex = 5;
+        layoutData.TabIndex = 0;
         // 
         // plotOriginal
         // 
@@ -382,7 +383,7 @@ partial class FrmMain
         plotOriginal.ShowCrossHairVertical = false;
         plotOriginal.Size = new Size(336, 170);
         plotOriginal.SnapToPoint = false;
-        plotOriginal.TabIndex = 2;
+        plotOriginal.TabIndex = 0;
         // 
         // plotBoxPlot
         // 
@@ -397,7 +398,7 @@ partial class FrmMain
         plotBoxPlot.ShowCrossHairVertical = false;
         plotBoxPlot.Size = new Size(164, 170);
         plotBoxPlot.SnapToPoint = false;
-        plotBoxPlot.TabIndex = 7;
+        plotBoxPlot.TabIndex = 1;
         // 
         // plotDerivative
         // 
@@ -412,7 +413,7 @@ partial class FrmMain
         plotDerivative.ShowCrossHairVertical = false;
         plotDerivative.Size = new Size(336, 170);
         plotDerivative.SnapToPoint = false;
-        plotDerivative.TabIndex = 6;
+        plotDerivative.TabIndex = 2;
         // 
         // layoutFractal
         // 
@@ -428,7 +429,7 @@ partial class FrmMain
         layoutFractal.RowCount = 1;
         layoutFractal.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         layoutFractal.Size = new Size(860, 176);
-        layoutFractal.TabIndex = 4;
+        layoutFractal.TabIndex = 1;
         // 
         // plotFractal
         // 
@@ -444,7 +445,7 @@ partial class FrmMain
         plotFractal.ShowCrossHairVertical = false;
         plotFractal.Size = new Size(565, 170);
         plotFractal.SnapToPoint = false;
-        plotFractal.TabIndex = 1;
+        plotFractal.TabIndex = 0;
         // 
         // plotFractalDistribution
         // 
@@ -459,7 +460,7 @@ partial class FrmMain
         plotFractalDistribution.ShowCrossHairVertical = false;
         plotFractalDistribution.Size = new Size(279, 170);
         plotFractalDistribution.SnapToPoint = false;
-        plotFractalDistribution.TabIndex = 5;
+        plotFractalDistribution.TabIndex = 1;
         // 
         // layoutFFT
         // 
@@ -477,7 +478,7 @@ partial class FrmMain
         layoutFFT.RowCount = 1;
         layoutFFT.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         layoutFFT.Size = new Size(860, 176);
-        layoutFFT.TabIndex = 3;
+        layoutFFT.TabIndex = 2;
         // 
         // plotFFT
         // 
@@ -493,7 +494,7 @@ partial class FrmMain
         plotFFT.ShowCrossHairVertical = false;
         plotFFT.Size = new Size(422, 170);
         plotFFT.SnapToPoint = false;
-        plotFFT.TabIndex = 3;
+        plotFFT.TabIndex = 0;
         // 
         // plotWindow
         // 
@@ -509,7 +510,7 @@ partial class FrmMain
         plotWindow.ShowCrossHairVertical = false;
         plotWindow.Size = new Size(207, 170);
         plotWindow.SnapToPoint = false;
-        plotWindow.TabIndex = 5;
+        plotWindow.TabIndex = 1;
         // 
         // plotApplied
         // 
@@ -525,7 +526,7 @@ partial class FrmMain
         plotApplied.ShowCrossHairVertical = false;
         plotApplied.Size = new Size(207, 170);
         plotApplied.SnapToPoint = false;
-        plotApplied.TabIndex = 6;
+        plotApplied.TabIndex = 2;
         // 
         // txtStats
         // 
@@ -537,7 +538,7 @@ partial class FrmMain
         txtStats.ReadOnly = true;
         txtStats.ScrollBars = ScrollBars.Vertical;
         txtStats.Size = new Size(854, 86);
-        txtStats.TabIndex = 2;
+        txtStats.TabIndex = 3;
         // 
         // FrmMain
         // 

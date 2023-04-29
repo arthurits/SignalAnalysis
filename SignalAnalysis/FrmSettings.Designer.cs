@@ -80,7 +80,7 @@
             btnCancel.Location = new Point(262, 304);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(100, 30);
-            btnCancel.TabIndex = 5;
+            btnCancel.TabIndex = 2;
             btnCancel.Text = "&Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += Cancel_Click;
@@ -90,7 +90,7 @@
             btnAccept.Location = new Point(368, 304);
             btnAccept.Name = "btnAccept";
             btnAccept.Size = new Size(100, 30);
-            btnAccept.TabIndex = 6;
+            btnAccept.TabIndex = 3;
             btnAccept.Text = "&Accept";
             btnAccept.UseVisualStyleBackColor = true;
             btnAccept.Click += Accept_Click;
@@ -105,7 +105,7 @@
             tabSettings.Name = "tabSettings";
             tabSettings.SelectedIndex = 0;
             tabSettings.Size = new Size(460, 284);
-            tabSettings.TabIndex = 11;
+            tabSettings.TabIndex = 0;
             // 
             // tabPlot
             // 
@@ -133,7 +133,7 @@
             chkBoxplot.Location = new Point(17, 99);
             chkBoxplot.Name = "chkBoxplot";
             chkBoxplot.Size = new Size(78, 23);
-            chkBoxplot.TabIndex = 20;
+            chkBoxplot.TabIndex = 2;
             chkBoxplot.Text = "Box plot";
             chkBoxplot.UseVisualStyleBackColor = true;
             // 
@@ -143,7 +143,7 @@
             chkCrossHair.Location = new Point(17, 219);
             chkCrossHair.Name = "chkCrossHair";
             chkCrossHair.Size = new Size(156, 23);
-            chkCrossHair.TabIndex = 19;
+            chkCrossHair.TabIndex = 6;
             chkCrossHair.Text = "Show plot's crosshair";
             chkCrossHair.UseVisualStyleBackColor = true;
             // 
@@ -153,7 +153,7 @@
             chkEntropy.Location = new Point(17, 189);
             chkEntropy.Name = "chkEntropy";
             chkEntropy.Size = new Size(226, 23);
-            chkEntropy.TabIndex = 18;
+            chkEntropy.TabIndex = 5;
             chkEntropy.Text = "Entropy (approximate && sample)";
             chkEntropy.UseVisualStyleBackColor = true;
             // 
@@ -163,7 +163,7 @@
             chkCumulative.Location = new Point(17, 159);
             chkCumulative.Name = "chkCumulative";
             chkCumulative.Size = new Size(205, 23);
-            chkCumulative.TabIndex = 17;
+            chkCumulative.TabIndex = 4;
             chkCumulative.Text = "Cumulative fractal dimension";
             chkCumulative.UseVisualStyleBackColor = true;
             // 
@@ -173,7 +173,7 @@
             chkPower.Location = new Point(17, 129);
             chkPower.Name = "chkPower";
             chkPower.Size = new Size(93, 23);
-            chkPower.TabIndex = 16;
+            chkPower.TabIndex = 3;
             chkPower.Text = "Power (dB)";
             chkPower.UseVisualStyleBackColor = true;
             // 
@@ -227,14 +227,14 @@
             txtEnd.Location = new Point(164, 56);
             txtEnd.Name = "txtEnd";
             txtEnd.Size = new Size(71, 25);
-            txtEnd.TabIndex = 14;
+            txtEnd.TabIndex = 1;
             // 
             // txtStart
             // 
             txtStart.Location = new Point(164, 17);
             txtStart.Name = "txtStart";
             txtStart.Size = new Size(71, 25);
-            txtStart.TabIndex = 13;
+            txtStart.TabIndex = 0;
             // 
             // lblEnd
             // 
@@ -262,10 +262,10 @@
             tabDerivative.Controls.Add(cboAlgorithms);
             tabDerivative.Controls.Add(chkComputeDerivative);
             tabDerivative.Controls.Add(chkExportDerivative);
-            tabDerivative.Location = new Point(4, 24);
+            tabDerivative.Location = new Point(4, 26);
             tabDerivative.Name = "tabDerivative";
             tabDerivative.Padding = new Padding(3);
-            tabDerivative.Size = new Size(452, 256);
+            tabDerivative.Size = new Size(452, 254);
             tabDerivative.TabIndex = 2;
             tabDerivative.Text = "Derivative";
             tabDerivative.UseVisualStyleBackColor = true;
@@ -276,7 +276,7 @@
             lblAlgorithms.Location = new Point(63, 122);
             lblAlgorithms.Name = "lblAlgorithms";
             lblAlgorithms.Size = new Size(174, 19);
-            lblAlgorithms.TabIndex = 4;
+            lblAlgorithms.TabIndex = 3;
             lblAlgorithms.Text = "Finite difference algorithms";
             // 
             // cboAlgorithms
@@ -285,7 +285,7 @@
             cboAlgorithms.Location = new Point(63, 150);
             cboAlgorithms.Name = "cboAlgorithms";
             cboAlgorithms.Size = new Size(223, 25);
-            cboAlgorithms.TabIndex = 3;
+            cboAlgorithms.TabIndex = 2;
             cboAlgorithms.SelectionChangeCommitted += Differentiation_SelectionChangeCommitted;
             // 
             // chkComputeDerivative
@@ -294,7 +294,7 @@
             chkComputeDerivative.Location = new Point(27, 38);
             chkComputeDerivative.Name = "chkComputeDerivative";
             chkComputeDerivative.Size = new Size(217, 23);
-            chkComputeDerivative.TabIndex = 2;
+            chkComputeDerivative.TabIndex = 0;
             chkComputeDerivative.Text = "Compute numerical derivative?";
             chkComputeDerivative.UseVisualStyleBackColor = true;
             chkComputeDerivative.CheckedChanged += ComputeDerivative_CheckedChanged;
@@ -305,7 +305,7 @@
             chkExportDerivative.Location = new Point(27, 78);
             chkExportDerivative.Name = "chkExportDerivative";
             chkExportDerivative.Size = new Size(167, 23);
-            chkExportDerivative.TabIndex = 0;
+            chkExportDerivative.TabIndex = 1;
             chkExportDerivative.Text = "Export derivative data?";
             chkExportDerivative.UseVisualStyleBackColor = true;
             // 
@@ -330,7 +330,7 @@
             chkAbsolute.Location = new Point(27, 70);
             chkAbsolute.Name = "chkAbsolute";
             chkAbsolute.Size = new Size(259, 23);
-            chkAbsolute.TabIndex = 4;
+            chkAbsolute.TabIndex = 1;
             chkAbsolute.Text = "Compute the absolute-value integral?";
             chkAbsolute.UseVisualStyleBackColor = true;
             // 
@@ -349,7 +349,7 @@
             lblIntegration.Location = new Point(63, 142);
             lblIntegration.Name = "lblIntegration";
             lblIntegration.Size = new Size(149, 19);
-            lblIntegration.TabIndex = 2;
+            lblIntegration.TabIndex = 4;
             lblIntegration.Text = "Quadrature algorithms";
             // 
             // chkExportIntegration
@@ -358,7 +358,7 @@
             chkExportIntegration.Location = new Point(27, 104);
             chkExportIntegration.Name = "chkExportIntegration";
             chkExportIntegration.Size = new Size(207, 23);
-            chkExportIntegration.TabIndex = 1;
+            chkExportIntegration.TabIndex = 2;
             chkExportIntegration.Text = "Export numerical integration?";
             chkExportIntegration.UseVisualStyleBackColor = true;
             // 
@@ -379,10 +379,10 @@
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 26);
+            tabGUI.Location = new Point(4, 24);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(452, 254);
+            tabGUI.Size = new Size(452, 256);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -413,7 +413,7 @@
             grpCulture.Location = new Point(19, 11);
             grpCulture.Name = "grpCulture";
             grpCulture.Size = new Size(408, 155);
-            grpCulture.TabIndex = 1;
+            grpCulture.TabIndex = 0;
             grpCulture.TabStop = false;
             grpCulture.Text = "UI and data format";
             // 
@@ -425,7 +425,7 @@
             cboAllCultures.Location = new Point(40, 118);
             cboAllCultures.Name = "cboAllCultures";
             cboAllCultures.Size = new Size(190, 25);
-            cboAllCultures.TabIndex = 3;
+            cboAllCultures.TabIndex = 2;
             cboAllCultures.SelectionChangeCommitted += AllCultures_SelectionChangeCommitted;
             // 
             // radUserCulture
@@ -434,7 +434,7 @@
             radUserCulture.Location = new Point(18, 90);
             radUserCulture.Name = "radUserCulture";
             radUserCulture.Size = new Size(108, 23);
-            radUserCulture.TabIndex = 2;
+            radUserCulture.TabIndex = 3;
             radUserCulture.TabStop = true;
             radUserCulture.Text = "Select culture";
             radUserCulture.UseVisualStyleBackColor = true;
@@ -470,7 +470,7 @@
             chkDlgPath.Location = new Point(23, 175);
             chkDlgPath.Name = "chkDlgPath";
             chkDlgPath.Size = new Size(290, 23);
-            chkDlgPath.TabIndex = 0;
+            chkDlgPath.TabIndex = 1;
             chkDlgPath.Text = "Remember open/save dialog previous path";
             chkDlgPath.UseVisualStyleBackColor = true;
             // 
@@ -479,7 +479,7 @@
             btnReset.Location = new Point(19, 304);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(100, 30);
-            btnReset.TabIndex = 12;
+            btnReset.TabIndex = 1;
             btnReset.Text = "&Reset";
             btnReset.UseVisualStyleBackColor = true;
             btnReset.Click += Reset_Click;
