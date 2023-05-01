@@ -238,12 +238,15 @@ public partial class FrmSettings : Form
 
         chkComputeDerivative.Checked = settings.ComputeDerivative;
         chkExportDerivative.Checked = settings.ExportDerivative;
+        chkExportDerivative.Enabled = settings.ComputeDerivative;
         lblAlgorithms.Enabled = settings.ComputeDerivative;
         cboAlgorithms.Enabled = settings.ComputeDerivative;
 
         chkComputeIntegration.Checked = settings.ComputeIntegration;
         chkAbsolute.Checked = settings.AbsoluteIntegral;
+        chkAbsolute.Enabled = settings.ComputeIntegration;
         chkExportIntegration.Checked = settings.ExportIntegration;
+        chkExportIntegration.Enabled = settings.ComputeIntegration;
         lblIntegration.Enabled = settings.ComputeIntegration;
         cboIntegration.Enabled = settings.ComputeIntegration;
         FillAlgorithms();
