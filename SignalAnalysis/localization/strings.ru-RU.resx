@@ -702,15 +702,15 @@
     <comment/>
   </data>
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>Compute the absolute-value integral?</value>
+    <value>Вычислить интеграл абсолютного значения?</value>
     <comment/>
   </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>Compute numerical differentiation?</value>
+    <value>Вычислить численное дифференцирование?</value>
     <comment/>
   </data>
   <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>Compute numerical integration?</value>
+    <value>Вычислить численное интегрирование?</value>
     <comment/>
   </data>
   <data name="strChkExportDerivative" xml:space="preserve">
