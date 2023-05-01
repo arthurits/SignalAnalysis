@@ -758,7 +758,7 @@
     <comment/>
   </data>
   <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>Finite difference algorithms</value>
+    <value>Алгоритмы конечных разностей</value>
     <comment/>
   </data>
   <data name="strIntegrationAlgorithms" xml:space="preserve">
@@ -786,7 +786,7 @@
     <comment/>
   </data>
   <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>Entropy error</value>
+    <value>Ошибка энтропии</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorFractal" xml:space="preserve">
