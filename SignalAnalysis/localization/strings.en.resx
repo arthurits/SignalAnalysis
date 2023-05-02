@@ -241,7 +241,7 @@ Default values will be used instead.</value>
     <value>Fractal dimension</value>
   </data>
   <data name="strFileHeader11" xml:space="preserve">
-    <value>Fractal variantie</value>
+    <value>Fractal variance</value>
   </data>
   <data name="strFileHeader12" xml:space="preserve">
     <value>Approximate entropy</value>
