@@ -318,6 +318,9 @@
   <data name="strGrpCulture" xml:space="preserve">
     <value>صيغة البيانات</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>نقاط FFT</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>مسار الملف</value>
   </data>
@@ -484,6 +487,12 @@
   </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>نقاط البيانات</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>المستدير لأسفل</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>جمع الشمل</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>الثواني</value>

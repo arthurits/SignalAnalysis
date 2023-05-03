@@ -59,6 +59,7 @@ public partial class FrmSettings : Form
         Settings.CumulativeDimension = chkCumulative.Checked;
         Settings.Entropy = chkEntropy.Checked;
         Settings.CrossHair = chkCrossHair.Checked;
+        Settings.FFTRoundUp = radUp.Checked;
 
         Settings.AxisType = AxisType.Seconds;
         if (radPoints.Checked) Settings.AxisType = AxisType.Points;
@@ -209,6 +210,8 @@ public partial class FrmSettings : Form
         chkEntropy.Checked = settings.Entropy;
         chkCrossHair.Checked = settings.CrossHair;
         chkDlgPath.Checked = settings.RememberFileDialogPath;
+        radUp.Checked = settings.FFTRoundUp;
+        radDown.Checked = !settings.FFTRoundUp;
 
         switch (settings.AxisType)
         {
@@ -333,6 +336,9 @@ public partial class FrmSettings : Form
         this.chkCumulative.Text = StringResources.ChkCumulative;
         this.chkEntropy.Text = StringResources.ChkEntropy;
         this.chkCrossHair.Text = StringResources.ChkCrossHair;
+        this.grpFFT.Text = StringResources.GrpFFT;
+        this.radUp.Text = StringResources.RadRoundUp;
+        this.radDown.Text = StringResources.RadRoundDown;
 
         this.grpCulture.Text = StringResources.GrpCulture;
         this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";

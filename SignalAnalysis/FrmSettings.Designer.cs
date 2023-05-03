@@ -32,6 +32,9 @@
             btnAccept = new Button();
             tabSettings = new TabControl();
             tabPlot = new TabPage();
+            grpFFT = new GroupBox();
+            radDown = new RadioButton();
+            radUp = new RadioButton();
             chkBoxplot = new CheckBox();
             chkCrossHair = new CheckBox();
             chkEntropy = new CheckBox();
@@ -68,6 +71,7 @@
             btnReset = new Button();
             tabSettings.SuspendLayout();
             tabPlot.SuspendLayout();
+            grpFFT.SuspendLayout();
             grpAxis.SuspendLayout();
             tabDerivative.SuspendLayout();
             tabIntegration.SuspendLayout();
@@ -77,7 +81,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(262, 304);
+            btnCancel.Location = new Point(282, 304);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(100, 30);
             btnCancel.TabIndex = 2;
@@ -87,7 +91,7 @@
             // 
             // btnAccept
             // 
-            btnAccept.Location = new Point(368, 304);
+            btnAccept.Location = new Point(388, 304);
             btnAccept.Name = "btnAccept";
             btnAccept.Size = new Size(100, 30);
             btnAccept.TabIndex = 3;
@@ -104,11 +108,12 @@
             tabSettings.Location = new Point(12, 14);
             tabSettings.Name = "tabSettings";
             tabSettings.SelectedIndex = 0;
-            tabSettings.Size = new Size(460, 284);
+            tabSettings.Size = new Size(480, 284);
             tabSettings.TabIndex = 0;
             // 
             // tabPlot
             // 
+            tabPlot.Controls.Add(grpFFT);
             tabPlot.Controls.Add(chkBoxplot);
             tabPlot.Controls.Add(chkCrossHair);
             tabPlot.Controls.Add(chkEntropy);
@@ -122,10 +127,43 @@
             tabPlot.Location = new Point(4, 26);
             tabPlot.Name = "tabPlot";
             tabPlot.Padding = new Padding(3);
-            tabPlot.Size = new Size(452, 254);
+            tabPlot.Size = new Size(472, 254);
             tabPlot.TabIndex = 0;
             tabPlot.Text = "Plotting";
             tabPlot.UseVisualStyleBackColor = true;
+            // 
+            // grpFFT
+            // 
+            grpFFT.Controls.Add(radDown);
+            grpFFT.Controls.Add(radUp);
+            grpFFT.Location = new Point(282, 143);
+            grpFFT.Name = "grpFFT";
+            grpFFT.Size = new Size(175, 95);
+            grpFFT.TabIndex = 16;
+            grpFFT.TabStop = false;
+            grpFFT.Text = "FFT points";
+            // 
+            // radDown
+            // 
+            radDown.AutoSize = true;
+            radDown.Location = new Point(13, 59);
+            radDown.Name = "radDown";
+            radDown.Size = new Size(142, 23);
+            radDown.TabIndex = 1;
+            radDown.TabStop = true;
+            radDown.Text = "Round down (trim)";
+            radDown.UseVisualStyleBackColor = true;
+            // 
+            // radUp
+            // 
+            radUp.AutoSize = true;
+            radUp.Location = new Point(13, 27);
+            radUp.Name = "radUp";
+            radUp.Size = new Size(158, 23);
+            radUp.TabIndex = 0;
+            radUp.TabStop = true;
+            radUp.Text = "Round up (add zeros)";
+            radUp.UseVisualStyleBackColor = true;
             // 
             // chkBoxplot
             // 
@@ -182,9 +220,9 @@
             grpAxis.Controls.Add(radTime);
             grpAxis.Controls.Add(radSeconds);
             grpAxis.Controls.Add(radPoints);
-            grpAxis.Location = new Point(257, 12);
+            grpAxis.Location = new Point(282, 12);
             grpAxis.Name = "grpAxis";
-            grpAxis.Size = new Size(168, 146);
+            grpAxis.Size = new Size(175, 125);
             grpAxis.TabIndex = 15;
             grpAxis.TabStop = false;
             grpAxis.Text = "Abscissa axis";
@@ -192,7 +230,7 @@
             // radTime
             // 
             radTime.AutoSize = true;
-            radTime.Location = new Point(22, 105);
+            radTime.Location = new Point(22, 88);
             radTime.Name = "radTime";
             radTime.Size = new Size(114, 23);
             radTime.TabIndex = 2;
@@ -203,7 +241,7 @@
             // radSeconds
             // 
             radSeconds.AutoSize = true;
-            radSeconds.Location = new Point(22, 67);
+            radSeconds.Location = new Point(22, 56);
             radSeconds.Name = "radSeconds";
             radSeconds.Size = new Size(77, 23);
             radSeconds.TabIndex = 1;
@@ -214,7 +252,7 @@
             // radPoints
             // 
             radPoints.AutoSize = true;
-            radPoints.Location = new Point(22, 30);
+            radPoints.Location = new Point(22, 25);
             radPoints.Name = "radPoints";
             radPoints.Size = new Size(98, 23);
             radPoints.TabIndex = 0;
@@ -224,14 +262,14 @@
             // 
             // txtEnd
             // 
-            txtEnd.Location = new Point(164, 56);
+            txtEnd.Location = new Point(174, 56);
             txtEnd.Name = "txtEnd";
             txtEnd.Size = new Size(71, 25);
             txtEnd.TabIndex = 1;
             // 
             // txtStart
             // 
-            txtStart.Location = new Point(164, 17);
+            txtStart.Location = new Point(174, 17);
             txtStart.Name = "txtStart";
             txtStart.Size = new Size(71, 25);
             txtStart.TabIndex = 0;
@@ -265,7 +303,7 @@
             tabDerivative.Location = new Point(4, 26);
             tabDerivative.Name = "tabDerivative";
             tabDerivative.Padding = new Padding(3);
-            tabDerivative.Size = new Size(452, 254);
+            tabDerivative.Size = new Size(472, 254);
             tabDerivative.TabIndex = 2;
             tabDerivative.Text = "Derivative";
             tabDerivative.UseVisualStyleBackColor = true;
@@ -316,10 +354,10 @@
             tabIntegration.Controls.Add(lblIntegration);
             tabIntegration.Controls.Add(chkExportIntegration);
             tabIntegration.Controls.Add(chkComputeIntegration);
-            tabIntegration.Location = new Point(4, 24);
+            tabIntegration.Location = new Point(4, 26);
             tabIntegration.Name = "tabIntegration";
             tabIntegration.Padding = new Padding(3);
-            tabIntegration.Size = new Size(452, 256);
+            tabIntegration.Size = new Size(472, 254);
             tabIntegration.TabIndex = 3;
             tabIntegration.Text = "Integration";
             tabIntegration.UseVisualStyleBackColor = true;
@@ -379,10 +417,10 @@
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 24);
+            tabGUI.Location = new Point(4, 26);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(452, 256);
+            tabGUI.Size = new Size(472, 254);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -410,7 +448,7 @@
             grpCulture.Controls.Add(radUserCulture);
             grpCulture.Controls.Add(radInvariantCulture);
             grpCulture.Controls.Add(radCurrentCulture);
-            grpCulture.Location = new Point(19, 11);
+            grpCulture.Location = new Point(24, 14);
             grpCulture.Name = "grpCulture";
             grpCulture.Size = new Size(408, 155);
             grpCulture.TabIndex = 0;
@@ -490,7 +528,7 @@
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new Size(484, 346);
+            ClientSize = new Size(504, 346);
             Controls.Add(btnReset);
             Controls.Add(tabSettings);
             Controls.Add(btnAccept);
@@ -506,6 +544,8 @@
             tabSettings.ResumeLayout(false);
             tabPlot.ResumeLayout(false);
             tabPlot.PerformLayout();
+            grpFFT.ResumeLayout(false);
+            grpFFT.PerformLayout();
             grpAxis.ResumeLayout(false);
             grpAxis.PerformLayout();
             tabDerivative.ResumeLayout(false);
@@ -559,5 +599,8 @@
         private CheckBox chkComputeIntegration;
         private CheckBox chkAbsolute;
         private CheckBox chkBoxplot;
+        private GroupBox grpFFT;
+        private RadioButton radDown;
+        private RadioButton radUp;
     }
 }

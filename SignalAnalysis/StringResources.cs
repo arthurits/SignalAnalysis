@@ -175,7 +175,7 @@ public static class StringResources
 
     public static string LblStart => StringRM.GetString("strLblStart", Culture) ?? "Array index start";
     public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end (max {0})";
-    public static string GrpAxis => StringRM.GetString("strGrpAxis", Culture) ?? "Abscissa axis";
+    public static string GrpAxis => StringRM.GetString("strGrpAxis", Culture) ?? "Abscissa axis";   
     public static string RadPoints => StringRM.GetString("strRadPoints", Culture) ?? "Data points";
     public static string RadSeconds => StringRM.GetString("strRadSeconds", Culture) ?? "Seconds";
     public static string RadTime => StringRM.GetString("strRadTime", Culture) ?? "Date and time";
@@ -184,6 +184,9 @@ public static class StringResources
     public static string ChkCumulative => StringRM.GetString("strChkCumulative", Culture) ?? "Cumulative fractal dimension";
     public static string ChkEntropy => StringRM.GetString("strChkEntropy", Culture) ?? "Entropy (approximate && sample)";
     public static string ChkCrossHair => StringRM.GetString("strChkCrossHair", Culture) ?? "Show plots' crosshair";
+    public static string GrpFFT => StringRM.GetString("strGrpFFT", Culture) ?? "FFT points";
+    public static string RadRoundUp => StringRM.GetString("strRadRoundUp", Culture) ?? "Round up (add 0)";
+    public static string RadRoundDown => StringRM.GetString("strRadRoundDown", Culture) ?? "Round down (trim)";
 
     public static string ChkComputeDerivative => StringRM.GetString("strChkComputeDerivative", Culture) ?? "Compute numerical differentiation?";
     public static string ChkExportDerivative => StringRM.GetString("strChkExportDerivative", Culture) ?? "Export derivative data?";

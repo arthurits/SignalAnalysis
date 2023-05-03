@@ -348,6 +348,9 @@ Default values will be used instead.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI and data format</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT points</value>
+  </data>
   <data name="strIntegrationAlgorithms" xml:space="preserve">
     <value>Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method</value>
   </data>
@@ -560,6 +563,12 @@ dimension has been stopped.</value>
   </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>Data points</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Round down (trim)</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Round up</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Seconds</value>

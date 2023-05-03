@@ -332,6 +332,9 @@
   <data name="strGrpCulture" xml:space="preserve">
     <value>用户界面及数据格式</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT点</value>
+  </data>
   <data name="strIntegrationAlgorithms" xml:space="preserve">
     <value>左端点法, 中点法, 右端点法, 梯形法, 辛普森 1/3 法, 辛普森 3/8 法, 辛普森法, 龙贝格法</value>
   </data>
@@ -542,6 +545,12 @@
   </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>数据点</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>向下舍入</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>围捕</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>秒</value>

@@ -348,6 +348,9 @@ Se utilizarán los valores por defecto.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Formato de datos e interfaz</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>Puntos FFT</value>
+  </data>
   <data name="strIntegrationAlgorithms" xml:space="preserve">
     <value>Punto izquierdo, Punto medio, Punto derecho, Método trapezoidal, Simpson 1/3, Simpson 3/8, Simpson compuesto, Método de Romberg</value>
   </data>
@@ -564,6 +567,12 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>Puntos</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Añadir puntos</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Recortar</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Segundos</value>

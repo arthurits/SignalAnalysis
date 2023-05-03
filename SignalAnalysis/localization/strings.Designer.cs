@@ -736,6 +736,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FFT points.
+        /// </summary>
+        internal static string strGrpFFT {
+            get {
+                return ResourceManager.GetString("strGrpFFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson&apos;s 1/3 rule, Simpson&apos;s 3/8 rule, Simpson&apos;s composite rule, Romberg&apos;s method.
         /// </summary>
         internal static string strIntegrationAlgorithms {
@@ -1347,6 +1356,24 @@ namespace SignalAnalysis.localization {
         internal static string strRadPoints {
             get {
                 return ResourceManager.GetString("strRadPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round down (trim).
+        /// </summary>
+        internal static string strRadRoundDown {
+            get {
+                return ResourceManager.GetString("strRadRoundDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round up.
+        /// </summary>
+        internal static string strRadRoundUp {
+            get {
+                return ResourceManager.GetString("strRadRoundUp", resourceCulture);
             }
         }
         

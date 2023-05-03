@@ -278,8 +278,9 @@ partial class FrmMain
         double[] signalWindow = Array.Empty<double>();
         double[] signalFFT = Array.Empty<double>();
 
-        // Round down to the next integer (Adjust to the lowest power of 2)
+        // First, round down to the next integer (adjust to the lowest power of 2)
         int power2 = (int)Math.Floor(Math.Log2(signal.Length));
+        if (_settings.FFTRoundUp) power2++;
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
 
         // Apply window to signal

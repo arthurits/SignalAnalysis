@@ -329,6 +329,9 @@ Standardwerte werden verwendet.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI und Datenformat</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT-Punkte</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Datenpfad</value>
   </data>
@@ -538,6 +541,12 @@ wurde gestoppt.</value>
   </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>Datenpunkte</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Abrunden</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Aufrunden</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Sekunden</value>

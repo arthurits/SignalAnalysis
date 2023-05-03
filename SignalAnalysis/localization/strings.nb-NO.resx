@@ -303,6 +303,9 @@ Standardverdier vil bli benyttet i stedet.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI og dataformat</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT-poeng</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Datafilbane</value>
   </data>
@@ -469,6 +472,12 @@ har stoppet.</value>
   </data>
   <data name="strRadPoints" xml:space="preserve">
     <value>Datapunkter</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Runde ned</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Rund opp</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Sekunder</value>
