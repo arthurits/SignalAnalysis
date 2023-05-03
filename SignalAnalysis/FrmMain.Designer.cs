@@ -201,6 +201,7 @@ partial class FrmMain
         statusStrip.RenderMode = ToolStripRenderMode.Professional;
         statusStrip.ShowItemToolTips = true;
         statusStrip.Size = new Size(884, 28);
+        statusStrip.SizingGrip = false;
         statusStrip.TabIndex = 1;
         statusStrip.Text = "Status bar";
         // 
@@ -209,7 +210,7 @@ partial class FrmMain
         statusStripLabelEmpty.BorderSides = ToolStripStatusLabelBorderSides.Right;
         statusStripLabelEmpty.DisplayStyle = ToolStripItemDisplayStyle.Text;
         statusStripLabelEmpty.Name = "statusStripLabelEmpty";
-        statusStripLabelEmpty.Size = new Size(603, 23);
+        statusStripLabelEmpty.Size = new Size(572, 23);
         statusStripLabelEmpty.Spring = true;
         statusStripLabelEmpty.TextAlign = ContentAlignment.MiddleLeft;
         // 
