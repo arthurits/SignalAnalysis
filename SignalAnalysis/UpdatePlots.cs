@@ -1,4 +1,5 @@
 ﻿using ScottPlot;
+using SignalAnalysis.NumericalAlgorithms;
 
 namespace SignalAnalysis;
 
@@ -281,8 +282,11 @@ partial class FrmMain
         double[] signalFFT = Array.Empty<double>();
 
         // First, round down to the next integer (adjust to the lowest power of 2)
-        int power2 = (int)Math.Floor(Math.Log2(signal.Length));
-        if (roundUp) power2++;
+        int power2;
+        if (roundUp)
+            power2 = (int)Math.Ceiling(Math.Log2(signal.Length));
+        else
+            power2 = (int)Math.Floor(Math.Log2(signal.Length));
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
 
         // Apply window to signal
