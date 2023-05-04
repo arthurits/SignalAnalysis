@@ -370,18 +370,18 @@ public partial class FrmSettings : Form
     private void RelocateControls()
     {
         int width = Math.Max(this.lblStart.Width, this.lblEnd.Width);
-        this.txtStart.Left = this.lblStart.Left + width;
-        this.txtEnd.Left = this.lblEnd.Left + width;
+        this.txtStart.Left = 5 + this.lblStart.Left + width;
+        this.txtEnd.Left = 5 + this.lblEnd.Left + width;
         this.lblStart.Top = this.txtStart.Top + (txtStart.Height - lblStart.Height) / 2;
         this.lblEnd.Top = this.txtEnd.Top + (txtEnd.Height - lblEnd.Height) / 2;
         this.lblCumulative.Top = -1 + this.chkCumulative.Top + (chkCumulative.Height - lblCumulative.Height) / 2;
         this.lblEntropy.Top = -1 + this.chkEntropy.Top + (chkEntropy.Height - lblEntropy.Height) / 2; ;
 
-        width = Math.Max(this.radUp.Width, this.radDown.Width);
+        width = -6 + Math.Max(this.radUp.Width, this.radDown.Width);
         this.radUp.Left = (this.grpFFT.Width - width) / 2;
         this.radDown.Left = this.radUp.Left;
 
-        width = Math.Max(Math.Max(this.radPoints.Width, this.radSeconds.Width), this.radTime.Width);
+        width = -6 + Math.Max(Math.Max(this.radPoints.Width, this.radSeconds.Width), this.radTime.Width);
         this.radPoints.Left = (this.grpAxis.Width - width) / 2;
         this.radSeconds.Left = this.radPoints.Left;
         this.radTime.Left = this.radPoints.Left;

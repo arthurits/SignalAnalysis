@@ -1369,7 +1369,7 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Round up.
+        ///   Looks up a localized string similar to Round up (add zeros).
         /// </summary>
         internal static string strRadRoundUp {
             get {

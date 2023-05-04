@@ -590,7 +590,7 @@ dimension has been stopped.</value>
     <value>Round down (trim)</value>
   </data>
   <data name="strRadRoundUp" xml:space="preserve">
-    <value>Round up</value>
+    <value>Round up (add zeros)</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Seconds</value>
