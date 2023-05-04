@@ -333,8 +333,8 @@ public partial class FrmSettings : Form
         this.radTime.Text = StringResources.RadTime;
         this.chkBoxplot.Text = StringResources.ChkBoxplot;
         this.chkPower.Text = StringResources.ChkPower;
-        this.chkCumulative.Text = StringResources.ChkCumulative;
-        this.chkEntropy.Text = StringResources.ChkEntropy;
+        this.lblCumulative.Text = StringResources.ChkCumulative;
+        this.lblEntropy.Text = StringResources.ChkEntropy;
         this.chkCrossHair.Text = StringResources.ChkCrossHair;
         this.grpFFT.Text = StringResources.GrpFFT;
         this.radUp.Text = StringResources.RadRoundUp;
@@ -374,6 +374,17 @@ public partial class FrmSettings : Form
         this.txtEnd.Left = this.lblEnd.Left + width;
         this.lblStart.Top = this.txtStart.Top + (txtStart.Height - lblStart.Height) / 2;
         this.lblEnd.Top = this.txtEnd.Top + (txtEnd.Height - lblEnd.Height) / 2;
+        this.lblCumulative.Top = -1 + this.chkCumulative.Top + (chkCumulative.Height - lblCumulative.Height) / 2;
+        this.lblEntropy.Top = -1 + this.chkEntropy.Top + (chkEntropy.Height - lblEntropy.Height) / 2; ;
+
+        width = Math.Max(this.radUp.Width, this.radDown.Width);
+        this.radUp.Left = (this.grpFFT.Width - width) / 2;
+        this.radDown.Left = this.radUp.Left;
+
+        width = Math.Max(Math.Max(this.radPoints.Width, this.radSeconds.Width), this.radTime.Width);
+        this.radPoints.Left = (this.grpAxis.Width - width) / 2;
+        this.radSeconds.Left = this.radPoints.Left;
+        this.radTime.Left = this.radPoints.Left;
 
         this.txtDataFormat.Left = 5 + this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
