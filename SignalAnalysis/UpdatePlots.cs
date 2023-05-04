@@ -19,8 +19,9 @@ partial class FrmMain
     /// <param name="entropy"><see langword="True"/> if the entropy values will be computed</param>
     /// <param name="fft"><see langword="True"/> if the FFT will be computed</param>
     /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, <see langword="false"/> if the amplitude is plotted instead</param>
+    /// <param name="fftRoundUp"><see langword="True"/> if data length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
     /// <returns></returns>
-    private async Task UpdateStatsPlots(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false)
+    private async Task ComputeAsync(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false, bool fftRoundUp = true)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -53,7 +54,7 @@ partial class FrmMain
                 if (integral) ComputeIntegral(signalClipped);
                 if (fractal) ComputeFractal(signalClipped, progressive);
                 if (entropy) ComputeEntropy(signalClipped);
-                if (fft) signalWindowed = ComputeFFT(signalClipped, window);
+                if (fft) signalWindowed = ComputeFFT(signalClipped, fftRoundUp, window);
             }
             catch (OperationCanceledException ex)
             {
@@ -267,26 +268,27 @@ partial class FrmMain
     /// <summary>
     /// Computes the FFT 
     /// </summary>
-    /// <param name="signal">1D data array whose values are expected to be uniformly spaced and and a power of 2 (otherwise it's rounded down to the closest 2^n)</param>
+    /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
+    /// <param name="roundUp"><see langword="True"/> if <paramref name="signal"/> length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
     /// <param name="window">Window function</param>
     /// <returns>The windowed signal</returns>
-    private double[] ComputeFFT(double[] signal, IWindow? window)
+    private double[] ComputeFFT(double[] signal, bool roundUp = true, IWindow? window = null)
     {
         //IWindow window = (IWindow)stripComboWindows.SelectedItem;
-        if (window is null) return Array.Empty<double>();
+        //if (window is null) return Array.Empty<double>();
 
         double[] signalWindow = Array.Empty<double>();
         double[] signalFFT = Array.Empty<double>();
 
         // First, round down to the next integer (adjust to the lowest power of 2)
         int power2 = (int)Math.Floor(Math.Log2(signal.Length));
-        if (_settings.FFTRoundUp) power2++;
+        if (roundUp) power2++;
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
 
         // Apply window to signal
         signalWindow = new double[(int)Math.Pow(2, power2)];
         Array.Copy(signal, signalWindow, Math.Min(signalWindow.Length, signal.Length));
-        window.ApplyInPlace(signalWindow);
+        window?.ApplyInPlace(signalWindow);
 
         try
         {
