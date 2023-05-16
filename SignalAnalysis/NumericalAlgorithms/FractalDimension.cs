@@ -220,7 +220,11 @@ public static class FractalDimension
 
         for (int i = 0; i < nPoints; i++)
         {
-            yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
+            if (yMax == yMin)
+                yNorm1 = 0.0;
+            else
+                yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
+            
             if (i > 0)
             {
                 lengthPartial = System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + System.Math.Pow(1 / (nPoints - 1), 2));
