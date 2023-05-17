@@ -279,7 +279,7 @@ partial class FrmMain
         //if (window is null) return Array.Empty<double>();
 
         double[] signalWindow = Array.Empty<double>();
-        double[] signalFFT = Array.Empty<double>();
+        System.Numerics.Complex[] spectrum = Array.Empty<System.Numerics.Complex>();
 
         // First, round down to the next integer (adjust to the lowest power of 2)
         int power2;
@@ -296,16 +296,11 @@ partial class FrmMain
 
         try
         {
-            signalFFT = FftSharp.Transform.FFTpower(signalWindow);
-            // Substitute -Infinity values (which will throw an exception when plotting) for a minimum value of -340
-            signalFFT = signalFFT.Select(x => Double.IsInfinity(x) ? -340.0 : x).ToArray();
-            Results.FFTpower = signalFFT;
-
-            signalFFT = FftSharp.Transform.FFTmagnitude(signalWindow);
-            Results.FFTmagnitude = signalFFT;
-
-            signalFFT = _settings.PowerSpectra ? Results.FFTpower : Results.FFTmagnitude;
-            Results.FFTfrequencies = FftSharp.Transform.FFTfreq(Signal.SampleFrequency, signalFFT.Length);
+            spectrum = FftSharp.FFT.Forward(signalWindow);
+            Results.FFTpower = FftSharp.FFT.Power(spectrum);
+            Results.FFTpower = Results.FFTpower.Select(x => double.IsInfinity(x) ? -1000 : x).ToArray();
+            Results.FFTmagnitude = FftSharp.FFT.Magnitude(spectrum);
+            Results.FFTfrequencies = FftSharp.FFT.FrequencyScale(Results.FFTpower.Length, Signal.SampleFrequency);
         }
         catch (Exception ex)
         {
