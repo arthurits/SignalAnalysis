@@ -1,5 +1,10 @@
 # SignalAnalysis changelog
 
+## SignalAnalysis 1.6
+* Update Russian translation.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.64.
+* Minor bug corrections.
+
 ## SignalAnalysis 1.5
 * Add variance computation.
 * Add box plot computation as an user-selected option.
