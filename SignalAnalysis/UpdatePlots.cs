@@ -523,17 +523,17 @@ partial class FrmMain
         {
             case AxisType.Points:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency / Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, color: SharedExtensions.Convert(plotDerivative.Plot.Palette.Colors[0]), label: StringResources.FileHeader28);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency / Signal.SampleFrequency, color: plotDerivative.Plot.Palette.Colors[0], label: StringResources.FileHeader28);
                 plotDerivative.Plot.BottomAxis.DateTimeFormat(false);
                 break;
             case AxisType.Seconds:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, color: SharedExtensions.Convert(plotDerivative.Plot.Palette.Colors[0]), label: StringResources.FileHeader28);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, Signal.SampleFrequency, color: plotDerivative.Plot.Palette.Colors[0], label: StringResources.FileHeader28);
                 plotDerivative.Plot.BottomAxis.DateTimeFormat(false);
                 break;
             case AxisType.DateTime:
                 pOriginal = plotDerivative.Plot.AddSignal(signal, 24 * 60 * 60 * Signal.SampleFrequency, color: Color.DarkGray, label: strLabel);
-                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, color: SharedExtensions.Convert(plotDerivative.Plot.Palette.Colors[0]), label: StringResources.FileHeader28);
+                pDerivative = plotDerivative.Plot.AddSignal(Results.Derivative, 24 * 60 * 60 * Signal.SampleFrequency, color: plotDerivative.Plot.Palette.Colors[0], label: StringResources.FileHeader28);
                 pOriginal.OffsetX = Signal.StartTime.ToOADate();
                 plotDerivative.Plot.BottomAxis.DateTimeFormat(true);
                 break;
