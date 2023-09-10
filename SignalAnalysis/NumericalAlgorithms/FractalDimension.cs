@@ -51,6 +51,7 @@ public static class FractalDimension
         else
         {
             DimensionCumulative = new double[yValues.Length];
+            DimensionCumulative = ComputeH(yValues);
             // Compute all but the last point
             for (int i = 0; i < yValues.Length - 1; i++)
             {
@@ -147,6 +148,54 @@ public static class FractalDimension
         }
 
         return (dimensionH, varianceH);
+    }
+
+    /// <summary>
+    /// Computes the fractal dimension of a discrete curve with a constant sampling rate starting at time 0 seconds.
+    /// </summary>
+    /// <param name="samplingFreq">The sampling frequency</param>
+    /// <param name="yValues">Array containing the ordinate points</param>
+    /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
+    /// <returns>The fractal dimension of the curve and its variance</returns>
+    private static double [] ComputeH(double[] yValues)
+    {
+        double[] _yMax = new double[yValues.Length];
+        double[] _yMin = new double[yValues.Length];
+        double[] partialSeg = new double[yValues.Length];
+        bool _recompute = false;
+
+        _yMax[0] = yValues[0];
+        _yMin[0] = yValues[0];
+        partialSeg[0] = 0;
+        DimensionCumulative[0] = DimensionMinimum;
+        for (int i = 1; i < yValues.Length - 1; i++)
+        {
+            if (yValues[i] > _yMax[i - 1])
+            {
+                _yMax[i] = yValues[i];
+                _recompute = true;
+            }
+            if (yValues[i] < _yMin[i - 1])
+            {
+                _yMin[i] = yValues[i];
+                _recompute = true;
+            }
+
+            if (!_recompute)
+                partialSeg[i] = partialSeg[i - 1] + Math.Pow((yValues[i] - yValues[i - 1]) / (_yMax[i] - _yMin[i]), 2);
+            else
+            {
+                double sumSeg = 0;
+                for (int j = i; j <= i; j++)
+                    sumSeg += Math.Pow((yValues[j] - yValues[j - 1]) / (_yMax[i] - _yMin[i]), 2);
+                partialSeg[i] = sumSeg;
+            }
+            partialSeg[i] += Math.Pow(1 / (i + 1 - 1), 2);
+
+            DimensionCumulative[i] = 1 + System.Math.Log10(partialSeg[i]) / System.Math.Log10(2 * (i + 1 - 1));
+        }
+
+        return DimensionCumulative;
     }
 
     /// <summary>
