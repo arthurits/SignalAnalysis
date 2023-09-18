@@ -75,40 +75,79 @@ public static class Complexity
         return (appEn, sampEn);
     }
 
+    ///// <summary>
+    ///// Computes the Shannon entropy, the entropy bit, and the ideal entropy for a vector of numeric values
+    ///// </summary>
+    ///// <param name="data">Numeric values vector</param>
+    ///// <returns>The Shannon entropy value, the entropy bit, and the ideal entropy</returns>
+    //public static (double Entropy, double EntropyBit, double IdealEntropy) ShannonEntropy<T>(IEnumerable<T> data)
+    //{
+    //    double entropy = 0;
+    //    double entropyBit;
+    //    double entropyIdeal;
+    //    double prob;
+
+    //    // Convert into an enumerable of doubles.
+    //    IEnumerable<double> values = data.Select(value => Convert.ToDouble(value));
+    //    int nLength = values.Count();
+    //    double nSum = values.Sum();
+       
+    //    // Compute the Shannon entropy
+    //    foreach (double s in values)
+    //    {
+    //        if (s > 0)
+    //        {
+    //            prob = s / nSum;
+    //            entropy -= prob * Math.Log2(prob);
+    //        }
+    //    }
+
+    //    // https://github.com/wqyeo/Shannon-Entropy/blob/master/EntropyCal.cs
+    //    entropyBit = Math.Ceiling(entropy) * nLength;
+
+    //    // https://stackoverflow.com/questions/2979174/how-do-i-compute-the-approximate-entropy-of-a-bit-string
+    //    prob = 1.0 / nLength;
+    //    entropyIdeal = -1.0 * nLength * prob * Math.Log(prob);
+
+    //    return (entropy, entropyBit, entropyIdeal);
+    //}
+
     /// <summary>
     /// Computes the Shannon entropy, the entropy bit, and the ideal entropy for a vector of numeric values
     /// </summary>
     /// <param name="data">Numeric values vector</param>
     /// <returns>The Shannon entropy value, the entropy bit, and the ideal entropy</returns>
-    public static (double Entropy, double EntropyBit, double IdealEntropy) ShannonEntropy<T>(IEnumerable<T> data)
+    public static (double Entropy, double EntropyBit, double IdealEntropy) ShannonEntropy<T>(IEnumerable<T> data, int decimalPrecision = 1)
     {
         double entropy = 0;
         double entropyBit;
         double entropyIdeal;
         double prob;
+        int decimalFactor = (int)Math.Pow(10, decimalPrecision);
 
         // Convert into an enumerable of doubles.
         IEnumerable<double> values = data.Select(value => Convert.ToDouble(value));
         int nLength = values.Count();
-        double nSum = values.Sum();
 
         // Group data values
         // https://stackoverflow.com/questions/20765589/how-do-i-find-duplicates-in-an-array-and-display-how-many-times-they-occurred
         var dict = new Dictionary<double, int>();
-        foreach(var value in values)
+        foreach (var value in values)
         {
+            double val = value * decimalFactor;
             // When the key is not found, "count" will be initialized to 0
-            dict.TryGetValue(value, out int count);
-            dict[value] = count + 1;
+            dict.TryGetValue(val, out int count);
+            dict[val] = count + 1;
         }
-        // var groups = values.GroupBy(v => v);
-        
+        //var groups = values.GroupBy(v => v);
+
         // Compute the Shannon entropy
-        foreach (double s in values)
+        foreach (var value in dict)
         {
-            if (s > 0)
+            if (value.Key > 0)
             {
-                prob = s / nSum;
+                //prob = value.Value / (value.Key / decimalFactor);
+                prob = (double)value.Value / nLength;
                 entropy -= prob * Math.Log2(prob);
             }
         }
@@ -118,7 +157,7 @@ public static class Complexity
 
         // https://stackoverflow.com/questions/2979174/how-do-i-compute-the-approximate-entropy-of-a-bit-string
         prob = 1.0 / nLength;
-        entropyIdeal = -1.0 * nLength * prob * Math.Log(prob);
+        entropyIdeal = -1.0 * nLength * prob * Math.Log2(prob);
 
         return (entropy, entropyBit, entropyIdeal);
     }
