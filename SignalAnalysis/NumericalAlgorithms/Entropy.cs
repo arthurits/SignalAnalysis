@@ -92,6 +92,17 @@ public static class Complexity
         int nLength = values.Count();
         double nSum = values.Sum();
 
+        // Group data values
+        // https://stackoverflow.com/questions/20765589/how-do-i-find-duplicates-in-an-array-and-display-how-many-times-they-occurred
+        var dict = new Dictionary<double, int>();
+        foreach(var value in values)
+        {
+            // When the key is not found, "count" will be initialized to 0
+            dict.TryGetValue(value, out int count);
+            dict[value] = count + 1;
+        }
+        // var groups = values.GroupBy(v => v);
+        
         // Compute the Shannon entropy
         foreach (double s in values)
         {
