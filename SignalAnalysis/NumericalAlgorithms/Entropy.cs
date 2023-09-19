@@ -116,14 +116,13 @@ public static class Complexity
     /// Computes the Shannon entropy, the entropy bit, and the ideal entropy for a vector of numeric values
     /// </summary>
     /// <param name="data">Numeric values vector</param>
-    /// <returns>The Shannon entropy value, the entropy bit, and the ideal entropy</returns>
-    public static (double Entropy, double EntropyBit, double IdealEntropy) ShannonEntropy<T>(IEnumerable<T> data, int decimalPrecision = 1)
+    /// <returns>The Shannon entropy value (bits per symbol), the entropy bit (min. number of bits needed to encode the vector), and the ideal entropy</returns>
+    public static (double Entropy, double EntropyBit, double IdealEntropy) ShannonEntropy<T>(IEnumerable<T> data)
     {
         double entropy = 0;
         double entropyBit;
         double entropyIdeal;
         double prob;
-        int decimalFactor = (int)Math.Pow(10, decimalPrecision);
 
         // Convert into an enumerable of doubles.
         IEnumerable<double> values = data.Select(value => Convert.ToDouble(value));
@@ -134,11 +133,11 @@ public static class Complexity
         var dict = new Dictionary<double, int>();
         foreach (var value in values)
         {
-            double val = value * decimalFactor;
             // When the key is not found, "count" will be initialized to 0
-            dict.TryGetValue(val, out int count);
-            dict[val] = count + 1;
+            dict.TryGetValue(value, out int count);
+            dict[value] = count + 1;
         }
+        // This also works, but it might be slower since each group in groups need to be counted again
         //var groups = values.GroupBy(v => v);
 
         // Compute the Shannon entropy
@@ -153,9 +152,11 @@ public static class Complexity
         }
 
         // https://github.com/wqyeo/Shannon-Entropy/blob/master/EntropyCal.cs
+        // This represents the minimum number of bits to encode the whole vector
         entropyBit = Math.Ceiling(entropy) * nLength;
 
         // https://stackoverflow.com/questions/2979174/how-do-i-compute-the-approximate-entropy-of-a-bit-string
+        // The Shannon entropy if all elements where different
         prob = 1.0 / nLength;
         entropyIdeal = -1.0 * nLength * prob * Math.Log2(prob);
 
