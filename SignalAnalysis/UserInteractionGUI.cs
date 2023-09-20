@@ -71,7 +71,7 @@ partial class FrmMain
                 }
                 else
                 {
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex,
+                    ComputeAsync(stripComboSeries.SelectedIndex,
                                     deletePreviousResults: true,
                                     stats: true,
                                     boxplot: _settings.Boxplot,
@@ -81,7 +81,8 @@ partial class FrmMain
                                     progressive: _settings.CumulativeDimension,
                                     entropy: _settings.Entropy,
                                     fft: true,
-                                    powerSpectra: _settings.PowerSpectra);
+                                    powerSpectra: _settings.PowerSpectra,
+                                    fftRoundUp: _settings.FFTRoundUp);
                 }
             }
 
@@ -201,7 +202,7 @@ partial class FrmMain
 
             UpdateUI_Language();
 
-            UpdateStatsPlots(stripComboSeries.SelectedIndex,
+            ComputeAsync(stripComboSeries.SelectedIndex,
                 deletePreviousResults: false,
                 stats: true,
                 boxplot: _settings.Boxplot,
@@ -211,7 +212,8 @@ partial class FrmMain
                 progressive: _settings.CumulativeDimension,
                 entropy: _settings.Entropy,
                 fft: true,
-                powerSpectra: _settings.PowerSpectra);
+                powerSpectra: _settings.PowerSpectra,
+                fftRoundUp: _settings.FFTRoundUp);
         }
 
     }
@@ -251,11 +253,11 @@ partial class FrmMain
                 case "statusStripLabelExBoxplot":
                     _settings.Boxplot = label.Checked;
                     ShowHideBoxplot(label.Checked);
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, boxplot: _settings.Boxplot);
+                    ComputeAsync(stripComboSeries.SelectedIndex, boxplot: _settings.Boxplot);
                     break;
                 case "statusStripLabelExDerivative":
                     _settings.ComputeDerivative = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
+                    ComputeAsync(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
                     if (_settings.ComputeDerivative == false)
                     {
                         plotDerivative.Clear();
@@ -264,21 +266,21 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExIntegration":
                     _settings.ComputeIntegration = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
+                    ComputeAsync(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
+                    ComputeAsync(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, fft: _settings.PowerSpectra, powerSpectra: _settings.PowerSpectra);
+                    ComputeAsync(stripComboSeries.SelectedIndex, fft: _settings.PowerSpectra, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp);
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
-                    UpdateStatsPlots(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
+                    ComputeAsync(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
@@ -346,7 +348,7 @@ partial class FrmMain
         //_settings.Entropy = false;
 
         // Update stats and plots
-        UpdateStatsPlots(stripComboSeries.SelectedIndex,
+        ComputeAsync(stripComboSeries.SelectedIndex,
             deletePreviousResults: false,
             stats: true,
             boxplot: _settings.Boxplot,
@@ -356,7 +358,8 @@ partial class FrmMain
             progressive: _settings.CumulativeDimension,
             entropy: _settings.Entropy,
             fft: true,
-            powerSpectra: _settings.PowerSpectra);
+            powerSpectra: _settings.PowerSpectra,
+            fftRoundUp: _settings.FFTRoundUp);
     }
 
     private void ComboWindow_SelectionChangeCommitted(object? sender, EventArgs e)
@@ -371,7 +374,7 @@ partial class FrmMain
         if (signal is null || signal.Length == 0) return;
 
         //UpdateWindowPlots(signal);
-        UpdateStatsPlots(stripComboSeries.SelectedIndex,
+        ComputeAsync(stripComboSeries.SelectedIndex,
             deletePreviousResults: false,
             stats: false,
             boxplot: _settings.Boxplot,
@@ -381,7 +384,8 @@ partial class FrmMain
             progressive: false,
             entropy: false,
             fft: true,
-            powerSpectra: _settings.PowerSpectra);
+            powerSpectra: _settings.PowerSpectra,
+            fftRoundUp: _settings.FFTRoundUp);
     }
 
     private void ShowHideBoxplot (bool show = true)

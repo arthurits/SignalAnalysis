@@ -1,18 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace SignalAnalysis;
 
-namespace FftSharp
+// https://github.com/Samson-Mano/Fast_Fourier_Transform/blob/main/Fast_fourier_transform/Fast_fourier_transform/process_data.cs
+public static class FFT
 {
-    [Obsolete("Use System.Numerics.Complex")]
+    public static double[] FFTpower(double[] input_signal)
+    {
+        int i;
+        int N = input_signal.Length;
+        if (N == 1)
+            return input_signal;
+
+        // Even array
+        double[] evenList = new double[N / 2];
+        for (i = 0; i < (N / 2); i++)
+            evenList[i] = input_signal[2 * i];
+        evenList = FFTpower(evenList);
+
+        // Odd array
+        double[] oddList = new double[N / 2];
+        for (i = 0; i < (N / 2); i++)
+        {
+            oddList[i] = input_signal[(2 * i) + 1];
+        }
+        oddList = FFTpower(oddList);
+
+        // Result
+        double[] result = new double[N];
+
+        for (i = 0; i < (N / 2); i++)
+        {
+            double w = (-2.0 * i * Math.PI) / N;
+            Complex wk = new(Math.Cos(w), Math.Sin(w));
+            Complex even = new(evenList[i], 0);
+            Complex odd = new(oddList[i], 0);
+
+            result[i] = (even + (wk * odd)).Real;
+            result[i + (N / 2)] = (even - (wk * odd)).Real;
+        }
+        return result;
+    }
+
     public struct Complex
     {
         public double Real;
         public double Imaginary;
-        public double MagnitudeSquared => Real * Real + Imaginary * Imaginary;
-        public double Magnitude => Math.Sqrt(MagnitudeSquared);
-        public double Phase => Math.Atan2(Imaginary, Real);
+        public double MagnitudeSquared { get { return Real * Real + Imaginary * Imaginary; } }
+        public double Magnitude { get { return Math.Sqrt(MagnitudeSquared); } }
 
         public Complex(double real, double imaginary)
         {
@@ -65,15 +98,6 @@ namespace FftSharp
                 output[i] = input[i].Magnitude;
             return output;
         }
-
-        public System.Numerics.Complex ToNumerics()
-        {
-            return new(Real, Imaginary);
-        }
-
-        public static System.Numerics.Complex[] ToNumerics(Complex[] values)
-        {
-            return values.Select(x => x.ToNumerics()).ToArray();
-        }
     }
+
 }

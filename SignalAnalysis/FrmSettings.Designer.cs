@@ -32,6 +32,11 @@
             btnAccept = new Button();
             tabSettings = new TabControl();
             tabPlot = new TabPage();
+            lblEntropy = new Label();
+            lblCumulative = new Label();
+            grpFFT = new GroupBox();
+            radDown = new RadioButton();
+            radUp = new RadioButton();
             chkBoxplot = new CheckBox();
             chkCrossHair = new CheckBox();
             chkEntropy = new CheckBox();
@@ -68,6 +73,7 @@
             btnReset = new Button();
             tabSettings.SuspendLayout();
             tabPlot.SuspendLayout();
+            grpFFT.SuspendLayout();
             grpAxis.SuspendLayout();
             tabDerivative.SuspendLayout();
             tabIntegration.SuspendLayout();
@@ -77,7 +83,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(262, 304);
+            btnCancel.Location = new Point(282, 304);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(100, 30);
             btnCancel.TabIndex = 2;
@@ -87,7 +93,7 @@
             // 
             // btnAccept
             // 
-            btnAccept.Location = new Point(368, 304);
+            btnAccept.Location = new Point(388, 304);
             btnAccept.Name = "btnAccept";
             btnAccept.Size = new Size(100, 30);
             btnAccept.TabIndex = 3;
@@ -104,11 +110,14 @@
             tabSettings.Location = new Point(12, 14);
             tabSettings.Name = "tabSettings";
             tabSettings.SelectedIndex = 0;
-            tabSettings.Size = new Size(460, 284);
+            tabSettings.Size = new Size(480, 284);
             tabSettings.TabIndex = 0;
             // 
             // tabPlot
             // 
+            tabPlot.Controls.Add(lblEntropy);
+            tabPlot.Controls.Add(lblCumulative);
+            tabPlot.Controls.Add(grpFFT);
             tabPlot.Controls.Add(chkBoxplot);
             tabPlot.Controls.Add(chkCrossHair);
             tabPlot.Controls.Add(chkEntropy);
@@ -122,15 +131,68 @@
             tabPlot.Location = new Point(4, 26);
             tabPlot.Name = "tabPlot";
             tabPlot.Padding = new Padding(3);
-            tabPlot.Size = new Size(452, 254);
+            tabPlot.Size = new Size(472, 254);
             tabPlot.TabIndex = 0;
             tabPlot.Text = "Plotting";
             tabPlot.UseVisualStyleBackColor = true;
             // 
+            // lblEntropy
+            // 
+            lblEntropy.AutoSize = true;
+            lblEntropy.Location = new Point(30, 190);
+            lblEntropy.MaximumSize = new Size(240, 0);
+            lblEntropy.Name = "lblEntropy";
+            lblEntropy.Size = new Size(207, 19);
+            lblEntropy.TabIndex = 18;
+            lblEntropy.Text = "Entropy (approximate && sample)";
+            // 
+            // lblCumulative
+            // 
+            lblCumulative.AutoSize = true;
+            lblCumulative.Location = new Point(30, 160);
+            lblCumulative.MaximumSize = new Size(257, 0);
+            lblCumulative.Name = "lblCumulative";
+            lblCumulative.Size = new Size(186, 19);
+            lblCumulative.TabIndex = 17;
+            lblCumulative.Text = "Cumulative fractal dimension";
+            // 
+            // grpFFT
+            // 
+            grpFFT.Controls.Add(radDown);
+            grpFFT.Controls.Add(radUp);
+            grpFFT.Location = new Point(287, 143);
+            grpFFT.Name = "grpFFT";
+            grpFFT.Size = new Size(175, 95);
+            grpFFT.TabIndex = 16;
+            grpFFT.TabStop = false;
+            grpFFT.Text = "FFT points";
+            // 
+            // radDown
+            // 
+            radDown.AutoSize = true;
+            radDown.Location = new Point(13, 59);
+            radDown.Name = "radDown";
+            radDown.Size = new Size(142, 23);
+            radDown.TabIndex = 1;
+            radDown.TabStop = true;
+            radDown.Text = "Round down (trim)";
+            radDown.UseVisualStyleBackColor = true;
+            // 
+            // radUp
+            // 
+            radUp.AutoSize = true;
+            radUp.Location = new Point(13, 27);
+            radUp.Name = "radUp";
+            radUp.Size = new Size(158, 23);
+            radUp.TabIndex = 0;
+            radUp.TabStop = true;
+            radUp.Text = "Round up (add zeros)";
+            radUp.UseVisualStyleBackColor = true;
+            // 
             // chkBoxplot
             // 
             chkBoxplot.AutoSize = true;
-            chkBoxplot.Location = new Point(17, 99);
+            chkBoxplot.Location = new Point(14, 99);
             chkBoxplot.Name = "chkBoxplot";
             chkBoxplot.Size = new Size(78, 23);
             chkBoxplot.TabIndex = 2;
@@ -140,7 +202,7 @@
             // chkCrossHair
             // 
             chkCrossHair.AutoSize = true;
-            chkCrossHair.Location = new Point(17, 219);
+            chkCrossHair.Location = new Point(14, 219);
             chkCrossHair.Name = "chkCrossHair";
             chkCrossHair.Size = new Size(156, 23);
             chkCrossHair.TabIndex = 6;
@@ -150,27 +212,27 @@
             // chkEntropy
             // 
             chkEntropy.AutoSize = true;
-            chkEntropy.Location = new Point(17, 189);
+            chkEntropy.Location = new Point(14, 189);
             chkEntropy.Name = "chkEntropy";
-            chkEntropy.Size = new Size(226, 23);
+            chkEntropy.Size = new Size(35, 23);
             chkEntropy.TabIndex = 5;
-            chkEntropy.Text = "Entropy (approximate && sample)";
+            chkEntropy.Text = "E";
             chkEntropy.UseVisualStyleBackColor = true;
             // 
             // chkCumulative
             // 
             chkCumulative.AutoSize = true;
-            chkCumulative.Location = new Point(17, 159);
+            chkCumulative.Location = new Point(14, 159);
             chkCumulative.Name = "chkCumulative";
-            chkCumulative.Size = new Size(205, 23);
+            chkCumulative.Size = new Size(37, 23);
             chkCumulative.TabIndex = 4;
-            chkCumulative.Text = "Cumulative fractal dimension";
+            chkCumulative.Text = "C";
             chkCumulative.UseVisualStyleBackColor = true;
             // 
             // chkPower
             // 
             chkPower.AutoSize = true;
-            chkPower.Location = new Point(17, 129);
+            chkPower.Location = new Point(14, 129);
             chkPower.Name = "chkPower";
             chkPower.Size = new Size(93, 23);
             chkPower.TabIndex = 3;
@@ -182,9 +244,9 @@
             grpAxis.Controls.Add(radTime);
             grpAxis.Controls.Add(radSeconds);
             grpAxis.Controls.Add(radPoints);
-            grpAxis.Location = new Point(257, 12);
+            grpAxis.Location = new Point(287, 12);
             grpAxis.Name = "grpAxis";
-            grpAxis.Size = new Size(168, 146);
+            grpAxis.Size = new Size(175, 125);
             grpAxis.TabIndex = 15;
             grpAxis.TabStop = false;
             grpAxis.Text = "Abscissa axis";
@@ -192,7 +254,7 @@
             // radTime
             // 
             radTime.AutoSize = true;
-            radTime.Location = new Point(22, 105);
+            radTime.Location = new Point(22, 88);
             radTime.Name = "radTime";
             radTime.Size = new Size(114, 23);
             radTime.TabIndex = 2;
@@ -203,7 +265,7 @@
             // radSeconds
             // 
             radSeconds.AutoSize = true;
-            radSeconds.Location = new Point(22, 67);
+            radSeconds.Location = new Point(22, 56);
             radSeconds.Name = "radSeconds";
             radSeconds.Size = new Size(77, 23);
             radSeconds.TabIndex = 1;
@@ -214,7 +276,7 @@
             // radPoints
             // 
             radPoints.AutoSize = true;
-            radPoints.Location = new Point(22, 30);
+            radPoints.Location = new Point(22, 25);
             radPoints.Name = "radPoints";
             radPoints.Size = new Size(98, 23);
             radPoints.TabIndex = 0;
@@ -224,14 +286,14 @@
             // 
             // txtEnd
             // 
-            txtEnd.Location = new Point(164, 56);
+            txtEnd.Location = new Point(171, 56);
             txtEnd.Name = "txtEnd";
             txtEnd.Size = new Size(71, 25);
             txtEnd.TabIndex = 1;
             // 
             // txtStart
             // 
-            txtStart.Location = new Point(164, 17);
+            txtStart.Location = new Point(171, 17);
             txtStart.Name = "txtStart";
             txtStart.Size = new Size(71, 25);
             txtStart.TabIndex = 0;
@@ -239,8 +301,8 @@
             // lblEnd
             // 
             lblEnd.AutoSize = true;
-            lblEnd.Location = new Point(13, 59);
-            lblEnd.MaximumSize = new Size(150, 0);
+            lblEnd.Location = new Point(10, 59);
+            lblEnd.MaximumSize = new Size(170, 0);
             lblEnd.Name = "lblEnd";
             lblEnd.Size = new Size(108, 19);
             lblEnd.TabIndex = 12;
@@ -249,8 +311,8 @@
             // lblStart
             // 
             lblStart.AutoSize = true;
-            lblStart.Location = new Point(13, 20);
-            lblStart.MaximumSize = new Size(150, 0);
+            lblStart.Location = new Point(10, 20);
+            lblStart.MaximumSize = new Size(170, 0);
             lblStart.Name = "lblStart";
             lblStart.Size = new Size(113, 19);
             lblStart.TabIndex = 11;
@@ -262,10 +324,10 @@
             tabDerivative.Controls.Add(cboAlgorithms);
             tabDerivative.Controls.Add(chkComputeDerivative);
             tabDerivative.Controls.Add(chkExportDerivative);
-            tabDerivative.Location = new Point(4, 26);
+            tabDerivative.Location = new Point(4, 24);
             tabDerivative.Name = "tabDerivative";
             tabDerivative.Padding = new Padding(3);
-            tabDerivative.Size = new Size(452, 254);
+            tabDerivative.Size = new Size(472, 256);
             tabDerivative.TabIndex = 2;
             tabDerivative.Text = "Derivative";
             tabDerivative.UseVisualStyleBackColor = true;
@@ -319,7 +381,7 @@
             tabIntegration.Location = new Point(4, 24);
             tabIntegration.Name = "tabIntegration";
             tabIntegration.Padding = new Padding(3);
-            tabIntegration.Size = new Size(452, 256);
+            tabIntegration.Size = new Size(472, 256);
             tabIntegration.TabIndex = 3;
             tabIntegration.Text = "Integration";
             tabIntegration.UseVisualStyleBackColor = true;
@@ -379,10 +441,10 @@
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 24);
+            tabGUI.Location = new Point(4, 26);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(452, 256);
+            tabGUI.Size = new Size(472, 254);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -410,9 +472,9 @@
             grpCulture.Controls.Add(radUserCulture);
             grpCulture.Controls.Add(radInvariantCulture);
             grpCulture.Controls.Add(radCurrentCulture);
-            grpCulture.Location = new Point(19, 11);
+            grpCulture.Location = new Point(24, 14);
             grpCulture.Name = "grpCulture";
-            grpCulture.Size = new Size(408, 155);
+            grpCulture.Size = new Size(387, 155);
             grpCulture.TabIndex = 0;
             grpCulture.TabStop = false;
             grpCulture.Text = "UI and data format";
@@ -490,7 +552,7 @@
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new Size(484, 346);
+            ClientSize = new Size(504, 346);
             Controls.Add(btnReset);
             Controls.Add(tabSettings);
             Controls.Add(btnAccept);
@@ -506,6 +568,8 @@
             tabSettings.ResumeLayout(false);
             tabPlot.ResumeLayout(false);
             tabPlot.PerformLayout();
+            grpFFT.ResumeLayout(false);
+            grpFFT.PerformLayout();
             grpAxis.ResumeLayout(false);
             grpAxis.PerformLayout();
             tabDerivative.ResumeLayout(false);
@@ -559,5 +623,10 @@
         private CheckBox chkComputeIntegration;
         private CheckBox chkAbsolute;
         private CheckBox chkBoxplot;
+        private GroupBox grpFFT;
+        private RadioButton radDown;
+        private RadioButton radUp;
+        private Label lblEntropy;
+        private Label lblCumulative;
     }
 }

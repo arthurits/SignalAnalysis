@@ -303,6 +303,9 @@ Vietoj jų bus naudojamos numatytos reikšmės.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Vartotojo sąsajos ir duomenų formatas</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT taškai</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Duomenų failo kelias</value>
   </data>
@@ -467,6 +470,12 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strRadPoints" xml:space="preserve">
     <value>Duomenų taškai</value>
   </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Apvalinant</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Suapvalinti</value>
+  </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Sekundės</value>
   </data>
@@ -570,5 +579,8 @@ skaičiavimas buvo sustabdytas.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Vartotojo sąsajos kalba</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Šenono / Ideali</value>
   </data>
 </root>

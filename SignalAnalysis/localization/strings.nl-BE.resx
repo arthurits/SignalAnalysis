@@ -303,6 +303,9 @@ In plaats daarvan worden standaardwaarden gebruikt.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Gebruikersinterface en gegevensindeling</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT-punten</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Pad gegevensbestand</value>
   </data>
@@ -469,6 +472,12 @@ dimensie is gestopt.</value>
   <data name="strRadPoints" xml:space="preserve">
     <value>Data punten</value>
   </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Beneden afronden</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Afronden</value>
+  </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Seconden</value>
   </data>
@@ -572,5 +581,8 @@ dimensie is gestopt.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Taal gebruikersinterface</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideale</value>
   </data>
 </root>

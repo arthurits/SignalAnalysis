@@ -303,6 +303,9 @@
   <data name="strGrpCulture" xml:space="preserve">
     <value>UI এবং ডেটা বিন্যাস</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT পয়েন্ট</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>ডাটা-ফাইল পাথ</value>
   </data>
@@ -470,6 +473,12 @@
   <data name="strRadPoints" xml:space="preserve">
     <value>ডেটা পয়েন্ট</value>
   </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>রাউন্ড আপ</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>নিচে সুসম্পন্ন</value>
+  </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>সেকেন্ড</value>
   </data>
@@ -573,5 +582,8 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>ইউজার ইন্টারফেস ভাষা</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>শ্যানন / আদর্শ</value>
   </data>
 </root>

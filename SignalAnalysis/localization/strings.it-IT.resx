@@ -302,6 +302,9 @@ Verranno utilizzati i valori di default.</value>
   <data name="strGrpCulture" xml:space="preserve">
     <value>Interfaccia e formato dei dati</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>Punti FFT</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>Percorso dell'archivio dati</value>
   </data>
@@ -467,6 +470,12 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strRadPoints" xml:space="preserve">
     <value>Punti di dato</value>
   </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Arrotonda per difetto</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Arrotondare</value>
+  </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Secondi</value>
   </data>
@@ -570,5 +579,8 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Lingua dell'interfaccia utente</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideale</value>
   </data>
 </root>

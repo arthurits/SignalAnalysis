@@ -1,4 +1,6 @@
 using FftSharp.Windows;
+using System;
+using System.Diagnostics;
 
 namespace SignalAnalysis;
 
@@ -51,6 +53,14 @@ public static class FractalDimension
         else
         {
             DimensionCumulative = new double[yValues.Length];
+            
+            Stopwatch stopwatch = new();
+            stopwatch.Start();
+            DimensionCumulative = ComputeH(yValues);
+            stopwatch.Stop();
+            TimeSpan elapsed = stopwatch.Elapsed;
+            Debug.WriteLine($"Elapsed time - Algorithm 1: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+            stopwatch.Restart();
             // Compute all but the last point
             for (int i = 0; i < yValues.Length - 1; i++)
             {
@@ -58,6 +68,9 @@ public static class FractalDimension
                 if (ct.IsCancellationRequested)
                     throw new OperationCanceledException("CancelFractal", ct);
             }
+            stopwatch.Stop();
+            elapsed = stopwatch.Elapsed;
+            Debug.WriteLine($"Elapsed time - Algorithm 2: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
             // Finally, compute the last point and get both the dimension and the variance
             (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, yValues.Length - 1);
             DimensionCumulative[^1] = DimensionSingle;
@@ -150,6 +163,56 @@ public static class FractalDimension
     }
 
     /// <summary>
+    /// Computes the fractal dimension of a discrete curve with a constant sampling rate starting at time 0 seconds.
+    /// </summary>
+    /// <param name="samplingFreq">The sampling frequency</param>
+    /// <param name="yValues">Array containing the ordinate points</param>
+    /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
+    /// <returns>The fractal dimension of the curve and its variance</returns>
+    private static double [] ComputeH(double[] yValues)
+    {
+        double _yMax;
+        double _yMin;
+        double _yRange = 0;
+        double[] _segLength = new double[yValues.Length];
+        double[] _dimH = new double[yValues.Length];
+        bool _recompute;
+        double _normLength = 0;
+
+        _yMax = yValues[0];
+        _yMin = yValues[0];
+        _segLength[0] = 0;
+        _dimH[0] = DimensionMinimum;
+        for (int i = 1; i < yValues.Length - 1; i++)
+        {
+            _recompute = yValues[i] > _yMax || yValues[i] < _yMin;
+            if (yValues[i] > _yMax) _yMax = yValues[i];
+            if (yValues[i] < _yMin) _yMin = yValues[i];
+            _yRange = _yMax - _yMin;
+
+            _segLength[i] = (yValues[i] - yValues[i - 1]) / _yRange;
+
+            _normLength = 0;
+            for (int j = 1; j <= i; j++)
+            {
+                if (!_recompute)
+                {
+                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow(1 / (i + 1 - 1), 2));
+                }
+                else
+                {
+                    _segLength[j] = (yValues[j] - yValues[j - 1]) / _yRange;
+                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow(1 / (i + 1 - 1), 2));
+                }
+            }
+
+            _dimH[i] = 1 + System.Math.Log10(_normLength) / System.Math.Log10(2 * (i + 1 - 1));
+        }
+
+        return _dimH;
+    }
+
+    /// <summary>
     /// Computes the normalized length of a discrete curve.
     /// To do so, the passed values are normalized to be in the range [0, 1] both in the abscissa and the ordinate axes.
     /// </summary>
@@ -220,7 +283,11 @@ public static class FractalDimension
 
         for (int i = 0; i < nPoints; i++)
         {
-            yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
+            if (yMax == yMin)
+                yNorm1 = 0.0;
+            else
+                yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
+            
             if (i > 0)
             {
                 lengthPartial = System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + System.Math.Pow(1 / (nPoints - 1), 2));

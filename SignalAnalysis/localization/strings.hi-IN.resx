@@ -302,6 +302,9 @@
   <data name="strGrpCulture" xml:space="preserve">
     <value>यूआई और डेटा प्रारूप</value>
   </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>एफएफटी अंक</value>
+  </data>
   <data name="strLblData" xml:space="preserve">
     <value>डेटा-फ़ाइल पथ</value>
   </data>
@@ -467,6 +470,12 @@
   <data name="strRadPoints" xml:space="preserve">
     <value>डेटा अंक</value>
   </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>नीचे घूमो</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>बढ़ाना</value>
+  </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>सेकंड</value>
   </data>
@@ -570,5 +579,8 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>उपयोगकर्ता इंटरफ़ेस भाषा</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>शैनन / आदर्श</value>
   </data>
 </root>

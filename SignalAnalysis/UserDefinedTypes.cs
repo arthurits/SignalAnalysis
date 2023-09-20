@@ -2,7 +2,7 @@
 
 public class SignalStats
 {
-    public SignalStats(double Max = 0, double Min = 0, double Avg = 0, double Var = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double IntegralValue = 0)
+    public SignalStats(double Max = 0, double Min = 0, double Avg = 0, double Var = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double ShannonIdeal = 0, double IntegralValue = 0)
     {
         Maximum = Max;
         Minimum = Min;
@@ -15,6 +15,7 @@ public class SignalStats
         ShannonEntropy = ShannEn;
         EntropyBit = BitEn;
         IdealEntropy = IdealEn;
+        this.ShannonIdeal = ShannonIdeal;
         Integral = IntegralValue;
     }
 
@@ -31,9 +32,22 @@ public class SignalStats
     public double FractalVariance { get; set; } = 0;
     public double ApproximateEntropy { get; set; } = 0;
     public double SampleEntropy { get; set; } = 0;
-    public double ShannonEntropy { get; set; } = 0; // The Shannon entropy value of a message
-    public double EntropyBit { get; set; } = 0;     // The entropy bit value of a message
-    public double IdealEntropy { get; set; } = 0;   // The ideal entropy value of a message
+    /// <summary>
+    /// // The Shannon entropy (in bits per symbol) of the data
+    /// </summary>
+    public double ShannonEntropy { get; set; } = 0;
+    /// <summary>
+    /// The minimum number of bits to encode the data
+    /// </summary>
+    public double EntropyBit { get; set; } = 0;
+    /// <summary>
+    /// The Shannon entropy assuming all data symbols are different. This is, in fact, the maximum Shannon entropy
+    /// </summary>
+    public double IdealEntropy { get; set; } = 0;
+    /// <summary>
+    /// The ratio Shannon entropy / Ideal entropy
+    /// </summary>
+    public double ShannonIdeal { get; set; } = 0;
 
     public double[] Derivative { get; set; } = Array.Empty<double>();
 
@@ -79,7 +93,8 @@ public class SignalStats
             $"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{ShannonEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{EntropyBit.ToString("0.########", culture)}{Environment.NewLine}" +
-            $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}{Environment.NewLine}";
+            $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{ShannonIdeal.ToString("0.########", culture)}{Environment.NewLine}";
         }
         
         if (integral)

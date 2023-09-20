@@ -45,6 +45,11 @@ public class ClassSettings
     [JsonPropertyName("Show box plot")]
     public bool Boxplot { get; set; } = true;
     /// <summary>
+    /// <see langword="True"/> to add 0 value points in order to round up the signal to the next power of 2 in FFT computation
+    /// </summary>
+    [JsonPropertyName("FFT round up power 2")]
+    public bool FFTRoundUp { get; set; } = true;
+    /// <summary>
     /// True if the power spectra is to be computed
     /// </summary>
     [JsonPropertyName("Compute power spectra")]
