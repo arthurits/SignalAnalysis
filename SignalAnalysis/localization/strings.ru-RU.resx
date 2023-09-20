@@ -769,6 +769,7 @@
   </data>
   <data name="strStatusTipIntegration" xml:space="preserve">
     <value>Численная интеграция</value>
+  </data>
   <data name="strFileHeader38" xml:space="preserve">
     <value>Шеннона / Идеальная</value>
   </data>
