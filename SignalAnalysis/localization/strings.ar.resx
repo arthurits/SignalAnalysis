@@ -598,4 +598,7 @@
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>لغة واجهة المستخدم</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>شانون / شانون</value>
+  </data>
 </root>

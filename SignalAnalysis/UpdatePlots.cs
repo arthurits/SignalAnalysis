@@ -263,7 +263,7 @@ partial class FrmMain
     private void ComputeEntropy(double[] signal)
     {
         (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
-        (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy) = Complexity.ShannonEntropy(signal);
+        (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy, Results.ShannonIdeal) = Complexity.ShannonEntropy(signal);
     }
 
     /// <summary>

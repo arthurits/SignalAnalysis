@@ -580,4 +580,7 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Lingua dell'interfaccia utente</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideale</value>
+  </data>
 </root>

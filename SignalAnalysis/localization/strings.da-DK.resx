@@ -582,4 +582,7 @@ er blevet stoppet.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Brugergrænsefladens sprog</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideel</value>
+  </data>
 </root>

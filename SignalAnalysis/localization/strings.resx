@@ -708,4 +708,7 @@ dimension has been stopped.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>User interface language</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideal</value>
+  </data>
 </root>

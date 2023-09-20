@@ -684,4 +684,7 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Idioma de la interfaz de usuario</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideal</value>
+  </data>
 </root>

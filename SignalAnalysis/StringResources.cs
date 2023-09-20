@@ -55,6 +55,7 @@ public static class StringResources
     public static string FileHeader35 => StringRM.GetString("strFileHeader35", Culture) ?? "Quartile 1 (25%)";
     public static string FileHeader36 => StringRM.GetString("strFileHeader36", Culture) ?? "Quartile 2 (50%)";
     public static string FileHeader37 => StringRM.GetString("strFileHeader37", Culture) ?? "Quartile 3 (75%)";
+    public static string FileHeader38 => StringRM.GetString("strFileHeader38", Culture) ?? "Shannon / Ideal";
 
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 

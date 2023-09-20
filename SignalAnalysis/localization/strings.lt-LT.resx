@@ -580,4 +580,7 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Vartotojo sąsajos kalba</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Šenono / Ideali</value>
+  </data>
 </root>
