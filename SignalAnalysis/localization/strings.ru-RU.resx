@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -155,16 +155,16 @@
     <value>&amp;Настройки</value>
   </data>
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>Compute the absolute-value integral?</value>
+    <value>Вычислить интеграл абсолютного значения?</value>
   </data>
   <data name="strChkBoxplot" xml:space="preserve">
     <value>Ящик с усами</value>
   </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>Compute numerical differentiation?</value>
+    <value>Вычислить численное дифференцирование?</value>
   </data>
   <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>Compute numerical integration?</value>
+    <value>Вычислить численное интегрирование?</value>
   </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Показать перекрестие графиков</value>
@@ -179,10 +179,10 @@
     <value>Энтропия (приблизительно &amp;&amp; выборка)</value>
   </data>
   <data name="strChkExportDerivative" xml:space="preserve">
-    <value>Export derivative data?</value>
+    <value>Экспортировать производные данные?</value>
   </data>
   <data name="strChkExportIntegration" xml:space="preserve">
-    <value>Export numerical integration?</value>
+    <value>Экспортировать численные интегрирования?</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Мощность (дБ)</value>
@@ -295,13 +295,13 @@
     <value>Производная</value>
   </data>
   <data name="strFileHeader29" xml:space="preserve">
-    <value>Differentiation algorithm</value>
+    <value>Дифференцирующий алгоритм</value>
   </data>
   <data name="strFileHeader30" xml:space="preserve">
-    <value>Integration algorithm</value>
+    <value>Интеграционный алгоритм</value>
   </data>
   <data name="strFileHeader31" xml:space="preserve">
-    <value>Integral value</value>
+    <value>Интегральное значение</value>
   </data>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Дисперсия</value>
@@ -313,13 +313,13 @@
     <value>Box plot upper limit</value>
   </data>
   <data name="strFileHeader35" xml:space="preserve">
-    <value>Quartile 1 (25%)</value>
+    <value>Квартиль 1 (25%)</value>
   </data>
   <data name="strFileHeader36" xml:space="preserve">
-    <value>Quartile 2 (50%)</value>
+    <value>Квартиль 2 (50%)</value>
   </data>
   <data name="strFileHeader37" xml:space="preserve">
-    <value>Quartile 3 (75%)</value>
+    <value>Квартиль 3 (75%)</value>
   </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
@@ -340,7 +340,7 @@
     <value> - </value>
   </data>
   <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>Finite difference algorithms</value>
+    <value>Алгоритмы конечных разностей</value>
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>абсцисса ось</value>
@@ -364,7 +364,7 @@
     <value>Конец индекса массива (макс. {0})</value>
   </data>
   <data name="strLblIntegration" xml:space="preserve">
-    <value>Quadrature algorithms</value>
+    <value>Квадратурные алгоритмы</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Выберите серию</value>
@@ -376,22 +376,22 @@
     <value>Окно</value>
   </data>
   <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>Unexpected error while computing numerical differentiation.
+    <value>Неожиданная ошибка при вычислении численного дифференцирования.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
-    <value>Differentiation error</value>
+    <value>Ошибка дифференцирования</value>
   </data>
   <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>Unexpected error while computing descriptive statistics values.
+    <value>Неожиданная ошибка при вычислении значений описательной статистики.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>Unexpected error while computing entropy values.
+    <value>Неожиданная ошибка при вычислении значений энтропии.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>Entropy error</value>
+    <value>Ошибка энтропии</value>
   </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
     <value>Непредвиденная ошибка при вычислении БПФ.
@@ -401,11 +401,11 @@
     <value>ошибка БПФ</value>
   </data>
   <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>Unexpected error while computing the fractal dimension.
+    <value>Неожиданная ошибка при вычислении фрактальной размерности.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value>Fractal error</value>
+    <value>Фрактальная ошибка</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>При открытии файла данных произошла непредвиденная ошибка.
@@ -449,16 +449,16 @@
     <value>Данные сохранены</value>
   </data>
   <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
-    <value>Numerical differentiation has been stopped.</value>
+    <value>Численное дифференцирование было остановлено.</value>
   </data>
   <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </data>
   <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value>Entropy computation has been stopped.</value>
+    <value>Вычисление энтропии было остановлено.</value>
   </data>
   <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Прекращен расчет фрактальной размерности
@@ -611,7 +611,7 @@
     <value>Показать режим перекрестия графика</value>
   </data>
   <data name="strStatusTipDerivative" xml:space="preserve">
-    <value>Numerical differentiation</value>
+    <value>Численное дифференцирование</value>
   </data>
   <data name="strStatusTipEntropy" xml:space="preserve">
     <value>Рассчитать кумулятивную фрактальную размерность (интенсивность процессора)</value>
@@ -620,7 +620,7 @@
     <value>Вычислить кумулятивную фрактальную размерность (интенсивность ЦП)</value>
   </data>
   <data name="strStatusTipIntegration" xml:space="preserve">
-    <value>Numerical integration</value>
+    <value>Численная интеграция</value>
   </data>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Постройте либо спектр мощности FFT (дБ), либо величину</value>
@@ -675,100 +675,6 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Язык пользовательского интерфейса</value>
-  </data>
-  <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>Вычислить интеграл абсолютного значения?</value>
-  </data>
-  <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>Вычислить численное дифференцирование?</value>
-  </data>
-  <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>Вычислить численное интегрирование?</value>
-  </data>
-  <data name="strChkExportDerivative" xml:space="preserve">
-    <value>Экспортировать производные данные?</value>
-  </data>
-  <data name="strChkExportIntegration" xml:space="preserve">
-    <value>Экспортировать численные интегрирования?</value>
-  </data>
-  <data name="strDifferentiationAlgorithms" xml:space="preserve">
-    <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
-  </data>
-  <data name="strFileHeader29" xml:space="preserve">
-    <value>Дифференцирующий алгоритм</value>
-  </data>
-  <data name="strFileHeader30" xml:space="preserve">
-    <value>Интеграционный алгоритм</value>
-  </data>
-  <data name="strFileHeader31" xml:space="preserve">
-    <value>Интегральное значение</value>
-  </data>
-  <data name="strFileHeader33" xml:space="preserve">
-    <value>Box plot lower limit</value>
-  </data>
-  <data name="strFileHeader34" xml:space="preserve">
-    <value>Box plot upper limit</value>
-  </data>
-  <data name="strFileHeader35" xml:space="preserve">
-    <value>Квартиль 1 (25%)</value>
-  </data>
-  <data name="strFileHeader36" xml:space="preserve">
-    <value>Квартиль 2 (50%)</value>
-  </data>
-  <data name="strFileHeader37" xml:space="preserve">
-    <value>Квартиль 3 (75%)</value>
-  </data>
-  <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>Алгоритмы конечных разностей</value>
-  </data>
-  <data name="strIntegrationAlgorithms" xml:space="preserve">
-    <value>Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method</value>
-  </data>
-  <data name="strLblIntegration" xml:space="preserve">
-    <value>Квадратурные алгоритмы</value>
-  </data>
-  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении численного дифференцирования.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
-    <value>Ошибка дифференцирования</value>
-  </data>
-  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении значений описательной статистики.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении значений энтропии.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>Ошибка энтропии</value>
-  </data>
-  <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении фрактальной размерности.
-{0}</value>
-  </data>
-  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value>Фрактальная ошибка</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
-    <value>Отменить</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value>Вычисление энтропии было остановлено.</value>
-  </data>
-  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
-    <value>Отменить</value>
-  </data>
-  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
-    <value>Численное дифференцирование было остановлено.</value>
-  </data>
-  <data name="strStatusTipDerivative" xml:space="preserve">
-    <value>Численное дифференцирование</value>
-  </data>
-  <data name="strStatusTipIntegration" xml:space="preserve">
-    <value>Численная интеграция</value>
   </data>
   <data name="strFileHeader38" xml:space="preserve">
     <value>Шеннона / Идеальная</value>
