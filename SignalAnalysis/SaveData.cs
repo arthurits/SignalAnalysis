@@ -63,6 +63,7 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{Results.ShannonEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{Results.EntropyBit.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{Results.IdealEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{Results.ShannonIdeal.ToString(_settings.AppCulture)}");
             if (_settings.ExportDerivative && _settings.ComputeDerivative)
                 sw.WriteLine($"{StringResources.FileHeader29}{StringResources.FileHeaderColon}{StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
             else
@@ -238,6 +239,7 @@ partial class FrmMain
             bw.Write(Results.ShannonEntropy);
             bw.Write(Results.EntropyBit);
             bw.Write(Results.IdealEntropy);
+            bw.Write(Results.ShannonIdeal);
 
             bw.Write($"{StringResources.FileHeader21}\t{SeriesName}");
 

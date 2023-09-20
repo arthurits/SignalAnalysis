@@ -677,4 +677,7 @@
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Язык пользовательского интерфейса</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Шеннона / Идеальная</value>
+  </data>
 </root>

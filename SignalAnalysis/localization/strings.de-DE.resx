@@ -658,4 +658,7 @@ wurde gestoppt.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Sprache der Oberfläche</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideale</value>
+  </data>
 </root>

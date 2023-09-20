@@ -665,4 +665,7 @@ boyut durdurulmuştur.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Kullanıcı arayüzü dili</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideal</value>
+  </data>
 </root>

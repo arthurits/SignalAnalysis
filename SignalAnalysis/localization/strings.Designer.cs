@@ -655,6 +655,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shannon / Ideal.
+        /// </summary>
+        internal static string strFileHeader38 {
+            get {
+                return ResourceManager.GetString("strFileHeader38", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to : .
         /// </summary>
         internal static string strFileHeaderColon {

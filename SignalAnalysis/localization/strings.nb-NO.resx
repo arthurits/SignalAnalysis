@@ -583,4 +583,7 @@ har stoppet.</value>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Brukergrensesnittspråk</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideell</value>
+  </data>
 </root>

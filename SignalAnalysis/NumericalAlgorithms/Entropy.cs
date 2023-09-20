@@ -76,15 +76,16 @@ public static class Complexity
     }
 
     /// <summary>
-    /// Computes the Shannon entropy, the entropy bit, and the ideal entropy for a vector of numeric values
+    /// Computes the Shannon entropy, the entropy bit, the ideal entropy, and the ratio Shannon/ideal for a vector of numeric values
     /// </summary>
     /// <param name="data">Numeric values vector</param>
-    /// <returns>The Shannon entropy value (bits per symbol), the entropy bit (min. number of bits needed to encode the vector), and the ideal entropy</returns>
-    public static (double Entropy, double EntropyBit, double IdealEntropy) ShannonEntropy<T>(IEnumerable<T> data)
+    /// <returns>The Shannon entropy value (bits per symbol), the entropy bit (min. number of bits needed to encode the vector), he ideal entropy, and the ratio Shannon/Ideal</returns>
+    public static (double Entropy, double EntropyBit, double IdealEntropy, double EntropyRatio) ShannonEntropy<T>(IEnumerable<T> data)
     {
         double entropy = 0;
         double entropyBit;
         double entropyIdeal;
+        double entropyRatio;
         double prob;
 
         // Convert into an enumerable of doubles.
@@ -123,7 +124,9 @@ public static class Complexity
         prob = 1.0 / nLength;
         entropyIdeal = -1.0 * nLength * prob * Math.Log2(prob);
 
-        return (entropy, entropyBit, entropyIdeal);
+        entropyRatio = entropy / entropyIdeal;
+
+        return (entropy, entropyBit, entropyIdeal, entropyRatio);
     }
 
     /// <summary>

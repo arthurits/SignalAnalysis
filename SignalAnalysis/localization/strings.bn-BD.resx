@@ -583,4 +583,7 @@
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>ইউজার ইন্টারফেস ভাষা</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>শ্যানন / আদর্শ</value>
+  </data>
 </root>
