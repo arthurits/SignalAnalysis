@@ -126,7 +126,11 @@
     <comment/>
   </data>
   <data name="strAboutDescription" xml:space="preserve">
-    <value>Инструмент анализа с базовой описательной статистикой, БПФ (быстрое преобразование Фурье), фрактальной размерностью, дифференцированием, интегрированием и энтропией для сигналов (файлы elux, а также общие файлы).Никакое коммерческое использование не допускается. Свяжитесь с автором по любым вопросам.Если вы найдете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
+    <value>Инструмент анализа с базовой описательной статистикой, БПФ (быстрое преобразование Фурье), фрактальной размерностью, дифференцированием, интегрированием и энтропией для сигналов (файлы elux, а также общие файлы).
+
+Никакое коммерческое использование не допускается. Свяжитесь с автором по любым вопросам.
+
+Если вы найдете это программное обеспечение полезным, пожалуйста, поддержите его!</value>
     <comment/>
   </data>
   <data name="strAboutProductName" xml:space="preserve">
@@ -186,7 +190,8 @@
     <comment/>
   </data>
   <data name="strDlgReset" xml:space="preserve">
-    <value>Вы хотите сбросить все поляк их значениям по умолчанию?</value>
+    <value>Вы хотите сбросить все поляк
+их значениям по умолчанию?</value>
     <comment/>
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
@@ -194,7 +199,11 @@
     <comment/>
   </data>
   <data name="strErrorDeserialize" xml:space="preserve">
-    <value>Ошибка при загрузке файла настроек.{0}Вместо этого будут использоваться значения по умолчанию.</value>
+    <value>Ошибка при загрузке файла настроек.
+
+{0}
+
+Вместо этого будут использоваться значения по умолчанию.</value>
     <comment/>
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
@@ -378,7 +387,8 @@
     <comment/>
   </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
-    <value>Непредвиденная ошибка при вычислении БПФ.{0}</value>
+    <value>Непредвиденная ошибка при вычислении БПФ.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
@@ -386,7 +396,9 @@
     <comment/>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
-    <value>При открытии файла данных произошла непредвиденная ошибка.Повторите попытку позже или обратитесь к инженеру-программисту.{0}</value>
+    <value>При открытии файла данных произошла непредвиденная ошибка.
+Повторите попытку позже или обратитесь к инженеру-программисту.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
@@ -394,7 +406,9 @@
     <comment/>
   </data>
   <data name="strMsgBoxErrorSaveData" xml:space="preserve">
-    <value>При сохранении файла данных произошла непредвиденная ошибка.Повторите попытку позже или обратитесь к инженеру-программисту.{0}</value>
+    <value>При сохранении файла данных произошла непредвиденная ошибка.
+Повторите попытку позже или обратитесь к инженеру-программисту.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
@@ -410,7 +424,8 @@
     <comment/>
   </data>
   <data name="strMsgBoxInitArray" xml:space="preserve">
-    <value>Непредвиденная ошибка в 'InitializeDataArrays'.{0}</value>
+    <value>Непредвиденная ошибка в 'InitializeDataArrays'.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
@@ -434,7 +449,8 @@
     <comment/>
   </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
-    <value>Прекращен расчет фрактальной размерностиХаусдорфа-Безиковича.</value>
+    <value>Прекращен расчет фрактальной размерности
+Хаусдорфа-Безиковича.</value>
     <comment/>
   </data>
   <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
@@ -578,11 +594,13 @@
     <comment/>
   </data>
   <data name="strReadDataError" xml:space="preserve">
-    <value>Невозможно прочитать данные из файла.{0}</value>
+    <value>Невозможно прочитать данные из файла.
+{0}</value>
     <comment/>
   </data>
   <data name="strReadDataErrorCulture" xml:space="preserve">
-    <value>Недопустимое имя строки идентификатора культуры.{0}</value>
+    <value>Недопустимое имя строки идентификатора культуры.
+{0}</value>
     <comment/>
   </data>
   <data name="strReadDataErrorCultureTitle" xml:space="preserve">
@@ -770,7 +788,8 @@
     <comment/>
   </data>
   <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении численного дифференцирования.{0}</value>
+    <value>Неожиданная ошибка при вычислении численного дифференцирования.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
@@ -778,11 +797,13 @@
     <comment/>
   </data>
   <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении значений описательной статистики.{0}</value>
+    <value>Неожиданная ошибка при вычислении значений описательной статистики.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении значений энтропии.{0}</value>
+    <value>Неожиданная ошибка при вычислении значений энтропии.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
@@ -790,7 +811,8 @@
     <comment/>
   </data>
   <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>Неожиданная ошибка при вычислении фрактальной размерности.{0}</value>
+    <value>Неожиданная ошибка при вычислении фрактальной размерности.
+{0}</value>
     <comment/>
   </data>
   <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
