@@ -321,6 +321,9 @@
   <data name="strFileHeader37" xml:space="preserve">
     <value>Квартиль 3 (75%)</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Шеннона / Идеальная</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -675,8 +678,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Язык пользовательского интерфейса</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>Шеннона / Идеальная</value>
   </data>
 </root>

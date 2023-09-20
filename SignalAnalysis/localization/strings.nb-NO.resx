@@ -279,6 +279,9 @@ Standardverdier vil bli benyttet i stedet.</value>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Varians</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideell</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -582,8 +585,5 @@ har stoppet.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Brukergrensesnittspråk</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>Shannon / Ideell</value>
   </data>
 </root>

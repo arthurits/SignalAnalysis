@@ -321,6 +321,9 @@ Default values will be used instead.</value>
   <data name="strFileHeader37" xml:space="preserve">
     <value>Quartile 3 (75%)</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideal</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -679,8 +682,5 @@ dimension has been stopped.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>User interface language</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>Shannon / Ideal</value>
   </data>
 </root>

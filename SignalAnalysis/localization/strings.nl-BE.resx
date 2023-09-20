@@ -279,6 +279,9 @@ In plaats daarvan worden standaardwaarden gebruikt.</value>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Variantie</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideale</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -581,8 +584,5 @@ dimensie is gestopt.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Taal gebruikersinterface</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>Shannon / Ideale</value>
   </data>
 </root>

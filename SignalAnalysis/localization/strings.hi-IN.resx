@@ -278,6 +278,9 @@
   <data name="strFileHeader32" xml:space="preserve">
     <value>विचरण</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>शैनन / आदर्श</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -579,8 +582,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>उपयोगकर्ता इंटरफ़ेस भाषा</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>शैनन / आदर्श</value>
   </data>
 </root>

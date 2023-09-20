@@ -306,6 +306,9 @@ Bunun yerine varsayılan değerler kullanılacaktır.</value>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Varyans</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideal</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -664,8 +667,5 @@ boyut durdurulmuştur.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Kullanıcı arayüzü dili</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>Shannon / Ideal</value>
   </data>
 </root>

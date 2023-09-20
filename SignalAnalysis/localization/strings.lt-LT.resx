@@ -279,6 +279,9 @@ Vietoj jų bus naudojamos numatytos reikšmės.</value>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Dispersija</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Šenono / Ideali</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -579,8 +582,5 @@ skaičiavimas buvo sustabdytas.</value>
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Vartotojo sąsajos kalba</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>Šenono / Ideali</value>
   </data>
 </root>

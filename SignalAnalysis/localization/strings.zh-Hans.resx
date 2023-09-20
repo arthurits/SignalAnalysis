@@ -305,6 +305,9 @@
   <data name="strFileHeader32" xml:space="preserve">
     <value>方差</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>香农 / 理想</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -661,8 +664,5 @@
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>用户界面语言</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>香农 / 理想</value>
   </data>
 </root>

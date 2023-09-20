@@ -278,6 +278,9 @@ Verranno utilizzati i valori di default.</value>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Varianza</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideale</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
@@ -579,8 +582,5 @@ Per favore riprova più tardi oppure contatta l'amministratore.
   </data>
   <data name="strToolTipUILanguage" xml:space="preserve">
     <value>Lingua dell'interfaccia utente</value>
-  </data>
-  <data name="strFileHeader38" xml:space="preserve">
-    <value>Shannon / Ideale</value>
   </data>
 </root>
