@@ -197,12 +197,12 @@ public static class FractalDimension
             {
                 if (!_recompute)
                 {
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow(1 / (i + 1 - 1), 2));
+                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
                 }
                 else
                 {
                     _segLength[j] = (yValues[j] - yValues[j - 1]) / _yRange;
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow(1 / (i + 1 - 1), 2));
+                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
                 }
             }
 
@@ -290,7 +290,7 @@ public static class FractalDimension
             
             if (i > 0)
             {
-                lengthPartial = System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + System.Math.Pow(1 / (nPoints - 1), 2));
+                lengthPartial = System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + System.Math.Pow((double)1 / (nPoints - 1), 2));
                 lengthTotal += lengthPartial;
 
                 // Compute variance incrementally
