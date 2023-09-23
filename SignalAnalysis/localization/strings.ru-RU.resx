@@ -155,16 +155,16 @@
     <value>&amp;Настройки</value>
   </data>
   <data name="strChkAbsoluteIntegral" xml:space="preserve">
-    <value>Compute the absolute-value integral?</value>
+    <value>Вычислить интеграл абсолютного значения?</value>
   </data>
   <data name="strChkBoxplot" xml:space="preserve">
     <value>Ящик с усами</value>
   </data>
   <data name="strChkComputeDerivative" xml:space="preserve">
-    <value>Compute numerical differentiation?</value>
+    <value>Вычислить численное дифференцирование?</value>
   </data>
   <data name="strChkComputeIntegration" xml:space="preserve">
-    <value>Compute numerical integration?</value>
+    <value>Вычислить численное интегрирование?</value>
   </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Показать перекрестие графиков</value>
@@ -179,10 +179,10 @@
     <value>Энтропия (приблизительно &amp;&amp; выборка)</value>
   </data>
   <data name="strChkExportDerivative" xml:space="preserve">
-    <value>Export derivative data?</value>
+    <value>Экспортировать производные данные?</value>
   </data>
   <data name="strChkExportIntegration" xml:space="preserve">
-    <value>Export numerical integration?</value>
+    <value>Экспортировать численные интегрирования?</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Мощность (дБ)</value>
@@ -191,8 +191,8 @@
     <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
   </data>
   <data name="strDlgReset" xml:space="preserve">
-    <value>Вы хотите сбросить все поля
-к их значениям по умолчанию?</value>
+    <value>Вы хотите сбросить все поляк
+их значениям по умолчанию?</value>
   </data>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>Сбросить настройки?</value>
@@ -295,13 +295,13 @@
     <value>Производная</value>
   </data>
   <data name="strFileHeader29" xml:space="preserve">
-    <value>Differentiation algorithm</value>
+    <value>Дифференцирующий алгоритм</value>
   </data>
   <data name="strFileHeader30" xml:space="preserve">
-    <value>Integration algorithm</value>
+    <value>Интеграционный алгоритм</value>
   </data>
   <data name="strFileHeader31" xml:space="preserve">
-    <value>Integral value</value>
+    <value>Интегральное значение</value>
   </data>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Дисперсия</value>
@@ -313,13 +313,16 @@
     <value>Box plot upper limit</value>
   </data>
   <data name="strFileHeader35" xml:space="preserve">
-    <value>Quartile 1 (25%)</value>
+    <value>Квартиль 1 (25%)</value>
   </data>
   <data name="strFileHeader36" xml:space="preserve">
-    <value>Quartile 2 (50%)</value>
+    <value>Квартиль 2 (50%)</value>
   </data>
   <data name="strFileHeader37" xml:space="preserve">
-    <value>Quartile 3 (75%)</value>
+    <value>Квартиль 3 (75%)</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Шеннона / Идеальная</value>
   </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
@@ -340,7 +343,7 @@
     <value> - </value>
   </data>
   <data name="strGrpAlgorithms" xml:space="preserve">
-    <value>Finite difference algorithms</value>
+    <value>Алгоритмы конечных разностей</value>
   </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>абсцисса ось</value>
@@ -364,7 +367,7 @@
     <value>Конец индекса массива (макс. {0})</value>
   </data>
   <data name="strLblIntegration" xml:space="preserve">
-    <value>Quadrature algorithms</value>
+    <value>Квадратурные алгоритмы</value>
   </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Выберите серию</value>
@@ -376,22 +379,22 @@
     <value>Окно</value>
   </data>
   <data name="strMsgBoxErrorDerivative" xml:space="preserve">
-    <value>Unexpected error while computing numerical differentiation.
+    <value>Неожиданная ошибка при вычислении численного дифференцирования.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
-    <value>Differentiation error</value>
+    <value>Ошибка дифференцирования</value>
   </data>
   <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
-    <value>Unexpected error while computing descriptive statistics values.
+    <value>Неожиданная ошибка при вычислении значений описательной статистики.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorEntropy" xml:space="preserve">
-    <value>Unexpected error while computing entropy values.
+    <value>Неожиданная ошибка при вычислении значений энтропии.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
-    <value>Entropy error</value>
+    <value>Ошибка энтропии</value>
   </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
     <value>Непредвиденная ошибка при вычислении БПФ.
@@ -401,11 +404,11 @@
     <value>ошибка БПФ</value>
   </data>
   <data name="strMsgBoxErrorFractal" xml:space="preserve">
-    <value>Unexpected error while computing the fractal dimension.
+    <value>Неожиданная ошибка при вычислении фрактальной размерности.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
-    <value>Fractal error</value>
+    <value>Фрактальная ошибка</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>При открытии файла данных произошла непредвиденная ошибка.
@@ -424,8 +427,7 @@
     <value>Ошибка сохранения данных</value>
   </data>
   <data name="strMsgBoxExit" xml:space="preserve">
-    <value>Вы уверены, что хотите выйти
-из приложения?</value>
+    <value>Вы уверены, что хотите выйтииз приложения?</value>
   </data>
   <data name="strMsgBoxExitTitle" xml:space="preserve">
     <value>Выход?</value>
@@ -450,16 +452,16 @@
     <value>Данные сохранены</value>
   </data>
   <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
-    <value>Numerical differentiation has been stopped.</value>
+    <value>Численное дифференцирование было остановлено.</value>
   </data>
   <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </data>
   <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
-    <value>Entropy computation has been stopped.</value>
+    <value>Вычисление энтропии было остановлено.</value>
   </data>
   <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Отменить</value>
   </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Прекращен расчет фрактальной размерности
@@ -612,7 +614,7 @@
     <value>Показать режим перекрестия графика</value>
   </data>
   <data name="strStatusTipDerivative" xml:space="preserve">
-    <value>Numerical differentiation</value>
+    <value>Численное дифференцирование</value>
   </data>
   <data name="strStatusTipEntropy" xml:space="preserve">
     <value>Рассчитать кумулятивную фрактальную размерность (интенсивность процессора)</value>
@@ -621,7 +623,7 @@
     <value>Вычислить кумулятивную фрактальную размерность (интенсивность ЦП)</value>
   </data>
   <data name="strStatusTipIntegration" xml:space="preserve">
-    <value>Numerical integration</value>
+    <value>Численная интеграция</value>
   </data>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Постройте либо спектр мощности FFT (дБ), либо величину</value>

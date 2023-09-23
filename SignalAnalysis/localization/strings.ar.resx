@@ -294,6 +294,9 @@
   <data name="strFileHeader32" xml:space="preserve">
     <value>التباين</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>شانون / شانون</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

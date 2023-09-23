@@ -509,6 +509,15 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader16));
             results.IdealEntropy = readValue;
 
+            strLine = sr.ReadLine();    // Ideal entropy
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader38));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader38", fileCulture) ?? "Shannon / Ideal"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader38));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader38));
+            results.ShannonIdeal = readValue;
+
             strLine = sr.ReadLine();    // Differentiation
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader29));
@@ -660,6 +669,7 @@ partial class FrmMain
             results.ShannonEntropy = br.ReadDouble();
             results.EntropyBit = br.ReadDouble();
             results.IdealEntropy = br.ReadDouble();
+            results.ShannonIdeal = br.ReadDouble();
 
             strLine = br.ReadString();      // Column header names
             if (strLine is null)

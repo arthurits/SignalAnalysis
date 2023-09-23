@@ -321,6 +321,9 @@ Se utilizarán los valores por defecto.</value>
   <data name="strFileHeader37" xml:space="preserve">
     <value>Cuartil 3 (75%)</value>
   </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideal</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>
