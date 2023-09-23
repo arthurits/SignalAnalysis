@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace FftSharp;
 
@@ -71,6 +71,37 @@ public static class FFT
         System.Numerics.Complex[] real = new System.Numerics.Complex[samples.Length / 2 + 1];
         Array.Copy(buffer, 0, real, 0, real.Length);
         return real;
+    }
+
+    /// <summary>
+    /// Calculate IFFT and return just the real component of the spectrum
+    /// </summary>
+    public static double[] InverseReal(System.Numerics.Complex[] spectrum)
+    {
+        int spectrumSize = spectrum.Length;
+        int windowSize = (spectrumSize - 1) * 2;
+
+        if (!FftOperations.IsPowerOfTwo(windowSize))
+            throw new ArgumentException($"{nameof(spectrum)} length must be a power of two plus 1");
+
+        System.Numerics.Complex[] buffer = new System.Numerics.Complex[windowSize];
+
+        for (int i = 0; i < spectrumSize; i++)
+            buffer[i] = spectrum[i];
+
+        for (int i = spectrumSize; i < windowSize; i++)
+        {
+            int iMirrored = spectrumSize - (i - (spectrumSize - 2));
+            buffer[i] = System.Numerics.Complex.Conjugate(spectrum[iMirrored]);
+        }
+
+        Inverse(buffer);
+
+        double[] result = new double[windowSize];
+        for (int i = 0; i < windowSize; i++)
+            result[i] = buffer[i].Real;
+
+        return result;
     }
 
     /// <summary>
@@ -184,5 +215,19 @@ public static class FFT
             output[i] = 20 * Math.Log10(output[i]);
 
         return output;
+    }
+
+    /// <summary>
+    /// Return a copy of the given values with the zero frequency component shifted to the center.
+    /// </summary>
+    public static double[] FftShift(double[] values)
+    {
+        int shiftBy = (values.Length + 1) / 2;
+
+        double[] values2 = new double[values.Length];
+        for (int i = 0; i < values.Length; i++)
+            values2[i] = values[(i + shiftBy) % values.Length];
+
+        return values2;
     }
 }
