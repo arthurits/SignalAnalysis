@@ -34,15 +34,16 @@ public static class FractalDimension
         {
             DimensionCumulative = new double[yValues.Length];
             // Compute all but the last point
-            for (int i = 0; i < yValues.Length - 1; i++)
+            Parallel.For(0, yValues.Length, i =>
             {
-                (DimensionCumulative[i], _) = ComputeH(xValues, yValues, i);
+                (DimensionCumulative[i], VarianceH) = ComputeH(xValues, yValues, i);
                 if (ct.IsCancellationRequested)
                     throw new OperationCanceledException("CancelFractal", ct);
-            }
-            // Finally, compute the last point and get both the dimension and the variance
-            (DimensionSingle, VarianceH) = ComputeH(xValues, yValues, yValues.Length - 1);
-            DimensionCumulative[^1] = DimensionSingle;
+            });
+            //// Finally, compute the last point and get both the dimension and the variance
+            //(DimensionSingle, VarianceH) = ComputeH(xValues, yValues, yValues.Length - 1);
+            //DimensionCumulative[^1] = DimensionSingle;
+            DimensionSingle = DimensionCumulative[^1];
         }
     }
 
@@ -56,41 +57,20 @@ public static class FractalDimension
 
             Stopwatch stopwatch = new();
             stopwatch.Start();
-            double[] DimensionCumulative1 = ComputeH(yValues);
-            stopwatch.Stop();
-            TimeSpan elapsed = stopwatch.Elapsed;
-            Debug.WriteLine($"Elapsed time - Optimized For loop: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
-            Debug.WriteLine($"Fractal dimension: {DimensionCumulative1[^1]}");
-            
-            //stopwatch.Restart();
-            //double[] DimensionCumulative2 = ComputeH_ParallelFor(yValues);
-            //stopwatch.Stop();
-            //elapsed = stopwatch.Elapsed;
-            //Debug.WriteLine($"Elapsed time - Double parallel for: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
-            //Debug.WriteLine($"Fractal dimension: {DimensionCumulative2[^1]}");
-            
-            stopwatch.Restart();
-            double[] DimensionCumulative3 = ComputeH_ParallelForEach(yValues);
-            stopwatch.Stop();
-            elapsed = stopwatch.Elapsed;
-            Debug.WriteLine($"Elapsed time - Parallel foreach & for: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
-            Debug.WriteLine($"Fractal dimension: {DimensionCumulative3[^1]}");
-            
-            stopwatch.Restart();
-            // Compute all but the last point
-            for (int i = 0; i < yValues.Length - 1; i++)
+            Parallel.For(0, yValues.Length, i =>
             {
-                (DimensionCumulative[i], _) = ComputeH(samplingFreq, yValues, i);
+                (DimensionCumulative[i], VarianceH) = ComputeH(samplingFreq, yValues, i);
                 if (ct.IsCancellationRequested)
                     throw new OperationCanceledException("CancelFractal", ct);
-            }
+            });
             stopwatch.Stop();
-            elapsed = stopwatch.Elapsed;
-            Debug.WriteLine($"Elapsed time - Algorithm 2: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
-            // Finally, compute the last point and get both the dimension and the variance
-            (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, yValues.Length - 1);
-            DimensionCumulative[^1] = DimensionSingle;
+            TimeSpan elapsed = stopwatch.Elapsed;
+            Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+            //// Finally, compute the last point and get both the dimension and the variance
+            //(DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, yValues.Length - 1);
+            //DimensionCumulative[^1] = DimensionSingle;
             Debug.WriteLine($"Fractal dimension: {DimensionCumulative[^1]}");
+            DimensionSingle = DimensionCumulative[^1];
         }
     }
 
