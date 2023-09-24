@@ -62,12 +62,12 @@ public static class FractalDimension
             Debug.WriteLine($"Elapsed time - Optimized For loop: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
             Debug.WriteLine($"Fractal dimension: {DimensionCumulative1[^1]}");
             
-            stopwatch.Restart();
-            double[] DimensionCumulative2 = ComputeH_ParallelFor(yValues);
-            stopwatch.Stop();
-            elapsed = stopwatch.Elapsed;
-            Debug.WriteLine($"Elapsed time - Double parallel for: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
-            Debug.WriteLine($"Fractal dimension: {DimensionCumulative2[^1]}");
+            //stopwatch.Restart();
+            //double[] DimensionCumulative2 = ComputeH_ParallelFor(yValues);
+            //stopwatch.Stop();
+            //elapsed = stopwatch.Elapsed;
+            //Debug.WriteLine($"Elapsed time - Double parallel for: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+            //Debug.WriteLine($"Fractal dimension: {DimensionCumulative2[^1]}");
             
             stopwatch.Restart();
             double[] DimensionCumulative3 = ComputeH_ParallelForEach(yValues);
@@ -259,7 +259,7 @@ public static class FractalDimension
             _segLength[i] = (yValues[i] - yValues[i - 1]) / _yRange;
 
             _normLength = 0;
-            Parallel.For(1, i + 1, j =>
+            for (int j = 1; j <= i; j++)
             {
                 if (!_recompute)
                 {
@@ -270,7 +270,7 @@ public static class FractalDimension
                     _segLength[j] = (yValues[j] - yValues[j - 1]) / _yRange;
                     _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
                 }
-            });
+            }
 
             _dimH[i] = 1 + System.Math.Log10(_normLength) / System.Math.Log10(2 * (i + 1 - 1));
         });
@@ -300,7 +300,7 @@ public static class FractalDimension
         _segLength[0] = 0;
         _dimH[0] = DimensionMinimum;
 
-        Parallel.ForEach(yValues.Skip(1), value =>
+        foreach (double value in yValues.Skip(1))
         {
             i++;
 
@@ -312,7 +312,7 @@ public static class FractalDimension
             _segLength[i] = (value - valueOld) / _yRange;
 
             _normLength = 0;
-            Parallel.For(1, i + 1, j =>
+            for (int j = 1; j <= i; j++)
             {
                 if (!_recompute)
                 {
@@ -323,10 +323,11 @@ public static class FractalDimension
                     _segLength[j] = (yValues[j] - yValues[j - 1]) / _yRange;
                     _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
                 }
-            });
+            }
 
             _dimH[i] = 1 + System.Math.Log10(_normLength) / System.Math.Log10(2 * (i + 1 - 1));
-        });
+            valueOld = value;
+        }
 
         return _dimH;
     }
