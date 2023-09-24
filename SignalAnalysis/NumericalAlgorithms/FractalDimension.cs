@@ -90,6 +90,7 @@ public static class FractalDimension
             // Finally, compute the last point and get both the dimension and the variance
             (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, yValues.Length - 1);
             DimensionCumulative[^1] = DimensionSingle;
+            Debug.WriteLine($"Fractal dimension: {DimensionCumulative[^1]}");
         }
     }
 
