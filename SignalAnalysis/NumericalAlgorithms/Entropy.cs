@@ -69,10 +69,72 @@ public static class Complexity
                 sum += Math.Log((double)AppEn_Cum / (double)AppEn_Cum1);
         }
 
+        //for (uint i = 0; i < upper; i++)
+        //{
+        //    AppEn_Cum = 0;
+        //    AppEn_Cum1 = 0;
+
+        //    Parallel.For(0, upper, j =>
+        //    {
+        //        (int a, int b, int c, int d) = EntropyInnerLoop(data, i, (uint)j, tolerance, ct, dim, fTol, std);
+        //        AppEn_Cum += a;
+        //        AppEn_Cum1 += b;
+        //        SampEn_Cum += c;
+        //        SampEn_Cum1 += d;
+        //    });
+
+        //    if (AppEn_Cum > 0 && AppEn_Cum1 > 0)
+        //        sum += Math.Log((double)AppEn_Cum / (double)AppEn_Cum1);
+        //}
+
         appEn = sum / (double)(data.Length - dim);
         sampEn = SampEn_Cum > 0 && SampEn_Cum1 > 0 ? Math.Log((double)SampEn_Cum / (double)SampEn_Cum1) : 0.0;
 
         return (appEn, sampEn);
+    }
+
+
+    /// <summary>
+    /// Computes the approximate and sample entropies of a physiological time-series signals (typically used to diagnose diseased states).
+    /// ApEn reflects the likelihood that similar patterns of observations will not be followed by additional similar observations. A time series containing many repetitive patterns has a relatively small ApEn; a less predictable process has a higher ApEn.
+    /// A smaller value of SampEn also indicates more self-similarity in data set or less noise.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="dim">Embedding dimension</param>
+    /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
+    /// <param name="std">Standard deviation of the population</param>
+    /// <returns>AppEn and SampEn</returns>
+    public static (int AppEn_Cum, int AppEn_Cum1, int SampEn_Cum, int SampEn_Cum1) EntropyInnerLoop(double[] data, uint i, uint j, double tolerance, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
+    {
+        int AppEn_Cum = 0, AppEn_Cum1 = 0;
+        int SampEn_Cum = 0, SampEn_Cum1 = 0;
+
+        bool isEqual = true;
+        //m - length series
+        for (uint k = 0; k < dim; k++)
+        {
+            if (Math.Abs(data[i + k] - data[j + k]) > tolerance)
+            {
+                isEqual = false;
+                break;
+            }
+            if (ct.IsCancellationRequested)
+                throw new OperationCanceledException("CancelEntropy", ct);
+        }
+        if (isEqual)
+        {
+            AppEn_Cum++;
+            SampEn_Cum++;
+        }
+
+        //m+1 - length series
+        if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
+        {
+            AppEn_Cum1++;
+            SampEn_Cum1++;
+        }
+
+        return (AppEn_Cum, AppEn_Cum1, SampEn_Cum, SampEn_Cum1);
     }
 
     /// <summary>
