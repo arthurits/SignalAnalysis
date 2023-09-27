@@ -53,7 +53,7 @@ public static class FractalDimension
         (double[] max, double[] min) = GetMaxMin(yValues);
 
         (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, max[^1], min[^1]);
-        if (!progress)
+        if (progress)
         {
             DimensionCumulative = new double[yValues.Length];
             
