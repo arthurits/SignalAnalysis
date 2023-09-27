@@ -19,10 +19,11 @@ partial class FrmMain
     /// <param name="progressive"><see langword="True"/> if the progressive/cumulative fractal dimension is computed for each point</param>
     /// <param name="entropy"><see langword="True"/> if the entropy values will be computed</param>
     /// <param name="fft"><see langword="True"/> if the FFT will be computed</param>
+    /// <param name="fftPlot"><see langword="True"/> if the FFT plot should update both the data points and the ordinate axis</param>
     /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, <see langword="false"/> if the amplitude is plotted instead</param>
     /// <param name="fftRoundUp"><see langword="True"/> if data length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
     /// <returns></returns>
-    private async Task ComputeAsync(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool powerSpectra = false, bool fftRoundUp = true)
+    private async Task ComputeAsync(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -117,8 +118,9 @@ partial class FrmMain
         {
             if (window is not null) PlotKernel(window, signalClipped.Length);
             if (signalWindowed.Length > 0) PlotWindowedSignal(signalWindowed);
-            PlotFFT(powerSpectra ? Results.FFTpower : Results.FFTmagnitude);
         }
+        if (fftPlot)
+            PlotFFT(powerSpectra ? Results.FFTpower : Results.FFTmagnitude);
 
         // Show text results
         //if (stats || fractal || entropy || integral)
@@ -267,7 +269,7 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Computes the FFT 
+    /// Computes the FFT: both the power and the magnitude data along with the frequency scale
     /// </summary>
     /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
     /// <param name="roundUp"><see langword="True"/> if <paramref name="signal"/> length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
