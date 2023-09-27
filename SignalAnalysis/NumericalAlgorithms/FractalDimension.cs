@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 
 namespace SignalAnalysis;
@@ -26,22 +27,24 @@ public static class FractalDimension
 
     public static void ComputeDimension(double[] xValues, double[] yValues, CancellationToken ct, bool progress = false)
     {
-        if (!progress)
-            (DimensionSingle, VarianceH) = ComputeH(xValues, yValues);
-        else
+        (double[] xMax, double[] xMin) = GetMaxMin(xValues);
+        (double[] yMax, double[] yMin) = GetMaxMin(yValues);
+
+        (DimensionSingle, VarianceH) = ComputeH(xValues, yValues, xMax[^1], xMin[^1], yMax[^1], yMin[^1]);
+        if (progress)
         {
             DimensionCumulative = new double[yValues.Length];
             // Compute all but the last point
-            Parallel.For(0, yValues.Length, i =>
+            Parallel.For(0, yValues.Length - 1, i =>
             {
-                (DimensionCumulative[i], VarianceH) = ComputeH(xValues, yValues, i);
+                (DimensionCumulative[i], VarianceH) = ComputeH(xValues, yValues, xMax[i], xMin[i], yMax[i], yMin[i], i);
                 if (ct.IsCancellationRequested)
                     throw new OperationCanceledException("CancelFractal", ct);
             });
             //// Finally, compute the last point and get both the dimension and the variance
-            //(DimensionSingle, VarianceH) = ComputeH(xValues, yValues, yValues.Length - 1);
-            //DimensionCumulative[^1] = DimensionSingle;
-            DimensionSingle = DimensionCumulative[^1];
+            //(DimensionSingle, VarianceH) = ComputeH(xValues, yValues, xMax[^1], xMin[^1], yMax[^1], yMin[^1], yValues.Length - 1);
+            DimensionCumulative[^1] = DimensionSingle;
+            //DimensionSingle = DimensionCumulative[^1];
         }
     }
 
@@ -49,9 +52,8 @@ public static class FractalDimension
     {
         (double[] max, double[] min) = GetMaxMin(yValues);
 
+        (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, max[^1], min[^1]);
         if (!progress)
-            (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, max[^1], min[^1]);
-        else
         {
             DimensionCumulative = new double[yValues.Length];
             
@@ -68,7 +70,7 @@ public static class FractalDimension
             TimeSpan elapsed = stopwatch.Elapsed;
             Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
             //// Finally, compute the last point and get both the dimension and the variance
-            (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, max[^1], min[^1], yValues.Length - 1);
+            //(DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, max[^1], min[^1], yValues.Length - 1);
             DimensionCumulative[^1] = DimensionSingle;
             Debug.WriteLine($"Fractal dimension: {DimensionCumulative[^1]}");
             //DimensionSingle = DimensionCumulative[^1];
@@ -82,7 +84,7 @@ public static class FractalDimension
     /// <param name="yValues">Array containing the ordinate points</param>
     /// /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
     /// <returns>The fractal dimension of the curve and its variance</returns>
-    private static (double dimension, double variance) ComputeH(double[] xValues, double[] yValues, int? arrayIndex = null)
+    private static (double dimension, double variance) ComputeH(double[] xValues, double[] yValues, double xMax, double xMin, double yMax, double yMin, int? arrayIndex = null)
     {
         int _nPoints;
         double _xMax;
@@ -95,10 +97,7 @@ public static class FractalDimension
         double dimensionH;
         double varianceH;
 
-        if (arrayIndex.HasValue)
-            _nPoints = arrayIndex.Value + 1;
-        else
-            _nPoints = yValues.Length;
+        _nPoints = arrayIndex.HasValue ? arrayIndex.Value + 1 : Math.Min(xValues.Length, yValues.Length);
 
         if (_nPoints < 2)
         {
@@ -107,10 +106,7 @@ public static class FractalDimension
         }
         else
         {
-            (_xMax, _xMin) = GetMaxMin(xValues, arrayIndex);
-            (_yMax, _yMin) = GetMaxMin(yValues, arrayIndex);
-
-            (_length, _varLength) = NormalizedLength(xValues, yValues, _nPoints, _xMax, _xMin, _yMax, _yMin);
+            (_length, _varLength) = NormalizedLength(xValues, yValues, _nPoints, xMax, xMin, yMax, yMin);
             _LN = System.Math.Log(2 * (_nPoints - 1));
             dimensionH = 1 + System.Math.Log(_length) / _LN;
             varianceH = (_nPoints - 1) * _varLength / (_length * _LN * _LN);
@@ -186,7 +182,7 @@ public static class FractalDimension
         double _LN;
         double _varLength;
         double dimensionH;
-        double varianceH;
+        double varianceH = 0;
 
         _nPoints = arrayIndex.HasValue ? arrayIndex.Value + 1 : yValues.Length;
 
@@ -207,12 +203,12 @@ public static class FractalDimension
             //_LN = System.Math.Log10(2 * (_nPoints - 1));
             //if (_nPoints == yValues.Length)
             //{
-            //    (_length, _varLength) = NormalizedLength(yValues, _nPoints, _yMax, _yMin);
+            //    (_length, _varLength) = NormalizedLength(yValues, _nPoints, max, min);
             //    varianceH = (_nPoints - 1) * _varLength / (_length * _LN * _LN);
             //}
             //else
             //{
-            //    _length = NormalizedLengthTest(yValues, _nPoints, _yMax, _yMin);
+            //    _length = NormalizedLengthTest(yValues, _nPoints, max, min);
             //}
             //dimensionH = 1 + System.Math.Log10(_length) / _LN;
         }
@@ -393,31 +389,22 @@ public static class FractalDimension
         double mean = 0;
         double oldMean;
         double variance = 0;
-        double xNorm1;
-        double xNorm2 = 0.0;
-        double yNorm1;
-        double yNorm2 = 0.0;
+        double xRange = xMax - xMin;
+        double yRange = yMax - yMin;
 
         if (nPoints <= 1) return (0.0, 0.0);
 
-        for (int i = 0; i < nPoints; i++)
+        for (int i = 1; i < nPoints; i++)
         {
-            xNorm1 = (xValues[i] - xMin) / (xMax - xMin);
-            yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
-            if (i > 0)
-            {
-                lengthPartial = System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + System.Math.Pow(xNorm1 - xNorm2, 2));
-                lengthTotal += lengthPartial;
+            lengthPartial = System.Math.Sqrt(System.Math.Pow((yValues[i] - yValues[i - 1]) / yRange, 2) + System.Math.Pow((xValues[i] - xValues[i - 1]) / xRange, 2));
+            lengthTotal += lengthPartial;
 
-                // Compute variance incrementally
-                oldMean = mean;
-                mean += (lengthPartial - mean) / i;
-                variance += (lengthPartial - mean) * (lengthPartial - oldMean);
-            }
-            xNorm2 = xNorm1;
-            yNorm2 = yNorm1;
+            // Compute variance incrementally
+            oldMean = mean;
+            mean += (lengthPartial - mean) / i;
+            variance += (lengthPartial - mean) * (lengthPartial - oldMean);
+
         }
-
         variance /= (nPoints - 1);
         return (lengthTotal, variance);
     }
@@ -438,32 +425,22 @@ public static class FractalDimension
         double mean = 0;
         double oldMean;
         double variance = 0;
-        double yNorm1;
-        double yNorm2 = 0;
+        double yRange = yMax - yMin;
         double xlength = System.Math.Pow((double)1 / (nPoints - 1), 2);
 
         if (nPoints <= 1) return (0.0, 0.0);
 
-        for (int i = 0; i < nPoints; i++)
+        for (int i = 1; i < nPoints; i++)
         {
-            if (yMax == yMin)
-                yNorm1 = 0.0;
-            else
-                yNorm1 = (yValues[i] - yMin) / (yMax - yMin);
+            lengthPartial = System.Math.Sqrt(System.Math.Pow((yValues[i] - yValues[i - 1]) / yRange, 2) + xlength);
+            lengthTotal += lengthPartial;
 
-            if (i > 0)
-            {
-                lengthPartial = System.Math.Sqrt(System.Math.Pow(yNorm1 - yNorm2, 2) + xlength);
-                lengthTotal += lengthPartial;
+            // Compute variance incrementally
+            oldMean = mean;
+            mean += (lengthPartial - mean) / i;
+            variance += (lengthPartial - mean) * (lengthPartial - oldMean);
 
-                // Compute variance incrementally
-                oldMean = mean;
-                mean += (lengthPartial - mean) / i;
-                variance += (lengthPartial - mean) * (lengthPartial - oldMean);
-            }
-            yNorm2 = yNorm1;
         }
-
         variance /= (nPoints - 1);
         return (lengthTotal, variance);
     }
@@ -472,21 +449,18 @@ public static class FractalDimension
     private static double NormalizedLengthTest(double[] yValues, int nPoints, double yMax, double yMin)
     {
         var syncRoot = new object();
-        double length = 0;
+        double[] length = new double[yValues.Length];
         double xlength = System.Math.Pow((double)1 / (nPoints - 1), 2);
 
         if (nPoints <= 1) return 0.0;
 
+        length[0] = 0;
         Parallel.For (1, nPoints, i=>
         {
-            double partialLength = System.Math.Sqrt(System.Math.Pow((yValues[i] - yValues[i - 1]) / (yMax - yMin), 2) + xlength);
-            lock (syncRoot)
-            {
-                length += partialLength;
-            }
+            length[i] = System.Math.Sqrt(System.Math.Pow((yValues[i] - yValues[i - 1]) / (yMax - yMin), 2) + xlength);
         });
 
-        return length;
+        return length.Sum();
     }
 
 
