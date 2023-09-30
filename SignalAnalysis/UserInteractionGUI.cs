@@ -81,6 +81,7 @@ partial class FrmMain
                                     progressive: _settings.CumulativeDimension,
                                     entropy: _settings.Entropy,
                                     fft: true,
+                                    fftPlot: true,
                                     powerSpectra: _settings.PowerSpectra,
                                     fftRoundUp: _settings.FFTRoundUp);
                 }
@@ -212,6 +213,7 @@ partial class FrmMain
                 progressive: _settings.CumulativeDimension,
                 entropy: _settings.Entropy,
                 fft: true,
+                fftPlot: true,
                 powerSpectra: _settings.PowerSpectra,
                 fftRoundUp: _settings.FFTRoundUp);
         }
@@ -276,7 +278,7 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
-                    ComputeAsync(stripComboSeries.SelectedIndex, fft: _settings.PowerSpectra, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp);
+                    ComputeAsync(stripComboSeries.SelectedIndex, fftPlot: true, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp);
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.Entropy = label.Checked;
