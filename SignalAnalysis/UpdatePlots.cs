@@ -1,5 +1,6 @@
 ﻿using ScottPlot;
 using SignalAnalysis.NumericalAlgorithms;
+using System.Diagnostics;
 
 namespace SignalAnalysis;
 
@@ -264,7 +265,18 @@ partial class FrmMain
     /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
     private void ComputeEntropy(double[] signal)
     {
-        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
+        Stopwatch stopwatch = new();
+        stopwatch.Start();
+        //(Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
+        stopwatch.Stop();
+        TimeSpan elapsed = stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+        stopwatch.Restart();
+        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token);
+        stopwatch.Stop();
+        elapsed = stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+
         (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy, Results.ShannonIdeal) = Complexity.ShannonEntropy(signal);
     }
 
