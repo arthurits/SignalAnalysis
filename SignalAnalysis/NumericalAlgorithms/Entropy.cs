@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis;
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace SignalAnalysis;
 
 /// <summary>
 /// Routines to compute the entropy in signals (data-array points)
@@ -8,6 +10,7 @@
 /// </summary>
 public static class Complexity
 {
+    [Obsolete("This is deprecated. Use Entropy_Parallel instead with is roughly twice as faster")]
     /// <summary>
     /// Computes the approximate and sample entropies of a physiological time-series signals (typically used to diagnose diseased states).
     /// ApEn reflects the likelihood that similar patterns of observations will not be followed by additional similar observations. A time series containing many repetitive patterns has a relatively small ApEn; a less predictable process has a higher ApEn.
@@ -18,12 +21,13 @@ public static class Complexity
     /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
     /// <param name="std">Standard deviation of the population</param>
     /// <returns>AppEn and SampEn</returns>
+    /// <seealso cref="https://www.codeproject.com/Articles/27030/Approximate-and-Sample-Entropies-Complexity-Metric"/>
     public static (double AppEn, double SampEn) Entropy(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     {
         long upper = data.Length - (dim + 1) + 1;
         bool isEqual;
-        int AppEn_Cum, AppEn_Cum1;
-        int SampEn_Cum = 0, SampEn_Cum1 = 0;
+        ulong AppEn_Cum, AppEn_Cum1;
+        ulong SampEn_Cum = 0, SampEn_Cum1 = 0;
         double sum = 0.0;
         double appEn, sampEn;
         double tolerance;
@@ -69,30 +73,90 @@ public static class Complexity
                 sum += Math.Log((double)AppEn_Cum / (double)AppEn_Cum1);
         }
 
-        //for (uint i = 0; i < upper; i++)
-        //{
-        //    AppEn_Cum = 0;
-        //    AppEn_Cum1 = 0;
-
-        //    Parallel.For(0, upper, j =>
-        //    {
-        //        (int a, int b, int c, int d) = EntropyInnerLoop(data, i, (uint)j, tolerance, ct, dim, fTol, std);
-        //        AppEn_Cum += a;
-        //        AppEn_Cum1 += b;
-        //        SampEn_Cum += c;
-        //        SampEn_Cum1 += d;
-        //    });
-
-        //    if (AppEn_Cum > 0 && AppEn_Cum1 > 0)
-        //        sum += Math.Log((double)AppEn_Cum / (double)AppEn_Cum1);
-        //}
-
         appEn = sum / (double)(data.Length - dim);
         sampEn = SampEn_Cum > 0 && SampEn_Cum1 > 0 ? Math.Log((double)SampEn_Cum / (double)SampEn_Cum1) : 0.0;
 
         return (appEn, sampEn);
     }
 
+    /// <summary>
+    /// Parallel computes the approximate and sample entropies of a physiological time-series signals (typically used to diagnose diseased states).
+    /// ApEn reflects the likelihood that similar patterns of observations will not be followed by additional similar observations. A time series containing many repetitive patterns has a relatively small ApEn; a less predictable process has a higher ApEn.
+    /// A smaller value of SampEn also indicates more self-similarity in data set or less noise.
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="dim">Embedding dimension</param>
+    /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
+    /// <param name="std">Standard deviation of the population</param>
+    /// <returns>AppEn and SampEn</returns>
+    /// <seealso cref="https://www.codeproject.com/Articles/27030/Approximate-and-Sample-Entropies-Complexity-Metric"/>
+    public static (double AppEn, double SampEn) Entropy_Parallel(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
+    {
+        long upper = data.Length - (dim + 1) + 1;
+        double appEn, sampEn;
+        double tolerance;
+        if (std.HasValue)
+            tolerance = std.Value * fTol;
+        else
+            tolerance = StdDev<double>(data) * fTol;
+
+
+        int[] AppEn_Cum_Arr = new int[upper];
+        int[] AppEn_Cum1_Arr = new int[upper];
+        int[] SampEn_Cum_Arr = new int[upper];
+        int[] SampEn_Cum1_Arr = new int[upper];
+        double[] sum_Arr = new double[upper];
+        bool[] isEqual_Arr = new bool[upper];
+
+        Parallel.For(0, upper, i =>
+        {
+            AppEn_Cum_Arr[i] = 0;
+            AppEn_Cum1_Arr[i] = 0;
+            for (uint j = 0; j < upper; j++)
+            {
+                isEqual_Arr[i] = true;
+                //m - length series
+                for (uint k = 0; k < dim; k++)
+                {
+                    if (Math.Abs(data[i + k] - data[j + k]) > tolerance)
+                    {
+                        isEqual_Arr[i] = false;
+                        break;
+                    }
+                    if (ct.IsCancellationRequested)
+                        throw new OperationCanceledException("CancelEntropy", ct);
+                }
+                if (isEqual_Arr[i])
+                {
+                    AppEn_Cum_Arr[i]++;
+                    SampEn_Cum_Arr[i]++;
+                }
+
+                //m+1 - length series
+                if (isEqual_Arr[i] && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
+                {
+                    AppEn_Cum1_Arr[i]++;
+                    SampEn_Cum1_Arr[i]++;
+                }
+            }
+            if (AppEn_Cum_Arr[i] > 0 && AppEn_Cum1_Arr[i] > 0)
+                sum_Arr[i] = Math.Log((double)AppEn_Cum_Arr[i] / (double)AppEn_Cum1_Arr[i]);
+        });
+
+        appEn = sum_Arr.Sum() / (double)(data.Length - dim);
+
+        ulong SampEn_Cum = 0;
+        foreach (int x in SampEn_Cum_Arr)
+            SampEn_Cum += (ulong)x;
+
+        ulong SampEn_Cum1 = 0;
+        foreach (int x in SampEn_Cum1_Arr)
+            SampEn_Cum1 += (ulong)x;
+
+        sampEn = SampEn_Cum > 0 && SampEn_Cum1 > 0 ? Math.Log((double)SampEn_Cum / (double)SampEn_Cum1) : 0.0;
+
+        return (appEn, sampEn);
+    }
 
     /// <summary>
     /// Computes the approximate and sample entropies of a physiological time-series signals (typically used to diagnose diseased states).
