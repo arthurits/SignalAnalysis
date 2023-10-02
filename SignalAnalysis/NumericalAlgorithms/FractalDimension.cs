@@ -53,7 +53,7 @@ public static class FractalDimension
     {
         (double[] max, double[] min) = GetMaxMin(yValues);
 
-        (DimensionSingle, VarianceH) = ComputeH(samplingFreq, yValues, max[^1], min[^1]);
+        (DimensionSingle, VarianceH) = ComputeH(yValues, max[^1], min[^1]);
         if (progress)
         {
             DimensionCumulative = new double[yValues.Length];
@@ -63,7 +63,7 @@ public static class FractalDimension
 
             Parallel.For(0, yValues.Length - 1, i =>
             {
-                (DimensionCumulative[i], VarianceH) = ComputeH(samplingFreq, yValues, max[i], min[i], i);
+                (DimensionCumulative[i], VarianceH) = ComputeH(yValues, max[i], min[i], i);
                 if (ct.IsCancellationRequested)
                     throw new OperationCanceledException("CancelFractal", ct);
             });
@@ -88,10 +88,6 @@ public static class FractalDimension
     private static (double dimension, double variance) ComputeH(double[] xValues, double[] yValues, double xMax, double xMin, double yMax, double yMin, int? arrayIndex = null)
     {
         int _nPoints;
-        double _xMax;
-        double _xMin;
-        double _yMax;
-        double _yMin;
         double _length;
         double _varLength;
         double _LN;
@@ -123,14 +119,14 @@ public static class FractalDimension
     /// <param name="yValues">Array containing the ordinate points</param>
     /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
     /// <returns>The fractal dimension of the curve and its variance</returns>
-    private static (double dimension, double variance) ComputeH(double samplingFreq, double[] yValues, double max, double min, int? arrayIndex = null)
+    private static (double dimension, double variance) ComputeH(double[] yValues, double max, double min, int? arrayIndex = null)
     {
         int _nPoints;
         double _length;
         double _LN;
         double _varLength;
         double dimensionH;
-        double varianceH = 0;
+        double varianceH;
 
         _nPoints = arrayIndex.HasValue ? arrayIndex.Value + 1 : yValues.Length;
 
