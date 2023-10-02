@@ -7,6 +7,7 @@ namespace SignalAnalysis;
 /// This class implements the computation of the fractal dimension of a discrete curve according to
 /// Carlos Sevcik's "A procedure to estimate the fractal dimension of waveforms"
 /// <seealso cref="https://arxiv.org/abs/1003.5266"/>
+/// <seealso cref="https://dev.to/kamilbugnokrk/parallel-programming-in-c-53eg"/> 
 /// </summary>
 public static class FractalDimension
 {
@@ -122,59 +123,6 @@ public static class FractalDimension
     /// <param name="yValues">Array containing the ordinate points</param>
     /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
     /// <returns>The fractal dimension of the curve and its variance</returns>
-    private static (double dimension, double variance) ComputeH(double samplingFreq, double[] yValues, int? arrayIndex = null)
-    {
-        int _nPoints;
-        double _yMax;
-        double _yMin;
-        double _length;
-        double _LN;
-        double _varLength;
-        double dimensionH;
-        double varianceH = 0;
-
-        if (arrayIndex.HasValue)
-            _nPoints = arrayIndex.Value + 1;
-        else
-            _nPoints = yValues.Length;
-
-        if (_nPoints < 2)
-        {
-            dimensionH = DimensionMinimum;
-            varianceH = double.NaN;
-        }
-        else
-        {
-            (_yMax, _yMin) = GetMaxMin(yValues, arrayIndex);
-
-            (_length, _varLength) = NormalizedLength(yValues, _nPoints, _yMax, _yMin);
-            _LN = System.Math.Log10(2 * (_nPoints - 1));
-            dimensionH = 1 + System.Math.Log10(_length) / _LN;
-            varianceH = (_nPoints - 1) * _varLength / (_length * _LN * _LN);
-
-            //_LN = System.Math.Log10(2 * (_nPoints - 1));
-            //if (_nPoints == yValues.Length)
-            //{
-            //    (_length, _varLength) = NormalizedLength(yValues, _nPoints, _yMax, _yMin);
-            //    varianceH = (_nPoints - 1) * _varLength / (_length * _LN * _LN);
-            //}
-            //else
-            //{
-            //    _length = NormalizedLengthTest(yValues, _nPoints, _yMax, _yMin);
-            //}
-            //dimensionH = 1 + System.Math.Log10(_length) / _LN;
-        }
-
-        return (dimensionH, varianceH);
-    }
-
-    /// <summary>
-    /// Computes the fractal dimension of a discrete curve with a constant sampling rate starting at time 0 seconds.
-    /// </summary>
-    /// <param name="samplingFreq">The sampling frequency</param>
-    /// <param name="yValues">Array containing the ordinate points</param>
-    /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
-    /// <returns>The fractal dimension of the curve and its variance</returns>
     private static (double dimension, double variance) ComputeH(double samplingFreq, double[] yValues, double max, double min, int? arrayIndex = null)
     {
         int _nPoints;
@@ -199,175 +147,9 @@ public static class FractalDimension
             _LN = System.Math.Log10(2 * (_nPoints - 1));
             dimensionH = 1 + System.Math.Log10(_length) / _LN;
             varianceH = (_nPoints - 1) * _varLength / (_length * _LN * _LN);
-
-            //_LN = System.Math.Log10(2 * (_nPoints - 1));
-            //if (_nPoints == yValues.Length)
-            //{
-            //    (_length, _varLength) = NormalizedLength(yValues, _nPoints, max, min);
-            //    varianceH = (_nPoints - 1) * _varLength / (_length * _LN * _LN);
-            //}
-            //else
-            //{
-            //    _length = NormalizedLengthTest(yValues, _nPoints, max, min);
-            //}
-            //dimensionH = 1 + System.Math.Log10(_length) / _LN;
         }
 
         return (dimensionH, varianceH);
-    }
-
-    /// <summary>
-    /// Computes the fractal dimension of a discrete curve with a constant sampling rate starting at time 0 seconds.
-    /// </summary>
-    /// <param name="samplingFreq">The sampling frequency</param>
-    /// <param name="yValues">Array containing the ordinate points</param>
-    /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
-    /// <returns>The fractal dimension of the curve and its variance</returns>
-    private static double [] ComputeH(double[] yValues)
-    {
-        double _yMax;
-        double _yMin;
-        double _yRange = 0;
-        double[] _segLength = new double[yValues.Length];
-        double[] _dimH = new double[yValues.Length];
-        bool _recompute;
-        double _normLength = 0;
-
-        _yMax = yValues[0];
-        _yMin = yValues[0];
-        _segLength[0] = 0;
-        _dimH[0] = DimensionMinimum;
-        for (int i = 1; i < yValues.Length; i++)
-        {
-            _recompute = yValues[i] > _yMax || yValues[i] < _yMin;
-            if (yValues[i] > _yMax) _yMax = yValues[i];
-            if (yValues[i] < _yMin) _yMin = yValues[i];
-            _yRange = _yMax - _yMin;
-
-            _segLength[i] = (yValues[i] - yValues[i - 1]) / _yRange;
-
-            _normLength = 0;
-            for (int j = 1; j <= i; j++)
-            {
-                if (!_recompute)
-                {
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
-                }
-                else
-                {
-                    _segLength[j] = (yValues[j] - yValues[j - 1]) / _yRange;
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
-                }
-            }
-
-            _dimH[i] = 1 + System.Math.Log10(_normLength) / System.Math.Log10(2 * (i + 1 - 1));
-        }
-
-        return _dimH;
-    }
-
-    /// <summary>
-    /// Computes the fractal dimension of a discrete curve with a constant sampling rate starting at time 0 seconds.
-    /// </summary>
-    /// <param name="samplingFreq">The sampling frequency</param>
-    /// <param name="yValues">Array containing the ordinate points</param>
-    /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
-    /// <returns>The fractal dimension of the curve and its variance</returns>
-    private static double[] ComputeH_ParallelFor(double[] yValues)
-    {
-        double _yMax;
-        double _yMin;
-        double _yRange = 0;
-        double[] _segLength = new double[yValues.Length];
-        double[] _dimH = new double[yValues.Length];
-        bool _recompute;
-        double _normLength = 0;
-
-        _yMax = yValues[0];
-        _yMin = yValues[0];
-        _segLength[0] = 0;
-        _dimH[0] = DimensionMinimum;
-        Parallel.For(1, yValues.Length, i =>
-        {
-            _recompute = yValues[i] > _yMax || yValues[i] < _yMin;
-            if (yValues[i] > _yMax) _yMax = yValues[i];
-            if (yValues[i] < _yMin) _yMin = yValues[i];
-            _yRange = _yMax - _yMin;
-
-            _segLength[i] = (yValues[i] - yValues[i - 1]) / _yRange;
-
-            _normLength = 0;
-            for (int j = 1; j <= i; j++)
-            {
-                if (!_recompute)
-                {
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
-                }
-                else
-                {
-                    _segLength[j] = (yValues[j] - yValues[j - 1]) / _yRange;
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
-                }
-            }
-
-            _dimH[i] = 1 + System.Math.Log10(_normLength) / System.Math.Log10(2 * (i + 1 - 1));
-        });
-
-        return _dimH;
-    }
-
-    /// <summary>
-    /// Computes the fractal dimension of a discrete curve with a constant sampling rate starting at time 0 seconds.
-    /// </summary>
-    /// <param name="samplingFreq">The sampling frequency</param>
-    /// <param name="yValues">Array containing the ordinate points</param>
-    /// <param name="arrayIndex">Array index cutoff. Array values above this index are ignored</param>
-    /// <returns>The fractal dimension of the curve and its variance</returns>
-    private static double[] ComputeH_ParallelForEach(double[] yValues)
-    {
-        double _yMax = yValues[0];
-        double _yMin = yValues[0];
-        double _yRange = 0;
-        double[] _segLength = new double[yValues.Length];
-        double[] _dimH = new double[yValues.Length];
-        bool _recompute;
-        double _normLength = 0;
-        double valueOld = yValues[0];
-        int i = 0;
-
-        _segLength[0] = 0;
-        _dimH[0] = DimensionMinimum;
-
-        foreach (double value in yValues.Skip(1))
-        {
-            i++;
-
-            _recompute = value > _yMax || value < _yMin;
-            if (value > _yMax) _yMax = value;
-            if (value < _yMin) _yMin = value;
-            _yRange = _yMax - _yMin;
-
-            _segLength[i] = (value - valueOld) / _yRange;
-
-            _normLength = 0;
-            for (int j = 1; j <= i; j++)
-            {
-                if (!_recompute)
-                {
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
-                }
-                else
-                {
-                    _segLength[j] = (yValues[j] - yValues[j - 1]) / _yRange;
-                    _normLength += System.Math.Sqrt(Math.Pow(_segLength[j], 2) + Math.Pow((double)1 / (i + 1 - 1), 2));
-                }
-            }
-
-            _dimH[i] = 1 + System.Math.Log10(_normLength) / System.Math.Log10(2 * (i + 1 - 1));
-            valueOld = value;
-        }
-
-        return _dimH;
     }
 
     /// <summary>
@@ -444,25 +226,6 @@ public static class FractalDimension
         variance /= (nPoints - 1);
         return (lengthTotal, variance);
     }
-
-    // https://dev.to/kamilbugnokrk/parallel-programming-in-c-53eg
-    private static double NormalizedLengthTest(double[] yValues, int nPoints, double yMax, double yMin)
-    {
-        var syncRoot = new object();
-        double[] length = new double[yValues.Length];
-        double xlength = System.Math.Pow((double)1 / (nPoints - 1), 2);
-
-        if (nPoints <= 1) return 0.0;
-
-        length[0] = 0;
-        Parallel.For (1, nPoints, i=>
-        {
-            length[i] = System.Math.Sqrt(System.Math.Pow((yValues[i] - yValues[i - 1]) / (yMax - yMin), 2) + xlength);
-        });
-
-        return length.Sum();
-    }
-
 
     /// <summary>
     /// Get the maximum and minimum values whithin an array.
