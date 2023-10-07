@@ -154,8 +154,17 @@ Hvis du synes denne programvaren er nyttig, kan du vurdere å støtte den!</valu
   <data name="strBtnSettings" xml:space="preserve">
     <value>&amp;Innstillinger</value>
   </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>Kalkuler absoluttverdi-integral?</value>
+  </data>
   <data name="strChkBoxplot" xml:space="preserve">
     <value>Boksplott</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>Kalkuler numerisk differensiering?</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>Kalkuler numerisk integrasjon?</value>
   </data>
   <data name="strChkCrossHair" xml:space="preserve">
     <value>Vis trådkors for utvalg</value>
@@ -167,7 +176,13 @@ Hvis du synes denne programvaren er nyttig, kan du vurdere å støtte den!</valu
     <value>Husk åpne/lagre dialog forrige bane</value>
   </data>
   <data name="strChkEntropy" xml:space="preserve">
-    <value>Entropi (omtrentlig og prøve)</value>
+    <value>Entropi (omtrentlig og utvalg)</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>Eksporter derivert data?</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>Eksporter numerisk integrasjon?</value>
   </data>
   <data name="strChkPower" xml:space="preserve">
     <value>Kraft (dB)</value>
@@ -276,8 +291,32 @@ Standardverdier vil bli benyttet i stedet.</value>
   <data name="strFileHeader28" xml:space="preserve">
     <value>Derivativ</value>
   </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>Deriveringsalgoritme</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Integreringsalgoritme</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Integralet</value>
+  </data>
   <data name="strFileHeader32" xml:space="preserve">
     <value>Varians</value>
+  </data>
+  <data name="strFileHeader33" xml:space="preserve">
+    <value>Boksplott nedre grense</value>
+  </data>
+  <data name="strFileHeader34" xml:space="preserve">
+    <value>Boksplott øvre grense</value>
+  </data>
+  <data name="strFileHeader35" xml:space="preserve">
+    <value>Kvartil 1 (25%)</value>
+  </data>
+  <data name="strFileHeader36" xml:space="preserve">
+    <value>Kvartil 2 (50 %)</value>
+  </data>
+  <data name="strFileHeader37" xml:space="preserve">
+    <value>Kvartil 3 (75 %)</value>
   </data>
   <data name="strFileHeader38" xml:space="preserve">
     <value>Shannon / Ideell</value>
@@ -300,6 +339,9 @@ Standardverdier vil bli benyttet i stedet.</value>
   <data name="strFrmTitleUnion" xml:space="preserve">
     <value> - </value>
   </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>Diskrete differansealgoritmer</value>
+  </data>
   <data name="strGrpAxis" xml:space="preserve">
     <value>Abscisse-akse</value>
   </data>
@@ -307,7 +349,7 @@ Standardverdier vil bli benyttet i stedet.</value>
     <value>UI og dataformat</value>
   </data>
   <data name="strGrpFFT" xml:space="preserve">
-    <value>FFT-poeng</value>
+    <value>FFT-punkt</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Datafilbane</value>
@@ -318,6 +360,9 @@ Standardverdier vil bli benyttet i stedet.</value>
   <data name="strLblEnd" xml:space="preserve">
     <value>Array-indeksslutt  (maks {0})</value>
   </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Kvadraturmetode</value>
+  </data>
   <data name="strLblSeries" xml:space="preserve">
     <value>Velg serie</value>
   </data>
@@ -327,12 +372,40 @@ Standardverdier vil bli benyttet i stedet.</value>
   <data name="strLblWindow" xml:space="preserve">
     <value>Vindu</value>
   </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Uventet feil  under numerisk derivasjon.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Derivasjonsfeil</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Uventet feil ved beregning av deskriptiv statistikk.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Statistikkfeil</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Uventet feil under beregning av entropi.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Entropifeil</value>
+  </data>
   <data name="strMsgBoxErrorFFT" xml:space="preserve">
     <value>Uventet feil under beregning av FFT.
 {0}</value>
   </data>
   <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
     <value>FFT-feil</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Uventet feil ved beregning av fraktaldimensjon.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Fraktal-feil</value>
   </data>
   <data name="strMsgBoxErrorOpenData" xml:space="preserve">
     <value>Det oppstod en uventet feil under åpningen av datafilen.
@@ -375,6 +448,18 @@ programmet?</value>
   </data>
   <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
     <value>Data lagret</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>Numerisk derivasjon har blitt stoppet.</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>Entropi-kalkulasjon har blitt stoppet.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Avbryt</value>
   </data>
   <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
     <value>Beregning av Hausdorff-Besicovitch fraktaldimensjonen
@@ -526,11 +611,17 @@ har stoppet.</value>
   <data name="strStatusTipCrossHair" xml:space="preserve">
     <value>Vis plotts trådkorsmodus</value>
   </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>Numerisk derivasjon</value>
+  </data>
   <data name="strStatusTipEntropy" xml:space="preserve">
     <value>Beregn den omtrentlige og sample entropien</value>
   </data>
   <data name="strStatusTipFractal" xml:space="preserve">
     <value>Beregn den kumulative fraktale dimensjonen (CPU-intensiv)</value>
+  </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Numerisk integrasjon</value>
   </data>
   <data name="strStatusTipPower" xml:space="preserve">
     <value>Plott enten FFT-effektspektra(dB) eller størrelse</value>
