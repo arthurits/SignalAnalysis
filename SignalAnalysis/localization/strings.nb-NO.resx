@@ -187,6 +187,9 @@ Hvis du synes denne programvaren er nyttig, kan du vurdere å støtte den!</valu
   <data name="strChkPower" xml:space="preserve">
     <value>Kraft (dB)</value>
   </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>Bakover én-punkts differanse, Fremover én-punkts differanse, Sentral tre-punkts differanse, Sentral fem-punkts differanse, Sentral syv-punkts differanse, Sentral ni-punkts differanse, Savitzky–Golay lineær tre-punkts, Savitzky–Golay lineær fem-punkts, Savitzky–Golay lineær syv-punkts, Savitzky–Golay lineær ni-punkts, Savitzky–Golay kubisk fem-punkts, Savitzky–Golay kubisk syv-punkts, Savitzky–Golay kubisk ni-punkts</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Vil du tilbakestille alle felter
 til standardverdien?</value>
@@ -350,6 +353,9 @@ Standardverdier vil bli benyttet i stedet.</value>
   </data>
   <data name="strGrpFFT" xml:space="preserve">
     <value>FFT-punkt</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Venstre punktregel, Midtpunktregel, Høyre punktregel, Trapesregel, Simpsons 1/3-regel, Simpsons 3/8-regel, Simpsons sammensatte regel, Rombergs metode</value>
   </data>
   <data name="strLblData" xml:space="preserve">
     <value>Datafilbane</value>
