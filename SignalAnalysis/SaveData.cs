@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis;
+﻿using System.Text.RegularExpressions;
+
+namespace SignalAnalysis;
 
 partial class FrmMain
 {
@@ -15,7 +17,7 @@ partial class FrmMain
         bool result = false;
         int numSeries = 1;
 
-        if (_settings.ExportDerivative)
+        if (_settings.ExportDerivative && _settings.ComputeDerivative)
         {
             numSeries = 2;
             SeriesName += $"\t{StringResources.FileHeader28}";
@@ -300,17 +302,28 @@ partial class FrmMain
             using var sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
 
             sw.WriteLine($"{StringResources.FileHeader01} ({_settings.AppCultureName})");
-            sw.WriteLine(Results.ToString(_settings.AppCulture,_settings.Boxplot,_settings.Entropy, false));
+            sw.WriteLine(Results.ToString(culture: _settings.AppCulture, boxplot: _settings.Boxplot, entropy: false, integral: false));
             if (_settings.ExportDerivative && _settings.ComputeDerivative)
             {
                 sw.WriteLine($"{StringResources.FileHeader29}{StringResources.FileHeaderColon}{StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
                 derivative = true;
             }
-                
+
+            if (_settings.ComputeEntropy)
+            {
+                sw.WriteLine($"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{Results.ShannonEntropy.ToString("0.########", _settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{Results.EntropyBit.ToString("0.########", _settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{Results.IdealEntropy.ToString("0.########", _settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{Results.ShannonIdeal.ToString("0.########", _settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader39}{StringResources.FileHeaderColon}{StringResources.EntropyAlgorithms.Split(", ")[(int)_settings.EntropyAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader12}{StringResources.FileHeaderColon}({_settings.EntropyFactorM}, {_settings.EntropyFactorR.ToString("0.##", _settings.AppCulture)}){Results.ApproximateEntropy.ToString("0.########", _settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader13}{StringResources.FileHeaderColon}({_settings.EntropyFactorM}, {_settings.EntropyFactorR.ToString("0.##", _settings.AppCulture)}){Results.SampleEntropy.ToString("0.########", _settings.AppCulture)}");
+            }
+
             if (_settings.ExportIntegration && _settings.ComputeIntegration)
             {
                 sw.WriteLine($"{StringResources.FileHeader30}{StringResources.FileHeaderColon}{StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm]}");
-                sw.WriteLine($"{StringResources.FileHeader31}{StringResources.FileHeaderColon}{Results.Integral.ToString(_settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader31}{StringResources.FileHeaderColon}{Results.Integral.ToString("0.########", _settings.AppCulture)}");
             }
 
             sw.WriteLine();

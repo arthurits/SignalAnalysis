@@ -197,6 +197,9 @@ to their default values?</value>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>Reset settings?</value>
   </data>
+  <data name="strEntropyAlgorithms" xml:space="preserve">
+    <value>Brute force, Monte-Carlo</value>
+  </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error loading settings file.
 
@@ -365,6 +368,15 @@ Default values will be used instead.</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>Array index end (max {0})</value>
+  </data>
+  <data name="strLblEntropy" xml:space="preserve">
+    <value>Entropy algorithms</value>
+  </data>
+  <data name="strLblFactorM" xml:space="preserve">
+    <value>Embedding dimension</value>
+  </data>
+  <data name="strLblFactorR" xml:space="preserve">
+    <value>Tolerance factor</value>
   </data>
   <data name="strLblIntegration" xml:space="preserve">
     <value>Quadrature algorithms</value>
@@ -634,6 +646,9 @@ dimension has been stopped.</value>
   </data>
   <data name="strTabDerivative" xml:space="preserve">
     <value>Differentiation</value>
+  </data>
+  <data name="strTabEntropy" xml:space="preserve">
+    <value>Entropy</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>User interface</value>

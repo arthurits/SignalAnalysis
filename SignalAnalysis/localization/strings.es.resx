@@ -197,6 +197,9 @@ los campos a sus valores por defecto?</value>
   <data name="strDlgResetTitle" xml:space="preserve">
     <value>¿Restablecer opciones?</value>
   </data>
+  <data name="strEntropyAlgorithms" xml:space="preserve">
+    <value>Fuerza bruta, Monte Carlo</value>
+  </data>
   <data name="strErrorDeserialize" xml:space="preserve">
     <value>Error al leer el archivo de configuración.
 
@@ -365,6 +368,15 @@ Se utilizarán los valores por defecto.</value>
   </data>
   <data name="strLblEnd" xml:space="preserve">
     <value>Índice final (máx {0})</value>
+  </data>
+  <data name="strLblEntropy" xml:space="preserve">
+    <value>Algoritmos de entropía</value>
+  </data>
+  <data name="strLblFactorM" xml:space="preserve">
+    <value>Dimensión</value>
+  </data>
+  <data name="strLblFactorR" xml:space="preserve">
+    <value>Factor de tolerancia</value>
   </data>
   <data name="strLblIntegration" xml:space="preserve">
     <value>Algoritmos de cuadratura</value>
@@ -638,6 +650,9 @@ Hausdorff-Besicovitch se ha detenido.</value>
   </data>
   <data name="strTabDerivative" xml:space="preserve">
     <value>Derivada</value>
+  </data>
+  <data name="strTabEntropy" xml:space="preserve">
+    <value>Entropía</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>Interfaz de usuario</value>

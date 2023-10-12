@@ -63,11 +63,14 @@ partial class FrmMain
                 {
                     Results = results;
                     txtStats.Text = Results.ToString(
-                        _settings.AppCulture,
-                        _settings.Boxplot,
-                        _settings.Entropy,
-                        _settings.ComputeIntegration,
-                        _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
+                        culture: _settings.AppCulture,
+                        boxplot: _settings.Boxplot,
+                        entropy: _settings.ComputeEntropy,
+                        entropyAlgorithm: _settings.ComputeEntropy ? StringResources.EntropyAlgorithms.Split(", ")[(int)_settings.EntropyAlgorithm] : string.Empty,
+                        entropyM: (int)_settings.EntropyFactorM,
+                        entropyR: _settings.EntropyFactorR,
+                        integral: _settings.ComputeIntegration,
+                        integralAlgorithm: _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
                 }
                 else
                 {
@@ -79,7 +82,7 @@ partial class FrmMain
                                     integral: _settings.ComputeIntegration,
                                     fractal: true,
                                     progressive: _settings.CumulativeDimension,
-                                    entropy: _settings.Entropy,
+                                    entropy: _settings.ComputeEntropy,
                                     fft: true,
                                     fftPlot: true,
                                     powerSpectra: _settings.PowerSpectra,
@@ -198,7 +201,7 @@ partial class FrmMain
             statusStripLabelExIntegration.Checked = _settings.ComputeIntegration;
             statusStripLabelExCumulative.Checked = _settings.CumulativeDimension;
             statusStripLabelExPower.Checked = _settings.PowerSpectra;
-            statusStripLabelExEntropy.Checked = _settings.Entropy;
+            statusStripLabelExEntropy.Checked = _settings.ComputeEntropy;
             statusStripLabelExCrossHair.Checked = _settings.CrossHair;
 
             UpdateUI_Language();
@@ -211,7 +214,7 @@ partial class FrmMain
                 integral: _settings.ComputeIntegration,
                 fractal: true,
                 progressive: _settings.CumulativeDimension,
-                entropy: _settings.Entropy,
+                entropy: _settings.ComputeEntropy,
                 fft: true,
                 fftPlot: true,
                 powerSpectra: _settings.PowerSpectra,
@@ -281,8 +284,8 @@ partial class FrmMain
                     ComputeAsync(stripComboSeries.SelectedIndex, fftPlot: true, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp);
                     break;
                 case "statusStripLabelExEntropy":
-                    _settings.Entropy = label.Checked;
-                    ComputeAsync(stripComboSeries.SelectedIndex, entropy: _settings.Entropy);
+                    _settings.ComputeEntropy = label.Checked;
+                    ComputeAsync(stripComboSeries.SelectedIndex, entropy: _settings.ComputeEntropy);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
@@ -358,7 +361,7 @@ partial class FrmMain
             integral: _settings.ComputeIntegration,
             fractal: true,
             progressive: _settings.CumulativeDimension,
-            entropy: _settings.Entropy,
+            entropy: _settings.ComputeEntropy,
             fft: true,
             powerSpectra: _settings.PowerSpectra,
             fftRoundUp: _settings.FFTRoundUp);
