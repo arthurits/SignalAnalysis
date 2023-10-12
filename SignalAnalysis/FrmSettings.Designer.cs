@@ -61,6 +61,13 @@
             lblIntegration = new Label();
             chkExportIntegration = new CheckBox();
             chkComputeIntegration = new CheckBox();
+            tabEntropy = new TabPage();
+            cboEntropyAlgorithm = new ComboBox();
+            lblEntropyAlgorithm = new Label();
+            txtFactorR = new TextBox();
+            txtFactorM = new TextBox();
+            lblFactorM = new Label();
+            lblFactorR = new Label();
             tabGUI = new TabPage();
             txtDataFormat = new TextBox();
             lblDataFormat = new Label();
@@ -77,6 +84,7 @@
             grpAxis.SuspendLayout();
             tabDerivative.SuspendLayout();
             tabIntegration.SuspendLayout();
+            tabEntropy.SuspendLayout();
             tabGUI.SuspendLayout();
             grpCulture.SuspendLayout();
             SuspendLayout();
@@ -106,6 +114,7 @@
             tabSettings.Controls.Add(tabPlot);
             tabSettings.Controls.Add(tabDerivative);
             tabSettings.Controls.Add(tabIntegration);
+            tabSettings.Controls.Add(tabEntropy);
             tabSettings.Controls.Add(tabGUI);
             tabSettings.Location = new Point(12, 14);
             tabSettings.Name = "tabSettings";
@@ -435,16 +444,82 @@
             chkComputeIntegration.UseVisualStyleBackColor = true;
             chkComputeIntegration.CheckedChanged += ComputeIntegration_CheckedChanged;
             // 
+            // tabEntropy
+            // 
+            tabEntropy.Controls.Add(cboEntropyAlgorithm);
+            tabEntropy.Controls.Add(lblEntropyAlgorithm);
+            tabEntropy.Controls.Add(txtFactorR);
+            tabEntropy.Controls.Add(txtFactorM);
+            tabEntropy.Controls.Add(lblFactorM);
+            tabEntropy.Controls.Add(lblFactorR);
+            tabEntropy.Location = new Point(4, 26);
+            tabEntropy.Name = "tabEntropy";
+            tabEntropy.Padding = new Padding(3);
+            tabEntropy.Size = new Size(472, 254);
+            tabEntropy.TabIndex = 4;
+            tabEntropy.Text = "Entropy";
+            tabEntropy.UseVisualStyleBackColor = true;
+            // 
+            // cboEntropyAlgorithm
+            // 
+            cboEntropyAlgorithm.FormattingEnabled = true;
+            cboEntropyAlgorithm.Location = new Point(131, 47);
+            cboEntropyAlgorithm.Name = "cboEntropyAlgorithm";
+            cboEntropyAlgorithm.Size = new Size(157, 25);
+            cboEntropyAlgorithm.TabIndex = 5;
+            cboEntropyAlgorithm.SelectionChangeCommitted += Entropy_SelectionChangeCommitted;
+            // 
+            // lblEntropyAlgorithm
+            // 
+            lblEntropyAlgorithm.AutoSize = true;
+            lblEntropyAlgorithm.Location = new Point(54, 50);
+            lblEntropyAlgorithm.Name = "lblEntropyAlgorithm";
+            lblEntropyAlgorithm.Size = new Size(70, 19);
+            lblEntropyAlgorithm.TabIndex = 4;
+            lblEntropyAlgorithm.Text = "Algorithm";
+            // 
+            // txtFactorR
+            // 
+            txtFactorR.Location = new Point(131, 138);
+            txtFactorR.Name = "txtFactorR";
+            txtFactorR.Size = new Size(100, 25);
+            txtFactorR.TabIndex = 3;
+            // 
+            // txtFactorM
+            // 
+            txtFactorM.Location = new Point(131, 94);
+            txtFactorM.Name = "txtFactorM";
+            txtFactorM.Size = new Size(100, 25);
+            txtFactorM.TabIndex = 2;
+            // 
+            // lblFactorM
+            // 
+            lblFactorM.AutoSize = true;
+            lblFactorM.Location = new Point(54, 97);
+            lblFactorM.Name = "lblFactorM";
+            lblFactorM.Size = new Size(61, 19);
+            lblFactorM.TabIndex = 1;
+            lblFactorM.Text = "M factor";
+            // 
+            // lblFactorR
+            // 
+            lblFactorR.AutoSize = true;
+            lblFactorR.Location = new Point(54, 141);
+            lblFactorR.Name = "lblFactorR";
+            lblFactorR.Size = new Size(56, 19);
+            lblFactorR.TabIndex = 0;
+            lblFactorR.Text = "R factor";
+            // 
             // tabGUI
             // 
             tabGUI.Controls.Add(txtDataFormat);
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 26);
+            tabGUI.Location = new Point(4, 24);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(472, 254);
+            tabGUI.Size = new Size(472, 256);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -576,6 +651,8 @@
             tabDerivative.PerformLayout();
             tabIntegration.ResumeLayout(false);
             tabIntegration.PerformLayout();
+            tabEntropy.ResumeLayout(false);
+            tabEntropy.PerformLayout();
             tabGUI.ResumeLayout(false);
             tabGUI.PerformLayout();
             grpCulture.ResumeLayout(false);
@@ -628,5 +705,12 @@
         private RadioButton radUp;
         private Label lblEntropy;
         private Label lblCumulative;
+        private TabPage tabEntropy;
+        private Label lblFactorM;
+        private Label lblFactorR;
+        private ComboBox cboEntropyAlgorithm;
+        private Label lblEntropyAlgorithm;
+        private TextBox txtFactorR;
+        private TextBox txtFactorM;
     }
 }

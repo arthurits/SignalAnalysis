@@ -83,7 +83,7 @@ partial class FrmMain
                         case "CancelEntropy":
                             msg = StringResources.MsgBoxTaskEntropyCancel;
                             title = StringResources.MsgBoxTaskEntropyCancelTitle;
-                            _settings.Entropy = false;
+                            _settings.ComputeEntropy = false;
                             this.statusStripLabelExEntropy.Checked = false;
                             break;
                     }
@@ -126,11 +126,14 @@ partial class FrmMain
         // Show text results
         //if (stats || fractal || entropy || integral)
         txtStats.Text = Results.ToString(
-            _settings.AppCulture,
-            _settings.Boxplot,
-            _settings.Entropy,
-            _settings.ComputeIntegration,
-            _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
+            culture: _settings.AppCulture,
+            boxplot: _settings.Boxplot,
+            entropy: _settings.ComputeEntropy,
+            entropyAlgorithm: _settings.ComputeEntropy ? StringResources.EntropyAlgorithms.Split(", ")[(int)_settings.EntropyAlgorithm] : string.Empty,
+            entropyM: (int)_settings.EntropyFactorM,
+            entropyR: _settings.EntropyFactorR,
+            integral: _settings.ComputeIntegration,
+            integralAlgorithm: _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 
         // Restore the cursor
         this.UseWaitCursor = false;
@@ -272,7 +275,7 @@ partial class FrmMain
         TimeSpan elapsed = stopwatch.Elapsed;
         Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
         stopwatch.Restart();
-        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token);
+        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token, _settings.EntropyFactorM, _settings.EntropyFactorR);
         stopwatch.Stop();
         elapsed = stopwatch.Elapsed;
         Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");

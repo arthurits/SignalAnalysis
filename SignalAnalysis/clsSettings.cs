@@ -64,7 +64,7 @@ public class ClassSettings
     /// True if both the application and sample entropies are to be computed
     /// </summary>
     [JsonPropertyName("Compute entropies")]
-    public bool Entropy { get; set; } = false;
+    public bool ComputeEntropy { get; set; } = false;
     /// <summary>
     /// True if a crosshair is shown on the plots
     /// </summary>
@@ -182,6 +182,25 @@ public class ClassSettings
     /// </summary>
     [JsonPropertyName("Upward-pad data to be integrated?")]
     public bool PadIntegral { get; set; } = false;
+
+    /// <summary>
+    /// Numerical entropy algorithm.
+    /// </summary>
+    [JsonPropertyName("Entropy algorithm")]
+    public EntropyMethod EntropyAlgorithm { get; set; } = EntropyMethod.BruteForce;
+
+    /// <summary>
+    /// ApEn & SampEn tolerance factor.
+    /// </summary>
+    [JsonPropertyName("ApEn & SampEn factor r")]
+    public double EntropyFactorR { get; set; } = 0.2;
+
+    /// <summary>
+    /// ApEn & SampEn embedding dimension.
+    /// </summary>
+    [JsonPropertyName("ApEn & SampEn factor m")]
+    public uint EntropyFactorM { get; set; } = 2;
+
 
     public ClassSettings()
     {

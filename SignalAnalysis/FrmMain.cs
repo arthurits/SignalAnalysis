@@ -272,11 +272,14 @@ public partial class FrmMain : Form
         // Update the results text
         if (txtStats.Text.Length > 0)
             txtStats.Text = Results.ToString(
-                _settings.AppCulture,
-                _settings.Boxplot,
-                _settings.Entropy,
-                _settings.ComputeIntegration,
-                _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
+                culture: _settings.AppCulture,
+                boxplot: _settings.Boxplot,
+                entropy: _settings.ComputeEntropy,
+                entropyAlgorithm: _settings.ComputeEntropy ? StringResources.EntropyAlgorithms.Split(", ")[(int)_settings.EntropyAlgorithm] : string.Empty,
+                entropyM: (int)_settings.EntropyFactorM,
+                entropyR: _settings.EntropyFactorR,
+                integral: _settings.ComputeIntegration,
+                integralAlgorithm: _settings.ComputeIntegration ? StringResources.IntegrationAlgorithms.Split(", ")[(int)_settings.IntegrationAlgorithm] : string.Empty);
 
         this.ResumeLayout();
     }

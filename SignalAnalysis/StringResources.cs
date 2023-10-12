@@ -56,6 +56,7 @@ public static class StringResources
     public static string FileHeader36 => StringRM.GetString("strFileHeader36", Culture) ?? "Quartile 2 (50%)";
     public static string FileHeader37 => StringRM.GetString("strFileHeader37", Culture) ?? "Quartile 3 (75%)";
     public static string FileHeader38 => StringRM.GetString("strFileHeader38", Culture) ?? "Shannon / Ideal";
+    public static string FileHeader39 => StringRM.GetString("strFileHeader39", Culture) ?? "Entropy algorithm";
 
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 
@@ -173,6 +174,7 @@ public static class StringResources
     public static string TabGUI => StringRM.GetString("strTabGUI", Culture) ?? "User interface";
     public static string TabDerivative => StringRM.GetString("strTabDerivative", Culture) ?? "Differentiation";
     public static string TabIntegration => StringRM.GetString("strTabIntegration", Culture) ?? "Integration";
+    public static string TabEntropy => StringRM.GetString("strTabEntropy", Culture) ?? "Entropy";
 
     public static string LblStart => StringRM.GetString("strLblStart", Culture) ?? "Array index start";
     public static string LblEnd => StringRM.GetString("strLblEnd", Culture) ?? "Array index end (max {0})";
@@ -199,6 +201,11 @@ public static class StringResources
     public static string ChkExportIntegration => StringRM.GetString("strChkExportIntegration", Culture) ?? "Export numerical integration?";
     public static string LblIntegration => StringRM.GetString("strLblIntegration", Culture) ?? "Quadrature algorithms";
     public static string IntegrationAlgorithms => StringRM.GetString("strIntegrationAlgorithms", Culture) ?? "Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method";
+
+    public static string LblFactorR => StringRM.GetString("strLblFactorR", Culture) ?? "Tolerance factor";
+    public static string LblFactorM => StringRM.GetString("strLblFactorM", Culture) ?? "Embedding dimension";
+    public static string LblEntropy => StringRM.GetString("strLblEntropy", Culture) ?? "Algorithms";
+    public static string EntropyAlgorithms => StringRM.GetString("strEntropyAlgorithms", Culture) ?? "Brute force, Monte-Carlo";
 
     public static string GrpCulture => StringRM.GetString("strGrpCulture", Culture) ?? "UI and data format";
     public static string RadCurrentCulture => StringRM.GetString("strRadCurrentCulture", Culture) ?? "Current culture formatting";

@@ -291,6 +291,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brute force, Monte-Carlo.
+        /// </summary>
+        internal static string strEntropyAlgorithms {
+            get {
+                return ResourceManager.GetString("strEntropyAlgorithms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error loading settings file.
         ///
         ///{0}
@@ -786,6 +795,33 @@ namespace SignalAnalysis.localization {
         internal static string strLblEnd {
             get {
                 return ResourceManager.GetString("strLblEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entropy algorithms.
+        /// </summary>
+        internal static string strLblEntropy {
+            get {
+                return ResourceManager.GetString("strLblEntropy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Embedding dimension.
+        /// </summary>
+        internal static string strLblFactorM {
+            get {
+                return ResourceManager.GetString("strLblFactorM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tolerance factor.
+        /// </summary>
+        internal static string strLblFactorR {
+            get {
+                return ResourceManager.GetString("strLblFactorR", resourceCulture);
             }
         }
         
@@ -1565,6 +1601,15 @@ namespace SignalAnalysis.localization {
         internal static string strTabDerivative {
             get {
                 return ResourceManager.GetString("strTabDerivative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entropy.
+        /// </summary>
+        internal static string strTabEntropy {
+            get {
+                return ResourceManager.GetString("strTabEntropy", resourceCulture);
             }
         }
         

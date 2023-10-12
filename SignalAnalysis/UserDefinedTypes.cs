@@ -66,7 +66,7 @@ public class SignalStats
     /// <param name="integral"><see langword="True"/> if the integral value and the algorithm name are included in the string</param>
     /// <param name="integralAlgorithm"><see langword="True"/>Integration algorithm name</param>
     /// <returns>Results formatted as string</returns>
-    public string ToString(System.Globalization.CultureInfo culture, bool boxplot = false, bool entropy = false, bool integral = false, string integralAlgorithm = "")
+    public string ToString(System.Globalization.CultureInfo culture, bool boxplot = false, bool entropy = false, string entropyAlgorithm = "", int entropyM = 0, double entropyR = 0.0, bool integral = false, string integralAlgorithm = "")
     {
         string strTemp;
 
@@ -89,12 +89,13 @@ public class SignalStats
 
         if (entropy)
         {
-            strTemp += $"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
-            $"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
-            $"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{ShannonEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
+            strTemp += $"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{ShannonEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{EntropyBit.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
-            $"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{ShannonIdeal.ToString("0.########", culture)}{Environment.NewLine}";
+            $"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{ShannonIdeal.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader39}{StringResources.FileHeaderColon}{entropyAlgorithm}{Environment.NewLine}" +
+            $"{StringResources.FileHeader12}(m={entropyM}, r={entropyR.ToString("0.##", culture)}){StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader13}(m={entropyM}, r={entropyR.ToString("0.##", culture)}){StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}";
         }
         
         if (integral)

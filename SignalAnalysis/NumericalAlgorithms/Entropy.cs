@@ -2,6 +2,12 @@
 
 namespace SignalAnalysis;
 
+public enum EntropyMethod
+{
+    BruteForce,
+    MonteCarlo
+}
+
 /// <summary>
 /// Routines to compute the entropy in signals (data-array points)
 /// <seealso cref="https://www.codeproject.com/Articles/27030/Approximate-and-Sample-Entropies-Complexity-Metric"/>
