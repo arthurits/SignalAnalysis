@@ -1,4 +1,5 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Numerics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis;
 
@@ -232,6 +233,46 @@ public static class Complexity
         double sum = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));
         double denominator = values.Count() - (asSample ? 1 : 0);
         return denominator > 0.0 ? Math.Sqrt(sum / denominator) : -1;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="ct"></param>
+    /// <param name="dim"></param>
+    /// <param name="fTol"></param>
+    /// <param name="std"></param>
+    /// <returns></returns>
+    /// <seealso cref="https://www.mdpi.com/1099-4300/24/4/524"/>
+    /// <seealso cref="https://github.com/phreer/sampen_estimation"/>
+    public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
+    {
+        //int N = data.Length;
+        //double result = 0;
+        //long A = 0;
+        //long B = 0;
+
+        //// Check we have enough data points
+        //if (N <= dim) return (-1.0, -1.0);
+
+        //int[] AB = _ComputeAB(data, dim, fTol);
+        //int sample_num = AB.Length / 2;
+
+        //for (int i = 0; i < sample_num; i++)
+        //{
+        //    A += AB[i * 2];
+        //    B += AB[i * 2 + 1];
+        //}
+        ////if (a) *a = A / sample_num;
+        ////if (b) *b = B / sample_num;
+
+        //if (A > 0 && B > 0)
+        //    result = -Math.Log(B / A);
+        //else
+        //    result = -Math.Log((N - dim - 1) / (N - dim));
+
+        return (0.0, 0.0);
     }
 }
 
