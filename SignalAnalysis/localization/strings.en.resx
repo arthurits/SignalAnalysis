@@ -327,6 +327,9 @@ Default values will be used instead.</value>
   <data name="strFileHeader38" xml:space="preserve">
     <value>Shannon / Ideal</value>
   </data>
+  <data name="strFileHeader39" xml:space="preserve">
+    <value>Entropy algorithm</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

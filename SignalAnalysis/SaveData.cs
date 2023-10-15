@@ -60,12 +60,16 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader34}{StringResources.FileHeaderColon}{Results.BoxplotMax.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{Results.FractalDimension.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{Results.FractalVariance.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
-            sw.WriteLine($"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{Results.SampleEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader14}{StringResources.FileHeaderColon}{Results.ShannonEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader15}{StringResources.FileHeaderColon}{Results.EntropyBit.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{Results.IdealEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{Results.ShannonIdeal.ToString(_settings.AppCulture)}");
+            if (_settings.ComputeEntropy)
+                sw.WriteLine($"{StringResources.FileHeader39}{StringResources.FileHeaderColon}{StringResources.EntropyAlgorithms.Split(", ")[(int)_settings.EntropyAlgorithm]}");
+            else
+                sw.WriteLine($"{StringResources.FileHeader39}{StringResources.FileHeaderColon}-");
+            sw.WriteLine($"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
+            sw.WriteLine($"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{Results.SampleEntropy.ToString(_settings.AppCulture)}");
             if (_settings.ExportDerivative && _settings.ComputeDerivative)
                 sw.WriteLine($"{StringResources.FileHeader29}{StringResources.FileHeaderColon}{StringResources.DifferentiationAlgorithms.Split(", ")[(int)_settings.DerivativeAlgorithm]}");
             else
@@ -236,12 +240,13 @@ partial class FrmMain
             bw.Write(Results.BoxplotMax);
             bw.Write(Results.FractalDimension);
             bw.Write(Results.FractalVariance);
-            bw.Write(Results.ApproximateEntropy);
-            bw.Write(Results.SampleEntropy);
             bw.Write(Results.ShannonEntropy);
             bw.Write(Results.EntropyBit);
             bw.Write(Results.IdealEntropy);
             bw.Write(Results.ShannonIdeal);
+            bw.Write(Results.ApproximateEntropy);
+            bw.Write(Results.SampleEntropy);
+            bw.Write(Results.Integral);
 
             bw.Write($"{StringResources.FileHeader21}\t{SeriesName}");
 

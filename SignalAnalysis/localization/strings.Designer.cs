@@ -673,6 +673,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entropy algorithm.
+        /// </summary>
+        internal static string strFileHeader39 {
+            get {
+                return ResourceManager.GetString("strFileHeader39", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to : .
         /// </summary>
         internal static string strFileHeaderColon {

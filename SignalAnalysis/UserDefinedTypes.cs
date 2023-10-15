@@ -94,8 +94,8 @@ public class SignalStats
             $"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{IdealEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{ShannonIdeal.ToString("0.########", culture)}{Environment.NewLine}" +
             $"{StringResources.FileHeader39}{StringResources.FileHeaderColon}{entropyAlgorithm}{Environment.NewLine}" +
-            $"{StringResources.FileHeader12}(m={entropyM}, r={entropyR.ToString("0.##", culture)}){StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
-            $"{StringResources.FileHeader13}(m={entropyM}, r={entropyR.ToString("0.##", culture)}){StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}";
+            $"{StringResources.FileHeader12} (m={entropyM}, r={entropyR.ToString("0.##", culture)}){StringResources.FileHeaderColon}{ApproximateEntropy.ToString("0.########", culture)}{Environment.NewLine}" +
+            $"{StringResources.FileHeader13} (m={entropyM}, r={entropyR.ToString("0.##", culture)}){StringResources.FileHeaderColon}{SampleEntropy.ToString("0.########", culture)}{Environment.NewLine}";
         }
         
         if (integral)

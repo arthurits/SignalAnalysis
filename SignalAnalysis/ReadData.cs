@@ -464,24 +464,6 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader11));
             results.FractalVariance = readValue;
 
-            strLine = sr.ReadLine();    // Approximate entropy
-            if (strLine is null)
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader12));
-            if (!strLine.Contains($"{StringResources.GetString("strFileHeader12", fileCulture) ?? "Approximate entropy"}: ", StringComparison.Ordinal))
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader12));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader12));
-            results.ApproximateEntropy = readValue;
-
-            strLine = sr.ReadLine();    // Sample entropy
-            if (strLine is null)
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader13));
-            if (!strLine.Contains($"{StringResources.GetString("strFileHeader13", fileCulture) ?? "Sample entropy"}: ", StringComparison.Ordinal))
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader13));
-            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader13));
-            results.SampleEntropy = readValue;
-
             strLine = sr.ReadLine();    // Shannnon entropy
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader14));
@@ -509,7 +491,7 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader16));
             results.IdealEntropy = readValue;
 
-            strLine = sr.ReadLine();    // Ideal entropy
+            strLine = sr.ReadLine();    // Ratio Shannon/Ideal entropy
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader38));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader38", fileCulture) ?? "Shannon / Ideal"}: ", StringComparison.Ordinal))
@@ -518,7 +500,36 @@ partial class FrmMain
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader38));
             results.ShannonIdeal = readValue;
 
-            strLine = sr.ReadLine();    // Differentiation
+            strLine = sr.ReadLine();    // Entropy algorithm
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader39));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader39", fileCulture) ?? "Entropy algorithm"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader39));
+            if (strLine[(strLine.IndexOf(":") + 2)..] != "-")
+            {
+                string[] str = StringResources.GetString("strEntropyAlgorithms", fileCulture).Split(", ");
+                _settings.EntropyAlgorithm = (EntropyMethod)Array.IndexOf(str, strLine[(strLine.IndexOf(":") + 2)..]);
+            }
+
+            strLine = sr.ReadLine();    // Approximate entropy
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader12));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader12", fileCulture) ?? "Approximate entropy"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader12));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader12));
+            results.ApproximateEntropy = readValue;
+
+            strLine = sr.ReadLine();    // Sample entropy
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader13));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader13", fileCulture) ?? "Sample entropy"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader13));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader13));
+            results.SampleEntropy = readValue;
+
+            strLine = sr.ReadLine();    // Differentiation algorithm
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader29));
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader29", fileCulture) ?? "Differentiation algorithm"}: ", StringComparison.Ordinal))
@@ -664,12 +675,13 @@ partial class FrmMain
             results.BoxplotMax = br.ReadDouble();
             results.FractalDimension = br.ReadDouble();
             results.FractalVariance = br.ReadDouble();
-            results.ApproximateEntropy = br.ReadDouble();
-            results.SampleEntropy = br.ReadDouble();
             results.ShannonEntropy = br.ReadDouble();
             results.EntropyBit = br.ReadDouble();
             results.IdealEntropy = br.ReadDouble();
             results.ShannonIdeal = br.ReadDouble();
+            results.ApproximateEntropy = br.ReadDouble();
+            results.SampleEntropy = br.ReadDouble();
+            results.Integral = br.ReadDouble();
 
             strLine = br.ReadString();      // Column header names
             if (strLine is null)
