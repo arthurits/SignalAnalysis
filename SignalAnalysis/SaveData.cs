@@ -244,8 +244,12 @@ partial class FrmMain
             bw.Write(Results.EntropyBit);
             bw.Write(Results.IdealEntropy);
             bw.Write(Results.ShannonIdeal);
+            bw.Write((byte)_settings.EntropyAlgorithm);
+            bw.Write(_settings.EntropyFactorM);
+            bw.Write(_settings.EntropyFactorR);
             bw.Write(Results.ApproximateEntropy);
             bw.Write(Results.SampleEntropy);
+            bw.Write((byte)_settings.IntegrationAlgorithm);
             bw.Write(Results.Integral);
 
             bw.Write($"{StringResources.FileHeader21}\t{SeriesName}");

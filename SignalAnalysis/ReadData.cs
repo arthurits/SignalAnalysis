@@ -648,10 +648,12 @@ partial class FrmMain
             using var fs = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using var br = new BinaryReader(fs, System.Text.Encoding.UTF8);
 
-            string strLine = br.ReadString();   // SignalAnalysis data
-            if (strLine is null)
-                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
-            if (!strLine.Contains($"{StringResources.FileHeader01} (", StringComparison.Ordinal))
+            // SignalAnalysis data
+            string strLine = br.ReadString() ?? throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
+            //if (!strLine.Contains($"{StringResources.FileHeader01} (", StringComparison.Ordinal))
+            //    throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader01", fileCulture) ?? "SignalAnalysis data"} (", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
 
             start = br.ReadDateTime();      // start time
@@ -679,8 +681,12 @@ partial class FrmMain
             results.EntropyBit = br.ReadDouble();
             results.IdealEntropy = br.ReadDouble();
             results.ShannonIdeal = br.ReadDouble();
+            _settings.EntropyAlgorithm = (EntropyMethod)br.ReadByte();
+            _settings.EntropyFactorM = br.ReadUInt32();
+            _settings.EntropyFactorR = br.ReadDouble();
             results.ApproximateEntropy = br.ReadDouble();
             results.SampleEntropy = br.ReadDouble();
+            _settings.IntegrationAlgorithm = (IntegrationMethod)br.ReadByte();
             results.Integral = br.ReadDouble();
 
             strLine = br.ReadString();      // Column header names
