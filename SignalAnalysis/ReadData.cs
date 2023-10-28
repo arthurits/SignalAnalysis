@@ -290,7 +290,8 @@ partial class FrmMain
 
         DateTime start;
         DateTime end;
-        int points = 0, series = 0; 
+        int points = 0, series = 0;
+        uint factorM = 0;
         bool result = false;
         double sampleFreq;
         double readValue;
@@ -510,6 +511,24 @@ partial class FrmMain
                 string[] str = StringResources.GetString("strEntropyAlgorithms", fileCulture).Split(", ");
                 _settings.EntropyAlgorithm = (EntropyMethod)Array.IndexOf(str, strLine[(strLine.IndexOf(":") + 2)..]);
             }
+
+            strLine = sr.ReadLine();    // Entropy factor R
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader40));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader40", fileCulture) ?? "Entropy tolerance factor"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader40));
+            if (!double.TryParse(strLine[(strLine.IndexOf(":") + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out readValue))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader40));
+            _settings.EntropyFactorR = readValue;
+
+            strLine = sr.ReadLine();    // Entropy factor M
+            if (strLine is null)
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader41));
+            if (!strLine.Contains($"{StringResources.GetString("strFileHeader41", fileCulture) ?? "Entropy embedding dimension"}: ", StringComparison.Ordinal))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader41));
+            if (!uint.TryParse(strLine[(strLine.IndexOf(":") + 1)..], out factorM))
+                throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader41));
+            _settings.EntropyFactorM = factorM;
 
             strLine = sr.ReadLine();    // Approximate entropy
             if (strLine is null)

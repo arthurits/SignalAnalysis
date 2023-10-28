@@ -65,9 +65,17 @@ partial class FrmMain
             sw.WriteLine($"{StringResources.FileHeader16}{StringResources.FileHeaderColon}{Results.IdealEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader38}{StringResources.FileHeaderColon}{Results.ShannonIdeal.ToString(_settings.AppCulture)}");
             if (_settings.ComputeEntropy)
+            {
                 sw.WriteLine($"{StringResources.FileHeader39}{StringResources.FileHeaderColon}{StringResources.EntropyAlgorithms.Split(", ")[(int)_settings.EntropyAlgorithm]}");
+                sw.WriteLine($"{StringResources.FileHeader40}{StringResources.FileHeaderColon}{_settings.EntropyFactorR.ToString(_settings.AppCulture)}");
+                sw.WriteLine($"{StringResources.FileHeader41}{StringResources.FileHeaderColon}{_settings.EntropyFactorM.ToString(_settings.AppCulture)}");
+            }
             else
+            {
                 sw.WriteLine($"{StringResources.FileHeader39}{StringResources.FileHeaderColon}-");
+                sw.WriteLine($"{StringResources.FileHeader40}{StringResources.FileHeaderColon}-");
+                sw.WriteLine($"{StringResources.FileHeader41}{StringResources.FileHeaderColon}-");
+            }
             sw.WriteLine($"{StringResources.FileHeader12}{StringResources.FileHeaderColon}{Results.ApproximateEntropy.ToString(_settings.AppCulture)}");
             sw.WriteLine($"{StringResources.FileHeader13}{StringResources.FileHeaderColon}{Results.SampleEntropy.ToString(_settings.AppCulture)}");
             if (_settings.ExportDerivative && _settings.ComputeDerivative)
