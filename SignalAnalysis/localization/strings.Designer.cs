@@ -682,6 +682,24 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entropy tolerance factor.
+        /// </summary>
+        internal static string strFileHeader40 {
+            get {
+                return ResourceManager.GetString("strFileHeader40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entropy Embedding dimension.
+        /// </summary>
+        internal static string strFileHeader41 {
+            get {
+                return ResourceManager.GetString("strFileHeader41", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to : .
         /// </summary>
         internal static string strFileHeaderColon {

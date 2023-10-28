@@ -330,6 +330,12 @@ Se utilizarán los valores por defecto.</value>
   <data name="strFileHeader39" xml:space="preserve">
     <value>Algoritmo para la entropía</value>
   </data>
+  <data name="strFileHeader40" xml:space="preserve">
+    <value>Factor de tolerancia de la entropía</value>
+  </data>
+  <data name="strFileHeader41" xml:space="preserve">
+    <value>Dimensión de la entropía</value>
+  </data>
   <data name="strFileHeaderColon" xml:space="preserve">
     <value>: </value>
   </data>

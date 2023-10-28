@@ -57,6 +57,8 @@ public static class StringResources
     public static string FileHeader37 => StringRM.GetString("strFileHeader37", Culture) ?? "Quartile 3 (75%)";
     public static string FileHeader38 => StringRM.GetString("strFileHeader38", Culture) ?? "Shannon / Ideal";
     public static string FileHeader39 => StringRM.GetString("strFileHeader39", Culture) ?? "Entropy algorithm";
+    public static string FileHeader40 => StringRM.GetString("strFileHeader40", Culture) ?? "Entropy tolerance factor";
+    public static string FileHeader41 => StringRM.GetString("strFileHeader41", Culture) ?? "Entropy embedding dimension";
 
     public static string FileHeaderSection => StringRM.GetString("strFileHeaderSection", Culture) ?? "Section '{0}' is mis-formatted.";
 
