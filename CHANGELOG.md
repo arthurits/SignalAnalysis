@@ -1,9 +1,14 @@
 # SignalAnalysis changelog
 
 ## SignalAnalysis 1.6
-* Update Russian translation.
-* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.64.
-* Minor bug corrections.
+* Update Norwegian (Bokmål) (nb-NO) translation. _Thanks @bjartelund_.
+* Update Russian translation. _Thanks @ shmudivel_.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.68.
+* Add paralellization for entropy and fractal dimension.
+* Add ratio Shannon/Ideal entropy.
+* Add ApEn and SampEn algorithm choice.
+* Correct not-casted-to-double division bug in fractal dimension.
+* Update text and bin file formats.
 
 ## SignalAnalysis 1.5
 * Add variance computation.
