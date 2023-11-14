@@ -250,14 +250,14 @@ public static class Complexity
     //public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     //{
     //    int N = data.Length;
-    //    double result = 0;
+    //    double result;
     //    long A = 0;
     //    long B = 0;
 
     //    // Check we have enough data points
     //    if (N <= dim) return (-1.0, -1.0);
 
-    //    int[] AB = _ComputeAB(data, dim, fTol);
+    //    int[] AB = _ComputeAB(data.ToList(), dim, fTol);
     //    int sample_num = AB.Length / 2;
 
     //    for (int i = 0; i < sample_num; i++)
@@ -273,53 +273,53 @@ public static class Complexity
     //    else
     //        result = -Math.Log((N - dim - 1) / (N - dim));
 
-    //    return (0.0, 0.0);
+    //    return (0.0, result);
     //}
 
     //private static List<long> _ComputeAB(List<double> data, uint m, double r)
     //{
-    //    List<Point> points = GetPoints(data, m + 1);
+    //    List<PointF> points = GetPoints(data, m + 1);
     //    return ComputeAB(points, r);
     //}
 
-    //private static List<Point> GetPoints(List<double> data, uint m)
+    //private static List<PointF> GetPoints(List<double> data, uint m)
     //{
-    //    List<Point> result = new List<Point>(data.Count - (int)m + 1);
+    //    List<PointF> result = new(data.Count - (int)m + 1);
     //    for (int i = 0; i < result.Count; i++)
     //    {
     //        //List<int> subData = data.GetRange(i, (int)m);
     //        //Point p = new Point(subData, 0);
     //        //Point p = new(data[0] + i + (int)m, 0);
-    //        result[i] = new(data[0] + i + (int)m, 0);
+    //        result[i] = new((float)data[0] + i + (int)m, 0);
     //    }
     //    return result;
     //}
 
-    //private static List<long> ComputeAB(List<Point> points, int r)
+    //private static List<long> ComputeAB(List<PointF> points, int r)
     //{
     //    int n = points.Count;
-    //    List<long> result = new List<long>(2) { 0, 0 };
+    //    List<long> result = new(2) { 0, 0 };
     //    if (n == 0) return result;
-    //    result = CountMatchedPara(points, r);
+    //    result = CountMatchedParallel(points, r);
     //    return result;
     //}
 
-    //private static List<long> CountMatchedPara(List<Point> points, int r)
+    //private static List<long> CountMatchedParallel(List<PointF> points, int r)
     //{
     //    int n = points.Count;
     //    int num_threads = Environment.ProcessorCount;
     //    if (num_threads == 0) num_threads = 16;
     //    else if (num_threads > 12) num_threads -= 8;
     //    else num_threads /= 2;
-    //    List<long> As = new List<long>(num_threads);
-    //    List<long> Bs = new List<long>(num_threads);
+    //    List<long> As = new(num_threads);
+    //    List<long> Bs = new(num_threads);
     //    for (int i = 0; i < num_threads; i++)
     //    {
     //        As.Add(0);
     //        Bs.Add(0);
     //    }
     //    if (num_threads > n) num_threads = n / 2;
-    //    List<Thread> threads = new List<Thread>();
+    //    List<Thread> threads = new();
     //    for (int i = 0; i < num_threads; i++)
     //    {
     //        threads.Add(new Thread(() => CountMatched(points, r, (uint)i, (uint)num_threads, As, Bs)));
@@ -332,20 +332,22 @@ public static class Complexity
     //    {
     //        thread.Join();
     //    }
-    //    List<long> AB = new List<long>(2);
-    //    AB[0] = As.Sum();
-    //    AB[1] = Bs.Sum();
+    //    List<long> AB = new(2)
+    //    {
+    //        [0] = As.Sum(),
+    //        [1] = Bs.Sum()
+    //    };
     //    return AB;
     //}
 
-    //private static void CountMatched(List<Point> points, int r, uint offset, uint interval, List<long> As, List<long> Bs)
+    //private static void CountMatched(List<PointF> points, int r, uint offset, uint interval, List<long> As, List<long> Bs)
     //{
     //    uint n = (uint)points.Count;
     //    uint m = (uint)points[0].dim() - 1;
     //    uint index = 0;
     //    for (uint i = 0; (index = i * interval + offset) < n; ++i)
     //    {
-    //        Point p = points[(int)index];
+    //        PointF p = points[(int)index];
     //        for (uint j = index + 1; j < n; j++)
     //        {
     //            if (p.within(points[(int)j], m, r))
