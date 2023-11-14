@@ -1,5 +1,11 @@
-﻿using System.Numerics;
+﻿using FftSharp.Windows;
+using ScottPlot.Drawing.Colormaps;
+using System.Drawing;
+using System.Numerics;
+using System.Reflection;
+using System.Reflection.Metadata;
 using System.Runtime.Intrinsics;
+using static ScottPlot.Plottable.PopulationPlot;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis;
@@ -364,3 +370,207 @@ public static class Complexity
 
 }
 
+/// <summary>
+/// A point in euclidean space.
+/// A class that represents a multi-dimensional euclidean point with some associated value.
+/// We allow for each point to have an associated value so that some more information can be stored with each point.
+/// Points can also have a multiplicity/count, this corresponds to having several duplicates of the same point.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <typeparam name="S"></typeparam>
+public class Point<T, S>
+    where T : INumber<T>
+    where S : INumber<S>
+{
+    private List<T> vector;
+    private S value;
+    private int multiplicity;
+
+    /// <summary>
+    /// Constructs an empty point. Creates a point in 0 dimensional euclidean space.
+    /// This constructor is provided only to make certain edge cases easier to handle.
+    /// </summary>
+    public Point()
+    {
+        multiplicity = 0;
+    }
+
+    /// <summary>
+    /// Constructs an empty point. Creates a point with its position in euclidean space defined by vec, value defined by val, and a multiplicity/count of 1.
+    /// </summary>
+    /// <param name="val">The position in euclidean space</param>
+    /// <param name="vec">The value associated with the point</param>
+    public Point(List<T> vec, S val)
+    {
+        this.vector = vec;
+        this.value = val;
+        multiplicity = 1;
+    }
+
+    /// <summary>
+    /// Constructs an empty point. Copies a point.
+    /// </summary>
+    /// <param name="val">The position in euclidean space</param>
+    /// <param name="vec">The value associated with the point</param>
+    public Point(Point<T, S> p)
+    {
+        value = p.value;
+        vector = p.vector;
+        multiplicity = p.Count();
+    }
+
+    /// <summary>
+    /// Euclidean position of the point.
+    /// </summary>
+    /// <returns>The euclidean position of the point as a List.</returns>
+    public List<T> AsVector()
+    {
+        return vector;
+    }
+
+    /// <summary>
+    /// The point's ambient dimension.
+    /// </summary>
+    /// <returns>the dimension of the space in which the point lives. I.e. a point of the form (1,2,3) lives in dimension 3.</returns>
+    public int Dim()
+    {
+        return vector.Count;
+    }
+    
+    /// <summary>
+    /// The point's count/multiplicity.
+    /// </summary>
+    /// <returns>The count/multiplicity</returns>
+    public int Count()
+    {
+        return multiplicity;
+    }
+
+    /// <summary>
+    /// Increase the point's count/multiplicity.
+    /// </summary>
+    /// <param name="n">Amount to increase by</param>
+    /// <exception cref="Exception">If <paramref name="n"/> is negative</exception>
+    public void IncreaseCountBy(int n)
+    {
+        if (n < 0)
+        {
+            throw new Exception("Can't increase by a negative amount");
+        }
+        multiplicity += n;
+    }
+
+    /// <summary>
+    /// Increase the point's count/multiplicity by one.
+    /// </summary>
+    public void IncreaseCountByOne()
+    {
+        multiplicity += 1;
+    }
+
+    /// <summary>
+    /// The point's value.
+    /// </summary>
+    /// <returns>The value stored in the point.</returns>
+    public S Value()
+    {
+        return value;
+    }
+
+
+    public Point<T, S> DropLast()
+    {
+        Point<T, S> result = new(this);
+        result.vector.RemoveAt(result.vector.Count - 1);
+        return result;
+    }
+
+    /// <summary>
+    /// Index a point. Get the ith coordinate value of the point. I.e. if a point is of the form (4, 5, 6), then its 0th coordinate value is 4 while its 2nd is 6.
+    /// </summary>
+    /// <param name="index">The coordinate to index</param>
+    /// <returns>The coordinate value</returns>
+    /// <exception cref="IndexOutOfRangeException">If <paramref name="index"/> is out of bounds</exception>
+    public T this[int index]
+    {
+        get
+        {
+            if (index < 0 || index >= Dim())
+            {
+                throw new IndexOutOfRangeException("[] access index for point is out of range.");
+            }
+            return vector[index];
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="p"></param>
+    /// <param name="m"></param>
+    /// <param name="r"></param>
+    /// <returns></returns>
+    public bool Within(Point<T, S> p, int m, int r)
+    {
+        
+        for (int i = 0; i < m; i++)
+        {
+            if (p[i] < vector[i] - T.CreateChecked(r) || p[i] > vector[i] + T.CreateChecked(r))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Check for equality. 
+    /// Two points are considered equal if they are in the same spot, have the same multiplicity/count, and store the same value.
+    /// </summary>
+    /// <param name="p">Some other point.</param>
+    /// <returns><see cref="true"/>if <paramref name="p"/> equals the current point, otherwise <see cref="false"/>.</returns>
+    public bool Equals(Point<T, S> p)
+    {
+        return vector.Equals(p.vector) && multiplicity == p.multiplicity && value.Equals(p.value);
+    }
+
+    /// <summary>
+    /// Check for inequality.
+    /// The opposite of <seealso cref="Equals(Point{T, S})"/>.
+    /// </summary>
+    /// <param name="p">Some other point.</param>
+    /// <returns><see cref="false"/> if <paramref name="p"/> equals the current point, otherwise <see cref="true"/>.</returns>
+    public bool NotEquals(Point<T, S> p)
+    {
+        return !Equals(p);
+    }
+
+    /// <summary>
+    /// Prints the point to standard out.
+    /// As an example, a point with euclidean location(3,4,5) and with a multiplicity/count of 4 will be printed as (3, 4, 5) : 4
+    /// </summary>
+    /// <param name="withCount">Whether or not to display the points count/multiplicity.</param>
+    public void ToString(bool withCount = true)
+    {
+        if (vector.Count == 0)
+        {
+            Console.WriteLine("()");
+        }
+        else
+        {
+            Console.Write("(");
+            for (int i = 0; i < vector.Count - 1; i++)
+            {
+                Console.Write(vector[i] + ", ");
+            }
+            if (withCount)
+            {
+                Console.WriteLine(vector[^1] + ") : " + multiplicity);
+            }
+            else
+            {
+                Console.WriteLine(vector[^1] + ") : ");
+            }
+        }
+    }
+}
