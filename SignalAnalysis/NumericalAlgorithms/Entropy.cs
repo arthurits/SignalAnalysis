@@ -1,4 +1,5 @@
 ﻿using FftSharp.Windows;
+using Microsoft.VisualBasic.ApplicationServices;
 using ScottPlot.Drawing.Colormaps;
 using System.Drawing;
 using System.Numerics;
@@ -253,120 +254,129 @@ public static class Complexity
     /// <returns></returns>
     /// <seealso cref="https://www.mdpi.com/1099-4300/24/4/524"/>
     /// <seealso cref="https://github.com/phreer/sampen_estimation"/>
-    //public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
-    //{
-    //    int N = data.Length;
-    //    double result;
-    //    long A = 0;
-    //    long B = 0;
+    public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
+    {
+        int N = data.Length;
+        double result;
+        long A = 0;
+        long B = 0;
+        double tolerance;
+        if (std.HasValue)
+            tolerance = std.Value * fTol;
+        else
+            tolerance = StdDev<double>(data) * fTol;
 
-    //    // Check we have enough data points
-    //    if (N <= dim) return (-1.0, -1.0);
+        // Check we have enough data points
+        if (N <= dim) return (-1.0, -1.0);
 
-    //    int[] AB = _ComputeAB(data.ToList(), dim, fTol);
-    //    int sample_num = AB.Length / 2;
+        long[] AB = _ComputeAB(data.ToList(), dim, tolerance).ToArray();
+        int sample_num = AB.Length / 2;
 
-    //    for (int i = 0; i < sample_num; i++)
-    //    {
-    //        A += AB[i * 2];
-    //        B += AB[i * 2 + 1];
-    //    }
-    //    //if (a) *a = A / sample_num;
-    //    //if (b) *b = B / sample_num;
+        for (int i = 0; i < sample_num; i++)
+        {
+            A += AB[i * 2];
+            B += AB[i * 2 + 1];
+        }
+        //if (a) *a = A / sample_num;
+        //if (b) *b = B / sample_num;
 
-    //    if (A > 0 && B > 0)
-    //        result = -Math.Log(B / A);
-    //    else
-    //        result = -Math.Log((N - dim - 1) / (N - dim));
+        if (A > 0 && B > 0)
+            result = -Math.Log((double)B / A);
+        else
+            result = -Math.Log((double)(N - dim - 1) / (N - dim));
 
-    //    return (0.0, result);
-    //}
+        return (0.0, result);
+    }
 
-    //private static List<long> _ComputeAB(List<double> data, uint m, double r)
-    //{
-    //    List<PointF> points = GetPoints(data, m + 1);
-    //    return ComputeAB(points, r);
-    //}
+    private static List<long> _ComputeAB(List<double> data, uint m, double r)
+    {
+        List<PointTree<double, int>> points = GetPoints(data, m + 1);
+        return ComputeAB(points, r);
+    }
 
-    //private static List<PointF> GetPoints(List<double> data, uint m)
-    //{
-    //    List<PointF> result = new(data.Count - (int)m + 1);
-    //    for (int i = 0; i < result.Count; i++)
-    //    {
-    //        //List<int> subData = data.GetRange(i, (int)m);
-    //        //Point p = new Point(subData, 0);
-    //        //Point p = new(data[0] + i + (int)m, 0);
-    //        result[i] = new((float)data[0] + i + (int)m, 0);
-    //    }
-    //    return result;
-    //}
+    private static List<PointTree<double, int>> GetPoints(List<double> data, uint m)
+    {
+        PointTree<double, int>[] result = new PointTree<double, int>[data.Count - (int)m + 1];
+        for (int i = 0; i < result.Length; i++)
+        {
+            //List<double> subData = data.GetRange(i, (int)m);
+            //PointTree<double, int> p = new PointTree<double, int>(subData, 0);
+            //PointTree<double, int> p = new PointTree<double, int>(data.GetRange(i, (int)m), 0);
+            result[i] = new PointTree<double, int>(data.GetRange(i, (int)m), 0);
+        }
+        return result.ToList();
+    }
 
-    //private static List<long> ComputeAB(List<PointF> points, int r)
-    //{
-    //    int n = points.Count;
-    //    List<long> result = new(2) { 0, 0 };
-    //    if (n == 0) return result;
-    //    result = CountMatchedParallel(points, r);
-    //    return result;
-    //}
+    private static List<long> ComputeAB(List<PointTree<double, int>> points, double r)
+    {
+        int n = points.Count;
+        List<long> result = new(2) { 0, 0 };
+        if (n == 0) return result;
+        result = CountMatchedParallel(points, r);
+        return result;
+    }
 
-    //private static List<long> CountMatchedParallel(List<PointF> points, int r)
-    //{
-    //    int n = points.Count;
-    //    int num_threads = Environment.ProcessorCount;
-    //    if (num_threads == 0) num_threads = 16;
-    //    else if (num_threads > 12) num_threads -= 8;
-    //    else num_threads /= 2;
-    //    List<long> As = new(num_threads);
-    //    List<long> Bs = new(num_threads);
-    //    for (int i = 0; i < num_threads; i++)
-    //    {
-    //        As.Add(0);
-    //        Bs.Add(0);
-    //    }
-    //    if (num_threads > n) num_threads = n / 2;
-    //    List<Thread> threads = new();
-    //    for (int i = 0; i < num_threads; i++)
-    //    {
-    //        threads.Add(new Thread(() => CountMatched(points, r, (uint)i, (uint)num_threads, As, Bs)));
-    //    }
-    //    foreach (Thread thread in threads)
-    //    {
-    //        thread.Start();
-    //    }
-    //    foreach (Thread thread in threads)
-    //    {
-    //        thread.Join();
-    //    }
-    //    List<long> AB = new(2)
-    //    {
-    //        [0] = As.Sum(),
-    //        [1] = Bs.Sum()
-    //    };
-    //    return AB;
-    //}
+    private static List<long> CountMatchedParallel(List<PointTree<double, int>> points, double r)
+    {
+        int n = points.Count;
+        int num_threads = Environment.ProcessorCount;
+        if (num_threads == 0) num_threads = 16;
+        else if (num_threads > 12) num_threads -= 8;
+        else num_threads /= 2;
+        if (num_threads > n) num_threads = n / 2;
 
-    //private static void CountMatched(List<PointF> points, int r, uint offset, uint interval, List<long> As, List<long> Bs)
-    //{
-    //    uint n = (uint)points.Count;
-    //    uint m = (uint)points[0].dim() - 1;
-    //    uint index = 0;
-    //    for (uint i = 0; (index = i * interval + offset) < n; ++i)
-    //    {
-    //        PointF p = points[(int)index];
-    //        for (uint j = index + 1; j < n; j++)
-    //        {
-    //            if (p.within(points[(int)j], m, r))
-    //            {
-    //                As[(int)offset] += 1;
-    //                if (-r <= p[m] - points[(int)j][m] && p[m] - points[(int)j][m] <= r)
-    //                {
-    //                    Bs[(int)offset] += 1;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+        List<long> As = new(num_threads);
+        List<long> Bs = new(num_threads);
+        for (int i = 0; i < num_threads; i++)
+        {
+            As.Add(0);
+            Bs.Add(0);
+        }
+        
+        Parallel.For(0, num_threads, i =>
+        {
+            CountMatched(points, r, (uint)i, (uint)num_threads, As, Bs);
+        });
+
+        //List<Thread> threads = new();
+        //for (int i = 0; i < num_threads; i++)
+        //{
+        //    threads.Add(new Thread(() => CountMatched(points, r, (uint)i, (uint)num_threads, As, Bs)));
+        //}
+        //foreach (Thread thread in threads)
+        //{
+        //    thread.Start();
+        //}
+        //foreach (Thread thread in threads)
+        //{
+        //    thread.Join();
+        //}
+
+        List<long> AB = new() {As.Sum(), Bs.Sum()};
+        return AB;
+    }
+
+    private static void CountMatched(List<PointTree<double, int>> points, double r, uint offset, uint interval, List<long> As, List<long> Bs)
+    {
+        uint n = (uint)points.Count;
+        uint m = (uint)points[0].Dim() - 1;
+        uint index = 0;
+        for (uint i = 0; (index = i * interval + offset) < n; ++i)
+        {
+            PointTree<double, int> p = points[(int)index];
+            for (uint j = index + 1; j < n; j++)
+            {
+                if (p.Within(points[(int)j], (int)m, r))
+                {
+                    As[(int)offset] += 1;
+                    if (-r <= p[(int)m] - points[(int)j][(int)m] && p[(int)m] - points[(int)j][(int)m] <= r)
+                    {
+                        Bs[(int)offset] += 1;
+                    }
+                }
+            }
+        }
+    }
 
 }
 
@@ -378,7 +388,7 @@ public static class Complexity
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <typeparam name="S"></typeparam>
-public class Point<T, S>
+public class PointTree<T, S>
     where T : INumber<T>
     where S : INumber<S>
 {
@@ -390,7 +400,7 @@ public class Point<T, S>
     /// Constructs an empty point. Creates a point in 0 dimensional euclidean space.
     /// This constructor is provided only to make certain edge cases easier to handle.
     /// </summary>
-    public Point()
+    public PointTree()
     {
         multiplicity = 0;
     }
@@ -400,7 +410,7 @@ public class Point<T, S>
     /// </summary>
     /// <param name="val">The position in euclidean space</param>
     /// <param name="vec">The value associated with the point</param>
-    public Point(List<T> vec, S val)
+    public PointTree(List<T> vec, S val)
     {
         this.vector = vec;
         this.value = val;
@@ -412,7 +422,7 @@ public class Point<T, S>
     /// </summary>
     /// <param name="val">The position in euclidean space</param>
     /// <param name="vec">The value associated with the point</param>
-    public Point(Point<T, S> p)
+    public PointTree(PointTree<T, S> p)
     {
         value = p.value;
         vector = p.vector;
@@ -478,9 +488,9 @@ public class Point<T, S>
     }
 
 
-    public Point<T, S> DropLast()
+    public PointTree<T, S> DropLast()
     {
-        Point<T, S> result = new(this);
+        PointTree<T, S> result = new(this);
         result.vector.RemoveAt(result.vector.Count - 1);
         return result;
     }
@@ -510,7 +520,7 @@ public class Point<T, S>
     /// <param name="m"></param>
     /// <param name="r"></param>
     /// <returns></returns>
-    public bool Within(Point<T, S> p, int m, int r)
+    public bool Within(PointTree<T, S> p, int m, double r)
     {
         
         for (int i = 0; i < m; i++)
@@ -529,18 +539,18 @@ public class Point<T, S>
     /// </summary>
     /// <param name="p">Some other point.</param>
     /// <returns><see cref="true"/>if <paramref name="p"/> equals the current point, otherwise <see cref="false"/>.</returns>
-    public bool Equals(Point<T, S> p)
+    public bool Equals(PointTree<T, S> p)
     {
         return vector.Equals(p.vector) && multiplicity == p.multiplicity && value.Equals(p.value);
     }
 
     /// <summary>
     /// Check for inequality.
-    /// The opposite of <seealso cref="Equals(Point{T, S})"/>.
+    /// The opposite of <seealso cref="Equals(PointTree{T, S})"/>.
     /// </summary>
     /// <param name="p">Some other point.</param>
     /// <returns><see cref="false"/> if <paramref name="p"/> equals the current point, otherwise <see cref="true"/>.</returns>
-    public bool NotEquals(Point<T, S> p)
+    public bool NotEquals(PointTree<T, S> p)
     {
         return !Equals(p);
     }

@@ -269,16 +269,24 @@ partial class FrmMain
     private void ComputeEntropy(double[] signal)
     {
         Stopwatch stopwatch = new();
+        
         stopwatch.Start();
         //(Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token);
         stopwatch.Stop();
         TimeSpan elapsed = stopwatch.Elapsed;
-        Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+        Debug.WriteLine($"Elapsed time - Normal: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+        
         stopwatch.Restart();
         (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token, _settings.EntropyFactorM, _settings.EntropyFactorR);
         stopwatch.Stop();
         elapsed = stopwatch.Elapsed;
         Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+
+        //stopwatch.Restart();
+        //(Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_SuperFast(signal, token, _settings.EntropyFactorM, _settings.EntropyFactorR);
+        //stopwatch.Stop();
+        //elapsed = stopwatch.Elapsed;
+        //Debug.WriteLine($"Elapsed time - SuperFast: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
 
         (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy, Results.ShannonIdeal) = Complexity.ShannonEntropy(signal);
     }
