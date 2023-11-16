@@ -1,6 +1,8 @@
 ﻿using FftSharp.Windows;
 using Microsoft.VisualBasic.ApplicationServices;
 using ScottPlot.Drawing.Colormaps;
+using ScottPlot.Styles;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
 using System.Reflection;
@@ -14,7 +16,9 @@ namespace SignalAnalysis;
 public enum EntropyMethod
 {
     BruteForce,
-    MonteCarlo
+    MonteCarloUniform,
+    MonteCarloRandom,
+    MonteCarloRandomSorted
 }
 
 /// <summary>
@@ -254,7 +258,7 @@ public static class Complexity
     /// <returns></returns>
     /// <seealso cref="https://www.mdpi.com/1099-4300/24/4/524"/>
     /// <seealso cref="https://github.com/phreer/sampen_estimation"/>
-    public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
+    public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, EntropyMethod entropyMethod = EntropyMethod.BruteForce, uint dim = 2, double fTol = 0.2, double? std = null)
     {
         int N = data.Length;
         double result;
@@ -269,7 +273,17 @@ public static class Complexity
         // Check we have enough data points
         if (N <= dim) return (-1.0, -1.0);
 
-        long[] AB = _ComputeAB(data.ToList(), dim, tolerance).ToArray();
+        // Compute values depending on method
+        //long[] AB = ComputeAB_Direct(data.ToList(), dim, tolerance).ToArray();
+        long[] AB = entropyMethod switch
+        {
+            EntropyMethod.BruteForce => ComputeAB_Direct(data.ToList(), dim, tolerance).ToArray(),
+            EntropyMethod.MonteCarloUniform => ComputeAB_Uniform(data, dim, tolerance, SampleSize: 1024, SampleNum: 8),
+            EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom(data, dim, tolerance, SampleSize: 1024, SampleNum: 8, false),
+            EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom(data, dim, tolerance, SampleSize: 1024, SampleNum: 8, true),
+            _ => Array.Empty<long>(),
+        };
+
         int sample_num = AB.Length / 2;
 
         for (int i = 0; i < sample_num; i++)
@@ -288,7 +302,7 @@ public static class Complexity
         return (0.0, result);
     }
 
-    private static List<long> _ComputeAB(List<double> data, uint m, double r)
+    private static List<long> ComputeAB_Direct(List<double> data, uint m, double r)
     {
         List<PointTree<double, int>> points = GetPoints(data, m + 1);
         return ComputeAB(points, r);
@@ -377,6 +391,93 @@ public static class Complexity
             }
         }
     }
+
+    private static long[] ComputeAB_QuasiRandom(double[] data, uint m, double r, int SampleSize = 1024, int SampleNum = 8, bool presort = true)
+    {
+        List<PointTree<double, int>> points = GetPoints(data.ToList(), m + 1);
+        int numPoints = points.Count;
+        Random random = new();
+
+        if (presort)
+        {
+            points.Sort((p1, p2) =>
+            {
+                for (int i = 0; i < p1.Dim(); i++)
+                {
+                    if (p1[i] > p2[i])
+                        return 1;
+                    if (p1[i] < p2[i])
+                        return -1;
+                }
+                return 1;
+            });
+        }
+
+        long[] ABs = new long[2 * SampleNum];
+        //for (int i = 0; i < (2 * SampleNum); ++i)
+        //    ABs.Add(0);
+
+        List<PointTree<double, int>> sampled_points = new (SampleSize);
+        int[] indices = new int[SampleSize];
+        int[] offsets = new int[SampleNum -1];
+        int[] tmp_indices = new int[SampleSize];
+
+        for (int j = 0; j < SampleSize; j++)
+            indices[j] = random.Next(0, numPoints);
+            // indices[j] = (n / sample_size) * j;
+
+        for (int i = 0; i < SampleNum - 1; ++i)
+            offsets[i] = random.Next(0, numPoints);
+
+        for (int i = 0; i < SampleNum; i++)
+        {
+            
+            if (i is not 0)
+            {
+                int offset = offsets[i - 1];
+                for (uint j = 0; j < SampleSize; ++j)
+                    tmp_indices[j] = (indices[j] + offset) % numPoints;
+
+            }
+            else
+            {
+                for (uint j = 0; j < SampleSize; ++j)
+                    tmp_indices[j] = indices[j];
+            }
+
+            for (int j = 0; j < SampleSize; ++j)
+                sampled_points[j] = points[tmp_indices[j]];
+
+            long[] AB = ComputeAB(sampled_points, r).ToArray();
+            ABs[2 * i] += AB[0];
+            ABs[2 * i + 1] += AB[1];
+        }
+        return ABs;
+    }
+
+    private static long[] ComputeAB_Uniform(double[] data, uint m, double r, int SampleSize = 1024, int SampleNum = 8)
+    {
+        List<PointTree<double, int>> points = GetPoints(data.ToList(), m + 1);
+        PointTree<double, int>[] sampled_points = new PointTree<double, int>[SampleSize];
+        Random random = new();
+        int numPoints = points.Count;
+
+        long[] ABs = new long[2 * SampleNum];
+        //for (int i = 0; i < (2 * SampleNum); ++i)
+        //    ABs.Add(0);
+        
+        for (int i = 0; i < SampleNum; i++)
+        {
+            // generate points
+            for (int j = 0; j < SampleSize; j++)
+                sampled_points[j] = points[random.Next(0, numPoints)];
+
+            long[] AB = ComputeAB(sampled_points.ToList(), r).ToArray();
+            ABs[2 * i] += AB[0];
+            ABs[2 * i + 1] += AB[1];
+        }
+    return ABs;
+}
 
 }
 
