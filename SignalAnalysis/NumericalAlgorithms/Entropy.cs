@@ -261,7 +261,7 @@ public static class Complexity
     public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, EntropyMethod entropyMethod = EntropyMethod.BruteForce, uint dim = 2, double fTol = 0.2, double? std = null)
     {
         int N = data.Length;
-        double result;
+        double ApEn, SampEn;
         long A = 0;
         long B = 0;
         double tolerance;
@@ -295,11 +295,11 @@ public static class Complexity
         //if (b) *b = B / sample_num;
 
         if (A > 0 && B > 0)
-            result = -Math.Log((double)B / A);
+            SampEn = -Math.Log((double)B / A);
         else
-            result = -Math.Log((double)(N - dim - 1) / (N - dim));
+            SampEn = -Math.Log((double)(N - dim - 1) / (N - dim));
 
-        return (0.0, result);
+        return (0.0, SampEn);
     }
 
     private static List<long> ComputeAB_Direct(List<double> data, uint m, double r)
