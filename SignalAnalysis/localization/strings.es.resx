@@ -593,10 +593,10 @@ Hausdorff-Besicovitch se ha detenido.</value>
     <value>Puntos</value>
   </data>
   <data name="strRadRoundDown" xml:space="preserve">
-    <value>Añadir puntos</value>
+    <value>Recortar serie</value>
   </data>
   <data name="strRadRoundUp" xml:space="preserve">
-    <value>Recortar</value>
+    <value>Añadir valores 0</value>
   </data>
   <data name="strRadSeconds" xml:space="preserve">
     <value>Segundos</value>
