@@ -1,15 +1,4 @@
-﻿using FftSharp.Windows;
-using Microsoft.VisualBasic.ApplicationServices;
-using ScottPlot.Drawing.Colormaps;
-using ScottPlot.Styles;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Numerics;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Runtime.Intrinsics;
-using static ScottPlot.Plottable.PopulationPlot;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Numerics;
 
 namespace SignalAnalysis;
 
