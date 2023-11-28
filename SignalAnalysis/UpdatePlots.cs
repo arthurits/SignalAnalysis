@@ -277,6 +277,7 @@ partial class FrmMain
         Debug.WriteLine($"Elapsed time - Normal: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
         
         stopwatch.Restart();
+        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token, _settings.EntropyFactorM, 0.15, 1);
         (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token, _settings.EntropyFactorM, _settings.EntropyFactorR);
         stopwatch.Stop();
         elapsed = stopwatch.Elapsed;
