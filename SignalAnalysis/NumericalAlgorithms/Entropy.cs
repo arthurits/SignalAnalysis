@@ -31,30 +31,30 @@ public static class Complexity
     /// <returns>AppEn and SampEn</returns>
     public static (double AppEn, double SampEn) Entropy(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     {
-        long upper = data.Length - (dim + 1) + 1;
+        long blocks = data.Length - (dim + 1) + 1;
         bool isEqual;
-        ulong AppEn_Cum, AppEn_Cum1;
-        ulong SampEn_Cum = 0, SampEn_Cum1 = 0;
+        ulong apEn_Possible, apEn_Match;
+        ulong sampEn_Possible = 0, sampEn_Match = 0;
         double sum = 0.0;
-        double appEn, sampEn;
-        double tolerance;
+        double apEn, sampEn;
+        double noiseFilter; // Tolerance
         if (std.HasValue)
-            tolerance = std.Value * fTol;
+            noiseFilter = std.Value * fTol;
         else
-            tolerance = StdDev<double>(data) * fTol;
+            noiseFilter = StdDev<double>(data) * fTol;
 
 
-        for (uint i = 0; i < upper; i++)
+        for (uint i = 0; i < blocks; i++)
         {
-            AppEn_Cum = 0;
-            AppEn_Cum1 = 0;
-            for (uint j = 0; j < upper; j++)
+            apEn_Possible = 0;
+            apEn_Match = 0;
+            for (uint j = 0; j < blocks; j++)
             {
                 isEqual = true;
                 //m - length series
                 for (uint k = 0; k < dim; k++)
                 {
-                    if (Math.Abs(data[i + k] - data[j + k]) > tolerance)
+                    if (Math.Abs(data[i + k] - data[j + k]) > noiseFilter)
                     {
                         isEqual = false;
                         break;
@@ -64,26 +64,26 @@ public static class Complexity
                 }
                 if (isEqual)
                 {
-                    AppEn_Cum++;
-                    SampEn_Cum++;
+                    apEn_Possible++;
+                    if (i != j) sampEn_Possible++;
                 }
 
                 //m+1 - length series
-                if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
+                if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= noiseFilter)
                 {
-                    AppEn_Cum1++;
-                    SampEn_Cum1++;
+                    apEn_Match++;
+                    if (i != j) sampEn_Match++;
                 }
             }
 
-            if (AppEn_Cum > 0 && AppEn_Cum1 > 0)
-                sum += Math.Log((double)AppEn_Cum / (double)AppEn_Cum1);
+            if (apEn_Possible > 0 && apEn_Match > 0)
+                sum += Math.Log((double)apEn_Possible / (double)apEn_Match);
         }
 
-        appEn = sum / (double)(data.Length - dim);
-        sampEn = SampEn_Cum > 0 && SampEn_Cum1 > 0 ? Math.Log((double)SampEn_Cum / (double)SampEn_Cum1) : 0.0;
+        apEn = sum / (double)(data.Length - dim);
+        sampEn = sampEn_Possible > 0 && sampEn_Match > 0 ? Math.Log((double)sampEn_Possible / (double)sampEn_Match) : 0.0;
 
-        return (appEn, sampEn);
+        return (apEn, sampEn);
     }
 
     /// <summary>
@@ -135,14 +135,14 @@ public static class Complexity
                 if (isEqual_Arr[i])
                 {
                     AppEn_Cum_Arr[i]++;
-                    SampEn_Cum_Arr[i]++;
+                    if (i != j) SampEn_Cum_Arr[i]++;
                 }
 
                 //m+1 - length series
                 if (isEqual_Arr[i] && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
                 {
                     AppEn_Cum1_Arr[i]++;
-                    SampEn_Cum1_Arr[i]++;
+                    if (i != j) SampEn_Cum1_Arr[i]++;
                 }
             }
             if (AppEn_Cum_Arr[i] > 0 && AppEn_Cum1_Arr[i] > 0)
