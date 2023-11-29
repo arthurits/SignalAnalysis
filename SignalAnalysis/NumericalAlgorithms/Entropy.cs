@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace SignalAnalysis;
 
@@ -327,34 +328,32 @@ public static class Complexity
             As.Add(0);
             Bs.Add(0);
         }
-        
+
         var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
 
         //Parallel.For(0, n, options, i =>
         //{
-        //    CountMatched(points, r, (uint)i, (uint)n, As, Bs);
+        //    CountMatched(data, r, (uint)i, (uint)n, As, Bs);
         //});
 
-        for (int i = 0; i < n; i++)
+        uint m = (uint)data[0].Dim() - 1;
+        for (uint i = 0; i < n; i++)
         {
-            uint m = (uint)data[0].Dim() - 1;
-            for (uint j = (uint)i; j < n; ++j)
-            {
-                PointTree<double, int> p = data[(int)j];
-                for (uint k = j + 1; k < n; k++)
+                PointTree<double, int> p = data[(int)i];
+                for (uint j = i + 1; j < n; j++)
                 {
-                    if (p.Within(data[(int)k], (int)m, r))
+                    if (p.Within(data[(int)j], (int)m, r))
                     {
                         As[(int)i] += 1;
-                        if (-r <= p[(int)m] - data[(int)k][(int)m] && p[(int)m] - data[(int)k][(int)m] <= r)
+                        if (-r <= p[(int)m] - data[(int)j][(int)m] && p[(int)m] - data[(int)j][(int)m] <= r)
                         {
                             Bs[(int)i] += 1;
                         }
                     }
                 }
-            }
+            //}
         }
-
+            
         //List<Thread> threads = new();
         //for (int i = 0; i < num_threads; i++)
         //{
@@ -373,62 +372,59 @@ public static class Complexity
         return AB;
     }
 
-    private static List<long> CountMatchedParallel(double[] data, uint dim, double r)
+    private static (int[] appEnPossible, int[] appEnMatch, int[] sampEnPossible, int[] sampEnMatch) CountMatchedParallel(double[] data, uint dim, double r)
     {
-        int n = data.Length;
+        int blocks = data.Length - (int)dim;
         int numThreads = Environment.ProcessorCount;
 
-        List<long> As = new(n);
-        List<long> Bs = new(n);
-        for (int i = 0; i < n; i++)
-        {
-            As.Add(0);
-            Bs.Add(0);
-        }
+        int[] AppEnPossible = new int[blocks];
+        int[] AppEnMatch = new int[blocks];
+        int[] SampEnPossible = new int[blocks];
+        int[] SampEnMatch = new int[blocks];
+        double[] sumArr = new double[blocks];
+        bool[] isEqualArr = new bool[blocks];
 
         var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
 
-        //Parallel.For(0, n, options, i =>
+        //Parallel.For(0, blocks, options, i =>
         //{
         //    CountMatched(points, r, (uint)i, (uint)n, As, Bs);
         //});
 
-        //for (int i = 0; i < n; i++)
-        //{
-        //    uint m = dim;
-        //    for (uint j = (uint)i; j < n; ++j)
-        //    {
-        //        PointTree<double, int> p = data[(int)j];
-        //        for (uint k = j + 1; k < n; k++)
-        //        {
-        //            if (p.Within(data[(int)k], (int)m, r))
-        //            {
-        //                As[(int)i] += 1;
-        //                if (-r <= p[(int)m] - data[(int)k][(int)m] && p[(int)m] - data[(int)k][(int)m] <= r)
-        //                {
-        //                    Bs[(int)i] += 1;
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        for (int i = 0; i < blocks; i++)
+        {
+            AppEnPossible[i] = 0;
+            AppEnMatch[i] = 0;
+            for (uint j = 0; j < blocks; j++)
+            {
+                isEqualArr[i] = true;
+                // Check for "possibles". This corresponds to the m - length block
+                for (uint k = 0; k < dim; k++)
+                {
+                    if (Math.Abs(data[i + k] - data[j + k]) > r)
+                    {
+                        isEqualArr[i] = false;
+                        break;
+                    }
+                    //if (ct.IsCancellationRequested)
+                    //    throw new OperationCanceledException("CancelEntropy", ct);
+                }
+                if (isEqualArr[i])
+                {
+                    AppEnPossible[i]++;
+                    if (j > i) SampEnPossible[i]++;
+                }
 
-        //List<Thread> threads = new();
-        //for (int i = 0; i < num_threads; i++)
-        //{
-        //    threads.Add(new Thread(() => CountMatched(points, r, (uint)i, (uint)num_threads, As, Bs)));
-        //}
-        //foreach (Thread thread in threads)
-        //{
-        //    thread.Start();
-        //}
-        //foreach (Thread thread in threads)
-        //{
-        //    thread.Join();
-        //}
+                // Check for "matches". This corresponds to the m+1 - length block
+                if (isEqualArr[i] && Math.Abs(data[i + dim] - data[j + dim]) <= r)
+                {
+                    AppEnMatch[i]++;
+                    if (j > i) SampEnMatch[i]++;
+                }
+            }
+        }
 
-        List<long> AB = new() { As.Sum(), Bs.Sum() };
-        return AB;
+        return (AppEnPossible, AppEnMatch, SampEnPossible, SampEnMatch);
     }
 
     private static void CountMatched(List<PointTree<double, int>> points, double r, uint offset, uint interval, List<long> As, List<long> Bs)
