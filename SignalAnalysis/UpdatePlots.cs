@@ -278,7 +278,14 @@ partial class FrmMain
         
         stopwatch.Restart();
         (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy(signal, token, _settings.EntropyFactorM, 0.15, 1);
-        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token, _settings.EntropyFactorM, _settings.EntropyFactorR);
+        stopwatch.Stop();
+        elapsed = stopwatch.Elapsed;
+        Debug.WriteLine($"ApEn: {Results.ApproximateEntropy}, SampEn: {Results.SampleEntropy}");
+        Debug.WriteLine($"Elapsed time: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+
+        stopwatch.Restart();
+        //(Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token, _settings.EntropyFactorM, _settings.EntropyFactorR);
+        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token, _settings.EntropyFactorM, 0.15, 1);
         stopwatch.Stop();
         elapsed = stopwatch.Elapsed;
         Debug.WriteLine($"ApEn: {Results.ApproximateEntropy}, SampEn: {Results.SampleEntropy}");

@@ -25,33 +25,30 @@ public static class Complexity
     /// A smaller value of SampEn also indicates more self-similarity in data set or less noise.
     /// </summary>
     /// <param name="data"></param>
-    /// <param name="dim">Embedding dimension</param>
-    /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
+    /// <param name="dim">Embedding dimension (factor m)</param>
+    /// <param name="fTol">Factor to compute the "noise filter" of "factor r" so that the total is typically equal to 0.2*std</param>
     /// <param name="std">Standard deviation of the population</param>
-    /// <returns>AppEn and SampEn</returns>
+    /// <returns>ApEn and SampEn</returns>
     public static (double AppEn, double SampEn) Entropy(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     {
-        long blocks = data.Length - (dim + 1) + 1;
+        long blocks = data.Length - (dim + 1) + 1;  // The total number of blocks defined in the sequence
+        if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         bool isEqual;
-        ulong apEn_Possible, apEn_Match;
-        ulong sampEn_Possible = 0, sampEn_Match = 0;
+        ulong apEnPossible, apEnMatch;
+        ulong sampEnPossible = 0, sampEnMatch = 0;
         double sum = 0.0;
         double apEn, sampEn;
-        double noiseFilter; // Tolerance
-        if (std.HasValue)
-            noiseFilter = std.Value * fTol;
-        else
-            noiseFilter = StdDev<double>(data) * fTol;
+        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
 
 
         for (uint i = 0; i < blocks; i++)
         {
-            apEn_Possible = 0;
-            apEn_Match = 0;
+            apEnPossible = 0;
+            apEnMatch = 0;
             for (uint j = 0; j < blocks; j++)
             {
                 isEqual = true;
-                //m - length series
+                // Check for "possibles". This corresponds to the m - length block
                 for (uint k = 0; k < dim; k++)
                 {
                     if (Math.Abs(data[i + k] - data[j + k]) > noiseFilter)
@@ -64,24 +61,24 @@ public static class Complexity
                 }
                 if (isEqual)
                 {
-                    apEn_Possible++;
-                    if (i != j) sampEn_Possible++;
+                    apEnPossible++;
+                    if (i != j) sampEnPossible++;
                 }
 
-                //m+1 - length series
+                // Check for "matches". This corresponds to the m+1 - length block
                 if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= noiseFilter)
                 {
-                    apEn_Match++;
-                    if (i != j) sampEn_Match++;
+                    apEnMatch++;
+                    if (i != j) sampEnMatch++;
                 }
             }
 
-            if (apEn_Possible > 0 && apEn_Match > 0)
-                sum += Math.Log((double)apEn_Possible / (double)apEn_Match);
+            if (apEnPossible > 0 && apEnMatch > 0)
+                sum += Math.Log((double)apEnPossible / (double)apEnMatch);
         }
 
         apEn = sum / (double)(data.Length - dim);
-        sampEn = sampEn_Possible > 0 && sampEn_Match > 0 ? Math.Log((double)sampEn_Possible / (double)sampEn_Match) : 0.0;
+        sampEn = sampEnPossible > 0 && sampEnMatch > 0 ? Math.Log((double)sampEnPossible / (double)sampEnMatch) : 0.0;
 
         return (apEn, sampEn);
     }
@@ -92,74 +89,71 @@ public static class Complexity
     /// A smaller value of SampEn also indicates more self-similarity in data set or less noise.
     /// </summary>
     /// <param name="data"></param>
-    /// <param name="dim">Embedding dimension</param>
-    /// <param name="fTol">Factor to compute the tolerance so that the total is typically equal to 0.2*std</param>
+    /// <param name="dim">Embedding dimension (factor m)</param>
+    /// <param name="fTol">Factor to compute the "noise filter" of "factor r" so that the total is typically equal to 0.2*std</param>
     /// <param name="std">Standard deviation of the population</param>
-    /// <returns>AppEn and SampEn</returns>
+    /// <returns>ApEn and SampEn</returns>
     public static (double AppEn, double SampEn) Entropy_Parallel(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     {
-        long upper = data.Length - (dim + 1) + 1;
+        long blocks = data.Length - (dim + 1) + 1;  // The total number of blocks defined in the sequence
+        if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         double appEn, sampEn;
-        double tolerance;
-        if (std.HasValue)
-            tolerance = std.Value * fTol;
-        else
-            tolerance = StdDev<double>(data) * fTol;
+        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
 
+        int[] AppEnPossible = new int[blocks];
+        int[] AppEnMatch = new int[blocks];
+        int[] SampEnPossible = new int[blocks];
+        int[] SampEnMatch = new int[blocks];
+        double[] sumArr = new double[blocks];
+        bool[] isEqualArr = new bool[blocks];
 
-        int[] AppEn_Cum_Arr = new int[upper];
-        int[] AppEn_Cum1_Arr = new int[upper];
-        int[] SampEn_Cum_Arr = new int[upper];
-        int[] SampEn_Cum1_Arr = new int[upper];
-        double[] sum_Arr = new double[upper];
-        bool[] isEqual_Arr = new bool[upper];
-
-        Parallel.For(0, upper, i =>
+        Parallel.For(0, blocks, i =>
         {
-            AppEn_Cum_Arr[i] = 0;
-            AppEn_Cum1_Arr[i] = 0;
-            for (uint j = 0; j < upper; j++)
+            AppEnPossible[i] = 0;
+            AppEnMatch[i] = 0;
+            for (uint j = 0; j < blocks; j++)
             {
-                isEqual_Arr[i] = true;
-                //m - length series
+                isEqualArr[i] = true;
+                // Check for "possibles". This corresponds to the m - length block
                 for (uint k = 0; k < dim; k++)
                 {
-                    if (Math.Abs(data[i + k] - data[j + k]) > tolerance)
+                    if (Math.Abs(data[i + k] - data[j + k]) > noiseFilter)
                     {
-                        isEqual_Arr[i] = false;
+                        isEqualArr[i] = false;
                         break;
                     }
                     if (ct.IsCancellationRequested)
                         throw new OperationCanceledException("CancelEntropy", ct);
                 }
-                if (isEqual_Arr[i])
+                if (isEqualArr[i])
                 {
-                    AppEn_Cum_Arr[i]++;
-                    if (i != j) SampEn_Cum_Arr[i]++;
+                    AppEnPossible[i]++;
+                    if (i != j) SampEnPossible[i]++;
                 }
 
-                //m+1 - length series
-                if (isEqual_Arr[i] && Math.Abs(data[i + dim] - data[j + dim]) <= tolerance)
+                // Check for "matches". This corresponds to the m+1 - length block
+                if (isEqualArr[i] && Math.Abs(data[i + dim] - data[j + dim]) <= noiseFilter)
                 {
-                    AppEn_Cum1_Arr[i]++;
-                    if (i != j) SampEn_Cum1_Arr[i]++;
+                    AppEnMatch[i]++;
+                    if (i != j) SampEnMatch[i]++;
                 }
             }
-            if (AppEn_Cum_Arr[i] > 0 && AppEn_Cum1_Arr[i] > 0)
-                sum_Arr[i] = Math.Log((double)AppEn_Cum_Arr[i] / (double)AppEn_Cum1_Arr[i]);
+            if (AppEnPossible[i] > 0 && AppEnMatch[i] > 0)
+                sumArr[i] = Math.Log((double)AppEnPossible[i] / (double)AppEnMatch[i]);
         });
 
-        appEn = sum_Arr.Sum() / (double)(data.Length - dim);
+        appEn = sumArr.Sum() / (double)(data.Length - dim);
 
-        ulong SampEn_Cum = 0;
-        foreach (int x in SampEn_Cum_Arr)
-            SampEn_Cum += (ulong)x;
+        ulong SampEnPossible_1 = 0;
+        foreach (int x in SampEnPossible)
+            SampEnPossible_1 += (ulong)x;
 
-        ulong SampEn_Cum1 = 0;
-        foreach (int x in SampEn_Cum1_Arr)
-            SampEn_Cum1 += (ulong)x;
+        ulong SampEnMatch_1 = 0;
+        foreach (int x in SampEnMatch)
+            SampEnMatch_1 += (ulong)x;
 
-        sampEn = SampEn_Cum > 0 && SampEn_Cum1 > 0 ? Math.Log((double)SampEn_Cum / (double)SampEn_Cum1) : 0.0;
+        sampEn = SampEnPossible_1 > 0 && SampEnMatch_1 > 0 ? Math.Log((double)SampEnPossible_1 / (double)SampEnMatch_1) : 0.0;
+        sampEn = SampEnPossible_1 > 0 && SampEnMatch_1 > 0 ? Math.Log((double)SampEnPossible.Sum() / (double)SampEnMatch.Sum()) : 0.0;
 
         return (appEn, sampEn);
     }
@@ -230,10 +224,12 @@ public static class Complexity
         IEnumerable<double> doubles = values.Select(value => Convert.ToDouble(value));
 
         // Then compute the standard deviation
-        double avg = System.Linq.Enumerable.Average(doubles);
-        double sum = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));
-        double denominator = values.Count() - (asSample ? 1 : 0);
-        return denominator > 0.0 ? Math.Sqrt(sum / denominator) : -1;
+        //double avg = System.Linq.Enumerable.Average(doubles);
+        //double sst = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));    // Sum of squares total
+        double avg = doubles.Average();
+        double sst = doubles.Sum(x => (x - avg) * (x - avg));   // Sum of squares total
+        int denominator = values.Count() - (asSample ? 1 : 0);
+        return denominator > 0.0 ? Math.Sqrt(sst / denominator) : -1.0;
     }
 
     /// <summary>
@@ -253,11 +249,7 @@ public static class Complexity
         double ApEn, SampEn;
         long A = 0;
         long B = 0;
-        double tolerance;
-        if (std.HasValue)
-            tolerance = std.Value * fTol;
-        else
-            tolerance = StdDev<double>(data) * fTol;
+        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
 
         // Check we have enough data points
         if (N <= dim) return (-1.0, -1.0);
@@ -266,10 +258,10 @@ public static class Complexity
         //long[] AB = ComputeAB_Direct(data.ToList(), dim, tolerance).ToArray();
         long[] AB = entropyMethod switch
         {
-            EntropyMethod.BruteForce => ComputeAB_Direct(data.ToList(), dim, tolerance).ToArray(),
-            EntropyMethod.MonteCarloUniform => ComputeAB_Uniform(data, dim, tolerance, SampleSize: 1024, SampleNum: 8),
-            EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom(data, dim, tolerance, SampleSize: 1024, SampleNum: 8, false),
-            EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom(data, dim, tolerance, SampleSize: 1024, SampleNum: 8, true),
+            EntropyMethod.BruteForce => ComputeAB_Direct(data.ToList(), dim, noiseFilter).ToArray(),
+            EntropyMethod.MonteCarloUniform => ComputeAB_Uniform(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8),
+            EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, false),
+            EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true),
             _ => Array.Empty<long>(),
         };
 
