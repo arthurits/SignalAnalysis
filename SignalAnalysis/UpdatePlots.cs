@@ -291,12 +291,13 @@ partial class FrmMain
         Debug.WriteLine($"ApEn: {Results.ApproximateEntropy}, SampEn: {Results.SampleEntropy}");
         Debug.WriteLine($"Elapsed time - Parallel For: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
 
-        //stopwatch.Restart();
+        stopwatch.Restart();
         //(Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_SuperFast(signal, token, EntropyMethod.BruteForce, _settings.EntropyFactorM, _settings.EntropyFactorR);
-        //stopwatch.Stop();
-        //elapsed = stopwatch.Elapsed;
-        //Debug.WriteLine($"ApEn: {Results.ApproximateEntropy}, SampEn: {Results.SampleEntropy}");
-        //Debug.WriteLine($"Elapsed time - SuperFast ({EntropyMethod.BruteForce}): {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_SuperFast(signal, token, EntropyMethod.BruteForce, _settings.EntropyFactorM, 0.15, 1);
+        stopwatch.Stop();
+        elapsed = stopwatch.Elapsed;
+        Debug.WriteLine($"ApEn: {Results.ApproximateEntropy}, SampEn: {Results.SampleEntropy}");
+        Debug.WriteLine($"Elapsed time - SuperFast ({EntropyMethod.BruteForce}): {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
 
         //stopwatch.Restart();
         //(Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_SuperFast(signal, token, EntropyMethod.MonteCarloUniform, _settings.EntropyFactorM, _settings.EntropyFactorR);
