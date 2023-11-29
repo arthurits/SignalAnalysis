@@ -31,7 +31,7 @@ public static class Complexity
     /// <returns>ApEn and SampEn</returns>
     public static (double AppEn, double SampEn) Entropy(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     {
-        long blocks = data.Length - (dim + 1) + 1;  // The total number of blocks defined in the sequence
+        long blocks = data.Length - dim;  // The total number of blocks defined in the sequence
         if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         bool isEqual;
         ulong apEnPossible, apEnMatch;
@@ -62,14 +62,14 @@ public static class Complexity
                 if (isEqual)
                 {
                     apEnPossible++;
-                    if (i != j) sampEnPossible++;
+                    if (j > i) sampEnPossible++;
                 }
 
                 // Check for "matches". This corresponds to the m+1 - length block
                 if (isEqual && Math.Abs(data[i + dim] - data[j + dim]) <= noiseFilter)
                 {
                     apEnMatch++;
-                    if (i != j) sampEnMatch++;
+                    if (j > i) sampEnMatch++;
                 }
             }
 
@@ -95,7 +95,7 @@ public static class Complexity
     /// <returns>ApEn and SampEn</returns>
     public static (double AppEn, double SampEn) Entropy_Parallel(double[] data, CancellationToken ct, uint dim = 2, double fTol = 0.2, double? std = null)
     {
-        long blocks = data.Length - (dim + 1) + 1;  // The total number of blocks defined in the sequence
+        long blocks = data.Length - dim;  // The total number of blocks defined in the sequence
         if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         double appEn, sampEn;
         double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
@@ -128,14 +128,14 @@ public static class Complexity
                 if (isEqualArr[i])
                 {
                     AppEnPossible[i]++;
-                    if (i != j) SampEnPossible[i]++;
+                    if (j > i) SampEnPossible[i]++;
                 }
 
                 // Check for "matches". This corresponds to the m+1 - length block
                 if (isEqualArr[i] && Math.Abs(data[i + dim] - data[j + dim]) <= noiseFilter)
                 {
                     AppEnMatch[i]++;
-                    if (i != j) SampEnMatch[i]++;
+                    if (j > i) SampEnMatch[i]++;
                 }
             }
             if (AppEnPossible[i] > 0 && AppEnMatch[i] > 0)
@@ -314,24 +314,31 @@ public static class Complexity
     private static List<long> CountMatchedParallel(List<PointTree<double, int>> points, double r)
     {
         int n = points.Count;
-        int num_threads = Environment.ProcessorCount;
-        if (num_threads == 0) num_threads = 16;
-        else if (num_threads > 12) num_threads -= 8;
-        else num_threads /= 2;
-        if (num_threads > n) num_threads = n / 2;
+        int numThreads = Environment.ProcessorCount;
+        //if (num_threads == 0) num_threads = 16;
+        //else if (num_threads > 12) num_threads -= 8;
+        //else num_threads /= 2;
+        //if (num_threads > n) num_threads = n / 2;
 
-        List<long> As = new(num_threads);
-        List<long> Bs = new(num_threads);
-        for (int i = 0; i < num_threads; i++)
+        List<long> As = new(n);
+        List<long> Bs = new(n);
+        for (int i = 0; i < n; i++)
         {
             As.Add(0);
             Bs.Add(0);
         }
         
-        Parallel.For(0, num_threads, i =>
+        var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
+
+        //Parallel.For(0, n, options, i =>
+        //{
+        //    CountMatched(points, r, (uint)i, (uint)n, As, Bs);
+        //});
+
+        for (int i =0; i < n; i++)
         {
-            CountMatched(points, r, (uint)i, (uint)num_threads, As, Bs);
-        });
+            CountMatched(points, r, (uint)i, (uint)n, As, Bs);
+        }
 
         //List<Thread> threads = new();
         //for (int i = 0; i < num_threads; i++)
