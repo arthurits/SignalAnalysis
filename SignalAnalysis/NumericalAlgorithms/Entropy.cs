@@ -311,9 +311,9 @@ public static class Complexity
         return result;
     }
 
-    private static List<long> CountMatchedParallel(List<PointTree<double, int>> points, double r)
+    private static List<long> CountMatchedParallel(List<PointTree<double, int>> data, double r)
     {
-        int n = points.Count;
+        int n = data.Count;
         int numThreads = Environment.ProcessorCount;
         //if (num_threads == 0) num_threads = 16;
         //else if (num_threads > 12) num_threads -= 8;
@@ -335,9 +335,24 @@ public static class Complexity
         //    CountMatched(points, r, (uint)i, (uint)n, As, Bs);
         //});
 
-        for (int i =0; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
-            CountMatched(points, r, (uint)i, (uint)n, As, Bs);
+            uint m = (uint)data[0].Dim() - 1;
+            for (uint j = (uint)i; j < n; ++j)
+            {
+                PointTree<double, int> p = data[(int)j];
+                for (uint k = j + 1; k < n; k++)
+                {
+                    if (p.Within(data[(int)k], (int)m, r))
+                    {
+                        As[(int)i] += 1;
+                        if (-r <= p[(int)m] - data[(int)k][(int)m] && p[(int)m] - data[(int)k][(int)m] <= r)
+                        {
+                            Bs[(int)i] += 1;
+                        }
+                    }
+                }
+            }
         }
 
         //List<Thread> threads = new();
@@ -355,6 +370,64 @@ public static class Complexity
         //}
 
         List<long> AB = new() {As.Sum(), Bs.Sum()};
+        return AB;
+    }
+
+    private static List<long> CountMatchedParallel(double[] data, uint dim, double r)
+    {
+        int n = data.Length;
+        int numThreads = Environment.ProcessorCount;
+
+        List<long> As = new(n);
+        List<long> Bs = new(n);
+        for (int i = 0; i < n; i++)
+        {
+            As.Add(0);
+            Bs.Add(0);
+        }
+
+        var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
+
+        //Parallel.For(0, n, options, i =>
+        //{
+        //    CountMatched(points, r, (uint)i, (uint)n, As, Bs);
+        //});
+
+        //for (int i = 0; i < n; i++)
+        //{
+        //    uint m = dim;
+        //    for (uint j = (uint)i; j < n; ++j)
+        //    {
+        //        PointTree<double, int> p = data[(int)j];
+        //        for (uint k = j + 1; k < n; k++)
+        //        {
+        //            if (p.Within(data[(int)k], (int)m, r))
+        //            {
+        //                As[(int)i] += 1;
+        //                if (-r <= p[(int)m] - data[(int)k][(int)m] && p[(int)m] - data[(int)k][(int)m] <= r)
+        //                {
+        //                    Bs[(int)i] += 1;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        //List<Thread> threads = new();
+        //for (int i = 0; i < num_threads; i++)
+        //{
+        //    threads.Add(new Thread(() => CountMatched(points, r, (uint)i, (uint)num_threads, As, Bs)));
+        //}
+        //foreach (Thread thread in threads)
+        //{
+        //    thread.Start();
+        //}
+        //foreach (Thread thread in threads)
+        //{
+        //    thread.Join();
+        //}
+
+        List<long> AB = new() { As.Sum(), Bs.Sum() };
         return AB;
     }
 
