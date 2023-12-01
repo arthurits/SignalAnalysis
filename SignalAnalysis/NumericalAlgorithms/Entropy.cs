@@ -256,6 +256,10 @@ public static class Complexity
         // Check we have enough data points
         if (N <= dim) return (-1.0, -1.0);
 
+        // Compute sampling parameters as suggested in https://doi.org/10.3390/e24040524
+        int sampleSize = data.Length < 1024 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
+        int sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
+
         // Compute values depending on method
         //long[] AB = ComputeAB_Direct(data.ToList(), dim, tolerance).ToArray();
 
@@ -267,11 +271,11 @@ public static class Complexity
         //    EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true),
         //    _ => (Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>())
         //};
-        
+
         (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) = CountMatchedParallel(data, dim, noiseFilter);
-        (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_Uniform2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8);
-        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, false);
-        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true);
+        (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_Uniform2(data, dim, noiseFilter, sampleSize, sampleNum);
+        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, false);
+        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, true);
 
         double sum = 0.0;
         for (int i = 0; i < apEnPossible.Length; i++)
@@ -623,8 +627,7 @@ public static class Complexity
 
     private static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) ComputeAB_Uniform2(double[] data, uint m, double r, int SampleSize = 1024, int SampleNum = 8)
     {
-        //SampleSize = data.Length < 1024 ? (int)Math.Floor(Math.Sqrt(data.Length)) : (int)Math.Floor(Math.Max(1024, Math.Sqrt(data.Length)));
-        //SampleNum = (int)Math.Max(5 + Math.Log2(data.Length), data.Length / SampleSize);
+        
         int[] sampled_points = new int[SampleSize];
         Random random = new();
         int numPoints = data.Length - (int)m;
