@@ -412,8 +412,10 @@ public static class Complexity
 
     private static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) CountMatchedParallel(double[] data, uint dim, double r, int[]? indices = null)
     {
+        bool useData = indices is null;
         indices ??= Enumerable.Range(0, data.Length).ToArray();
-        int blocks = indices.Length - (int)dim;
+        int blocks = indices.Length - (useData ? (int)dim : 0);
+
         ulong[] AppEnPossible = new ulong[blocks];
         ulong[] AppEnMatch = new ulong[blocks];
         ulong[] SampEnPossible = new ulong[blocks];
