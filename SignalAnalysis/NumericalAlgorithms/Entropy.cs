@@ -248,7 +248,7 @@ public static class Complexity
     public static (double AppEn, double SampEn) Entropy_SuperFast(double[] data, CancellationToken ct, EntropyMethod entropyMethod = EntropyMethod.BruteForce, uint dim = 2, double fTol = 0.2, double? std = null)
     {
         int N = data.Length;
-        double ApEn, SampEn;
+        double ApEn = 0, SampEn = 0;
         ulong A = 0;
         ulong B = 0;
         double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
@@ -256,30 +256,41 @@ public static class Complexity
         // Check we have enough data points
         if (N <= dim) return (-1.0, -1.0);
 
+        // Compute sampling parameters as suggested in https://doi.org/10.3390/e24040524
+        int sampleSize = data.Length - (int)dim;
+        int sampleNum = 1;
+        if (entropyMethod != EntropyMethod.BruteForce)
+        {
+            sampleSize = data.Length < 2048 ? (int)Math.Sqrt(data.Length) : Math.Max(2048, (int)Math.Sqrt(data.Length));
+            sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
+        }
+
         // Compute values depending on method
         //long[] AB = ComputeAB_Direct(data.ToList(), dim, tolerance).ToArray();
 
-        //(int[] apEnPossible, int[] apEnMatch, int[] sampEnPossible, int[] sampEnMatch) = entropyMethod switch
-        //{
-        //    EntropyMethod.BruteForce => CountMatchedParallel(data, dim, noiseFilter),
-        //    EntropyMethod.MonteCarloUniform => ComputeAB_Uniform2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8),
-        //    EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, false),
-        //    EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true),
-        //    _ => (Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>())
-        //};
-        
-        (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) = CountMatchedParallel(data, dim, noiseFilter);
-        (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_Uniform2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8);
-        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, false);
-        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true);
+        (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) = entropyMethod switch
+        {
+            EntropyMethod.BruteForce => CountMatchedParallel(data, dim, noiseFilter),
+            EntropyMethod.MonteCarloUniform => ComputeAB_Uniform2(data, dim, noiseFilter, sampleSize, sampleNum),
+            EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum),
+            EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum),
+            _ => (Array.Empty<ulong>(), Array.Empty<ulong>(), Array.Empty<ulong>(), Array.Empty<ulong>())
+        };
+
+        //(ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) = CountMatchedParallel(data, dim, noiseFilter);
+        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_Uniform2(data, dim, noiseFilter, sampleSize, sampleNum);
+        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, false);
+        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, true);
 
         double sum = 0.0;
         for (int i = 0; i < apEnPossible.Length; i++)
         {
+            sum = 0.0;
             if (apEnPossible[i] > 0 && apEnMatch[i] > 0)
                 sum += Math.Log((double)apEnPossible[i] / (double)apEnMatch[i]);
         }
-        ApEn = sum / (double)(data.Length - dim);
+        ApEn = sum / (double)(sampleSize * sampleNum);
+        ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
 
         foreach (ulong x in sampEnMatch)
             A += x;
@@ -290,30 +301,30 @@ public static class Complexity
             SampEn = -Math.Log((double)A / B);
 
 
-        long[] AB = entropyMethod switch
-        {
-            EntropyMethod.BruteForce => ComputeAB_Direct(data.ToList(), dim, noiseFilter).ToArray(),
-            EntropyMethod.MonteCarloUniform => ComputeAB_Uniform(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8),
-            EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, false),
-            EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true),
-            _ => Array.Empty<long>(),
-        };
+        //long[] AB = entropyMethod switch
+        //{
+        //    EntropyMethod.BruteForce => ComputeAB_Direct(data.ToList(), dim, noiseFilter).ToArray(),
+        //    EntropyMethod.MonteCarloUniform => ComputeAB_Uniform(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8),
+        //    EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, false),
+        //    EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true),
+        //    _ => Array.Empty<long>(),
+        //};
 
-        A = 0;
-        B = 0;
-        int sample_num = AB.Length / 2;
-        for (int i = 0; i < sample_num; i++)
-        {
-            A += (ulong)AB[i * 2];
-            B += (ulong)AB[i * 2 + 1];
-        }
+        //A = 0;
+        //B = 0;
+        //int sample_num = AB.Length / 2;
+        //for (int i = 0; i < sample_num; i++)
+        //{
+        //    A += (ulong)AB[i * 2];
+        //    B += (ulong)AB[i * 2 + 1];
+        //}
         //if (a) *a = A / sample_num;
         //if (b) *b = B / sample_num;
 
-        if (A > 0 && B > 0)
-            SampEn = -Math.Log((double)B / A);
-        else
-            SampEn = -Math.Log((double)(N - dim - 1) / (N - dim));
+        //if (A > 0 && B > 0)
+        //    SampEn = -Math.Log((double)B / A);
+        //else
+        //    SampEn = -Math.Log((double)(N - dim - 1) / (N - dim));
 
         return (ApEn, SampEn);
     }
@@ -366,27 +377,37 @@ public static class Complexity
 
         var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
 
-        //Parallel.For(0, n, options, i =>
-        //{
-        //    CountMatched(data, r, (uint)i, (uint)n, As, Bs);
-        //});
-
-        for (uint i = 0; i < n; i++)
+        Parallel.For(0, n, options, i =>
         {
-                PointTree<double, int> p = data[(int)i];
-                for (uint j = i + 1; j < n; j++)
+            PointTree<double, int> p = data[(int)i];
+            for (uint j = (uint)(i + 1); j < n; j++)
+            {
+                if (p.Within(data[(int)j], (int)dim, r))
                 {
-                    if (p.Within(data[(int)j], (int)dim, r))
+                    As[(int)i] += 1;
+                    if (-r <= p[(int)dim] - data[(int)j][(int)dim] && p[(int)dim] - data[(int)j][(int)dim] <= r)
                     {
-                        As[(int)i] += 1;
-                        if (-r <= p[(int)dim] - data[(int)j][(int)dim] && p[(int)dim] - data[(int)j][(int)dim] <= r)
-                        {
-                            Bs[(int)i] += 1;
-                        }
+                        Bs[(int)i] += 1;
                     }
                 }
-            //}
-        }
+            }
+        });
+
+        //for (uint i = 0; i < n; i++)
+        //{
+        //        PointTree<double, int> p = data[(int)i];
+        //        for (uint j = i + 1; j < n; j++)
+        //        {
+        //            if (p.Within(data[(int)j], (int)dim, r))
+        //            {
+        //                As[(int)i] += 1;
+        //                if (-r <= p[(int)dim] - data[(int)j][(int)dim] && p[(int)dim] - data[(int)j][(int)dim] <= r)
+        //                {
+        //                    Bs[(int)i] += 1;
+        //                }
+        //            }
+        //        }
+        //}
             
         //List<Thread> threads = new();
         //for (int i = 0; i < num_threads; i++)
@@ -408,8 +429,10 @@ public static class Complexity
 
     private static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) CountMatchedParallel(double[] data, uint dim, double r, int[]? indices = null)
     {
+        bool useData = indices is null;
         indices ??= Enumerable.Range(0, data.Length).ToArray();
-        int blocks = indices.Length - (int)dim;
+        int blocks = indices.Length - (useData ? (int)dim : 0);
+
         ulong[] AppEnPossible = new ulong[blocks];
         ulong[] AppEnMatch = new ulong[blocks];
         ulong[] SampEnPossible = new ulong[blocks];
@@ -419,12 +442,7 @@ public static class Complexity
 
         var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
 
-        //Parallel.For(0, blocks, options, i =>
-        //{
-        //    CountMatched(points, r, (uint)i, (uint)n, As, Bs);
-        //});
-
-        for (int i = 0; i < blocks; i++)
+        Parallel.For(0, blocks, options, i =>
         {
             AppEnPossible[i] = 0;
             AppEnMatch[i] = 0;
@@ -455,7 +473,40 @@ public static class Complexity
                     if (j > i) SampEnMatch[i]++;
                 }
             }
-        }
+        });
+
+        //for (int i = 0; i < blocks; i++)
+        //{
+        //    AppEnPossible[i] = 0;
+        //    AppEnMatch[i] = 0;
+        //    for (uint j = 0; j < blocks; j++)
+        //    {
+        //        isEqualArr[i] = true;
+        //        // Check for "possibles". This corresponds to the m - length block
+        //        for (uint k = 0; k < dim; k++)
+        //        {
+        //            if (Math.Abs(data[indices[i] + k] - data[indices[j] + k]) > r)
+        //            {
+        //                isEqualArr[i] = false;
+        //                break;
+        //            }
+        //            //if (ct.IsCancellationRequested)
+        //            //    throw new OperationCanceledException("CancelEntropy", ct);
+        //        }
+        //        if (isEqualArr[i])
+        //        {
+        //            AppEnPossible[i]++;
+        //            if (j > i) SampEnPossible[i]++;
+        //        }
+
+        //        // Check for "matches". This corresponds to the m+1 - length block
+        //        if (isEqualArr[i] && Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
+        //        {
+        //            AppEnMatch[i]++;
+        //            if (j > i) SampEnMatch[i]++;
+        //        }
+        //    }
+        //}
 
         return (AppEnPossible, AppEnMatch, SampEnPossible, SampEnMatch);
     }
@@ -621,32 +672,39 @@ public static class Complexity
         return ABs;
     }
 
-    private static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) ComputeAB_Uniform2(double[] data, uint m, double r, int SampleSize = 1024, int SampleNum = 8)
+    /// <summary>
+    /// Computes the "possibles" (A) and "matches" (B) by uniformly sampling the data
+    /// </summary>
+    /// <param name="data">Data points to be sampled</param>
+    /// <param name="dim">Embedding dimension</param>
+    /// <param name="r">Factor r (noise filter)</param>
+    /// <param name="SampleSize">Size (number of points) of the sample</param>
+    /// <param name="SampleNum">Number of samples to be created</param>
+    /// <returns>ApEn "possibles" (A), ApEn "matches" (B), SampEn "possibles" (A), SampEn "matches" (B)</returns>
+    private static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) ComputeAB_Uniform2(double[] data, uint dim, double r, int SampleSize = 1024, int SampleNum = 8)
     {
-        //SampleSize = data.Length < 1024 ? (int)Math.Floor(Math.Sqrt(data.Length)) : (int)Math.Floor(Math.Max(1024, Math.Sqrt(data.Length)));
-        //SampleNum = (int)Math.Max(5 + Math.Log2(data.Length), data.Length / SampleSize);
-        int[] sampled_points = new int[SampleSize];
         Random random = new();
-        int numPoints = data.Length - (int)m;
-        int sampleSize = SampleSize - (int)m;
+        int[] sampledPoints = new int[SampleSize];
+        int numPoints = data.Length - (int)dim;
+        //int sampleSize = SampleSize - (int)m;
 
-        ulong[] apEnPossible = new ulong[sampleSize * SampleNum];
-        ulong[] apEnMatch = new ulong[sampleSize * SampleNum];
-        ulong[] sampEnPossible = new ulong[sampleSize * SampleNum];
-        ulong[] sampEnMatch = new ulong[sampleSize * SampleNum];
+        ulong[] apEnPossible = new ulong[SampleSize * SampleNum];
+        ulong[] apEnMatch = new ulong[SampleSize * SampleNum];
+        ulong[] sampEnPossible = new ulong[SampleSize * SampleNum];
+        ulong[] sampEnMatch = new ulong[SampleSize * SampleNum];
 
         for (int i = 0; i < SampleNum; i++)
         {
             // Data sampling
             for (int j = 0; j < SampleSize; j++)
-                sampled_points[j] = random.Next(0, numPoints);
+                sampledPoints[j] = random.Next(0, numPoints);
 
-            // Count possibles and matches
-            (var a, var b, var c, var d) = CountMatchedParallel(data, m, r, sampled_points);
-            Array.Copy(a, 0, apEnPossible, sampleSize * i, sampleSize);
-            Array.Copy(b, 0, apEnMatch, sampleSize * i, sampleSize);
-            Array.Copy(c, 0, sampEnPossible, sampleSize * i, sampleSize);
-            Array.Copy(d, 0, sampEnMatch, sampleSize * i, sampleSize);
+            // Count "possibles" (A) and "matches" (B)
+            (var a, var b, var c, var d) = CountMatchedParallel(data, dim, r, sampledPoints);
+            Array.Copy(a, 0, apEnPossible, SampleSize * i, SampleSize);
+            Array.Copy(b, 0, apEnMatch, SampleSize * i, SampleSize);
+            Array.Copy(c, 0, sampEnPossible, SampleSize * i, SampleSize);
+            Array.Copy(d, 0, sampEnMatch, SampleSize * i, SampleSize);
         }
         return (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch);
     }
