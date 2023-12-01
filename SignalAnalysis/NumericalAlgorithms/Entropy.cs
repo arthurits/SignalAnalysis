@@ -257,8 +257,13 @@ public static class Complexity
         if (N <= dim) return (-1.0, -1.0);
 
         // Compute sampling parameters as suggested in https://doi.org/10.3390/e24040524
-        int sampleSize = data.Length < 1024 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
-        int sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
+        int sampleSize = data.Length - (int)dim;
+        int sampleNum = 1;
+        if (entropyMethod != EntropyMethod.BruteForce)
+        {
+            sampleSize = data.Length < 1024 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
+            sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
+        }
 
         // Compute values depending on method
         //long[] AB = ComputeAB_Direct(data.ToList(), dim, tolerance).ToArray();
@@ -283,7 +288,7 @@ public static class Complexity
             if (apEnPossible[i] > 0 && apEnMatch[i] > 0)
                 sum += Math.Log((double)apEnPossible[i] / (double)apEnMatch[i]);
         }
-        ApEn = sum / (double)(data.Length - dim);
+        ApEn = sum / (double)(sampleSize * sampleNum);
 
         foreach (ulong x in sampEnMatch)
             A += x;
