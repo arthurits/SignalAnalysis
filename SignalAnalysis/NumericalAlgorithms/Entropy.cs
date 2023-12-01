@@ -625,31 +625,39 @@ public static class Complexity
         return ABs;
     }
 
-    private static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) ComputeAB_Uniform2(double[] data, uint m, double r, int SampleSize = 1024, int SampleNum = 8)
+    /// <summary>
+    /// Computes the "possibles" (A) and "matches" (B) by uniformly sampling the data
+    /// </summary>
+    /// <param name="data">Data points to be sampled</param>
+    /// <param name="dim">Embedding dimension</param>
+    /// <param name="r">Factor r (noise filter)</param>
+    /// <param name="SampleSize">Size (number of points) of the sample</param>
+    /// <param name="SampleNum">Number of samples to be created</param>
+    /// <returns>ApEn "possibles" (A), ApEn "matches" (B), SampEn "possibles" (A), SampEn "matches" (B)</returns>
+    private static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) ComputeAB_Uniform2(double[] data, uint dim, double r, int SampleSize = 1024, int SampleNum = 8)
     {
-        
-        int[] sampled_points = new int[SampleSize];
         Random random = new();
-        int numPoints = data.Length - (int)m;
-        int sampleSize = SampleSize - (int)m;
+        int[] sampledPoints = new int[SampleSize];
+        int numPoints = data.Length - (int)dim;
+        //int sampleSize = SampleSize - (int)m;
 
-        ulong[] apEnPossible = new ulong[sampleSize * SampleNum];
-        ulong[] apEnMatch = new ulong[sampleSize * SampleNum];
-        ulong[] sampEnPossible = new ulong[sampleSize * SampleNum];
-        ulong[] sampEnMatch = new ulong[sampleSize * SampleNum];
+        ulong[] apEnPossible = new ulong[SampleSize * SampleNum];
+        ulong[] apEnMatch = new ulong[SampleSize * SampleNum];
+        ulong[] sampEnPossible = new ulong[SampleSize * SampleNum];
+        ulong[] sampEnMatch = new ulong[SampleSize * SampleNum];
 
         for (int i = 0; i < SampleNum; i++)
         {
             // Data sampling
             for (int j = 0; j < SampleSize; j++)
-                sampled_points[j] = random.Next(0, numPoints);
+                sampledPoints[j] = random.Next(0, numPoints);
 
-            // Count possibles and matches
-            (var a, var b, var c, var d) = CountMatchedParallel(data, m, r, sampled_points);
-            Array.Copy(a, 0, apEnPossible, sampleSize * i, sampleSize);
-            Array.Copy(b, 0, apEnMatch, sampleSize * i, sampleSize);
-            Array.Copy(c, 0, sampEnPossible, sampleSize * i, sampleSize);
-            Array.Copy(d, 0, sampEnMatch, sampleSize * i, sampleSize);
+            // Count "possibles" (A) and "matches" (B)
+            (var a, var b, var c, var d) = CountMatchedParallel(data, dim, r, sampledPoints);
+            Array.Copy(a, 0, apEnPossible, SampleSize * i, SampleSize);
+            Array.Copy(b, 0, apEnMatch, SampleSize * i, SampleSize);
+            Array.Copy(c, 0, sampEnPossible, SampleSize * i, SampleSize);
+            Array.Copy(d, 0, sampEnMatch, SampleSize * i, SampleSize);
         }
         return (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch);
     }
