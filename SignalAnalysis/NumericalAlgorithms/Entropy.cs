@@ -261,7 +261,7 @@ public static class Complexity
         int sampleNum = 1;
         if (entropyMethod != EntropyMethod.BruteForce)
         {
-            sampleSize = data.Length < 2048 ? (int)Math.Sqrt(data.Length) : Math.Max(2048, (int)Math.Sqrt(data.Length));
+            sampleSize = data.Length < 2048 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
             sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
         }
 
@@ -291,8 +291,11 @@ public static class Complexity
         }
         //ApEn = sum / (double)(sampleSize * sampleNum);
         //ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
-        ApEn = sum / (double)(data.Length - (int)dim);
-        ApEn += Math.Log((double)(data.Length - (int)dim) / (sampleSize * sampleNum)); // This needs testing
+        //ApEn = sum / (double)(data.Length - (int)dim);
+        //ApEn += Math.Log((double)(data.Length - (int)dim) / (sampleSize * sampleNum)); // This needs testing
+        ApEn = sum / (sampleSize * sampleNum);
+        ApEn *= (double)(data.Length - (int)dim) / (sampleSize * sampleNum);
+        
 
         foreach (ulong x in sampEnMatch)
             A += x;
@@ -709,6 +712,209 @@ public static class Complexity
             Array.Copy(d, 0, sampEnMatch, SampleSize * i, SampleSize);
         }
         return (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch);
+    }
+
+    /// <summary>
+    /// ApEn function translated from TSEntropies package
+    /// </summary>
+    /// <param name="TS">Time series</param>
+    /// <param name="R_rmax">maximum size of the recurrence plot</param>
+    /// <param name="dim">embedding dimension</param>
+    /// <param name="R_lag">embedding lag/delay</param>
+    /// <param name="R_r">Noise filter</param>
+    /// <returns>ApEn value</returns>
+    /// <seealso cref="https://github.com/cran/TSEntropies/blob/master/src/ApEn.c"/>
+    public static double ApEn_Cfun(double[] TS, int R_rmax, int dim, int R_lag, double R_r)
+    {
+        const int TILE = (8 * 5);
+        int rmax = R_rmax;
+        int lag = R_lag;
+        double r = R_r;
+        int count = 0;
+        double phi = 0;
+        for (int run = 0; run < 2; run++)
+        {
+            for (int RPx = 0; RPx < rmax; RPx++)
+            {
+                int ub = rmax / TILE;
+                count = 0;
+                for (int t = 0; t < ub; ++t)
+                {
+                    int const_idx = t * TILE;
+                    double[] temp = new double[TILE];
+                    for (int m = 0; m < dim; m++)
+                    {
+                        int ind = m * lag + RPx;
+                        double a = TS[ind];
+                        for (int RPy = 0; RPy < TILE; RPy++)
+                        {
+                            double b = TS[RPy + const_idx + m * lag];
+                            if (temp[RPy] < Math.Abs(a - b)) { temp[RPy] = Math.Abs(a - b); }
+                        }
+                    }
+                    for (int ti = 0; ti < TILE; ++ti) { if (temp[ti] < r) { count++; } }
+                }
+                double[] temp2 = new double[TILE];
+                int rest = rmax % TILE;
+                int const_idx2 = ub * TILE;
+                for (int m = 0; m < dim; ++m)
+                {
+                    int ind = m * lag + RPx;
+                    double a = TS[ind];
+                    for (int RPy = 0; RPy < rest; RPy++)
+                    {
+                        double b = TS[RPy + const_idx2 + m * lag];
+                        if (temp2[RPy] < Math.Abs(a - b)) { temp2[RPy] = Math.Abs(a - b); }
+                    }
+                }
+                for (int ti = 0; ti < rest; ++ti) { if (temp2[ti] < r) { count++; } }
+            }
+            double temp3 = (double)count / rmax;
+            phi += Math.Log(temp3) / rmax;
+        }
+
+        dim++;
+        rmax -= lag;
+
+        return phi;
+    }
+
+    public static void FastApEn_Cfun(double[] TS, ref double R_res, ref int R_N, ref int R_dim, ref int R_lag, ref double R_r)
+    {
+        int N = R_N;
+        int dim = R_dim;
+        int lag = R_lag;
+        double r = R_r; // threshold of vicinity
+        int numOfSeq = N - (dim * lag) + 1;  // number of sequencies inside of time series TS
+        int Ncl; // number of value classes
+        int count = 0;
+        short[] alreadyMatched = new short[numOfSeq];  // allocating space for match records
+        double[] temp_res = new double[2];  // temporary results
+        double logji;
+        for (int run = 0; run < 2; run++)
+        {
+            Ncl = 0; logji = 0;
+            for (int i = 0; i < numOfSeq; i++) alreadyMatched[i] = 0; // clearing match records
+            for (int x = 0; x < numOfSeq; x++)
+            {
+                if (alreadyMatched[x] != 0) continue;
+                count = 0;
+                Ncl++;
+                for (int m, y = 0; y < numOfSeq; y++)
+                {
+                    if (alreadyMatched[y] != 0) continue;
+                    for (m = 0; m < dim; m++)
+                    {
+                        if (Math.Abs(TS[x + m * lag] - TS[y + m * lag]) > r) break;  // test for Maximum distance L_infinity
+                    }
+                    if (m == dim)  // test if all dimensions distances are less than or equal to eps
+                    {
+                        count++;
+                        alreadyMatched[y] = 1;
+                    }
+                }
+                logji += Math.Log(count);
+            }
+            temp_res[run] = (logji / Ncl) - Math.Log(Ncl);
+            dim++;
+            numOfSeq -= lag;
+        }
+        R_res = temp_res[0] - temp_res[1];
+        alreadyMatched = null;
+    }
+
+    public static void SampEn_Cfun(double[] TS, ref double R_res, ref int R_rmax, ref int R_dim, ref int R_lag, ref double R_r)
+    {
+        const int TILE = (8 * 5);
+        int rmax = R_rmax;
+        int dim = R_dim;
+        int lag = R_lag;
+        double r = R_r;
+        int count;
+        double[] temp_res = new double[2];
+        for (int run = 0; run < 2; run++)
+        {
+            count = 0;
+            for (int RPx = 0; RPx < rmax; RPx++)
+            {
+                int ub = rmax / TILE;
+                for (int t = 0; t < ub; ++t)
+                {
+                    int const_idx = t * TILE;
+                    double[] temp = new double[TILE];
+                    for (int m = 0; m < dim; m++)
+                    {
+                        int ind = m * lag + RPx;
+                        double a = TS[ind];
+                        for (int RPy = 0; RPy < TILE; RPy++)
+                        {
+                            double b = TS[RPy + const_idx + m * lag];
+                            if (temp[RPy] < Math.Abs(a - b)) { temp[RPy] = Math.Abs(a - b); }
+                        }
+                    }
+                    for (int ti = 0; ti < TILE; ++ti) { if (temp[ti] < r) { count++; } }
+                }
+                double[] temp2 = new double[TILE];
+                int rest = rmax % TILE;
+                int const_idx2 = ub * TILE;
+                for (int m = 0; m < dim; ++m)
+                {
+                    int ind = m * lag + RPx;
+                    double a = TS[ind];
+                    for (int RPy = 0; RPy < rest; RPy++)
+                    {
+                        double b = TS[RPy + const_idx2 + m * lag];
+                        if (temp2[RPy] < Math.Abs(a - b)) { temp2[RPy] = Math.Abs(a - b); }
+                    }
+                }
+                for (int ti = 0; ti < rest; ++ti) { if (temp2[ti] < r) { count++; } }
+            }
+            temp_res[run] = count - rmax;
+            dim++;
+            rmax -= lag;
+        }
+        R_res = Math.Log(temp_res[0] / temp_res[1]);
+    }
+
+    public static void FastSampEn_Cfun(double[] TS, ref double R_res, ref int R_N, ref int R_dim, ref int R_lag, ref double R_r)
+    {
+        int N = R_N;
+        int dim = R_dim;
+        int lag = R_lag;
+        double r = R_r; // Maximum and Manhattan distance
+        int numOfSeq = N - (dim * lag) + 1; // number of sequences inside of time series TS
+        int count;
+        short[] alreadyMatched = new short[numOfSeq];
+        double[] temp_res = new double[2];
+        for (int run = 0; run < 2; run++)
+        {
+            count = 0;
+            for (int i = 0; i < numOfSeq; i++) alreadyMatched[i] = 0; // clearing match records
+            for (int x = 0; x < numOfSeq; x++)
+            {
+                if (alreadyMatched[x] != 0) continue;
+                for (int m, y = 0; y < numOfSeq; y++)
+                {
+                    if (alreadyMatched[y] != 0) continue;
+                    for (m = 0; m < dim; m++)
+                    {
+                        if (Math.Abs(TS[x + m * lag] - TS[y + m * lag]) >= r) break; // test for Maximum distance L_infinity
+                    }
+                    if (m == dim) // test if all dimensions distance is less than or equal to eps
+                    {
+                        count++;
+                        alreadyMatched[y] = 1;
+                    }
+                }
+                count--; // because SampEn do not count on self match
+            }
+            temp_res[run] = count;
+            dim++;
+            numOfSeq -= lag;
+        }
+        if (temp_res[1] != 0) R_res = Math.Log(temp_res[0] / temp_res[1]);
+        else R_res = 666;
+        alreadyMatched = null;
     }
 
 }
