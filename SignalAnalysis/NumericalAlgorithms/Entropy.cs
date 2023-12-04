@@ -285,12 +285,14 @@ public static class Complexity
         double sum = 0.0;
         for (int i = 0; i < apEnPossible.Length; i++)
         {
-            sum = 0.0;
+            //sum = 0.0;
             if (apEnPossible[i] > 0 && apEnMatch[i] > 0)
                 sum += Math.Log((double)apEnPossible[i] / (double)apEnMatch[i]);
         }
-        ApEn = sum / (double)(sampleSize * sampleNum);
-        ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
+        //ApEn = sum / (double)(sampleSize * sampleNum);
+        //ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
+        ApEn = sum / (double)(data.Length - (int)dim);
+        ApEn += Math.Log((double)(data.Length - (int)dim) / (sampleSize * sampleNum)); // This needs testing
 
         foreach (ulong x in sampEnMatch)
             A += x;
