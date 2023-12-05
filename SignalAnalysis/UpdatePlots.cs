@@ -307,7 +307,9 @@ partial class FrmMain
         Debug.WriteLine($"ApEn: {Results.ApproximateEntropy}, SampEn: {Results.SampleEntropy}");
         Debug.WriteLine($"Elapsed time - SuperFast ({EntropyMethod.MonteCarloUniform}): {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
 
-        var apEn = Complexity.ApEn_Cfun(new double[] { -0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.4, 0.3, 0.2, 0.1, 0, -0.1, -0.2, -0.3, -0.4, -0.5 }, 5, 2, 1, 0.15);
+        var apEn = Complexity.ApEn_Cfun(signal, 2, 1, 0.15);
+        apEn = Complexity.ApEn_R(signal, 2, 1, 0.15);
+        apEn = Complexity.FastApEn_Cfun(signal, 2, 1, 0.15);
 
         //stopwatch.Restart();
         //(Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_SuperFast(signal, token, EntropyMethod.MonteCarloUniform, _settings.EntropyFactorM, _settings.EntropyFactorR);
