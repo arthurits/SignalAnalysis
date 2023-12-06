@@ -268,6 +268,12 @@ partial class FrmMain
     /// <param name="signal">1D data array whose values are expected to be uniformly spaced</param>
     private void ComputeEntropy(double[] signal)
     {
+        (Results.ApproximateEntropy, Results.SampleEntropy) = Complexity.Entropy_Parallel(signal, token, _settings.EntropyFactorM, _settings.EntropyFactorR);
+        (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy, Results.ShannonIdeal) = Complexity.ShannonEntropy(signal);
+
+
+#if DEBUG
+
         Stopwatch stopwatch = new();
         
         stopwatch.Start();
@@ -317,8 +323,8 @@ partial class FrmMain
         //elapsed = stopwatch.Elapsed;
         //Debug.WriteLine($"ApEn: {Results.ApproximateEntropy}, SampEn: {Results.SampleEntropy}");
         //Debug.WriteLine($"Elapsed time - SuperFast ({EntropyMethod.MonteCarloUniform}): {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+#endif
 
-        (Results.ShannonEntropy, Results.EntropyBit, Results.IdealEntropy, Results.ShannonIdeal) = Complexity.ShannonEntropy(signal);
     }
 
     /// <summary>
