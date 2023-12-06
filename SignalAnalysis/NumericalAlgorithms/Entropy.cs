@@ -412,27 +412,20 @@ public static class Complexity
         ulong[] AppEnMatch = new ulong[useData ? blocks - 1 : blocks];
         ulong[] SampEnPossible = new ulong[blocks];
         ulong[] SampEnMatch = new ulong[useData ? blocks - 1 : blocks];
-        double[] sumArr = new double[blocks];
-        bool[] isEqualArr = new bool[blocks];
 
         var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
 
         Parallel.For(0, blocks, options, i =>
         {
-            //AppEnPossible[i] = 0;
-            //AppEnMatch[i] = 0;
             for (uint j = 0; j < blocks; j++)
             {
-                //isEqualArr[i] = true;
                 // Check for "possibles". This corresponds to the m - length block
                 int k;
                 for (k = 0; k < dim; k++)
                 {
                     if (Math.Abs(data[indices[i] + k] - data[indices[j] + k]) > r)
-                    {
-                        //isEqualArr[i] = false;
                         break;
-                    }
+
                     //if (ct.IsCancellationRequested)
                     //    throw new OperationCanceledException("CancelEntropy", ct);
                 }
@@ -451,13 +444,6 @@ public static class Complexity
                         }
                     }
                 }
-
-                //// Check for "matches". This corresponds to the m+1 - length block
-                //if (isEqualArr[i] && Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
-                //{
-                //    AppEnMatch[i]++;
-                //    if (j > i) SampEnMatch[i]++;
-                //}
             }
         });
 
