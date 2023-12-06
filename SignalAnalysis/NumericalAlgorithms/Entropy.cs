@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis;
 
@@ -277,24 +279,18 @@ public static class Complexity
             _ => (Array.Empty<ulong>(), Array.Empty<ulong>(), Array.Empty<ulong>(), Array.Empty<ulong>())
         };
 
-        //(ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) = CountMatchedParallel(data, dim, noiseFilter);
-        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_Uniform2(data, dim, noiseFilter, sampleSize, sampleNum);
-        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, false);
-        //(apEnPossible, apEnMatch, sampEnPossible, sampEnMatch) = ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, true);
+        double sumPossible = apEnPossible.Sum(x => x > 0 ? Math.Log(x) : 0);
+        sumPossible -= Math.Log(apEnPossible.Length);
+        double sumMatch = apEnMatch.Sum(x => x > 0 ? Math.Log(x) : 0);
+        sumMatch -= Math.Log(apEnMatch.Length);
+        ApEn = sumPossible/apEnPossible.Length - sumMatch/apEnMatch.Length;
 
-        double sum = 0.0;
-        for (int i = 0; i < apEnPossible.Length; i++)
-        {
-            //sum = 0.0;
-            if (apEnPossible[i] > 0 && apEnMatch[i] > 0)
-                sum += Math.Log((double)apEnPossible[i] / (double)apEnMatch[i]);
-        }
         //ApEn = sum / (double)(sampleSize * sampleNum);
         //ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
         //ApEn = sum / (double)(data.Length - (int)dim);
         //ApEn += Math.Log((double)(data.Length - (int)dim) / (sampleSize * sampleNum)); // This needs testing
-        ApEn = sum / (sampleSize * sampleNum);
-        ApEn *= (double)(data.Length - (int)dim) / (sampleSize * sampleNum);
+        //ApEn = sumPossible / (sampleSize * sampleNum);
+        //ApEn *= (double)(data.Length - (int)dim) / (sampleSize * sampleNum);
         
 
         foreach (ulong x in sampEnMatch)
@@ -304,32 +300,6 @@ public static class Complexity
 
         if (A > 0 && B > 0)
             SampEn = -Math.Log((double)A / B);
-
-
-        //long[] AB = entropyMethod switch
-        //{
-        //    EntropyMethod.BruteForce => ComputeAB_Direct(data.ToList(), dim, noiseFilter).ToArray(),
-        //    EntropyMethod.MonteCarloUniform => ComputeAB_Uniform(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8),
-        //    EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, false),
-        //    EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom(data, dim, noiseFilter, SampleSize: 1024, SampleNum: 8, true),
-        //    _ => Array.Empty<long>(),
-        //};
-
-        //A = 0;
-        //B = 0;
-        //int sample_num = AB.Length / 2;
-        //for (int i = 0; i < sample_num; i++)
-        //{
-        //    A += (ulong)AB[i * 2];
-        //    B += (ulong)AB[i * 2 + 1];
-        //}
-        //if (a) *a = A / sample_num;
-        //if (b) *b = B / sample_num;
-
-        //if (A > 0 && B > 0)
-        //    SampEn = -Math.Log((double)B / A);
-        //else
-        //    SampEn = -Math.Log((double)(N - dim - 1) / (N - dim));
 
         return (ApEn, SampEn);
     }
@@ -436,12 +406,12 @@ public static class Complexity
     {
         bool useData = indices is null;
         indices ??= Enumerable.Range(0, data.Length).ToArray();
-        int blocks = indices.Length - (useData ? (int)dim : 0);
+        int blocks = indices.Length - (useData ? (int)dim - 1 : 0);
 
         ulong[] AppEnPossible = new ulong[blocks];
-        ulong[] AppEnMatch = new ulong[blocks];
+        ulong[] AppEnMatch = new ulong[useData ? blocks - 1 : blocks];
         ulong[] SampEnPossible = new ulong[blocks];
-        ulong[] SampEnMatch = new ulong[blocks];
+        ulong[] SampEnMatch = new ulong[useData ? blocks - 1 : blocks];
         double[] sumArr = new double[blocks];
         bool[] isEqualArr = new bool[blocks];
 
@@ -449,34 +419,45 @@ public static class Complexity
 
         Parallel.For(0, blocks, options, i =>
         {
-            AppEnPossible[i] = 0;
-            AppEnMatch[i] = 0;
+            //AppEnPossible[i] = 0;
+            //AppEnMatch[i] = 0;
             for (uint j = 0; j < blocks; j++)
             {
-                isEqualArr[i] = true;
+                //isEqualArr[i] = true;
                 // Check for "possibles". This corresponds to the m - length block
-                for (uint k = 0; k < dim; k++)
+                int k;
+                for (k = 0; k < dim; k++)
                 {
                     if (Math.Abs(data[indices[i] + k] - data[indices[j] + k]) > r)
                     {
-                        isEqualArr[i] = false;
+                        //isEqualArr[i] = false;
                         break;
                     }
                     //if (ct.IsCancellationRequested)
                     //    throw new OperationCanceledException("CancelEntropy", ct);
                 }
-                if (isEqualArr[i])
+                if (k == dim)
                 {
                     AppEnPossible[i]++;
                     if (j > i) SampEnPossible[i]++;
+
+                    if (j < AppEnMatch.Length && i < AppEnMatch.Length)
+                    {
+                        // Check for "matches". This corresponds to the m+1 - length block
+                        if (Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
+                        {
+                            AppEnMatch[i]++;
+                            if (j > i) SampEnMatch[i]++;
+                        }
+                    }
                 }
 
-                // Check for "matches". This corresponds to the m+1 - length block
-                if (isEqualArr[i] && Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
-                {
-                    AppEnMatch[i]++;
-                    if (j > i) SampEnMatch[i]++;
-                }
+                //// Check for "matches". This corresponds to the m+1 - length block
+                //if (isEqualArr[i] && Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
+                //{
+                //    AppEnMatch[i]++;
+                //    if (j > i) SampEnMatch[i]++;
+                //}
             }
         });
 
@@ -715,7 +696,7 @@ public static class Complexity
     }
 
     /// <summary>
-    /// ApEn function translated from TSEntropies package
+    /// ApEn function adapted from TSEntropies package
     /// </summary>
     /// <param name="data">Time series</param>
     /// <param name="dim">embedding dimension</param>
@@ -723,68 +704,86 @@ public static class Complexity
     /// <param name="noiseFilter">Noise filter</param>
     /// <returns>ApEn value</returns>
     /// <seealso cref="https://github.com/cran/TSEntropies/blob/master/src/ApEn.c"/>
-    public static double ApEn_Cfun(double[] data, int dim, int lag, double noiseFilter)
+    public static (ulong[] apEnPossible, ulong[] apEnMatch, ulong[] sampEnPossible, ulong[] sampEnMatch) ApEn_Cfun(double[] data, int dim, int lag, double noiseFilter)
     {
-        int TILE = data.Length * 5;
-        int blocks = data.Length - ((dim) * lag) + 1;
-        double[] result = new double[2];
-        int count = 0;
-        double phi = 0;
-        for (int run = 0; run < 2; run++)
+        int blocks = data.Length - (dim * lag) + 1;
+        ulong[] apEnPossible = new ulong[blocks];
+        ulong[] apEnMatch = new ulong[blocks - 1];
+        ulong[] sampEnPossible = new ulong[blocks];
+        ulong[] sampEnMatch = new ulong[blocks - 1];
+        double pointDistance;
+
+        var options = new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 };
+
+        Parallel.For(0, blocks, i =>
         {
-            for (int RPx = 0; RPx < blocks; RPx++)
+            for (int j = 0; j < blocks; j++)
             {
-                int ub = blocks / TILE;
-                count = 0;
-                for (int t = 0; t < ub; ++t)
+                // This is the dim-length section. This counts all the "possibles"
+                int m;
+                for (m = 0; m < dim; m++)
                 {
-                    int const_idx = t * TILE;
-                    double[] temp = new double[TILE];
-                    for (int m = 0; m < dim; m++)
+                    pointDistance = Math.Abs(data[m * lag + i] - data[m * lag + j]);
+                    if (pointDistance > noiseFilter)
+                        break;
+                }
+                if (m == dim)
+                {
+                    apEnPossible[i]++;
+                    if (j > i) sampEnPossible[i]++;
+
+                    // This is the dim+1 section. This counts all the "matches"
+                    if (j < (blocks - 1) && i < (blocks - 1))
                     {
-                        int ind = m * lag + RPx;
-                        double a = data[ind];
-                        for (int RPy = 0; RPy < TILE; RPy++)
+                        pointDistance = Math.Abs(data[m * lag + i] - data[m * lag + j]);
+                        if (pointDistance <= noiseFilter)
                         {
-                            double b = data[RPy + const_idx + m * lag];
-                            if (temp[RPy] < Math.Abs(a - b))
-                                temp[RPy] = Math.Abs(a - b);
+                            apEnMatch[i]++;
+                            if (j > i) sampEnMatch[i]++;
                         }
                     }
-                    for (int ti = 0; ti < TILE; ++ti)
-                    {
-                        if (temp[ti] < noiseFilter)
-                            count++;
-                    }
-                }
-                double[] temp2 = new double[TILE];
-                int rest = blocks % TILE;
-                int const_idx2 = ub * TILE;
-                for (int m = 0; m < dim; ++m)
-                {
-                    int ind = m * lag + RPx;
-                    double a = data[ind];
-                    for (int RPy = 0; RPy < rest; RPy++)
-                    {
-                        double b = data[RPy + const_idx2 + m * lag];
-                        if (temp2[RPy] < Math.Abs(a - b))
-                            temp2[RPy] = Math.Abs(a - b);
-                    }
-                }
-                for (int ti = 0; ti < rest; ++ti)
-                {
-                    if (temp2[ti] < noiseFilter)
-                        count++;
-                }
 
-                double temp3 = (double)count / blocks;
-                phi += Math.Log(temp3) / blocks;
+                }
             }
-            result[run] = phi;
-            dim++;
-            blocks -= lag;
-        }
-        return result[0] - result[1];
+        });
+
+        //for (int i = 0; i < blocks; i++)
+        //{
+        //    for (int j = 0; j < blocks; j++)
+        //    {
+        //        maxDistance = new double[blocks];
+
+        //        // This is the dim-length section. This counts all the "possibles" 
+        //        for (int m = 0; m < dim; m++)
+        //        {
+        //            pointDistance = Math.Abs(data[m * lag + i] - data[m * lag + j]);
+        //            if (maxDistance[j] < pointDistance)
+        //                maxDistance[j] = pointDistance;
+        //        }
+        //        if (maxDistance[j] < noiseFilter)
+        //        {
+        //            apEnPossible[i]++;
+        //            if (j > i) sampEnPossible[i]++;
+        //        }
+
+        //        // This is the dim+1 section. This counts all the "matches"
+        //        if (j < (blocks - 1) && i < (blocks - 1) )
+        //        {
+        //            pointDistance = Math.Abs(data[dim * lag + i] - data[dim * lag + j]);
+        //            if (maxDistance[j] < pointDistance)
+        //                maxDistance[j] = pointDistance;
+        //            if (maxDistance[j] < noiseFilter)
+        //            {
+        //                apEnMatch[i]++;
+        //                if (j > i) sampEnMatch[i]++;
+        //            }
+        //        }
+
+        //    }
+
+        //}
+
+        return (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch);
     }
 
     public static double ApEn_R(double[] data, int dim = 2, int lag = 1, double noiseFilter = 0.15)
@@ -860,42 +859,50 @@ public static class Complexity
     public static double FastApEn_Cfun(double[] data, int dim, int lag, double noiseFilter)
     {
         int blocks = data.Length - (dim * lag) + 1;  // number of sequencies inside of time series TS
-        int Ncl; // number of value classes
+        int validCases; // number of value classes
         int count = 0;
-        short[] alreadyMatched = new short[blocks];  // allocating space for match records
+        bool[] alreadyMatched;  // allocating space for match records
         double[] temp_res = new double[2];  // temporary results
         double logji;
 
+        ulong[] apEnPossible = new ulong[blocks];
+        ulong[] apEnMatch = new ulong[blocks - 1];
+        ulong[] sampEnPossible = new ulong[blocks];
+        ulong[] sampEnMatch = new ulong[blocks - 1];
+
         for (int run = 0; run < 2; run++)
         {
-            Ncl = 0; logji = 0;
-            for (int i = 0; i < blocks; i++) alreadyMatched[i] = 0; // clearing match records
+            validCases = 0;
+            logji = 0;
+            alreadyMatched = new bool[blocks]; // clearing match records
 
-            for (int x = 0; x < blocks; x++)
+            for (int i = 0; i < blocks; i++)
             {
-                if (alreadyMatched[x] != 0)
+                if (alreadyMatched[i] == true)
                     continue;
                 count = 0;
-                Ncl++;
-                for (int m, y = 0; y < blocks; y++)
+                validCases++;
+                for (int j = 0; j < blocks; j++)
                 {
-                    if (alreadyMatched[y] != 0)
+                    if (alreadyMatched[j] == true)
                         continue;
+                    int m;
                     for (m = 0; m < dim; m++)
                     {
-                        if (Math.Abs(data[x + m * lag] - data[y + m * lag]) > noiseFilter)
+                        if (Math.Abs(data[i + m * lag] - data[j + m * lag]) > noiseFilter)
                             break;  // test for Maximum distance L_infinity
                     }
                     if (m == dim)  // test if all dimensions distances are less than or equal to eps
                     {
                         count++;
-                        alreadyMatched[y] = 1;
+                        alreadyMatched[j] = true;
                     }
                 }
                 logji += Math.Log(count);
             }
-            //temp_res[run] = (logji / Ncl) - Math.Log(Ncl);
-            temp_res[run] = (logji - Math.Log(Ncl)) / Ncl;
+
+            temp_res[run] = (logji / validCases) - Math.Log(validCases);
+            //temp_res[run] = (logji - Math.Log(Ncl)) / Ncl;
             dim++;
             blocks -= lag;
         }
@@ -904,121 +911,50 @@ public static class Complexity
         return temp_res[0] - temp_res[1];
     }
 
-    public static void SampEn_Cfun(double[] TS, ref double R_res, ref int R_rmax, ref int R_dim, ref int R_lag, ref double R_r)
+    public static double FastSampEn_Cfun(double[] data, int dim, int lag, double noiseFilter)
     {
-        const int TILE = (8 * 5);
-        int rmax = R_rmax;
-        int dim = R_dim;
-        int lag = R_lag;
-        double r = R_r;
+        int blocks = data.Length - (dim * lag) + 1; // number of sequences inside of time series TS
         int count;
-        double[] temp_res = new double[2];
-        for (int run = 0; run < 2; run++)
-        {
-            count = 0;
-            for (int RPx = 0; RPx < rmax; RPx++)
-            {
-                int ub = rmax / TILE;
-                for (int t = 0; t < ub; ++t)
-                {
-                    int const_idx = t * TILE;
-                    double[] temp = new double[TILE];
-                    for (int m = 0; m < dim; m++)
-                    {
-                        int ind = m * lag + RPx;
-                        double a = TS[ind];
-                        for (int RPy = 0; RPy < TILE; RPy++)
-                        {
-                            double b = TS[RPy + const_idx + m * lag];
-                            if (temp[RPy] < Math.Abs(a - b))
-                                temp[RPy] = Math.Abs(a - b);
-                        }
-                    }
-                    for (int ti = 0; ti < TILE; ++ti)
-                    {
-                        if (temp[ti] < r)
-                            count++;
-                    }
-                }
-
-                double[] temp2 = new double[TILE];
-                int rest = rmax % TILE;
-                int const_idx2 = ub * TILE;
-                for (int m = 0; m < dim; ++m)
-                {
-                    int ind = m * lag + RPx;
-                    double a = TS[ind];
-                    for (int RPy = 0; RPy < rest; RPy++)
-                    {
-                        double b = TS[RPy + const_idx2 + m * lag];
-                        if (temp2[RPy] < Math.Abs(a - b))
-                            temp2[RPy] = Math.Abs(a - b);
-                    }
-                }
-                for (int ti = 0; ti < rest; ++ti)
-                {
-                    if (temp2[ti] < r)
-                        count++;
-                }
-            }
-            temp_res[run] = count - rmax;
-            dim++;
-            rmax -= lag;
-        }
-        R_res = Math.Log(temp_res[0] / temp_res[1]);
-    }
-
-    public static void FastSampEn_Cfun(double[] TS, ref double R_res, ref int R_N, ref int R_dim, ref int R_lag, ref double R_r)
-    {
-        int N = R_N;
-        int dim = R_dim;
-        int lag = R_lag;
-        double r = R_r; // Maximum and Manhattan distance
-        int numOfSeq = N - (dim * lag) + 1; // number of sequences inside of time series TS
-        int count;
-        short[] alreadyMatched = new short[numOfSeq];
+        bool[] alreadyMatched;
         double[] temp_res = new double[2];
         
         for (int run = 0; run < 2; run++)
         {
             count = 0;
-            for (int i = 0; i < numOfSeq; i++)
-                alreadyMatched[i] = 0; // clearing match records
+            alreadyMatched = new bool[blocks]; // clearing match records
 
-            for (int x = 0; x < numOfSeq; x++)
+            int m;
+            for (int i = 0; i < blocks; i++)
             {
-                if (alreadyMatched[x] != 0)
+                if (alreadyMatched[i] == true)
                     continue;
-                
-                for (int m, y = 0; y < numOfSeq; y++)
+               
+                for (int j = 0; j < blocks; j++)
                 {
-                    if (alreadyMatched[y] != 0)
+                    if (alreadyMatched[j] == true)
                         continue;
                     
                     for (m = 0; m < dim; m++)
                     {
-                        if (Math.Abs(TS[x + m * lag] - TS[y + m * lag]) >= r)
-                            break; // test for Maximum distance L_infinity
+                        if (Math.Abs(data[i + m * lag] - data[j + m * lag]) >= noiseFilter)
+                            break;
                     }
                     if (m == dim) // test if all dimensions distance is less than or equal to eps
                     {
                         count++;
-                        alreadyMatched[y] = 1;
+                        alreadyMatched[j] = true;
                     }
                 }
                 count--; // because SampEn do not count on self match
             }
             temp_res[run] = count;
             dim++;
-            numOfSeq -= lag;
+            blocks -= lag;
         }
-        if (temp_res[1] != 0)
-            R_res = Math.Log(temp_res[0] / temp_res[1]);
-        else R_res = 666;
 
-        alreadyMatched = null;
+        return temp_res[1] != 0 ? Math.Log(temp_res[0] / temp_res[1]) : -1;
     }
-
+    
 }
 
 /// <summary>
