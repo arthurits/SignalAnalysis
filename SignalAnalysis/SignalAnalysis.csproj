@@ -38,6 +38,9 @@ If you find this software useful, please consider supporting it!</Description>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="examples\ApEn test - 11 pt.sig">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="examples\ApEn test - 21 pt.sig">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
