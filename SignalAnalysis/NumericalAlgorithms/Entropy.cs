@@ -225,13 +225,13 @@ public static class Complexity
     public static double StdDev<T>(IEnumerable<T> values, bool asSample = false)
     {
         // Convert into an enumerable of doubles.
-        IEnumerable<double> doubles = values.Select(value => Convert.ToDouble(value));
+        IEnumerable<double> doubles = values.AsParallel().Select(value => Convert.ToDouble(value));
 
         // Then compute the standard deviation
         //double avg = System.Linq.Enumerable.Average(doubles);
         //double sst = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));    // Sum of squares total
-        double avg = doubles.Average();
-        double sst = doubles.Sum(x => (x - avg) * (x - avg));   // Sum of squares total
+        double avg = doubles.AsParallel().Average();
+        double sst = doubles.AsParallel().Sum(x => (x - avg) * (x - avg));   // Sum of squares total
         int denominator = values.Count() - (asSample ? 1 : 0);
         return denominator > 0.0 ? Math.Sqrt(sst / denominator) : -1.0;
     }
@@ -263,7 +263,7 @@ public static class Complexity
         int sampleNum = 1;
         if (entropyMethod != EntropyMethod.BruteForce)
         {
-            sampleSize = data.Length < 2048 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
+            sampleSize = data.Length < 1024 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
             sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
         }
 
@@ -408,6 +408,8 @@ public static class Complexity
         indices ??= Enumerable.Range(0, data.Length).ToArray();
         int blocks = indices.Length - (useData ? (int)dim - 1 : 0);
 
+        ulong[] alreadyPossible = new ulong[blocks];
+        ulong[] alreadyMatched = new ulong[blocks];
         ulong[] AppEnPossible = new ulong[blocks];
         ulong[] AppEnMatch = new ulong[useData ? blocks - 1 : blocks];
         ulong[] SampEnPossible = new ulong[blocks];
