@@ -434,6 +434,7 @@ public static class Complexity
                 if (k == dim)
                 {
                     AppEnPossible[i]++;
+                    alreadyPossible[j]++;
                     if (j > i) SampEnPossible[i]++;
 
                     if (j < AppEnMatch.Length && i < AppEnMatch.Length)
