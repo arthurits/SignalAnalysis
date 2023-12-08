@@ -39,16 +39,16 @@ If you find this software useful, please consider supporting it!</Description>
 
   <ItemGroup>
     <None Update="examples\ApEn test - 11 pt.sig">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="examples\ApEn test - 21 pt.sig">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="examples\Artificial light test.elux">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="examples\Random set - 50 pt.sig">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="examples\Signal format template file.sig">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
