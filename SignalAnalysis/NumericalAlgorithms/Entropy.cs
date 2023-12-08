@@ -141,38 +141,44 @@ public static class Complexity
             MaxDegreeOfParallelism = Environment.ProcessorCount - 1
         };
 
-        Parallel.For(0, blocks, options, i =>
+        try
         {
-            uint k;
-            for (uint j = 0; j < blocks; j++)
-            {
-                // Check for "possibles". This corresponds to the m - length block
-                for (k = 0; k < dim; k++)
-                {
-                    if (Math.Abs(data[i + k] - data[j + k]) > noiseFilter)
-                        break;
-                    if (ct.IsCancellationRequested)
-                        throw new OperationCanceledException("CancelEntropy", ct);
-                }
-                if (k == dim)
-                {
-                    ApEnPossible[i]++;
-                    if (j > i) SampEnPossible[i]++;
 
-                    if (j < ApEnMatch.Length && i < ApEnMatch.Length)
+            Parallel.For(0, blocks, options, i =>
+            {
+                uint k;
+                for (uint j = 0; j < blocks; j++)
+                {
+                    // Check for "possibles". This corresponds to the m - length block
+                    for (k = 0; k < dim; k++)
                     {
-                        // Check for "matches". This corresponds to the m+1 - length block
-                        if (Math.Abs(data[i + dim] - data[j + dim]) <= noiseFilter)
+                        if (Math.Abs(data[i + k] - data[j + k]) > noiseFilter)
+                            break;
+                    }
+                    if (k == dim)
+                    {
+                        ApEnPossible[i]++;
+                        if (j > i) SampEnPossible[i]++;
+
+                        if (j < ApEnMatch.Length && i < ApEnMatch.Length)
                         {
-                            ApEnMatch[i]++;
-                            if (j > i) SampEnMatch[i]++;
+                            // Check for "matches". This corresponds to the m+1 - length block
+                            if (Math.Abs(data[i + dim] - data[j + dim]) <= noiseFilter)
+                            {
+                                ApEnMatch[i]++;
+                                if (j > i) SampEnMatch[i]++;
+                            }
                         }
                     }
                 }
-            }
-            //if (AppEnPossible[i] > 0 && AppEnMatch[i] > 0)
-            //    sumArr[i] = Math.Log((double)AppEnPossible[i] / (double)AppEnMatch[i]);
-        });
+                //if (AppEnPossible[i] > 0 && AppEnMatch[i] > 0)
+                //    sumArr[i] = Math.Log((double)AppEnPossible[i] / (double)AppEnMatch[i]);
+            });
+        }
+        catch(OperationCanceledException)
+        {
+            throw new OperationCanceledException("CancelEntropy", ct);
+        }
 
         //appEn = sumArr.Sum() / (double)(data.Length - dim);
 
@@ -450,38 +456,42 @@ public static class Complexity
             MaxDegreeOfParallelism = Environment.ProcessorCount - 1
         };
 
-        Parallel.For(0, blocks, options, i =>
+        try
         {
-            for (uint j = 0; j < blocks; j++)
+            Parallel.For(0, blocks, options, i =>
             {
-                // Check for "possibles". This corresponds to the m - length block
-                int k;
-                for (k = 0; k < dim; k++)
+                for (uint j = 0; j < blocks; j++)
                 {
-                    if (Math.Abs(data[indices[i] + k] - data[indices[j] + k]) > r)
-                        break;
-
-                    //if (ct.IsCancellationRequested)
-                    //    throw new OperationCanceledException("CancelEntropy", ct);
-                }
-                if (k == dim)
-                {
-                    ApEnPossible[i]++;
-                    alreadyPossible[j]++;
-                    if (j > i) SampEnPossible[i]++;
-
-                    if (j < ApEnMatch.Length && i < ApEnMatch.Length)
+                    // Check for "possibles". This corresponds to the m - length block
+                    int k;
+                    for (k = 0; k < dim; k++)
                     {
-                        // Check for "matches". This corresponds to the m+1 - length block
-                        if (Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
+                        if (Math.Abs(data[indices[i] + k] - data[indices[j] + k]) > r)
+                            break;
+                    }
+                    if (k == dim)
+                    {
+                        ApEnPossible[i]++;
+                        alreadyPossible[j]++;
+                        if (j > i) SampEnPossible[i]++;
+
+                        if (j < ApEnMatch.Length && i < ApEnMatch.Length)
                         {
-                            ApEnMatch[i]++;
-                            if (j > i) SampEnMatch[i]++;
+                            // Check for "matches". This corresponds to the m+1 - length block
+                            if (Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
+                            {
+                                ApEnMatch[i]++;
+                                if (j > i) SampEnMatch[i]++;
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
+        catch (OperationCanceledException)
+        {
+            throw new OperationCanceledException("CancelEntropy", ct);
+        }
 
         return (ApEnPossible, ApEnMatch, SampEnPossible, SampEnMatch);
     }
