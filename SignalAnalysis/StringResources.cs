@@ -213,6 +213,7 @@ public static class StringResources
     public static string RadCurrentCulture => StringRM.GetString("strRadCurrentCulture", Culture) ?? "Current culture formatting";
     public static string RadInvariantCulture => StringRM.GetString("strRadInvariantCulture", Culture) ?? "Invariant culture formatting";
     public static string RadUserCulture => StringRM.GetString("strRadUserCulture", Culture) ?? "Select culture";
+    public static string ChkWindowPos => StringRM.GetString("strChkWindowPos", Culture) ?? "Remember window position and size on startup";
     public static string ChkDlgPath => StringRM.GetString("strChkDlgPath", Culture) ?? "Remember open/save dialog previous path";
     public static string LblDataFormat => StringRM.GetString("strLblDataFormat", Culture) ?? "Numeric data-formatting string";
 

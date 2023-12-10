@@ -172,6 +172,9 @@ Hvis du finder denne software nyttig, så overvej at støtte den!</value>
   <data name="strChkPower" xml:space="preserve">
     <value>Kraft (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Husk vinduesposition og størrelse ved opstart</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Vil du nulstille alle felter til deres standardværdier?</value>
   </data>

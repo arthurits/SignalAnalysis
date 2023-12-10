@@ -187,6 +187,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>القوة (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>تذكر موضع النافذة وحجمها عند بدء التشغيل</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>هل تود إستعادة جميع الحقول
 للقيم الاصلية ؟</value>

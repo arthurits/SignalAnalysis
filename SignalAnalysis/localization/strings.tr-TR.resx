@@ -187,6 +187,9 @@ Bu yazılımı yararlı bulursanız, lütfen desteklemeyi düşünün!</value>
   <data name="strChkPower" xml:space="preserve">
     <value>Güç (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Başlangıçta pencere konumunu ve boyutunu hatırla</value>
+  </data>
   <data name="strDifferentiationAlgorithms" xml:space="preserve">
     <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
   </data>

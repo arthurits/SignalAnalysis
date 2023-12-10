@@ -67,6 +67,7 @@ public partial class FrmSettings : Form
         if (radPoints.Checked) Settings.AxisType = AxisType.Points;
         if (radTime.Checked) Settings.AxisType = AxisType.DateTime;
 
+        Settings.WindowPosition = chkWindowPos.Checked;
         Settings.RememberFileDialogPath = chkDlgPath.Checked;
         Settings.DataFormat = txtDataFormat.Text;
 
@@ -225,7 +226,6 @@ public partial class FrmSettings : Form
         chkCumulative.Checked = settings.CumulativeDimension;
         chkEntropy.Checked = settings.ComputeEntropy;
         chkCrossHair.Checked = settings.CrossHair;
-        chkDlgPath.Checked = settings.RememberFileDialogPath;
         radUp.Checked = settings.FFTRoundUp;
         radDown.Checked = !settings.FFTRoundUp;
 
@@ -252,6 +252,7 @@ public partial class FrmSettings : Form
             radUserCulture.Checked = true;
         }
 
+        chkWindowPos.Checked = settings.WindowPosition;
         chkDlgPath.Checked = settings.RememberFileDialogPath;
         txtDataFormat.Text = settings.DataFormat;
 
@@ -371,6 +372,7 @@ public partial class FrmSettings : Form
         this.radCurrentCulture.Text = StringResources.RadCurrentCulture + $" ({System.Globalization.CultureInfo.CurrentCulture.Name})";
         this.radInvariantCulture.Text = StringResources.RadInvariantCulture;
         this.radUserCulture.Text = StringResources.RadUserCulture;
+        this.chkWindowPos.Text = StringResources.ChkWindowPos;
         this.chkDlgPath.Text = StringResources.ChkDlgPath;
         this.lblDataFormat.Text = StringResources.LblDataFormat;
 
@@ -425,6 +427,8 @@ public partial class FrmSettings : Form
         this.txtFactorR.Left = 5 + this.lblFactorR.Left + width;
 
         // User inferface tab
+        this.cboAllCultures.Left = 5 + this.radUserCulture.Left + this.radUserCulture.Width;
+        this.cboAllCultures.Width = Math.Min(190, grpCulture.Width - 2 * this.radUserCulture.Left - 5 - this.radUserCulture.Width);
         this.txtDataFormat.Left = 5 + this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }
