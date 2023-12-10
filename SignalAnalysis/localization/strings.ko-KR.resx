@@ -187,6 +187,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>세기(dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>시작 시 창 위치 및 크기 기억</value>
+  </data>
   <data name="strDifferentiationAlgorithms" xml:space="preserve">
     <value>후방 1점차, 전방 1점차, 중앙 3점차, 중앙 5점차, 중앙 7점차, 중앙 9점차, 사비츠키-골레이 선형 3점차, 사비츠키-골레이 선형 5점차, 사비츠키-골레이 선형 7점차, 사비츠키-골레이 선형 9점차, 사비츠키-골레이 큐빅 5점차, 사비츠키-골레이 큐빅 7점차, 사비츠키-골레이 큐빅 9점차, 사비츠키-골레이 큐빅 9점차</value>
   </data>
