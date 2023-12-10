@@ -172,6 +172,9 @@ Jei ši programinė įranga jums naudinga, apsvarstykite galimybę ją palaikyti
   <data name="strChkPower" xml:space="preserve">
     <value>Galia (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Atcerieties loga pozīciju un izmēru palaišanas laikā</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Ar norite nustatyti visus laukus
 į numatytąsias reikšmes?</value>

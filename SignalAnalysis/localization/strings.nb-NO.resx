@@ -187,6 +187,9 @@ Hvis du synes denne programvaren er nyttig, kan du vurdere å støtte den!</valu
   <data name="strChkPower" xml:space="preserve">
     <value>Kraft (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Husk vindusposisjon og størrelse ved oppstart</value>
+  </data>
   <data name="strDifferentiationAlgorithms" xml:space="preserve">
     <value>Bakover én-punkts differanse, Fremover én-punkts differanse, Sentral tre-punkts differanse, Sentral fem-punkts differanse, Sentral syv-punkts differanse, Sentral ni-punkts differanse, Savitzky–Golay lineær tre-punkts, Savitzky–Golay lineær fem-punkts, Savitzky–Golay lineær syv-punkts, Savitzky–Golay lineær ni-punkts, Savitzky–Golay kubisk fem-punkts, Savitzky–Golay kubisk syv-punkts, Savitzky–Golay kubisk ni-punkts</value>
   </data>

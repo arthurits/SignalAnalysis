@@ -187,6 +187,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>功率（dB）</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>启动时记住窗口位置和大小</value>
+  </data>
   <data name="strDifferentiationAlgorithms" xml:space="preserve">
     <value>向后一点差分, 向前一点差分, 中心三点差分, 中心五点差分, 中心七点差分, 中心九点差分, Savitzky–Golay 三点线性, Savitzky–Golay 五点线性, Savitzky–Golay 七点线性, Savitzky–Golay 九点线性, Savitzky–Golay 五点三次, Savitzky–Golay 七点三次, Savitzky–Golay 九点三次</value>
   </data>

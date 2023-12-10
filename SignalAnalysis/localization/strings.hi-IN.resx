@@ -172,6 +172,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>पावर (डीबी)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>स्टार्टअप पर विंडो की स्थिति और आकार याद रखें</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>क्या आप सभी फ़ील्ड रीसेट करना चाहते हैं?</value>
   </data>

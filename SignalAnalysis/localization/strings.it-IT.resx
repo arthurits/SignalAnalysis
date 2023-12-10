@@ -172,6 +172,9 @@ Se trovi utile questo software, considera di supportarlo!</value>
   <data name="strChkPower" xml:space="preserve">
     <value>Potenza (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Ricorda la posizione e le dimensioni della finestra all'avvio</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Vuoi ripristinare tutti i campi ai loro valori di default?</value>
   </data>

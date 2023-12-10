@@ -197,6 +197,9 @@ If you find this software useful, please consider supporting it!</value>
   <data name="strChkPower" xml:space="preserve">
     <value>Power (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Remember window position and size on startup</value>
+  </data>
   <data name="strDifferentiationAlgorithms" xml:space="preserve">
     <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
     <comment>Algorithms to be displayed as options in a ComboBox</comment>

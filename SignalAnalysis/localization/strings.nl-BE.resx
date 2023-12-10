@@ -172,6 +172,9 @@ Als u deze software nuttig vindt, overweeg dan om deze te ondersteunen!</value>
   <data name="strChkPower" xml:space="preserve">
     <value>Vermogen (dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>Onthoud de positie en grootte van het venster bij het opstarten</value>
+  </data>
   <data name="strDlgReset" xml:space="preserve">
     <value>Wilt u alle velden resetten
 naar hun standaardwaarden?</value>

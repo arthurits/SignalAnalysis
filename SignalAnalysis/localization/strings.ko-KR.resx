@@ -117,33 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="strFileDlgFileName" xml:space="preserve">
-    <value>Plot.png</value>
-  </data>
-  <data name="strFileDlgFilter" xml:space="preserve">
-    <value>PNG Files (*.png)|*.png;*.png|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg|BMP Files (*.bmp)|*.bmp;*.bmp|All files (*.*)|*.*</value>
-  </data>
-  <data name="strMenuCopy" xml:space="preserve">
-    <value>이미지 복사</value>
-  </data>
-  <data name="strMenuCrossHair" xml:space="preserve">
-    <value>십자형 표시</value>
-  </data>
-  <data name="strMenuDetach" xml:space="preserve">
-    <value>기록</value>
-  </data>
-  <data name="strMenuHelp" xml:space="preserve">
-    <value>도움</value>
-  </data>
-  <data name="strMenuOpen" xml:space="preserve">
-    <value>새로운 창에서 열기</value>
-  </data>
-  <data name="strMenuSave" xml:space="preserve">
-    <value>다음과 같이 이미지를 저장</value>
-  </data>
-  <data name="strMenuZoom" xml:space="preserve">
-    <value>데이터에 맞게 확대/축소</value>
-  </data>
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>개발자{0}</value>
   </data>
@@ -214,6 +187,9 @@
   <data name="strChkPower" xml:space="preserve">
     <value>세기(dB)</value>
   </data>
+  <data name="strChkWindowPos" xml:space="preserve">
+    <value>시작 시 창 위치 및 크기 기억</value>
+  </data>
   <data name="strDifferentiationAlgorithms" xml:space="preserve">
     <value>후방 1점차, 전방 1점차, 중앙 3점차, 중앙 5점차, 중앙 7점차, 중앙 9점차, 사비츠키-골레이 선형 3점차, 사비츠키-골레이 선형 5점차, 사비츠키-골레이 선형 7점차, 사비츠키-골레이 선형 9점차, 사비츠키-골레이 큐빅 5점차, 사비츠키-골레이 큐빅 7점차, 사비츠키-골레이 큐빅 9점차, 사비츠키-골레이 큐빅 9점차</value>
   </data>
@@ -232,6 +208,12 @@
   </data>
   <data name="strErrorDeserializeTitle" xml:space="preserve">
     <value>오류</value>
+  </data>
+  <data name="strFileDlgFileName" xml:space="preserve">
+    <value>Plot.png</value>
+  </data>
+  <data name="strFileDlgFilter" xml:space="preserve">
+    <value>PNG Files (*.png)|*.png;*.png|JPG Files (*.jpg, *.jpeg)|*.jpg;*.jpeg|BMP Files (*.bmp)|*.bmp;*.bmp|All files (*.*)|*.*</value>
   </data>
   <data name="strFileHeader00" xml:space="preserve">
     <value>ErgoLux 데이터</value>
@@ -403,6 +385,27 @@
   </data>
   <data name="strLblWindow" xml:space="preserve">
     <value>Window</value>
+  </data>
+  <data name="strMenuCopy" xml:space="preserve">
+    <value>이미지 복사</value>
+  </data>
+  <data name="strMenuCrossHair" xml:space="preserve">
+    <value>십자형 표시</value>
+  </data>
+  <data name="strMenuDetach" xml:space="preserve">
+    <value>기록</value>
+  </data>
+  <data name="strMenuHelp" xml:space="preserve">
+    <value>도움</value>
+  </data>
+  <data name="strMenuOpen" xml:space="preserve">
+    <value>새로운 창에서 열기</value>
+  </data>
+  <data name="strMenuSave" xml:space="preserve">
+    <value>다음과 같이 이미지를 저장</value>
+  </data>
+  <data name="strMenuZoom" xml:space="preserve">
+    <value>데이터에 맞게 확대/축소</value>
   </data>
   <data name="strMsgBoxErrorDerivative" xml:space="preserve">
     <value>Unexpected error while computing numerical differentiation.
