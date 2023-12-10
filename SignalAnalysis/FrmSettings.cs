@@ -427,6 +427,8 @@ public partial class FrmSettings : Form
         this.txtFactorR.Left = 5 + this.lblFactorR.Left + width;
 
         // User inferface tab
+        this.cboAllCultures.Left = 5 + this.radUserCulture.Left + this.radUserCulture.Width;
+        this.cboAllCultures.Width = Math.Min(190, grpCulture.Width - 2 * this.radUserCulture.Left - 5 - this.radUserCulture.Width);
         this.txtDataFormat.Left = 5 + this.lblDataFormat.Left + this.lblDataFormat.Width;
         this.lblDataFormat.Top = this.txtDataFormat.Top + (txtDataFormat.Height - lblDataFormat.Height) / 2;
     }

@@ -561,7 +561,7 @@
             grpCulture.Controls.Add(radCurrentCulture);
             grpCulture.Location = new Point(24, 14);
             grpCulture.Name = "grpCulture";
-            grpCulture.Size = new Size(387, 130);
+            grpCulture.Size = new Size(400, 130);
             grpCulture.TabIndex = 0;
             grpCulture.TabStop = false;
             grpCulture.Text = "UI and data format";
@@ -581,7 +581,6 @@
             // 
             radUserCulture.AutoSize = true;
             radUserCulture.Location = new Point(18, 93);
-            radUserCulture.MaximumSize = new Size(152, 0);
             radUserCulture.Name = "radUserCulture";
             radUserCulture.Size = new Size(108, 23);
             radUserCulture.TabIndex = 3;
