@@ -481,6 +481,7 @@ public static class Complexity
                             if (Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
                             {
                                 ApEnMatch[i]++;
+                                alreadyMatched[j]++;
                                 if (j > i) SampEnMatch[i]++;
                             }
                         }
