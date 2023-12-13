@@ -444,11 +444,11 @@ public static class Complexity
         int blocks = indices.Length - (useData ? (int)dim - 1 : 0);
 
         ulong[] alreadyPossible = new ulong[blocks];
-        ulong[] alreadyMatched = new ulong[blocks];
-        ulong[] ApEnPossible = new ulong[blocks];
-        ulong[] ApEnMatch = new ulong[useData ? blocks - 1 : blocks];
-        ulong[] SampEnPossible = new ulong[blocks];
-        ulong[] SampEnMatch = new ulong[useData ? blocks - 1 : blocks];
+        ulong[] alreadyMatch = new ulong[useData ? blocks - 1 : blocks];
+        ulong[] apEnPossible = new ulong[blocks];
+        ulong[] apEnMatch = new ulong[useData ? blocks - 1 : blocks];
+        ulong[] sampEnPossible = new ulong[blocks];
+        ulong[] sampEnMatch = new ulong[useData ? blocks - 1 : blocks];
 
         var options = new ParallelOptions()
         {
@@ -471,17 +471,18 @@ public static class Complexity
                     }
                     if (k == dim)
                     {
-                        ApEnPossible[i]++;
+                        apEnPossible[i]++;
                         alreadyPossible[j]++;
-                        if (j > i) SampEnPossible[i]++;
+                        if (j > i) sampEnPossible[i]++;
 
-                        if (j < ApEnMatch.Length && i < ApEnMatch.Length)
+                        if (j < apEnMatch.Length && i < apEnMatch.Length)
                         {
                             // Check for "matches". This corresponds to the m+1 - length block
                             if (Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
                             {
-                                ApEnMatch[i]++;
-                                if (j > i) SampEnMatch[i]++;
+                                apEnMatch[i]++;
+                                alreadyMatch[j]++;
+                                if (j > i) sampEnMatch[i]++;
                             }
                         }
                     }
@@ -493,7 +494,7 @@ public static class Complexity
             throw new OperationCanceledException("CancelEntropy", ct);
         }
 
-        return (ApEnPossible, ApEnMatch, SampEnPossible, SampEnMatch);
+        return (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch);
     }
 
     //private static long[] ComputeAB_QuasiRandom(double[] data, uint m, double r, int SampleSize = 1024, int SampleNum = 8, bool presort = true)
