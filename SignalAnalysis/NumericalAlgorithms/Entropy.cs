@@ -444,7 +444,7 @@ public static class Complexity
         int blocks = indices.Length - (useData ? (int)dim - 1 : 0);
 
         ulong[] alreadyPossible = new ulong[blocks];
-        ulong[] alreadyMatch = new ulong[blocks];
+        ulong[] alreadyMatch = new ulong[useData ? blocks - 1 : blocks];
         ulong[] apEnPossible = new ulong[blocks];
         ulong[] apEnMatch = new ulong[useData ? blocks - 1 : blocks];
         ulong[] sampEnPossible = new ulong[blocks];
