@@ -39,7 +39,7 @@ public static class Complexity
         long blocks = data.Length - (dim - 1);  // The total number of blocks for the "possible" template
         if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         double apEn, sampEn = -1.0;
-        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
+        double noiseFilter = fTol * (std ?? Statistics.Descriptive.Variance(data)); // Factor r (also known as tolerance)
         uint k;
 
         uint[] alreadyPossible = new uint[blocks];
@@ -127,7 +127,7 @@ public static class Complexity
         long blocks = data.Length - (dim - 1);  // The total number of blocks for the "possible" template
         if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         double apEn, sampEn;
-        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
+        double noiseFilter = fTol * (std ?? Statistics.Descriptive.Variance(data)); // Factor r (also known as tolerance)
 
         ulong[] ApEnPossible = new ulong[blocks];
         ulong[] ApEnMatch = new ulong[blocks - 1];
@@ -295,7 +295,7 @@ public static class Complexity
         double ApEn = -1.0, SampEn = -1.0;
         ulong A = 0;
         ulong B = 0;
-        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
+        double noiseFilter = fTol * (std ?? Statistics.Descriptive.Variance(data)); // Factor r (also known as tolerance)
 
         // Check we have enough data points
         if (N <= dim) return (-1.0, -1.0);
