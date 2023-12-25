@@ -39,7 +39,7 @@ public static class Complexity
         long blocks = data.Length - (dim - 1);  // The total number of blocks for the "possible" template
         if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         double apEn, sampEn = -1.0;
-        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
+        double noiseFilter = fTol * (std ?? Statistics.Descriptive.Variance(data)); // Factor r (also known as tolerance)
         uint k;
 
         uint[] alreadyPossible = new uint[blocks];
@@ -127,7 +127,7 @@ public static class Complexity
         long blocks = data.Length - (dim - 1);  // The total number of blocks for the "possible" template
         if (blocks <= 0) return (-1.0, -1.0);   // Check there are enough data points to define the blocks
         double apEn, sampEn;
-        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
+        double noiseFilter = fTol * (std ?? Statistics.Descriptive.Variance(data)); // Factor r (also known as tolerance)
 
         ulong[] ApEnPossible = new ulong[blocks];
         ulong[] ApEnMatch = new ulong[blocks - 1];
@@ -295,7 +295,7 @@ public static class Complexity
         double ApEn = -1.0, SampEn = -1.0;
         ulong A = 0;
         ulong B = 0;
-        double noiseFilter = fTol * (std ?? StdDev<double>(data)); // Factor r (also known as tolerance)
+        double noiseFilter = fTol * (std ?? Statistics.Descriptive.Variance(data)); // Factor r (also known as tolerance)
 
         // Check we have enough data points
         if (N <= dim) return (-1.0, -1.0);
@@ -444,11 +444,11 @@ public static class Complexity
         int blocks = indices.Length - (useData ? (int)dim - 1 : 0);
 
         ulong[] alreadyPossible = new ulong[blocks];
-        ulong[] alreadyMatched = new ulong[blocks];
-        ulong[] ApEnPossible = new ulong[blocks];
-        ulong[] ApEnMatch = new ulong[useData ? blocks - 1 : blocks];
-        ulong[] SampEnPossible = new ulong[blocks];
-        ulong[] SampEnMatch = new ulong[useData ? blocks - 1 : blocks];
+        ulong[] alreadyMatch = new ulong[useData ? blocks - 1 : blocks];
+        ulong[] apEnPossible = new ulong[blocks];
+        ulong[] apEnMatch = new ulong[useData ? blocks - 1 : blocks];
+        ulong[] sampEnPossible = new ulong[blocks];
+        ulong[] sampEnMatch = new ulong[useData ? blocks - 1 : blocks];
 
         var options = new ParallelOptions()
         {
@@ -471,17 +471,18 @@ public static class Complexity
                     }
                     if (k == dim)
                     {
-                        ApEnPossible[i]++;
+                        apEnPossible[i]++;
                         alreadyPossible[j]++;
-                        if (j > i) SampEnPossible[i]++;
+                        if (j > i) sampEnPossible[i]++;
 
-                        if (j < ApEnMatch.Length && i < ApEnMatch.Length)
+                        if (j < apEnMatch.Length && i < apEnMatch.Length)
                         {
                             // Check for "matches". This corresponds to the m+1 - length block
                             if (Math.Abs(data[indices[i] + dim] - data[indices[j] + dim]) <= r)
                             {
-                                ApEnMatch[i]++;
-                                if (j > i) SampEnMatch[i]++;
+                                apEnMatch[i]++;
+                                alreadyMatch[j]++;
+                                if (j > i) sampEnMatch[i]++;
                             }
                         }
                     }
@@ -493,7 +494,7 @@ public static class Complexity
             throw new OperationCanceledException("CancelEntropy", ct);
         }
 
-        return (ApEnPossible, ApEnMatch, SampEnPossible, SampEnMatch);
+        return (apEnPossible, apEnMatch, sampEnPossible, sampEnMatch);
     }
 
     //private static long[] ComputeAB_QuasiRandom(double[] data, uint m, double r, int SampleSize = 1024, int SampleNum = 8, bool presort = true)
