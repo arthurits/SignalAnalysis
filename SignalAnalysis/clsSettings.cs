@@ -14,7 +14,7 @@ public class AppSettings
     /// Remember window position on start up
     /// </summary>
     [JsonPropertyName("Window position")]
-    public bool WindowPosition { get; set; } = false;
+    public bool WindowPosition { get; set; } = true;
     [JsonPropertyName("Window top")]
     public int WindowTop { get; set; } = 0;
     [JsonPropertyName("Window left")]
