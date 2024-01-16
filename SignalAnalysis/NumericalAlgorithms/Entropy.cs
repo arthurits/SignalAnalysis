@@ -1,9 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Numerics;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.RegularExpressions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Numerics;
 
 namespace SignalAnalysis;
 
