@@ -38,6 +38,9 @@ public partial class FrmMain : Form
 
         // Language initialization
         UpdateUI_Language();
+
+        // Modify window size and position
+        if (_settings.WindowPosition && _settingsFileExist) SetWindowPos();
     }
 
     private void FrmMain_Shown(object sender, EventArgs e)
