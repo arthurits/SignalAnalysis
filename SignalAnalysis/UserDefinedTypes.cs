@@ -108,9 +108,9 @@ public class SignalData
 
     public double SampleFrequency { get; set; } = 0;
 
-    public double[][] Data = Array.Empty<double[]>();
+    public double[][] Data = [];
 
-    public string[] SeriesLabels = Array.Empty<string>();
+    public string[] SeriesLabels = [];
 
     /// <summary>
     /// Array starting index
