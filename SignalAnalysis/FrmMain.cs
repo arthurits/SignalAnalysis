@@ -16,7 +16,7 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings
-        LoadProgramSettingsJSON();
+        LoadAppSettingsJSON();
 
         // Set form icon
         this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
@@ -68,7 +68,7 @@ public partial class FrmMain : Form
         }
 
         // Save settings data
-        SaveProgramSettingsJSON();
+        SaveAppSettingsJSON();
     }
 
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)

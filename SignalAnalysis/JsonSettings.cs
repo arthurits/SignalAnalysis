@@ -8,7 +8,7 @@ partial class FrmMain
     /// Loads all settings from file <see cref="AppSettings.FileName"/> into variable <see cref="_settings"/>.
     /// Shows MessageBox error if unsuccessful
     /// </summary>
-    private void LoadProgramSettingsJSON()
+    private void LoadAppSettingsJSON()
     {
         try
         {
@@ -36,7 +36,7 @@ partial class FrmMain
     /// <summary>
     /// Saves data from class instance _sett into _sett.FileName
     /// </summary>
-    private void SaveProgramSettingsJSON()
+    private void SaveAppSettingsJSON()
     {
         _settings.WindowLeft = DesktopLocation.X;
         _settings.WindowTop = DesktopLocation.Y;
