@@ -2,7 +2,7 @@
 
 namespace SignalAnalysis;
 
-public class ClassSettings
+public class AppSettings
 {
     /// <summary>
     /// Stores the settings file name
@@ -14,7 +14,7 @@ public class ClassSettings
     /// Remember window position on start up
     /// </summary>
     [JsonPropertyName("Window position")]
-    public bool WindowPosition { get; set; } = false;
+    public bool WindowPosition { get; set; } = true;
     [JsonPropertyName("Window top")]
     public int WindowTop { get; set; } = 0;
     [JsonPropertyName("Window left")]
@@ -202,7 +202,7 @@ public class ClassSettings
     public uint EntropyFactorM { get; set; } = 2;
 
 
-    public ClassSettings()
+    public AppSettings()
     {
     }
 

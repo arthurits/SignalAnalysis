@@ -6,7 +6,7 @@ namespace SignalAnalysis;
 public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
-    private readonly ClassSettings? Settings;
+    private readonly AppSettings? Settings;
     private readonly string _baseName = "SignalAnalysis.localization.strings";
     private int _derivativeAlgorithm;
     private int _integrationAlgorithm;
@@ -18,7 +18,7 @@ public partial class FrmSettings : Form
         FillDefinedCultures(_baseName, typeof(FrmSettings).Assembly);
     }
 
-    public FrmSettings(ClassSettings settings)
+    public FrmSettings(AppSettings settings)
         : this()
     {
         Settings = settings;
@@ -120,7 +120,7 @@ public partial class FrmSettings : Form
 
         if (DlgResult == DialogResult.Yes)
         {
-            UpdateControls(new ClassSettings());
+            UpdateControls(new AppSettings());
         }
     }
 
@@ -217,7 +217,7 @@ public partial class FrmSettings : Form
     /// Updates the form's controls with values from the settings class
     /// </summary>
     /// <param name="settings">Class containing the values to show on the form's controls</param>
-    private void UpdateControls(ClassSettings settings)
+    private void UpdateControls(AppSettings settings)
     {
         txtStart.Text = settings.IndexStart.ToString();
         txtEnd.Text = settings.IndexEnd.ToString();

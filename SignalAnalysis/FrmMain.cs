@@ -3,7 +3,8 @@
 public partial class FrmMain : Form
 {
     // Program data
-    ClassSettings _settings = new();
+    AppSettings _settings = new();
+    private bool _settingsFileExist = false;
     SignalStats Results = new();
     SignalData Signal = new();
 
@@ -15,7 +16,7 @@ public partial class FrmMain : Form
     public FrmMain()
     {
         // Load settings
-        LoadProgramSettingsJSON();
+        LoadAppSettingsJSON();
 
         // Set form icon
         this.Icon = GraphicsResources.Load<Icon>(GraphicsResources.AppLogo);
@@ -37,6 +38,9 @@ public partial class FrmMain : Form
 
         // Language initialization
         UpdateUI_Language();
+
+        // Modify window size and position
+        if (_settings.WindowPosition && _settingsFileExist) SetWindowPos();
     }
 
     private void FrmMain_Shown(object sender, EventArgs e)
@@ -67,7 +71,7 @@ public partial class FrmMain : Form
         }
 
         // Save settings data
-        SaveProgramSettingsJSON();
+        SaveAppSettingsJSON();
     }
 
     private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)

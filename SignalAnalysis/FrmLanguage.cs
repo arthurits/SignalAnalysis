@@ -6,7 +6,7 @@ namespace SignalAnalysis;
 public partial class FrmLanguage : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
-    private readonly ClassSettings? Settings;
+    private readonly AppSettings? Settings;
     private readonly string _baseName = "SignalAnalysis.localization.strings";
 
     public FrmLanguage()
@@ -15,7 +15,7 @@ public partial class FrmLanguage : Form
         FillDefinedCultures(_baseName, typeof(FrmLanguage).Assembly);
     }
 
-    public FrmLanguage(ClassSettings settings)
+    public FrmLanguage(AppSettings settings)
     : this()
     {
         Settings = settings;
