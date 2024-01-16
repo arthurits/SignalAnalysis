@@ -32,13 +32,13 @@ public class SignalStats(double Max = 0, double Min = 0, double Avg = 0, double 
     /// </summary>
     public double ShannonIdeal { get; set; } = ShannonIdeal;
 
-    public double[] Derivative { get; set; } = Array.Empty<double>();
+    public double[] Derivative { get; set; } = [];
 
     public double Integral { get; set; } = IntegralValue;
 
-    public double[] FFTpower { get; set; } = Array.Empty<double>();
-    public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
-    public double[] FFTfrequencies { get; set; } = Array.Empty<double>();
+    public double[] FFTpower { get; set; } = [];
+    public double[] FFTmagnitude { get; set; } = [];
+    public double[] FFTfrequencies { get; set; } = [];
 
     /// <summary>
     /// Gets a text-formatted result string
