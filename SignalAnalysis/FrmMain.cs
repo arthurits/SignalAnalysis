@@ -217,7 +217,7 @@ public partial class FrmMain : Form
         plotBoxPlot.Refresh();
 
         plotWindow.CultureUI = _settings.AppCulture;
-        IWindow window = (IWindow)stripComboWindows.SelectedItem;
+        IWindow? window = (IWindow?)stripComboWindows.SelectedItem;
         if (window is not null)
             plotWindow.Plot.Title(String.Format(StringResources.PlotWindowTitle, window.Name));
         plotWindow.Plot.LeftAxis.Label(StringResources.PlotWindowYLabel);
