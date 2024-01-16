@@ -7,7 +7,7 @@ partial class FrmMain
         Close();
     }
 
-    private void Open_Click(object? sender, EventArgs e)
+    private async void Open_Click(object? sender, EventArgs e)
     {
         DialogResult result;
         string filePath;
@@ -74,7 +74,7 @@ partial class FrmMain
                 }
                 else
                 {
-                    ComputeAsync(stripComboSeries.SelectedIndex,
+                    await ComputeAsync(stripComboSeries.SelectedIndex,
                                     deletePreviousResults: true,
                                     stats: true,
                                     boxplot: _settings.Boxplot,
@@ -152,11 +152,11 @@ partial class FrmMain
             
             var boolSave = Path.GetExtension(filePath).ToLower() switch
             {
-                ".txt" => SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
-                ".sig" => SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
-                ".bin" => SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
+                ".txt" => SaveTextData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem?.ToString()),
+                ".sig" => SaveSigData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem?.ToString()),
+                ".bin" => SaveBinaryData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem?.ToString()),
                 ".results" => SaveResultsData(SaveDlg.FileName, signal, _settings.IndexStart),
-                _ => SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem.ToString()),
+                _ => SaveDefaultData(SaveDlg.FileName, signal, _settings.IndexStart, stripComboSeries.SelectedItem?.ToString()),
             };
 
             // Restore the cursor
@@ -177,7 +177,7 @@ partial class FrmMain
         }
     }
 
-    private void Settings_Click(object? sender, EventArgs e)
+    private async void Settings_Click(object? sender, EventArgs e)
     {
         _settings.IndexStart = Signal.IndexStart;
         _settings.IndexEnd = Signal.IndexEnd;
@@ -206,7 +206,7 @@ partial class FrmMain
 
             UpdateUI_Language();
 
-            ComputeAsync(stripComboSeries.SelectedIndex,
+            await ComputeAsync(stripComboSeries.SelectedIndex,
                 deletePreviousResults: false,
                 stats: true,
                 boxplot: _settings.Boxplot,
@@ -239,7 +239,7 @@ partial class FrmMain
             UpdateUI_Language();
     }
 
-    private void LabelEx_Click(object? sender, EventArgs e)
+    private async void LabelEx_Click(object? sender, EventArgs e)
     {
         if (sender is not null && sender is ToolStripStatusLabelEx LabelEx)
         {
@@ -258,11 +258,11 @@ partial class FrmMain
                 case "statusStripLabelExBoxplot":
                     _settings.Boxplot = label.Checked;
                     ShowHideBoxplot(label.Checked);
-                    ComputeAsync(stripComboSeries.SelectedIndex, boxplot: _settings.Boxplot);
+                    await ComputeAsync(stripComboSeries.SelectedIndex, boxplot: _settings.Boxplot);
                     break;
                 case "statusStripLabelExDerivative":
                     _settings.ComputeDerivative = label.Checked;
-                    ComputeAsync(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
+                    await ComputeAsync(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
                     if (_settings.ComputeDerivative == false)
                     {
                         plotDerivative.Clear();
@@ -271,21 +271,21 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExIntegration":
                     _settings.ComputeIntegration = label.Checked;
-                    ComputeAsync(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
+                    await ComputeAsync(stripComboSeries.SelectedIndex, integral: _settings.ComputeIntegration);
                     break;
                 case "statusStripLabelExCumulative":
                     _settings.CumulativeDimension = label.Checked;
-                    ComputeAsync(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
+                    await ComputeAsync(stripComboSeries.SelectedIndex, fractal: true, progressive: _settings.CumulativeDimension);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
-                    ComputeAsync(stripComboSeries.SelectedIndex, fftPlot: true, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp);
+                    await ComputeAsync(stripComboSeries.SelectedIndex, fftPlot: true, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp);
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.ComputeEntropy = label.Checked;
-                    ComputeAsync(stripComboSeries.SelectedIndex, entropy: _settings.ComputeEntropy);
+                    await ComputeAsync(stripComboSeries.SelectedIndex, entropy: _settings.ComputeEntropy);
                     if (!label.Checked && statsTask is not null && statsTask.Status == TaskStatus.Running)
                         FrmMain_KeyPress(sender, new KeyPressEventArgs((char)Keys.Escape));
                     break;
@@ -342,7 +342,7 @@ partial class FrmMain
 
     }
 
-    private void ComboSeries_SelectionChangeCommitted(object? sender, EventArgs e)
+    private async void ComboSeries_SelectionChangeCommitted(object? sender, EventArgs e)
     {
         // Move the focus away in order to deselect the text
         //this.tableLayoutPanel1.Focus();
@@ -353,7 +353,7 @@ partial class FrmMain
         //_settings.Entropy = false;
 
         // Update stats and plots
-        ComputeAsync(stripComboSeries.SelectedIndex,
+        await ComputeAsync(stripComboSeries.SelectedIndex,
             deletePreviousResults: false,
             stats: true,
             boxplot: _settings.Boxplot,
@@ -367,7 +367,7 @@ partial class FrmMain
             fftRoundUp: _settings.FFTRoundUp);
     }
 
-    private void ComboWindow_SelectionChangeCommitted(object? sender, EventArgs e)
+    private async void ComboWindow_SelectionChangeCommitted(object? sender, EventArgs e)
     {
         // Move the focus away in order to deselect the text
         //this.tableLayoutPanel1.Focus();
@@ -379,7 +379,7 @@ partial class FrmMain
         if (signal is null || signal.Length == 0) return;
 
         //UpdateWindowPlots(signal);
-        ComputeAsync(stripComboSeries.SelectedIndex,
+        await ComputeAsync(stripComboSeries.SelectedIndex,
             deletePreviousResults: false,
             stats: false,
             boxplot: _settings.Boxplot,

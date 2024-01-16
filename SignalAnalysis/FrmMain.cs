@@ -25,7 +25,7 @@ public partial class FrmMain : Form
         InitializeComponent();
         InitializeToolStripPanel();
         InitializeStatusStrip();
-        InitializeMenu();
+        //InitializeMenu();
 
         PopulateComboWindow();
 
