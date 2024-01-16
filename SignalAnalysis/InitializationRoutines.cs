@@ -45,11 +45,11 @@ partial class FrmMain
         statusStripLabelExCrossHair.Checked = _settings.CrossHair;
     }
 
-    /// <summary>
-    /// Initialize the main menu
-    /// </summary>
-    private void InitializeMenu()
-    {
+    ///// <summary>
+    ///// Initialize the main menu
+    ///// </summary>
+    //private void InitializeMenu()
+    //{
 
-    }
+    //}
 }

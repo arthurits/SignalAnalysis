@@ -36,7 +36,7 @@ partial class FrmMain
         this.UseWaitCursor = true;
 
         // Compute data;
-        double[] signalWindowed = Array.Empty<double>();
+        double[] signalWindowed = [];
         IWindow? window = (IWindow?)stripComboWindows.SelectedItem;
         tokenSource?.Dispose();
         tokenSource = new();
@@ -336,8 +336,8 @@ partial class FrmMain
         //IWindow window = (IWindow)stripComboWindows.SelectedItem;
         //if (window is null) return Array.Empty<double>();
 
-        double[] signalWindow = Array.Empty<double>();
-        System.Numerics.Complex[] spectrum = Array.Empty<System.Numerics.Complex>();
+        double[] signalWindow = [];
+        System.Numerics.Complex[] spectrum = [];
 
         // First, round down to the next integer (adjust to the lowest power of 2)
         int power2;
