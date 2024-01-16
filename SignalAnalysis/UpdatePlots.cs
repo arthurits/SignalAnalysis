@@ -28,7 +28,7 @@ partial class FrmMain
         if (Signal.Data is null || Signal.Data.Length == 0) return;
         double[] signalClipped = Signal.Data[series][Signal.IndexStart..(Signal.IndexEnd + 1)];
         if (signalClipped is null || signalClipped.Length == 0) return;
-        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0].ToString() : stripComboSeries.SelectedItem.ToString();
+        string? seriesName = stripComboSeries.SelectedItem is null ? stripComboSeries.Items[0]?.ToString() : stripComboSeries.SelectedItem.ToString();
 
         // Show waiting cursor
         var cursor = this.Cursor;
@@ -37,7 +37,7 @@ partial class FrmMain
 
         // Compute data;
         double[] signalWindowed = Array.Empty<double>();
-        IWindow? window = (IWindow)stripComboWindows.SelectedItem;
+        IWindow? window = (IWindow?)stripComboWindows.SelectedItem;
         tokenSource?.Dispose();
         tokenSource = new();
         token = tokenSource.Token;
