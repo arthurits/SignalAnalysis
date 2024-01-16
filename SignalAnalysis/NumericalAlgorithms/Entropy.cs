@@ -681,15 +681,15 @@ public static class Complexity
     {
         int blocks = data.Length - (dim * lag) + 1;  // number of sequencies inside of time series TS
         int validCases; // number of value classes
-        int count = 0;
+        int count;
         bool[] alreadyMatched;  // allocating space for match records
         double[] temp_res = new double[2];  // temporary results
         double logji;
 
-        ulong[] apEnPossible = new ulong[blocks];
-        ulong[] apEnMatch = new ulong[blocks - 1];
-        ulong[] sampEnPossible = new ulong[blocks];
-        ulong[] sampEnMatch = new ulong[blocks - 1];
+        //ulong[] apEnPossible = new ulong[blocks];
+        //ulong[] apEnMatch = new ulong[blocks - 1];
+        //ulong[] sampEnPossible = new ulong[blocks];
+        //ulong[] sampEnMatch = new ulong[blocks - 1];
 
         for (int run = 0; run < 2; run++)
         {
