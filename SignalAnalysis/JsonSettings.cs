@@ -14,11 +14,11 @@ partial class FrmMain
         {
             var jsonString = File.ReadAllText(_settings.FileName);
             _settings = JsonSerializer.Deserialize<AppSettings>(jsonString) ?? _settings;
-
-            ApplySettingsJSON(_settings.WindowPosition);
+            //SetWindowPos(_settings.WindowPosition);
         }
         catch (FileNotFoundException)
         {
+            _settingsFileExist = false;
         }
         catch (Exception ex)
         {
@@ -31,7 +31,6 @@ partial class FrmMain
                     MessageBoxIcon.Error);
             }
         }
-
     }
 
     /// <summary>
@@ -53,16 +52,12 @@ partial class FrmMain
     }
 
     /// <summary>
-    /// Update UI with settings
+    /// Modifies window size and position to the values in <see cref="AppSettings">_settings</see>
     /// </summary>
-    /// <param name="WindowPosition"><see langword="True"/> if the window position and size should be applied. <see langword="False"/> if omitted</param>
-    private void ApplySettingsJSON(bool WindowPosition = false)
+    private void SetWindowPos()
     {
-        if (WindowPosition)
-        {
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
-            this.ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
-        }
+        this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+        this.DesktopLocation = new Point(_settings.WindowLeft, _settings.WindowTop);
+        this.ClientSize = new Size(_settings.WindowWidth, _settings.WindowHeight);
     }
 }
