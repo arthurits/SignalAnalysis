@@ -1,5 +1,4 @@
-﻿using ScottPlot;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace SignalAnalysis;
 
