@@ -1,57 +1,40 @@
 ﻿namespace SignalAnalysis;
 
-public class SignalStats
+public class SignalStats(double Max = 0, double Min = 0, double Avg = 0, double Var = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double ShannonIdeal = 0, double IntegralValue = 0)
 {
-    public SignalStats(double Max = 0, double Min = 0, double Avg = 0, double Var = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double ShannonIdeal = 0, double IntegralValue = 0)
-    {
-        Maximum = Max;
-        Minimum = Min;
-        Average = Avg;
-        Variance = Var;
-        FractalDimension = FractalDim;
-        FractalVariance = FractalVar;
-        ApproximateEntropy = AppEn;
-        SampleEntropy = SampEn;
-        ShannonEntropy = ShannEn;
-        EntropyBit = BitEn;
-        IdealEntropy = IdealEn;
-        this.ShannonIdeal = ShannonIdeal;
-        Integral = IntegralValue;
-    }
-
-    public double Maximum { get; set; } = 0;
-    public double Minimum { get; set; } = 0;
-    public double Average { get; set; } = 0;
-    public double Variance { get; set; } = 0;
+    public double Maximum { get; set; } = Max;
+    public double Minimum { get; set; } = Min;
+    public double Average { get; set; } = Avg;
+    public double Variance { get; set; } = Var;
     public double BoxplotQ1 { get; set; } = 0;
     public double BoxplotQ2 { get; set; } = 0;
     public double BoxplotQ3 { get; set; } = 0;
     public double BoxplotMax { get; set; } = 0;
     public double BoxplotMin { get; set; } = 0;
-    public double FractalDimension { get; set; } = 0;
-    public double FractalVariance { get; set; } = 0;
-    public double ApproximateEntropy { get; set; } = 0;
-    public double SampleEntropy { get; set; } = 0;
+    public double FractalDimension { get; set; } = FractalDim;
+    public double FractalVariance { get; set; } = FractalVar;
+    public double ApproximateEntropy { get; set; } = AppEn;
+    public double SampleEntropy { get; set; } = SampEn;
     /// <summary>
     /// // The Shannon entropy (in bits per symbol) of the data
     /// </summary>
-    public double ShannonEntropy { get; set; } = 0;
+    public double ShannonEntropy { get; set; } = ShannEn;
     /// <summary>
     /// The minimum number of bits to encode the data
     /// </summary>
-    public double EntropyBit { get; set; } = 0;
+    public double EntropyBit { get; set; } = BitEn;
     /// <summary>
     /// The Shannon entropy assuming all data symbols are different. This is, in fact, the maximum Shannon entropy
     /// </summary>
-    public double IdealEntropy { get; set; } = 0;
+    public double IdealEntropy { get; set; } = IdealEn;
     /// <summary>
     /// The ratio Shannon entropy / Ideal entropy
     /// </summary>
-    public double ShannonIdeal { get; set; } = 0;
+    public double ShannonIdeal { get; set; } = ShannonIdeal;
 
     public double[] Derivative { get; set; } = Array.Empty<double>();
 
-    public double Integral { get; set; } = 0;
+    public double Integral { get; set; } = IntegralValue;
 
     public double[] FFTpower { get; set; } = Array.Empty<double>();
     public double[] FFTmagnitude { get; set; } = Array.Empty<double>();
