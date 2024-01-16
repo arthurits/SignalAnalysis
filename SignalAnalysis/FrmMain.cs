@@ -3,7 +3,7 @@
 public partial class FrmMain : Form
 {
     // Program data
-    ClassSettings _settings = new();
+    AppSettings _settings = new();
     SignalStats Results = new();
     SignalData Signal = new();
 

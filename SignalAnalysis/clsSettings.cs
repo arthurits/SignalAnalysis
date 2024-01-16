@@ -2,7 +2,7 @@
 
 namespace SignalAnalysis;
 
-public class ClassSettings
+public class AppSettings
 {
     /// <summary>
     /// Stores the settings file name
@@ -202,7 +202,7 @@ public class ClassSettings
     public uint EntropyFactorM { get; set; } = 2;
 
 
-    public ClassSettings()
+    public AppSettings()
     {
     }
 

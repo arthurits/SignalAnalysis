@@ -5,7 +5,7 @@ namespace SignalAnalysis;
 partial class FrmMain
 {
     /// <summary>
-    /// Loads all settings from file <see cref="ClassSettings.FileName"/> into variable <see cref="_settings"/>.
+    /// Loads all settings from file <see cref="AppSettings.FileName"/> into variable <see cref="_settings"/>.
     /// Shows MessageBox error if unsuccessful
     /// </summary>
     private void LoadProgramSettingsJSON()
@@ -13,7 +13,7 @@ partial class FrmMain
         try
         {
             var jsonString = File.ReadAllText(_settings.FileName);
-            _settings = JsonSerializer.Deserialize<ClassSettings>(jsonString) ?? _settings;
+            _settings = JsonSerializer.Deserialize<AppSettings>(jsonString) ?? _settings;
 
             ApplySettingsJSON(_settings.WindowPosition);
         }

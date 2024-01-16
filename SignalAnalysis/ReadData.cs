@@ -36,7 +36,7 @@ partial class FrmMain
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader02", fileCulture) ?? "Start time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", AppSettings.GetMillisecondsFormat(fileCulture));
             if (strLine == null || !DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out start))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
 
@@ -318,7 +318,7 @@ partial class FrmMain
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader02", fileCulture) ?? "Start time"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
             string fullPattern = fileCulture.DateTimeFormat.FullDateTimePattern;
-            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", ClassSettings.GetMillisecondsFormat(fileCulture));
+            fullPattern = System.Text.RegularExpressions.Regex.Replace(fullPattern, "(:ss|:s)", AppSettings.GetMillisecondsFormat(fileCulture));
             if (!DateTime.TryParseExact(strLine[(strLine.IndexOf(":") + 2)..], fullPattern, fileCulture, System.Globalization.DateTimeStyles.None, out start))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader02));
 
