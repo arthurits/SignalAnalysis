@@ -1,6 +1,4 @@
-﻿using ScottPlot;
-using SignalAnalysis.NumericalAlgorithms;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace SignalAnalysis;
 
