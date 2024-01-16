@@ -28,7 +28,7 @@ partial class FrmAbout : Form
     {
         get
         {
-            return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            return Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "?";
         }
     }
 
