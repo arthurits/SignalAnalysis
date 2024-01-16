@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 partial class FrmMain
 {
