@@ -7,7 +7,7 @@ public static class Descriptive
     /// </summary>
     public static double Sum(double[] values)
     {
-        if (!values.Any())
+        if (values.Length == 0)
             throw new ArgumentException($"{nameof(values)} cannot be empty");
 
         double sum = 0;
@@ -32,7 +32,7 @@ public static class Descriptive
     /// </summary>
     public static double Mean(double[] values)
     {
-        if (!values.Any())
+        if (values.Length == 0)
             throw new ArgumentException($"{nameof(values)} cannot be empty");
 
         return Sum(values) / values.Length;

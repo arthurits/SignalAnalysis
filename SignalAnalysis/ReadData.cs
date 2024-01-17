@@ -12,7 +12,7 @@ partial class FrmMain
     {
         DateTime start;
         DateTime end;
-        int points = 0, series = 0;
+        int points, series;
         bool result = false;
         double sampleFreq;
         string[] seriesLabels;
@@ -26,7 +26,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // ErgoLux data
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader00));
-            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf('(') + 1)..^1]);
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader00", fileCulture) ?? "ErgoLux data"} (", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader00));
 
@@ -308,7 +308,7 @@ partial class FrmMain
             strLine = sr.ReadLine();    // SignalAnalysis data
             if (strLine is null)
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
-            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf("(") + 1)..^1]);
+            System.Globalization.CultureInfo fileCulture = new(strLine[(strLine.IndexOf('(') + 1)..^1]);
             if (!strLine.Contains($"{StringResources.GetString("strFileHeader01", fileCulture) ?? "SignalAnalysis data"} (", StringComparison.Ordinal))
                 throw new FormatException(string.Format(StringResources.FileHeaderSection, StringResources.FileHeader01));
 

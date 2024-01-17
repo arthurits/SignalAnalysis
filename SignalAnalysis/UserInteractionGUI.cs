@@ -104,7 +104,7 @@ partial class FrmMain
         string filePath;
 
         // Extract the values to be exported
-        double[] signal = Array.Empty<double>();
+        double[] signal = [];
         if (Signal.Data.Length > 0)
             signal = Signal.Data[stripComboSeries.SelectedIndex][Signal.IndexStart..(Signal.IndexEnd + 1)];
 
