@@ -6,7 +6,7 @@ public partial class FrmLanguage : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly AppSettings? Settings;
-    private readonly string _baseName = "SignalAnalysis.localization.strings";
+    private readonly string _baseName = StringResources.StringRM.BaseName;
 
     public FrmLanguage()
     {

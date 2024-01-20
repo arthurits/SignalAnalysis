@@ -7,7 +7,7 @@ public partial class FrmSettings : Form
 {
     private CultureInfo _culture = CultureInfo.CurrentCulture;
     private readonly AppSettings? Settings;
-    private readonly string _baseName = "SignalAnalysis.localization.strings";
+    private readonly string _baseName = StringResources.StringRM.BaseName;
     private int _derivativeAlgorithm;
     private int _integrationAlgorithm;
     private int _entropyAlgorithm;
