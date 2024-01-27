@@ -4,7 +4,7 @@ public partial class FrmMain : Form
 {
     // Program data
     AppSettings _settings = new();
-    private bool _settingsFileExist = false;
+    private bool _settingsFileExist = true;
     SignalStats Results = new();
     SignalData Signal = new();
 
