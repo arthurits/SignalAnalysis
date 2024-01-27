@@ -14,7 +14,7 @@ Download latest release: [![GitHub release (latest by date)](https://img.shields
 ![Screenshot](/SignalAnalysis/images/screenshot.png?raw=true "SignalAnalysis GUI")
 
 ## Use and installation
-Please follow this steps to install and use this software:
+Please follow these steps to install and use this software:
 * Dowload the zip file.
 * Unzip the contents to your desired folder.
 * Make sure that .NET 8 is installed in your PC. The `.NET 8 Desktop Runtime` can be downloaded from the [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0).
