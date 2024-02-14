@@ -298,9 +298,12 @@ public static class Complexity
         // Compute sampling parameters as suggested in https://doi.org/10.3390/e24040524
         int sampleSize = data.Length - (int)dim;
         int sampleNum = 1;
+        int times = 0;
         if (entropyMethod != EntropyMethod.BruteForce)
         {
-            sampleSize = data.Length < 1024 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
+            //sampleSize = data.Length < 1024 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
+            //sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
+            (times, sampleSize) = TimesDivisionByDivisor(sampleSize, 2, (int)Math.Max(1024, (int)Math.Sqrt(sampleSize)));
             sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
         }
 
@@ -311,7 +314,7 @@ public static class Complexity
             EntropyMethod.MonteCarloUniform => ComputeAB_Uniform2(data, dim, noiseFilter, sampleSize, sampleNum, ct),
             EntropyMethod.MonteCarloRandom => ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, ct),
             EntropyMethod.MonteCarloRandomSorted => ComputeAB_QuasiRandom2(data, dim, noiseFilter, sampleSize, sampleNum, ct),
-            _ => (Array.Empty<ulong>(), Array.Empty<ulong>(), Array.Empty<ulong>(), Array.Empty<ulong>())
+            _ => ([], [], [], [])
         };
 
         // Compute ApEn using the original definition without any simplifications nor approximations
@@ -320,6 +323,8 @@ public static class Complexity
         double sumMatch = apEnMatch.Sum(x => x > 0 ? Math.Log(x) : 0) / apEnMatch.Length;
         sumMatch -= Math.Log(apEnMatch.Length);
         ApEn = sumPossible - sumMatch;
+
+        double ApEn2 = ApEn * Math.Pow(Math.Log(Math.PI), times);
 
         //ApEn = sum / (double)(sampleSize * sampleNum);
         //ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
@@ -776,6 +781,28 @@ public static class Complexity
         return temp_res[1] != 0 ? Math.Log(temp_res[0] / temp_res[1]) : -1;
     }
     
+    /// <summary>
+    /// Computes the number of times a dividend can be continuously divided by a divisor without the quotient ever dropping below a lower limit
+    /// </summary>
+    /// <param name="dividend">Quantity to be divided by</param>
+    /// <param name="divisor">Divisor value</param>
+    /// <param name="lowerLimit">The lower limit value that the quotient should be above</param>
+    /// <returns>The number of times the division has been done with the quotient above the lower limit</returns>
+    public static (int times, int quotient) TimesDivisionByDivisor(int dividend, int divisor, int lowerLimit)
+    {
+        // Make sure dividend is above the lower limit
+        if (lowerLimit >= dividend) return (0, dividend);
+
+        int numTimes = 0;
+        while (dividend > lowerLimit*divisor)
+        {
+            numTimes++;
+            dividend /= divisor;
+        }
+
+        return (numTimes, dividend);
+    }
+
 }
 
 /// <summary>
