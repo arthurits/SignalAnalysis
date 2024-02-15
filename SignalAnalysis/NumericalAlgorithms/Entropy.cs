@@ -303,7 +303,7 @@ public static class Complexity
         {
             //sampleSize = data.Length < 1024 ? (int)Math.Sqrt(data.Length) : Math.Max(1024, (int)Math.Sqrt(data.Length));
             //sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
-            (times, sampleSize) = TimesDivisionByDivisor(sampleSize, 2, (int)Math.Max(1024, (int)Math.Sqrt(sampleSize)));
+            (times, sampleSize) = TimesDivisionByDivisor(sampleSize, 2, (int)Math.Max(512, (int)Math.Sqrt(sampleSize)));
             sampleNum = Math.Min(5 + (int)Math.Log2(data.Length), data.Length / sampleSize);
         }
 
@@ -325,6 +325,28 @@ public static class Complexity
         ApEn = sumPossible - sumMatch;
 
         double ApEn2 = ApEn * Math.Pow(Math.Log(Math.PI), times);
+        ApEn2 = 0;
+        int index;
+        for (int i = 0; i<sampleNum; i++)
+        {
+            sumPossible = sampleNum > 1 ? 0 : Math.Log(apEnPossible[^1]);
+            sumMatch = 0;
+            for (int j = 0; j< sampleSize; j++)
+            {
+                index = i * sampleNum + j;
+                if (apEnPossible[index] > 0)
+                    sumPossible += Math.Log(apEnPossible[index]);
+                if (apEnMatch[index] > 0)
+                    sumMatch += Math.Log(apEnMatch[index]);
+            }
+            sumPossible /= (apEnPossible.Length / sampleNum);
+            sumPossible -= Math.Log(apEnPossible.Length / sampleNum);
+            sumMatch /= (apEnMatch.Length / sampleNum);
+            sumMatch -= Math.Log(apEnMatch.Length / sampleNum);
+            ApEn2 += (sumPossible - sumMatch) / sampleNum;
+        }
+        ApEn2 *= Math.Pow(Math.Log(Math.PI), times);
+
 
         //ApEn = sum / (double)(sampleSize * sampleNum);
         //ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
