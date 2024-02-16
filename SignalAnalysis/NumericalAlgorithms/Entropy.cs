@@ -318,42 +318,54 @@ public static class Complexity
         };
 
         // Compute ApEn using the original definition without any simplifications nor approximations
-        double sumPossible = apEnPossible.Sum(x => x > 0 ? Math.Log(x) : 0) / apEnPossible.Length;
-        sumPossible -= Math.Log(apEnPossible.Length);
-        double sumMatch = apEnMatch.Sum(x => x > 0 ? Math.Log(x) : 0) / apEnMatch.Length;
-        sumMatch -= Math.Log(apEnMatch.Length);
-        ApEn = sumPossible - sumMatch;
+        //double sumPossible = apEnPossible.Sum(x => x > 0 ? Math.Log(x) : 0) / apEnPossible.Length;
+        //sumPossible -= Math.Log(apEnPossible.Length);
+        //double sumMatch = apEnMatch.Sum(x => x > 0 ? Math.Log(x) : 0) / apEnMatch.Length;
+        //sumMatch -= Math.Log(apEnMatch.Length);
+        //ApEn = sumPossible - sumMatch;
 
-        double ApEn2 = ApEn * Math.Pow(Math.Log(Math.PI), times);
-        ApEn2 = 0;
+        //double ApEn2 = ApEn * Math.Pow(Math.Log(Math.PI), times);
+        //ApEn2 = 0;
         int index;
-        for (int i = 0; i<sampleNum; i++)
+        double sumPossible;
+        double sumMatch;
+        if (sampleNum == 1)
         {
-            sumPossible = sampleNum > 1 ? 0 : Math.Log(apEnPossible[^1]);
-            sumMatch = 0;
-            for (int j = 0; j< sampleSize; j++)
-            {
-                index = i * sampleNum + j;
-                if (apEnPossible[index] > 0)
-                    sumPossible += Math.Log(apEnPossible[index]);
-                if (apEnMatch[index] > 0)
-                    sumMatch += Math.Log(apEnMatch[index]);
-            }
-            sumPossible /= (apEnPossible.Length / sampleNum);
-            sumPossible -= Math.Log(apEnPossible.Length / sampleNum);
-            sumMatch /= (apEnMatch.Length / sampleNum);
-            sumMatch -= Math.Log(apEnMatch.Length / sampleNum);
-            ApEn2 += (sumPossible - sumMatch) / sampleNum;
+            // Compute ApEn using the original definition without any simplifications nor approximations
+            sumPossible = apEnPossible.Sum(x => x > 0 ? Math.Log(x) : 0) / apEnPossible.Length;
+            sumPossible -= Math.Log(apEnPossible.Length);
+            sumMatch = apEnMatch.Sum(x => x > 0 ? Math.Log(x) : 0) / apEnMatch.Length;
+            sumMatch -= Math.Log(apEnMatch.Length);
+            ApEn = sumPossible - sumMatch;
         }
-        ApEn2 *= Math.Pow(Math.Log(Math.PI), times);
-
-
-        //ApEn = sum / (double)(sampleSize * sampleNum);
-        //ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
-        //ApEn = sum / (double)(data.Length - (int)dim);
-        //ApEn += Math.Log((double)(data.Length - (int)dim) / (sampleSize * sampleNum)); // This needs testing
-        //ApEn = sumPossible / (sampleSize * sampleNum);
-        //ApEn *= (double)(data.Length - (int)dim) / (sampleSize * sampleNum);
+        else
+        {
+            for (int i = 0; i < sampleNum; i++)
+            {
+                sumPossible = sampleNum > 1 ? 0 : Math.Log(apEnPossible[^1]);
+                sumMatch = 0;
+                for (int j = 0; j < sampleSize; j++)
+                {
+                    index = i * sampleNum + j;
+                    if (apEnPossible[index] > 0)
+                        sumPossible += Math.Log(apEnPossible[index]);
+                    if (apEnMatch[index] > 0)
+                        sumMatch += Math.Log(apEnMatch[index]);
+                }
+                sumPossible /= (apEnPossible.Length / sampleNum);
+                sumPossible -= Math.Log(apEnPossible.Length / sampleNum);
+                sumMatch /= (apEnMatch.Length / sampleNum);
+                sumMatch -= Math.Log(apEnMatch.Length / sampleNum);
+                ApEn += (sumPossible - sumMatch) / sampleNum;
+            }
+            ApEn *= Math.Pow(Math.Log(Math.PI), times);
+            //ApEn = sum / (double)(sampleSize * sampleNum);
+            //ApEn += Math.Log(data.Length / sampleSize) / sampleNum; // This needs testing
+            //ApEn = sum / (double)(data.Length - (int)dim);
+            //ApEn += Math.Log((double)(data.Length - (int)dim) / (sampleSize * sampleNum)); // This needs testing
+            //ApEn = sumPossible / (sampleSize * sampleNum);
+            //ApEn *= (double)(data.Length - (int)dim) / (sampleSize * sampleNum);
+        }
 
         // Compute SampEn
         foreach (ulong x in sampEnMatch)
