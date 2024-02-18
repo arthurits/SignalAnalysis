@@ -1,7 +1,7 @@
 namespace SignalAnalysis.UnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class SignalAnalysisTest
     {
         [TestMethod]
         public void TestMethod1()
