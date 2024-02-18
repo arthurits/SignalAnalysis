@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalAnalysis", "SignalAnalysis\SignalAnalysis.csproj", "{2A379A6E-60BF-493E-9256-3D486BEB866A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalAnalysis.UnitTest", "SignalAnalysis.UnitTest\SignalAnalysis.UnitTest.csproj", "{66B90265-C5FA-4130-BA85-8DE82A82D477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,14 +17,18 @@ Global
 		{2A379A6E-60BF-493E-9256-3D486BEB866A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A379A6E-60BF-493E-9256-3D486BEB866A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A379A6E-60BF-493E-9256-3D486BEB866A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66B90265-C5FA-4130-BA85-8DE82A82D477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B90265-C5FA-4130-BA85-8DE82A82D477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B90265-C5FA-4130-BA85-8DE82A82D477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B90265-C5FA-4130-BA85-8DE82A82D477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_ShowErrorsInErrorList = False
-		RESX_RemoveEmptyEntries = False
-		SolutionGuid = {F82A9C7A-74C8-4091-936C-B7967E77D38F}
 		RESX_SortFileContentOnSave = True
+		SolutionGuid = {F82A9C7A-74C8-4091-936C-B7967E77D38F}
+		RESX_RemoveEmptyEntries = False
+		RESX_ShowErrorsInErrorList = False
 	EndGlobalSection
 EndGlobal
