@@ -1,11 +1,10 @@
-namespace SignalAnalysis.UnitTest
+namespace SignalAnalysis.UnitTest;
+
+[TestClass]
+public class SignalAnalysisTest
 {
-    [TestClass]
-    public class SignalAnalysisTest
+    [TestMethod]
+    public void TestMethod1()
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
     }
 }
