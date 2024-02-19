@@ -65,7 +65,7 @@ public static class Descriptive
         double avg = Mean(values);
         double sst = SST(values, avg);   // Sum of squares total
         int denominator = values.Count - (asSample ? 1 : 0);
-        return denominator > 0.0 ? Math.Sqrt(sst / denominator) : -1.0;
+        return denominator > 0.0 ? sst / denominator : -1.0;
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ public static class Descriptive
         double avg = doubles.AsParallel().Average();
         double sst = doubles.AsParallel().Sum(x => (x - avg) * (x - avg));   // Sum of squares total
         int denominator = values.Count - (asSample ? 1 : 0);
-        return denominator > 0.0 ? Math.Sqrt(sst / denominator) : -1.0;
+        return denominator > 0.0 ? sst / denominator : -1.0;
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ public static class Descriptive
     /// <param name="values"></param>
     /// <param name="mean"></param>
     /// <returns></returns>
-    public static double SST<T>(IReadOnlyList<T> values, double? mean)
+    public static double SST<T>(IReadOnlyList<T> values, double? mean = null)
     {
         // Convert into an enumerable of doubles.
         IEnumerable<double> doubles = values.AsParallel().Select(value => Convert.ToDouble(value));
@@ -120,7 +120,7 @@ public static class Descriptive
     /// <param name="values"></param>
     /// <param name="mean"></param>
     /// <returns></returns>
-    public static double SSTParallel<T>(IReadOnlyList<T> values, double? mean)
+    public static double SSTParallel<T>(IReadOnlyList<T> values, double? mean = null)
     {
         // Convert into an enumerable of doubles.
         IEnumerable<double> doubles = values.AsParallel().Select(value => Convert.ToDouble(value));
