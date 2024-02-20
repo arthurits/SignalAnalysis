@@ -54,6 +54,8 @@ public static class Descriptive
             return double.NaN;
 
         // Write our own custom parallel summation algorithm without depending on LINQ, which is would be values.AsParallel().Sum()
+        // https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.for?view=net-8.0#system-threading-tasks-parallel-for-1(system-int32-system-int32-system-threading-tasks-paralleloptions-system-func((-0))-system-func((system-int32-system-threading-tasks-parallelloopstate-0-0))-system-action((-0)))
+        // https://michaelscodingspot.com/array-iteration-vs-parallelism-in-c-net/
         double sum = 0;
         int processorCount = Environment.ProcessorCount;
         int numLoops = values.Length / processorCount;
