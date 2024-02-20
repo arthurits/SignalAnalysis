@@ -71,6 +71,10 @@ public static class Descriptive
             },
             // Combine all local states
             localFinally: (localTotal) => { sum += localTotal; });
+        
+        for (int i = numLoops*processorCount; i<values.Length; i++)
+            sum += values[i];
+
         return sum;
     }
 

@@ -62,13 +62,13 @@ public class StatisticsTest
         Assert.AreEqual(3682913, Statistics.Descriptive.Sum(dataPrimes_1000), 1e-1);
         stopwatch.Stop();
         TimeSpan elapsed = stopwatch.Elapsed;
-        Debug.WriteLine($"Elapsed time - Sum: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
-        
+        Debug.WriteLine($"Elapsed time - Sum: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, {elapsed.Milliseconds} milliseconds, and {elapsed.Microseconds} microseconds");
+
         stopwatch.Start();
         Assert.AreEqual(3682913, Statistics.Descriptive.SumParallel(dataPrimes_1000), 1e-1);
         stopwatch.Stop();
         elapsed = stopwatch.Elapsed;
-        Debug.WriteLine($"Elapsed time - SumParallel: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, and {elapsed.Milliseconds} milliseconds");
+        Debug.WriteLine($"Elapsed time - SumParallel: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, {elapsed.Milliseconds} milliseconds, and {elapsed.Microseconds} microseconds");
     }
 
     [TestMethod]
