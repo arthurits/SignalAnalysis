@@ -3,15 +3,20 @@
 public static class Descriptive
 {
     /// <summary>
-    /// Return the sample sum.
+    /// Computes the sum of all the elements in the data serie.
     /// </summary>
+    /// <param name="values">Data values</param>
+    /// <returns>The total sum of the elements. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
     public static double Sum(double[] values)
     {
+        //if (values.Length == 0)
+        //    throw new ArgumentException($"{nameof(values)} cannot be empty");
+
         if (values.Length == 0)
-            throw new ArgumentException($"{nameof(values)} cannot be empty");
+            return double.NaN;
 
         double sum = 0;
-
         foreach (double value in values)
             sum += value;
 
@@ -19,77 +24,251 @@ public static class Descriptive
     }
 
     /// <summary>
-    /// Return the sample sum.
+    /// Computes the sum of all the elements in the data serie.
     /// </summary>
+    /// <param name="values">Data values</param>
+    /// <returns>The total sum of the elements. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
     public static double Sum<T>(IReadOnlyList<T> values)
     {
-        double[] values2 = values.AsParallel().Select(value => Convert.ToDouble(value)).ToArray();
+        //if (values.Length == 0)
+        //    throw new ArgumentException($"{nameof(values)} cannot be empty");
+
+        if (values.Count == 0)
+            return double.NaN;
+
+        double[] values2 = values.Select(value => Convert.ToDouble(value)).ToArray();
+
         return Sum(values2);
     }
 
     /// <summary>
-    /// Return the sample mean.
+    /// Computes the sum of all the elements in the data serie.
     /// </summary>
-    public static double Mean(double[] values)
+    /// <param name="values">Data values</param>
+    /// <returns>The total sum of the elements. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double SumParallel(double[] values)
     {
         if (values.Length == 0)
-            throw new ArgumentException($"{nameof(values)} cannot be empty");
+            return double.NaN;
+
+        return values.AsParallel().Sum();
+    }
+
+    /// <summary>
+    /// Computes the sum of all the elements in the data serie. Uses paralellization.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <returns>The total sum of the elements. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double SumParallel<T>(IReadOnlyList<T> values)
+    {
+        if (values.Count == 0)
+            return double.NaN;
+
+        double[] values2 = values.AsParallel().Select(value => Convert.ToDouble(value)).ToArray();
+        return values2.AsParallel().Sum();
+    }
+
+    /// <summary>
+    /// Computes the mean (first moment about the mean) of the data serie.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <returns>The sample mean value. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double Mean(double[] values)
+    {
+        //if (values.Length == 0)
+        //    throw new ArgumentException($"{nameof(values)} cannot be empty");
+        
+        //if (values.Length == 0)
+        //    return double.NaN;
 
         return Sum(values) / values.Length;
     }
 
     /// <summary>
-    /// Return the sample mean.
+    /// Computes the mean (first moment about the mean) of the data serie.
     /// </summary>
+    /// <param name="values">Data values</param>
+    /// <returns>The sample mean value. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
     public static double Mean<T>(IReadOnlyList<T> values)
     {
-        double[] values2 = values.AsParallel().Select(value => Convert.ToDouble(value)).ToArray();
-        return Mean(values2);
+        //if (values.Count == 0)
+        //    throw new ArgumentException($"{nameof(values)} cannot be empty");
+
+        //if (values.Count == 0)
+        //    return double.NaN;
+
+        return Sum(values) / values.Count;
+    }
+
+    /// <summary>
+    /// Computes the mean (first moment about the mean) of the data serie. Uses paralellization.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <returns>The sample mean value. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double MeanParallel(double[] values)
+    {
+        //if (values.Length == 0)
+        //    throw new ArgumentException($"{nameof(values)} cannot be empty");
+
+        //if (values.Length == 0)
+        //    return double.NaN;
+
+        return SumParallel(values) / values.Length;
+    }
+
+    /// <summary>
+    /// Computes the mean (first moment about the mean) of the data serie. Uses paralellization.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <returns>The sample mean value. If length is equal to 0, then it returns NaN value</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double MeanParallel<T>(IReadOnlyList<T> values)
+    {
+        //if (values.Length == 0)
+        //    throw new ArgumentException($"{nameof(values)} cannot be empty");
+
+        //if (values.Count == 0)
+        //    return double.NaN;
+
+        return SumParallel(values) / values.Count;
     }
 
     /// <summary>
     /// Computes the variance (second moment about the mean) of the data series.
     /// </summary>
     /// <param name="values">Data values</param>
-    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
-    /// <returns>Standard deviation. A value equal to -1 indicates insufficient data points.</returns>
-    public static double Variance<T>(IReadOnlyList<T> values, bool asSample = false)
+    /// <param name="asSample"><see langword="True"/> to compute the sample variance (N-1); otherwise (by default), it computes the population (N) variance</param>
+    /// <returns>The variance value. A value equal to NaN indicates insufficient data points.</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double Variance(double[] values, double? mean = null, bool asSample = false)
     {
-        if (values.Count < 2)
-            return -1;
-            //throw new ArgumentException($"{nameof(values)} must have at least 2 values");
-
-        // Then compute the standard deviation
-        //double avg = System.Linq.Enumerable.Average(doubles);
-        //double sst = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));    // Sum of squares total
-        double avg = Mean(values);
-        double sst = SST(values, avg);   // Sum of squares total
-        int denominator = values.Count - (asSample ? 1 : 0);
-        return denominator > 0.0 ? sst / denominator : -1.0;
-    }
-
-    /// <summary>
-    /// Computes the variance (second moment about the mean) of the data series.
-    /// </summary>
-    /// <param name="values">Data values</param>
-    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
-    /// <returns>Standard deviation. A value equal to -1 indicates insufficient data points.</returns>
-    public static double VarianceParallel<T>(IReadOnlyList<T> values, bool asSample = false)
-    {
-        if (values.Count < 2)
-            return -1;
+        if (values.Length < 2)
+            return double.NaN;
         //throw new ArgumentException($"{nameof(values)} must have at least 2 values");
 
+        // Then compute the standard deviation
+        //double avg = System.Linq.Enumerable.Average(doubles);
+        //double sst = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));    // Sum of squares total
+        double avg = mean ?? Mean(values);
+        double sst = SST(values, avg);   // Sum of squares total
+        int denominator = values.Length - (asSample ? 1 : 0);
+        return denominator > 0.0 ? sst / denominator : -1.0;
+    }
+
+    /// <summary>
+    /// Computes the variance (second moment about the mean) of the data series.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><see langword="True"/> to compute the sample variance (N-1); otherwise (by default), it computes the population (N) variance</param>
+    /// <returns>The variance value. A value equal to NaN indicates insufficient data points.</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double Variance<T>(IReadOnlyList<T> values, double? mean = null, bool asSample = false)
+    {
         // Convert into an enumerable of doubles.
-        IEnumerable<double> doubles = values.AsParallel().Select(value => Convert.ToDouble(value));
+        double[] values2 = values.Select(value => Convert.ToDouble(value)).ToArray();
+
+        return Variance(values2, mean, asSample);
+    }
+
+    /// <summary>
+    /// Computes the variance (second moment about the mean) of the data series using paralellization.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><see langword="True"/> to compute the sample variance (N-1); otherwise (by default), it computes the population (N) variance</param>
+    /// <returns>The variance value. A value equal to NaN indicates insufficient data points.</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double VarianceParallel(double[] values, double? mean = null, bool asSample = false)
+    {
+        if (values.Length < 2)
+            return double.NaN;
+        //throw new ArgumentException($"{nameof(values)} must have at least 2 values");
 
         // Then compute the standard deviation
         //double avg = System.Linq.Enumerable.Average(doubles);
         //double sst = System.Linq.Enumerable.Sum(System.Linq.Enumerable.Select(doubles, x => (x - avg) * (x - avg)));    // Sum of squares total
-        double avg = doubles.AsParallel().Average();
-        double sst = doubles.AsParallel().Sum(x => (x - avg) * (x - avg));   // Sum of squares total
-        int denominator = values.Count - (asSample ? 1 : 0);
+        double avg = mean ?? MeanParallel(values);
+        double sst = SSTParallel(values, avg);   // Sum of squares total
+        int denominator = values.Length - (asSample ? 1 : 0);
         return denominator > 0.0 ? sst / denominator : -1.0;
+    }
+
+    /// <summary>
+    /// Computes the variance (second moment about the mean) of the data series using paralellization.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><see langword="True"/> to compute the sample variance (N-1); otherwise (by default), it computes the population (N) variance</param>
+    /// <returns>The variance value. A value equal to NaN indicates insufficient data points.</returns>
+    /// <exception cref="ArgumentException">Throws exception if data length is equal to 0</exception>
+    public static double VarianceParallel<T>(IReadOnlyList<T> values, double? mean = null, bool asSample = false)
+    {
+        // Convert into an enumerable of doubles.
+        double[] values2 = values.AsParallel().Select(value => Convert.ToDouble(value)).ToArray();
+
+        return VarianceParallel(values2, mean, asSample);
+    }
+
+    /// <summary>
+    /// Computes the standard deviation (square root of the variance) of the data series.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
+    /// <returns>Standard deviation. A value equal to NaN indicates insufficient data points.</returns>
+    public static double StandardDeviation(double[] values, double? mean = null, bool asSample = false)
+    {
+        return Math.Sqrt(Variance(values, mean, asSample));
+    }
+
+    /// <summary>
+    /// Computes the standard deviation (square root of the variance) of the data series.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
+    /// <returns>Standard deviation. A value equal to NaN indicates insufficient data points.</returns>
+    public static double StandardDeviation<T>(IReadOnlyList<T> values, double? mean = null, bool asSample = false)
+    {
+        return Math.Sqrt(Variance<T>(values, mean, asSample));
+    }
+
+    /// <summary>
+    /// Computes the standard deviation (square root of the variance) of the data series using paralellization.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
+    /// <returns>Standard deviation. A value equal to NaN indicates insufficient data points.</returns>
+    public static double StandardDeviationParallel(double[] values, double? mean = null, bool asSample = false)
+    {
+        return Math.Sqrt(VarianceParallel(values, mean, asSample));
+    }
+
+    /// <summary>
+    /// Computes the standard deviation (square root of the variance) of the data series using paralellization.
+    /// </summary>
+    /// <param name="values">Data values</param>
+    /// <param name="asSample"><see langword="True"/> to compute the sample standard deviation (N-1); otherwise (by default), it computes the population (N) deviation</param>
+    /// <returns>Standard deviation. A value equal to NaN indicates insufficient data points.</returns>
+    public static double StandardDeviationParallel<T>(IReadOnlyList<T> values, double? mean = null, bool asSample = false)
+    {
+        return Math.Sqrt(VarianceParallel<T>(values, mean, asSample));
+    }
+
+    /// <summary>
+    /// Computes the total sum of squares
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="values"></param>
+    /// <param name="mean"></param>
+    /// <returns></returns>
+    public static double SST(double[] values, double? mean = null)
+    {
+        double average = mean ?? Mean(values);
+
+        return values.Sum(x => (x - average) * (x - average));
     }
 
     /// <summary>
@@ -101,16 +280,24 @@ public static class Descriptive
     /// <returns></returns>
     public static double SST<T>(IReadOnlyList<T> values, double? mean = null)
     {
-        // Convert into an enumerable of doubles.
-        IEnumerable<double> doubles = values.AsParallel().Select(value => Convert.ToDouble(value));
-        
-        double average;
-        if (mean.HasValue)
-            average = mean.Value;
-        else
-            average = doubles.Average();
+        // Convert into an array of doubles.
+        double[] values2 = values.Select(value => Convert.ToDouble(value)).ToArray();
 
-        return doubles.Sum(x => (x - average) * (x - average));
+        return SST(values2, mean);
+    }
+
+    /// <summary>
+    /// Computes the total sum of squares
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="values"></param>
+    /// <param name="mean"></param>
+    /// <returns></returns>
+    public static double SSTParallel(double[] values, double? mean = null)
+    {
+        double average = mean ?? MeanParallel(values);
+
+        return values.AsParallel().Sum(x => (x - average) * (x - average));
     }
 
     /// <summary>
@@ -123,14 +310,8 @@ public static class Descriptive
     public static double SSTParallel<T>(IReadOnlyList<T> values, double? mean = null)
     {
         // Convert into an enumerable of doubles.
-        IEnumerable<double> doubles = values.AsParallel().Select(value => Convert.ToDouble(value));
+        double[] values2 = values.AsParallel().Select(value => Convert.ToDouble(value)).ToArray();
 
-        double average;
-        if (mean.HasValue)
-            average = mean.Value;
-        else
-            average = doubles.AsParallel().Average();
-
-        return doubles.AsParallel().Sum(x => (x - average) * (x - average));
+        return SSTParallel(values2);
     }
 }
