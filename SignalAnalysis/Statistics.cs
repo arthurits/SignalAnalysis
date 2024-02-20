@@ -53,7 +53,23 @@ public static class Descriptive
         if (values.Length == 0)
             return double.NaN;
 
-        return values.AsParallel().Sum();
+        // Write our own custom parallel summation algorithm without depending on LINQ, which is would be values.AsParallel().Sum()
+        double sum = 0;
+        int processorCount = Environment.ProcessorCount;
+        int numLoops = values.Length / processorCount;
+        Parallel.For<double>(0, processorCount, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
+            localInit: () => 0,     // Initialize the local states
+            // Accumulate the thread-local computations in the loop body
+            body: (i, loop, localTotal) =>
+            {
+                for (int j = i * numLoops; j < (i + 1) * numLoops; j++)
+                    localTotal += values[j];
+
+                return localTotal;
+            },
+            // Combine all local states
+            localFinally: (localTotal) => { sum += localTotal; });
+        return sum;
     }
 
     /// <summary>
@@ -268,7 +284,15 @@ public static class Descriptive
     {
         double average = mean ?? Mean(values);
 
-        return values.Sum(x => (x - average) * (x - average));
+        double subtraction;
+        double sum = 0;
+        foreach (double value in values)
+        {
+            subtraction = value-average;
+            sum += subtraction * subtraction;
+        }
+
+        return sum;
     }
 
     /// <summary>
