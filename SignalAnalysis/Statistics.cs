@@ -56,26 +56,26 @@ public static class Descriptive
         // Write our own custom parallel summation algorithm without depending on LINQ, which is would be values.AsParallel().Sum()
         // https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.for?view=net-8.0#system-threading-tasks-parallel-for-1(system-int32-system-int32-system-threading-tasks-paralleloptions-system-func((-0))-system-func((system-int32-system-threading-tasks-parallelloopstate-0-0))-system-action((-0)))
         // https://michaelscodingspot.com/array-iteration-vs-parallelism-in-c-net/
-        double sum = 0;
-        int processorCount = Environment.ProcessorCount;
-        int numLoops = values.Length / processorCount;
-        Parallel.For<double>(0, processorCount, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
-            localInit: () => 0,     // Initialize the local states
-            // Accumulate the thread-local computations in the loop body
-            body: (i, loop, localTotal) =>
-            {
-                for (int j = i * numLoops; j < (i + 1) * numLoops; j++)
-                    localTotal += values[j];
+        //double sum = 0;
+        //int processorCount = Environment.ProcessorCount;
+        //int numLoops = values.Length / processorCount;
+        //Parallel.For<double>(0, processorCount, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
+        //    localInit: () => 0,     // Initialize the local states
+        //    // Accumulate the thread-local computations in the loop body
+        //    body: (i, loop, localTotal) =>
+        //    {
+        //        for (int j = i * numLoops; j < (i + 1) * numLoops; j++)
+        //            localTotal += values[j];
 
-                return localTotal;
-            },
-            // Combine all local states
-            localFinally: (localTotal) => { sum += localTotal; });
+        //        return localTotal;
+        //    },
+        //    // Combine all local states
+        //    localFinally: (localTotal) => { sum += localTotal; });
         
-        for (int i = numLoops*processorCount; i<values.Length; i++)
-            sum += values[i];
+        //for (int i = numLoops*processorCount; i<values.Length; i++)
+        //    sum += values[i];
 
-        return sum;
+        return values.AsParallel().Sum();
     }
 
     /// <summary>
