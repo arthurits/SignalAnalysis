@@ -5,18 +5,18 @@ namespace SignalAnalysis.UnitTest;
 [TestClass]
 public class StatisticsTest
 {
-    readonly double[] dataRandom = [0.635332247, 0.870181136, 0.678631034, 1.078938819, 1.105371046, 1.160009639, 1.091093042, 1.01799636, 0.992046413, 1.40562247, 0.74047614, 1.01297892,
+    private readonly double[] dataRandom = [0.635332247, 0.870181136, 0.678631034, 1.078938819, 1.105371046, 1.160009639, 1.091093042, 1.01799636, 0.992046413, 1.40562247, 0.74047614, 1.01297892,
             0.930566431, 0.829267703, 1.268018434, 1.2646188, 0.943980255, 0.53140922, 1.89863075, 0.806829855, 0.428950107, 2.020562594, 0.787877134, 1.195852193, 1.963551608,
             0.345232064, 1.036935295, 0.373574234, 0.691577798, 0.750008462, 1.475358373, 0.857603129, 0.060878366, 0.259649207, 1.302601821, 1.000431607, 0.546063164, 1.192633612,
             0.610321354, 0.428376566, 1.132490096, 1.493178088, 1.088099726, 0.718872968, 0.661457021, 1.172447167, 0.512788372, 1.722244192, 1.309734253, 1.38219508];
     
-    readonly int[] dataPrimes_100 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
+    private readonly int[] dataPrimes_100 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71,
         73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173,
         179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281,
         283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409,
         419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541];
 
-    readonly int[] dataPrimes_1000 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137,
+    private readonly int[] dataPrimes_1000 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137,
         139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331,
         337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547,
         557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761,
@@ -50,6 +50,9 @@ public class StatisticsTest
         7229, 7237, 7243, 7247, 7253, 7283, 7297, 7307, 7309, 7321, 7331, 7333, 7349, 7351, 7369, 7393, 7411, 7417, 7433, 7451, 7457, 7459, 7477, 7481, 7487, 7489, 7499, 7507, 7517,
         7523, 7529, 7537, 7541, 7547, 7549, 7559, 7561, 7573, 7577, 7583, 7589, 7591, 7603, 7607, 7621, 7639, 7643, 7649, 7669, 7673, 7681, 7687, 7691, 7699, 7703, 7717, 7723, 7727,
         7741, 7753, 7757, 7759, 7789, 7793, 7817, 7823, 7829, 7841, 7853, 7867, 7873, 7877, 7879, 7883, 7901, 7907, 7919];
+    
+    private Stopwatch _stopwatch = new();
+    private TimeSpan _elapsed = TimeSpan.Zero;
 
     [TestMethod]
     public void Test_Sum()
@@ -57,18 +60,17 @@ public class StatisticsTest
         Assert.AreEqual(48.783544365, Statistics.Descriptive.Sum(dataRandom), 1e-9);
         Assert.AreEqual(24133, Statistics.Descriptive.Sum(dataPrimes_100), 1e-1);
 
-        Stopwatch stopwatch = new();
-        stopwatch.Start();
+        _stopwatch.Start();
         Assert.AreEqual(3682913, Statistics.Descriptive.Sum(dataPrimes_1000), 1e-1);
-        stopwatch.Stop();
-        TimeSpan elapsed = stopwatch.Elapsed;
-        Debug.WriteLine($"Elapsed time - Sum: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, {elapsed.Milliseconds} milliseconds, and {elapsed.Microseconds} microseconds");
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - Sum: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
 
-        stopwatch.Start();
+        _stopwatch.Start();
         Assert.AreEqual(3682913, Statistics.Descriptive.SumParallel(dataPrimes_1000), 1e-1);
-        stopwatch.Stop();
-        elapsed = stopwatch.Elapsed;
-        Debug.WriteLine($"Elapsed time - SumParallel: {elapsed.Hours} hours, {elapsed.Minutes} minutes, {elapsed.Seconds} seconds, {elapsed.Milliseconds} milliseconds, and {elapsed.Microseconds} microseconds");
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - SumParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
     }
 
     [TestMethod]
@@ -76,7 +78,18 @@ public class StatisticsTest
     {
         Assert.AreEqual(0.9756708873, Statistics.Descriptive.Mean(dataRandom), 1e-10);
         Assert.AreEqual(241.33, Statistics.Descriptive.Mean(dataPrimes_100), 1e-2);
+
+        _stopwatch.Start();
         Assert.AreEqual(3682.913, Statistics.Descriptive.Mean(dataPrimes_1000), 1e-2);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - Mean: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+
+        _stopwatch.Start();
+        Assert.AreEqual(3682.913, Statistics.Descriptive.MeanParallel(dataPrimes_1000), 1e-2);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - MeanParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
     }
 
     [TestMethod]
@@ -89,8 +102,17 @@ public class StatisticsTest
         Assert.AreEqual(25865.7586868687, Statistics.Descriptive.Variance(dataPrimes_100, asSample: true), 1e-10);
         Assert.AreEqual(25865.7586868687, Statistics.Descriptive.VarianceParallel(dataPrimes_100, asSample: true), 1e-10);
 
+        _stopwatch.Start();
         Assert.AreEqual(5494765.76319419, Statistics.Descriptive.Variance(dataPrimes_1000, asSample: true), 1e-8);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - VarianceS: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+
+        _stopwatch.Start();
         Assert.AreEqual(5494765.76319419, Statistics.Descriptive.VarianceParallel(dataPrimes_1000, asSample: true), 1e-8);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - VarianceSParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
 
         // Population variance
         Assert.AreEqual(0.181854461627969, Statistics.Descriptive.Variance(dataRandom, asSample: false), 1e-15);
@@ -99,8 +121,17 @@ public class StatisticsTest
         Assert.AreEqual(25607.1011, Statistics.Descriptive.Variance(dataPrimes_100, asSample: false), 1e-4);
         Assert.AreEqual(25607.1011, Statistics.Descriptive.VarianceParallel(dataPrimes_100, asSample: false), 1e-4);
 
+        _stopwatch.Start();
         Assert.AreEqual(5489270.997431, Statistics.Descriptive.Variance(dataPrimes_1000, asSample: false), 1e-6);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - VarianceP: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+
+        _stopwatch.Start();
         Assert.AreEqual(5489270.997431, Statistics.Descriptive.VarianceParallel(dataPrimes_1000, asSample: false), 1e-6);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - VariancePParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
     }
     
     [TestMethod]
@@ -112,8 +143,17 @@ public class StatisticsTest
         Assert.AreEqual(2560710.11, Statistics.Descriptive.SST(dataPrimes_100), 1e-2);
         Assert.AreEqual(2560710.11, Statistics.Descriptive.SSTParallel(dataPrimes_100), 1e-2);
 
+        _stopwatch.Start();
         Assert.AreEqual(5489270997.431, Statistics.Descriptive.SST(dataPrimes_1000), 1e-2);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - SST: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+
+        _stopwatch.Start();
         Assert.AreEqual(5489270997.431, Statistics.Descriptive.SSTParallel(dataPrimes_1000), 1e-2);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - SSTParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
 
     }
 }
