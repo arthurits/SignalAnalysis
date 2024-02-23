@@ -133,7 +133,49 @@ public class StatisticsTest
         _elapsed = _stopwatch.Elapsed;
         Debug.WriteLine($"Elapsed time - VariancePParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
     }
-    
+
+    [TestMethod]
+    public void Test_StandardDeviation()
+    {
+        // Sample standard deviation
+        Assert.AreEqual(0.430773463866331, Statistics.Descriptive.StandardDeviation(dataRandom, asSample: true), 1e-15);
+        Assert.AreEqual(0.430773463866331, Statistics.Descriptive.StandardDeviationParallel(dataRandom, asSample: true), 1e-15);
+        
+        Assert.AreEqual(160.828351626412, Statistics.Descriptive.StandardDeviation(dataPrimes_100, asSample: true), 1e-10);
+        Assert.AreEqual(160.828351626412, Statistics.Descriptive.StandardDeviationParallel(dataPrimes_100, asSample: true), 1e-10);
+
+        _stopwatch.Start();
+        Assert.AreEqual(2344.09167124372, Statistics.Descriptive.StandardDeviation(dataPrimes_1000, asSample: true), 1e-8);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - StandardDeviationS: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+
+        _stopwatch.Start();
+        Assert.AreEqual(2344.09167124372, Statistics.Descriptive.StandardDeviationParallel(dataPrimes_1000, asSample: true), 1e-8);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - StandardDeviationSParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+
+        // Population standard deviation
+        Assert.AreEqual(0.426443972437141, Statistics.Descriptive.StandardDeviation(dataRandom, asSample: false), 1e-15);
+        Assert.AreEqual(0.426443972437141, Statistics.Descriptive.StandardDeviationParallel(dataRandom, asSample: false), 1e-15);
+
+        Assert.AreEqual(160.022189398846, Statistics.Descriptive.StandardDeviation(dataPrimes_100, asSample: false), 1e-4);
+        Assert.AreEqual(160.022189398846, Statistics.Descriptive.StandardDeviationParallel(dataPrimes_100, asSample: false), 1e-4);
+
+        _stopwatch.Start();
+        Assert.AreEqual(2342.91933225005, Statistics.Descriptive.StandardDeviation(dataPrimes_1000, asSample: false), 1e-6);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - StandardDeviationP: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+
+        _stopwatch.Start();
+        Assert.AreEqual(2342.91933225005, Statistics.Descriptive.StandardDeviationParallel(dataPrimes_1000, asSample: false), 1e-6);
+        _stopwatch.Stop();
+        _elapsed = _stopwatch.Elapsed;
+        Debug.WriteLine($"Elapsed time - StandardDeviationPParallel: {_elapsed.Hours} hours, {_elapsed.Minutes} minutes, {_elapsed.Seconds} seconds, {_elapsed.Milliseconds} milliseconds, and {_elapsed.Microseconds} microseconds");
+    }
+
     [TestMethod]
     public void Test_SST()
     {
