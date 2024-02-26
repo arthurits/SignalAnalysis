@@ -1,6 +1,4 @@
-﻿using FftSharp;
-
-namespace SignalAnalysis;
+﻿namespace SignalAnalysis;
 
 public enum IntegrationMethod
 {
@@ -36,8 +34,13 @@ public static class Integration
         if (roundupSegments)
             segments += PaddingQuantity(segments + 1, method);
 
+        // Determine whether "function" is a user-defined function or a data array
+        // by checking if we are coming from the overloaded "Integrate" function
+        bool isFunction = !function.Method.Name.Contains("<Integrate>");
+
         double result = 0;
         int i = 0;
+        double delta;
         switch (method)
         {
             case IntegrationMethod.LeftPointRule:
@@ -54,16 +57,18 @@ public static class Integration
                 break;
             case IntegrationMethod.SimpsonRule3:
                 i = segments % 2;
-                result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i, absoluteIntegral);
-                result += SimpsonRule3(function, lowerLimit, upperLimit - i, segments - i, absoluteIntegral);
+                delta = isFunction ? i / segments : i;
+                result = TrapezoidalUniformRule(function, upperLimit - delta, upperLimit, i, absoluteIntegral);
+                result += SimpsonRule3(function, lowerLimit, upperLimit - delta, segments - i, absoluteIntegral);
                 break;
             case IntegrationMethod.SimpsonRule8:
                 i = segments % 3;
+                delta = isFunction ? (double)i / segments : i;
                 if (i == 1)
-                    result = TrapezoidalUniformRule(function, upperLimit - i, upperLimit, i, absoluteIntegral);
+                    result = TrapezoidalUniformRule(function, upperLimit - delta, upperLimit, i, absoluteIntegral);
                 else if (i == 2)
-                    result = SimpsonRule3(function, upperLimit - i, upperLimit, i, absoluteIntegral);
-                result += SimpsonRule8(function, lowerLimit, upperLimit - i, segments - i, absoluteIntegral);
+                    result = SimpsonRule3(function, upperLimit - delta, upperLimit, i, absoluteIntegral);
+                result += SimpsonRule8(function, lowerLimit, upperLimit - delta, segments - i, absoluteIntegral);
                 break;
             case IntegrationMethod.SimpsonComposite:
                 if (segments < 8)
@@ -410,8 +415,8 @@ public static class Integration
     /// <param name="maxSteps">maximum steps of the procedure</param>
     /// <param name="epsilon">desired accuracy</param>
     /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
-    /// <seealso cref="https://en.wikipedia.org/wiki/Romberg%27s_method"/>
     /// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
+    /// <seealso cref="https://en.wikipedia.org/wiki/Romberg%27s_method"/>
     private static double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-6, bool absoluteIntegral = false)
     {
         double[] R1 = new double[maxSteps]; // buffer previous row
