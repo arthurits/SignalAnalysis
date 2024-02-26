@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis;
+﻿using FftSharp;
+
+namespace SignalAnalysis;
 
 public enum IntegrationMethod
 {
@@ -21,17 +23,23 @@ public static class Integration
     /// Computes the numerical integral of a function
     /// </summary>
     /// <param name="function">Function to be integrated</param>
-    /// <param name="method">Integration method</param>
+    /// <param name="method">Integration method from <see cref="IntegrationMethod"> enumeration</param>
     /// <param name="lowerLimit">Integral lower limit</param>
     /// <param name="upperLimit">Integral upper limit</param>
     /// <param name="segments">Number of equal segments the integration interval is divided into</param>
-    /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. <see langword="False"/> if positive and negative areas are computed and compensated</param>
+    /// <param name="pad"><see langword="True"/> if the data array should be increased to fit the required algorith length. <see langword="False"/> (default value) otherwise</param>
     /// <returns>The estimated integral value</returns>
-    public static double Integrate(Func<double, double> function, IntegrationMethod method = IntegrationMethod.TrapezoidRule, double lowerLimit = 0, double upperLimit = 1, int segments = 1, bool absoluteIntegral = false)
+    public static double Integrate(Func<double, double> function, IntegrationMethod method = IntegrationMethod.TrapezoidRule, double lowerLimit = 0, double upperLimit = 1, int segments = 1, bool absoluteIntegral = false, bool pad = false)
     {
+        // Add data if necessary so that the number of segments match the required algorithm
+        //double subtract = 0;
+        //if (pad)
+        //    (array, subtract) = PadDataToIntegrate(array, method);
+
+
         double result = 0;
         int i = 0;
-
         switch (method)
         {
             case IntegrationMethod.LeftPointRule:
@@ -78,17 +86,21 @@ public static class Integration
     /// Computes the numerical integral of uniformly-spaced tabular data
     /// </summary>
     /// <param name="array">1D array containing the data</param>
+    /// <param name="method">Integration method from <see cref="IntegrationMethod"> enumeration</param>
     /// <param name="lowerIndex">Integral lower limit</param>
     /// <param name="upperIndex">Integral upper limit</param>
     /// <param name="samplingFrequency">Data sampling frequency</param>
-    /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
+    /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. <see langword="False"/> if positive and negative areas are computed and compensated</param>
+    /// <param name="pad"><see langword="True"/> if the data array should be increased to fit the required algorith length. <see langword="False"/> (default value) otherwise</param>
     /// <returns>The estimated integral value</returns>
     public static double Integrate(double[] array, IntegrationMethod method = IntegrationMethod.TrapezoidRule, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1, bool absoluteIntegral = false, bool pad = false)
     {
         // Add data if necessary so that the number of segments match the required algorithm
         double subtract = 0;
         if (pad)
+        {
             (array, subtract) = PadDataToIntegrate(array, method);
+        }
 
         // Compute the array and adjust the result by the sampling frequency. This is only possible when data is uniformly spaced.
         double result = Integrate(Function, method, lowerIndex, upperIndex, (upperIndex - lowerIndex), absoluteIntegral);
@@ -123,8 +135,8 @@ public static class Integration
     /// <returns>A new data array where the last point has been multiplicated to fit the algorith requirements and the rectangular area that has been added.</returns>
     public static (double[] newArray, double subtract) PadDataToIntegrate(double[] array, IntegrationMethod method = IntegrationMethod.TrapezoidRule)
     {
-        double[] newSignal = array;
-        double lastValue = array.Last();
+        double[] newSignal = [];
+        double lastValue = array[^1];
         double subtract = 0;
         int padding;
 
