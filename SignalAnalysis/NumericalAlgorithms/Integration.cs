@@ -28,15 +28,13 @@ public static class Integration
     /// <param name="upperLimit">Integral upper limit</param>
     /// <param name="segments">Number of equal segments the integration interval is divided into</param>
     /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. <see langword="False"/> if positive and negative areas are computed and compensated</param>
-    /// <param name="pad"><see langword="True"/> if the data array should be increased to fit the required algorith length. <see langword="False"/> (default value) otherwise</param>
+    /// <param name="roundupSegments"><see langword="True"/> if the data array should be increased to fit the required algorith length. <see langword="False"/> (default value) otherwise</param>
     /// <returns>The estimated integral value</returns>
-    public static double Integrate(Func<double, double> function, IntegrationMethod method = IntegrationMethod.TrapezoidRule, double lowerLimit = 0, double upperLimit = 1, int segments = 1, bool absoluteIntegral = false, bool pad = false)
+    public static double Integrate(Func<double, double> function, IntegrationMethod method = IntegrationMethod.TrapezoidRule, double lowerLimit = 0, double upperLimit = 1, int segments = 1, bool absoluteIntegral = false, bool roundupSegments = false)
     {
-        // Add data if necessary so that the number of segments match the required algorithm
-        //double subtract = 0;
-        //if (pad)
-        //    (array, subtract) = PadDataToIntegrate(array, method);
-
+        // This should only be true when we are dealing with real function (not an array transformed into a function)
+        if (roundupSegments)
+            segments += PaddingQuantity(segments + 1, method);
 
         double result = 0;
         int i = 0;
@@ -95,15 +93,20 @@ public static class Integration
     /// <returns>The estimated integral value</returns>
     public static double Integrate(double[] array, IntegrationMethod method = IntegrationMethod.TrapezoidRule, int lowerIndex = 0, int upperIndex = 1, double samplingFrequency = 1, bool absoluteIntegral = false, bool pad = false)
     {
+        // Create subarray according to the lower and upper indexes
+        array = array[lowerIndex..(upperIndex + 1)];
+
         // Add data if necessary so that the number of segments match the required algorithm
         double subtract = 0;
         if (pad)
-        {
             (array, subtract) = PadDataToIntegrate(array, method);
-        }
+
+        // After the above array transformations, recalculate the lower an upper indexes
+        lowerIndex = array.GetLowerBound(0);
+        upperIndex = array.GetUpperBound(0);
 
         // Compute the array and adjust the result by the sampling frequency. This is only possible when data is uniformly spaced.
-        double result = Integrate(Function, method, lowerIndex, upperIndex, (upperIndex - lowerIndex), absoluteIntegral);
+        double result = Integrate(Function, method, lowerIndex, upperIndex, (upperIndex - lowerIndex), absoluteIntegral, false);
         
         // Subtract the area under the data that was added to match the algorithm-required number of segments
         result -= subtract;
@@ -131,7 +134,7 @@ public static class Integration
     /// This adds a new rectangular area under the data that must be deal off afterwards.
     /// </summary>
     /// <param name="array">The original data array</param>
-    /// <param name="method">Numerical integration algorithm</param>
+    /// <param name="method">Integration method from <see cref="IntegrationMethod"> enumeration/param>
     /// <returns>A new data array where the last point has been multiplicated to fit the algorith requirements and the rectangular area that has been added.</returns>
     public static (double[] newArray, double subtract) PadDataToIntegrate(double[] array, IntegrationMethod method = IntegrationMethod.TrapezoidRule)
     {
@@ -144,6 +147,7 @@ public static class Integration
         {
             case IntegrationMethod.SimpsonRule3:
                 padding = (array.Length - 1) % 2;
+                padding = PaddingQuantity(array.Length, method);
                 if (padding > 0)
                 {
                     newSignal = new double[array.Length + padding];
@@ -154,6 +158,7 @@ public static class Integration
                 break;
             case IntegrationMethod.SimpsonRule8:
                 padding = 3 - (array.Length - 1) % 3;
+                padding = PaddingQuantity(array.Length, method);
                 if (padding > 0 && padding < 3)
                 {
                     newSignal = new double[array.Length + padding];
@@ -163,6 +168,7 @@ public static class Integration
                 }
                 break;
             case IntegrationMethod.Romberg: // This needs to be padded to the upward power of 2
+                padding = PaddingQuantity(array.Length, method);
                 if (!System.Numerics.BitOperations.IsPow2(array.Length - 1))
                 {
                     newSignal = new double[1 + (int)Math.Pow(2, Math.Round(Math.Log2(array.Length - 1), MidpointRounding.ToPositiveInfinity))];
@@ -176,6 +182,22 @@ public static class Integration
         return (newSignal, subtract);
     }
 
+    /// <summary>
+    /// Computes the required padding quantity, in terms of additional needed points, for each specific integration method
+    /// </summary>
+    /// <param name="points">Current number of data points</param>
+    /// <param name="method">Integration method from <see cref="IntegrationMethod"> enumeration</param>
+    /// <returns>The additional needed points that should be added</returns>
+    public static int PaddingQuantity (int points, IntegrationMethod method = IntegrationMethod.TrapezoidRule)
+    {
+        return method switch
+        {
+            IntegrationMethod.SimpsonRule3 => (points - 1) % 2,
+            IntegrationMethod.SimpsonRule8 => 3 - (points - 1) % 3,
+            IntegrationMethod.Romberg => (1 + (int)Math.Pow(2, Math.Round(Math.Log2(points - 1), MidpointRounding.ToPositiveInfinity))) - points,
+            _ => 0
+        };
+    }
 
     /// <summary>
     /// Computes the numerical integral using the left-point rule. Data is assumed to be uniformly spaced.
