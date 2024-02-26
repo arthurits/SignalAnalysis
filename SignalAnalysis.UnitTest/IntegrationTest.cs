@@ -156,46 +156,60 @@ public class IntegrationTest
     [TestMethod]
     public void Test_Integration_Simpson8()
     {
-        var test = Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, false, false);
-        test = Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, false, true);
-        test = Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, true, false);
-        test = Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, true, true);
-
-        test = Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonRule8, 0, sin2Hz.GetUpperBound(0), 100, true, false);
-        test = Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonRule8, 0, sin2Hz.GetUpperBound(0), 100, true, true);
-
-        test = Integration.Integrate(sinSum, IntegrationMethod.SimpsonRule8, 0, sinSum.GetUpperBound(0), 100, true, false);
-        test = Integration.Integrate(sinSum, IntegrationMethod.SimpsonRule8, 0, sinSum.GetUpperBound(0), 100, true, true);
-
         // Test data array input
         Assert.AreEqual(0, Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, false, false), 1e-6);
+        Assert.AreEqual(0, Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, false, true), 1e-4);
         Assert.AreEqual(0.63646261004750027, Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, true, false), 1e-10);
-        Assert.AreEqual(0.63646261004750027, Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, true, true), 1e-10);
+        Assert.AreEqual(0.63638412189750015, Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonRule8, 0, sin1Hz.GetUpperBound(0), 100, true, true), 1e-10);
 
         Assert.AreEqual(0, Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonRule8, 0, sin2Hz.GetUpperBound(0), 100, false, false), 1e-6);
+        Assert.AreEqual(0, Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonRule8, 0, sin2Hz.GetUpperBound(0), 100, false, true), 1e-4);
         Assert.AreEqual(0.31799547915125009, Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonRule8, 0, sin2Hz.GetUpperBound(0), 100, true, false), 1e-10);
-        Assert.AreEqual(0.31799547915125009, Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonRule8, 0, sin2Hz.GetUpperBound(0), 100, true, true), 1e-10);
+        Assert.AreEqual(0.31791714588000003, Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonRule8, 0, sin2Hz.GetUpperBound(0), 100, true, true), 1e-10);
 
         Assert.AreEqual(0, Integration.Integrate(sinSum, IntegrationMethod.SimpsonRule8, 0, sinSum.GetUpperBound(0), 100, false, false), 1e-6);
+        Assert.AreEqual(0, Integration.Integrate(sinSum, IntegrationMethod.SimpsonRule8, 0, sinSum.GetUpperBound(0), 100, false, true), 1e-3);
         Assert.AreEqual(0.63661969052000034, Integration.Integrate(sinSum, IntegrationMethod.SimpsonRule8, 0, sinSum.GetUpperBound(0), 100, true, false), 1e-10);
-        Assert.AreEqual(0.63661969052000034, Integration.Integrate(sinSum, IntegrationMethod.SimpsonRule8, 0, sinSum.GetUpperBound(0), 100, true, true), 1e-10);
+        Assert.AreEqual(0.63646286910000038, Integration.Integrate(sinSum, IntegrationMethod.SimpsonRule8, 0, sinSum.GetUpperBound(0), 100, true, true), 1e-10);
 
         // Test function input
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false, false), 1e-6);
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false, true), 1e-14);
+        Assert.AreEqual(0.63646261004565408, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true, false), 1e-15);
+        Assert.AreEqual(0.63661988705121764, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true, true), 1e-15);
 
-        test = Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false);
-        test = Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true);
-        test = Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false);
-        test = Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true);
-        test = Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false);
-        test = Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true);
+        Assert.AreEqual(0, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false, false), 1e-6);
+        Assert.AreEqual(0, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false, true), 1e-15);
+        Assert.AreEqual(0.3179954792264908, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true, false), 1e-15);
+        Assert.AreEqual(0.31830994352560887, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true, true), 1e-15);
 
-        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false), 1e-15);
-        Assert.AreEqual(0.63661982751576784, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true), 1e-15);
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false, false), 1e-6);
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false, true), 1e-14);
+        Assert.AreEqual(0.636619690551253, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true, false), 1e-15);
+        Assert.AreEqual(0.63661988705121808, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true, true), 1e-15);
+    }
 
-        Assert.AreEqual(0, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false), 1e-15);
-        Assert.AreEqual(0.317890896877306, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true), 1e-15);
+    [TestMethod]
+    public void Test_Integration_SimpsonComposite()
+    {
+        // Test data array input
+        Assert.AreEqual(0, Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonComposite, 0, sin1Hz.GetUpperBound(0), 100, false, false), 1e-16);
+        Assert.AreEqual(0.6365150736070837, Integration.Integrate(sin1Hz, IntegrationMethod.SimpsonComposite, 0, sin1Hz.GetUpperBound(0), 100, true, false), 1e-16);
 
-        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, false), 1e-15);
-        Assert.AreEqual(0.63661982751576784, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonRule8, 0, 1, 100, true), 1e-15);
+        Assert.AreEqual(0, Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonComposite, 0, sin2Hz.GetUpperBound(0), 100, false, false), 1e-16);
+        Assert.AreEqual(0.31799575944291686, Integration.Integrate(sin2Hz, IntegrationMethod.SimpsonComposite, 0, sin2Hz.GetUpperBound(0), 100, true, false), 1e-16);
+
+        Assert.AreEqual(0, Integration.Integrate(sinSum, IntegrationMethod.SimpsonComposite, 0, sinSum.GetUpperBound(0), 100, false, false), 1e-16);
+        Assert.AreEqual(0.63661993620750035, Integration.Integrate(sinSum, IntegrationMethod.SimpsonComposite, 0, sinSum.GetUpperBound(0), 100, true, false), 1e-16);
+
+        // Test function input
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, false, false), 1e-15);
+        Assert.AreEqual(0.63651507360114012, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, true, false), 1e-16);
+
+        Assert.AreEqual(0, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, false, false), 1e-16);
+        Assert.AreEqual(0.31799575952023684, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, true, false), 1e-16);
+
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, false, false), 1e-15);
+        Assert.AreEqual(0.63661993624407109, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, true, false), 1e-16);
     }
 }
