@@ -173,10 +173,12 @@ public static class Integration
                 }
                 break;
             case IntegrationMethod.Romberg: // This needs to be padded to the upward power of 2
-                padding = PaddingQuantity(array.Length, method);
+                
                 if (!System.Numerics.BitOperations.IsPow2(array.Length - 1))
                 {
-                    newSignal = new double[1 + (int)Math.Pow(2, Math.Round(Math.Log2(array.Length - 1), MidpointRounding.ToPositiveInfinity))];
+                    //newSignal = new double[1 + (int)Math.Pow(2, Math.Round(Math.Log2(array.Length - 1), MidpointRounding.ToPositiveInfinity))];
+                    padding = PaddingQuantity(array.Length, method);
+                    newSignal = new double[array.Length + padding];
                     Array.Copy(array, newSignal, array.Length);
                     Array.Fill(newSignal, lastValue, array.Length, newSignal.Length - array.Length);
                     subtract = lastValue * (newSignal.Length - array.Length);    // This is the rectangle area under the upward-padded data. Needs to be divided by the sampling frequency
@@ -417,7 +419,7 @@ public static class Integration
     /// <param name="absoluteIntegral"><see langword="True"/> if the absolute integral value is computed. False if positive and negative areas are computed and compensated</param>
     /// <returns>Approximate value of the integral of the function f for x in [a,b] with accuracy 'acc' and steps 'max_steps'</returns>
     /// <seealso cref="https://en.wikipedia.org/wiki/Romberg%27s_method"/>
-    private static double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-6, bool absoluteIntegral = false)
+    private static double Romberg(Func<double, double> function, double lowerLimit, double upperLimit, int maxSteps = 10, double epsilon = 1E-10, bool absoluteIntegral = false)
     {
         double[] R1 = new double[maxSteps]; // buffer previous row
         double[] R2 = new double[maxSteps];   // buffer current row
@@ -441,7 +443,7 @@ public static class Integration
                 R2[j] = (n_k * R2[j - 1] - R1[j - 1]) / (n_k - 1); // compute R(i,j)
             }
 
-            if (i > 1 && Math.Abs(R1[i - 1] - R2[i]) < epsilon)
+            if (i > 2 && Math.Abs(R1[i - 1] - R2[i]) < epsilon)
                 return R2[i];
 
             // swap Rn and Rc as we only need the last row

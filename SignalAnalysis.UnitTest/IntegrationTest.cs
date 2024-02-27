@@ -212,4 +212,40 @@ public class IntegrationTest
         Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, false, false), 1e-15);
         Assert.AreEqual(0.63661993624407109, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.SimpsonComposite, 0, 1, 100, true, false), 1e-16);
     }
+
+    [TestMethod]
+    public void Test_Integration_Romberg()
+    {
+        // Test data array input
+        Assert.AreEqual(0, Integration.Integrate(sin1Hz, IntegrationMethod.Romberg, 0, sin1Hz.GetUpperBound(0), 100, false, false), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate(sin1Hz, IntegrationMethod.Romberg, 0, sin1Hz.GetUpperBound(0), 100, false, true), 1e-5);
+        Assert.AreEqual(0, Integration.Integrate(sin1Hz, IntegrationMethod.Romberg, 0, sin1Hz.GetUpperBound(0), 100, true, false), 1e-16);
+        Assert.AreEqual(0.63669457505048688, Integration.Integrate(sin1Hz, IntegrationMethod.Romberg, 0, sin1Hz.GetUpperBound(0), 100, true, true), 1e-16);
+
+        Assert.AreEqual(0, Integration.Integrate(sin2Hz, IntegrationMethod.Romberg, 0, sin2Hz.GetUpperBound(0), 100, false, false), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate(sin2Hz, IntegrationMethod.Romberg, 0, sin2Hz.GetUpperBound(0), 100, false, true), 1e-5);
+        Assert.AreEqual(0, Integration.Integrate(sin2Hz, IntegrationMethod.Romberg, 0, sin2Hz.GetUpperBound(0), 100, true, false), 1e-16);
+        Assert.AreEqual(0.31789089707873663, Integration.Integrate(sin2Hz, IntegrationMethod.Romberg, 0, sin2Hz.GetUpperBound(0), 100, true, true), 1e-16);
+
+        Assert.AreEqual(0, Integration.Integrate(sinSum, IntegrationMethod.Romberg, 0, sinSum.GetUpperBound(0), 100, false, false), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate(sinSum, IntegrationMethod.Romberg, 0, sinSum.GetUpperBound(0), 100, false, true), 1e-5);
+        Assert.AreEqual(0, Integration.Integrate(sinSum, IntegrationMethod.Romberg, 0, sinSum.GetUpperBound(0), 100, true, false), 1e-16);
+        Assert.AreEqual(0.636614345880711, Integration.Integrate(sinSum, IntegrationMethod.Romberg, 0, sinSum.GetUpperBound(0), 100, true, true), 1e-16);
+
+        // Test function input
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.Romberg, 0, 1, 100, false, false), 1e-15);
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.Romberg, 0, 1, 100, false, true), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.Romberg, 0, 1, 100, true, false), 1e-16);
+        Assert.AreEqual(0.63661977236758138, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x), IntegrationMethod.Romberg, 0, 1, 100, true, true), 1e-16);
+
+        Assert.AreEqual(0, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, false, false), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, false, true), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, true, false), 1e-16);
+        Assert.AreEqual(0.31830988618556694, Integration.Integrate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, true, true), 1e-16);
+
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, false, false), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, false, true), 1e-16);
+        Assert.AreEqual(0, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, true, false), 1e-16);
+        Assert.AreEqual(0.63661977236758083, Integration.Integrate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), IntegrationMethod.Romberg, 0, 1, 100, true, true), 1e-16);
+    }
 }
