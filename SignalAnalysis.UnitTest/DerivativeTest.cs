@@ -62,7 +62,17 @@ public class DerivativeTest
     [TestMethod]
     public void Test_Derivative_BackwardOnePoint()
     {
+        var test = Derivative.Derivate(sin1Hz, DerivativeMethod.BackwardOnePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        test= Derivative.Derivate(sin2Hz, DerivativeMethod.BackwardOnePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        test = Derivative.Derivate(sinSum, DerivativeMethod.BackwardOnePoint, 0, sin1Hz.GetUpperBound(0), 100);
 
+        Assert.AreEqual(cos1Hz, Derivative.Derivate(sin1Hz, DerivativeMethod.BackwardOnePoint, 0, sin1Hz.GetUpperBound(0), 100));
+        Assert.AreEqual(cos2Hz, Derivative.Derivate(sin2Hz, DerivativeMethod.BackwardOnePoint, 0, sin2Hz.GetUpperBound(0), 100));
+        Assert.AreEqual(cosSum, Derivative.Derivate(sinSum, DerivativeMethod.BackwardOnePoint, 0, sinSum.GetUpperBound(0), 100));
+
+        test = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.BackwardOnePoint, 0, 1, 100);
+        test = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.BackwardOnePoint, 0, 1, 100);
+        test = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.BackwardOnePoint, 0, 1, 100);
     }
 
     [TestMethod]
