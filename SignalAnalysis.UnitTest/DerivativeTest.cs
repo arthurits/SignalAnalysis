@@ -219,66 +219,402 @@ public class DerivativeTest
     [TestMethod]
     public void Test_Derivative_CenteredThreePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredThreePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 1; i < Dsin1Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredThreePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 1; i < Dsin2Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredThreePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 1; i < DsinSum.Length - 1; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredThreePoint, 0, 1, 100);
+        for (int i = 1; i < Dsin1Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredThreePoint, 0, 1, 100);
+        for (int i = 1; i < Dsin2Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredThreePoint, 0, 1, 100);
+        for (int i = 1; i < DsinSum.Length - 1; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
     }
 
     [TestMethod]
     public void Test_Derivative_CenteredFivePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredFivePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredFivePoint, 0, 1, 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
     }
 
     [TestMethod]
     public void Test_Derivative_CenteredSevenPoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-6);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-6);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredSevenPoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-6);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-6);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-6);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredSevenPoint, 0, 1, 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-6);
     }
 
     [TestMethod]
     public void Test_Derivative_CenteredNinePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-9);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-9);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredNinePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-8);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-9);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-9);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredNinePoint, 0, 1, 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-8);
     }
 
     [TestMethod]
     public void Test_Derivative_SGLinearThreePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGLinearThreePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 1; i < Dsin1Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGLinearThreePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 1; i < Dsin2Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGLinearThreePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 1; i < DsinSum.Length - 1; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGLinearThreePoint, 0, 1, 100);
+        for (int i = 1; i < Dsin1Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearThreePoint, 0, 1, 100);
+        for (int i = 1; i < Dsin2Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearThreePoint, 0, 1, 100);
+        for (int i = 1; i < DsinSum.Length - 1; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
     }
 
     [TestMethod]
     public void Test_Derivative_SGLinearFivePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGLinearFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGLinearFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGLinearFivePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGLinearFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearFivePoint, 0, 1, 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
     }
 
     [TestMethod]
     public void Test_Derivative_SGLinearSevenPoint()
     {
+        //Dsin1Hz = [double.NaN, double.NaN, double.NaN, 6.143511647663760, 6.057802264775890, 5.948185503895540, 5.815093972298800, 5.659052921457110, 5.480678174109790,
+        //    5.280673693892950, 5.059828807116630, 4.819015087654520, 4.559182917240030, 4.281357734743720, 3.986635989234680, 3.676180812796870, 3.351217430178200,
+        //    3.013028323388230, 2.662948170327560, 2.302358577423890, 1.932682627062710, 1.555379261331230, 1.171937524240460, 0.783870685148836, 0.392710266579383,
+        //    0, -0.392710266579389, -0.783870685148839, -1.171937524240460, -1.555379261331230, -1.932682627062720, -2.302358577423900, -2.662948170327560, -3.013028323388240,
+        //    -3.351217430178210, -3.676180812796870, -3.986635989234680, -4.281357734743730, -4.559182917240030, -4.819015087654530, -5.059828807116630, -5.280673693892940,
+        //    -5.480678174109790, -5.659052921457110, -5.815093972298790, -5.948185503895540, -6.057802264775890, -6.143511647663760, -6.204975396781790, -6.241950942792340,
+        //    -6.254292360107860, -6.241950942792340, -6.204975396781800, -6.143511647663760, -6.057802264775890, -5.948185503895540, -5.815093972298790, -5.659052921457100,
+        //    -5.480678174109780, -5.280673693892930, -5.059828807116620, -4.819015087654520, -4.559182917240020, -4.281357734743720, -3.986635989234670, -3.676180812796860,
+        //    -3.351217430178190, -3.013028323388220, -2.662948170327540, -2.302358577423880, -1.932682627062710, -1.555379261331210, -1.171937524240450, -0.783870685148824,
+        //    -0.392710266579369, 0, 0.392710266579403, 0.783870685148852, 1.171937524240480, 1.555379261331240, 1.932682627062730, 2.302358577423910, 2.662948170327580,
+        //    3.013028323388250, 3.351217430178220, 3.676180812796880, 3.986635989234700, 4.281357734743740, 4.559182917240040, 4.819015087654540, 5.059828807116640,
+        //    5.280673693892950, 5.480678174109790, 5.659052921457120, 5.815093972298790, 5.948185503895550, 6.057802264775890, 6.143511647663770, double.NaN, double.NaN, double.NaN];
 
+        //Dsin2Hz = [double.NaN, double.NaN, double.NaN, 5.735016325320120, 5.405205651374850, 4.990151655394060, 4.496399986835610, 3.931737404465590, 3.305068974521080,
+        //    2.626277632495870, 1.906068323343980, 1.155799178102930, 0.387302389382242, -0.387302389382241, -1.155799178102930, -1.906068323343980, -2.626277632495870,
+        //    -3.305068974521080, -3.931737404465600, -4.496399986835610, -4.990151655394070, -5.405205651374860, -5.735016325320120, -5.974382365882380, -6.119528827611650,
+        //    -6.168166664100180, -6.119528827611650, -5.974382365882380, -5.735016325320110, -5.405205651374850, -4.990151655394060, -4.496399986835600, -3.931737404465590,
+        //    -3.305068974521080, -2.626277632495860, -1.906068323343970, -1.155799178102920, -0.387302389382231, 0.387302389382257, 1.155799178102950, 1.906068323343990,
+        //    2.626277632495880, 3.305068974521090, 3.931737404465600, 4.496399986835620, 4.990151655394070, 5.405205651374860, 5.735016325320120, 5.974382365882390,
+        //    6.119528827611660, 6.168166664100200, 6.119528827611650, 5.974382365882380, 5.735016325320110, 5.405205651374850, 4.990151655394060, 4.496399986835590,
+        //    3.931737404465580, 3.305068974521060, 2.626277632495840, 1.906068323343960, 1.155799178102910, 0.387302389382219, -0.387302389382266, -1.155799178102950,
+        //    -1.906068323344000, -2.626277632495890, -3.305068974521100, -3.931737404465610, -4.496399986835630, -4.990151655394080, -5.405205651374870, -5.735016325320130,
+        //    -5.974382365882400, -6.119528827611670, -6.168166664100170, -6.119528827611660, -5.974382365882370, -5.735016325320100, -5.405205651374830, -4.990151655394040,
+        //    -4.496399986835580, -3.931737404465570, -3.305068974521050, -2.626277632495830, -1.906068323343950, -1.155799178102900, -0.387302389382203, 0.387302389382285,
+        //    1.155799178102970, 1.906068323344020, 2.626277632495900, 3.305068974521120, 3.931737404465630, 4.496399986835630, 4.990151655394090, 5.405205651374880,
+        //    5.735016325320130, double.NaN, double.NaN, double.NaN];
+
+        //DsinSum = [double.NaN, double.NaN, double.NaN, 11.878527972983900, 11.463007916150700, 10.938337159289600, 10.311493959134400, 9.590790325922710, 8.785747148630880,
+        //    7.906951326388810, 6.965897130460610, 5.974814265757460, 4.946485306622270, 3.894055345361480, 2.830836811131750, 1.770112489452890, 0.724939797682331,
+        //    -0.292040651132853, -1.268789234138040, -2.194041409411720, -3.057469028331350, -3.849826390043630, -4.563078801079660, -5.190511680733550, -5.726818561032270,
+        //    -6.168166664100190, -6.512239094191040, -6.758253051031220, -6.906953849560580, -6.960584912706080, -6.922834282456780, -6.798758564259500, -6.594685574793150,
+        //    -6.318097297909310, -5.977495062674060, -5.582249136140840, -5.142435167337610, -4.668660124125960, -4.171880527857770, -3.663215909551580, -3.153760483772640,
+        //    -2.654396061397070, -2.175609199588700, -1.727315516991500, -1.318693985463180, -0.958033848501471, -0.652596613401027, -0.408495322343640, -0.230593030899408,
+        //    -0.122422115180687, -0.086125696007657, -0.122422115180690, -0.230593030899414, -0.408495322343650, -0.652596613401040, -0.958033848501487, -1.318693985463190,
+        //    -1.727315516991520, -2.175609199588720, -2.654396061397090, -3.153760483772660, -3.663215909551610, -4.171880527857800, -4.668660124125980, -5.142435167337630,
+        //    -5.582249136140860, -5.977495062674080, -6.318097297909320, -6.594685574793160, -6.798758564259510, -6.922834282456790, -6.960584912706080, -6.906953849560570,
+        //    -6.758253051031220, -6.512239094191030, -6.168166664100150, -5.726818561032260, -5.190511680733520, -4.563078801079630, -3.849826390043590, -3.057469028331310,
+        //    -2.194041409411670, -1.268789234138000, -0.292040651132809, 0.724939797682384, 1.770112489452940, 2.830836811131800, 3.894055345361530, 4.946485306622330,
+        //    5.974814265757520, 6.965897130460660, 7.906951326388860, 8.785747148630910, 9.590790325922740, 10.311493959134400, 10.938337159289600, 11.463007916150800,
+        //    11.878527972983900, double.NaN, double.NaN, double.NaN];
+
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGLinearSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGLinearSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-0);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGLinearSevenPoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-0);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGLinearSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-0);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearSevenPoint, 0, 1, 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-0);
     }
 
     [TestMethod]
     public void Test_Derivative_SGLinearNinePoint()
     {
+        //Dsin1Hz = [double.NaN, double.NaN, double.NaN, double.NaN, 6.038665550906850, 5.929395071482480, 5.796723978593900, 5.641175864433080, 5.463364606343460,
+        //    5.263991944126470, 5.043844710595170, 4.803791726304610, 4.544780370714010, 4.267832843312850, 3.974042129466500, 3.664567686902280, 3.340630869859590,
+        //    3.003510108962640, 2.654535865838850, 2.295085382394690, 1.926577245470980, 1.550465788328810, 1.168235351060560, 0.781394422577632, 0.391469687293947,
+        //    0, -0.391469687293951, -0.781394422577636, -1.168235351060560, -1.550465788328820, -1.926577245470980, -2.295085382394690, -2.654535865838860,
+        //    -3.003510108962640, -3.340630869859600, -3.664567686902290, -3.974042129466500, -4.267832843312860, -4.544780370714020, -4.803791726304620, -5.043844710595170,
+        //    -5.263991944126470, -5.463364606343460, -5.641175864433080, -5.796723978593900, -5.929395071482480, -6.038665550906850, -6.124104176205660, -6.185373760158050,
+        //    -6.222232499707570, -6.234534930248410, -6.222232499707570, -6.185373760158050, -6.124104176205660, -6.038665550906850, -5.929395071482470, -5.796723978593890,
+        //    -5.641175864433080, -5.463364606343450, -5.263991944126460, -5.043844710595160, -4.803791726304600, -4.544780370714000, -4.267832843312840, -3.974042129466480,
+        //    -3.664567686902270, -3.340630869859580, -3.003510108962620, -2.654535865838850, -2.295085382394670, -1.926577245470960, -1.550465788328810, -1.168235351060550,
+        //    -0.781394422577620, -0.391469687293932, 0, 0.391469687293964, 0.781394422577651, 1.168235351060580, 1.550465788328830, 1.926577245470990, 2.295085382394700,
+        //    2.654535865838870, 3.003510108962660, 3.340630869859610, 3.664567686902300, 3.974042129466510, 4.267832843312870, 4.544780370714030, 4.803791726304620,
+        //    5.043844710595180, 5.263991944126470, 5.463364606343470, 5.641175864433090, 5.796723978593900, 5.929395071482480, 6.038665550906860,
+        //    double.NaN, double.NaN, double.NaN, double.NaN];
 
+        //Dsin2Hz = [double.NaN, double.NaN, double.NaN, double.NaN, 5.336855722314980, 4.927050168856280, 4.439542090957610, 3.882019782230640, 3.263275702531690,
+        //    2.593067815617400, 1.881965700227190, 1.141183861512590, 0.382404871591728, -0.382404871591729, -1.141183861512580, -1.881965700227190, -2.593067815617400,
+        //    -3.263275702531690, -3.882019782230650, -4.439542090957610, -4.927050168856280, -5.336855722314980, -5.662495872949700, -5.898835081056920, -6.042146136142610,
+        //    -6.090168937258190, -6.042146136142610, -5.898835081056920, -5.662495872949690, -5.336855722314980, -4.927050168856280, -4.439542090957610, -3.882019782230640,
+        //    -3.263275702531680, -2.593067815617390, -1.881965700227180, -1.141183861512570, -0.382404871591716, 0.382404871591741, 1.141183861512600, 1.881965700227200,
+        //    2.593067815617410, 3.263275702531700, 3.882019782230660, 4.439542090957620, 4.927050168856290, 5.336855722314990, 5.662495872949700, 5.898835081056920,
+        //    6.042146136142610, 6.090168937258210, 6.042146136142610, 5.898835081056920, 5.662495872949690, 5.336855722314970, 4.927050168856270, 4.439542090957600,
+        //    3.882019782230630, 3.263275702531670, 2.593067815617380, 1.881965700227170, 1.141183861512560, 0.382404871591705, -0.382404871591749, -1.141183861512610,
+        //    -1.881965700227210, -2.593067815617420, -3.263275702531710, -3.882019782230670, -4.439542090957630, -4.927050168856300, -5.336855722315000, -5.662495872949710,
+        //    -5.898835081056940, -6.042146136142620, -6.090168937258180, -6.042146136142600, -5.898835081056920, -5.662495872949680, -5.336855722314960, -4.927050168856260,
+        //    -4.439542090957590, -3.882019782230620, -3.263275702531660, -2.593067815617370, -1.881965700227160, -1.141183861512550, -0.382404871591687, 0.382404871591768,
+        //    1.141183861512620, 1.881965700227230, 2.593067815617440, 3.263275702531730, 3.882019782230680, 4.439542090957640, 4.927050168856310, 5.336855722315010,
+        //    double.NaN, double.NaN, double.NaN, double.NaN];
+
+        //DsinSum = [double.NaN, double.NaN, double.NaN, double.NaN, 11.375521273221800, 10.856445240338800, 10.236266069551500, 9.523195646663730, 8.726640308875160,
+        //    7.857059759743870, 6.925810410822360, 5.944975587817200, 4.927185242305740, 3.885427971721120, 2.832858267953910, 1.782601986675100, 0.747563054242196,
+        //    -0.259765593569052, -1.227483916391790, -2.144456708562930, -3.000472923385310, -3.786389933986170, -4.494260521889140, -5.117440658479290, -5.650676448848660,
+        //    -6.090168937258200, -6.433615823436560, -6.680229503634560, -6.830731224010260, -6.887321510643800, -6.853627414327260, -6.734627473352290, -6.536555648069500,
+        //    -6.266785811494330, -5.933698685476990, -5.546533387129470, -5.115225990979070, -4.650237714904570, -4.162375499122280, -3.662607864792020, -3.161879010367970,
+        //    -2.670924128509060, -2.200088903811760, -1.759156082202430, -1.357181887636270, -1.002344902626190, -0.701809828591861, -0.461608303255958, -0.286538679101125,
+        //    -0.180086363564963, -0.144365992990203, -0.180086363564966, -0.286538679101132, -0.461608303255968, -0.701809828591874, -1.002344902626200, -1.357181887636290,
+        //    -1.759156082202450, -2.200088903811780, -2.670924128509080, -3.161879010367990, -3.662607864792040, -4.162375499122300, -4.650237714904590, -5.115225990979090,
+        //    -5.546533387129480, -5.933698685477000, -6.266785811494340, -6.536555648069510, -6.734627473352300, -6.853627414327260, -6.887321510643800, -6.830731224010260,
+        //    -6.680229503634560, -6.433615823436550, -6.090168937258170, -5.650676448848640, -5.117440658479260, -4.494260521889100, -3.786389933986130, -3.000472923385260,
+        //    -2.144456708562890, -1.227483916391750, -0.259765593569008, 0.747563054242242, 1.782601986675140, 2.832858267953960, 3.885427971721180, 4.927185242305790,
+        //    5.944975587817240, 6.925810410822410, 7.857059759743910, 8.726640308875200, 9.523195646663770, 10.236266069551500, 10.856445240338800, 11.375521273221900,
+        //    double.NaN, double.NaN, double.NaN, double.NaN];
+
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGLinearNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGLinearNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-0);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGLinearNinePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-0);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGLinearNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-0);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGLinearNinePoint, 0, 1, 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-0);
     }
 
     [TestMethod]
     public void Test_Derivative_SGCubicFivePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGCubicFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGCubicFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGCubicFivePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGCubicFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicFivePoint, 0, 1, 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
     }
 
     [TestMethod]
     public void Test_Derivative_SGCubicSevenPoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGCubicSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGCubicSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-3);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGCubicSevenPoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-3);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGCubicSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-3);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicSevenPoint, 0, 1, 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-3);
     }
 
     [TestMethod]
     public void Test_Derivative_SGCubicNinePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGCubicNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGCubicNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-2);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGCubicNinePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-2);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGCubicNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-2);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicNinePoint, 0, 1, 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-2);
     }
 }
