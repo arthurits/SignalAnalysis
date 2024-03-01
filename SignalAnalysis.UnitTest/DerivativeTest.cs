@@ -534,7 +534,30 @@ public class DerivativeTest
     [TestMethod]
     public void Test_Derivative_SGCubicFivePoint()
     {
-        
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.SGCubicFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.SGCubicFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.SGCubicFivePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.SGCubicFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.SGCubicFivePoint, 0, 1, 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
     }
 
     [TestMethod]
