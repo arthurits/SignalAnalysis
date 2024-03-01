@@ -219,25 +219,117 @@ public class DerivativeTest
     [TestMethod]
     public void Test_Derivative_CenteredThreePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredThreePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 1; i < Dsin1Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredThreePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 1; i < Dsin2Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredThreePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 1; i < DsinSum.Length - 1; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredThreePoint, 0, 1, 100);
+        for (int i = 1; i < Dsin1Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredThreePoint, 0, 1, 100);
+        for (int i = 1; i < Dsin2Hz.Length - 1; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-1);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredThreePoint, 0, 1, 100);
+        for (int i = 1; i < DsinSum.Length - 1; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-1);
     }
 
     [TestMethod]
     public void Test_Derivative_CenteredFivePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredFivePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredFivePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin1Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredFivePoint, 0, 1, 100);
+        for (int i = 2; i < Dsin2Hz.Length - 2; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-4);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredFivePoint, 0, 1, 100);
+        for (int i = 2; i < DsinSum.Length - 2; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-4);
     }
 
     [TestMethod]
     public void Test_Derivative_CenteredSevenPoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-6);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredSevenPoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-6);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredSevenPoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-6);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin1Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-6);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredSevenPoint, 0, 1, 100);
+        for (int i = 3; i < Dsin2Hz.Length - 3; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-6);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredSevenPoint, 0, 1, 100);
+        for (int i = 3; i < DsinSum.Length - 3; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-6);
     }
 
     [TestMethod]
     public void Test_Derivative_CenteredNinePoint()
     {
+        var result = Derivative.Derivate(sin1Hz, DerivativeMethod.CenteredNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-9);
 
+        result = Derivative.Derivate(sin2Hz, DerivativeMethod.CenteredNinePoint, 0, sin1Hz.GetUpperBound(0), 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-9);
+
+        result = Derivative.Derivate(sinSum, DerivativeMethod.CenteredNinePoint, 0, sinSum.GetUpperBound(0), 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-8);
+
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x), DerivativeMethod.CenteredNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin1Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin1Hz[i], result[i], 1e-9);
+
+        result = Derivative.Derivate((x) => 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredNinePoint, 0, 1, 100);
+        for (int i = 4; i < Dsin2Hz.Length - 4; i++)
+            Assert.AreEqual(Dsin2Hz[i], result[i], 1e-9);
+
+        result = Derivative.Derivate((x) => Math.Sin(2 * Math.PI * 1 * x) + 0.5 * Math.Sin(2 * Math.PI * 2 * x), DerivativeMethod.CenteredNinePoint, 0, 1, 100);
+        for (int i = 4; i < DsinSum.Length - 4; i++)
+            Assert.AreEqual(DsinSum[i], result[i], 1e-8);
     }
 
     [TestMethod]
