@@ -151,7 +151,7 @@ public static class Integration
         switch (method)
         {
             case IntegrationMethod.SimpsonRule3:
-                padding = (array.Length - 1) % 2;
+                //padding = (array.Length - 1) % 2;
                 padding = PaddingQuantity(array.Length, method);
                 if (padding > 0)
                 {
@@ -162,7 +162,7 @@ public static class Integration
                 }
                 break;
             case IntegrationMethod.SimpsonRule8:
-                padding = 3 - (array.Length - 1) % 3;
+                //padding = 3 - (array.Length - 1) % 3;
                 padding = PaddingQuantity(array.Length, method);
                 if (padding > 0 && padding < 3)
                 {

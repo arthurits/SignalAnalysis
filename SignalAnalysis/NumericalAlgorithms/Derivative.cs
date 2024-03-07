@@ -133,6 +133,7 @@ public static class Derivative
     {
         double[] result = Derivate(Function, method, lowerIndex, upperIndex, upperIndex - lowerIndex);
 
+        // Adjust the result by the sampling frequency. This is only possible when data is uniformly spaced.
         for (int i = 0; i < result.Length; i++)
             result[i] *= samplingFrequency;
 
