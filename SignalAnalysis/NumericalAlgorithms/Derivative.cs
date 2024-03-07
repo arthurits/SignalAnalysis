@@ -34,14 +34,9 @@ public interface IFunction<T>
 
 delegate double RealFunction<T>(T arg);
 
-class Function<T> : IFunction<T>
+class Function<T>(RealFunction<T> function) : IFunction<T>
 {
-    readonly RealFunction<T> func;
-
-    public Function(RealFunction<T> func)
-    {
-        this.func = func;
-    }
+    readonly RealFunction<T> func = function;
 
     public double this[T arg]
     {
