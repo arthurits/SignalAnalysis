@@ -1,0 +1,710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Developed by {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Copyright {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
+
+No commercial use allowed whatsoever. Contact the author for any inquiries.
+
+If you find this software useful, please consider supporting it!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Product name: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>&amp;Accept</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>&amp;Cancel</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>Select data</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>&amp;Export</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>&amp;Reset</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>&amp;Settings</value>
+  </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>Compute the absolute-value integral?</value>
+  </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Box plot</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>Compute numerical differentiation?</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>Compute numerical integration?</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>Show plots' crosshair</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>Cumulative fractal dimension</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Remember open/save dialog previous path</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>Entropy (approximate and sample)</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>Export derivative data?</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>Export numerical integration?</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>Power (dB)</value>
+  </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>Backward one-point difference, Forward one-point difference, Central three-point difference, Central five-point difference, Central seven-point difference, Central nine-point difference, Savitzky–Golay linear three point, Savitzky–Golay linear five point, Savitzky–Golay linear seven point, Savitzky–Golay linear nine point, Savitzky–Golay cubic five point, Savitzky–Golay cubic seven point, Savitzky–Golay cubic nine point</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>Do you want to reset all fields
+to their default values?</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>Reset settings?</value>
+  </data>
+  <data name="strEntropyAlgorithms" xml:space="preserve">
+    <value>Brute force, Monte-Carlo</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>Error loading settings file.
+
+{0}
+
+Default values will be used instead.</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="strFileHeader00" xml:space="preserve">
+    <value>ErgoLux data</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>SignalAnalysis data</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>End time</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Total measuring time</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Number of data points</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Sampling frequency</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>Fractal dimension</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>Fractal variance</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>Approximate entropy</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>Sample entropy</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Shannon entropy</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Entropy bit</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Ideal entropy</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>Number of data series</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>Number of sensors</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>Missing an empty line.</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>Missing column headers (series names).</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>days, day, days</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>hours, hour, hours</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>minutes, minute, minutes</value>
+  </data>
+  <data name="strFileHeader25" xml:space="preserve">
+    <value>seconds, second, seconds</value>
+  </data>
+  <data name="strFileHeader26" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="strFileHeader27" xml:space="preserve">
+    <value>milliseconds, millisecond, milliseconds</value>
+  </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Derivative</value>
+  </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>Differentiation algorithm</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Integration algorithm</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Integral value</value>
+  </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Variance</value>
+  </data>
+  <data name="strFileHeader33" xml:space="preserve">
+    <value>Box plot lower limit</value>
+  </data>
+  <data name="strFileHeader34" xml:space="preserve">
+    <value>Box plot upper limit</value>
+  </data>
+  <data name="strFileHeader35" xml:space="preserve">
+    <value>Quartile 1 (25%)</value>
+  </data>
+  <data name="strFileHeader36" xml:space="preserve">
+    <value>Quartile 2 (50%)</value>
+  </data>
+  <data name="strFileHeader37" xml:space="preserve">
+    <value>Quartile 3 (75%)</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideal</value>
+  </data>
+  <data name="strFileHeader39" xml:space="preserve">
+    <value>Entropy algorithm</value>
+  </data>
+  <data name="strFileHeader40" xml:space="preserve">
+    <value>Entropy tolerance factor</value>
+  </data>
+  <data name="strFileHeader41" xml:space="preserve">
+    <value>Entropy Embedding dimension</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>Section '{0}' is mis-formatted.</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Select culture</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>Signal analysis</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>Finite difference algorithms</value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>Abscissa axis</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>UI and data format</value>
+  </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT points</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Left-point rule, Mid-point rule, Right-point rule, Trapezoid rule, Simpson's 1/3 rule, Simpson's 3/8 rule, Simpson's composite rule, Romberg's method</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>Data-file path</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>Numeric data-formatting string</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>Array index end (max {0})</value>
+  </data>
+  <data name="strLblEntropy" xml:space="preserve">
+    <value>Entropy algorithms</value>
+  </data>
+  <data name="strLblFactorM" xml:space="preserve">
+    <value>Embedding dimension</value>
+  </data>
+  <data name="strLblFactorR" xml:space="preserve">
+    <value>Tolerance factor</value>
+  </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Quadrature algorithms</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>Select series</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>Array index start</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Unexpected error while computing numerical differentiation.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Differentiation error</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Unexpected error while computing descriptive statistics values.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Statistics error</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Unexpected error while computing entropy values.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Entropy error</value>
+  </data>
+  <data name="strMsgBoxErrorFFT" xml:space="preserve">
+    <value>Unexpected error while computing the FFT.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
+    <value>FFT error</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Unexpected error while computing the fractal dimension.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Fractal error</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>An unexpected error happened while opening data file.
+Please try again later or contact the software engineer.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Error opening data</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>An unexpected error happened while saving data file.
+Please try again later or contact the software engineer.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Error saving data</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>Are you sure you want to exit
+the application?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>Exit?</value>
+  </data>
+  <data name="strMsgBoxInitArray" xml:space="preserve">
+    <value>Unexpected error in 'InitializeDataArrays'.
+{0}</value>
+  </data>
+  <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>There is no data available to be saved.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>No data</value>
+  </data>
+  <data name="strMsgBoxOKSaveData" xml:space="preserve">
+    <value>Data has been successfully saved to disk.</value>
+  </data>
+  <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
+    <value>Data saved</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>Numerical differentiation has been stopped.</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>Entropy computation has been stopped.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
+    <value>Computation of the Hausdorff-Besicovitch fractal
+dimension has been stopped.</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>ErgoLux files (*.elux)|*.elux|SignalAnalysis files (*.sig)|*.sig|Text files (*.txt)|*.txt|Binary files (*.bin)|*.bin|All files (*.*)|*.*</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>Open data file</value>
+  </data>
+  <data name="strPlotAppliedTitle" xml:space="preserve">
+    <value>Windowed signal</value>
+  </data>
+  <data name="strPlotAppliedXLabel" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="strPlotAppliedYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Box plot</value>
+  </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivative</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitude / sec</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotFFTTitle" xml:space="preserve">
+    <value>Fast Fourier transform</value>
+  </data>
+  <data name="strPlotFFTXLabel" xml:space="preserve">
+    <value>Frequency (Hz)</value>
+  </data>
+  <data name="strPlotFFTYLabelMag" xml:space="preserve">
+    <value>Magnitude (RMS²)</value>
+  </data>
+  <data name="strPlotFFTYLabelPow" xml:space="preserve">
+    <value>Power (dB)</value>
+  </data>
+  <data name="strPlotFractalDisributionXLabel" xml:space="preserve">
+    <value>Fractal dimension (H)</value>
+  </data>
+  <data name="strPlotFractalDisributionYLabel" xml:space="preserve">
+    <value>Probability</value>
+  </data>
+  <data name="strPlotFractalDistributionTitle" xml:space="preserve">
+    <value>Fractal dimension distribution</value>
+  </data>
+  <data name="strPlotFractalTitle1" xml:space="preserve">
+    <value>Fractal dimension</value>
+  </data>
+  <data name="strPlotFractalTitle2" xml:space="preserve">
+    <value>(cumulative)</value>
+  </data>
+  <data name="strPlotFractalXLabel" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="strPlotFractalYLabel" xml:space="preserve">
+    <value>Dimension (H)</value>
+  </data>
+  <data name="strPlotOriginalTitle" xml:space="preserve">
+    <value>Input signal</value>
+  </data>
+  <data name="strPlotOriginalXLabel" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="strPlotOriginalYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotWindowTitle" xml:space="preserve">
+    <value>{0} window</value>
+  </data>
+  <data name="strPlotWindowXLabel" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="strPlotWindowYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>Current culture formatting</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>Invariant culture formatting</value>
+  </data>
+  <data name="strRadPoints" xml:space="preserve">
+    <value>Data points</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Round down (trim)</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Round up (add zeros)</value>
+  </data>
+  <data name="strRadSeconds" xml:space="preserve">
+    <value>Seconds</value>
+  </data>
+  <data name="strRadTime" xml:space="preserve">
+    <value>Date and time</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>Select culture</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>Unable to read data from file.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>The culture identifier string name is not valid.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>Culture name error</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>Invalid numeric value: {0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>Error parsing data</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="strReadNotimplementedError" xml:space="preserve">
+    <value>Unable to read data from a {0} file.</value>
+  </data>
+  <data name="strReadNotimplementedErrorTitle" xml:space="preserve">
+    <value>Not implemented</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>Text file (*.txt)|*.txt|SignalAnalysis file (*.sig)|*.sig|Binary file (*.bin)|*.bin|Results file (*.results)|*.results|All files (*.*)|*.*</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>Save data file</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Show plot's crosshair mode</value>
+  </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>Numerical differentiation</value>
+  </data>
+  <data name="strStatusTipEntropy" xml:space="preserve">
+    <value>Compute the approximate and sample entropy</value>
+  </data>
+  <data name="strStatusTipFractal" xml:space="preserve">
+    <value>Compute the cumulative fractal dimension (CPU intensive)</value>
+  </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Numerical integration</value>
+  </data>
+  <data name="strStatusTipPower" xml:space="preserve">
+    <value>Plot either FFT power spectra(dB) or magnitude</value>
+  </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Differentiation</value>
+  </data>
+  <data name="strTabEntropy" xml:space="preserve">
+    <value>Entropy</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>User interface</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integration</value>
+  </data>
+  <data name="strTabPlot" xml:space="preserve">
+    <value>Plotting</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="strToolStripExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>About this software</value>
+  </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>Select data series</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>Select FFT window</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>Exit the application</value>
+  </data>
+  <data name="strToolTipExport" xml:space="preserve">
+    <value>Export data and data analysis</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>Open data file from disk</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>Settings for plots, data, and UI</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>User interface language</value>
+  </data>
+</root>

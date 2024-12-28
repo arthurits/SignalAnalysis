@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>开发者 {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>版权所有 {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>具有基本描述性统计、FFT（快速傅立叶变换）、分形维数、微分、积分和信号熵（elux 文件以及通用文件）的分析工具。
+
+严禁任何商业用途。如有任何疑问，请联系作者。
+
+如果您觉得这个软件有用，请考虑支持它！</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>产品名称：{0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>版本 {0}</value>
+  </data>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>确认(&amp;A)</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>取消(&amp;C)</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>选择数据</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>导出(&amp;E)</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>重置(&amp;R)</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>设置(&amp;S)</value>
+  </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>计算绝对值积分？</value>
+  </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>箱形图</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>计算数值微分？</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>计算数值积分？</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>显示图表十字线</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>累积分形维数</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>记忆上次打开/保存对话框的路径</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>熵（近似和样本）</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>导出微分数据？</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>导出数值积分？</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>功率（dB）</value>
+  </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>向后一点差分, 向前一点差分, 中心三点差分, 中心五点差分, 中心七点差分, 中心九点差分, Savitzky–Golay 三点线性, Savitzky–Golay 五点线性, Savitzky–Golay 七点线性, Savitzky–Golay 九点线性, Savitzky–Golay 五点三次, Savitzky–Golay 七点三次, Savitzky–Golay 九点三次</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>您想将所有字段重置为默认值吗？</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>重置设置？</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>加载设置文件出错。
+
+{0}
+
+将使用默认值。</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="strFileHeader00" xml:space="preserve">
+    <value>ErgoLux 数据</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>SignalAnalysis 数据</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>结束时间</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>总测量时间</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>数据点数</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>采样频率</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>均值</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>最大值</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>最小值</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>分形维数</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>分形方差</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>近似熵</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>样本熵</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>香农熵</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>熵比特</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>理想熵</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>数据序列数量</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>传感器数量</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>缺少一个空行。</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>缺少列标题（序列名称）。</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="strFileHeader25" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="strFileHeader26" xml:space="preserve">
+    <value>和</value>
+  </data>
+  <data name="strFileHeader27" xml:space="preserve">
+    <value>毫秒</value>
+  </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>导数</value>
+  </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>微分算法</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>积分算法</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>积分值</value>
+  </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>方差</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>香农 / 理想</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>节“{0}”格式不正确。</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>区域设置</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>Signal analysis</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>有限差分算法</value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>横坐标</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>用户界面及数据格式</value>
+  </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT点</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>左端点法, 中点法, 右端点法, 梯形法, 辛普森 1/3 法, 辛普森 3/8 法, 辛普森法, 龙贝格法</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>数据文件路径</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>数值数据格式化字符串</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>数组索引结束（上限 {0}）</value>
+  </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>求积算法</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>选择序列</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>数组索引起始</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>窗</value>
+  </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>计算数值微分时出现意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>微分错误</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>计算描述性统计量时发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>统计错误</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>计算熵值时发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>熵错误</value>
+  </data>
+  <data name="strMsgBoxErrorFFT" xml:space="preserve">
+    <value>计算 FFT 时发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
+    <value>FFT 错误</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>计算分形维数时发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>分形错误</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>在打开数据文件时发生了意外错误。
+请稍后重试或联系软件工程师。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>打开数据出错</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>在保存数据文件时发生了意外错误。
+请稍后重试或联系软件工程师。
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>保存数据出错</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>您确定要退出程序吗？</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>退出？</value>
+  </data>
+  <data name="strMsgBoxInitArray" xml:space="preserve">
+    <value>'InitializeDataArrays' 中发生了意外错误。
+{0}</value>
+  </data>
+  <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>没有可供保存的数据。</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>无数据</value>
+  </data>
+  <data name="strMsgBoxOKSaveData" xml:space="preserve">
+    <value>数据已成功保存到磁盘。</value>
+  </data>
+  <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
+    <value>数据已保存</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>数值微分已停止。</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>熵计算已停止。</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
+    <value>Hausdorff-Besicovitch 分形维数的计算已停止。</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>ErgoLux 文件 (*.elux)|*.elux|SignalAnalysis 文件 (*.sig)|*.sig|文本文件 (*.txt)|*.txt|二进制文件 (*.bin)|*.bin|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>打开数据文件</value>
+  </data>
+  <data name="strPlotAppliedTitle" xml:space="preserve">
+    <value>加窗信号</value>
+  </data>
+  <data name="strPlotAppliedXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotAppliedYLabel" xml:space="preserve">
+    <value>幅值</value>
+  </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>箱形图</value>
+  </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>幅值</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>导数</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>幅值/秒</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>幅值</value>
+  </data>
+  <data name="strPlotFFTTitle" xml:space="preserve">
+    <value>快速傅里叶变换</value>
+  </data>
+  <data name="strPlotFFTXLabel" xml:space="preserve">
+    <value>频率（Hz）</value>
+  </data>
+  <data name="strPlotFFTYLabelMag" xml:space="preserve">
+    <value>幅度（均方根²）</value>
+  </data>
+  <data name="strPlotFFTYLabelPow" xml:space="preserve">
+    <value>功率（dB）</value>
+  </data>
+  <data name="strPlotFractalDisributionXLabel" xml:space="preserve">
+    <value>分形维数（H）</value>
+  </data>
+  <data name="strPlotFractalDisributionYLabel" xml:space="preserve">
+    <value>概率</value>
+  </data>
+  <data name="strPlotFractalDistributionTitle" xml:space="preserve">
+    <value>分形维数分布</value>
+  </data>
+  <data name="strPlotFractalTitle1" xml:space="preserve">
+    <value>分形维数</value>
+  </data>
+  <data name="strPlotFractalTitle2" xml:space="preserve">
+    <value>（累积）</value>
+  </data>
+  <data name="strPlotFractalXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotFractalYLabel" xml:space="preserve">
+    <value>维数（H）</value>
+  </data>
+  <data name="strPlotOriginalTitle" xml:space="preserve">
+    <value>输入信号</value>
+  </data>
+  <data name="strPlotOriginalXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotOriginalYLabel" xml:space="preserve">
+    <value>幅值</value>
+  </data>
+  <data name="strPlotWindowTitle" xml:space="preserve">
+    <value>{0} 窗</value>
+  </data>
+  <data name="strPlotWindowXLabel" xml:space="preserve">
+    <value>时间（秒）</value>
+  </data>
+  <data name="strPlotWindowYLabel" xml:space="preserve">
+    <value>幅值</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>当前区域格式</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>区域无关格式</value>
+  </data>
+  <data name="strRadPoints" xml:space="preserve">
+    <value>数据点</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>向下舍入</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>围捕</value>
+  </data>
+  <data name="strRadSeconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="strRadTime" xml:space="preserve">
+    <value>日期时间</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>选择区域</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>无法从文件中读取数据。
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>区域标识符字符串名称无效。
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>区域名称错误</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>无效的数值：{0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>解析数据出错</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="strReadNotimplementedError" xml:space="preserve">
+    <value>无法从{0}文件中读取数据。</value>
+  </data>
+  <data name="strReadNotimplementedErrorTitle" xml:space="preserve">
+    <value>未实现</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>文本文件 (*.txt)|*.txt|SignalAnalysis 文件 (*.sig)|*.sig|二进制文件 (*.bin)|*.bin|结果文件 (*.results)|*.results|所有文件 (*.*)|*.*</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>保存数据文件</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>显示图表十字线模式</value>
+  </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>数值微分</value>
+  </data>
+  <data name="strStatusTipEntropy" xml:space="preserve">
+    <value>计算近似熵和样本熵</value>
+  </data>
+  <data name="strStatusTipFractal" xml:space="preserve">
+    <value>计算累积分形维数（计算量较大）</value>
+  </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>数值积分</value>
+  </data>
+  <data name="strStatusTipPower" xml:space="preserve">
+    <value>绘制 FFT 功率谱（db）或幅度谱</value>
+  </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>微分</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>用户界面</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>积分</value>
+  </data>
+  <data name="strTabPlot" xml:space="preserve">
+    <value>绘图</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="strToolStripExport" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>关于本软件</value>
+  </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>选择数据序列</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>选择 FFT 窗函数</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>退出程序</value>
+  </data>
+  <data name="strToolTipExport" xml:space="preserve">
+    <value>导出数据和分析结果</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>从磁盘上打开数据文件</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>绘图、数据和用户界面设置</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>用户界面语言</value>
+  </data>
+</root>

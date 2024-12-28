@@ -1,0 +1,21 @@
+﻿SignalAnalysis data (en)
+Start time: Monday, July 5, 2021 8:59:12.020 AM
+End time: Monday, July 5, 2021 8:59:12.687 AM
+Total measuring time: 0 days, 0 hours, 0 minutes, 0 seconds and 667 milliseconds
+Number of data series: 1
+Number of data points: 2
+Sampling frequency: 1.5
+Average: 694.45
+Maximum: 716.5
+Minimum: 672.4
+Fractal dimension: 1.5
+Fractal variance: 0
+Approximate entropy: 0.04317543919772206
+Sample entropy: 0.04042956652288515
+Shannon entropy: 0
+Entropy bit: 0
+Ideal entropy: 0
+
+Time	Promedio
+Monday, July 5, 2021 8:59:12.020 AM	672.4
+Monday, July 5, 2021 8:59:12.687 AM	716.5
