@@ -190,6 +190,7 @@ public static class StringResources
     public static string ChkEntropy => StringRM.GetString("strChkEntropy", Culture) ?? "Entropy (approximate && sample)";
     public static string ChkCrossHair => StringRM.GetString("strChkCrossHair", Culture) ?? "Show plots' crosshair";
     public static string GrpFFT => StringRM.GetString("strGrpFFT", Culture) ?? "FFT points";
+    public static string RadBluestein => StringRM.GetString("strRadBluestein", Culture) ?? "Bluestein algorithm";
     public static string RadRoundUp => StringRM.GetString("strRadRoundUp", Culture) ?? "Round up (add 0)";
     public static string RadRoundDown => StringRM.GetString("strRadRoundDown", Culture) ?? "Round down (trim)";
 

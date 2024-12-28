@@ -21,8 +21,9 @@ partial class FrmMain
     /// <param name="fftPlot"><see langword="True"/> if the FFT plot should update both the data points and the ordinate axis</param>
     /// <param name="powerSpectra"><see langword="True"/> if the power spectra is plotted, <see langword="false"/> if the amplitude is plotted instead</param>
     /// <param name="fftRoundUp"><see langword="True"/> if data length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
+    /// <param name="fftBluestein"><see langword="True"/> if Bluestein algorithm is used</param>
     /// <returns></returns>
-    private async Task ComputeAsync(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true)
+    private async Task ComputeAsync(int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true, bool fftBluestein = true)
     {
         // Clip signal data to the user-specified bounds 
         if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -55,7 +56,7 @@ partial class FrmMain
                 if (integral) ComputeIntegral(signalClipped);
                 if (fractal) ComputeFractal(signalClipped, progressive);
                 if (entropy) ComputeEntropy(signalClipped);
-                if (fft) signalWindowed = ComputeFFT(signalClipped, fftRoundUp, window);
+                if (fft) signalWindowed = ComputeFFT(signalClipped, fftRoundUp, fftBluestein, window);
             }
             catch (OperationCanceledException ex)
             {
@@ -331,7 +332,7 @@ partial class FrmMain
     /// <param name="roundUp"><see langword="True"/> if <paramref name="signal"/> length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
     /// <param name="window">Window function</param>
     /// <returns>The windowed signal</returns>
-    private double[] ComputeFFT(double[] signal, bool roundUp = true, IWindow? window = null)
+    private double[] ComputeFFT(double[] signal, bool roundUp = true, bool bluestein = true, IWindow? window = null)
     {
         //IWindow window = (IWindow)stripComboWindows.SelectedItem;
         //if (window is null) return Array.Empty<double>();
@@ -348,13 +349,13 @@ partial class FrmMain
         //int evenPower = (power2 % 2 == 0) ? power2 : power2 - 1;
 
         // Apply window to signal
-        signalWindow = new double[(int)Math.Pow(2, power2)];
+        signalWindow = bluestein ? new double[signal.Length] : new double[(int)Math.Pow(2, power2)];
         Array.Copy(signal, signalWindow, Math.Min(signalWindow.Length, signal.Length));
         window?.ApplyInPlace(signalWindow);
 
         try
         {
-            spectrum = FftSharp.FFT.Forward(signalWindow);
+            spectrum = bluestein ? FftSharp.Bluestein.Forward(signalWindow) : FftSharp.FFT.Forward(signalWindow);
             Results.FFTpower = FftSharp.FFT.Power(spectrum);
             Results.FFTpower = Results.FFTpower.Select(x => double.IsInfinity(x) ? -1000 : x).ToArray();
             Results.FFTmagnitude = FftSharp.FFT.Magnitude(spectrum);

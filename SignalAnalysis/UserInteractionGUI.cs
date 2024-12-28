@@ -281,7 +281,7 @@ partial class FrmMain
                     break;
                 case "statusStripLabelExPower":
                     _settings.PowerSpectra = label.Checked;
-                    await ComputeAsync(stripComboSeries.SelectedIndex, fftPlot: true, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp);
+                    await ComputeAsync(stripComboSeries.SelectedIndex, fftPlot: true, powerSpectra: _settings.PowerSpectra, fftRoundUp: _settings.FFTRoundUp, fftBluestein: _settings.FFTBluestein);
                     break;
                 case "statusStripLabelExEntropy":
                     _settings.ComputeEntropy = label.Checked;
@@ -365,7 +365,8 @@ partial class FrmMain
             fft: true,
             fftPlot: true,
             powerSpectra: _settings.PowerSpectra,
-            fftRoundUp: _settings.FFTRoundUp);
+            fftRoundUp: _settings.FFTRoundUp,
+            fftBluestein: _settings.FFTBluestein);
     }
 
     private async void ComboWindow_SelectionChangeCommitted(object? sender, EventArgs e)
@@ -392,7 +393,8 @@ partial class FrmMain
             fft: true,
             fftPlot: true,
             powerSpectra: _settings.PowerSpectra,
-            fftRoundUp: _settings.FFTRoundUp);
+            fftRoundUp: _settings.FFTRoundUp,
+            fftBluestein: _settings.FFTBluestein);
     }
 
     private void ShowHideBoxplot (bool show = true)
