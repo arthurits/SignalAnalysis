@@ -370,6 +370,7 @@ public partial class FrmSettings : Form
         this.lblEntropy.Text = StringResources.ChkEntropy;
         this.chkCrossHair.Text = StringResources.ChkCrossHair;
         this.grpFFT.Text = StringResources.GrpFFT;
+        this.radBluestein.Text = StringResources.RadBluestein;
         this.radUp.Text = StringResources.RadRoundUp;
         this.radDown.Text = StringResources.RadRoundDown;
 

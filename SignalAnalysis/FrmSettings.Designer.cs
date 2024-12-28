@@ -35,6 +35,7 @@
             lblEntropy = new Label();
             lblCumulative = new Label();
             grpFFT = new GroupBox();
+            radBluestein = new RadioButton();
             radDown = new RadioButton();
             radUp = new RadioButton();
             chkBoxplot = new CheckBox();
@@ -79,7 +80,6 @@
             radCurrentCulture = new RadioButton();
             chkDlgPath = new CheckBox();
             btnReset = new Button();
-            radBluestein = new RadioButton();
             tabSettings.SuspendLayout();
             tabPlot.SuspendLayout();
             grpFFT.SuspendLayout();
@@ -179,13 +179,24 @@
             grpFFT.TabStop = false;
             grpFFT.Text = "FFT points";
             // 
+            // radBluestein
+            // 
+            radBluestein.AutoSize = true;
+            radBluestein.Location = new Point(13, 25);
+            radBluestein.Name = "radBluestein";
+            radBluestein.Size = new Size(145, 23);
+            radBluestein.TabIndex = 0;
+            radBluestein.TabStop = true;
+            radBluestein.Text = "Bluestein algorithm";
+            radBluestein.UseVisualStyleBackColor = true;
+            // 
             // radDown
             // 
             radDown.AutoSize = true;
             radDown.Location = new Point(13, 85);
             radDown.Name = "radDown";
             radDown.Size = new Size(142, 23);
-            radDown.TabIndex = 1;
+            radDown.TabIndex = 2;
             radDown.TabStop = true;
             radDown.Text = "Round down (trim)";
             radDown.UseVisualStyleBackColor = true;
@@ -196,7 +207,7 @@
             radUp.Location = new Point(13, 55);
             radUp.Name = "radUp";
             radUp.Size = new Size(158, 23);
-            radUp.TabIndex = 0;
+            radUp.TabIndex = 1;
             radUp.TabStop = true;
             radUp.Text = "Round up (add zeros)";
             radUp.UseVisualStyleBackColor = true;
@@ -634,17 +645,6 @@
             btnReset.Text = "&Reset";
             btnReset.UseVisualStyleBackColor = true;
             btnReset.Click += Reset_Click;
-            // 
-            // radBluestein
-            // 
-            radBluestein.AutoSize = true;
-            radBluestein.Location = new Point(13, 25);
-            radBluestein.Name = "radBluestein";
-            radBluestein.Size = new Size(145, 23);
-            radBluestein.TabIndex = 2;
-            radBluestein.TabStop = true;
-            radBluestein.Text = "Bluestein algorithm";
-            radBluestein.UseVisualStyleBackColor = true;
             // 
             // FrmSettings
             // 
