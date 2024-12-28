@@ -470,9 +470,6 @@ skaičiavimas buvo sustabdytas.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitudė</value>
   </data>
-  <data name="strRadBluestein" xml:space="preserve">
-    <value>Bluestein algoritmas</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Dabartinės kultūros formatavimas</value>
   </data>

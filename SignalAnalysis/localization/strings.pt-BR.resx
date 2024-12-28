@@ -473,9 +473,6 @@ foi interrompida.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
-  <data name="strRadBluestein" xml:space="preserve">
-    <value>Algoritmo Bluestein</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Formatação da cultura atual</value>
   </data>

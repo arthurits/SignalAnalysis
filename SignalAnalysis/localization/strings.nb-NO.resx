@@ -564,9 +564,6 @@ har stoppet.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
-  <data name="strRadBluestein" xml:space="preserve">
-    <value>Bluestein algoritme</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Gjeldende kulturformatering</value>
   </data>

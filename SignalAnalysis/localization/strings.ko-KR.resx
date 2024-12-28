@@ -590,9 +590,6 @@ dimension has been stopped.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
-  <data name="strRadBluestein" xml:space="preserve">
-    <value>블루스타인 알고리즘</value>
-  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Current culture formatting</value>
   </data>
