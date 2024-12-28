@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FftSharp</name>
+    </assembly>
+    <members>
+        <member name="M:FftSharp.Experimental.Bluestein(System.Double[],System.Boolean)">
+            <summary>
+            Computes the discrete Fourier transform (DFT) of the given array.
+            The array may have any length.
+            Uses Bluestein's chirp z-transform algorithm.
+            </summary>
+        </member>
+        <member name="M:FftSharp.Experimental.Bluestein(System.Numerics.Complex[],System.Boolean)">
+            <summary>
+            Computes the discrete Fourier transform (DFT) of the given complex vector in place.
+            The vector can have any length.
+            Uses Bluestein's chirp z-transform algorithm.
+            </summary>
+        </member>
+        <member name="M:FftSharp.Extensions.ToComplexArray(System.Double[])">
+            <summary>
+            Return a Complex array with the given values as the real component
+            </summary>
+            <param name="real"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FftSharp.FFT">
+            <summary>
+            Fast Fourier Transform (FFT) operations using System.Numerics.Complex data types.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.Forward(System.Numerics.Complex[])">
+            <summary>
+            Compute the discrete Fourier Transform (in-place) using the FFT algorithm.
+            </summary>
+            <param name="samples">Data to transform in-place. Length must be a power of 2.</param>
+        </member>
+        <member name="M:FftSharp.FFT.Forward(System.Double[])">
+            <summary>
+            Compute the discrete Fourier Transform (in-place) using the FFT algorithm.
+            </summary>
+            <param name="samples">Data to transform in-place. Length must be a power of 2.</param>
+        </member>
+        <member name="M:FftSharp.FFT.Forward(System.Span{System.Numerics.Complex})">
+            <summary>
+            Compute the discrete Fourier Transform (in-place) using the FFT algorithm.
+            </summary>
+            <param name="samples">Data to transform in-place. Length must be a power of 2.</param>
+        </member>
+        <member name="M:FftSharp.FFT.ForwardReal(System.Numerics.Complex[])">
+            <summary>
+            Calculate FFT and return just the real component of the spectrum
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.ForwardReal(System.Double[])">
+            <summary>
+            Calculate FFT and return just the real component of the spectrum
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.InverseReal(System.Numerics.Complex[])">
+            <summary>
+            Calculate IFFT and return just the real component of the spectrum
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.Inverse(System.Numerics.Complex[])">
+            <summary>
+            Apply the inverse Fast Fourier Transform (iFFT) to the Complex array in place.
+            Length of the array must be a power of 2.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.Inverse(System.Span{System.Numerics.Complex})">
+            <summary>
+            Apply the inverse Fast Fourier Transform (iFFT) to the Complex array in place.
+            Length of the array must be a power of 2.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.FrequencyScale(System.Int32,System.Double,System.Boolean)">
+            <summary>
+            Return frequencies for each index of a FFT.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.FrequencyResolution(System.Int32,System.Double,System.Boolean)">
+            <summary>
+            Return the resolution (distance between each frequency) of the FFT in Hz
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.Phase(System.Numerics.Complex[])">
+            <summary>
+            Return the phase for each point in a Complex array
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.Magnitude(System.Numerics.Complex[],System.Boolean)">
+            <summary>
+            Calculate power spectrum density (PSD) in RMS units
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.Power(System.Numerics.Complex[],System.Boolean)">
+            <summary>
+            Calculate power spectrum density (PSD) in dB units
+            </summary>
+        </member>
+        <member name="M:FftSharp.FFT.FftShift(System.Double[])">
+            <summary>
+            Return a copy of the given values with the zero frequency component shifted to the center.
+            </summary>
+        </member>
+        <member name="T:FftSharp.FftOperations">
+            <summary>
+            Primary methods for calculating FFT and performing related operations.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.IsPowerOfTwo(System.Int32)">
+            <summary>
+            Returns true if the given number is evenly divisible by a power of 2
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.FFT_WithoutChecks(System.Span{FftSharp.Complex})">
+            <summary>
+            High performance FFT function.
+            Complex input will be transformed in place.
+            Input array length must be a power of two. This length is NOT validated.
+            Running on an array with an invalid length may throw an invalid index exception.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.FFT_WithoutChecks(System.Span{System.Numerics.Complex})">
+            <summary>
+            High performance FFT function.
+            Complex input will be transformed in place.
+            Input array length must be a power of two. This length is NOT validated.
+            Running on an array with an invalid length may throw an invalid index exception.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.RFFT_WithoutChecks(System.Span{System.Numerics.Complex},System.Span{System.Numerics.Complex})">
+            <summary>
+            Calculate FFT of the input and return just the real component
+            Input array length must be a power of two. This length is NOT validated.
+            Running on an array with an invalid length may throw an invalid index exception.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.IFFT_WithoutChecks(System.Span{FftSharp.Complex})">
+            <summary>
+            High performance inverse FFT function.
+            Complex input will be transformed in place.
+            Input array length must be a power of two. This length is NOT validated.
+            Running on an array with an invalid length may throw an invalid index exception.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.IFFT_WithoutChecks(System.Span{System.Numerics.Complex})">
+            <summary>
+            High performance inverse FFT function.
+            Complex input will be transformed in place.
+            Input array length must be a power of two. This length is NOT validated.
+            Running on an array with an invalid length may throw an invalid index exception.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.IFFT_WithoutChecks(System.Numerics.Complex[])">
+            <summary>
+            High performance inverse FFT function.
+            Complex input will be transformed in place.
+            Input array length must be a power of two. This length is NOT validated.
+            Running on an array with an invalid length may throw an invalid index exception.
+            </summary>
+        </member>
+        <member name="M:FftSharp.FftOperations.BitReverse(System.Int32,System.Int32)">
+            <summary>
+            Reverse the order of bits in an integer
+            </summary>
+        </member>
+        <member name="M:FftSharp.Filter.LowPass(System.Double[],System.Double,System.Double)">
+            <summary>
+            Silence frequencies above the given frequency
+            </summary>
+        </member>
+        <member name="M:FftSharp.Filter.HighPass(System.Double[],System.Double,System.Double)">
+            <summary>
+            Silence frequencies below the given frequency
+            </summary>
+        </member>
+        <member name="M:FftSharp.Filter.BandPass(System.Double[],System.Double,System.Double,System.Double)">
+            <summary>
+            Silence frequencies outside the given frequency range
+            </summary>
+        </member>
+        <member name="M:FftSharp.Filter.BandStop(System.Double[],System.Double,System.Double,System.Double)">
+            <summary>
+            Silence frequencies inside the given frequency range
+            </summary>
+        </member>
+        <member name="M:FftSharp.IWindow.Create(System.Int32,System.Boolean)">
+            <summary>
+            Generate this window as a new array with the given length.
+            Normalizing will scale the window so the sum of all points is 1.
+            </summary>
+        </member>
+        <member name="M:FftSharp.IWindow.Apply(System.Double[],System.Boolean)">
+            <summary>
+            Return a new array where this window was multiplied by the given signal.
+            Normalizing will scale the window so the sum of all points is 1 prior to multiplication.
+            </summary>
+        </member>
+        <member name="M:FftSharp.IWindow.ApplyInPlace(System.Double[],System.Boolean)">
+            <summary>
+            Modify the given signal by multiplying it by this window IN PLACE.
+            Normalizing will scale the window so the sum of all points is 1 prior to multiplication.
+            </summary>
+        </member>
+        <member name="P:FftSharp.IWindow.Name">
+            <summary>
+            Single word name for this window
+            </summary>
+        </member>
+        <member name="P:FftSharp.IWindow.Description">
+            <summary>
+            A brief description of what makes this window unique and what it is typically used for.
+            </summary>
+        </member>
+        <member name="P:FftSharp.IWindow.IsSymmetric">
+            <summary>
+            Indicates whether the window is symmetric around its midpoint
+            </summary>
+        </member>
+        <member name="T:FftSharp.Mel">
+            <summary>
+            Methods for conversion to/from Mel scaling
+            </summary>
+        </member>
+        <member name="M:FftSharp.Pad.ZeroPad(FftSharp.Complex[])">
+            <summary>
+            Return the input array (or a new zero-padded new one) ensuring length is a power of 2
+            </summary>
+            <param name="input">array of any length</param>
+            <returns>the input array or a zero-padded copy</returns>
+        </member>
+        <member name="M:FftSharp.Pad.ZeroPad(System.Numerics.Complex[])">
+            <summary>
+            Return the input array (or a new zero-padded new one) ensuring length is a power of 2
+            </summary>
+            <param name="input">array of any length</param>
+            <returns>the input array or a zero-padded copy</returns>
+        </member>
+        <member name="M:FftSharp.Pad.ZeroPad(System.Double[])">
+            <summary>
+            Return the input array (or a new zero-padded new one) ensuring length is a power of 2
+            </summary>
+            <param name="input">array of any length</param>
+            <returns>the input array or a zero-padded copy</returns>
+        </member>
+        <member name="M:FftSharp.Pad.ZeroPad(FftSharp.Complex[],System.Int32)">
+            <summary>
+            Return the input array zero-padded to reach a final length
+            </summary>
+            <param name="input">array of any length</param>
+            <param name="finalLength">pad the array with zeros a the end to achieve this final length</param>
+            <returns>a zero-padded copy of the input array</returns>
+        </member>
+        <member name="M:FftSharp.Pad.ZeroPad(System.Double[],System.Int32)">
+            <summary>
+            Return the input array zero-padded to reach a final length
+            </summary>
+            <param name="input">array of any length</param>
+            <param name="finalLength">pad the array with zeros a the end to achieve this final length</param>
+            <returns>a zero-padded copy of the input array</returns>
+        </member>
+        <member name="M:FftSharp.SampleData.SampleAudio1">
+            <summary>
+            Sample audio (48 kHz sample rate) with tones at 2 kHz, 10 kHz, and 20 kHz
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.FFT(FftSharp.Complex[])">
+            <summary>
+            Compute the discrete Fourier Transform (in-place) using the FFT algorithm.
+            </summary>
+            <param name="buffer">Data to transform in-place. Length must be a power of 2.</param>
+        </member>
+        <member name="M:FftSharp.Transform.FFT(System.Span{FftSharp.Complex})">
+            <summary>
+            Compute the discrete Fourier Transform (in-place) using the FFT algorithm.
+            </summary>
+            <param name="buffer">Data to transform in-place. Length must be a power of 2.</param>
+        </member>
+        <member name="M:FftSharp.Transform.FFTfreq(System.Double,System.Int32,System.Boolean)">
+            <summary>
+            Calculate sample frequency for each point in a FFT
+            </summary>
+            <param name="sampleRate">Sample rate (Hz) of the original signal</param>
+            <param name="pointCount">Number of points to generate (typically the length of the FFT)</param>
+            <param name="oneSided">Whether or not frequencies are for a one-sided FFT (containing only real numbers)</param>
+        </member>
+        <member name="M:FftSharp.Transform.FFTfreq(System.Double,System.Double[],System.Boolean)">
+            <summary>
+            Calculate sample frequency for each point in a FFT
+            </summary>
+            <param name="sampleRate">Sample rate (Hz) of the original signal</param>
+            <param name="fft">FFT array for which frequencies should be generated</param>
+            <param name="oneSided">Whether or not frequencies are for a one-sided FFT (containing only real numbers)</param>
+        </member>
+        <member name="M:FftSharp.Transform.FFTphase(FftSharp.Complex[])">
+            <summary>
+            Return the phase for each point in a Complex array
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.FFTphase(System.Double[])">
+            <summary>
+            Take the FFT of the given array and return its phase
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.FFTfreqPeriod(System.Int32,System.Int32)">
+            <summary>
+            Return the distance between each FFT point in frequency units (Hz)
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.IsPowerOfTwo(System.Int32)">
+            <summary>
+            Returns true if the given number is evenly divisible by a power of 2
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.MakeComplex(System.Double[])">
+            <summary>
+            Create an array of Complex data given the real component
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.MakeComplex(System.Span{FftSharp.Complex},System.Span{System.Double})">
+            <summary>
+            Create an array of Complex data given the real component
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.FFT(System.Double[])">
+            <summary>
+            Compute the 1D discrete Fourier Transform using the Fast Fourier Transform (FFT) algorithm
+            </summary>
+            <param name="input">real input (must be an array with length that is a power of 2)</param>
+            <returns>transformed input</returns>
+        </member>
+        <member name="M:FftSharp.Transform.RFFT(System.Double[])">
+            <summary>
+            Compute the 1D discrete Fourier Transform using the Fast Fourier Transform (FFT) algorithm
+            </summary>
+            <param name="input">real input (must be an array with length that is a power of 2)</param>
+            <returns>real component of transformed input</returns>
+        </member>
+        <member name="M:FftSharp.Transform.RFFT(System.Span{FftSharp.Complex},System.Span{System.Double})">
+            <summary>
+            Compute the 1D discrete Fourier Transform using the Fast Fourier Transform (FFT) algorithm
+            </summary>
+            <param name="destination">Memory location of the results (must be an equal to input length / 2 + 1)</param>
+            <param name="input">real input (must be an array with length that is a power of 2)</param>
+            <returns>real component of transformed input</returns>
+        </member>
+        <member name="M:FftSharp.Transform.IFFT(FftSharp.Complex[])">
+            <summary>
+            Compute the inverse discrete Fourier Transform (in-place) using the FFT algorithm.
+            </summary>
+            <param name="buffer">Data to transform in-place. Length must be a power of 2.</param>
+        </member>
+        <member name="M:FftSharp.Transform.Absolute(FftSharp.Complex[])">
+            <summary>
+            Return a Complex array as an array of its absolute values
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FftSharp.Transform.FFTmagnitude(System.Double[])">
+            <summary>
+            Calculate power spectrum density (PSD) original (RMS) units
+            </summary>
+            <param name="input">real input</param>
+        </member>
+        <member name="M:FftSharp.Transform.FFTmagnitude(System.Span{System.Double},System.Span{System.Double})">
+            <summary>
+            Calculate power spectrum density (PSD) original (RMS) units
+            </summary>
+            <param name="destination">Memory location of the results.</param>
+            <param name="input">real input</param>
+        </member>
+        <member name="M:FftSharp.Transform.FFTpower(System.Double[])">
+            <summary>
+            Calculate power spectrum density (PSD) in dB units
+            </summary>
+            <param name="input">real input</param>
+        </member>
+        <member name="M:FftSharp.Transform.FFTpower(System.Span{System.Double},System.Double[])">
+            <summary>
+            Calculate power spectrum density (PSD) in dB units
+            </summary>
+            <param name="destination">Memory location of the results.</param>
+            <param name="input">real input</param>
+        </member>
+        <member name="M:FftSharp.Transform.MelToFreq(System.Double)">
+            <summary>
+            Convert a Mel bin to frequency (Hz)
+            </summary>
+        </member>
+        <member name="M:FftSharp.Transform.MelFromFreq(System.Double)">
+            <summary>
+            Convert a frequency (Hz) to a Mel bin
+            </summary>
+        </member>
+        <member name="M:FftSharp.Window.Apply(System.Double[],System.Boolean)">
+            <summary>
+            Multiply the array by this window and return the result as a new array
+            </summary>
+        </member>
+        <member name="M:FftSharp.Window.ApplyInPlace(System.Double[],System.Boolean)">
+            <summary>
+            Multiply the array by this window, modifying it in place
+            </summary>
+        </member>
+        <member name="M:FftSharp.Window.GetWindows">
+            <summary>
+            Return an array containing all available windows.
+            Note that all windows returned will use the default constructor, but some
+            windows have customization options in their constructors if you create them individually.
+            </summary>
+        </member>
+    </members>
+</doc>
