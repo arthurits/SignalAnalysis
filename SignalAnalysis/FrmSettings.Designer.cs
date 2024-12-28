@@ -35,6 +35,7 @@
             lblEntropy = new Label();
             lblCumulative = new Label();
             grpFFT = new GroupBox();
+            radBluestein = new RadioButton();
             radDown = new RadioButton();
             radUp = new RadioButton();
             chkBoxplot = new CheckBox();
@@ -168,22 +169,34 @@
             // 
             // grpFFT
             // 
+            grpFFT.Controls.Add(radBluestein);
             grpFFT.Controls.Add(radDown);
             grpFFT.Controls.Add(radUp);
-            grpFFT.Location = new Point(287, 143);
+            grpFFT.Location = new Point(287, 128);
             grpFFT.Name = "grpFFT";
-            grpFFT.Size = new Size(175, 95);
+            grpFFT.Size = new Size(175, 120);
             grpFFT.TabIndex = 16;
             grpFFT.TabStop = false;
             grpFFT.Text = "FFT points";
             // 
+            // radBluestein
+            // 
+            radBluestein.AutoSize = true;
+            radBluestein.Location = new Point(13, 25);
+            radBluestein.Name = "radBluestein";
+            radBluestein.Size = new Size(145, 23);
+            radBluestein.TabIndex = 0;
+            radBluestein.TabStop = true;
+            radBluestein.Text = "Bluestein algorithm";
+            radBluestein.UseVisualStyleBackColor = true;
+            // 
             // radDown
             // 
             radDown.AutoSize = true;
-            radDown.Location = new Point(13, 59);
+            radDown.Location = new Point(13, 85);
             radDown.Name = "radDown";
             radDown.Size = new Size(142, 23);
-            radDown.TabIndex = 1;
+            radDown.TabIndex = 2;
             radDown.TabStop = true;
             radDown.Text = "Round down (trim)";
             radDown.UseVisualStyleBackColor = true;
@@ -191,10 +204,10 @@
             // radUp
             // 
             radUp.AutoSize = true;
-            radUp.Location = new Point(13, 27);
+            radUp.Location = new Point(13, 55);
             radUp.Name = "radUp";
             radUp.Size = new Size(158, 23);
-            radUp.TabIndex = 0;
+            radUp.TabIndex = 1;
             radUp.TabStop = true;
             radUp.Text = "Round up (add zeros)";
             radUp.UseVisualStyleBackColor = true;
@@ -254,9 +267,9 @@
             grpAxis.Controls.Add(radTime);
             grpAxis.Controls.Add(radSeconds);
             grpAxis.Controls.Add(radPoints);
-            grpAxis.Location = new Point(287, 12);
+            grpAxis.Location = new Point(287, 5);
             grpAxis.Name = "grpAxis";
-            grpAxis.Size = new Size(175, 125);
+            grpAxis.Size = new Size(175, 120);
             grpAxis.TabIndex = 15;
             grpAxis.TabStop = false;
             grpAxis.Text = "Abscissa axis";
@@ -264,7 +277,7 @@
             // radTime
             // 
             radTime.AutoSize = true;
-            radTime.Location = new Point(22, 88);
+            radTime.Location = new Point(22, 85);
             radTime.Name = "radTime";
             radTime.Size = new Size(114, 23);
             radTime.TabIndex = 2;
@@ -275,7 +288,7 @@
             // radSeconds
             // 
             radSeconds.AutoSize = true;
-            radSeconds.Location = new Point(22, 56);
+            radSeconds.Location = new Point(22, 55);
             radSeconds.Name = "radSeconds";
             radSeconds.Size = new Size(77, 23);
             radSeconds.TabIndex = 1;
@@ -518,10 +531,10 @@
             tabGUI.Controls.Add(lblDataFormat);
             tabGUI.Controls.Add(grpCulture);
             tabGUI.Controls.Add(chkDlgPath);
-            tabGUI.Location = new Point(4, 26);
+            tabGUI.Location = new Point(4, 24);
             tabGUI.Name = "tabGUI";
             tabGUI.Padding = new Padding(3);
-            tabGUI.Size = new Size(472, 254);
+            tabGUI.Size = new Size(472, 256);
             tabGUI.TabIndex = 1;
             tabGUI.Text = "User interface";
             tabGUI.UseVisualStyleBackColor = true;
@@ -644,7 +657,7 @@
             Controls.Add(tabSettings);
             Controls.Add(btnAccept);
             Controls.Add(btnCancel);
-            Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 10F);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -725,5 +738,6 @@
         private TextBox txtFactorR;
         private TextBox txtFactorM;
         private CheckBox chkWindowPos;
+        private RadioButton radBluestein;
     }
 }
