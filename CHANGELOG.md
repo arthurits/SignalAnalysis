@@ -1,12 +1,15 @@
 # SignalAnalysis changelog
 
 ## SignalAnalysis 1.6
+* Target .NET 9.0.
+* Update [FftSharp](https://github.com/swharden/FftSharp) api to version 2.2.0.
 * Update Norwegian (Bokmål) (nb-NO) translation. _Thanks @bjartelund_.
 * Update Russian translation. _Thanks @ shmudivel_.
-* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.68.
+* [ScottPlot](https://github.com/ScottPlot/ScottPlot) control has been updated to version 4.1.74.
 * Add paralellization for entropy and fractal dimension.
 * Add ratio Shannon/Ideal entropy.
 * Add ApEn and SampEn algorithm choice.
+* Add Bluestein option to compute FFT for arrays of any length.
 * Correct not-casted-to-double division bug in fractal dimension.
 * Update text and bin file formats.
 
