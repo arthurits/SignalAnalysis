@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -17,11 +16,9 @@ No commercial use allowed whatsoever. Contact the author for any inquires.
 
 If you find this software useful, please consider supporting it!</Description>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.73" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="localization\strings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -29,14 +26,12 @@ If you find this software useful, please consider supporting it!</Description>
       <DependentUpon>strings.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="localization\strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="examples\ApEn test - 11 pt.sig">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -120,5 +115,4 @@ If you find this software useful, please consider supporting it!</Description>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>
