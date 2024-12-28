@@ -10,7 +10,7 @@
     <Version>$(VersionPrefix)1.5</Version>
     <Authors>Arthurits</Authors>
     <Company>Arthurits Ltd.</Company>
-    <Copyright>© 2021-2024</Copyright>
+    <Copyright>© 2021-2025</Copyright>
     <Description>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
 
 No commercial use allowed whatsoever. Contact the author for any inquires.
