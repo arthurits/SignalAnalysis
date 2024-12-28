@@ -17,7 +17,7 @@ No commercial use allowed whatsoever. Contact the author for any inquires.
 If you find this software useful, please consider supporting it!</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ScottPlot.WinForms" Version="4.1.73" />
+    <PackageReference Include="ScottPlot.WinForms" Version="4.1.74" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="localization\strings.Designer.cs">
