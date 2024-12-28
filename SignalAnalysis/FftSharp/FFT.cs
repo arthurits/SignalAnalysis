@@ -3,10 +3,45 @@ using System;
 namespace FftSharp;
 
 /// <summary>
-/// Fast Fourier Transform (FFT) operations using System.Numerics.Complex data types.
+/// Fast Fourier Transform (FFT) operations
 /// </summary>
 public static class FFT
 {
+    /// <summary>
+    /// An easy-to-read (but inefficient) implementation of the FFT algorithm
+    /// </summary>
+    [Obsolete("This method is inefficient and is for educational purposes only.")]
+    private static System.Numerics.Complex[] FFTsimple(System.Numerics.Complex[] input)
+    {
+        System.Numerics.Complex[] output = new System.Numerics.Complex[input.Length];
+
+        int H = input.Length / 2;
+        System.Numerics.Complex[] evens = new System.Numerics.Complex[H];
+        System.Numerics.Complex[] odds = new System.Numerics.Complex[H];
+        for (int i = 0; i < H; i++)
+        {
+            evens[i] = input[2 * i];
+            odds[i] = input[2 * i + 1];
+        }
+        odds = FFTsimple(odds);
+        evens = FFTsimple(evens);
+
+        double mult1 = -2 * Math.PI / input.Length;
+        for (int i = 0; i < H; i++)
+        {
+            double radians = mult1 * i;
+            odds[i] *= new System.Numerics.Complex(Math.Cos(radians), Math.Sin(radians));
+        }
+
+        for (int i = 0; i < H; i++)
+        {
+            output[i] = evens[i] + odds[i];
+            output[i + H] = evens[i] - odds[i];
+        }
+
+        return output;
+    }
+
     /// <summary>
     /// Compute the discrete Fourier Transform (in-place) using the FFT algorithm.
     /// </summary>

@@ -363,6 +363,7 @@ partial class FrmMain
             progressive: _settings.CumulativeDimension,
             entropy: _settings.ComputeEntropy,
             fft: true,
+            fftPlot: true,
             powerSpectra: _settings.PowerSpectra,
             fftRoundUp: _settings.FFTRoundUp);
     }
@@ -389,6 +390,7 @@ partial class FrmMain
             progressive: false,
             entropy: false,
             fft: true,
+            fftPlot: true,
             powerSpectra: _settings.PowerSpectra,
             fftRoundUp: _settings.FFTRoundUp);
     }
