@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="strRadBluestein" xml:space="preserve">
-    <value>블루스타인 알고리즘</value>
-  </data>
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>개발자{0}</value>
   </data>
@@ -590,6 +587,9 @@ dimension has been stopped.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>블루스타인 알고리즘</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Current culture formatting</value>
   </data>
@@ -666,6 +666,9 @@ dimension has been stopped.</value>
   </data>
   <data name="strTabDerivative" xml:space="preserve">
     <value>Differentiation</value>
+  </data>
+  <data name="strTabEntropy" xml:space="preserve">
+    <value>엔트로피</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>User interface</value>

@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="strRadBluestein" xml:space="preserve">
-    <value>خوارزمية بلوستاين</value>
-  </data>
   <data name="strAboutCompanyName" xml:space="preserve">
     <value>طور بواسطة {0}</value>
   </data>
@@ -488,6 +485,9 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>السعة</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>خوارزمية بلوستاين</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>تنسيق الثافة الحالية</value>
   </data>
@@ -558,6 +558,9 @@
   </data>
   <data name="strTabDerivative" xml:space="preserve">
     <value>التفاضل</value>
+  </data>
+  <data name="strTabEntropy" xml:space="preserve">
+    <value>إنتروبيا</value>
   </data>
   <data name="strTabGUI" xml:space="preserve">
     <value>واجهة المستخدم</value>
