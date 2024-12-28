@@ -50,23 +50,28 @@ public class AppSettings
     [JsonPropertyName("FFT round up power 2")]
     public bool FFTRoundUp { get; set; } = true;
     /// <summary>
-    /// True if the power spectra is to be computed
+    /// <see langword="True"/> if Bluestein's chirp z-transform algorithm is used for arrays of any length
+    /// </summary>
+    [JsonPropertyName("FFT Bluestein algorithm")]
+    public bool FFTBluestein { get; set; } = true;
+    /// <summary>
+    /// <see langword="True"/> if the power spectra is to be computed
     /// </summary>
     [JsonPropertyName("Compute power spectra")]
     public bool PowerSpectra { get; set; } = true;
     /// <summary>
-    /// True if the cumulative (incremental) fractal dimension is to be computed
+    /// <see langword="True"/> if the cumulative (incremental) fractal dimension is to be computed
     /// This can be CPU-consuming for large datasets
     /// </summary>
     [JsonPropertyName("Compute cumulative fractal")]
     public bool CumulativeDimension { get; set; } = false;
     /// <summary>
-    /// True if both the application and sample entropies are to be computed
+    /// <see langword="True"/> if both the application and sample entropies are to be computed
     /// </summary>
     [JsonPropertyName("Compute entropies")]
     public bool ComputeEntropy { get; set; } = false;
     /// <summary>
-    /// True if a crosshair is shown on the plots
+    /// <see langword="True"/> if a crosshair is shown on the plots
     /// </summary>
     [JsonPropertyName("Show plots crosshair")]
     public bool CrossHair { get; set; } = false;
