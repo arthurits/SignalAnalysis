@@ -467,6 +467,9 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>आयाम</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>ब्लूस्टीन एल्गोरिथ्म</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>वर्तमान संस्कृति स्वरूपण</value>
   </data>

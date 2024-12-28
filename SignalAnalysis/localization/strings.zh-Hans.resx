@@ -543,6 +543,9 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>幅值</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>Bluestein 算法</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>当前区域格式</value>
   </data>

@@ -485,6 +485,9 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>السعة</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>خوارزمية بلوستاين</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>تنسيق الثافة الحالية</value>
   </data>

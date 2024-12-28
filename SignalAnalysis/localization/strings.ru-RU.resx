@@ -557,6 +557,9 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Амплитуда</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>Алгоритм Блюстейна</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Форматирование текущей культуры</value>
   </data>

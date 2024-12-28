@@ -1414,6 +1414,15 @@ namespace SignalAnalysis.localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bluestein algorithm.
+        /// </summary>
+        internal static string strRadBluestein {
+            get {
+                return ResourceManager.GetString("strRadBluestein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current culture formatting.
         /// </summary>
         internal static string strRadCurrentCulture {

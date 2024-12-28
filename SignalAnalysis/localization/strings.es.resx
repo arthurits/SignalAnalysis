@@ -586,6 +586,9 @@ Hausdorff-Besicovitch se ha detenido.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitud</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>Algoritmo Bluestein</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Referencia cultural actual</value>
   </data>

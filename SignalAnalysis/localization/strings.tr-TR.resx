@@ -546,6 +546,9 @@ boyut durdurulmuştur.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Genlik</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>Bluestein algoritması</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Geçerli kültür biçimlendirmesi</value>
   </data>

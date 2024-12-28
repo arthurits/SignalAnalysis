@@ -470,6 +470,9 @@
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>প্রশস্ততা</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>ব্লুস্টেইন অ্যালগরিদম</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>বর্তমান সংস্কৃতি বিন্যাস</value>
   </data>

@@ -606,6 +606,9 @@ dimension has been stopped.</value>
   <data name="strPlotWindowYLabel" xml:space="preserve">
     <value>Amplitude</value>
   </data>
+  <data name="strRadBluestein" xml:space="preserve">
+    <value>Bluestein algorithm</value>
+  </data>
   <data name="strRadCurrentCulture" xml:space="preserve">
     <value>Current culture formatting</value>
   </data>
