@@ -61,6 +61,7 @@ public partial class FrmSettings : Form
         Settings.CumulativeDimension = chkCumulative.Checked;
         Settings.ComputeEntropy = chkEntropy.Checked;
         Settings.CrossHair = chkCrossHair.Checked;
+        Settings.FFTBluestein = radBluestein.Checked;
         Settings.FFTRoundUp = radUp.Checked;
 
         Settings.AxisType = AxisType.Seconds;
@@ -226,8 +227,12 @@ public partial class FrmSettings : Form
         chkCumulative.Checked = settings.CumulativeDimension;
         chkEntropy.Checked = settings.ComputeEntropy;
         chkCrossHair.Checked = settings.CrossHair;
-        radUp.Checked = settings.FFTRoundUp;
-        radDown.Checked = !settings.FFTRoundUp;
+        radBluestein.Checked = settings.FFTBluestein;
+        if (!radBluestein.Checked)
+        {
+            radUp.Checked = settings.FFTRoundUp;
+            radDown.Checked = !settings.FFTRoundUp;
+        }
 
         switch (settings.AxisType)
         {
@@ -411,8 +416,9 @@ public partial class FrmSettings : Form
         this.lblCumulative.Top = -1 + this.chkCumulative.Top + (chkCumulative.Height - lblCumulative.Height) / 2;
         this.lblEntropy.Top = -1 + this.chkEntropy.Top + (chkEntropy.Height - lblEntropy.Height) / 2; ;
 
-        width = -6 + Math.Max(this.radUp.Width, this.radDown.Width);
-        this.radUp.Left = (this.grpFFT.Width - width) / 2;
+        width = -6 + Math.Max(this.radBluestein.Width, Math.Max(this.radUp.Width, this.radDown.Width));
+        this.radBluestein.Left = (this.grpFFT.Width - width) / 2;
+        this.radUp.Left = this.radBluestein.Left;
         this.radDown.Left = this.radUp.Left;
 
         width = -6 + Math.Max(Math.Max(this.radPoints.Width, this.radSeconds.Width), this.radTime.Width);
