@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -9,7 +9,7 @@
     <Version>$(VersionPrefix)1.6</Version>
     <Authors>Arthurits</Authors>
     <Company>Arthurits Ltd.</Company>
-    <Copyright>© 2021-2025</Copyright>
+    <Copyright>© 2021-2026</Copyright>
     <Description>Analysis tool featuring basic descriptive statistics, FFT (fast Fourier transform), fractal dimension, differentiation, integration, and entropy for signals (elux files as well as generic ones).
 
 No commercial use allowed whatsoever. Contact the author for any inquires.
