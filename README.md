@@ -17,7 +17,7 @@ Download latest release: [![GitHub release (latest by date)](https://img.shields
 Please follow these steps to install and use this software:
 * Dowload the zip file.
 * Unzip the contents to your desired folder.
-* Make sure that .NET 8 is installed in your PC. The `.NET 8 Desktop Runtime` can be downloaded from the [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/8.0).
+* Make sure that .NET 10 is installed in your PC. The `.NET 10 Desktop Runtime` can be downloaded from the [Microsoft .NET website](https://dotnet.microsoft.com/download/dotnet/10.0).
 * Execute (or create a direct link to) `SignalAnalysis.exe`.
 
 ## External dependencies
