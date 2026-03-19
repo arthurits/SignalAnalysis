@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "SignalAnalysis.WinUI (Package)": {
+    "SignalAnalysis (Package)": {
       "commandName": "MsixPackage"
     },
-    "SignalAnalysis.WinUI (Unpackaged)": {
+    "SignalAnalysis (Unpackaged)": {
       "commandName": "Project"
     }
   }
