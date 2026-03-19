@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.WinUI;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using System.Diagnostics;
 using Windows.UI.ApplicationSettings;
@@ -129,6 +132,79 @@ public partial class App : Application
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
+        // Handle base event implementation
+        base.OnLaunched(args);
 
+        // Handle the main window closing events
+        MainWindow.AppWindow.Closing += OnClosing;
+        MainWindow.Closed += OnClosed;
+    }
+
+    private async void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)
+    {
+        args.Cancel = true; // https://github.com/microsoft/WindowsAppSDK/issues/3209
+
+        if (await ConfirmAppCloseAsync())
+        {
+            MainWindow.Close();
+            args.Cancel = false; // Allow the app to close
+        }
+    }
+
+    public static async Task<bool> ConfirmAppCloseAsync()
+    {
+        var result = await MessageBox.Show(
+            "MsgBoxExitContent".GetLocalized("MessageBox"),
+            "MsgBoxExitTitle".GetLocalized("MessageBox"),
+            primaryButtonText: "MsgBoxExitPrimary".GetLocalized("MessageBox"),
+            closeButtonText: "MsgBoxExitCancel".GetLocalized("MessageBox"),
+            defaultButton: MessageBox.MessageBoxButtonDefault.CloseButton,
+            icon: MessageBox.MessageBoxImage.Question);
+
+        var ClosingConfirmed = result == Microsoft.UI.Xaml.Controls.ContentDialogResult.Primary;
+
+        if (ClosingConfirmed)
+        {
+            var settings = App.GetService<ILocalSettingsService<AppSettings>>();
+            //await settings.SaveSettingKeyAsync<string>("isTrue","yes");
+            if (settings.GetValues.WindowPosition)
+            {
+                settings.GetValues.WindowLeft = MainWindow.AppWindow.Position.X;
+                settings.GetValues.WindowTop = MainWindow.AppWindow.Position.Y;
+                settings.GetValues.WindowWidth = MainWindow.AppWindow.Size.Width;
+                settings.GetValues.WindowHeight = MainWindow.AppWindow.Size.Height;
+            }
+
+            settings.GetValues.AppCultureName = App.GetService<ILocalizationService>().CurrentLanguage;
+
+            // No need to save the theme here, as it is already set in SettingsViewModel OnThemeChanged
+            //var themeService = App.GetService<IThemeSelectorService>();
+            //settings.GetValues.ThemeName = themeService.GetThemeName();
+
+            await settings.SaveSettingFileAsync();
+
+            // Set the startup enabled state based on the settings
+            //var startupService = App.GetService<IStartupService>();
+            //startupService.SetStartupEnabled(settings.GetValues.LaunchAtStartup);
+        }
+
+        return ClosingConfirmed;
+    }
+
+    /// <summary>
+    /// This event is fired after the window is closed. It formally ends the app and disposes the host.
+    /// It also calls Dispose on all the services.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    private async void OnClosed(object sender, WindowEventArgs args)
+    {
+        App.MainWindow.DispatcherQueue.TryEnqueue(
+            DispatcherQueuePriority.Low,
+            new DispatcherQueueHandler(async () =>
+            {
+                await Host.StopAsync();
+                Host.Dispose();
+            }));
     }
 }
