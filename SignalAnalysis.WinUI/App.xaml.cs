@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -21,6 +22,10 @@ public partial class App : Application
 
         return service;
     }
+
+    public static WindowEx MainWindow { get; } = new MainWindow();
+
+    public static UIElement? AppTitlebar { get; set; }
 
     private Window? _window;
 
