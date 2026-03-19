@@ -7,6 +7,8 @@ using Microsoft.UI.Xaml;
 using SignalAnalysis.Activation;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
+using SignalAnalysis.Models;
+using SignalAnalysis.Services;
 using System.Diagnostics;
 using Windows.UI.ApplicationSettings;
 using WinUIEx;

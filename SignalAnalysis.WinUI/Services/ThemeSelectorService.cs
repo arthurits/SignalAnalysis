@@ -3,7 +3,7 @@ using SignalAnalysis;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
 
-namespace ManualHandling.Services;
+namespace SignalAnalysis.Services;
 
 public class ThemeSelectorService : IThemeSelectorService
 {

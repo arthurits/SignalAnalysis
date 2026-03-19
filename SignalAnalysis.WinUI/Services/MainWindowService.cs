@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SignalAnalysis.Contracts.Services;
 
-namespace ManualHandling.Services;
+namespace SignalAnalysis.Services;
 public partial class MainWindowService : ObservableObject, IMainWindowService
 {
     private readonly WinUIEx.WindowEx _window;
