@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace ManualHandling.Interop;
+namespace SignalAnalysis.Interop;
 
 internal static partial class Win32
 {

@@ -1,4 +1,4 @@
-﻿namespace ManualHandling.Interop;
+﻿namespace SignalAnalysis.Interop;
 
 internal static partial class Win32
 {

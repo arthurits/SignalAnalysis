@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using WinRT.Interop;
 
-namespace ManualHandling.Interop;
+namespace SignalAnalysis.Interop;
 internal static partial class Win32
 {
     [DllImport("dwmapi.dll", PreserveSig = true)]
