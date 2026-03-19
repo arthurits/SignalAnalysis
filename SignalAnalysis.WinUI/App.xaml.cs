@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using System.Diagnostics;
 using Windows.UI.ApplicationSettings;
 using WinUIEx;
 
@@ -96,6 +97,30 @@ public partial class App : Application
         // In case we need to catch exceptions outside the UI thread.
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+    }
+
+    private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    {
+        // TODO: Log and handle exceptions as appropriate.
+        // https://docs.microsoft.com/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.application.unhandledexception.
+
+        // Show error details
+        System.Diagnostics.Debug.WriteLine($"UI thread error: {e.Exception}");
+
+        // Mark the exception as handled so that the process does not finish
+        e.Handled = true;
+    }
+
+    private void CurrentDomain_UnhandledException(object? s, System.UnhandledExceptionEventArgs e)
+    {
+        Debug.WriteLine($"Non-UI thread error: {(e.ExceptionObject as Exception)?.Message}");
+        // There is no e.Handled; so the process will finish after any logging action
+    }
+
+    private void TaskScheduler_UnobservedTaskException(object? s, UnobservedTaskExceptionEventArgs e)
+    {
+        Debug.WriteLine($"Task unobserved: {e.Exception.Message}");
+        e.SetObserved();
     }
 
     /// <summary>
