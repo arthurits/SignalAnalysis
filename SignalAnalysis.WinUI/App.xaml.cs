@@ -5,6 +5,7 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using SignalAnalysis.Activation;
+using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
 using System.Diagnostics;
 using Windows.UI.ApplicationSettings;
