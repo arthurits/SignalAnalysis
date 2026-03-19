@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -9,6 +10,8 @@ namespace SignalAnalysis;
 /// </summary>
 public partial class App : Application
 {
+    public IHost Host { get; }
+
     private Window? _window;
 
     /// <summary>
