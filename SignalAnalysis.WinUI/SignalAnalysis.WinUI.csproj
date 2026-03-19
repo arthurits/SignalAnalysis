@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.22621.1</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>SignalAnalysis</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -74,5 +74,6 @@
     <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">True</PublishTrimmed>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>SignalAnalysis</AssemblyName>
+    <SupportedOSPlatformVersion>10.0.22621.1</SupportedOSPlatformVersion>
   </PropertyGroup>
 </Project>
