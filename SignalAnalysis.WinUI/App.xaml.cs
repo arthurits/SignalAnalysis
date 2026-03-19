@@ -1,14 +1,16 @@
-﻿using CommunityToolkit.WinUI;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+
 using SignalAnalysis.Activation;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.Services;
+using SignalAnalysis.ViewModels;
+using SignalAnalysis.Views;
 using System.Diagnostics;
 using Windows.UI.ApplicationSettings;
 using WinUIEx;
@@ -84,16 +86,16 @@ public partial class App : Application
             //services.AddSingleton<IMainWindowService>(sp => new MainWindowService(MainWindow));
 
             // Views and ViewModels
-            services.AddSingleton<LiftingViewModel>();
-            services.AddSingleton<LiftingPage>();
-            services.AddSingleton<AboutViewModel>();
-            services.AddTransient<AboutPage>();
-            services.AddSingleton<SettingsViewModel>();
-            services.AddTransient<SettingsPage>();
-            services.AddSingleton<LibertyViewModel>();
-            services.AddSingleton<LibertyPage>();
-            services.AddSingleton<CarryingViewModel>();
-            services.AddSingleton<CarryingPage>();
+            //services.AddSingleton<LiftingViewModel>();
+            //services.AddSingleton<LiftingPage>();
+            //services.AddSingleton<AboutViewModel>();
+            //services.AddTransient<AboutPage>();
+            //services.AddSingleton<SettingsViewModel>();
+            //services.AddTransient<SettingsPage>();
+            //services.AddSingleton<LibertyViewModel>();
+            //services.AddSingleton<LibertyPage>();
+            //services.AddSingleton<CarryingViewModel>();
+            //services.AddSingleton<CarryingPage>();
             services.AddTransient<ShellPage>();
             services.AddSingleton<ShellViewModel>();
 
