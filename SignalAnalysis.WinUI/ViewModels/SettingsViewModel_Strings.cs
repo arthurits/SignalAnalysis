@@ -15,7 +15,6 @@ public partial class SettingsViewModel : ObservableRecipient
     public partial string StrThemeDescription { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrThemeOptions { get; set; } = string.Empty;
-    
     [ObservableProperty]
     public partial string StrWindowSize { get; set; } = string.Empty;
     [ObservableProperty]
