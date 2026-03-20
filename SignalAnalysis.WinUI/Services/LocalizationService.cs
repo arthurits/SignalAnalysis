@@ -18,7 +18,7 @@ public class LocalizationService : ILocalizationService
 
     public LocalizationService()
     {
-        _resourceLoader = new();
+        //_resourceLoader = new();
         _resourceManager = new();
         //_defaultContextForCurrentView = Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView();
         //CurrentLanguage = ApplicationLanguages.Languages[0];
