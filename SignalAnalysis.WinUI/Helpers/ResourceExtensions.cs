@@ -10,9 +10,12 @@ public static class ResourceExtensions
 
     public static string GetLocalized(this string resourceKey)
     {
-        //var resourceLoader = new ResourceLoader();
-        var resourceLoader = ResourceLoader.GetForViewIndependentUse();
-        return resourceLoader.GetString(resourceKey);
+        ////var resourceLoader = new ResourceLoader();
+        //var resourceLoader = ResourceLoader.GetForViewIndependentUse();
+        //return resourceLoader.GetString(resourceKey);
+
+        var localizationService = App.GetService<ILocalizationService>();
+        return localizationService.GetString(resourceKey);
     }
 
     public static string GetLocalized(this string resourceKey, string resourceMap)
