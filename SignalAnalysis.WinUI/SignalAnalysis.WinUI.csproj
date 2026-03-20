@@ -29,6 +29,10 @@
     <AppxPackage>true</AppxPackage>
     <GenerateAppInstallerFile>true</GenerateAppInstallerFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\StartUpPage.xaml" />
+  </ItemGroup>
   
   <ItemGroup>
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -61,6 +65,11 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260317003" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />
     <PackageReference Include="WinUIEx" Version="2.9.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\StartUpPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--

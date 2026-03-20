@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using Microsoft.Windows.ApplicationModel.Resources;
+﻿using Microsoft.Windows.ApplicationModel.Resources;
+using System.Globalization;
 
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Models;
@@ -8,7 +8,7 @@ namespace SignalAnalysis.Services;
 
 public class LocalizationService : ILocalizationService
 {
-    private readonly ResourceLoader _resourceLoader;
+    //private readonly ResourceLoader _resourceLoader;
     private readonly ResourceManager _resourceManager;
     //private readonly Windows.ApplicationModel.Resources.Core.ResourceContext _defaultContextForCurrentView;
     
@@ -18,7 +18,7 @@ public class LocalizationService : ILocalizationService
 
     public LocalizationService()
     {
-        _resourceLoader = new();
+        //_resourceLoader = new();
         _resourceManager = new();
         //_defaultContextForCurrentView = Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView();
         //CurrentLanguage = ApplicationLanguages.Languages[0];
@@ -27,7 +27,16 @@ public class LocalizationService : ILocalizationService
 
     public string GetString(string key)
     {
-        return _resourceLoader.GetString(key);
+        //return _resourceLoader.GetString(key);
+
+        // Obtener el ResourceMap principal (puedes usar GetSubtree para mapas concretos)
+        var mainMap = _resourceManager.MainResourceMap;
+
+        // La clave suele ser "Resources/<resourceName>" o "<FileName>/<resourceName>"
+        // Ajusta el path según la ubicación de tu .resw
+        var entry = mainMap.TryGetValue(key);
+
+        return entry?.ValueAsString ?? string.Empty;
     }
 
     public string GetString(string key, string resourceMap)
@@ -36,6 +45,24 @@ public class LocalizationService : ILocalizationService
         var result = subTree?.TryGetValue(key);
         return result != null ? result.ValueAsString : string.Empty;
     }
+
+    //private void DumpResourceMaps()
+    //{
+    //    var rm = new ResourceManager();
+    //    var mainMap = rm.MainResourceMap;
+
+    //    foreach (var key in mainMap.Keys)
+    //    {
+    //        Debug.WriteLine(key);
+    //    }
+
+    //    // Para ver las claves dentro de un subtree
+    //    var subtree = mainMap.GetSubtree("Resources");
+    //    foreach (var k in subtree.Keys)
+    //    {
+    //        Debug.WriteLine(k);
+    //    }
+    //}
 
     /// <summary>
     /// Sets the application language by updating the primary language override. Notifies subscribers of the language change by invoking the <see href="LanguageChanged"> event.
