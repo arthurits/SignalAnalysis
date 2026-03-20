@@ -86,16 +86,12 @@ public partial class App : Application
             //services.AddSingleton<IMainWindowService>(sp => new MainWindowService(MainWindow));
 
             // Views and ViewModels
-            //services.AddSingleton<LiftingViewModel>();
-            //services.AddSingleton<LiftingPage>();
-            //services.AddSingleton<AboutViewModel>();
-            //services.AddTransient<AboutPage>();
-            //services.AddSingleton<SettingsViewModel>();
-            //services.AddTransient<SettingsPage>();
-            //services.AddSingleton<LibertyViewModel>();
-            //services.AddSingleton<LibertyPage>();
-            //services.AddSingleton<CarryingViewModel>();
-            //services.AddSingleton<CarryingPage>();
+            services.AddSingleton<StartUpViewModel>();
+            services.AddSingleton<StartUpPage>();
+            services.AddSingleton<AboutViewModel>();
+            services.AddTransient<AboutPage>();
+            services.AddSingleton<SettingsViewModel>();
+            services.AddTransient<SettingsPage>();
             services.AddTransient<ShellPage>();
             services.AddSingleton<ShellViewModel>();
 

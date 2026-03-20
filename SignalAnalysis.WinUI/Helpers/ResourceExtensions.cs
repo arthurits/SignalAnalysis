@@ -1,5 +1,5 @@
 ﻿using SignalAnalysis.Contracts.Services;
-using Microsoft.Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel.Resources;
 
 namespace SignalAnalysis.Helpers;
 
