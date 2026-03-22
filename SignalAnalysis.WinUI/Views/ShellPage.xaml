@@ -52,9 +52,9 @@
                 TODO: Update item icons by updating FontIcon.Glyph properties.
                 https://docs.microsoft.com/windows/apps/design/style/segoe-fluent-icons-font#icon-list
                 -->
-                <NavigationViewItem Content="{Binding StrLibertyItem}"
+                <NavigationViewItem Content="{Binding StrStartUpItem}"
                                     helpers:NavigationHelper.NavigateTo="SignalAnalysis.ViewModels.StartUpViewModel"
-                                    ToolTipService.ToolTip="{Binding StrLibertyToolTip}">
+                                    ToolTipService.ToolTip="{Binding StrStartUpToolTip}">
                     <NavigationViewItem.Icon>
                         <ImageIcon Source="/Assets/Shell_StartUp.svg"/>
                     </NavigationViewItem.Icon>
