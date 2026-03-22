@@ -33,17 +33,9 @@ public partial class ShellViewModel : ObservableRecipient
     [ObservableProperty]
     public partial string StrAboutToolTip { get; set; } = string.Empty;
     [ObservableProperty]
-    public partial string StrLibertyItem { get; set; } = string.Empty;
+    public partial string StrStartUpItem { get; set; } = string.Empty;
     [ObservableProperty]
-    public partial string StrLibertyToolTip { get; set; } = string.Empty;
-    [ObservableProperty]
-    public partial string StrLiftingItem { get; set; } = string.Empty;
-    [ObservableProperty]
-    public partial string StrLiftingToolTip { get; set; } = string.Empty;
-    [ObservableProperty]
-    public partial string StrCarryingItem { get; set; } = string.Empty;
-    [ObservableProperty]
-    public partial string StrCarryingToolTip { get; set; } = string.Empty;
+    public partial string StrStartUpToolTip { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrSettingsItem { get; set; } = string.Empty;
     [ObservableProperty]
@@ -72,6 +64,8 @@ public partial class ShellViewModel : ObservableRecipient
         // Set the title union character
         _mainWindowService.TitleUnion = "StrTitleUnion".GetLocalized("Shell");
 
+        //// Force the initial update of the display name and tooltips based on the current language
+        //OnLanguageChanged(this, EventArgs.Empty);
     }
 
     public void Dispose()
@@ -84,14 +78,11 @@ public partial class ShellViewModel : ObservableRecipient
     {
         // Update the display name and tooltips based on the current language
         StrAppDisplayName_Base = "StrAppDisplayName".GetLocalized("Shell");
+        _mainWindowService.TitleMain = StrAppDisplayName_Base;
         StrAboutItem = "StrAboutItem".GetLocalized("Shell");
         StrAboutToolTip = "StrAboutToolTip".GetLocalized("Shell");
-        StrLibertyItem = "StrLibertyItem".GetLocalized("Shell");
-        StrLibertyToolTip = "StrLibertyToolTip".GetLocalized("Shell");
-        StrLiftingItem = "StrLiftingItem".GetLocalized("Shell");
-        StrLiftingToolTip = "StrLiftingToolTip".GetLocalized("Shell");
-        StrCarryingItem = "StrCarryingItem".GetLocalized("Shell");
-        StrCarryingToolTip = "StrCarryingToolTip".GetLocalized("Shell");
+        StrStartUpItem = "StrStartUpItem".GetLocalized("Shell");
+        StrStartUpToolTip = "StrStartUpToolTip".GetLocalized("Shell");
         StrSettingsItem = "StrSettingsItem".GetLocalized("Shell");
         StrSettingsToolTip = "StrSettingsToolTip".GetLocalized("Shell");
 

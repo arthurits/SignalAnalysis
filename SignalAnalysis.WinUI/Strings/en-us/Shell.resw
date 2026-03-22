@@ -132,6 +132,12 @@
   <data name="StrSettingsToolTip" xml:space="preserve">
     <value>Program settings</value>
   </data>
+  <data name="StrStartUpItem" xml:space="preserve">
+    <value>Start up page</value>
+  </data>
+  <data name="StrStartUpToolTip" xml:space="preserve">
+    <value>Start up tool tip</value>
+  </data>
   <data name="StrTitleUnion" xml:space="preserve">
     <value>-</value>
   </data>

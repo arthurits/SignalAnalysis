@@ -142,41 +142,41 @@ public partial class App : Application
         MainWindow.AppWindow.Closing += OnClosing;
         MainWindow.Closed += OnClosed;
 
-        //// Read settings file
-        //// https://github.com/arthurits/OpenXML-editor/blob/master/OpenXML%20WinUI/App.xaml.cs
-        //var settings = App.GetService<ILocalSettingsService<AppSettings>>();
-        //await settings.ReadSettingFileAsync<AppSettings>();
+        // Read settings file
+        // https://github.com/arthurits/OpenXML-editor/blob/master/OpenXML%20WinUI/App.xaml.cs
+        var settings = App.GetService<ILocalSettingsService<AppSettings>>();
+        await settings.ReadSettingFileAsync<AppSettings>();
 
-        //// Set initial window position in case it was stored in settings
-        //if (settings.GetValues.WindowPosition)
-        //{
-        //    MainWindow.MoveAndResize(settings.GetValues.WindowLeft, settings.GetValues.WindowTop, settings.GetValues.WindowWidth, settings.GetValues.WindowHeight);
-        //}
-        //else
-        //{
-        //    // https://stackoverflow.com/questions/74890047/how-can-i-set-my-winui3-program-to-be-started-in-the-center-of-the-screen
-        //    //IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(m_window);
-        //    WindowPosition.SetWindowSize(MainWindow, width: 1450, height: 850);
-        //    WindowPosition.CenterWindow(MainWindow);
-        //}
+        // Set initial window position in case it was stored in settings
+        if (settings.GetValues.WindowPosition)
+        {
+            MainWindow.MoveAndResize(settings.GetValues.WindowLeft, settings.GetValues.WindowTop, settings.GetValues.WindowWidth, settings.GetValues.WindowHeight);
+        }
+        else
+        {
+            // https://stackoverflow.com/questions/74890047/how-can-i-set-my-winui3-program-to-be-started-in-the-center-of-the-screen
+            //IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(m_window);
+            WindowPosition.SetWindowSize(MainWindow, width: 1450, height: 850);
+            WindowPosition.CenterWindow(MainWindow);
+        }
 
-        //// Apply theme stored in settings
-        //var themeService = App.GetService<IThemeSelectorService>();
-        //if (themeService is not null)
-        //{
-        //    if (Enum.TryParse(settings.GetValues.ThemeName, out ElementTheme theme) is true)
-        //    {
-        //        themeService.SetTheme(theme);
-        //    }
-        //}
+        // Apply theme stored in settings
+        var themeService = App.GetService<IThemeSelectorService>();
+        if (themeService is not null)
+        {
+            if (Enum.TryParse(settings.GetValues.ThemeName, out ElementTheme theme) is true)
+            {
+                themeService.SetTheme(theme);
+            }
+        }
 
         // Now that the settings are loaded, we call the activation service
         // so that the defaul page and view model can access the settings and apply them
         await App.GetService<IActivationService>().ActivateAsync(args);
 
-        //// Apply language stored in settings
-        //var _localizationService = App.GetService<ILocalizationService>();
-        //_localizationService.SetAppLanguage(settings.GetValues.AppCultureName);
+        // Apply language stored in settings
+        var _localizationService = App.GetService<ILocalizationService>();
+        _localizationService.SetAppLanguage(settings.GetValues.AppCultureName);
     }
 
     private async void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)

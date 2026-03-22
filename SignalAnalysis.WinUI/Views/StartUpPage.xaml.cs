@@ -9,14 +9,14 @@ namespace SignalAnalysis.Views;
 /// </summary>
 public sealed partial class StartUpPage : Page, IDisposable
 {
-    public SettingsViewModel ViewModel { get; }
+    public StartUpViewModel ViewModel { get; }
     private readonly ILocalizationService _localizationService;
 
     public StartUpPage()
     {
         InitializeComponent();
 
-        ViewModel = App.GetService<SettingsViewModel>();
+        ViewModel = App.GetService<StartUpViewModel>();
         DataContext = ViewModel;
         _localizationService = App.GetService<ILocalizationService>();
     }

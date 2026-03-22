@@ -90,7 +90,7 @@
 					Margin="0,-75,0,0"
 					VerticalAlignment="Top">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="/Assets/AppLogo - V2.svg"/>
+                <ImageBrush ImageSource="/Assets/AppLogo.svg"/>
             </Ellipse.Fill>
         </Ellipse>
 

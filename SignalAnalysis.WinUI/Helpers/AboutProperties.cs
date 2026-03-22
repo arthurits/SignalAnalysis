@@ -27,8 +27,8 @@ public static class AboutProperties
         //var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Localization");
         //Microsoft.Windows.ApplicationModel.Resources.ResourceLoader _resourceLoader = new("Localization");
 
-        var resourceContext = new Windows.ApplicationModel.Resources.Core.ResourceContext(); // not using ResourceContext.GetForCurrentView
-        var resourceMap = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree("Localization/Resources");
+        //var resourceContext = new Windows.ApplicationModel.Resources.Core.ResourceContext(); // not using ResourceContext.GetForCurrentView
+        //var resourceMap = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree("Localization/Resources");
 
         //return $"{"AppDisplayName".GetLocalized()} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         //return $"{"AppDisplayName"} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";

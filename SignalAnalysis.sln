@@ -34,7 +34,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_RemoveEmptyEntries = False
 		SolutionGuid = {F82A9C7A-74C8-4091-936C-B7967E77D38F}
 	EndGlobalSection
 EndGlobal

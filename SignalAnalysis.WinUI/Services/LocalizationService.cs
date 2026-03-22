@@ -85,7 +85,7 @@ public class LocalizationService : ILocalizationService
             // Set the primary language. This value is used to access the app's resources.
             Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = languageCode != string.Empty ? languageCode : invariantCulture;
             //Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().Reset();
-            Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();
+            //Windows.ApplicationModel.Resources.Core.ResourceContext.GetForViewIndependentUse().Reset();
 
             // Set the current thread's UI culture to the new language
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(CurrentLanguage);
