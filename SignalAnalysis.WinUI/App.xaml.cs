@@ -147,18 +147,18 @@ public partial class App : Application
         var settings = App.GetService<ILocalSettingsService<AppSettings>>();
         await settings.ReadSettingFileAsync<AppSettings>();
 
-        //// Set initial window position in case it was stored in settings
-        //if (settings.GetValues.WindowPosition)
-        //{
-        //    MainWindow.MoveAndResize(settings.GetValues.WindowLeft, settings.GetValues.WindowTop, settings.GetValues.WindowWidth, settings.GetValues.WindowHeight);
-        //}
-        //else
-        //{
-        //    // https://stackoverflow.com/questions/74890047/how-can-i-set-my-winui3-program-to-be-started-in-the-center-of-the-screen
-        //    //IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(m_window);
-        //    WindowPosition.SetWindowSize(MainWindow, width: 1450, height: 850);
-        //    WindowPosition.CenterWindow(MainWindow);
-        //}
+        // Set initial window position in case it was stored in settings
+        if (settings.GetValues.WindowPosition)
+        {
+            MainWindow.MoveAndResize(settings.GetValues.WindowLeft, settings.GetValues.WindowTop, settings.GetValues.WindowWidth, settings.GetValues.WindowHeight);
+        }
+        else
+        {
+            // https://stackoverflow.com/questions/74890047/how-can-i-set-my-winui3-program-to-be-started-in-the-center-of-the-screen
+            //IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(m_window);
+            WindowPosition.SetWindowSize(MainWindow, width: 1450, height: 850);
+            WindowPosition.CenterWindow(MainWindow);
+        }
 
         //// Apply theme stored in settings
         //var themeService = App.GetService<IThemeSelectorService>();
