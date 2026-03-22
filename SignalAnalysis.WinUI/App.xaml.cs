@@ -160,15 +160,15 @@ public partial class App : Application
             WindowPosition.CenterWindow(MainWindow);
         }
 
-        //// Apply theme stored in settings
-        //var themeService = App.GetService<IThemeSelectorService>();
-        //if (themeService is not null)
-        //{
-        //    if (Enum.TryParse(settings.GetValues.ThemeName, out ElementTheme theme) is true)
-        //    {
-        //        themeService.SetTheme(theme);
-        //    }
-        //}
+        // Apply theme stored in settings
+        var themeService = App.GetService<IThemeSelectorService>();
+        if (themeService is not null)
+        {
+            if (Enum.TryParse(settings.GetValues.ThemeName, out ElementTheme theme) is true)
+            {
+                themeService.SetTheme(theme);
+            }
+        }
 
         // Now that the settings are loaded, we call the activation service
         // so that the defaul page and view model can access the settings and apply them
