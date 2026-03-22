@@ -73,7 +73,7 @@
                                     helpers:NavigationHelper.NavigateTo="SignalAnalysis.ViewModels.AboutViewModel"
                                     ToolTipService.ToolTip="{Binding StrAboutToolTip}">
                     <NavigationViewItem.Icon>
-                        <BitmapIcon UriSource="/Assets/about.ico"
+                        <BitmapIcon UriSource="/Assets/Shell_About.ico"
                                     ShowAsMonochrome="False" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
