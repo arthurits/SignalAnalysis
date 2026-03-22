@@ -78,6 +78,7 @@ public partial class ShellViewModel : ObservableRecipient
     {
         // Update the display name and tooltips based on the current language
         StrAppDisplayName_Base = "StrAppDisplayName".GetLocalized("Shell");
+        _mainWindowService.TitleMain = StrAppDisplayName_Base;
         StrAboutItem = "StrAboutItem".GetLocalized("Shell");
         StrAboutToolTip = "StrAboutToolTip".GetLocalized("Shell");
         StrStartUpItem = "StrStartUpItem".GetLocalized("Shell");
