@@ -142,10 +142,10 @@ public partial class App : Application
         MainWindow.AppWindow.Closing += OnClosing;
         MainWindow.Closed += OnClosed;
 
-        //// Read settings file
-        //// https://github.com/arthurits/OpenXML-editor/blob/master/OpenXML%20WinUI/App.xaml.cs
-        //var settings = App.GetService<ILocalSettingsService<AppSettings>>();
-        //await settings.ReadSettingFileAsync<AppSettings>();
+        // Read settings file
+        // https://github.com/arthurits/OpenXML-editor/blob/master/OpenXML%20WinUI/App.xaml.cs
+        var settings = App.GetService<ILocalSettingsService<AppSettings>>();
+        await settings.ReadSettingFileAsync<AppSettings>();
 
         //// Set initial window position in case it was stored in settings
         //if (settings.GetValues.WindowPosition)
@@ -174,9 +174,9 @@ public partial class App : Application
         // so that the defaul page and view model can access the settings and apply them
         await App.GetService<IActivationService>().ActivateAsync(args);
 
-        //// Apply language stored in settings
-        //var _localizationService = App.GetService<ILocalizationService>();
-        //_localizationService.SetAppLanguage(settings.GetValues.AppCultureName);
+        // Apply language stored in settings
+        var _localizationService = App.GetService<ILocalizationService>();
+        _localizationService.SetAppLanguage(settings.GetValues.AppCultureName);
     }
 
     private async void OnClosing(AppWindow sender, AppWindowClosingEventArgs args)
