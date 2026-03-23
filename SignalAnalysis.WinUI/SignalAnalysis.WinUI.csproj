@@ -16,6 +16,7 @@
     <Copyright>© 2026</Copyright>
     <Company>Arthurits Ltd.</Company>
     <Version>0.1.0</Version>
+    <ApplicationIcon>Assets\AppLogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
