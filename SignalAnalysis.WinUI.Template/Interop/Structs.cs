@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SignalAnalysis.Interop;
+namespace SignalAnalysis.Template.Interop;
 internal static partial class Win32
 {
     [StructLayout(LayoutKind.Sequential)]

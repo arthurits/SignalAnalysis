@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SignalAnalysis.Helpers;
+namespace SignalAnalysis.Template.Helpers;
 
 public class RuntimeHelper
 {

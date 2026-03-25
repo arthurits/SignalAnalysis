@@ -1,6 +1,6 @@
 ﻿using SignalAnalysis.Models;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 public class TrayMenuOpeningEventArgs : EventArgs
 {

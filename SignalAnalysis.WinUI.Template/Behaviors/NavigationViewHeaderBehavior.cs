@@ -5,7 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Xaml.Interactivity;
 
-namespace SignalAnalysis.Behaviors;
+namespace SignalAnalysis.Template.Behaviors;
 
 public class NavigationViewHeaderBehavior : Behavior<NavigationView>
 {

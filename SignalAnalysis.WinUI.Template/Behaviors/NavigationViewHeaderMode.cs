@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Behaviors;
+﻿namespace SignalAnalysis.Template.Behaviors;
 
 public enum NavigationViewHeaderMode
 {

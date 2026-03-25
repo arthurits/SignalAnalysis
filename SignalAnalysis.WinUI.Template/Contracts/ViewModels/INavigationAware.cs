@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Contracts.ViewModels;
+﻿namespace SignalAnalysis.Template.Contracts.ViewModels;
 
 public interface INavigationAware
 {

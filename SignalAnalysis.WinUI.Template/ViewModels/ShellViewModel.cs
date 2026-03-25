@@ -5,7 +5,7 @@ using SignalAnalysis.Helpers;
 
 using Microsoft.UI.Xaml.Navigation;
 
-namespace SignalAnalysis.ViewModels;
+namespace SignalAnalysis.Template.ViewModels;
 
 public partial class ShellViewModel : ObservableRecipient
 {

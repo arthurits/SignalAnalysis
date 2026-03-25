@@ -2,7 +2,7 @@
 using SignalAnalysis.Models;
 using Microsoft.UI.Xaml.Media;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 public class MonospacedFontsService : IMonospacedFontsService
 {

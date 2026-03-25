@@ -6,7 +6,7 @@ using SignalAnalysis.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 public class ActivationService : IActivationService
 {

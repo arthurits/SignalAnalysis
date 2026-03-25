@@ -1,7 +1,7 @@
 ﻿using SignalAnalysis.Services;
 using SignalAnalysis.Contracts.Services;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 public class IconLoaderFactory(GdiPlusIconLoader gdi, Win2DIconLoader win2d) : IIconLoaderFactory
 {
     private readonly GdiPlusIconLoader _gdi = gdi;

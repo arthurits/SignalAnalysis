@@ -1,7 +1,7 @@
 ﻿using SignalAnalysis.Contracts.Services;
 using Microsoft.Win32;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 public class StartupService : IStartupService
 {
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";

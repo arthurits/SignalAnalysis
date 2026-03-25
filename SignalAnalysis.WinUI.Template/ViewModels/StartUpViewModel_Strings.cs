@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SignalAnalysis.ViewModels;
+namespace SignalAnalysis.Template.ViewModels;
 
 public partial class StartUpViewModel : ObservableRecipient
 {

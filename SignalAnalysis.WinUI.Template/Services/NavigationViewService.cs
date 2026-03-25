@@ -6,7 +6,7 @@ using SignalAnalysis.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 public class NavigationViewService : INavigationViewService
 {

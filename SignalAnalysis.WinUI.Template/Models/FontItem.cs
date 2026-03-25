@@ -1,5 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Media;
 
-namespace SignalAnalysis.Models;
+namespace SignalAnalysis.Template.Models;
 
 public sealed record FontItem(string Name, FontFamily Family);

@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Helpers;
+namespace SignalAnalysis.Template.Helpers;
 
 public static class FrameExtensions
 {

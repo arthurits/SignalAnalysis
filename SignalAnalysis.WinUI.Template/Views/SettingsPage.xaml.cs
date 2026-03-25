@@ -4,7 +4,7 @@ using SignalAnalysis.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Windows.System.UserProfile;
 
-namespace SignalAnalysis.Views;
+namespace SignalAnalysis.Template.Views;
 
 public sealed partial class SettingsPage : Page, IDisposable
 {

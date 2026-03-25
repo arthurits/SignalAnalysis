@@ -6,7 +6,7 @@ using SignalAnalysis.Models;
 using WinRT.Interop;
 using static SignalAnalysis.Interop.Win32;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 internal partial class TrayIconService : ITrayIconService, IDisposable
 {

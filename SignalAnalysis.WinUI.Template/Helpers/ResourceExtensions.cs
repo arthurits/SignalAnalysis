@@ -1,7 +1,7 @@
 ﻿using SignalAnalysis.Contracts.Services;
 using Windows.ApplicationModel.Resources;
 
-namespace SignalAnalysis.Helpers;
+namespace SignalAnalysis.Template.Helpers;
 
 public static class ResourceExtensions
 {

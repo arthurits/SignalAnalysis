@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Contracts.Services;
+﻿namespace SignalAnalysis.Template.Contracts.Services;
 
 public interface IMonospacedFontsService
 {

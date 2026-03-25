@@ -5,7 +5,7 @@ using Microsoft.UI;
 using Microsoft.Graphics.Canvas;
 using Windows.Foundation;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 public partial class Win2DIconLoader : IIconLoader, IDisposable
 {
     private readonly CanvasDevice _device;

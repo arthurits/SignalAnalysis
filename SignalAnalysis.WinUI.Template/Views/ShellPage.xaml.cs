@@ -8,7 +8,7 @@ using Microsoft.UI.Xaml.Input;
 
 using Windows.System;
 
-namespace SignalAnalysis.Views;
+namespace SignalAnalysis.Template.Views;
 
 // TODO: Update NavigationViewItem titles and icons in ShellPage.xaml.
 public sealed partial class ShellPage : Page

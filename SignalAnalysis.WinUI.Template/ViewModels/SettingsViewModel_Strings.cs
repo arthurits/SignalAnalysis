@@ -2,7 +2,7 @@
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 
-namespace SignalAnalysis.ViewModels;
+namespace SignalAnalysis.Template.ViewModels;
 
 public partial class SettingsViewModel : ObservableRecipient
 {

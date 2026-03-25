@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 
-namespace SignalAnalysis.Models;
+namespace SignalAnalysis.Template.Models;
 public partial class AppSettings : ObservableObject
 {
     /// <summary>

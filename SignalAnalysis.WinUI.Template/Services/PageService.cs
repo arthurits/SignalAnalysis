@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using SignalAnalysis.Contracts.Services;
 using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 public class PageService : IPageService
 {

@@ -4,7 +4,7 @@ using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
 using Windows.System;
 
-namespace SignalAnalysis.ViewModels;
+namespace SignalAnalysis.Template.ViewModels;
 
 public partial class AboutViewModel : ObservableRecipient
 {

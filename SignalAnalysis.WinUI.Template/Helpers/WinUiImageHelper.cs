@@ -3,7 +3,7 @@ using SignalAnalysis.Interop;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 
-namespace SignalAnalysis.Helpers;
+namespace SignalAnalysis.Template.Helpers;
 
 public static class WinUiImageHelper
 {

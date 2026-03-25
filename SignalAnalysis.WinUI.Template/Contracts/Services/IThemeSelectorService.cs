@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 
-namespace SignalAnalysis.Contracts.Services;
+namespace SignalAnalysis.Template.Contracts.Services;
 
 public interface IThemeSelectorService
 {

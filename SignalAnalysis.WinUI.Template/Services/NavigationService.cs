@@ -7,7 +7,7 @@ using SignalAnalysis.Helpers;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 // For more information on navigation between pages see
 // https://github.com/microsoft/TemplateStudio/blob/main/docs/WinUI/navigation.md

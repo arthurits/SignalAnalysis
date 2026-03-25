@@ -1,6 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Contracts.Services;
+namespace SignalAnalysis.Template.Contracts.Services;
 
 public interface INavigationViewService
 {

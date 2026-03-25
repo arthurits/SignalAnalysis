@@ -6,7 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
 using Windows.System;
 
-namespace SignalAnalysis.Views;
+namespace SignalAnalysis.Template.Views;
 
 public sealed partial class AboutPage : Page
 {

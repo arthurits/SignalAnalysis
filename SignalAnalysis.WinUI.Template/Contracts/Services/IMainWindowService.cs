@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SignalAnalysis.Contracts.Services;
+namespace SignalAnalysis.Template.Contracts.Services;
 
 /// <summary>
 /// Defines the contract for the main window service.

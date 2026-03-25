@@ -1,6 +1,6 @@
 ﻿using SignalAnalysis.Services;
 
-namespace SignalAnalysis.Contracts.Services;
+namespace SignalAnalysis.Template.Contracts.Services;
 
 /// <summary>
 /// Service for managing the system tray icon.

@@ -1,7 +1,7 @@
 ﻿using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Interop;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 public partial class GdiPlusIconLoader : IIconLoader, IDisposable
 {

@@ -3,7 +3,7 @@ using SignalAnalysis.ViewModels;
 
 using Microsoft.UI.Xaml;
 
-namespace SignalAnalysis.Activation;
+namespace SignalAnalysis.Template.Activation;
 
 public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
 {

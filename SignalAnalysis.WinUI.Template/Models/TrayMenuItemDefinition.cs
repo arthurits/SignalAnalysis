@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Models;
+﻿namespace SignalAnalysis.Template.Models;
 
 public class TrayMenuItemDefinition
 {

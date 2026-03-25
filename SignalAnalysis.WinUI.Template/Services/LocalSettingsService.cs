@@ -6,7 +6,7 @@ using SignalAnalysis.Models;
 using Microsoft.Extensions.Options;
 using Windows.Storage;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 /// <summary>
 /// Class that reads and stores application settings.

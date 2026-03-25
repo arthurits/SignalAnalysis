@@ -9,7 +9,7 @@ using Windows.Foundation.Collections;
 using Windows.Globalization;
 using Windows.Storage;
 
-namespace SignalAnalysis.Services;
+namespace SignalAnalysis.Template.Services;
 
 public class LocalizationService : ILocalizationService
 {
