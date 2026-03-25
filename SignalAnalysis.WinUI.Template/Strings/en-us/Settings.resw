@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="StrActivate" xml:space="preserve">
+    <value>Activate</value>
+  </data>
+  <data name="StrAppSettings" xml:space="preserve">
+    <value>App settings</value>
+  </data>
+  <data name="StrDeactivate" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+  <data name="StrFilepathDescription" xml:space="preserve">
+    <value>Activate this option to remember the previous path in all open/save-file dialogs</value>
+  </data>
+  <data name="StrFilepathHeader" xml:space="preserve">
+    <value>Remember previous file path</value>
+  </data>
+  <data name="StrLanguageDescription" xml:space="preserve">
+    <value>Select the language/culture to use throughout the app</value>
+  </data>
+  <data name="StrLanguageHeader" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="StrResetButton" xml:space="preserve">
+    <value>Reset settings</value>
+  </data>
+  <data name="StrThemeDescription" xml:space="preserve">
+    <value>Select the app's color theme</value>
+  </data>
+  <data name="StrThemeHeader" xml:space="preserve">
+    <value>Color theme</value>
+  </data>
+  <data name="StrThemeOptions" xml:space="preserve">
+    <value>Default,Light,Dark</value>
+  </data>
+  <data name="StrWindowPosition" xml:space="preserve">
+    <value>App window position: {0} px left and {1} px top</value>
+  </data>
+  <data name="StrWindowPositionDescription" xml:space="preserve">
+    <value>Activate this option to remember the app's window size and position</value>
+  </data>
+  <data name="StrWindowPositionHeader" xml:space="preserve">
+    <value>Remember window position</value>
+  </data>
+  <data name="StrWindowSize" xml:space="preserve">
+    <value>App window size: {0} px width and {1} px height</value>
+  </data>
+</root>

@@ -1,0 +1,109 @@
+﻿<Page
+    x:Class="SignalAnalysis.Views.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    mc:Ignorable="d"
+    NavigationCacheMode="Enabled">
+    
+    <Page.Resources>
+        <ui:AttachedDropShadow x:Key="CommonShadow"
+                               Offset="4, 4"
+                               CastTo="{x:Bind ShadowTarget}"
+                               CornerRadius="24"
+                               Color="DarkGray"/>
+        
+        <!-- Legal text border style -->
+        <Style x:Key="LegalBoxStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Background" Value="{ThemeResource StackPanelBackground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource StackPanelBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12"/>
+        </Style>
+        
+        <!-- Legal text style -->
+        <Style x:Key="LegalTextStyle" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="LineHeight" Value="18"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid x:Name="ContentArea"
+		  ColumnDefinitions="*,450,*"
+          RowDefinitions="84, Auto, *">
+
+        <Border x:Name="ShadowTarget" />
+
+        <Border CornerRadius="24"
+				Grid.Row="1"
+				Grid.Column="1"
+				Background="#FFFFFF"
+                BorderBrush="DarkGray"
+                BorderThickness="2"
+                ui:Effects.Shadow="{StaticResource CommonShadow}"
+                VerticalAlignment="Top"
+                MinHeight="260">
+            <StackPanel
+                Orientation="Vertical"
+                HorizontalAlignment="Center"
+                Margin="0, 100 , 0, 0"
+                Spacing="6">
+                <TextBlock Text="{x:Bind ViewModel.StrProductName, Mode=OneWay}" FontSize="18" FontWeight="Normal" />
+                <TextBlock Text="{x:Bind ViewModel.StrVersionNumber, Mode=OneWay}" FontSize="18" FontWeight="Normal" />
+                <TextBlock Text="{x:Bind ViewModel.StrCopyright, Mode=OneWay}" FontSize="18" FontWeight="Normal" />
+                <!--<TextBlock Text="{x:Bind ViewModel.CompanyName, Mode=OneWay}" FontSize="18" FontWeight="Normal" />-->
+                <TextBlock FontSize="18" FontWeight="Normal" TextWrapping="Wrap">
+                    <Run Text="{x:Bind ViewModel.StrDevelopedBy, Mode=OneWay}"/>
+                    <Hyperlink Click="OnCompanyHyperlinkClick">
+                        <Run Text="{x:Bind ViewModel.StrCompanyShortName, Mode=OneWay}"/>
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock
+					x:Uid="Settings_AboutDescription"
+					Margin="{StaticResource XSmallTopMargin}"
+					Style="{ThemeResource BodyTextBlockStyle}" />
+                <HyperlinkButton x:Uid="SettingsPage_PrivacyTermsLink" Margin="{StaticResource SettingsPageHyperlinkButtonMargin}" />
+            </StackPanel>
+        </Border>
+
+        <!-- Profile Circle Image -->
+        <Ellipse
+					Grid.Row="1"
+					Grid.Column="1"
+					Width="168"
+					Height="168"
+					Stroke="#FFFF9900"
+					StrokeThickness="4"
+					Fill="White"
+					Margin="0,-84,0,0"
+					VerticalAlignment="Top"/>
+        <Ellipse
+					Grid.Row="1"
+					Grid.Column="1"
+					Width="150"
+					Height="150"
+					Margin="0,-75,0,0"
+					VerticalAlignment="Top">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/Assets/AppLogo.svg"/>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <!-- Legal box -->
+        <Border x:Name="LegalTextPanel"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    VerticalAlignment="Bottom"
+                    Style="{StaticResource LegalBoxStyle}"
+                    Margin="0,24,0,24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <TextBlock Style="{StaticResource LegalTextStyle}" Text="{x:Bind ViewModel.StrLegalText, Mode=OneWay}" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>
