@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SignalAnalysis (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SignalAnalysis (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

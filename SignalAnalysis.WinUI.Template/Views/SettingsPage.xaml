@@ -1,0 +1,92 @@
+﻿<Page
+    x:Class="SignalAnalysis.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:sys="using:System"
+    mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
+    DataContext="{x:Bind ViewModel}">
+
+    <Grid x:Name="Settings" ColumnDefinitions="*" RowDefinitions ="*">
+        <ScrollView x:Name="ScrollSettingsPage" ContentOrientation="Vertical"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                    ZoomMode="Disabled" IsTabStop="True"
+                    VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                    HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Hidden"
+                    VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Orientation="Vertical" Style="{StaticResource BaseStackPanel}" Spacing="6">
+                
+                <!--App settings-->
+                <TextBlock Text="{Binding StrAppSettings}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0, 12, 0, 0"/>
+
+                <controls:SettingsCard x:Name="cardTheme"
+                               Description="{Binding StrThemeDescription}"
+                               Header="{Binding StrThemeHeader}"
+                               HeaderIcon="{ui:FontIcon Glyph=&#xE793;}">
+                    <!--<controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xE790;" Foreground="Red">
+                        </FontIcon>
+                    </controls:SettingsCard.HeaderIcon>-->
+                    <ComboBox
+                        ItemsSource="{Binding ColorModes}"
+                        SelectedIndex="{Binding Theme, Mode=TwoWay}"
+                        SelectedValuePath="Value"
+                        DisplayMemberPath="DisplayName">
+                    </ComboBox>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Name="cardCulture"
+                        Description="{Binding StrLanguageDescription}"
+                        Header="{Binding StrLanguageHeader}"
+                        HeaderIcon="{ui:FontIcon Glyph=&#xE774;}"
+                        IsEnabled="True">
+                    <ComboBox x:Name="LanguageComboBox"
+                        ItemsSource="{Binding AvailableLanguages}"
+                        SelectedIndex="{Binding SelectedLanguageIndex, Mode=TwoWay}"
+                        SelectedValuePath="LanguageTag"
+                        DisplayMemberPath="DisplayName">
+                    </ComboBox>
+                </controls:SettingsCard>
+                
+                <controls:SettingsCard x:Name="cardWinPos"
+                       Header="{Binding StrWindowPositionHeader}"
+                       HeaderIcon="{ui:FontIcon Glyph=&#xE840;}">
+                    <controls:SettingsCard.Description>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding StrWindowPositionDescription}"/>
+                            <TextBlock Text="{Binding WindowSizeDescription}"/>
+                            <TextBlock Text="{Binding WindowPositionDescription}"/>
+                        </StackPanel>
+                    </controls:SettingsCard.Description>
+                    <ToggleSwitch IsOn="{Binding WindowPosition, Mode=TwoWay}" OnContent="{Binding StrActivate}" OffContent="{Binding StrDeactivate}"/>
+                </controls:SettingsCard>
+
+                <controls:SettingsCard x:Name="cardPath"
+                        Description="{Binding StrFilepathDescription}"
+                        Header="{Binding StrFilepathHeader}"
+                        HeaderIcon="{ui:FontIcon Glyph=&#xE838;}">
+                    <ToggleSwitch IsOn="{Binding RememberFileDialogPath, Mode=TwoWay}" OnContent="{Binding StrActivate}" OffContent="{Binding StrDeactivate}"/>
+                </controls:SettingsCard>
+
+                <!--Reset settings button-->
+                <Button x:Name="BtnReset"
+                        Margin="{StaticResource SmallTopMargin}"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Command="{Binding ResetSettingsCommand}"
+                        IsEnabled="{Binding IsResetVisible}">
+                    <StackPanel Padding="{StaticResource XXSmallLeftTopRightBottomMargin}" Orientation="Horizontal">
+                        <FontIcon Glyph="&#xe8ee;" Margin="{StaticResource XSmallRightMargin}" />
+                        <TextBlock Text="{Binding StrResetButton}"/>
+                    </StackPanel>
+                </Button>
+                
+            </StackPanel>
+        </ScrollView>
+    </Grid>
+</Page>
