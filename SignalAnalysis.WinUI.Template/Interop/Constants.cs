@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Interop;
+﻿namespace $safeprojectname$.Interop;
 
 internal static partial class Win32
 {

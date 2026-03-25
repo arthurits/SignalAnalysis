@@ -1,9 +1,9 @@
-﻿using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.ViewModels;
+﻿using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.ViewModels;
 
 using Microsoft.UI.Xaml;
 
-namespace SignalAnalysis.Activation;
+namespace $safeprojectname$.Activation;
 
 public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
 {

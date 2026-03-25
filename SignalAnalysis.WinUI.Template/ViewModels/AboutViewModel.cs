@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
 using Windows.System;
 
-namespace SignalAnalysis.ViewModels;
+namespace $safeprojectname$.ViewModels;
 
 public partial class AboutViewModel : ObservableRecipient
 {

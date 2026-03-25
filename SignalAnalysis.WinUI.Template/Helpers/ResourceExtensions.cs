@@ -1,7 +1,7 @@
-﻿using SignalAnalysis.Contracts.Services;
+﻿using $safeprojectname$.Contracts.Services;
 using Windows.ApplicationModel.Resources;
 
-namespace SignalAnalysis.Helpers;
+namespace $safeprojectname$.Helpers;
 
 public static class ResourceExtensions
 {

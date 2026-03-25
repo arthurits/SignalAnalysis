@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
-using SignalAnalysis.Models;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
+using $safeprojectname$.Models;
 using Microsoft.Extensions.Options;
 using Windows.Storage;
 
-namespace SignalAnalysis.Services;
+namespace $safeprojectname$.Services;
 
 /// <summary>
 /// Class that reads and stores application settings.

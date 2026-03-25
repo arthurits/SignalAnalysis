@@ -1,12 +1,12 @@
 ﻿using System.Runtime.InteropServices;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
-using SignalAnalysis.Interop;
-using SignalAnalysis.Models;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
+using $safeprojectname$.Interop;
+using $safeprojectname$.Models;
 using WinRT.Interop;
-using static SignalAnalysis.Interop.Win32;
+using static $safeprojectname$.Interop.Win32;
 
-namespace SignalAnalysis.Services;
+namespace $safeprojectname$.Services;
 
 internal partial class TrayIconService : ITrayIconService, IDisposable
 {

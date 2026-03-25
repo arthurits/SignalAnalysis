@@ -1,12 +1,12 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using SignalAnalysis.ViewModels;
+using $safeprojectname$.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
 using Windows.System;
 
-namespace SignalAnalysis.Views;
+namespace $safeprojectname$.Views;
 
 public sealed partial class AboutPage : Page
 {

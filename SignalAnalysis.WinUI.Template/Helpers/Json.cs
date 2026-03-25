@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace SignalAnalysis.Helpers;
+namespace $safeprojectname$.Helpers;
 public static class Json
 {
     public static JsonSerializerOptions options = new()

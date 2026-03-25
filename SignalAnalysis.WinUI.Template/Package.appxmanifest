@@ -16,7 +16,7 @@
   <mp:PhoneIdentity PhoneProductId="9a4a09eb-b5c0-4cfa-a2af-720ddb22a9ce" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>SignalAnalysis</DisplayName>
+    <DisplayName>$safeprojectname$</DisplayName>
     <PublisherDisplayName>Arthurits Ltd.</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -35,8 +35,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="SignalAnalysis"
-        Description="SignalAnalysis"
+        DisplayName="$safeprojectname$"
+        Description="$safeprojectname$"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">

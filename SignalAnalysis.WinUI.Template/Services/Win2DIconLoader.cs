@@ -1,11 +1,11 @@
 ﻿using System.Runtime.InteropServices;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Interop;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Interop;
 using Microsoft.UI;
 using Microsoft.Graphics.Canvas;
 using Windows.Foundation;
 
-namespace SignalAnalysis.Services;
+namespace $safeprojectname$.Services;
 public partial class Win2DIconLoader : IIconLoader, IDisposable
 {
     private readonly CanvasDevice _device;

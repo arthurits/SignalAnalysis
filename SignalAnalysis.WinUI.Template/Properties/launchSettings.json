@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "SignalAnalysis (Package)": {
+    "$safeprojectname$ (Package)": {
       "commandName": "MsixPackage"
     },
-    "SignalAnalysis (Unpackaged)": {
+    "$safeprojectname$ (Unpackaged)": {
       "commandName": "Project"
     }
   }

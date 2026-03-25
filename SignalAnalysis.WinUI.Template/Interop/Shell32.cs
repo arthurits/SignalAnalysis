@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SignalAnalysis.Interop;
+namespace $safeprojectname$.Interop;
 internal static partial class Win32
 {
     [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]

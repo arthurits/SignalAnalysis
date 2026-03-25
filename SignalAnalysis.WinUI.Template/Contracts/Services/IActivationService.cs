@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Contracts.Services;
+﻿namespace $safeprojectname$.Contracts.Services;
 
 public interface IActivationService
 {

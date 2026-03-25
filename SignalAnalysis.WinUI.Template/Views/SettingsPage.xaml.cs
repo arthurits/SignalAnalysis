@@ -1,10 +1,10 @@
-﻿using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.ViewModels;
+﻿using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 using Windows.System.UserProfile;
 
-namespace SignalAnalysis.Views;
+namespace $safeprojectname$.Views;
 
 public sealed partial class SettingsPage : Page, IDisposable
 {

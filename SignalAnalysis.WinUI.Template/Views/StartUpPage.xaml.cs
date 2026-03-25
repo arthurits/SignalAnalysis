@@ -1,8 +1,8 @@
 using Microsoft.UI.Xaml.Controls;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.ViewModels;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.ViewModels;
 
-namespace SignalAnalysis.Views;
+namespace $safeprojectname$.Views;
 
 /// <summary>
 /// StartUpPage to be used as a template.

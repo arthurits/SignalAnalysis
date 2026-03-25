@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Models;
+﻿namespace $safeprojectname$.Models;
 
 public class ComboBoxData
 {

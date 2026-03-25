@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using System;
 
-namespace SignalAnalysis.Helpers;
+namespace $safeprojectname$.Helpers;
 
 public static class WindowPosition
 {

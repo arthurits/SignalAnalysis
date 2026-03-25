@@ -1,11 +1,11 @@
-﻿using SignalAnalysis.Contracts.Services;
+﻿using $safeprojectname$.Contracts.Services;
 using Microsoft.Win32;
 
-namespace SignalAnalysis.Services;
+namespace $safeprojectname$.Services;
 public class StartupService : IStartupService
 {
     private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
-    private const string AppName = "SignalAnalysis";
+    private const string AppName = "$safeprojectname$";
     private const string StartupArgument = "--startup";
 
     private static string ExecutablePath => Environment.ProcessPath ?? string.Empty;

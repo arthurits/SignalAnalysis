@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Windows.ApplicationModel;
 
-namespace SignalAnalysis.Helpers;
+namespace $safeprojectname$.Helpers;
 
 /// <summary>
 /// Retireve app values regarding version number, app name, vendor, copyright, etc.

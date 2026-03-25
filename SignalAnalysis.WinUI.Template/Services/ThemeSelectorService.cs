@@ -1,9 +1,9 @@
 ﻿using Microsoft.UI.Xaml;
-using SignalAnalysis;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
+using $safeprojectname$;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
 
-namespace SignalAnalysis.Services;
+namespace $safeprojectname$.Services;
 
 public class ThemeSelectorService : IThemeSelectorService
 {

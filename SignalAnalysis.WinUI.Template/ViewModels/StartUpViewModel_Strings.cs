@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Helpers;
+using $safeprojectname$.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SignalAnalysis.ViewModels;
+namespace $safeprojectname$.ViewModels;
 
 public partial class StartUpViewModel : ObservableRecipient
 {

@@ -1,8 +1,8 @@
-﻿using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Models;
+﻿using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Models;
 using Microsoft.UI.Xaml.Media;
 
-namespace SignalAnalysis.Services;
+namespace $safeprojectname$.Services;
 
 public class MonospacedFontsService : IMonospacedFontsService
 {
