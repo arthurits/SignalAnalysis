@@ -3,5 +3,5 @@
 public interface IMonospacedFontsService
 {
     IReadOnlyList<double> FontSizes { get; }
-    IReadOnlyList<SignalAnalysis.Models.FontItem> MonospacedFonts { get; }
+    IReadOnlyList<SignalAnalysis.Template.Models.FontItem> MonospacedFonts { get; }
 }

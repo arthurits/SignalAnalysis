@@ -4,7 +4,7 @@ using SignalAnalysis.Template.Helpers;
 using SignalAnalysis.Template.Interop;
 using SignalAnalysis.Template.Models;
 using WinRT.Interop;
-using static SignalAnalysis.Interop.Win32;
+using static SignalAnalysis.Template.Interop.Win32;
 
 namespace SignalAnalysis.Template.Services;
 
