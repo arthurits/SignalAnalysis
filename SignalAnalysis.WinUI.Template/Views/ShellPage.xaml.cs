@@ -1,6 +1,6 @@
-﻿using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Helpers;
-using SignalAnalysis.Template.ViewModels;
+﻿using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
+using $safeprojectname$.ViewModels;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,7 +8,7 @@ using Microsoft.UI.Xaml.Input;
 
 using Windows.System;
 
-namespace SignalAnalysis.Template.Views;
+namespace $safeprojectname$.Views;
 
 // TODO: Update NavigationViewItem titles and icons in ShellPage.xaml.
 public sealed partial class ShellPage : Page

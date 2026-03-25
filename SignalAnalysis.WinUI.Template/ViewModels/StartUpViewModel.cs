@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Template.Contracts.Services;
+using $safeprojectname$.Contracts.Services;
 
-namespace SignalAnalysis.Template.ViewModels;
+namespace $safeprojectname$.ViewModels;
 
 public partial class StartUpViewModel: ObservableRecipient
 {

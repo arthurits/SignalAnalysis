@@ -4,13 +4,13 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 
-using SignalAnalysis.Template.Activation;
-using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Helpers;
-using SignalAnalysis.Template.Models;
-using SignalAnalysis.Template.Services;
-using SignalAnalysis.Template.ViewModels;
-using SignalAnalysis.Template.Views;
+using $safeprojectname$.Activation;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
+using $safeprojectname$.Models;
+using $safeprojectname$.Services;
+using $safeprojectname$.ViewModels;
+using $safeprojectname$.Views;
 using System.Diagnostics;
 using Windows.UI.ApplicationSettings;
 using WinUIEx;
@@ -18,7 +18,7 @@ using WinUIEx;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace SignalAnalysis.Template;
+namespace $safeprojectname$;
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.
 /// </summary>

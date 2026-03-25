@@ -1,7 +1,7 @@
-﻿using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Interop;
+﻿using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Interop;
 
-namespace SignalAnalysis.Template.Services;
+namespace $safeprojectname$.Services;
 
 public partial class GdiPlusIconLoader : IIconLoader, IDisposable
 {

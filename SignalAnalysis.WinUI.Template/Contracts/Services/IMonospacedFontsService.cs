@@ -1,7 +1,7 @@
-﻿namespace SignalAnalysis.Template.Contracts.Services;
+﻿namespace $safeprojectname$.Contracts.Services;
 
 public interface IMonospacedFontsService
 {
     IReadOnlyList<double> FontSizes { get; }
-    IReadOnlyList<SignalAnalysis.Template.Models.FontItem> MonospacedFonts { get; }
+    IReadOnlyList<$safeprojectname$.Models.FontItem> MonospacedFonts { get; }
 }

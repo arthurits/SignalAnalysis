@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Template.Activation;
+﻿namespace $safeprojectname$.Activation;
 
 public interface IActivationHandler
 {

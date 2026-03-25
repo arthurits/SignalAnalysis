@@ -1,12 +1,12 @@
 using Windows.UI.ViewManagement;
 using WinUIEx;
 
-using SignalAnalysis.Template.Helpers;
+using $safeprojectname$.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace SignalAnalysis.Template;
+namespace $safeprojectname$;
 
 /// <summary>
 /// An empty window that can be used on its own or navigated to within a Frame.

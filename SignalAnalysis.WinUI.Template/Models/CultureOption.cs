@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Template.Models;
+﻿namespace $safeprojectname$.Models;
 
 public class CultureOption
 {

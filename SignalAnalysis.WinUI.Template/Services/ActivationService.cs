@@ -1,12 +1,12 @@
-﻿using SignalAnalysis.Template.Activation;
-using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Views;
-using SignalAnalysis.Template.Helpers;
+﻿using $safeprojectname$.Activation;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Views;
+using $safeprojectname$.Helpers;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Template.Services;
+namespace $safeprojectname$.Services;
 
 public class ActivationService : IActivationService
 {

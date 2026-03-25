@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 
-namespace SignalAnalysis.Template.Helpers;
+namespace $safeprojectname$.Helpers;
 
 // This code is adapted from the original MessageBox here:
 // https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/MessageBox.cs

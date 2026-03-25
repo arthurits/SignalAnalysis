@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Template.Contracts.ViewModels;
+﻿namespace $safeprojectname$.Contracts.ViewModels;
 
 public interface INavigationAware
 {

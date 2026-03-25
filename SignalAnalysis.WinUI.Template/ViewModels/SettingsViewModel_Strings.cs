@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Template.Helpers;
-using SignalAnalysis.Template.Models;
+using $safeprojectname$.Helpers;
+using $safeprojectname$.Models;
 
-namespace SignalAnalysis.Template.ViewModels;
+namespace $safeprojectname$.ViewModels;
 
 public partial class SettingsViewModel : ObservableRecipient
 {

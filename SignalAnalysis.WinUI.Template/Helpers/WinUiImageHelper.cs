@@ -1,9 +1,9 @@
 ﻿using System.Runtime.InteropServices;
-using SignalAnalysis.Template.Interop;
+using $safeprojectname$.Interop;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 
-namespace SignalAnalysis.Template.Helpers;
+namespace $safeprojectname$.Helpers;
 
 public static class WinUiImageHelper
 {

@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
-using SignalAnalysis.Template.Models;
+using $safeprojectname$.Models;
 
-namespace SignalAnalysis.Template.Contracts.Services;
+namespace $safeprojectname$.Contracts.Services;
 
 public interface ILocalizationService
 {

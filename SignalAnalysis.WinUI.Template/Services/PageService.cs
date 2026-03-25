@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Template.Contracts.Services;
+using $safeprojectname$.Contracts.Services;
 using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Template.Services;
+namespace $safeprojectname$.Services;
 
 public class PageService : IPageService
 {

@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Helpers;
-using SignalAnalysis.Template.ViewModels;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
+using $safeprojectname$.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 
-namespace SignalAnalysis.Template.Services;
+namespace $safeprojectname$.Services;
 
 public class NavigationViewService : INavigationViewService
 {

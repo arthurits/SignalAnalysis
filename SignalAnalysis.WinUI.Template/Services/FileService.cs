@@ -1,10 +1,10 @@
-﻿using SignalAnalysis.Template.Contracts.Services;
+﻿using $safeprojectname$.Contracts.Services;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 
-namespace SignalAnalysis.Template.Services;
+namespace $safeprojectname$.Services;
 
 public class FileService : IFileService
 {

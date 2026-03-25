@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 
-namespace SignalAnalysis.Template.Models;
+namespace $safeprojectname$.Models;
 public partial class AppSettings : ObservableObject
 {
     /// <summary>
@@ -11,7 +11,7 @@ public partial class AppSettings : ObservableObject
     [JsonIgnore]
     public string FileName { get; set; } = "appsettings.json";
     [JsonIgnore]
-    public string AppDataFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Signal analysis", "ApplicationData");
+    public string AppDataFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "$safeprojectname$", "ApplicationData");
 
 
     /// <summary>

@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Helpers;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
 
 using Microsoft.UI.Xaml.Navigation;
 
-namespace SignalAnalysis.Template.ViewModels;
+namespace $safeprojectname$.ViewModels;
 
 public partial class ShellViewModel : ObservableRecipient
 {

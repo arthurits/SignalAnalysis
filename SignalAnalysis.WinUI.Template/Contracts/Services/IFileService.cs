@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Template.Contracts.Services;
+﻿namespace $safeprojectname$.Contracts.Services;
 
 public interface IFileService
 {

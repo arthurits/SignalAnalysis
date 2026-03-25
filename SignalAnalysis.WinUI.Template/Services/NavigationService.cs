@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Contracts.ViewModels;
-using SignalAnalysis.Template.Helpers;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Contracts.ViewModels;
+using $safeprojectname$.Helpers;
 
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
-namespace SignalAnalysis.Template.Services;
+namespace $safeprojectname$.Services;
 
 // For more information on navigation between pages see
 // https://github.com/microsoft/TemplateStudio/blob/main/docs/WinUI/navigation.md

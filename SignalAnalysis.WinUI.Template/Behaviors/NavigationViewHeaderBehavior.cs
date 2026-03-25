@@ -1,11 +1,11 @@
-﻿using SignalAnalysis.Template.Contracts.Services;
+﻿using $safeprojectname$.Contracts.Services;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Xaml.Interactivity;
 
-namespace SignalAnalysis.Template.Behaviors;
+namespace $safeprojectname$.Behaviors;
 
 public class NavigationViewHeaderBehavior : Behavior<NavigationView>
 {

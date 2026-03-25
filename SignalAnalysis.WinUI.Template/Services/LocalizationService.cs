@@ -1,7 +1,7 @@
 ﻿using Microsoft.Windows.ApplicationModel.Resources;
-using SignalAnalysis.Template.Contracts.Services;
-using SignalAnalysis.Template.Helpers;
-using SignalAnalysis.Template.Models;
+using $safeprojectname$.Contracts.Services;
+using $safeprojectname$.Helpers;
+using $safeprojectname$.Models;
 using System.Globalization;
 using System.Reflection;
 using Windows.ApplicationModel;
@@ -9,7 +9,7 @@ using Windows.Foundation.Collections;
 using Windows.Globalization;
 using Windows.Storage;
 
-namespace SignalAnalysis.Template.Services;
+namespace $safeprojectname$.Services;
 
 public class LocalizationService : ILocalizationService
 {

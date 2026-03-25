@@ -1,4 +1,4 @@
-﻿namespace SignalAnalysis.Template.Contracts.Services;
+﻿namespace $safeprojectname$.Contracts.Services;
 
 // Interface for managing local settings in the application
 public interface ILocalSettingsService<T>

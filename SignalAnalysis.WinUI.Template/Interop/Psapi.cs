@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SignalAnalysis.Template.Interop;
+namespace $safeprojectname$.Interop;
 internal static partial class Win32
 {
     [DllImport("psapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
