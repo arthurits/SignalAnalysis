@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Interop;
+using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Interop;
 using Microsoft.UI;
 using Microsoft.Graphics.Canvas;
 using Windows.Foundation;

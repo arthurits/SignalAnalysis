@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Helpers;
-using SignalAnalysis.Models;
+using SignalAnalysis.Template.Helpers;
+using SignalAnalysis.Template.Models;
 
 namespace SignalAnalysis.Template.ViewModels;
 

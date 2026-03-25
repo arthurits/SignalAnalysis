@@ -1,5 +1,5 @@
-﻿using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.ViewModels;
+﻿using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.ViewModels;
 
 using Microsoft.UI.Xaml;
 

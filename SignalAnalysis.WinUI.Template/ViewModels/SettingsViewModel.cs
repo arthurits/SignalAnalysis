@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
-using SignalAnalysis.Models;
+using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Helpers;
+using SignalAnalysis.Template.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.System.UserProfile;

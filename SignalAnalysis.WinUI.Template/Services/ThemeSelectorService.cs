@@ -1,7 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
-using SignalAnalysis;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
+using SignalAnalysis.Template;
+using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Helpers;
 
 namespace SignalAnalysis.Template.Services;
 

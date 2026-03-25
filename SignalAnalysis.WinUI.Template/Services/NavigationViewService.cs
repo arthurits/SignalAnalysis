@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
-using SignalAnalysis.ViewModels;
+using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Helpers;
+using SignalAnalysis.Template.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 

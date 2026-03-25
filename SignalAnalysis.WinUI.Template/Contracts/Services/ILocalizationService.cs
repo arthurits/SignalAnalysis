@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using SignalAnalysis.Models;
+using SignalAnalysis.Template.Models;
 
 namespace SignalAnalysis.Template.Contracts.Services;
 

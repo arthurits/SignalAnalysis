@@ -1,4 +1,4 @@
-﻿using SignalAnalysis.Services;
+﻿using SignalAnalysis.Template.Services;
 
 namespace SignalAnalysis.Template.Contracts.Services;
 

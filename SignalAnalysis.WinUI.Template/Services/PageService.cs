@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Template.Contracts.Services;
 using Microsoft.UI.Xaml.Controls;
 
 namespace SignalAnalysis.Template.Services;

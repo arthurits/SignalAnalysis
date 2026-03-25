@@ -1,4 +1,4 @@
-﻿using SignalAnalysis.Contracts.Services;
+﻿using SignalAnalysis.Template.Contracts.Services;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;

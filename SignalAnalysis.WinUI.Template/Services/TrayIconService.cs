@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
-using SignalAnalysis.Interop;
-using SignalAnalysis.Models;
+using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Helpers;
+using SignalAnalysis.Template.Interop;
+using SignalAnalysis.Template.Models;
 using WinRT.Interop;
 using static SignalAnalysis.Interop.Win32;
 

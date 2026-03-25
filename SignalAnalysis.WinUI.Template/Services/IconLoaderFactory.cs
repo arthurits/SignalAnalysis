@@ -1,5 +1,5 @@
-﻿using SignalAnalysis.Services;
-using SignalAnalysis.Contracts.Services;
+﻿using SignalAnalysis.Template.Services;
+using SignalAnalysis.Template.Contracts.Services;
 
 namespace SignalAnalysis.Template.Services;
 public class IconLoaderFactory(GdiPlusIconLoader gdi, Win2DIconLoader win2d) : IIconLoaderFactory

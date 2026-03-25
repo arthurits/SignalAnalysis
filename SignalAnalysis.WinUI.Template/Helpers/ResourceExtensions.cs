@@ -1,4 +1,4 @@
-﻿using SignalAnalysis.Contracts.Services;
+﻿using SignalAnalysis.Template.Contracts.Services;
 using Windows.ApplicationModel.Resources;
 
 namespace SignalAnalysis.Template.Helpers;

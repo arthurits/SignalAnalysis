@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Helpers;
-using SignalAnalysis.Models;
+using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Helpers;
+using SignalAnalysis.Template.Models;
 using Microsoft.Extensions.Options;
 using Windows.Storage;
 

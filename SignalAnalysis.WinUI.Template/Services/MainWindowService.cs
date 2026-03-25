@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Template.Contracts.Services;
 
 namespace SignalAnalysis.Template.Services;
 public partial class MainWindowService : ObservableObject, IMainWindowService

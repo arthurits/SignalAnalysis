@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using SignalAnalysis.Interop;
+using SignalAnalysis.Template.Interop;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
 

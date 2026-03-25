@@ -1,5 +1,5 @@
-﻿using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Models;
+﻿using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Models;
 using Microsoft.UI.Xaml.Media;
 
 namespace SignalAnalysis.Template.Services;

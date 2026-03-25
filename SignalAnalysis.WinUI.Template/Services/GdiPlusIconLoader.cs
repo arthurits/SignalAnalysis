@@ -1,5 +1,5 @@
-﻿using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.Interop;
+﻿using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.Interop;
 
 namespace SignalAnalysis.Template.Services;
 

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using SignalAnalysis.ViewModels;
+using SignalAnalysis.Template.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;

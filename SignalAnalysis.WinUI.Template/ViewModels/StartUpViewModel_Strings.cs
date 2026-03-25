@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SignalAnalysis.Helpers;
+using SignalAnalysis.Template.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
-using SignalAnalysis.Contracts.Services;
-using SignalAnalysis.ViewModels;
+using SignalAnalysis.Template.Contracts.Services;
+using SignalAnalysis.Template.ViewModels;
 
 namespace SignalAnalysis.Template.Views;
 

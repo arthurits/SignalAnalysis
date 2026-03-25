@@ -1,4 +1,4 @@
-﻿using SignalAnalysis.Contracts.Services;
+﻿using SignalAnalysis.Template.Contracts.Services;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;

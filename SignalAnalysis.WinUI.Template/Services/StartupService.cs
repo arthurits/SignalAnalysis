@@ -1,4 +1,4 @@
-﻿using SignalAnalysis.Contracts.Services;
+﻿using SignalAnalysis.Template.Contracts.Services;
 using Microsoft.Win32;
 
 namespace SignalAnalysis.Template.Services;
