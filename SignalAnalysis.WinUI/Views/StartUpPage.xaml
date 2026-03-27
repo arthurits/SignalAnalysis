@@ -6,16 +6,196 @@
     xmlns:local="using:SignalAnalysis.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ScottPlot="using:ScottPlot.WinUI"
     mc:Ignorable="d"
-    NavigationCacheMode="Enabled">
+    NavigationCacheMode="Enabled"
+    Loaded="Page_Loaded"
+    SizeChanged="Page_SizeChanged">
 
     <Page.Resources>
     </Page.Resources>
 
-    <Grid x:Name="ContentArea"
-		  ColumnDefinitions="*"
-          RowDefinitions="*">
+    <Grid x:Name="ContentArea" ColumnDefinitions="*" RowDefinitions ="*">
+        <ScrollView x:Name="ScrollViewPage" ContentOrientation="Vertical"
+            HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch"
+            ZoomMode="Disabled" IsTabStop="True"
+            VerticalAlignment="Top" HorizontalAlignment="Left"
+            HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
 
+            <StackPanel Orientation="Vertical" Style="{StaticResource BaseStackPanel}">
+
+                <Grid x:Name="ContentGrid" ColumnDefinitions="*" RowDefinitions ="*, *, *, *, *, 300, Auto">
+
+                    <!-- Open file section -->
+                    <StackPanel x:Name="PanelOpenFile"
+                                x:DefaultBindMode="OneWay"
+                                Grid.Row="0"
+                                Orientation="Vertical"
+                                Style="{StaticResource ContentStackPanel}"
+                                ToolTipService.ToolTip="{x:Bind ViewModel.StrOpenDocumentToolTip, Mode=OneWay}">
+                        <TextBlock x:Name="LblOpen"
+                               Text="{x:Bind ViewModel.StrOpenDocument}"
+                               TextWrapping="Wrap"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                        <Border CornerRadius="8"
+                                Height="80"
+                                Width="250"
+                                AllowDrop="True"
+                                DragOver="OpenFile_DragOver"
+                                Drop="OpenFile_Drop"
+                                PointerPressed="OpenFile_Click"
+                                ToolTipService.ToolTip="{x:Bind ViewModel.StrDragDropToolTip}">
+                            <Border.Background>
+                                <SolidColorBrush Color="SkyBlue"
+                                Opacity=".6" />
+                            </Border.Background>
+                            <TextBlock x:Name="LblDrop"
+                                   Text="{x:Bind ViewModel.StrDragDrop}"
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Data section -->
+
+                    <!-- Plots section -->
+                    <StackPanel x:Name="PanelPlots"
+                                x:DefaultBindMode="OneWay"
+                            Orientation="Vertical"
+                            Grid.Row="4"
+                            Grid.RowSpan="2"
+                            Margin="0, 12, 0, 0"
+                            Spacing="4">
+                        <Border 
+                            CornerRadius="4"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            BorderThickness="1"
+                            BorderBrush="MistyRose">
+                            <Border.Background>
+                                <SolidColorBrush Color="MistyRose"
+                                             Opacity=".4" />
+                            </Border.Background>
+                            <CommandBar DefaultLabelPosition="Right"
+                                    OverflowButtonVisibility="Collapsed">
+                                <CommandBar.PrimaryCommands>
+                                    <AppBarButton x:Name="SavePlot"
+                                              IsEnabled="{x:Bind ViewModel.PlotSaveEnabled, Mode=OneWay}"
+                                              ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotSaveToolTip}"
+                                              Icon="Save"
+                                              Label="{x:Bind ViewModel.StrButtonPlotSave}"
+                                              LabelPosition="Default"
+                                              Click="SavePlot_Click"
+                                              Foreground="MidnightBlue" />
+                                    <AppBarSeparator/>
+                                    <AppBarToggleButton x:Name="ShowLegend"
+                                                    IsChecked="{x:Bind ViewModel.PlotLegendChecked, Mode=TwoWay}"
+                                                    ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotLegendToolTip}"
+                                                    Label="{x:Bind ViewModel.StrButtonPlotLegend}"
+                                                    LabelPosition="Default"
+                                                    Click="ShowLegend_Click"
+                                                    Foreground="MidnightBlue">
+                                        <AppBarToggleButton.Icon>
+                                            <FontIcon Glyph="&#xE70B;"/>
+                                        </AppBarToggleButton.Icon>
+                                    </AppBarToggleButton>
+                                    <AppBarSeparator/>
+                                    <AppBarElementContainer VerticalAlignment="Center">
+                                        <StackPanel x:Name="plotSeriesPanel"
+                                                Orientation="Horizontal"
+                                                Margin="8,0,0,0">
+                                            <Image Source="/Assets/Series.svg"
+                                               ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotSeriesToolTip}"
+                                               Margin="0,0,8,0"
+                                               Width="16"
+                                               Height="16"/>
+                                            <ComboBox x:Name="plotSeries"
+                                                  AutomationProperties.Name="Plot series"
+                                                  ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotSeriesToolTip}"
+                                                  ItemsSource="{x:Bind ViewModel.PlotSeries, Mode=TwoWay}"
+                                                  DisplayMemberPath="Name"
+                                                  SelectedValuePath="Value"
+                                                  SelectedIndex="0"
+                                                  Width="120"
+                                                  SelectionChanged="Series_SelectionChanged"/>
+                                        </StackPanel>
+                                    </AppBarElementContainer>
+                                    <AppBarSeparator/>
+                                    <AppBarElementContainer VerticalAlignment="Center">
+                                        <StackPanel x:Name="plotPalettePanel"
+                                                    Orientation="Horizontal"
+                                                    Margin="8,0,0,0">
+                                            <Image Source="/Assets/ColorPaletteIcon.svg"
+                                                   ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                   Margin="0,0,8,0"
+                                                   Width="16"
+                                                   Height="16"/>
+                                            <ComboBox x:Name="plotPaletteCombo"
+                                                      AutomationProperties.Name="Plot palette"
+                                                      ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                      ItemsSource="{x:Bind PlotPalettes}"
+                                                      SelectedValue="{x:Bind ViewModel.PlotPalette, Mode=TwoWay}"
+                                                      Width="170"
+                                                      SelectionChanged="Palette_SelectionChanged"/>
+                                        </StackPanel>
+                                    </AppBarElementContainer>
+                                    <AppBarSeparator Visibility="Collapsed"/>
+                                    <AppBarToggleButton x:Name="UpdatePlotSimpleTasks"
+                                                      ToolTipService.ToolTip="Compute LM-MMH"
+                                                      Icon="Calculator"
+                                                      Label="Compute"
+                                                      LabelPosition="Default"
+                                                      IsChecked="{x:Bind ViewModel.UpdatePlotSimpleTasksChecked, Mode=TwoWay}"
+                                                      Checked="UpdatePlotSimpleTasks_Checked"
+                                                      Foreground="MidnightBlue"
+                                                      Visibility="Collapsed"/>
+                                    <AppBarToggleButton x:Name="UpdatePlotCompositeTasks"
+                                                        IsChecked="{x:Bind ViewModel.UpdatePlotCompositeTasksChecked, Mode=TwoWay}"
+                                                        Checked="UpdatePlotCompositeTasks_Checked"
+                                                        Foreground="MidnightBlue"
+                                                        Visibility="Collapsed"/>
+                                </CommandBar.PrimaryCommands>
+                            </CommandBar>
+                        </Border>
+                        <Border 
+                            CornerRadius="{x:Bind PanelTextResults.CornerRadius}"
+                            BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
+                            BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
+                            Height="300">
+                            <Grid ColumnDefinitions="*, *, *" RowDefinitions="*">
+                                <ScottPlot:WinUIPlot x:Name="PlotSimpleTasks"
+                                    Grid.Column="0">
+                                </ScottPlot:WinUIPlot>
+                                <ScottPlot:WinUIPlot x:Name="PlotCompositeTasks"
+                                    Grid.Column="1">
+                                </ScottPlot:WinUIPlot>
+                                <ScottPlot:WinUIPlot x:Name="PlotTaskFactors"
+                                    Grid.Column="3">
+                                </ScottPlot:WinUIPlot>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel x:Name="PanelTextResults"
+                                    Style="{StaticResource ContentStackPanel}"
+                                Visibility="Collapsed">
+                        <ScrollView x:Name="ScrollViewText" ContentOrientation="Horizontal"
+                                        HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch"
+                                        ZoomMode="Disabled" IsTabStop="True"
+                                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                                        HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="TextResults">
+                            </TextBlock>
+                        </ScrollView>
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+        </ScrollView>
     </Grid>
     
 </Page>
