@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
 
 namespace SignalAnalysis.ViewModels;
