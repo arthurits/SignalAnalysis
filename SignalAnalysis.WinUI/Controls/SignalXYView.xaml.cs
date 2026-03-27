@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ScottPlot;
 using ScottPlot.Plottables;
+using ScottPlot.WinUI;
 using SignalAnalysis.Helpers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -42,14 +43,20 @@ public sealed partial class SignalXYView : UserControl
     private readonly ScottPlot.WinUI.WinUIPlot _winUIPlot;
     readonly Plot _plot;
     readonly SignalXY _signal;
-    double[] _xsArray = [];
-    double[] _ysArray = [];
+    double[] _xsArray = new double[200];
+    double[] _ysArray = new double[200];
 
     public SignalXYView()
     {
         InitializeComponent();
 
         _debouncer = new DebounceDispatcher(DispatcherQueue.GetForCurrentThread(), TimeSpan.FromMilliseconds(80));
+
+        for (int i = 0; i < 200; i++)
+        {
+            _xsArray[i] = i * 0.1;
+            _ysArray[i] = Math.Sin(_xsArray[i]);
+        }
 
         // Crear Plot y SignalXY
         _winUIPlot = new();
@@ -62,6 +69,7 @@ public sealed partial class SignalXYView : UserControl
         // Aquí dejamos un placeholder: el usuario debe reemplazar por su host concreto.
         RootGrid.Children.Add(_winUIPlot); // <-- reemplazar por tu host
         WinUIPlotHost = _winUIPlot; // <-- si tu host tiene una propiedad Plot, asígnale el plot creado aquí.
+        WinUIPlotHost.Refresh();
     }
 
     static void OnXsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -115,7 +123,7 @@ public sealed partial class SignalXYView : UserControl
         //_signal.Update(_xsArray, _ysArray);
     }
 
-    void RequestRenderDebounced()
+    public void RequestRenderDebounced()
     {
         _debouncer.Debounce(() =>
         {
@@ -123,9 +131,14 @@ public sealed partial class SignalXYView : UserControl
             // Si usas un host que expone Render(), llámalo aquí.
             // Ejemplo genérico:
             //_plot.Render();
-            _winUIPlot.Refresh();
+            //_winUIPlot.Refresh();
+            DispatcherQueue.GetForCurrentThread().TryEnqueue(() =>
+            {
+                WinUIPlotHost.Refresh();
+            });
         });
     }
 
-    
+    public void ForceRender() => WinUIPlotHost.Refresh();
+
 }

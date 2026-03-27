@@ -6,6 +6,7 @@
     xmlns:local="using:SignalAnalysis.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:SignalAnalysis.Controls"
     xmlns:ScottPlot="using:ScottPlot.WinUI"
     mc:Ignorable="d"
     NavigationCacheMode="Enabled"
@@ -166,8 +167,13 @@
                             BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
                             Height="300">
                             <Grid ColumnDefinitions="*, *, *" RowDefinitions="*">
+                                <controls:SignalXYView x:Name="signalXYView"
+                                                       Grid.Column="0"
+                                                       Xs="{x:Bind ViewModel.Xs, Mode=OneWay}"
+                                                       Ys="{x:Bind ViewModel.Ys, Mode=OneWay}">
+                                </controls:SignalXYView>
                                 <ScottPlot:WinUIPlot x:Name="PlotSimpleTasks"
-                                    Grid.Column="0">
+                                    Grid.Column="1">
                                 </ScottPlot:WinUIPlot>
                                 <ScottPlot:WinUIPlot x:Name="PlotCompositeTasks"
                                     Grid.Column="1">
