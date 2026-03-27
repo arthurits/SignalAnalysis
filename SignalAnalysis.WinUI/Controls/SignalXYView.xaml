@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="SignalAnalysis.Controls.SignalXYView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SignalAnalysis.Controls"
+    xmlns:winUI="using:ScottPlot.WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="RootGrid">
+        <!-- Reemplaza el contenido interior por el control WinUI de ScottPlot que uses.
+             Aquí dejamos un Grid como placeholder; el código-behind añadirá el host. -->
+        <winUI:WinUIPlot x:Name="WinUIPlotHost" />
+    </Grid>
+    
+</UserControl>
