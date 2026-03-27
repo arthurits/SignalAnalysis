@@ -1,11 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SignalAnalysis.Contracts.Services;
+using System.Collections.ObjectModel;
 
 namespace SignalAnalysis.ViewModels;
 
 public partial class StartUpViewModel: ObservableRecipient
 {
     private readonly ILocalizationService _localizationService;
+
+    public ObservableCollection<PlotSeries> PlotSeries = [];
+
+    [ObservableProperty]
+    public partial bool PlotSaveEnabled { get; set; } = true;
+    [ObservableProperty]
+    public partial bool PlotLegendChecked { get; set; } = true;
+    [ObservableProperty]
+    public partial string PlotPalette { get; set; } = (new ScottPlot.Palettes.Nord()).Name;
+    [ObservableProperty]
+    public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
+    [ObservableProperty]
+    public partial bool UpdatePlotCompositeTasksChecked { get; set; } = false;
 
     public StartUpViewModel(ILocalizationService localizationService)
     {
