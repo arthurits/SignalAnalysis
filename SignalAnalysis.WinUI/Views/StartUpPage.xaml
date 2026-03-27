@@ -8,7 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ScottPlot="using:ScottPlot.WinUI"
     mc:Ignorable="d"
-    NavigationCacheMode="Enabled">
+    NavigationCacheMode="Enabled"
+    Loaded="Page_Loaded"
+    SizeChanged="Page_SizeChanged">
 
     <Page.Resources>
     </Page.Resources>
@@ -162,7 +164,7 @@
                             CornerRadius="{x:Bind PanelTextResults.CornerRadius}"
                             BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
                             BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
-                            Height="600">
+                            Height="300">
                             <Grid ColumnDefinitions="*, *, *" RowDefinitions="*">
                                 <ScottPlot:WinUIPlot x:Name="PlotSimpleTasks"
                                     Grid.Column="0">
