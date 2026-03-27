@@ -11,6 +11,9 @@ public partial class StartUpViewModel: ObservableRecipient
 
     public ObservableCollection<PlotSeries> PlotSeries = [];
 
+    public ObservableCollection<double> Xs { get; } = [];
+    public ObservableCollection<double> Ys { get; } = [];
+
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
     [ObservableProperty]
@@ -31,6 +34,13 @@ public partial class StartUpViewModel: ObservableRecipient
 
         // Load string resources into binding variables for the UI
         OnLanguageChanged(null, EventArgs.Empty);
+
+        // For testeing purposes, add some dummy data to the plot series collection
+        for (int i = 0; i < 200; i++)
+        {
+            Xs.Add(i * 0.1);
+            Ys.Add(System.Math.Sin(i * 0.1));
+        }
     }
 
     public void Dispose()
