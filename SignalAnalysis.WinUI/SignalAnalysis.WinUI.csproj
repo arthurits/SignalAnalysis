@@ -32,6 +32,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controls\SignalXYView.xaml" />
     <None Remove="Views\StartUpPage.xaml" />
   </ItemGroup>
   
@@ -70,6 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\StartUpPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\SignalXYView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
