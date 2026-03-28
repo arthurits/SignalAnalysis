@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ScottPlot;
 using ScottPlot.Plottables;
-using ScottPlot.WinUI;
 using SignalAnalysis.Helpers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
