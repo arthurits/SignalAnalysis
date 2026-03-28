@@ -40,7 +40,7 @@ public sealed partial class SignalXYView : UserControl
 
     // Internal property to hold the reference to the ScottPlot host control, which is used to call Refresh() when needed.
     // This should be set by the parent view after adding the host control to the visual tree.
-    private readonly object _sync = new();
+    private readonly Lock _sync = new();
     private readonly DebounceDispatcher _debouncer;
     private readonly ScottPlot.WinUI.WinUIPlot _winUIPlot;
     private readonly Plot _plot;
@@ -50,8 +50,8 @@ public sealed partial class SignalXYView : UserControl
     // These are updated based on changes to the Xs and Ys collections, and are what the SignalXY plottable uses as its data source.
     // We maintain these internal lists to ensure that we only add complete pairs of X and Y values to the plot,
     // and to handle cases where X and Y values may arrive in an interleaved manner.
-    private List<double> _xsList = [];
-    private List<double> _ysList = [];
+    private readonly List<double> _xsList = [];
+    private readonly List<double> _ysList = [];
 
     // Internal buffers to hold pending X or Y values when they arrive without their corresponding pair,
     // to ensure that we only add complete pairs to the plot. This handles the case where X and Y are added in an interleaved manner.
@@ -83,7 +83,6 @@ public sealed partial class SignalXYView : UserControl
     {
         var ctrl = (SignalXYView)d;
         ctrl.OnCollectionAssigned(e.OldValue as ObservableCollection<double>, e.NewValue as ObservableCollection<double>);
-
     }
 
     private static void OnYsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
