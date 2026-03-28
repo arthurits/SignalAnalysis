@@ -39,12 +39,12 @@ public sealed partial class SignalXYView : UserControl
     // y enlazar el Plot creado aquí al host concreto de ScottPlot WinUI.
     public Plot GetPlot() => _plot;
 
-    readonly DebounceDispatcher _debouncer;
+    private readonly DebounceDispatcher _debouncer;
     private readonly ScottPlot.WinUI.WinUIPlot _winUIPlot;
-    readonly Plot _plot;
-    readonly SignalXY _signal;
-    double[] _xsArray = new double[200];
-    double[] _ysArray = new double[200];
+    private readonly Plot _plot;
+    private readonly SignalXY _signal;
+    private List<double> _xsList = [];
+    private List<double> _ysList = [];
 
     public SignalXYView()
     {
@@ -52,16 +52,16 @@ public sealed partial class SignalXYView : UserControl
 
         _debouncer = new DebounceDispatcher(DispatcherQueue.GetForCurrentThread(), TimeSpan.FromMilliseconds(80));
 
-        for (int i = 0; i < 200; i++)
-        {
-            _xsArray[i] = i * 0.1;
-            _ysArray[i] = Math.Sin(_xsArray[i]);
-        }
+        //for (int i = 0; i < 200; i++)
+        //{
+        //    _xsList.Add(i * 0.1);
+        //    _ysList.Add(Math.Sin(_xsList[i]));
+        //}
 
         // Crear Plot y SignalXY
         _winUIPlot = new();
         _plot = _winUIPlot.Plot;
-        _signal = _plot.Add.SignalXY(_xsArray, _ysArray);
+        _signal = _plot.Add.SignalXY(_xsList, _ysList);
 
         // Insertar el host visual de ScottPlot en el Grid RootGrid
         // Ajusta la siguiente línea al control WinUI que uses para renderizar ScottPlot.
@@ -84,7 +84,7 @@ public sealed partial class SignalXYView : UserControl
         ctrl.OnCollectionAssigned(e.OldValue as ObservableCollection<double>, e.NewValue as ObservableCollection<double>, isX: false);
     }
 
-    void OnCollectionAssigned(ObservableCollection<double> oldCol, ObservableCollection<double> newCol, bool isX)
+    void OnCollectionAssigned(ObservableCollection<double>? oldCol, ObservableCollection<double>? newCol, bool isX)
     {
         oldCol?.CollectionChanged -= Collections_CollectionChanged;
 
@@ -109,15 +109,16 @@ public sealed partial class SignalXYView : UserControl
         int count = System.Math.Min(xs.Count, ys.Count);
         if (count == 0)
         {
-            _xsArray = [];
-            _ysArray = [];
-            //_signal.Update(_xsArray, _ysArray);
+            _xsList.Clear();
+            _ysList.Clear();
             return;
         }
 
         // Copia eficiente: si las colecciones son listas internas, puedes optimizar.
-        _xsArray = xs.Take(count).ToArray();
-        _ysArray = ys.Take(count).ToArray();
+        _xsList.AddRange(xs.Take(count));
+        _ysList.AddRange(ys.Take(count));
+        //_xsList = xs.Take(count).ToArray();
+        //_ysList = ys.Take(count).ToArray();
 
         //// Actualiza el SignalXY con los nuevos arrays
         //_signal.Update(_xsArray, _ysArray);
