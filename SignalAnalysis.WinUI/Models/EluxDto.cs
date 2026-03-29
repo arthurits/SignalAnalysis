@@ -12,14 +12,8 @@ namespace SignalAnalysis.Models;
 /// </summary>
 /// <remarks>This class is used to serialize and deserialize elux data, including information about the
 /// document type, file version, and signal data.</remarks>
-internal class EluxlDto
+internal class EluxlDto: DocumentBase
 {
-    // Campo para indicar la cultura detectada en el fichero de texto (ej: "es-ES")
-    public string CultureName { get; set; } = "es-ES";
-
-    public string DocumentType { get; set; } = string.Empty;
-    public double FileVersion { get; set; }
-
     [JsonConverter(typeof(LocalizedDateTimeConverter))]
     public DateTime StartingTime { get; set; }
 
@@ -37,9 +31,9 @@ internal class EluxlDto
     public List<List<double>> SeriesData { get; set; } = new();
 
     // Helper: crea JsonSerializerOptions con la cultura del DTO y añade converters instanciados con esa cultura.
-    public JsonSerializerOptions CreateJsonOptions()
+    public override JsonSerializerOptions CreateJsonOptions()
     {
-        var culture = GetCultureInfoOrDefault();
+        var culture = !string.IsNullOrWhiteSpace(CultureName) ? new CultureInfo(CultureName) : CultureInfo.InvariantCulture;
         var options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = new EluxlNamingPolicy(),
@@ -47,19 +41,20 @@ internal class EluxlDto
         };
         options.Converters.Add(new LocalizedDateTimeConverter(culture));
         options.Converters.Add(new LocalizedTimeSpanConverter(culture));
+        // añadir otros converters si procede
         return options;
     }
 
-    private CultureInfo GetCultureInfoOrDefault()
-    {
-        try
-        {
-            if (!string.IsNullOrWhiteSpace(CultureName))
-                return new CultureInfo(CultureName);
-        }
-        catch { /* ignore and fallback */ }
-        return new CultureInfo("en-US");
-    }
+    //private CultureInfo GetCultureInfoOrDefault()
+    //{
+    //    try
+    //    {
+    //        if (!string.IsNullOrWhiteSpace(CultureName))
+    //            return new CultureInfo(CultureName);
+    //    }
+    //    catch { /* ignore and fallback */ }
+    //    return new CultureInfo("en-US");
+    //}
 
     // Parsea un fichero ErgoLux en memoria (líneas) y devuelve un DTO rellenado.
     // Asume que la primera línea contiene algo como "ErgoLux data (es-ES)" o similar.
@@ -129,8 +124,8 @@ internal class EluxlDto
             else
             {
                 // Si la línea contiene "Sensor #00" es la cabecera de la tabla
-                if (line.IndexOf("Sensor #00", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    line.IndexOf("Sensor #0", StringComparison.OrdinalIgnoreCase) >= 0)
+                if (line.Contains("Sensor #00", StringComparison.OrdinalIgnoreCase) ||
+                    line.Contains("Sensor #0", StringComparison.OrdinalIgnoreCase))
                 {
                     break; // i apunta a la cabecera de la tabla
                 }
@@ -143,7 +138,7 @@ internal class EluxlDto
         {
             for (int j = 0; j < lines.Length; j++)
             {
-                if (lines[j].IndexOf("Sensor #", StringComparison.OrdinalIgnoreCase) >= 0)
+                if (lines[j].Contains("Sensor #", StringComparison.OrdinalIgnoreCase))
                 {
                     headerIndex = j;
                     break;
