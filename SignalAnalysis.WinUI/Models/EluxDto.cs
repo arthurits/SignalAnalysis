@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using SignalAnalysis.Converters;
+using SignalAnalysis.Helpers;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
@@ -18,13 +20,13 @@ internal class EluxlDto
     public string DocumentType { get; set; } = string.Empty;
     public double FileVersion { get; set; }
 
-    [JsonConverter(typeof(LocalizedDateTimeConverter), /* placeholder: converter instance will be added to options */)]
+    [JsonConverter(typeof(LocalizedDateTimeConverter))]
     public DateTime StartingTime { get; set; }
 
-    [JsonConverter(typeof(LocalizedDateTimeConverter), /* placeholder */)]
+    [JsonConverter(typeof(LocalizedDateTimeConverter))]
     public DateTime EndingTime { get; set; }
 
-    [JsonConverter(typeof(LocalizedTimeSpanConverter), /* placeholder */)]
+    [JsonConverter(typeof(LocalizedTimeSpanConverter))]
     public TimeSpan Duration { get; set; }
 
     public int SensorNumber { get; set; }
