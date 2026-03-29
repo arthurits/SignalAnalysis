@@ -291,6 +291,17 @@ public sealed partial class StartUpPage : Page, IDisposable
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private async Task<bool> OpenJsonDocument(string jsonString)
     {
+        // Leer fichero
+        var lines = File.ReadAllLines("miarchivo.sig");
+        var dto = SignalDto.ParseFromSigText(lines);
+
+        // Serializar a JSON (opcional: guardar doubles como strings con coma decimal)
+        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
+        var json = JsonSerializer.Serialize(dto, options);
+
+        // Deserializar (asegúrate de crear las mismas opciones si usaste converter de doubles)
+        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+
         //// Deserialize the json string to get the header information
         //JobJsonDto? data;
         //try
