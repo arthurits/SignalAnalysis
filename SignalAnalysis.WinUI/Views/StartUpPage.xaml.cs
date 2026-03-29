@@ -4,10 +4,12 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Converters;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.ViewModels;
 using System.Data;
+using System.Globalization;
 using System.Text.Json;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
@@ -301,6 +303,11 @@ public sealed partial class StartUpPage : Page, IDisposable
 
         // Deserializar (asegúrate de crear las mismas opciones si usaste converter de doubles)
         var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+
+        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
+        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
+        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
+        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
 
         //// Deserialize the json string to get the header information
         //JobJsonDto? data;
