@@ -179,20 +179,18 @@ public sealed partial class StartUpPage : Page, IDisposable
                 else
                 {
                     _ = await MessageBox.Show(
-                        App.MainWindow.Content.XamlRoot,
-                        $"Incorrect file type.{Environment.NewLine}Please select a '*.sig' file type.",
-                        "Error",
-                        "OK",
+                        messageBoxText: "MsgBoxFileTypeContent".GetLocalized("MessageBox"),
+                        caption: "MsgBoxFileTypeTitle".GetLocalized("MessageBox"),
+                        primaryButtonText: "MsgBoxFileTypePrimary".GetLocalized("MessageBox"),
                         icon: MessageBox.MessageBoxImage.Error);
                 }
             }
             else
             {
                 _ = await MessageBox.Show(
-                    App.MainWindow.Content.XamlRoot,
-                    "Please, drop one file at a time",
-                    "Error",
-                    "OK",
+                    messageBoxText: "MsgBoxDropOneFileContent".GetLocalized("MessageBox"),
+                    caption: "MsgBoxDropOneFileTitle".GetLocalized("MessageBox"),
+                    primaryButtonText: "MsgBoxDropOneFilePrimary".GetLocalized("MessageBox"),
                     icon: MessageBox.MessageBoxImage.Error);
             }
         }
@@ -246,7 +244,8 @@ public sealed partial class StartUpPage : Page, IDisposable
 
         // Set options for your file picker
         openPicker.ViewMode = PickerViewMode.Thumbnail;
-        openPicker.FileTypeFilter.Add(".mmh");
+        openPicker.FileTypeFilter.Add(".sig");
+        openPicker.FileTypeFilter.Add(".elux");
 
         if (!rememberFileDialogPath)
         {
@@ -275,10 +274,9 @@ public sealed partial class StartUpPage : Page, IDisposable
         else
         {
             _ = await MessageBox.Show(
-                App.MainWindow.Content.XamlRoot,
-                "Could not open the file",
-                "Cancel",
-                "OK",
+                messageBoxText: "MsgBoxOpenFileErrorContent".GetLocalized("MessageBox"),
+                caption: "MsgBoxOpenFileErrorTitle".GetLocalized("MessageBox"),
+                primaryButtonText: "MsgBoxOpenFileErrorPrimary".GetLocalized("MessageBox"),
                 icon: MessageBox.MessageBoxImage.Information);
             result = false;
         }
