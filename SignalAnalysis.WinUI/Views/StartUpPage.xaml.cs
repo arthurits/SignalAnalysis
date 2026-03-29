@@ -244,7 +244,8 @@ public sealed partial class StartUpPage : Page, IDisposable
 
         // Set options for your file picker
         openPicker.ViewMode = PickerViewMode.Thumbnail;
-        openPicker.FileTypeFilter.Add(".mmh");
+        openPicker.FileTypeFilter.Add(".sig");
+        openPicker.FileTypeFilter.Add(".elux");
 
         if (!rememberFileDialogPath)
         {
