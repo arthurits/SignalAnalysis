@@ -39,6 +39,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MsgBoxDropOneFileContent" xml:space="preserve">
+    <value>No es posible arrastrar y abrir
+múltiples archivos a la vez.</value>
+  </data>
+  <data name="MsgBoxDropOneFilePrimary" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="MsgBoxDropOneFileTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="MsgBoxExitCancel" xml:space="preserve">
     <value>No, cancelar</value>
   </data>
@@ -50,6 +60,26 @@
   </data>
   <data name="MsgBoxExitTitle" xml:space="preserve">
     <value>¿Salir?</value>
+  </data>
+  <data name="MsgBoxFileTypeContent" xml:space="preserve">
+    <value>Archivo incorrecto.
+Por favor, seleccione archivos tipo '*.sig' o '*.elux'.</value>
+  </data>
+  <data name="MsgBoxFileTypePrimary" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="MsgBoxFileTypeTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="MsgBoxOpenFileErrorContent" xml:space="preserve">
+    <value>No es posible abrir y leer
+el contenido del archivo.</value>
+  </data>
+  <data name="MsgBoxOpenFileErrorPrimary" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="MsgBoxOpenFileErrorTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="MsgBoxResetSettingsClose" xml:space="preserve">
     <value>No</value>
