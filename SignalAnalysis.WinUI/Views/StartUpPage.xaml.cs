@@ -4,10 +4,12 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Converters;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.ViewModels;
 using System.Data;
+using System.Globalization;
 using System.Text.Json;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
@@ -291,6 +293,34 @@ public sealed partial class StartUpPage : Page, IDisposable
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private async Task<bool> OpenJsonDocument(string jsonString)
     {
+        // Leer fichero
+        var lines = File.ReadAllLines("miarchivo.sig");
+        var dto = SignalDto.ParseFromSigText(lines);
+
+        // Serializar a JSON (opcional: guardar doubles como strings con coma decimal)
+        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
+        var json = JsonSerializer.Serialize(dto, options);
+
+        // Deserializar (asegúrate de crear las mismas opciones si usaste converter de doubles)
+        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+
+        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
+        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
+        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
+        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
+
+        // 1) Parsear desde texto (archivo .eluxl o .sig)
+        var lines2 = File.ReadAllLines("miarchivo.sig");
+        DocumentBase doc = DocumentFactory.ParseFromText(lines2);
+        if (doc is EluxlDto elux) { /* trabajar con elux */ }
+        if (doc is SignalDto sig) { /* trabajar con sig */ }
+
+        // 2) Deserializar desde JSON (detecta tipo y cultura)
+        DocumentBase docFromJson = DocumentFactory.DeserializeFromJson(json);
+
+        // 3) Serializar a JSON (valida cabecera)
+        string jsonOut = DocumentFactory.SerializeToJson(doc);
+
         //// Deserialize the json string to get the header information
         //JobJsonDto? data;
         //try
