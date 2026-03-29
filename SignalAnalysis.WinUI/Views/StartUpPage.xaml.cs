@@ -309,6 +309,18 @@ public sealed partial class StartUpPage : Page, IDisposable
         optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
         var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
 
+        // 1) Parsear desde texto (archivo .eluxl o .sig)
+        var lines2 = File.ReadAllLines("miarchivo.sig");
+        DocumentBase doc = DocumentFactory.ParseFromText(lines2);
+        if (doc is EluxlDto elux) { /* trabajar con elux */ }
+        if (doc is SignalDto sig) { /* trabajar con sig */ }
+
+        // 2) Deserializar desde JSON (detecta tipo y cultura)
+        DocumentBase docFromJson = DocumentFactory.DeserializeFromJson(json);
+
+        // 3) Serializar a JSON (valida cabecera)
+        string jsonOut = DocumentFactory.SerializeToJson(doc);
+
         //// Deserialize the json string to get the header information
         //JobJsonDto? data;
         //try

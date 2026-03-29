@@ -18,3 +18,4 @@ internal sealed class SignalNamingPolicy : JsonNamingPolicy
         if (string.IsNullOrEmpty(name)) return name;
         return char.ToLowerInvariant(name[0]) + name[1..];
     }
+}
