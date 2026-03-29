@@ -1,7 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace SignalAnalysis.Models;
 
@@ -33,7 +31,7 @@ public abstract class DocumentBase
     /// <summary>
     /// Cada DTO concreto debe proporcionar opciones de JsonSerializer configuradas con la cultura adecuada.
     /// </summary>
-    public abstract JsonSerializerOptions CreateJsonOptions();
+    public abstract JsonSerializerOptions CreateJsonOptions(bool serializeDoublesAsStrings = false);
 }
 
 /// <summary>

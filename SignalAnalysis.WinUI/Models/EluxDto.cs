@@ -27,11 +27,11 @@ internal class EluxlDto: DocumentBase
     public int SeriesPoints { get; set; }
     public double SamplingFrequency { get; set; }
 
-    public List<string> SeriesNames { get; set; } = new();
-    public List<List<double>> SeriesData { get; set; } = new();
+    public List<string> SeriesNames { get; set; } = [];
+    public List<List<double>> SeriesData { get; set; } = [];
 
     // Helper: crea JsonSerializerOptions con la cultura del DTO y añade converters instanciados con esa cultura.
-    public override JsonSerializerOptions CreateJsonOptions()
+    public override JsonSerializerOptions CreateJsonOptions(bool serializeDoublesAsStrings = false)
     {
         var culture = !string.IsNullOrWhiteSpace(CultureName) ? new CultureInfo(CultureName) : CultureInfo.InvariantCulture;
         var options = new JsonSerializerOptions
