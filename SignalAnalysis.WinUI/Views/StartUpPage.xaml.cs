@@ -9,6 +9,7 @@ using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.ViewModels;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using Windows.ApplicationModel.DataTransfer;
@@ -266,24 +267,27 @@ public sealed partial class StartUpPage : Page, IDisposable
 
     private async Task<bool> OpenFile(StorageFile? file)
     {
-        bool result = true;
-
-        if (file is not null)
-        {
-            string jsonString = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
-            result = await OpenJsonDocument(jsonString);
-        }
-        else
+        if (file is null)
         {
             _ = await MessageBox.Show(
                 messageBoxText: "MsgBoxOpenFileErrorContent".GetLocalized("MessageBox"),
                 caption: "MsgBoxOpenFileErrorTitle".GetLocalized("MessageBox"),
                 primaryButtonText: "MsgBoxOpenFileErrorPrimary".GetLocalized("MessageBox"),
                 icon: MessageBox.MessageBoxImage.Information);
-            result = false;
+            return false;
         }
 
-        return result;
+        try
+        {
+            string jsonString = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            return await OpenJsonDocument(jsonString);
+        }
+        catch (Exception ex)
+        {
+            // Log o mostrar mensaje según tu infraestructura
+            Debug.WriteLine(ex);
+            return false;
+        }
     }
 
     /// <summary>
