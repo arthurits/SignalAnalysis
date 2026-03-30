@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>নির্মাণে {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>কপিরাইট {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>মৌলিক বর্ণনামূলক পরিসংখ্যান, এফএফটি (দ্রুত ফুরিয়ার ট্রান্সফর্ম), ফ্র্যাক্টাল ডাইমেনশন, ডিফারেন্সিয়েশন, ইন্টিগ্রেশন এবং সিগন্যালের জন্য এনট্রপি (এলাক্স ফাইলের পাশাপাশি জেনেরিক ফাইল) সমন্বিত বিশ্লেষণ টুল।
+
+কোনো বাণিজ্যিক ব্যবহারের অনুমতি নেই. কোন অনুসন্ধানের জন্য লেখকের সাথে যোগাযোগ করুন.
+
+আপনি যদি এই সফ্টওয়্যারটিকে দরকারী মনে করেন, তাহলে অনুগ্রহ করে এটিকে সমর্থন করার কথা বিবেচনা করুন!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>পণ্যের নাম: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>সংস্করণ {0}</value>
+  </data>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>&amp;গ্রহণ করুন</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>&amp;বাতিল করুন</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>ডেটা নির্বাচন করুন</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>&amp;রপ্তানি</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>&amp;পুন:স্থাপন</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>&amp;সেটিংস</value>
+  </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>বক্স চক্রান্ত</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>প্লটের ক্রসহেয়ার দেখান</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>ক্রমবর্ধমান ফ্র্যাক্টাল মাত্রা</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>আগের পথ খোলা/সংরক্ষণ ডায়ালগ মনে রাখবেন</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>এনট্রপি (আনুমানিক এবং নমুনা)</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>শক্তি (dB)</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>আপনি কি সব ক্ষেত্র রিসেট করতে চান?
+তাদের ডিফল্ট মান?</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>পুন:স্থাপন সেটিংস?</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>সেটিংস ফাইল লোড করার সময় ত্রুটি.
+
+{0}
+
+পরিবর্তে ডিফল্ট মান ব্যবহার করা হবে.</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>ত্রুটি</value>
+  </data>
+  <data name="strFileHeader00" xml:space="preserve">
+    <value>এরগোলাক্স তথ্য</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>সংকেত বিশ্লেষণ তথ্য</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>সময় শুরু</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>শেষ সময়</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>মোট পরিমাপের সময়</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>ডেটা পয়েন্টের সংখ্যা</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>স্যাম্পলিং ফ্রিকোয়েন্সি</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>গড়</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>সর্বোচ্চ</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>সর্বনিম্ন</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>ফ্র্যাক্টাল মাত্রা</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>ফ্র্যাক্টাল ভ্যারিয়েন্স</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>আনুমানিক এনট্রপি</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>নমুনা এনট্রপি</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>শ্যানন এনট্রপি</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>এনট্রপি বিট</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>আদর্শ এনট্রপি</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>ডেটা সিরিজের সংখ্যা</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>সেন্সর সংখ্যা</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>একটি খালি লাইন অনুপস্থিত.</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>অনুপস্থিত কলাম শিরোনাম (সিরিজের নাম).</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>সময়</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>দিন</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>ঘন্টা</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>মিনিট</value>
+  </data>
+  <data name="strFileHeader25" xml:space="preserve">
+    <value>সেকেন্ড</value>
+  </data>
+  <data name="strFileHeader26" xml:space="preserve">
+    <value>এবং</value>
+  </data>
+  <data name="strFileHeader27" xml:space="preserve">
+    <value>মিলিসেকেন্ড</value>
+  </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>ডেরিভেটিভ</value>
+  </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>ভ্যারিয়েন্স</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>শ্যানন / আদর্শ</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>বিভাগ '{0}' ভুল ফর্ম্যাট করা হয়েছে.</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>বিভাগ সংস্কৃতি</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>সেটিংস</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>সংকেত বিশ্লেষণ</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>অ্যাবসিসা অক্ষ</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>UI এবং ডেটা বিন্যাস</value>
+  </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT পয়েন্ট</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>ডাটা-ফাইল পাথ</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>সংখ্যাসূচক ডেটা-ফরম্যাটিং স্ট্রিং</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>অ্যারে সূচক শেষ (সর্বোচ্চ {0})</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>সিরিজ নির্বাচন করুন</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>অ্যারে সূচী শুরু</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>জানালা</value>
+  </data>
+  <data name="strMsgBoxErrorFFT" xml:space="preserve">
+    <value>FFT গণনা করার সময় অপ্রত্যাশিত ত্রুটি.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
+    <value>FFT ত্রুটি</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>ডেটা ফাইল খোলার সময় একটি অপ্রত্যাশিত ত্রুটি ঘটেছে.
+অনুগ্রহ করে পরে আবার চেষ্টা করুন বা সফ্টওয়্যার ইঞ্জিনিয়ারের সাথে যোগাযোগ করুন.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Error opening data</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>ডেটা ফাইল সংরক্ষণ করার সময় একটি অপ্রত্যাশিত ত্রুটি ঘটেছে.
+অনুগ্রহ করে পরে আবার চেষ্টা করুন বা সফ্টওয়্যার ইঞ্জিনিয়ারের সাথে যোগাযোগ করুন.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>ডেটা সংরক্ষণে ত্রুটি৷</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>তুমি কি নিশ্চিত আপনি প্রস্থান করতে চান
+সফটওয়্যার টি?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>প্রস্থান করুন?</value>
+  </data>
+  <data name="strMsgBoxInitArray" xml:space="preserve">
+    <value>অপ্রত্যাশিত ত্রুটি 'InitializeDataArrays'.
+{0}</value>
+  </data>
+  <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
+    <value>ত্রুটি</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>সংরক্ষণ করার জন্য কোন তথ্য উপলব্ধ নেই.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>কোন তথ্য নেই</value>
+  </data>
+  <data name="strMsgBoxOKSaveData" xml:space="preserve">
+    <value>ডেটা সফলভাবে ডিস্কে সংরক্ষণ করা হয়েছে.</value>
+  </data>
+  <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
+    <value>ডেটা সংরক্ষিত</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
+    <value>হাউসডর্ফ-বেসিকোভিচ ফ্র্যাক্টাল মাত্রার গণনা
+বন্ধ করা হয়েছে.</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
+    <value>বন্ধ</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>ErgoLux ফাইলগুলি (*.elux)|*.elux|SignalAnalysis ফাইলগুলি (*.sig)|*.sig|টেক্সট ফাইলগুলি (*.txt)|*.txt|বাইনারি ফাইলগুলি (*.bin)|*.bin|সকল ফাইলগুলি (*.*)|*.*</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>তথ্যের ফাইল খুলুন</value>
+  </data>
+  <data name="strPlotAppliedTitle" xml:space="preserve">
+    <value>জানালাযুক্ত সংকেত</value>
+  </data>
+  <data name="strPlotAppliedXLabel" xml:space="preserve">
+    <value>সময় (সেকেন্ড)</value>
+  </data>
+  <data name="strPlotAppliedYLabel" xml:space="preserve">
+    <value>প্রশস্ততা</value>
+  </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>বক্স চক্রান্ত</value>
+  </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>প্রশস্ততা</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>ডেরিভেটিভ</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>সময় (সেকেন্ড)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>প্রশস্ততা / সেকেন্ড</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>প্রশস্ততা</value>
+  </data>
+  <data name="strPlotFFTTitle" xml:space="preserve">
+    <value>ফাস্ট ফোরিয়ার ট্রান্সফর্ম</value>
+  </data>
+  <data name="strPlotFFTXLabel" xml:space="preserve">
+    <value>ফ্রিকোয়েন্সি (Hz)</value>
+  </data>
+  <data name="strPlotFFTYLabelMag" xml:space="preserve">
+    <value>মাত্রা (RMS²)</value>
+  </data>
+  <data name="strPlotFFTYLabelPow" xml:space="preserve">
+    <value>শক্তি (dB)</value>
+  </data>
+  <data name="strPlotFractalDisributionXLabel" xml:space="preserve">
+    <value>ফ্র্যাক্টাল মাত্রা (H)</value>
+  </data>
+  <data name="strPlotFractalDisributionYLabel" xml:space="preserve">
+    <value>সম্ভাবনা</value>
+  </data>
+  <data name="strPlotFractalDistributionTitle" xml:space="preserve">
+    <value>ফ্র্যাক্টাল ডাইমেনশন ডিস্ট্রিবিউশন</value>
+  </data>
+  <data name="strPlotFractalTitle1" xml:space="preserve">
+    <value>ফ্র্যাক্টাল মাত্রা</value>
+  </data>
+  <data name="strPlotFractalTitle2" xml:space="preserve">
+    <value>(ক্রমবর্ধমান)</value>
+  </data>
+  <data name="strPlotFractalXLabel" xml:space="preserve">
+    <value>সময় (সেকেন্ড)</value>
+  </data>
+  <data name="strPlotFractalYLabel" xml:space="preserve">
+    <value>মাত্রা (H)</value>
+  </data>
+  <data name="strPlotOriginalTitle" xml:space="preserve">
+    <value>ইনপুট সংকেত</value>
+  </data>
+  <data name="strPlotOriginalXLabel" xml:space="preserve">
+    <value>সময় (সেকেন্ড)</value>
+  </data>
+  <data name="strPlotOriginalYLabel" xml:space="preserve">
+    <value>প্রশস্ততা</value>
+  </data>
+  <data name="strPlotWindowTitle" xml:space="preserve">
+    <value>{0} জানালা</value>
+  </data>
+  <data name="strPlotWindowXLabel" xml:space="preserve">
+    <value>সময় (সেকেন্ড)</value>
+  </data>
+  <data name="strPlotWindowYLabel" xml:space="preserve">
+    <value>প্রশস্ততা</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>বর্তমান সংস্কৃতি বিন্যাস</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>পরিবর্তনশীল সংস্কৃতি বিন্যাস</value>
+  </data>
+  <data name="strRadPoints" xml:space="preserve">
+    <value>ডেটা পয়েন্ট</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>রাউন্ড আপ</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>নিচে সুসম্পন্ন</value>
+  </data>
+  <data name="strRadSeconds" xml:space="preserve">
+    <value>সেকেন্ড</value>
+  </data>
+  <data name="strRadTime" xml:space="preserve">
+    <value>তারিখ এবং সময়</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>সংস্কৃতি নির্বাচন করুন</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>ফাইল থেকে ডেটা পড়তে অক্ষম.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>সংস্কৃতি শনাক্তকারী স্ট্রিং নামটি বৈধ নয়.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>সংস্কৃতি নামের ত্রুটি</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>অবৈধ সাংখ্যিক মান: {0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>ডেটা পার্স করার সময় ত্রুটি</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>ত্রুটি</value>
+  </data>
+  <data name="strReadNotimplementedError" xml:space="preserve">
+    <value>একটি ফাইল থেকে ডেটা {0} পড়তে অক্ষম.</value>
+  </data>
+  <data name="strReadNotimplementedErrorTitle" xml:space="preserve">
+    <value>বাস্তবায়িত হয়নি</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>টেক্সট ফাইল (*.txt)|*.txt|SignalAnalysis ফাইল (*.sig)|*.sig|বাইনারি ফাইল (*.bin)|*.bin|ফলাফল ফাইল (*.results)|*.results|সকল ফাইল (*.*)|*.*</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>ডেটা ফাইল সংরক্ষণ করুন</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>প্লটের ক্রসহেয়ার মোড দেখান</value>
+  </data>
+  <data name="strStatusTipEntropy" xml:space="preserve">
+    <value>আনুমানিক এবং নমুনা এনট্রপি গণনা</value>
+  </data>
+  <data name="strStatusTipFractal" xml:space="preserve">
+    <value>ক্রমবর্ধমান ফ্র্যাক্টাল মাত্রা গণনা করুন (CPU নিবিড়)</value>
+  </data>
+  <data name="strStatusTipPower" xml:space="preserve">
+    <value>হয় FFT পাওয়ার স্পেকট্রা(dB) বা মাত্রা</value>
+  </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>ডেরিভেটিভ</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>ব্যবহারকারী ইন্টারফেস</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>একীকরণ</value>
+  </data>
+  <data name="strTabPlot" xml:space="preserve">
+    <value>চক্রান্ত</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>সম্পর্কিত</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>প্রস্থান করুন</value>
+  </data>
+  <data name="strToolStripExport" xml:space="preserve">
+    <value>রপ্তানি</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>খোলুন</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>সেটিংস</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>এই সফটওয়্যার সম্পর্কে</value>
+  </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>ডেটা সিরিজ নির্বাচন করুন</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>FFT উইন্ডো নির্বাচন করুন</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>সফটওয়্যার থেকে প্রস্থান করুন</value>
+  </data>
+  <data name="strToolTipExport" xml:space="preserve">
+    <value>ডেটা এবং ডেটা বিশ্লেষণ রপ্তানি করুন</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>ডিস্ক থেকে ডাটা ফাইল খুলুন</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>প্লট, ডেটা এবং UI এর জন্য সেটিংস</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>ইউজার ইন্টারফেস ভাষা</value>
+  </data>
+</root>
