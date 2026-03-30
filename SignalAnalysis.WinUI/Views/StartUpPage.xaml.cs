@@ -9,6 +9,7 @@ using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.ViewModels;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using Windows.ApplicationModel.DataTransfer;
@@ -266,24 +267,27 @@ public sealed partial class StartUpPage : Page, IDisposable
 
     private async Task<bool> OpenFile(StorageFile? file)
     {
-        bool result = true;
-
-        if (file is not null)
-        {
-            string jsonString = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
-            result = await OpenJsonDocument(jsonString);
-        }
-        else
+        if (file is null)
         {
             _ = await MessageBox.Show(
                 messageBoxText: "MsgBoxOpenFileErrorContent".GetLocalized("MessageBox"),
                 caption: "MsgBoxOpenFileErrorTitle".GetLocalized("MessageBox"),
                 primaryButtonText: "MsgBoxOpenFileErrorPrimary".GetLocalized("MessageBox"),
                 icon: MessageBox.MessageBoxImage.Information);
-            result = false;
+            return false;
         }
 
-        return result;
+        try
+        {
+            string jsonString = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            return await OpenJsonDocument(jsonString);
+        }
+        catch (Exception ex)
+        {
+            // Log o mostrar mensaje según tu infraestructura
+            Debug.WriteLine(ex);
+            return false;
+        }
     }
 
     /// <summary>
@@ -293,33 +297,125 @@ public sealed partial class StartUpPage : Page, IDisposable
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
     private async Task<bool> OpenJsonDocument(string jsonString)
     {
-        // Leer fichero
-        var lines = File.ReadAllLines("miarchivo.sig");
-        var dto = SignalDto.ParseFromSigText(lines);
 
-        // Serializar a JSON (opcional: guardar doubles como strings con coma decimal)
-        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
-        var json = JsonSerializer.Serialize(dto, options);
+        try
+        {
+            // 1) Intentar interpretar como JSON
+            bool handled = false;
 
-        // Deserializar (asegúrate de crear las mismas opciones si usaste converter de doubles)
-        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+            try
+            {
+                // Intento de deserializar a DocumentBase (o a tipos concretos)
+                var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
+                // Añade converters si los necesitas
+                // optionsForRead.Converters.Add(new LocalizedDateTimeConverter(...));
 
-        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
-        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
-        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
-        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
+                // Si conoces el tipo raíz, intenta deserializarlo
+                DocumentBase docFromJson = DocumentFactory.DeserializeFromJson(jsonString);
+                if (docFromJson != null)
+                {
+                    // Trabaja con docFromJson
+                    handled = true;
+                }
+            }
+            catch (JsonException)
+            {
+                // No es JSON válido, seguir al parseo por texto
+            }
 
-        // 1) Parsear desde texto (archivo .eluxl o .sig)
-        var lines2 = File.ReadAllLines("miarchivo.sig");
-        DocumentBase doc = DocumentFactory.ParseFromText(lines2);
-        if (doc is EluxlDto elux) { /* trabajar con elux */ }
-        if (doc is SignalDto sig) { /* trabajar con sig */ }
+            if (!handled)
+            {
+                // 2) Tratar como texto plano (.sig o .eluxl)
+                var lines = jsonString.Split(["\r\n", "\n"], StringSplitOptions.None);
 
-        // 2) Deserializar desde JSON (detecta tipo y cultura)
-        DocumentBase docFromJson = DocumentFactory.DeserializeFromJson(json);
+                // Ejemplo: parseo específico para SignalDto
+                try
+                {
+                    var dto = SignalDto.ParseFromSigText(lines);
+                    if (dto != null)
+                    {
+                        // Opcional: serializar/deserializar para validar
+                        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
+                        var json = JsonSerializer.Serialize(dto, options);
 
-        // 3) Serializar a JSON (valida cabecera)
-        string jsonOut = DocumentFactory.SerializeToJson(doc);
+                        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+
+                        // Si necesitas convertir a EluxlDto con converters:
+                        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
+                        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
+                        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
+                        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
+
+                        // Trabaja con dto / dto2 / dto3 según corresponda
+                        return true;
+                    }
+                }
+                catch
+                {
+                    // Ignorar y probar parseo genérico
+                }
+
+                // 3) Parseo genérico con DocumentFactory
+                try
+                {
+                    DocumentBase doc = DocumentFactory.ParseFromText(lines);
+                    if (doc is EluxlDto elux)
+                    {
+                        // trabajar con elux
+                    }
+                    else if (doc is SignalDto sig)
+                    {
+                        // trabajar con sig
+                    }
+                    else
+                    {
+                        // tipo desconocido
+                    }
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            return false;
+        }
+
+        //// Leer fichero
+        //var lines = File.ReadAllLines("miarchivo.sig");
+        //var dto = SignalDto.ParseFromSigText(lines);
+
+        //// Serializar a JSON (opcional: guardar doubles como strings con coma decimal)
+        //var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
+        //var json = JsonSerializer.Serialize(dto, options);
+
+        //// Deserializar (asegúrate de crear las mismas opciones si usaste converter de doubles)
+        //var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+
+        //var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
+        //optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
+        //optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
+        //var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
+
+        //// 1) Parsear desde texto (archivo .eluxl o .sig)
+        //var lines2 = File.ReadAllLines("miarchivo.sig");
+        //DocumentBase doc = DocumentFactory.ParseFromText(lines2);
+        //if (doc is EluxlDto elux) { /* trabajar con elux */ }
+        //if (doc is SignalDto sig) { /* trabajar con sig */ }
+
+        //// 2) Deserializar desde JSON (detecta tipo y cultura)
+        //DocumentBase docFromJson = DocumentFactory.DeserializeFromJson(json);
+
+        //// 3) Serializar a JSON (valida cabecera)
+        //string jsonOut = DocumentFactory.SerializeToJson(doc);
 
         //// Deserialize the json string to get the header information
         //JobJsonDto? data;
