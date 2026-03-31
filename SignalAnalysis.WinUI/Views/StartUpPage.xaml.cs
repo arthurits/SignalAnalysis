@@ -315,7 +315,7 @@ public sealed partial class StartUpPage : Page, IDisposable
 
                 // Si conoces el tipo raíz, intenta deserializarlo
                 DocumentBase docFromJson = DocumentFactory.DeserializeFromJson(jsonString);
-                if (docFromJson != null)
+                if (docFromJson is not null)
                 {
                     // Trabaja con docFromJson
                     handled = true;
@@ -335,7 +335,7 @@ public sealed partial class StartUpPage : Page, IDisposable
                 try
                 {
                     var dto = SignalDto.ParseFromSigText(lines);
-                    if (dto != null)
+                    if (dto is not null)
                     {
                         // Opcional: serializar/deserializar para validar
                         var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
