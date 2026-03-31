@@ -259,7 +259,10 @@ public sealed partial class StartUpPage : Page, IDisposable
 
         // Open the picker for the user to pick a file
         var file = await openPicker.PickSingleFileAsync();
-        _ = await OpenFile(file);
+        if (file is not null)
+        {
+            var result = await OpenFile(file);
+        }
 
         // Set the cursor to the previous one
         this.ProtectedCursor = currentCursor;
@@ -280,7 +283,7 @@ public sealed partial class StartUpPage : Page, IDisposable
         try
         {
             string jsonString = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
-            return await OpenJsonDocument(jsonString);
+            return await OpenJsonDocument(jsonString, file.FileType);
         }
         catch (Exception ex)
         {
@@ -295,7 +298,7 @@ public sealed partial class StartUpPage : Page, IDisposable
     /// </summary>
     /// <param name="jsonString">String containing the data</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private async Task<bool> OpenJsonDocument(string jsonString)
+    private async Task<bool> OpenJsonDocument(string jsonString, string fileType)
     {
 
         try
@@ -312,7 +315,7 @@ public sealed partial class StartUpPage : Page, IDisposable
 
                 // Si conoces el tipo raíz, intenta deserializarlo
                 DocumentBase docFromJson = DocumentFactory.DeserializeFromJson(jsonString);
-                if (docFromJson != null)
+                if (docFromJson is not null)
                 {
                     // Trabaja con docFromJson
                     handled = true;
@@ -331,8 +334,9 @@ public sealed partial class StartUpPage : Page, IDisposable
                 // Ejemplo: parseo específico para SignalDto
                 try
                 {
-                    var dto = SignalDto.ParseFromSigText(lines);
-                    if (dto != null)
+                    var dto = DocumentFactory.ParseFromText(lines);
+
+                    if (dto is not null)
                     {
                         // Opcional: serializar/deserializar para validar
                         var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
