@@ -259,7 +259,10 @@ public sealed partial class StartUpPage : Page, IDisposable
 
         // Open the picker for the user to pick a file
         var file = await openPicker.PickSingleFileAsync();
-        _ = await OpenFile(file);
+        if (file is not null)
+        {
+            var result = await OpenFile(file);
+        }
 
         // Set the cursor to the previous one
         this.ProtectedCursor = currentCursor;
