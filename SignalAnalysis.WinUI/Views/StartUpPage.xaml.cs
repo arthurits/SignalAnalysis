@@ -283,7 +283,7 @@ public sealed partial class StartUpPage : Page, IDisposable
         try
         {
             string jsonString = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf8);
-            return await OpenJsonDocument(jsonString);
+            return await OpenJsonDocument(jsonString, file.FileType);
         }
         catch (Exception ex)
         {
@@ -298,7 +298,7 @@ public sealed partial class StartUpPage : Page, IDisposable
     /// </summary>
     /// <param name="jsonString">String containing the data</param>
     /// <returns><see langword="True"/> if successful, <see langword="false"/> otherwise</returns>
-    private async Task<bool> OpenJsonDocument(string jsonString)
+    private async Task<bool> OpenJsonDocument(string jsonString, string fileType)
     {
 
         try
@@ -334,7 +334,8 @@ public sealed partial class StartUpPage : Page, IDisposable
                 // Ejemplo: parseo específico para SignalDto
                 try
                 {
-                    var dto = SignalDto.ParseFromSigText(lines);
+                    var dto = DocumentFactory.ParseFromText(lines);
+
                     if (dto is not null)
                     {
                         // Opcional: serializar/deserializar para validar

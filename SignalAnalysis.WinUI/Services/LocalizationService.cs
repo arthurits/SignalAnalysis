@@ -1,4 +1,5 @@
 ﻿using Microsoft.Windows.ApplicationModel.Resources;
+using ScottPlot.Colormaps;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
@@ -45,6 +46,13 @@ public class LocalizationService : ILocalizationService
     }
 
     public string GetString(string key, string resourceMap)
+    {
+        var subTree = _resourceManager.MainResourceMap.TryGetSubtree(resourceMap);
+        var result = subTree?.TryGetValue(key);
+        return result != null ? result.ValueAsString : string.Empty;
+    }
+
+    public string GetString(string key, string resourceMap, CultureInfo culture)
     {
         var subTree = _resourceManager.MainResourceMap.TryGetSubtree(resourceMap);
         var result = subTree?.TryGetValue(key);
