@@ -28,10 +28,18 @@ public abstract class DocumentBase
     /// </summary>
     public double FileVersion { get; set; }
 
+    public int SeriesNumber { get; set; }
+    public int SeriesPoints { get; set; }
+    public double SamplingFrequency { get; set; }
+
+    public List<string> SeriesNames { get; set; } = [];
+    public List<List<double>> SignalData { get; set; } = [];
+
     /// <summary>
     /// Cada DTO concreto debe proporcionar opciones de JsonSerializer configuradas con la cultura adecuada.
     /// </summary>
     public abstract JsonSerializerOptions CreateJsonOptions(bool serializeDoublesAsStrings = false);
+    public abstract DocumentBase ParseFromText(string[] lines);
 }
 
 /// <summary>
