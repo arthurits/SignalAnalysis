@@ -43,12 +43,12 @@ public partial class StartUpViewModel: ObservableRecipient
         // Load string resources into binding variables for the UI
         OnLanguageChanged(null, EventArgs.Empty);
 
-        // For testing purposes, add some dummy data to the plot series collection
-        for (int i = 0; i < 200; i++)
-        {
-            Xs.Add(i * 0.1);
-            Ys.Add(System.Math.Cos(i * 0.1));
-        }
+        //// For testing purposes, add some dummy data to the plot series collection
+        //for (int i = 0; i < 200; i++)
+        //{
+        //    Xs.Add(i * 0.1);
+        //    Ys.Add(System.Math.Cos(i * 0.1));
+        //}
     }
 
     public void Dispose()

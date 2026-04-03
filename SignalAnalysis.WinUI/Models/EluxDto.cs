@@ -73,10 +73,8 @@ internal class EluxlDto: DocumentBase
         DateTime start;
         DateTime end;
         int points, series;
-        bool result = false;
         double sampleFreq;
         string[] seriesLabels;
-        string? strLine;
 
         try
         {

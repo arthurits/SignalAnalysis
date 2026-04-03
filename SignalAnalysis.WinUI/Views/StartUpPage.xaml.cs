@@ -53,7 +53,7 @@ public sealed partial class StartUpPage : Page, IDisposable
         //maxTasks = _settings.MaxTasks;
         //ViewModel.MaxTasks = maxTasks;
 
-        //plotPaletteCombo.SelectedValue = ViewModel.PlotPalette;
+        plotPaletteCombo.SelectedValue = ViewModel.PlotPalette;
 
         //int items = DataTable.Items.Count;
         //AddButton.IsEnabled = items >= 0 && items < maxTasks;
@@ -153,9 +153,11 @@ public sealed partial class StartUpPage : Page, IDisposable
 
             // This is not needed, since plots are custom-drawn
             var selectedPalette = ScottPlot.Palette.GetPalettes().Cast<ScottPlot.IPalette>().Where(x => x.Name == ViewModel.PlotPalette).First();
-            PlotSimpleTasks.Plot.Add.Palette = selectedPalette;
-            PlotCompositeTasks.Plot.Add.Palette = selectedPalette;
-            PlotTaskFactors.Plot.Add.Palette = selectedPalette;
+            signalXYView.GetPlot().Add.Palette = selectedPalette;
+            signalXYView.ForceRender();
+            //PlotSimpleTasks.Plot.Add.Palette = selectedPalette;
+            //PlotCompositeTasks.Plot.Add.Palette = selectedPalette;
+            //PlotTaskFactors.Plot.Add.Palette = selectedPalette;
 
             //ClearPlots();
             //CreatePlotSimple();
