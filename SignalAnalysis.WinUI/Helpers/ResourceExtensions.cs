@@ -1,4 +1,5 @@
 ﻿using SignalAnalysis.Contracts.Services;
+using System.Globalization;
 using Windows.ApplicationModel.Resources;
 
 namespace SignalAnalysis.Helpers;
@@ -22,6 +23,12 @@ public static class ResourceExtensions
     {
         var localizationService = App.GetService<ILocalizationService>();
         return localizationService.GetString(resourceKey, resourceMap);
+    }
+
+    public static string GetLocalized(this string resourceKey, string resourceMap, CultureInfo culture)
+    {
+        var localizationService = App.GetService<ILocalizationService>();
+        return localizationService.GetString(resourceKey, resourceMap, culture);
     }
 
     //public static void Refresh()
