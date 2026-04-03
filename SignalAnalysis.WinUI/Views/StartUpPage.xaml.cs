@@ -328,7 +328,7 @@ public sealed partial class StartUpPage : Page, IDisposable
 
             if (!handled)
             {
-                // 2) Tratar como texto plano (.sig o .eluxl)
+                // 2) Tratar como texto plano (.sig o .elux)
                 var lines = jsonString.Split(["\r\n", "\n"], StringSplitOptions.None);
 
                 // Ejemplo: parseo específico para SignalDto
