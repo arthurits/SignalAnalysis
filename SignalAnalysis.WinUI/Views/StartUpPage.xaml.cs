@@ -363,9 +363,21 @@ public sealed partial class StartUpPage : Page, IDisposable
                 try
                 {
                     DocumentBase doc = DocumentFactory.ParseFromText(lines);
-                    if (doc is EluxlDto elux)
+                    if (doc is EluxlDto docElux)
                     {
-                        // trabajar con elux
+                        ViewModel.PlotSeries.Clear();
+                        // Añadir cada nombre como PlotSeries, conservando el índice
+                        int index = 0;
+                        foreach (var name in docElux.SeriesNames)
+                        {
+                            ViewModel.PlotSeries.Add(new PlotSeries(name, index));
+                            index++;
+                        }
+                        //// LINQ alternative
+                        //foreach (var item in docElux.SeriesNames.Select((name, i) => new PlotSeries(name, i)))
+                        //{
+                        //    ViewModel.PlotSeries.Add(item);
+                        //}
                     }
                     else if (doc is SignalDto sig)
                     {
