@@ -9,6 +9,7 @@ public interface ILocalizationService
     event EventHandler LanguageChanged;
     string GetString(string key);
     string GetString(string key, string resourceMap);
+    string GetString(string key, string resourceMap, CultureInfo culture);
     void SetAppLanguage(string languageCode, string invariantCulture = "en", bool notifyLanguageChanged = true);
     IEnumerable<CultureOption> GetAvailableLanguages(
         string resourceFileName = "Resources",

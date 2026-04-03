@@ -53,7 +53,7 @@ public sealed partial class StartUpPage : Page, IDisposable
         //maxTasks = _settings.MaxTasks;
         //ViewModel.MaxTasks = maxTasks;
 
-        //plotPaletteCombo.SelectedValue = ViewModel.PlotPalette;
+        plotPaletteCombo.SelectedValue = ViewModel.PlotPalette;
 
         //int items = DataTable.Items.Count;
         //AddButton.IsEnabled = items >= 0 && items < maxTasks;
@@ -153,9 +153,11 @@ public sealed partial class StartUpPage : Page, IDisposable
 
             // This is not needed, since plots are custom-drawn
             var selectedPalette = ScottPlot.Palette.GetPalettes().Cast<ScottPlot.IPalette>().Where(x => x.Name == ViewModel.PlotPalette).First();
-            PlotSimpleTasks.Plot.Add.Palette = selectedPalette;
-            PlotCompositeTasks.Plot.Add.Palette = selectedPalette;
-            PlotTaskFactors.Plot.Add.Palette = selectedPalette;
+            signalXYView.GetPlot().Add.Palette = selectedPalette;
+            signalXYView.ForceRender();
+            //PlotSimpleTasks.Plot.Add.Palette = selectedPalette;
+            //PlotCompositeTasks.Plot.Add.Palette = selectedPalette;
+            //PlotTaskFactors.Plot.Add.Palette = selectedPalette;
 
             //ClearPlots();
             //CreatePlotSimple();
@@ -328,44 +330,57 @@ public sealed partial class StartUpPage : Page, IDisposable
 
             if (!handled)
             {
-                // 2) Tratar como texto plano (.sig o .eluxl)
+                // 2) Tratar como texto plano (.sig o .elux)
                 var lines = jsonString.Split(["\r\n", "\n"], StringSplitOptions.None);
 
-                // Ejemplo: parseo específico para SignalDto
-                try
-                {
-                    var dto = DocumentFactory.ParseFromText(lines);
+                //// Ejemplo: parseo específico para SignalDto
+                //try
+                //{
+                //    var dto = DocumentFactory.ParseFromText(lines);
 
-                    if (dto is not null)
-                    {
-                        // Opcional: serializar/deserializar para validar
-                        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
-                        var json = JsonSerializer.Serialize(dto, options);
+                //    if (dto is not null)
+                //    {
+                //        // Opcional: serializar/deserializar para validar
+                //        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
+                //        var json = JsonSerializer.Serialize(dto, options);
 
-                        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+                //        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
 
-                        // Si necesitas convertir a EluxlDto con converters:
-                        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
-                        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
-                        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
-                        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
+                //        // Si necesitas convertir a EluxlDto con converters:
+                //        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
+                //        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
+                //        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
+                //        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
 
-                        // Trabaja con dto / dto2 / dto3 según corresponda
-                        return true;
-                    }
-                }
-                catch
-                {
-                    // Ignorar y probar parseo genérico
-                }
+                //        // Trabaja con dto / dto2 / dto3 según corresponda
+                //        return true;
+                //    }
+                //}
+                //catch
+                //{
+                //    // Ignorar y probar parseo genérico
+                //}
 
                 // 3) Parseo genérico con DocumentFactory
                 try
                 {
                     DocumentBase doc = DocumentFactory.ParseFromText(lines);
-                    if (doc is EluxlDto elux)
+                    ViewModel.DocumentDto = doc;
+                    if (doc is EluxlDto docElux)
                     {
-                        // trabajar con elux
+                        //ViewModel.PlotSeries.Clear();
+                        //// Añadir cada nombre como PlotSeries, conservando el índice
+                        //int index = 0;
+                        //foreach (var name in docElux.SeriesNames)
+                        //{
+                        //    ViewModel.PlotSeries.Add(new PlotSeries(name, index));
+                        //    index++;
+                        //}
+                        ////// LINQ alternative
+                        ////foreach (var item in docElux.SeriesNames.Select((name, i) => new PlotSeries(name, i)))
+                        ////{
+                        ////    ViewModel.PlotSeries.Add(item);
+                        ////}
                     }
                     else if (doc is SignalDto sig)
                     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.Windows.ApplicationModel.Resources;
+﻿using Microsoft.Windows.AI.Text;
+using Microsoft.Windows.ApplicationModel.Resources;
 using ScottPlot.Colormaps;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
@@ -54,6 +55,13 @@ public class LocalizationService : ILocalizationService
 
     public string GetString(string key, string resourceMap, CultureInfo culture)
     {
+        // Set the primary language. This value is used to access the app's resources.
+        var primaryLanguage = Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride;
+        if (!string.Equals(primaryLanguage, culture.Name, StringComparison.OrdinalIgnoreCase))
+        {
+            Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.Name != string.Empty ? culture.Name : "en";
+        }
+
         var subTree = _resourceManager.MainResourceMap.TryGetSubtree(resourceMap);
         var result = subTree?.TryGetValue(key);
         return result != null ? result.ValueAsString : string.Empty;

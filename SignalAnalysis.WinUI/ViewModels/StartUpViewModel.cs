@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
@@ -20,10 +21,17 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial bool PlotLegendChecked { get; set; } = true;
     [ObservableProperty]
     public partial string PlotPalette { get; set; } = (new ScottPlot.Palettes.Nord()).Name;
+
+    [ObservableProperty]
+    public partial int SelectedPlotSeriesIndex { get; set; } = -1;
+
     [ObservableProperty]
     public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
     [ObservableProperty]
     public partial bool UpdatePlotCompositeTasksChecked { get; set; } = false;
+
+    [ObservableProperty]
+    public partial DocumentBase DocumentDto { get; set; }
 
     public StartUpViewModel(ILocalizationService localizationService)
     {
@@ -35,16 +43,63 @@ public partial class StartUpViewModel: ObservableRecipient
         // Load string resources into binding variables for the UI
         OnLanguageChanged(null, EventArgs.Empty);
 
-        // For testing purposes, add some dummy data to the plot series collection
-        for (int i = 0; i < 200; i++)
-        {
-            Xs.Add(i * 0.1);
-            Ys.Add(System.Math.Cos(i * 0.1));
-        }
+        //// For testing purposes, add some dummy data to the plot series collection
+        //for (int i = 0; i < 200; i++)
+        //{
+        //    Xs.Add(i * 0.1);
+        //    Ys.Add(System.Math.Cos(i * 0.1));
+        //}
     }
 
     public void Dispose()
     {
         _localizationService.LanguageChanged -= OnLanguageChanged;
+    }
+
+    partial void OnDocumentDtoChanged(DocumentBase oldValue, DocumentBase newValue)
+    {
+        PlotSeries.Clear();
+        if (DocumentDto.SeriesNames.Count > 0)
+        {
+            // Añadir cada nombre como PlotSeries, conservando el índice
+            int index = 0;
+            foreach (var name in DocumentDto.SeriesNames)
+            {
+                PlotSeries.Add(new PlotSeries(name, index));
+                index++;
+            }
+            //// LINQ alternative
+            //foreach (var item in docElux.SeriesNames.Select((name, i) => new PlotSeries(name, i)))
+            //{
+            //    ViewModel.PlotSeries.Add(item);
+            //}
+        }
+
+        // Select the first series by default if there are any
+        if (PlotSeries.Count >= 1)
+        {
+            SelectedPlotSeriesIndex = 0;
+        }
+    }
+
+    partial void OnSelectedPlotSeriesIndexChanged(int oldValue, int newValue)
+    {
+        if (newValue >= 0 && newValue < DocumentDto.SeriesNames.Count)
+        {
+            var selectedSeriesName = DocumentDto.SeriesNames[newValue];
+            
+            // Clear existing data points. We need to keep the references to the ObservableCollections for the plot to update correctly.
+            Xs.Clear();
+            Ys.Clear();
+            
+            var period = 1 / DocumentDto.SamplingFrequency;
+            var data = DocumentDto.SeriesData[newValue];
+            for (int i = 0; i < data.Count; i++)
+            {
+                Xs.Add(i * period); // Ejemplo de eje X
+                Ys.Add(data[i]); // Datos de la serie seleccionada
+            }
+            
+        }
     }
 }

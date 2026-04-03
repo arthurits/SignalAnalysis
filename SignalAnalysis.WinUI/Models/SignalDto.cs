@@ -13,12 +13,12 @@ namespace SignalAnalysis.Models;
 /// document type, file version, and signal data.</remarks>
 internal class SignalDto:DocumentBase
 {
-    public int SeriesNumber { get; set; }
-    public int SeriesPoints { get; set; }
-    public double SamplingFrequency { get; set; }
+    //public int SeriesNumber { get; set; }
+    //public int SeriesPoints { get; set; }
+    //public double SamplingFrequency { get; set; }
 
-    public List<string> SeriesNames { get; set; } = [];
-    public List<List<double>> SignalData { get; set; } = [];
+    //public List<string> SeriesNames { get; set; } = [];
+    //public List<List<double>> SignalData { get; set; } = [];
 
     /// <summary>
     /// Crea JsonSerializerOptions con la política de nombres y, opcionalmente,
@@ -159,7 +159,7 @@ internal class SignalDto:DocumentBase
             dto.SeriesNames = headerCols.ToList();
 
             int sensorsCount = dto.SeriesNames.Count;
-            dto.SignalData = Enumerable.Range(0, sensorsCount).Select(_ => new List<double>()).ToList();
+            dto.SeriesData = Enumerable.Range(0, sensorsCount).Select(_ => new List<double>()).ToList();
 
             // Leer filas de datos a partir de la siguiente línea
             for (int r = headerIndex + 1; r < lines.Length; r++)
@@ -182,7 +182,7 @@ internal class SignalDto:DocumentBase
                     try
                     {
                         var val = ParseDouble(token);
-                        dto.SignalData[c].Add(val);
+                        dto.SeriesData[c].Add(val);
                     }
                     catch
                     {
@@ -196,12 +196,12 @@ internal class SignalDto:DocumentBase
                             else
                                 raw = raw.Replace(",", "");
                             if (double.TryParse(raw, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var fallback))
-                                dto.SignalData[c].Add(fallback);
+                                dto.SeriesData[c].Add(fallback);
                         }
                         else
                         {
                             // Si no hay número, añadir NaN para mantener la alineación
-                            dto.SignalData[c].Add(double.NaN);
+                            dto.SeriesData[c].Add(double.NaN);
                         }
                     }
                 }
@@ -218,7 +218,7 @@ internal class SignalDto:DocumentBase
         if (dto.SeriesPoints > 0)
         {
             // comprobar que el número de puntos coincide con las filas leídas
-            var actualPoints = dto.SignalData.Count > 0 ? dto.SignalData[0].Count : 0;
+            var actualPoints = dto.SeriesData.Count > 0 ? dto.SeriesData[0].Count : 0;
             if (dto.SeriesPoints != actualPoints)
             {
                 // actualizar SeriesPoints para reflejar lo leído
@@ -227,7 +227,7 @@ internal class SignalDto:DocumentBase
         }
         else
         {
-            dto.SeriesPoints = dto.SignalData.Count > 0 ? dto.SignalData[0].Count : 0;
+            dto.SeriesPoints = dto.SeriesData.Count > 0 ? dto.SeriesData[0].Count : 0;
         }
 
         return dto;

@@ -373,6 +373,7 @@ public sealed partial class SignalXYView : UserControl
             DispatcherQueue.GetForCurrentThread().TryEnqueue(() =>
             {
                 ForceRender();
+                _plot.Axes.AutoScale();
             });
         });
     }

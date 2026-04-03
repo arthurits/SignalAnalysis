@@ -119,9 +119,8 @@
                                                   ItemsSource="{x:Bind ViewModel.PlotSeries, Mode=TwoWay}"
                                                   DisplayMemberPath="Name"
                                                   SelectedValuePath="Value"
-                                                  SelectedIndex="0"
-                                                  Width="120"
-                                                  SelectionChanged="Series_SelectionChanged"/>
+                                                  SelectedIndex="{x:Bind ViewModel.SelectedPlotSeriesIndex, Mode=TwoWay}"
+                                                  Width="120"/>
                                         </StackPanel>
                                     </AppBarElementContainer>
                                     <AppBarSeparator/>
