@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
@@ -20,10 +21,17 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial bool PlotLegendChecked { get; set; } = true;
     [ObservableProperty]
     public partial string PlotPalette { get; set; } = (new ScottPlot.Palettes.Nord()).Name;
+
+    [ObservableProperty]
+    public partial int SelectedPlotSeriesIndex { get; set; } = -1;
+
     [ObservableProperty]
     public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
     [ObservableProperty]
     public partial bool UpdatePlotCompositeTasksChecked { get; set; } = false;
+
+    [ObservableProperty]
+    public partial DocumentBase DocumentDto { get; set; }
 
     public StartUpViewModel(ILocalizationService localizationService)
     {
@@ -46,5 +54,49 @@ public partial class StartUpViewModel: ObservableRecipient
     public void Dispose()
     {
         _localizationService.LanguageChanged -= OnLanguageChanged;
+    }
+
+    partial void OnDocumentDtoChanged(DocumentBase oldValue, DocumentBase newValue)
+    {
+        PlotSeries.Clear();
+        if (DocumentDto is EluxlDto docElux)
+        {
+            // Añadir cada nombre como PlotSeries, conservando el índice
+            int index = 0;
+            foreach (var name in docElux.SeriesNames)
+            {
+                PlotSeries.Add(new PlotSeries(name, index));
+                index++;
+            }
+            //// LINQ alternative
+            //foreach (var item in docElux.SeriesNames.Select((name, i) => new PlotSeries(name, i)))
+            //{
+            //    ViewModel.PlotSeries.Add(item);
+            //}
+        }
+
+        // Select the first series by default if there are any
+        if (PlotSeries.Count >= 1)
+        {
+            SelectedPlotSeriesIndex = 0;
+        }
+    }
+
+    partial void OnSelectedPlotSeriesIndexChanged(int oldValue, int newValue)
+    {
+        if (DocumentDto is EluxlDto docElux && newValue >= 0 && newValue < docElux.SeriesNames.Count)
+        {
+            var selectedSeriesName = docElux.SeriesNames[newValue];
+            // Aquí puedes cargar los datos correspondientes a selectedSeriesName en Xs e Ys
+            // Por ejemplo:
+            Xs.Clear();
+            Ys.Clear();
+            var data = docElux.SeriesData[newValue];
+            for (int i = 0; i < data.Count; i++)
+            {
+                Xs.Add(i * docElux.SamplingFrequency); // Ejemplo de eje X
+                Ys.Add(data[i]); // Datos de la serie seleccionada
+            }
+        }
     }
 }
