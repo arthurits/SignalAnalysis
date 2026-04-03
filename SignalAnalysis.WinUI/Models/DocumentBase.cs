@@ -33,7 +33,7 @@ public abstract class DocumentBase
     public double SamplingFrequency { get; set; }
 
     public List<string> SeriesNames { get; set; } = [];
-    public List<List<double>> SignalData { get; set; } = [];
+    public List<List<double>> SeriesData { get; set; } = [];
 
     /// <summary>
     /// Cada DTO concreto debe proporcionar opciones de JsonSerializer configuradas con la cultura adecuada.

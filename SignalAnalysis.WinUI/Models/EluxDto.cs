@@ -24,12 +24,12 @@ internal class EluxlDto: DocumentBase
     [JsonConverter(typeof(LocalizedTimeSpanConverter))]
     public TimeSpan Duration { get; set; }
 
-    public int SensorNumber { get; set; }
-    public int SeriesPoints { get; set; }
-    public double SamplingFrequency { get; set; }
+    //public int SensorNumber { get; set; }
+    //public int SeriesPoints { get; set; }
+    //public double SamplingFrequency { get; set; }
 
-    public List<string> SeriesNames { get; set; } = [];
-    public List<List<double>> SeriesData { get; set; } = [];
+    //public List<string> SeriesNames { get; set; } = [];
+    //public List<List<double>> SeriesData { get; set; } = [];
 
     // Helper: crea JsonSerializerOptions con la cultura del DTO y añade converters instanciados con esa cultura.
     public override JsonSerializerOptions CreateJsonOptions(bool serializeDoublesAsStrings = false)
@@ -59,7 +59,7 @@ internal class EluxlDto: DocumentBase
 
     // Parsea un fichero ErgoLux en memoria (líneas) y devuelve un DTO rellenado.
     // Asume que la primera línea contiene algo como "ErgoLux data (es-ES)" o similar.
-    public static EluxlDto ParseFromErgoLuxText(string[] lines)
+    public override EluxlDto ParseFromText(string[] lines)
     {
         var dto = new EluxlDto();
 
@@ -130,7 +130,7 @@ internal class EluxlDto: DocumentBase
                 throw new FormatException(string.Format("StrOpenDataFileSection".GetLocalized("ReadDataFile", fileCulture), "StrOpenDataFile18".GetLocalized("ReadDataFile", fileCulture)));
             if (series <= 0)
                 throw new FormatException(string.Format("StrOpenDataFileSection".GetLocalized("ReadDataFile", fileCulture), "StrOpenDataFile18".GetLocalized("ReadDataFile", fileCulture)));
-            dto.SensorNumber = series + 6;
+            dto.SeriesNumber = series + 6;
 
             // Number of data points
             if (lines[5] is null)

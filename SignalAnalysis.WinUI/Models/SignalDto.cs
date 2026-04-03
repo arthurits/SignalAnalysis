@@ -13,12 +13,12 @@ namespace SignalAnalysis.Models;
 /// document type, file version, and signal data.</remarks>
 internal class SignalDto:DocumentBase
 {
-    public int SeriesNumber { get; set; }
-    public int SeriesPoints { get; set; }
-    public double SamplingFrequency { get; set; }
+    //public int SeriesNumber { get; set; }
+    //public int SeriesPoints { get; set; }
+    //public double SamplingFrequency { get; set; }
 
-    public List<string> SeriesNames { get; set; } = [];
-    public List<List<double>> SignalData { get; set; } = [];
+    //public List<string> SeriesNames { get; set; } = [];
+    //public List<List<double>> SignalData { get; set; } = [];
 
     /// <summary>
     /// Crea JsonSerializerOptions con la política de nombres y, opcionalmente,
@@ -54,7 +54,7 @@ internal class SignalDto:DocumentBase
     /// Parsea el contenido de un archivo .sig dado como array de líneas y devuelve un DTO rellenado.
     /// Maneja separador decimal según la cultura detectada en la primera línea.
     /// </summary>
-    public static SignalDto ParseFromSigText(string[] lines)
+    public override SignalDto ParseFromText(string[] lines)
     {
         var dto = new SignalDto();
         if (lines == null || lines.Length == 0) return dto;
