@@ -59,7 +59,7 @@ internal class EluxlDto: DocumentBase
 
     // Parsea un fichero ErgoLux en memoria (líneas) y devuelve un DTO rellenado.
     // Asume que la primera línea contiene algo como "ErgoLux data (es-ES)" o similar.
-    public override EluxlDto ParseFromText(string[] lines)
+    public static EluxlDto ParseFromErgoLuxText(string[] lines)
     {
         var dto = new EluxlDto();
 

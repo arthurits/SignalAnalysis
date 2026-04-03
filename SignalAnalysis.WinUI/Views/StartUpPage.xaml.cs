@@ -333,33 +333,33 @@ public sealed partial class StartUpPage : Page, IDisposable
                 // 2) Tratar como texto plano (.sig o .elux)
                 var lines = jsonString.Split(["\r\n", "\n"], StringSplitOptions.None);
 
-                // Ejemplo: parseo específico para SignalDto
-                try
-                {
-                    var dto = DocumentFactory.ParseFromText(lines);
+                //// Ejemplo: parseo específico para SignalDto
+                //try
+                //{
+                //    var dto = DocumentFactory.ParseFromText(lines);
 
-                    if (dto is not null)
-                    {
-                        // Opcional: serializar/deserializar para validar
-                        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
-                        var json = JsonSerializer.Serialize(dto, options);
+                //    if (dto is not null)
+                //    {
+                //        // Opcional: serializar/deserializar para validar
+                //        var options = dto.CreateJsonOptions(serializeDoublesAsStrings: false);
+                //        var json = JsonSerializer.Serialize(dto, options);
 
-                        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
+                //        var dto2 = JsonSerializer.Deserialize<SignalDto>(json, options);
 
-                        // Si necesitas convertir a EluxlDto con converters:
-                        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
-                        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
-                        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
-                        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
+                //        // Si necesitas convertir a EluxlDto con converters:
+                //        var optionsForRead = new JsonSerializerOptions { PropertyNamingPolicy = new EluxlNamingPolicy() };
+                //        optionsForRead.Converters.Add(new LocalizedDateTimeConverter(new CultureInfo(dto.CultureName)));
+                //        optionsForRead.Converters.Add(new LocalizedTimeSpanConverter(new CultureInfo(dto.CultureName)));
+                //        var dto3 = JsonSerializer.Deserialize<EluxlDto>(json, optionsForRead);
 
-                        // Trabaja con dto / dto2 / dto3 según corresponda
-                        return true;
-                    }
-                }
-                catch
-                {
-                    // Ignorar y probar parseo genérico
-                }
+                //        // Trabaja con dto / dto2 / dto3 según corresponda
+                //        return true;
+                //    }
+                //}
+                //catch
+                //{
+                //    // Ignorar y probar parseo genérico
+                //}
 
                 // 3) Parseo genérico con DocumentFactory
                 try

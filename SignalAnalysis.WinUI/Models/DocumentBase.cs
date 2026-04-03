@@ -28,18 +28,17 @@ public abstract class DocumentBase
     /// </summary>
     public double FileVersion { get; set; }
 
+    // Series data properties are common to both DTOs, so they can be defined here.
     public int SeriesNumber { get; set; }
     public int SeriesPoints { get; set; }
     public double SamplingFrequency { get; set; }
-
     public List<string> SeriesNames { get; set; } = [];
     public List<List<double>> SeriesData { get; set; } = [];
 
     /// <summary>
-    /// Cada DTO concreto debe proporcionar opciones de JsonSerializer configuradas con la cultura adecuada.
+    /// Each concrete DTO must implement this method to create JsonSerializerOptions with the appropriate naming policy and converters based on the culture.
     /// </summary>
     public abstract JsonSerializerOptions CreateJsonOptions(bool serializeDoublesAsStrings = false);
-    public abstract DocumentBase ParseFromText(string[] lines);
 }
 
 /// <summary>
@@ -73,7 +72,7 @@ public static class DocumentFactory
         var first = lines[0].Trim();
 
         if (first.StartsWith("ErgoLux", StringComparison.OrdinalIgnoreCase) ||
-            first.IndexOf("elux", StringComparison.OrdinalIgnoreCase) >= 0)
+            first.Contains("elux", StringComparison.OrdinalIgnoreCase))
         {
             var dto = EluxlDto.ParseFromErgoLuxText(lines);
             ValidateMandatoryHeader(dto);
@@ -81,7 +80,7 @@ public static class DocumentFactory
         }
 
         if (first.StartsWith("SignalAnalysis", StringComparison.OrdinalIgnoreCase) ||
-            first.IndexOf("sig", StringComparison.OrdinalIgnoreCase) >= 0)
+            first.Contains("sig", StringComparison.OrdinalIgnoreCase))
         {
             var dto = SignalDto.ParseFromSigText(lines);
             ValidateMandatoryHeader(dto);

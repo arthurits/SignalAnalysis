@@ -59,11 +59,11 @@ public partial class StartUpViewModel: ObservableRecipient
     partial void OnDocumentDtoChanged(DocumentBase oldValue, DocumentBase newValue)
     {
         PlotSeries.Clear();
-        if (DocumentDto is EluxlDto docElux)
+        if (DocumentDto.SeriesNames.Count > 0)
         {
             // Añadir cada nombre como PlotSeries, conservando el índice
             int index = 0;
-            foreach (var name in docElux.SeriesNames)
+            foreach (var name in DocumentDto.SeriesNames)
             {
                 PlotSeries.Add(new PlotSeries(name, index));
                 index++;
@@ -84,17 +84,17 @@ public partial class StartUpViewModel: ObservableRecipient
 
     partial void OnSelectedPlotSeriesIndexChanged(int oldValue, int newValue)
     {
-        if (DocumentDto is EluxlDto docElux && newValue >= 0 && newValue < docElux.SeriesNames.Count)
+        if (newValue >= 0 && newValue < DocumentDto.SeriesNames.Count)
         {
-            var selectedSeriesName = docElux.SeriesNames[newValue];
+            var selectedSeriesName = DocumentDto.SeriesNames[newValue];
             // Aquí puedes cargar los datos correspondientes a selectedSeriesName en Xs e Ys
             // Por ejemplo:
             Xs.Clear();
             Ys.Clear();
-            var data = docElux.SeriesData[newValue];
+            var data = DocumentDto.SeriesData[newValue];
             for (int i = 0; i < data.Count; i++)
             {
-                Xs.Add(i * docElux.SamplingFrequency); // Ejemplo de eje X
+                Xs.Add(i * DocumentDto.SamplingFrequency); // Ejemplo de eje X
                 Ys.Add(data[i]); // Datos de la serie seleccionada
             }
         }
