@@ -26,7 +26,7 @@
 
             <StackPanel Orientation="Vertical" Style="{StaticResource BaseStackPanel}">
 
-                <Grid x:Name="ContentGrid" ColumnDefinitions="*" RowDefinitions ="*, *, *, *, *, 300, Auto">
+                <Grid x:Name="ContentGrid" ColumnDefinitions="*" RowDefinitions ="*, *, 300, *, 300, *, Auto">
 
                     <!-- Open file section -->
                     <StackPanel x:Name="PanelOpenFile"
@@ -65,11 +65,11 @@
                     <!-- Plots section -->
                     <StackPanel x:Name="PanelPlots"
                                 x:DefaultBindMode="OneWay"
-                            Orientation="Vertical"
-                            Grid.Row="4"
-                            Grid.RowSpan="2"
-                            Margin="0, 12, 0, 0"
-                            Spacing="4">
+                                Orientation="Vertical"
+                                Grid.Row="1"
+                                Grid.RowSpan="2"
+                                Margin="0, 12, 0, 0"
+                                Spacing="4">
                         <Border 
                             CornerRadius="4"
                             VerticalAlignment="Top"
@@ -184,6 +184,69 @@
                         </Border>
                     </StackPanel>
 
+                    <!-- Derivative section -->
+                    <StackPanel x:Name="DerivativePanel"
+                                x:DefaultBindMode="OneWay"
+                                Orientation="Vertical"
+                                Grid.Row="3"
+                                Grid.RowSpan="2"
+                                Margin="0, 12, 0, 0"
+                                Spacing="4">
+                                <Border 
+                                    CornerRadius="4"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    BorderThickness="1"
+                                    BorderBrush="MistyRose">
+                            <Border.Background>
+                                <SolidColorBrush Color="MistyRose"
+                                                Opacity=".4" />
+                            </Border.Background>
+                            <CommandBar DefaultLabelPosition="Right"
+                                        OverflowButtonVisibility="Collapsed">
+                                <CommandBar.PrimaryCommands>
+                                    <AppBarButton x:Name="SavePlotDerivative"
+                                                  IsEnabled="{x:Bind ViewModel.PlotSaveEnabled, Mode=OneWay}"
+                                                  ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotSaveToolTip}"
+                                                  Icon="Save"
+                                                  Label="{x:Bind ViewModel.StrButtonPlotSave}"
+                                                  LabelPosition="Default"
+                                                  Click="SavePlot_Click"
+                                                  Foreground="MidnightBlue" />
+                                    <AppBarSeparator/>
+                                    <AppBarElementContainer VerticalAlignment="Center">
+                                        <StackPanel x:Name="plotDerivativePanel"
+                                                    Orientation="Horizontal"
+                                                    Margin="8,0,0,0">
+                                            <Image Source="/Assets/ColorPaletteIcon.svg"
+                                                   ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                   Margin="0,0,8,0"
+                                                   Width="16"
+                                                   Height="16"/>
+                                            <ComboBox x:Name="plotDerivativeCombo"
+                                                      AutomationProperties.Name="Derivative method"
+                                                      ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                      ItemsSource="{x:Bind ViewModel.DerivativeMethods}"
+                                                      SelectedValue="{x:Bind ViewModel.SelectedDerivativeMethod, Mode=TwoWay}"
+                                                      Width="170"/>
+                                        </StackPanel>
+                                    </AppBarElementContainer>
+                                </CommandBar.PrimaryCommands>
+                            </CommandBar>
+                        </Border>
+                        <Border 
+                            CornerRadius="{x:Bind PanelTextResults.CornerRadius}"
+                            BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
+                            BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
+                            Height="300">
+                            <controls:ScatterPlotView x:Name="plotDerivativeView"
+                               Xs="{x:Bind ViewModel.Derivative_Xs, Mode=OneWay}"
+                               Ys="{x:Bind ViewModel.Derivative_Ys, Mode=OneWay}">
+                            </controls:ScatterPlotView>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Text results section -->
                     <StackPanel x:Name="PanelTextResults"
                                     Style="{StaticResource ContentStackPanel}"
                                 Visibility="Collapsed">

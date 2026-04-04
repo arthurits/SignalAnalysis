@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.DependencyInjection;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
@@ -15,6 +14,9 @@ public partial class StartUpViewModel: ObservableRecipient
     public ObservableCollection<double> Xs { get; } = [];
     public ObservableCollection<double> Ys { get; } = [];
 
+    public ObservableCollection<double> Derivative_Xs { get; } = [];
+    public ObservableCollection<double> Derivative_Ys { get; } = [];
+
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
     [ObservableProperty]
@@ -24,6 +26,12 @@ public partial class StartUpViewModel: ObservableRecipient
 
     [ObservableProperty]
     public partial int SelectedPlotSeriesIndex { get; set; } = -1;
+
+    [ObservableProperty]
+    public partial int SelectedDerivativeMethod { get; set; } = -1;
+    [ObservableProperty]
+    public partial List<string> DerivativeMethods { get; set; } = [];
+
 
     [ObservableProperty]
     public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
@@ -101,5 +109,10 @@ public partial class StartUpViewModel: ObservableRecipient
             }
             
         }
+    }
+
+    partial void OnSelectedDerivativeMethodChanged(int oldValue, int newValue)
+    {
+        
     }
 }
