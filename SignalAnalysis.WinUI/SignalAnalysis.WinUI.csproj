@@ -32,6 +32,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controls\ScatterPlotView.xaml" />
     <None Remove="Controls\SignalXYView.xaml" />
     <None Remove="Views\StartUpPage.xaml" />
   </ItemGroup>
@@ -68,6 +69,11 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />
     <PackageReference Include="ScottPlot.WinUI" Version="5.1.58" />
     <PackageReference Include="WinUIEx" Version="2.9.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\ScatterPlotView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\StartUpPage.xaml">
