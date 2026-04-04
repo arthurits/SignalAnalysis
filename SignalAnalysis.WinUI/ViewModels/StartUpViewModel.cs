@@ -28,10 +28,9 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial int SelectedPlotSeriesIndex { get; set; } = -1;
 
     [ObservableProperty]
-    public partial int SelectedDerivativeMethod { get; set; } = -1;
-    [ObservableProperty]
     public partial List<string> DerivativeMethods { get; set; } = [];
-
+    [ObservableProperty]
+    public partial int SelectedDerivativeMethod { get; set; } = 1;
 
     [ObservableProperty]
     public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
@@ -113,6 +112,6 @@ public partial class StartUpViewModel: ObservableRecipient
 
     partial void OnSelectedDerivativeMethodChanged(int oldValue, int newValue)
     {
-        
+        //await ComputeAsync(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
     }
 }

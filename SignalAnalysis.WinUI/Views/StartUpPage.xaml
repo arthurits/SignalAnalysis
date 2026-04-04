@@ -228,7 +228,7 @@
                                                       ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
                                                       ItemsSource="{x:Bind ViewModel.DerivativeMethods}"
                                                       SelectedValue="{x:Bind ViewModel.SelectedDerivativeMethod, Mode=TwoWay}"
-                                                      Width="170"/>
+                                                      Width="220"/>
                                         </StackPanel>
                                     </AppBarElementContainer>
                                 </CommandBar.PrimaryCommands>
