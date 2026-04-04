@@ -54,5 +54,8 @@ public partial class StartUpViewModel : ObservableRecipient
         //StrButtonPlotPalette = "StrButtonPlotPalette".GetLocalized("SignalAnalysis");
         StrButtonPlotPaletteToolTip = "StrButtonPlotPaletteToolTip".GetLocalized("SignalAnalysis");
 
+        // Derivative algorithms
+        DerivativeMethods = [.. "StrDifferentiationAlgorithms".GetLocalized("Numerical").Split(',')];
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.DependencyInjection;
 using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
 
@@ -15,6 +15,9 @@ public partial class StartUpViewModel: ObservableRecipient
     public ObservableCollection<double> Xs { get; } = [];
     public ObservableCollection<double> Ys { get; } = [];
 
+    public ObservableCollection<double> Derivative_Xs { get; } = [];
+    public ObservableCollection<double> Derivative_Ys { get; } = [];
+
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
     [ObservableProperty]
@@ -24,6 +27,11 @@ public partial class StartUpViewModel: ObservableRecipient
 
     [ObservableProperty]
     public partial int SelectedPlotSeriesIndex { get; set; } = -1;
+
+    [ObservableProperty]
+    public partial List<string> DerivativeMethods { get; set; } = [];
+    [ObservableProperty]
+    public partial int SelectedDerivativeIndex { get; set; } = 1;
 
     [ObservableProperty]
     public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
@@ -102,4 +110,15 @@ public partial class StartUpViewModel: ObservableRecipient
             
         }
     }
+
+    partial void OnSelectedDerivativeIndexChanged(int oldValue, int newValue)
+    {
+        _ = OnSelectedDerivativeMethodIndexAsync(oldValue, newValue);
+    }
+
+    private async Task OnSelectedDerivativeMethodIndexAsync(int oldValue, int newValue)
+    {
+        await Compute.ComputeAsync(DocumentDto, SelectedPlotSeriesIndex, derivative: true);
+    }
+
 }
