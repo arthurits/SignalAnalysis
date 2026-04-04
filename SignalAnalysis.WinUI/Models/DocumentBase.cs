@@ -36,6 +36,16 @@ public abstract class DocumentBase
     public List<List<double>> SeriesData { get; set; } = [];
 
     /// <summary>
+    /// Array starting index
+    /// </summary>
+    public int IndexStart { get; set; } = 0;
+
+    /// <summary>
+    /// Array ending index
+    /// </summary>
+    public int IndexEnd { get; set; } = 0;
+
+    /// <summary>
     /// Each concrete DTO must implement this method to create JsonSerializerOptions with the appropriate naming policy and converters based on the culture.
     /// </summary>
     public abstract JsonSerializerOptions CreateJsonOptions(bool serializeDoublesAsStrings = false);
