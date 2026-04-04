@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
 
@@ -110,8 +111,9 @@ public partial class StartUpViewModel: ObservableRecipient
         }
     }
 
-    partial void OnSelectedDerivativeMethodChanged(int oldValue, int newValue)
+    async partial void OnSelectedDerivativeMethodChanged(int oldValue, int newValue)
     {
-        //await ComputeAsync(stripComboSeries.SelectedIndex, derivative: _settings.ComputeDerivative);
+        await Compute.ComputeAsync(DocumentDto, SelectedPlotSeriesIndex);
     }
+
 }

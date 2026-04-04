@@ -1,7 +1,5 @@
-﻿using ScottPlot;
-using ScottPlot.Plottables;
-using SignalAnalysis.Models;
-using static SkiaSharp.HarfBuzz.SKShaper;
+﻿using SignalAnalysis.Models;
+using SignalAnalysis.NumericalAlgorithms;
 
 namespace SignalAnalysis.Helpers;
 
@@ -26,10 +24,10 @@ internal static class Compute
     /// <param name="fftRoundUp"><see langword="True"/> if data length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
     /// <param name="fftBluestein"><see langword="True"/> if Bluestein algorithm is used</param>
     /// <returns></returns>
-    private static async Task ComputeAsync(DocumentBase data, int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true, bool fftBluestein = true)
+    internal static async Task ComputeAsync(DocumentBase data, int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true, bool fftBluestein = true)
     {
         if (derivative)
-            ComputeDerivative(signalClipped);
+            Derivative.Derivate(data.SeriesData[series].ToArray());
 
         //     Clip signal data to the user-specified bounds 
         //    if (Signal.Data is null || Signal.Data.Length == 0) return;
@@ -143,5 +141,44 @@ internal static class Compute
         //     Restore the cursor
         //    this.UseWaitCursor = false;
         //    Cursor = cursor;
-        //}
-    }
+        }
+
+    ///// <summary>
+    ///// Computes the derivative of a 1D data array.
+    ///// </summary>
+    ///// <param name="signal">1D data array values whose values are expected to be uniformly spaced</param>
+    ///// <exception cref="OperationCanceledException">This is thrown if the token is cancelled whenever the user presses the ESC button</exception>
+    //private void ComputeDerivative(double[] signal)
+    //{
+    //    Results.Derivative = Derivative.Derivate(
+    //        array: signal,
+    //        method: _settings.DerivativeAlgorithm,
+    //        lowerIndex: 0,
+    //        upperIndex: signal.Length - 1,
+    //        samplingFrequency: Signal.SampleFrequency);
+
+    //    // Replacing NaN values using LinQ since ScottPlot throws an exception for NaN values
+    //    //var watch = new System.Diagnostics.Stopwatch();
+    //    //watch.Start();
+    //    Results.Derivative = Results.Derivative.Select(x => double.IsNaN(x) ? 0 : x).ToArray();
+    //    //watch.Stop();
+    //    //System.Diagnostics.Debug.WriteLine($"LinQ execution time: {watch.ElapsedMilliseconds} ms");
+
+    //    //if (!watch.IsRunning)
+    //    //    watch.Restart(); // Reset time to 0 and start measuring
+
+    //    // Replacing NaN values using a for loop
+    //    //double x;
+    //    //for (int i = 0; i < Results.Derivative.Length; i++)
+    //    //{
+    //    //    x = Results.Derivative[i];
+    //    //    Results.Derivative[i] = double.IsNaN(x) ? 0 : x;
+    //    //}
+
+    //    //watch.Stop();
+    //    //System.Diagnostics.Debug.WriteLine($"For-loop execution time: {watch.ElapsedMilliseconds} ms");
+
+    //    // This doesn't quite work
+    //    //Array.ForEach(Results.Derivative, x => x = double.IsNaN(x) ? 0 : x);
+    //}
+}
