@@ -31,7 +31,7 @@ public partial class StartUpViewModel: ObservableRecipient
     [ObservableProperty]
     public partial List<string> DerivativeMethods { get; set; } = [];
     [ObservableProperty]
-    public partial int SelectedDerivativeMethod { get; set; } = 1;
+    public partial int SelectedDerivativeIndex { get; set; } = 1;
 
     [ObservableProperty]
     public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
@@ -111,9 +111,14 @@ public partial class StartUpViewModel: ObservableRecipient
         }
     }
 
-    async partial void OnSelectedDerivativeMethodChanged(int oldValue, int newValue)
+    partial void OnSelectedDerivativeIndexChanged(int oldValue, int newValue)
     {
-        await Compute.ComputeAsync(DocumentDto, SelectedPlotSeriesIndex);
+        _ = OnSelectedDerivativeMethodIndexAsync(oldValue, newValue);
+    }
+
+    private async Task OnSelectedDerivativeMethodIndexAsync(int oldValue, int newValue)
+    {
+        await Compute.ComputeAsync(DocumentDto, SelectedPlotSeriesIndex, derivative: true);
     }
 
 }

@@ -21,8 +21,8 @@ public sealed class CenteredNinePointStrategy : IDerivativeStrategy
     /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
     public double[] Compute(Func<double, double> function, double lowerLimit, double upperLimit, int segments)
     {
-        if (function is null) throw new ArgumentNullException(nameof(f));
-        if (segments <= 0) throw new ArgumentOutOfRangeException(nameof(segments));
+        ArgumentNullException.ThrowIfNull(function);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(segments);
         if (lowerLimit >= upperLimit) throw new ArgumentException("lowerLimit must be < upperLimit");
 
         int n = segments + 1;
@@ -39,7 +39,7 @@ public sealed class CenteredNinePointStrategy : IDerivativeStrategy
             return result;
         }
 
-        // Bordes no definidos: 4 primeros y 4 últimos
+        // Limit extreme points to NaN, as the formula cannot be applied there
         for (int i = 0; i < 4; i++) result[i] = double.NaN;
         for (int i = n - 4; i < n; i++) result[i] = double.NaN;
 
@@ -57,7 +57,7 @@ public sealed class CenteredNinePointStrategy : IDerivativeStrategy
 
     public double[] ComputeFromSamples(ReadOnlySpan<double> samples, double samplingFrequency)
     {
-        if (samples.Length == 0) return Array.Empty<double>();
+        if (samples.Length == 0) return [];
         int n = samples.Length;
         var result = new double[n];
 
@@ -69,7 +69,8 @@ public sealed class CenteredNinePointStrategy : IDerivativeStrategy
         }
 
         double h = 1.0 / samplingFrequency;
-        // Bordes: 4 primeros y 4 últimos no definidos
+
+        // Limit extreme points to NaN, as the formula cannot be applied there
         for (int i = 0; i < 4; i++) result[i] = double.NaN;
         for (int i = n - 4; i < n; i++) result[i] = double.NaN;
 

@@ -27,7 +27,9 @@ internal static class Compute
     internal static async Task ComputeAsync(DocumentBase data, int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true, bool fftBluestein = true)
     {
         if (derivative)
-            Derivative.Derivate(data.SeriesData[series].ToArray());
+        {
+            var result = await Task.Run(() => Derivative.Derivate(data.SeriesData[series].ToArray(), upperIndex: data.SeriesData[series].Count-1));
+        }
 
         //     Clip signal data to the user-specified bounds 
         //    if (Signal.Data is null || Signal.Data.Length == 0) return;

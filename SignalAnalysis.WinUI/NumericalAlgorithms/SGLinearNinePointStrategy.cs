@@ -89,4 +89,3 @@ public sealed class SGLinearNinePointStrategy : IDerivativeStrategy
         return result;
     }
 }
-}

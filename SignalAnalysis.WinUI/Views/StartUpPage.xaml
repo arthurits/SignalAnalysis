@@ -227,7 +227,7 @@
                                                       AutomationProperties.Name="Derivative method"
                                                       ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
                                                       ItemsSource="{x:Bind ViewModel.DerivativeMethods}"
-                                                      SelectedValue="{x:Bind ViewModel.SelectedDerivativeMethod, Mode=TwoWay}"
+                                                      SelectedIndex="{x:Bind ViewModel.SelectedDerivativeIndex, Mode=TwoWay}"
                                                       Width="220"/>
                                         </StackPanel>
                                     </AppBarElementContainer>

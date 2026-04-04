@@ -80,4 +80,3 @@ public sealed class SGCubicFivePointStrategy : IDerivativeStrategy
         return result;
     }
 }
-}
