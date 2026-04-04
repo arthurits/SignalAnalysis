@@ -21,8 +21,8 @@ public sealed class CenteredFivePointStrategy : IDerivativeStrategy
     /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
     public double[] Compute(Func<double, double> function, double lowerLimit, double upperLimit, int segments)
     {
-        if (function is null) throw new ArgumentNullException(nameof(function));
-        if (segments <= 0) throw new ArgumentOutOfRangeException(nameof(segments));
+        ArgumentNullException.ThrowIfNull(function);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(segments);
         if (lowerLimit >= upperLimit) throw new ArgumentException("lowerLimit must be < upperLimit");
 
         int n = segments + 1;
@@ -37,9 +37,10 @@ public sealed class CenteredFivePointStrategy : IDerivativeStrategy
             return result;
         }
 
-        // Bordes: dos primeros y dos últimos no definidos
+        // First two and last two points are not defined for the five-point formula, so we set them to NaN
         for (int i = 0; i < 2; i++) result[i] = double.NaN;
         for (int i = n - 2; i < n; i++) result[i] = double.NaN;
+        
         double x = lowerLimit + step2;
         for (int j = 2; j < n - 2; j++)
         {
@@ -57,6 +58,7 @@ public sealed class CenteredFivePointStrategy : IDerivativeStrategy
         int n = samples.Length;
         var result = new double[n];
 
+        // If we don't have enough points to apply the five-point formula, return NaN for all points
         if (n < 5)
         {
             for (int i = 0; i < n; i++) result[i] = double.NaN;
@@ -66,7 +68,7 @@ public sealed class CenteredFivePointStrategy : IDerivativeStrategy
         double step = 1.0 / samplingFrequency;
         double step2 = 2 * step;
 
-        // Bordes: dos primeros y dos últimos no definidos
+        // First two and last two points are not defined for the five-point formula, so we set them to NaN
         for (int i = 0; i < 2; i++) result[i] = double.NaN;
         for (int i = n - 2; i < n; i++) result[i] = double.NaN;
 

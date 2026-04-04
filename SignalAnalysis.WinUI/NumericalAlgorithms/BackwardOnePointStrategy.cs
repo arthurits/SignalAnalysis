@@ -6,6 +6,7 @@ namespace SignalAnalysis.NumericalAlgorithms;
 /// Computes the derivative using the backwards one-point finite difference.
 /// [f(x) - f(x-h)] / h
 /// </summary>
+/// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
 public sealed class BackwardOnePointStrategy : IDerivativeStrategy
 {
     /// <summary>
@@ -18,10 +19,10 @@ public sealed class BackwardOnePointStrategy : IDerivativeStrategy
     /// <param name="segments">Number of equal segments the differentiation interval is divided into</param>
     /// <returns>1D array (vector) with the discrete derivate for the discretised <paramref name="function"/></returns>
     /// <seealso cref="https://www.cantorsparadise.com/the-best-numerical-derivative-approximation-formulas-998703380948"/>
-    public double[] Compute(Func<double, double> f, double lowerLimit, double upperLimit, int segments)
+    public double[] Compute(Func<double, double> function, double lowerLimit, double upperLimit, int segments)
     {
-        if (f is null) throw new ArgumentNullException(nameof(f));
-        if (segments <= 0) throw new ArgumentOutOfRangeException(nameof(segments));
+        ArgumentNullException.ThrowIfNull(function);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(segments);
         if (lowerLimit >= upperLimit) throw new ArgumentException("lowerLimit must be < upperLimit");
 
         int n = segments + 1;
@@ -34,7 +35,7 @@ public sealed class BackwardOnePointStrategy : IDerivativeStrategy
         double x = lowerLimit + step;
         for (int j = 1; j < n; j++)
         {
-            result[j] = (f(x) - f(x - step)) / step;
+            result[j] = (function(x) - function(x - step)) / step;
             x += step;
         }
 
@@ -43,7 +44,7 @@ public sealed class BackwardOnePointStrategy : IDerivativeStrategy
 
     public double[] ComputeFromSamples(ReadOnlySpan<double> samples, double samplingFrequency)
     {
-        if (samples.Length == 0) return Array.Empty<double>();
+        if (samples.Length == 0) return [];
         int n = samples.Length;
         var result = new double[n];
         double step = 1.0 / samplingFrequency;

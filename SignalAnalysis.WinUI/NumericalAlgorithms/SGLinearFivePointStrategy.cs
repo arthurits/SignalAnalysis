@@ -37,7 +37,7 @@ public sealed class SGLinearFivePointStrategy : IDerivativeStrategy
             return result;
         }
 
-        // Limit extreme points to NaN, as the formula cannot be applied there
+        // First and last two points cannot be computed with the formula, so we set them to NaN
         for (int i = 0; i < 2; i++) result[i] = double.NaN;
         for (int i = n - 2; i < n; i++) result[i] = double.NaN;
 
@@ -67,7 +67,7 @@ public sealed class SGLinearFivePointStrategy : IDerivativeStrategy
 
         double step = 1.0 / samplingFrequency;
 
-        // Limit extreme points to NaN, as the formula cannot be applied there
+        // First and last two points cannot be computed with the formula, so we set them to NaN
         for (int i = 0; i < 2; i++) result[i] = double.NaN;
         for (int i = n - 2; i < n; i++) result[i] = double.NaN;
 

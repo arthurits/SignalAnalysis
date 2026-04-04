@@ -21,8 +21,8 @@ public sealed class CenteredSevenPointStrategy : IDerivativeStrategy
     /// <seealso cref="https://en.wikipedia.org/wiki/Finite_difference_coefficient"/>
     public double[] Compute(Func<double, double> function, double lowerLimit, double upperLimit, int segments)
     {
-        if (function is null) throw new ArgumentNullException(nameof(function));
-        if (segments <= 0) throw new ArgumentOutOfRangeException(nameof(segments));
+        ArgumentNullException.ThrowIfNull(function);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(segments);
         if (lowerLimit >= upperLimit) throw new ArgumentException("lowerLimit must be < upperLimit");
 
         int n = segments + 1;
@@ -38,7 +38,7 @@ public sealed class CenteredSevenPointStrategy : IDerivativeStrategy
             return result;
         }
 
-        // Bordes no definidos: 3 primeros y 3 últimos
+        // First 3 and last 3 points are not defined due to the formula requiring points at x±3h, so we set them to NaN
         for (int i = 0; i < 3; i++) result[i] = double.NaN;
         for (int i = n - 3; i < n; i++) result[i] = double.NaN;
 
@@ -59,6 +59,7 @@ public sealed class CenteredSevenPointStrategy : IDerivativeStrategy
         int n = samples.Length;
         var result = new double[n];
 
+        // If we have less than 7 points, we cannot apply the formula, so we return NaN for all points
         if (n < 7)
         {
             for (int i = 0; i < n; i++) result[i] = double.NaN;
@@ -67,7 +68,7 @@ public sealed class CenteredSevenPointStrategy : IDerivativeStrategy
 
         double step = 1.0 / samplingFrequency;
 
-        // Bordes: 3 primeros y 3 últimos no definidos
+        // First 3 and last 3 points are not defined due to the formula requiring points at x±3h, so we set them to NaN
         for (int i = 0; i < 3; i++) result[i] = double.NaN;
         for (int i = n - 3; i < n; i++) result[i] = double.NaN;
 

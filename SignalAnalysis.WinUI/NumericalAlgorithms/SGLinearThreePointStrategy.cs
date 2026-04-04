@@ -7,6 +7,7 @@ namespace SignalAnalysis.NumericalAlgorithms;
 /// The formula is the same as <see cref="CenteredThreePoint(Func{double, double}, double, double, int)"/>
 /// [f(x+h) - f(x-h)] / 2h
 /// </summary>
+/// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
 public sealed class SGLinearThreePointStrategy : IDerivativeStrategy
 {
     /// <summary>
@@ -22,8 +23,8 @@ public sealed class SGLinearThreePointStrategy : IDerivativeStrategy
     /// <seealso cref="https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter"/>
     public double[] Compute(Func<double, double> function, double lowerLimit, double upperLimit, int segments)
     {
-        if (function is null) throw new ArgumentNullException(nameof(function));
-        if (segments <= 0) throw new ArgumentOutOfRangeException(nameof(segments));
+        ArgumentNullException.ThrowIfNull(function);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(segments);
         if (lowerLimit >= upperLimit) throw new ArgumentException("lowerLimit must be < upperLimit");
 
         int n = segments + 1;
@@ -37,7 +38,7 @@ public sealed class SGLinearThreePointStrategy : IDerivativeStrategy
             return result;
         }
 
-        // Limit extreme points to NaN, as the formula cannot be applied there
+        // First and last points cannot be computed using the formula, so we set them to NaN
         result[0] = double.NaN;
         result[n - 1] = double.NaN;
 
@@ -66,7 +67,7 @@ public sealed class SGLinearThreePointStrategy : IDerivativeStrategy
 
         double step = 1.0 / samplingFrequency;
 
-        // Limit extreme points to NaN, as the formula cannot be applied there
+        // First and last points cannot be computed using the formula, so we set them to NaN
         result[0] = double.NaN;
         result[n - 1] = double.NaN;
 
