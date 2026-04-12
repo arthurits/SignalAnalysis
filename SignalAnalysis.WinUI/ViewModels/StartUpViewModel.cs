@@ -3,6 +3,7 @@ using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
+using static CommunityToolkit.WinUI.Animations.Expressions.ExpressionValues;
 
 namespace SignalAnalysis.ViewModels;
 
@@ -15,8 +16,8 @@ public partial class StartUpViewModel: ObservableRecipient
     public ObservableCollection<double> Xs { get; } = [];
     public ObservableCollection<double> Ys { get; } = [];
 
-    public ObservableCollection<double> Derivative_Xs { get; } = [];
-    public ObservableCollection<double> Derivative_Ys { get; } = [];
+    public ObservableCollection<double> Derivative_Xs { get; set; } = [];
+    public ObservableCollection<double> Derivative_Ys { get; set; } = [];
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
@@ -40,6 +41,8 @@ public partial class StartUpViewModel: ObservableRecipient
 
     [ObservableProperty]
     public partial DocumentBase DocumentDto { get; set; }
+
+    private SignalStats _signalStats = new();
 
     public StartUpViewModel(ILocalizationService localizationService)
     {
@@ -88,6 +91,14 @@ public partial class StartUpViewModel: ObservableRecipient
         {
             SelectedPlotSeriesIndex = 0;
         }
+
+        // Update _signalStats with the new document data
+        var dataAbscissa = new ObservableCollection<double>(Enumerable.Range(0, newValue.SeriesPoints).Select(i => 0 + i / newValue.SamplingFrequency));
+        Derivative_Xs = dataAbscissa;
+
+        //// Si quieres minimizar notificaciones, podrías implementar una colección con suspensión de notificaciones.
+        //Derivative_Xs.Clear();
+        //foreach (var v in dataAbscissa) Derivative_Xs.Add(v);
     }
 
     partial void OnSelectedPlotSeriesIndexChanged(int oldValue, int newValue)
@@ -118,7 +129,8 @@ public partial class StartUpViewModel: ObservableRecipient
 
     private async Task OnSelectedDerivativeMethodIndexAsync(int oldValue, int newValue)
     {
-        await Compute.ComputeAsync(DocumentDto, SelectedPlotSeriesIndex, derivative: true);
+        await Compute.ComputeAsync(DocumentDto, _signalStats, SelectedPlotSeriesIndex, derivative: true);
+        Derivative_Ys = new ObservableCollection<double>(_signalStats.Derivative);
     }
 
 }
