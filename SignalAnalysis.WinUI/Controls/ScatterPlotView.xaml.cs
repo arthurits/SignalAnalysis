@@ -6,6 +6,7 @@ using ScottPlot.Plottables;
 using SignalAnalysis.Helpers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Windows.System.Implementation.FileExplorer;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -22,6 +23,10 @@ public sealed partial class ScatterPlotView : UserControl
         DependencyProperty.Register(nameof(Ys), typeof(ObservableCollection<double>), typeof(ScatterPlotView),
             new PropertyMetadata(null, OnYsChanged));
 
+    public static readonly DependencyProperty PointsProperty =
+            DependencyProperty.Register(nameof(Points), typeof(ObservableCollection<(double X, double Y)>), typeof(ScatterPlotView),
+                new PropertyMetadata(null, OnPointsChanged));
+
     public ObservableCollection<double> Xs
     {
         get => (ObservableCollection<double>)GetValue(XsProperty);
@@ -32,6 +37,12 @@ public sealed partial class ScatterPlotView : UserControl
     {
         get => (ObservableCollection<double>)GetValue(YsProperty);
         set => SetValue(YsProperty, value);
+    }
+
+    public ObservableCollection<(double X, double Y)> Points
+    {
+        get => (ObservableCollection<(double X, double Y)>)GetValue(PointsProperty);
+        set => SetValue(PointsProperty, value);
     }
 
     // Método público para que la vista que contiene este control pueda añadir el host visual
@@ -78,27 +89,75 @@ public sealed partial class ScatterPlotView : UserControl
     private static void OnXsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var ctrl = (ScatterPlotView)d;
-        ctrl.OnCollectionAssigned(e.OldValue as ObservableCollection<double>, e.NewValue as ObservableCollection<double>);
+        ctrl.OnCollectionAssigned(e.OldValue as ObservableCollection<double>, e.NewValue as ObservableCollection<double>, isXs: true, isYs: false);
     }
 
     private static void OnYsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var ctrl = (ScatterPlotView)d;
-        ctrl.OnCollectionAssigned(e.OldValue as ObservableCollection<double>, e.NewValue as ObservableCollection<double>);
+        ctrl.OnCollectionAssigned(e.OldValue as ObservableCollection<double>, e.NewValue as ObservableCollection<double>, isXs: false, isYs: true);
     }
 
-    private void OnCollectionAssigned(ObservableCollection<double>? oldCol, ObservableCollection<double>? newCol)
+    private static void OnPointsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var ctrl = (ScatterPlotView)d;
+        ctrl.OnPointsAssigned(e.OldValue as ObservableCollection<(double X, double Y)>, e.NewValue as ObservableCollection<(double X, double Y)>);
+    }
+
+    private void OnCollectionAssigned(ObservableCollection<double>? oldCol, ObservableCollection<double>? newCol, bool isXs, bool isYs)
     {
         // Unsubscribe from old collection events and subscribe to new collection events
         oldCol?.CollectionChanged -= Collections_CollectionChanged;
         newCol?.CollectionChanged += Collections_CollectionChanged;
 
-        // Immediately process the new collection to update the plot with any existing data.
-        // This is done the UI thread to ensure thread safety when accessing ObservableCollection and updating the plot.
-        // This ensures that if the collection already has items when assigned, they will be reflected in the plot right away.       
-        DispatcherQueue.GetForCurrentThread().TryEnqueue(() =>
+        // Coalesce assignments so that if both Xs and Ys are set almost simultaneously we process them together.
+        _debouncer.Debounce(() =>
         {
-            ProcessInitialCollections();
+            // Immediately process the new collection to update the plot with any existing data.
+            // This is done the UI thread to ensure thread safety when accessing ObservableCollection and updating the plot.
+            // This ensures that if the collection already has items when assigned, they will be reflected in the plot right away.       
+            DispatcherQueue.GetForCurrentThread().TryEnqueue(() =>
+                {
+                    // Si se asignaron Points desde el VM, preferimos reconstruir desde Points
+                    if (Points is not null && Points.Count > 0)
+                    {
+                        RebuildFromPoints();
+                    }
+                    else
+                    {
+                        // Si Ys ya existen y Xs se asignó, actualizamos solo Xs; si no, reconstruimos según disponibilidad
+                        if (isXs && !isYs)
+                        {
+                            if (Xs is not null) UpdateXs(Xs);
+                        }
+                        else if (!isXs && isYs)
+                        {
+                            if (Ys is not null) UpdateYs(Ys);
+                        }
+
+                        // Si ambas colecciones están presentes y hay desalineación, reconstruimos para coherencia
+                        if (Xs is not null && Ys is not null)
+                        {
+                            // Si la diferencia es grande o hay dudas, reconstruir
+                            if (Math.Abs(Xs.Count - Ys.Count) > 0)
+                                ProcessInitialCollections(rebuildAll: true);
+                        }
+                    }
+                });
+        });
+    }
+
+    private void OnPointsAssigned(ObservableCollection<(double X, double Y)>? oldCol, ObservableCollection<(double X, double Y)>? newCol)
+    {
+        if (oldCol is not null) oldCol.CollectionChanged -= Points_CollectionChanged;
+        if (newCol is not null) newCol.CollectionChanged += Points_CollectionChanged;
+
+        _debouncer.Debounce(() =>
+        {
+            DispatcherQueue.GetForCurrentThread().TryEnqueue(() =>
+            {
+                RebuildFromPoints();
+            });
         });
     }
 
@@ -195,6 +254,15 @@ public sealed partial class ScatterPlotView : UserControl
 
     }
 
+    private void Points_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        DispatcherQueue.GetForCurrentThread().TryEnqueue(() =>
+        {
+            // For simplicity: on any non-trivial change, rebuild from Points
+            RebuildFromPoints();
+        });
+    }
+
     /// <summary>
     /// Processes the initial X and Y collections, pairing available elements and handling any pending unmatched values.
     /// </summary>
@@ -263,6 +331,106 @@ public sealed partial class ScatterPlotView : UserControl
                 _pendingY = ys[_ysList.Count];
             }
         }
+    }
+
+    private void RebuildFromPoints()
+    {
+        if (Points is null) return;
+
+        lock (_sync)
+        {
+            _xsList.Clear();
+            _ysList.Clear();
+            foreach (var p in Points)
+            {
+                _xsList.Add(p.X);
+                _ysList.Add(p.Y);
+            }
+        }
+
+        RequestRenderDebounced();
+    }
+
+    // Actualiza solo las Xs de forma eficiente manteniendo Ys
+    public void UpdateXs(IList<double> xs)
+    {
+        if (xs is null) return;
+
+        lock (_sync)
+        {
+            // Si no hay Ys, guardamos Xs internamente hasta que Ys estén disponibles
+            if (_ysList.Count == 0 && (Ys is null || Ys.Count == 0))
+            {
+                // Guardar como reconstrucción completa cuando Ys lleguen
+                _xsList.Clear();
+                _xsList.AddRange(xs.Take(xs.Count));
+                // No render hasta que haya Ys
+                return;
+            }
+
+            int yCount = _ysList.Count;
+            int newCount = Math.Min(xs.Count, yCount);
+
+            // Replace existing
+            int common = Math.Min(_xsList.Count, newCount);
+            for (int i = 0; i < common; i++)
+                _xsList[i] = xs[i];
+
+            // Add new pairs if xs longer
+            for (int i = _xsList.Count; i < newCount; i++)
+            {
+                _xsList.Add(xs[i]);
+                // _ysList already has the corresponding Y
+            }
+
+            // Trim if xs shorter
+            while (_xsList.Count > newCount)
+            {
+                int last = _xsList.Count - 1;
+                _xsList.RemoveAt(last);
+                if (last < _ysList.Count) _ysList.RemoveAt(last);
+            }
+        }
+
+        RequestRenderDebounced();
+    }
+
+    // Actualiza solo las Ys de forma eficiente manteniendo Xs
+    public void UpdateYs(IList<double> ys)
+    {
+        if (ys is null) return;
+
+        lock (_sync)
+        {
+            // Si no hay Xs, guardamos Ys internamente hasta que Xs estén disponibles
+            if (_xsList.Count == 0 && (Xs is null || Xs.Count == 0))
+            {
+                _ysList.Clear();
+                _ysList.AddRange(ys.Take(ys.Count));
+                return;
+            }
+
+            int xCount = _xsList.Count;
+            int newCount = Math.Min(ys.Count, xCount);
+
+            int common = Math.Min(_ysList.Count, newCount);
+            for (int i = 0; i < common; i++)
+                _ysList[i] = ys[i];
+
+            for (int i = _ysList.Count; i < newCount; i++)
+            {
+                _ysList.Add(ys[i]);
+            }
+
+            while (_ysList.Count > newCount)
+            {
+                int last = _ysList.Count - 1;
+                _ysList.RemoveAt(last);
+                if (last < _xsList.Count) _xsList.RemoveAt(last);
+            }
+        }
+
+        RequestRenderDebounced();
     }
 
     private void HandleNewX(double x)
