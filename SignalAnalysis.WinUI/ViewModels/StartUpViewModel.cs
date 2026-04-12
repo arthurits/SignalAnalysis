@@ -3,6 +3,7 @@ using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using static CommunityToolkit.WinUI.Animations.Expressions.ExpressionValues;
 
 namespace SignalAnalysis.ViewModels;
@@ -16,8 +17,10 @@ public partial class StartUpViewModel: ObservableRecipient
     public ObservableCollection<double> Xs { get; } = [];
     public ObservableCollection<double> Ys { get; } = [];
 
-    public ObservableCollection<double> Derivative_Xs { get; set; } = [];
-    public ObservableCollection<double> Derivative_Ys { get; set; } = [];
+    [ObservableProperty]
+    public partial ObservableCollection<double> Derivative_Xs { get; set; } = [];
+    [ObservableProperty]
+    public partial ObservableCollection<double> Derivative_Ys { get; set; } = [];
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;

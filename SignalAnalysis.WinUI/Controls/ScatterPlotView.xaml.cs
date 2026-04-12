@@ -6,7 +6,6 @@ using ScottPlot.Plottables;
 using SignalAnalysis.Helpers;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using Windows.System.Implementation.FileExplorer;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -122,17 +121,26 @@ public sealed partial class ScatterPlotView : UserControl
                     if (Points is not null && Points.Count > 0)
                     {
                         RebuildFromPoints();
+                        return;
                     }
                     else
                     {
                         // Si Ys ya existen y Xs se asignó, actualizamos solo Xs; si no, reconstruimos según disponibilidad
                         if (isXs && !isYs)
                         {
-                            if (Xs is not null) UpdateXs(Xs);
+                            if (Xs is not null)
+                            {
+                                UpdateXs(Xs);
+                                return;
+                            }
                         }
                         else if (!isXs && isYs)
                         {
-                            if (Ys is not null) UpdateYs(Ys);
+                            if (Ys is not null)
+                            {
+                                UpdateYs(Ys);
+                                return;
+                            }
                         }
 
                         // Si ambas colecciones están presentes y hay desalineación, reconstruimos para coherencia
