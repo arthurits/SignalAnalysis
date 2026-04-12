@@ -104,5 +104,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>SignalAnalysis</AssemblyName>
     <SupportedOSPlatformVersion>10.0.17763.1</SupportedOSPlatformVersion>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 </Project>

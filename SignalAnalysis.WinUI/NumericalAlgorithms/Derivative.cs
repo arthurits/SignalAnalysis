@@ -79,7 +79,7 @@ internal static class Derivative
         // Si la API original devolvía un vector con la misma longitud que el array original,
         // podemos expandir el resultado para cubrir índices fuera del intervalo con NaN.
         var full = new double[array.Length];
-        for (int i = 0; i < array.Length; i++) full[i] = double.NaN;
+        //for (int i = 0; i < array.Length; i++) full[i] = double.NaN;
         for (int i = 0; i < result.Length; i++) full[lowerIndex + i] = result[i];
 
         return full;

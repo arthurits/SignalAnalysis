@@ -24,11 +24,11 @@ internal static class Compute
     /// <param name="fftRoundUp"><see langword="True"/> if data length will be augmented by zero padding at the to make it equal to a power of 2. If <see langword="false"/>, it's rounded down to the closes power of 2</param>
     /// <param name="fftBluestein"><see langword="True"/> if Bluestein algorithm is used</param>
     /// <returns></returns>
-    internal static async Task ComputeAsync(DocumentBase data, int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true, bool fftBluestein = true)
+    internal static async Task ComputeAsync(DocumentBase data, SignalStats signalStats, int series, bool deletePreviousResults = false, bool stats = false, bool boxplot = false, bool derivative = false, bool integral = false, bool fractal = false, bool progressive = false, bool entropy = false, bool fft = false, bool fftPlot = false, bool powerSpectra = false, bool fftRoundUp = true, bool fftBluestein = true)
     {
         if (derivative)
         {
-            var result = await Task.Run(() => Derivative.Derivate(data.SeriesData[series].ToArray(), upperIndex: data.SeriesData[series].Count-1));
+            signalStats.Derivative = await Task.Run(() => Derivative.Derivate(data.SeriesData[series].ToArray(), upperIndex: data.SeriesData[series].Count-1));
         }
 
         //     Clip signal data to the user-specified bounds 
