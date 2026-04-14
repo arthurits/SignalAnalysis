@@ -240,8 +240,7 @@
                             BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
                             Height="300">
                             <controls:ScatterPlotView x:Name="plotDerivativeView"
-                               Xs="{x:Bind ViewModel.Derivative_Xs, Mode=OneWay}"
-                               Ys="{x:Bind ViewModel.Derivative_Ys, Mode=OneWay}">
+                               Series="{x:Bind ViewModel.PlotSeriesData, Mode=OneWay}">
                             </controls:ScatterPlotView>
                         </Border>
                     </StackPanel>

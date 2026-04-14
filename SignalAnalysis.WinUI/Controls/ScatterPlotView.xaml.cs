@@ -15,17 +15,17 @@ using System.ComponentModel;
 namespace SignalAnalysis.Controls;
 
 
-public class ScatterSeries : ObservableObject
+public partial class ScatterSeries : ObservableObject
 {
     [ObservableProperty]
-    public partial ObservableCollection<double>? Xs;
+    public partial ObservableCollection<double>? Xs { get; set; }
 
     [ObservableProperty]
-    public partial ObservableCollection<double>? Ys;
+    public partial ObservableCollection<double>? Ys { get; set; }
 
     // OPCIONAL: para uso futuro
     [ObservableProperty]
-    public partial ObservableCollection<(double X, double Y)>? Points;
+    public partial ObservableCollection<(double X, double Y)>? Points { get; set; }
 }
 
 
@@ -155,7 +155,7 @@ public sealed partial class ScatterPlotView : UserControl
         }
         else
         {
-            scatter.Update(xs, ys);
+            //scatter.Update(xs, ys);
         }
     }
 

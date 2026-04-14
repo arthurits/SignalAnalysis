@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Controls;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using System.Collections.ObjectModel;
@@ -21,6 +22,9 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial ObservableCollection<double> Derivative_Xs { get; set; } = [];
     [ObservableProperty]
     public partial ObservableCollection<double> Derivative_Ys { get; set; } = [];
+    
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> PlotSeriesData { get; set; } = [];
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
