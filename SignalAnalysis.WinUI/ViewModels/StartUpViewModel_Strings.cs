@@ -37,6 +37,14 @@ public partial class StartUpViewModel : ObservableRecipient
     [ObservableProperty]
     public partial string StrButtonPlotPaletteToolTip { get; set; } = string.Empty;
 
+    [ObservableProperty]
+    public partial string StrDerivarivePlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrDerivativeXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrDerivativeYAxisTitle { get; set; } = string.Empty;
+
+
     private void OnLanguageChanged(object? sender, EventArgs e)
     {
         StrOpenDocument = "StrOpenDocument".GetLocalized("SignalAnalysis");

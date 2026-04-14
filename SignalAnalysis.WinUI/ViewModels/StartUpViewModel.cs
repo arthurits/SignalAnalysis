@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SignalAnalysis.Contracts.Services;
+using SignalAnalysis.Controls;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
+using SignalAnalysis.NumericalAlgorithms;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using static CommunityToolkit.WinUI.Animations.Expressions.ExpressionValues;
@@ -21,6 +23,9 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial ObservableCollection<double> Derivative_Xs { get; set; } = [];
     [ObservableProperty]
     public partial ObservableCollection<double> Derivative_Ys { get; set; } = [];
+    
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> DerivativeData { get; set; } = [];
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
@@ -56,6 +61,15 @@ public partial class StartUpViewModel: ObservableRecipient
 
         // Load string resources into binding variables for the UI
         OnLanguageChanged(null, EventArgs.Empty);
+
+        // Add plot series
+        DerivativeData.Clear();
+        DerivativeData.Add(new ScatterSeries()); // Original signal
+        DerivativeData.Add(new ScatterSeries()); // Derivative signal
+
+        StrDerivarivePlotTitle = "Derivarive";
+        StrDerivativeXAxisTitle = "Time (s)";
+        StrDerivativeYAxisTitle = "Amplitude";
 
         //// For testing purposes, add some dummy data to the plot series collection
         //for (int i = 0; i < 200; i++)
@@ -97,7 +111,12 @@ public partial class StartUpViewModel: ObservableRecipient
 
         // Update _signalStats with the new document data
         var dataAbscissa = new ObservableCollection<double>(Enumerable.Range(0, newValue.SeriesPoints).Select(i => 0 + i / newValue.SamplingFrequency));
-        Derivative_Xs = dataAbscissa;
+
+        foreach (var dataSerie in DerivativeData)
+            dataSerie.Xs = dataAbscissa;
+
+
+        //Derivative_Xs = dataAbscissa;
 
         //// Si quieres minimizar notificaciones, podrías implementar una colección con suspensión de notificaciones.
         //Derivative_Xs.Clear();
@@ -121,7 +140,9 @@ public partial class StartUpViewModel: ObservableRecipient
                 Xs.Add(i * period); // Ejemplo de eje X
                 Ys.Add(data[i]); // Datos de la serie seleccionada
             }
-            
+
+            DerivativeData[1].Ys = new ObservableCollection<double>(data);
+
         }
     }
 
@@ -133,7 +154,8 @@ public partial class StartUpViewModel: ObservableRecipient
     private async Task OnSelectedDerivativeMethodIndexAsync(int oldValue, int newValue)
     {
         await Compute.ComputeAsync(DocumentDto, _signalStats, SelectedPlotSeriesIndex, derivative: true);
-        Derivative_Ys = new ObservableCollection<double>(_signalStats.Derivative);
+        //Derivative_Ys = new ObservableCollection<double>(_signalStats.Derivative);
+        DerivativeData[0].Ys = new ObservableCollection<double>(_signalStats.Derivative);
     }
 
 }
