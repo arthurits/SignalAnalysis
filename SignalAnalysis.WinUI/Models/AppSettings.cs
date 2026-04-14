@@ -105,6 +105,10 @@ public partial class AppSettings : ObservableObject
     [JsonPropertyName("Launch app on startup")]
     public bool LaunchAtStartup { get; set; } = false;
 
+
+    [JsonPropertyName("Default derivative method")]
+    public int DefaultDerivativeMethod = 2;
+
     /// <summary>
     /// Maximum number of tasks or subtasks
     /// </summary>
