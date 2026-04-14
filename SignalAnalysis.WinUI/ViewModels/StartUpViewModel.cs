@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.Logging;
+using ScottPlot.Statistics;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Controls;
+using SignalAnalysis.Enumerations;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.NumericalAlgorithms;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using static CommunityToolkit.WinUI.Animations.Expressions.ExpressionValues;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis.ViewModels;
 
@@ -148,14 +150,28 @@ public partial class StartUpViewModel: ObservableRecipient
 
     partial void OnSelectedDerivativeIndexChanged(int oldValue, int newValue)
     {
-        _ = OnSelectedDerivativeMethodIndexAsync(oldValue, newValue);
+        bool derivative = true;
+
+        if (derivative)
+        {
+            _ = OnSelectedDerivativeMethodIndexAsync(oldValue, newValue);
+        }
     }
 
     private async Task OnSelectedDerivativeMethodIndexAsync(int oldValue, int newValue)
     {
-        await Compute.ComputeAsync(DocumentDto, _signalStats, SelectedPlotSeriesIndex, derivative: true);
-        //Derivative_Ys = new ObservableCollection<double>(_signalStats.Derivative);
+        DerivativeMethod method = DerivativeMethod.CenteredThreePoint; // Default method
+        if (Enum.IsDefined(typeof(DerivativeMethod), newValue))
+        {
+            method = (DerivativeMethod)newValue;
+        }
+
+        _signalStats.Derivative = await Task.Run(() => Derivative.Derivate(DocumentDto.SeriesData[SelectedPlotSeriesIndex].ToArray(),
+            method: method,
+            lowerIndex: 0,
+            upperIndex: DocumentDto.SeriesData[SelectedPlotSeriesIndex].Count - 1,
+            samplingFrequency: DocumentDto.SamplingFrequency));
+
         DerivativeData[0].Ys = new ObservableCollection<double>(_signalStats.Derivative);
     }
-
 }
