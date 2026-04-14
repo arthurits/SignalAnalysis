@@ -25,7 +25,7 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial ObservableCollection<double> Derivative_Ys { get; set; } = [];
     
     [ObservableProperty]
-    public partial ObservableCollection<ScatterSeries> PlotSeriesData { get; set; } = [];
+    public partial ObservableCollection<ScatterSeries> DerivativeData { get; set; } = [];
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
@@ -63,9 +63,9 @@ public partial class StartUpViewModel: ObservableRecipient
         OnLanguageChanged(null, EventArgs.Empty);
 
         // Add plot series
-        PlotSeriesData.Clear();
-        PlotSeriesData.Add(new ScatterSeries()); // Original signal
-        PlotSeriesData.Add(new ScatterSeries()); // Derivative signal
+        DerivativeData.Clear();
+        DerivativeData.Add(new ScatterSeries()); // Original signal
+        DerivativeData.Add(new ScatterSeries()); // Derivative signal
 
 
         //// For testing purposes, add some dummy data to the plot series collection
@@ -109,7 +109,7 @@ public partial class StartUpViewModel: ObservableRecipient
         // Update _signalStats with the new document data
         var dataAbscissa = new ObservableCollection<double>(Enumerable.Range(0, newValue.SeriesPoints).Select(i => 0 + i / newValue.SamplingFrequency));
 
-        foreach (var dataSerie in PlotSeriesData)
+        foreach (var dataSerie in DerivativeData)
             dataSerie.Xs = dataAbscissa;
 
 
@@ -138,7 +138,7 @@ public partial class StartUpViewModel: ObservableRecipient
                 Ys.Add(data[i]); // Datos de la serie seleccionada
             }
 
-            PlotSeriesData[1].Ys = new ObservableCollection<double>(data);
+            DerivativeData[1].Ys = new ObservableCollection<double>(data);
 
         }
     }
@@ -152,7 +152,7 @@ public partial class StartUpViewModel: ObservableRecipient
     {
         await Compute.ComputeAsync(DocumentDto, _signalStats, SelectedPlotSeriesIndex, derivative: true);
         //Derivative_Ys = new ObservableCollection<double>(_signalStats.Derivative);
-        PlotSeriesData[0].Ys = new ObservableCollection<double>(_signalStats.Derivative);
+        DerivativeData[0].Ys = new ObservableCollection<double>(_signalStats.Derivative);
     }
 
 }
