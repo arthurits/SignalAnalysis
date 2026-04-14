@@ -14,6 +14,9 @@ namespace SignalAnalysis.ViewModels;
 
 public partial class StartUpViewModel: ObservableRecipient
 {
+    // Services
+    private readonly AppSettings _appSettings;
+    private readonly ILocalSettingsService<AppSettings> _settingsService;
     private readonly ILocalizationService _localizationService;
 
     public ObservableCollection<PlotSeries> PlotSeries = [];
@@ -42,7 +45,7 @@ public partial class StartUpViewModel: ObservableRecipient
     [ObservableProperty]
     public partial List<string> DerivativeMethods { get; set; } = [];
     [ObservableProperty]
-    public partial int SelectedDerivativeIndex { get; set; } = 1;
+    public partial int SelectedDerivativeIndex { get; set; } = 2;
 
     [ObservableProperty]
     public partial bool UpdatePlotSimpleTasksChecked { get; set; } = false;
@@ -54,8 +57,14 @@ public partial class StartUpViewModel: ObservableRecipient
 
     private SignalStats _signalStats = new();
 
-    public StartUpViewModel(ILocalizationService localizationService)
+    public StartUpViewModel(ILocalSettingsService<AppSettings> settings, ILocalizationService localizationService)
     {
+        // Load settings
+        _appSettings = settings.GetValues;
+        _settingsService = settings;
+        // _settingsService.SettingChanged += OnSettingChanged;
+        SelectedDerivativeIndex = _appSettings.DefaultDerivativeMethod;
+
         // Subscribe to localization service events
         _localizationService = localizationService;
         _localizationService.LanguageChanged -= OnLanguageChanged;
@@ -69,7 +78,7 @@ public partial class StartUpViewModel: ObservableRecipient
         DerivativeData.Add(new ScatterSeries()); // Original signal
         DerivativeData.Add(new ScatterSeries()); // Derivative signal
 
-        StrDerivarivePlotTitle = "Derivarive";
+        StrDerivarivePlotTitle = "Derivative";
         StrDerivativeXAxisTitle = "Time (s)";
         StrDerivativeYAxisTitle = "Amplitude";
 
