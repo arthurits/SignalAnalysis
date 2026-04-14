@@ -67,6 +67,9 @@ public partial class StartUpViewModel: ObservableRecipient
         DerivativeData.Add(new ScatterSeries()); // Original signal
         DerivativeData.Add(new ScatterSeries()); // Derivative signal
 
+        StrDerivarivePlotTitle = "Derivarive";
+        StrDerivativeXAxisTitle = "Time (s)";
+        StrDerivativeYAxisTitle = "Amplitude";
 
         //// For testing purposes, add some dummy data to the plot series collection
         //for (int i = 0; i < 200; i++)
