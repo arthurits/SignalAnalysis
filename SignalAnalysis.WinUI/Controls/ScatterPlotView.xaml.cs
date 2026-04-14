@@ -231,4 +231,22 @@ public sealed partial class ScatterPlotView : UserControl
     }
 
     #endregion
+
+    #region Titles handling
+    private static void OnTitlesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var ctrl = (ScatterPlotView)d;
+        ctrl.ApplyTitles();
+    }
+
+    private void ApplyTitles()
+    {
+        _plot.Title(PlotTitle ?? string.Empty);
+        _plot.XLabel(XAxisTitle ?? string.Empty);
+        _plot.YLabel(YAxisTitle ?? string.Empty);
+
+        _plotHost.Refresh();
+    }
+
+    #endregion
 }
