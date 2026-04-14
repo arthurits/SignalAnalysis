@@ -31,6 +31,7 @@ public partial class ScatterSeries : ObservableObject
 
 public sealed partial class ScatterPlotView : UserControl
 {
+    #region Series DependencyProperty
     public static readonly DependencyProperty SeriesProperty =
         DependencyProperty.Register(
             nameof(Series),
@@ -43,6 +44,50 @@ public sealed partial class ScatterPlotView : UserControl
         get => (ObservableCollection<ScatterSeries>?)GetValue(SeriesProperty);
         set => SetValue(SeriesProperty, value);
     }
+    #endregion
+
+
+    #region Titles DependencyProperties
+
+    public static readonly DependencyProperty PlotTitleProperty =
+        DependencyProperty.Register(
+            nameof(PlotTitle),
+            typeof(string),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(string.Empty, OnTitlesChanged));
+
+    public static readonly DependencyProperty XAxisTitleProperty =
+        DependencyProperty.Register(
+            nameof(XAxisTitle),
+            typeof(string),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(string.Empty, OnTitlesChanged));
+
+    public static readonly DependencyProperty YAxisTitleProperty =
+        DependencyProperty.Register(
+            nameof(YAxisTitle),
+            typeof(string),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(string.Empty, OnTitlesChanged));
+
+    public string PlotTitle
+    {
+        get => (string)GetValue(PlotTitleProperty);
+        set => SetValue(PlotTitleProperty, value);
+    }
+
+    public string XAxisTitle
+    {
+        get => (string)GetValue(XAxisTitleProperty);
+        set => SetValue(XAxisTitleProperty, value);
+    }
+
+    public string YAxisTitle
+    {
+        get => (string)GetValue(YAxisTitleProperty);
+        set => SetValue(YAxisTitleProperty, value);
+    }
+    #endregion
 
 
     // Método público para que la vista que contiene este control pueda añadir el host visual
