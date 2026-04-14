@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -11,6 +12,34 @@ using System.Collections.Specialized;
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace SignalAnalysis.Controls;
+
+
+public class ScatterSeries : ObservableObject
+{
+
+    public ObservableCollection<double>? Xs
+    {
+        get => _xs;
+        set => SetProperty(ref _xs, value);
+    }
+    private ObservableCollection<double>? _xs;
+
+    public ObservableCollection<double>? Ys
+    {
+        get => _ys;
+        set => SetProperty(ref _ys, value);
+    }
+    private ObservableCollection<double>? _ys;
+
+    // OPCIONAL – para el futuro
+    public ObservableCollection<(double X, double Y)>? Points
+    {
+        get => _points;
+        set => SetProperty(ref _points, value);
+    }
+    private ObservableCollection<(double X, double Y)>? _points;
+}
+
 
 public sealed partial class ScatterPlotView : UserControl
 {
