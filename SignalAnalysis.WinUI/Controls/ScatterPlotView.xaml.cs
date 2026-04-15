@@ -29,12 +29,14 @@ public partial class ScatterSeries : ObservableObject
 
 internal sealed class ScatterHandle
 {
-    public List<double> Xs { get; } = new();
-    public List<double> Ys { get; } = new();
+    public List<double> Xs { get; } = [];
+    public List<double> Ys { get; } = [];
     public Scatter Scatter { get; }
 
-    public ScatterHandle(Scatter scatter)
+    public ScatterHandle(List<double> xs, List<double> ys, Scatter scatter)
     {
+        Xs = xs;
+        Ys = ys;
         Scatter = scatter;
     }
 }
