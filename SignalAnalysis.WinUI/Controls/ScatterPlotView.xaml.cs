@@ -216,9 +216,9 @@ public sealed partial class ScatterPlotView : UserControl
             var scatter = _plot.Add.Scatter(xsList, ysList);
 
             // Store the Scatter plottable and its associated data lists in the handle, so that we can update them later when the series changes.
-            handle = new ScatterHandle(scatter);
-            handle.Xs.AddRange(xsList);
-            handle.Ys.AddRange(ysList);
+            handle = new ScatterHandle(xsList, ysList, scatter);
+            //handle.Xs.AddRange(xsList);
+            //handle.Ys.AddRange(ysList);
             _seriesMap[serie] = handle;
         }
         else
