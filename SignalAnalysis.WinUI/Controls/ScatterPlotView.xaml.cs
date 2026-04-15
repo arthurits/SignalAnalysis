@@ -216,6 +216,15 @@ public sealed partial class ScatterPlotView : UserControl
             var ysList = new List<double>(ys);
             var scatter = _plot.Add.Scatter(xsList, ysList);
 
+            // Asign the scatter to the appropriate Y-axis based on the UseSecondaryYAxis property of the series.
+            scatter.Axes.YAxis = serie.UseSecondaryYAxis
+                ? _plot.Axes.Right
+                : _plot.Axes.Left;
+
+            // Apply style
+            ApplyDefaultStyle(scatter, serie);
+
+
             // Store the Scatter plottable and its associated data lists in the handle, so that we can update them later when the series changes.
             handle = new ScatterHandle(xsList, ysList, scatter);
             _seriesMap[serie] = handle;
@@ -229,8 +238,36 @@ public sealed partial class ScatterPlotView : UserControl
 
             handle.Xs.AddRange(xs);
             handle.Ys.AddRange(ys);
+
+            // Reassing the scatter to the appropriate Y-axis in case the UseSecondaryYAxis property has changed.
+            handle.Scatter.Axes.YAxis = serie.UseSecondaryYAxis
+                ? _plot.Axes.Right
+                : _plot.Axes.Left;
         }
     }
+
+
+    private void ApplyDefaultStyle(Scatter scatter, ScatterSeries serie)
+    {
+        int seriesIndex = Series!.IndexOf(serie);
+        //var color = _plot.Palette.GetColor(seriesIndex);
+        var color = _plot.Add.Palette.GetColor(seriesIndex);
+        
+        scatter.LineColor = color;
+        scatter.MarkerSize = 0;
+
+        if (serie.UseSecondaryYAxis)
+        {
+            scatter.LineWidth = 1.5f;
+            scatter.LinePattern = LinePattern.Dashed;
+        }
+        else
+        {
+            scatter.LineWidth = 2.5f;
+            scatter.LinePattern = LinePattern.Solid;
+        }
+    }
+
 
     private static bool TryGetData(ScatterSeries serie, out IEnumerable<double> xs, out IEnumerable<double> ys
 )
