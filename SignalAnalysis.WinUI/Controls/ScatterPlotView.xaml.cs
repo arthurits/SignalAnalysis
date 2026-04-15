@@ -117,21 +117,8 @@ public sealed partial class ScatterPlotView : UserControl
     //private readonly Scatter _scatter;
 
     // Relación 1:1 Serie ↔ Scatter
-    private readonly Dictionary<ScatterSeries, ScottPlot.Plottables.Scatter> _scatters = [];    // This is valid for ScottPlot version 5.0.0 and later, where Scatter is a plottable type that can be updated with new data.
+    //private readonly Dictionary<ScatterSeries, ScottPlot.Plottables.Scatter> _scatters = [];    // This is valid for ScottPlot version 5.0.0 and later, where Scatter is a plottable type that can be updated with new data.
     private readonly Dictionary<ScatterSeries, ScatterHandle> _seriesMap = [];
-
-
-    //// Internal Lists to hold the actual data points for the plot.
-    //// These are updated based on changes to the Xs and Ys collections, and are what the SignalXY plottable uses as its data source.
-    //// We maintain these internal lists to ensure that we only add complete pairs of X and Y values to the plot,
-    //// and to handle cases where X and Y values may arrive in an interleaved manner.
-    //private readonly List<double> _xsList = [];
-    //private readonly List<double> _ysList = [];
-
-    //// Internal buffers to hold pending X or Y values when they arrive without their corresponding pair,
-    //// to ensure that we only add complete pairs to the plot. This handles the case where X and Y are added in an interleaved manner.
-    //private double? _pendingX = null;
-    //private double? _pendingY = null;
 
     public ScatterPlotView()
     {
@@ -178,7 +165,7 @@ public sealed partial class ScatterPlotView : UserControl
     private void RebuildAllSeries()
     {
         _plot.Clear();
-        _scatters.Clear();
+        //_scatters.Clear();
 
         if (Series is null)
             return;
@@ -223,14 +210,12 @@ public sealed partial class ScatterPlotView : UserControl
 
             // Store the Scatter plottable and its associated data lists in the handle, so that we can update them later when the series changes.
             handle = new ScatterHandle(xsList, ysList, scatter);
-            //handle.Xs.AddRange(xsList);
-            //handle.Ys.AddRange(ysList);
             _seriesMap[serie] = handle;
         }
         else
         {
             // Modify the existing data lists for the Scatter plottable associated with this series.
-            // This is the only way to update in ScottPlot version 4.x. In version 5.0.0 and later, we can directly use the .Update() method.
+            // This is the only way to update in ScottPlot version 4.x. In version 5.0 and later, we can directly use the .Update() method.
             handle.Xs.Clear();
             handle.Ys.Clear();
 
