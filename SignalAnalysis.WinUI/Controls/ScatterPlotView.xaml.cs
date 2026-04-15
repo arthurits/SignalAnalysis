@@ -21,9 +21,17 @@ public partial class ScatterSeries : ObservableObject
     [ObservableProperty]
     public partial ObservableCollection<double>? Ys { get; set; }
 
-    // OPCIONAL: para uso futuro
+    // Optional property to hold points as tuples, which can be more convenient for some data sources. If this property is set, it takes precedence over Xs and Ys.
     [ObservableProperty]
     public partial ObservableCollection<(double X, double Y)>? Points { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to display data using a secondary Y-axis.
+    /// </summary>
+    /// <remarks>Set this property to <see langword="true"/> to plot data on a secondary Y-axis, which can be
+    /// useful when displaying multiple data series with different value ranges on the same chart.</remarks>
+    [ObservableProperty]
+    public partial bool UseSecondaryYAxis { get; set; } = false;
 }
 
 
