@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ScottPlot;
+using ScottPlot.Plottables;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -24,6 +25,20 @@ public partial class ScatterSeries : ObservableObject
     [ObservableProperty]
     public partial ObservableCollection<(double X, double Y)>? Points { get; set; }
 }
+
+
+internal sealed class ScatterHandle
+{
+    public List<double> Xs { get; } = new();
+    public List<double> Ys { get; } = new();
+    public Scatter Scatter { get; }
+
+    public ScatterHandle(Scatter scatter)
+    {
+        Scatter = scatter;
+    }
+}
+
 
 
 public sealed partial class ScatterPlotView : UserControl
@@ -100,7 +115,8 @@ public sealed partial class ScatterPlotView : UserControl
     //private readonly Scatter _scatter;
 
     // Relación 1:1 Serie ↔ Scatter
-    private readonly Dictionary<ScatterSeries, ScottPlot.Plottables.Scatter> _scatters = [];
+    private readonly Dictionary<ScatterSeries, ScottPlot.Plottables.Scatter> _scatters = [];    // This is valid for ScottPlot version 5.0.0 and later, where Scatter is a plottable type that can be updated with new data.
+    private readonly Dictionary<ScatterSeries, ScatterHandle> _seriesMap = [];
 
 
     //// Internal Lists to hold the actual data points for the plot.
