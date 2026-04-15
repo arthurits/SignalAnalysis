@@ -206,14 +206,28 @@ public sealed partial class ScatterPlotView : UserControl
         if (!TryGetData(serie, out var xs, out var ys))
             return;
 
-        if (!_scatters.TryGetValue(serie, out var scatter))
+        if (!_seriesMap.TryGetValue(serie, out var handle))
         {
-            scatter = _plot.Add.Scatter(xs, ys);
-            _scatters[serie] = scatter;
+            // Create data lists for the new series so that they can be updated later without needing to replace the entire plottable.
+            var xsList = new List<double>(xs);
+            var ysList = new List<double>(ys);
+            var scatter = _plot.Add.Scatter(xsList, ysList);
+
+            // Store the Scatter plottable and its associated data lists in the handle, so that we can update them later when the series changes.
+            handle = new ScatterHandle(scatter);
+            handle.Xs.AddRange(xsList);
+            handle.Ys.AddRange(ysList);
+            _seriesMap[serie] = handle;
         }
         else
         {
-            //scatter.Update(xs, ys);
+            // Modify the existing data lists for the Scatter plottable associated with this series.
+            // This is the only way to update in ScottPlot version 4.x. In version 5.0.0 and later, we can directly use the .Update() method.
+            handle.Xs.Clear();
+            handle.Ys.Clear();
+
+            handle.Xs.AddRange(xs);
+            handle.Ys.AddRange(ys);
         }
     }
 
