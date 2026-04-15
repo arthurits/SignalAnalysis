@@ -231,7 +231,8 @@ public sealed partial class ScatterPlotView : UserControl
         }
     }
 
-    private static bool TryGetData(ScatterSeries serie, out double[] xs, out double[] ys)
+    private static bool TryGetData(ScatterSeries serie, out IEnumerable<double> xs, out IEnumerable<double> ys
+)
     {
         xs = [];
         ys = [];
@@ -239,8 +240,8 @@ public sealed partial class ScatterPlotView : UserControl
         // PRIORIDAD 1: Points
         if (serie.Points is not null && serie.Points.Count > 0)
         {
-            xs = serie.Points.Select(p => p.X).ToArray();
-            ys = serie.Points.Select(p => p.Y).ToArray();
+            xs = serie.Points.Select(p => p.X);
+            ys = serie.Points.Select(p => p.Y);
             return true;
         }
 
@@ -252,8 +253,8 @@ public sealed partial class ScatterPlotView : UserControl
         if (count == 0)
             return false;
 
-        xs = serie.Xs.Take(count).ToArray();
-        ys = serie.Ys.Take(count).ToArray();
+        xs = serie.Xs.Take(count);
+        ys = serie.Ys.Take(count);
         return true;
     }
 
