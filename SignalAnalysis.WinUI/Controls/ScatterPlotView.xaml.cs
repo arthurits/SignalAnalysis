@@ -185,6 +185,7 @@ public sealed partial class ScatterPlotView : UserControl
 
         foreach (var serie in Series)
         {
+            serie.PropertyChanged -= OnSeriePropertyChanged;
             serie.PropertyChanged += OnSeriePropertyChanged;
             AddOrUpdateSeries(serie);
         }
@@ -196,6 +197,11 @@ public sealed partial class ScatterPlotView : UserControl
     private void OnSeriePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (sender is not ScatterSeries serie)
+            return;
+
+        if (e.PropertyName is not nameof(ScatterSeries.Xs)
+                and not nameof(ScatterSeries.Ys)
+                and not nameof(ScatterSeries.Points))
             return;
 
         AddOrUpdateSeries(serie);
