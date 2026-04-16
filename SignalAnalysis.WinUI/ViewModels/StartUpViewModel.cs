@@ -75,8 +75,17 @@ public partial class StartUpViewModel: ObservableRecipient
 
         // Add plot series
         DerivativeData.Clear();
-        DerivativeData.Add(new ScatterSeries()); // Original signal
-        DerivativeData.Add(new ScatterSeries()); // Derivative signal
+        // Derivative signal on the primary Y axis
+        DerivativeData.Add(new ScatterSeries
+        {
+            UseSecondaryYAxis = false
+        });
+
+        // Original signal on the secondary Y axis
+        DerivativeData.Add(new ScatterSeries
+        {
+            UseSecondaryYAxis = true
+        });
 
         StrDerivarivePlotTitle = "Derivative";
         StrDerivativeXAxisTitle = "Time (s)";
