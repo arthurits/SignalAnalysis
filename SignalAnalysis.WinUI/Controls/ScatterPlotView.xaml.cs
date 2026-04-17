@@ -124,6 +124,18 @@ public sealed partial class ScatterPlotView : UserControl
     }
     #endregion
 
+    public static readonly DependencyProperty PlotPaletteProperty =
+        DependencyProperty.Register(
+            nameof(PlotPalette),
+            typeof(IPalette),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(new ScottPlot.Palettes.Nord(), OnPaletteChanged));
+
+    public IPalette PlotPalette
+    {
+        get => (IPalette)GetValue(PlotPaletteProperty);
+        set => SetValue(PlotPaletteProperty, value);
+    }
 
     // Método público para que la vista que contiene este control pueda añadir el host visual
     // y enlazar el Plot creado aquí al host concreto de ScottPlot WinUI.
