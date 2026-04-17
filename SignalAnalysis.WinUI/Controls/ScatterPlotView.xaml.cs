@@ -320,9 +320,10 @@ public sealed partial class ScatterPlotView : UserControl
 
     private void ApplyTitles()
     {
-        _plot.Title(PlotTitle ?? string.Empty);
-        _plot.XLabel(XAxisTitle ?? string.Empty);
-        _plot.YLabel(YAxisTitle ?? string.Empty);
+        _plot.Axes.Title.Label.Text = PlotTitle ?? string.Empty;
+        _plot.Axes.Bottom.Label.Text = XAxisTitle ?? string.Empty;
+        _plot.Axes.Left.Label.Text = YAxisTitle ?? string.Empty;
+        _plot.Axes.Right.Label.Text = YAxisSecondaryTitle ?? string.Empty;
 
         _plotHost.Refresh();
     }
