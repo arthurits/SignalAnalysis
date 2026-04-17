@@ -342,4 +342,25 @@ public sealed partial class ScatterPlotView : UserControl
     }
 
     #endregion
+
+    #region Palette handling
+    private static void OnPaletteChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var ctrl = (ScatterPlotView)d;
+
+        if (e.NewValue is IPalette newPalette)
+        {
+            ctrl.ApplyPalette(newPalette);
+        }
+        return; 
+    }
+
+    private void ApplyPalette(IPalette newPalette)
+    {
+        _plot.Add.Palette = newPalette;
+        _plotHost.Refresh();
+    }
+
+    #endregion
+
 }
