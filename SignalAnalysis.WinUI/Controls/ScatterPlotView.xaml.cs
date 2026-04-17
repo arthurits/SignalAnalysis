@@ -271,12 +271,13 @@ public sealed partial class ScatterPlotView : UserControl
 
         if (serie.UseSecondaryYAxis)
         {
-            scatter.LineWidth = 1.5f;
-            scatter.LinePattern = LinePattern.Dashed;
+            scatter.LineWidth = 1f;
+            scatter.LinePattern = LinePattern.Solid;
+            scatter.LineColor = color.Lighten(0.5f);
         }
         else
         {
-            scatter.LineWidth = 2.5f;
+            scatter.LineWidth = 1f;
             scatter.LinePattern = LinePattern.Solid;
         }
     }
