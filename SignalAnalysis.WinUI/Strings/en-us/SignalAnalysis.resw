@@ -57,6 +57,18 @@
   <data name="StrButtonPlotSeriesToolTip" xml:space="preserve">
     <value>Select series to be plotted</value>
   </data>
+  <data name="StrDerivativePlotTitle" xml:space="preserve">
+    <value>Derivative</value>
+  </data>
+  <data name="StrDerivativeXAxisTitle" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="StrDerivativeYAxisSecondaryTitle" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="StrDerivativeYAxisTitle" xml:space="preserve">
+    <value>Amplitude / sec</value>
+  </data>
   <data name="StrDragDrop" xml:space="preserve">
     <value>Click or drag and drop here</value>
   </data>
