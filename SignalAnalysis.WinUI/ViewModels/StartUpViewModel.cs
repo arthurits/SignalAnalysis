@@ -87,16 +87,6 @@ public partial class StartUpViewModel: ObservableRecipient
             UseSecondaryYAxis = true
         });
 
-        //StrDerivativePlotTitle = "Derivative";
-        //StrDerivativeXAxisTitle = "Time (s)";
-        //StrDerivativeYAxisTitle = "Amplitude";
-
-        //// For testing purposes, add some dummy data to the plot series collection
-        //for (int i = 0; i < 200; i++)
-        //{
-        //    Xs.Add(i * 0.1);
-        //    Ys.Add(System.Math.Cos(i * 0.1));
-        //}
     }
 
     public void Dispose()
