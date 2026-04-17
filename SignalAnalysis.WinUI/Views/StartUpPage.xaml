@@ -244,7 +244,8 @@
                                 PlotTitle="{x:Bind ViewModel.StrDerivativePlotTitle}"
                                 XAxisTitle="{x:Bind ViewModel.StrDerivativeXAxisTitle}"
                                 YAxisTitle="{x:Bind ViewModel.StrDerivativeYAxisTitle}"
-                                YAxisSecondaryTitle="{x:Bind ViewModel.StrDerivativeYAxisSecondaryTitle}">
+                                YAxisSecondaryTitle="{x:Bind ViewModel.StrDerivativeYAxisSecondaryTitle}"
+                                PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
                             </controls:ScatterPlotView>
                         </Border>
                     </StackPanel>
