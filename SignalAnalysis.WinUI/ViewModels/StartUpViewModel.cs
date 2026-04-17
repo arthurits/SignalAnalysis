@@ -38,6 +38,8 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial bool PlotLegendChecked { get; set; } = true;
     [ObservableProperty]
     public partial string PlotPalette { get; set; } = (new ScottPlot.Palettes.Nord()).Name;
+    [ObservableProperty]
+    public partial ScottPlot.IPalette SelectedPlotPalette { get; set; } = new ScottPlot.Palettes.Nord();
 
     [ObservableProperty]
     public partial int SelectedPlotSeriesIndex { get; set; } = -1;
@@ -181,5 +183,14 @@ public partial class StartUpViewModel: ObservableRecipient
             samplingFrequency: DocumentDto.SamplingFrequency));
 
         DerivativeData[0].Ys = new ObservableCollection<double>(_signalStats.Derivative);
+    }
+
+    partial void OnPlotPaletteChanged(string oldValue, string newValue)
+    {
+        var selectedPalette = ScottPlot.Palette.GetPalettes().Cast<ScottPlot.IPalette>().Where(x => x.Name == PlotPalette).First();
+        if(selectedPalette is not null)
+        {
+            SelectedPlotPalette = selectedPalette;
+        }
     }
 }
