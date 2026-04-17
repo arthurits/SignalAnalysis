@@ -92,6 +92,13 @@ public sealed partial class ScatterPlotView : UserControl
             typeof(ScatterPlotView),
             new PropertyMetadata(string.Empty, OnTitlesChanged));
 
+    public static readonly DependencyProperty YAxisSecondaryTitleProperty =
+        DependencyProperty.Register(
+            nameof(YAxisSecondaryTitle),
+            typeof(string),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(string.Empty, OnTitlesChanged));
+
     public string PlotTitle
     {
         get => (string)GetValue(PlotTitleProperty);
@@ -108,6 +115,12 @@ public sealed partial class ScatterPlotView : UserControl
     {
         get => (string)GetValue(YAxisTitleProperty);
         set => SetValue(YAxisTitleProperty, value);
+    }
+
+    public string YAxisSecondaryTitle
+    {
+        get => (string)GetValue(YAxisSecondaryTitleProperty);
+        set => SetValue(YAxisSecondaryTitleProperty, value);
     }
     #endregion
 
@@ -307,9 +320,10 @@ public sealed partial class ScatterPlotView : UserControl
 
     private void ApplyTitles()
     {
-        _plot.Title(PlotTitle ?? string.Empty);
-        _plot.XLabel(XAxisTitle ?? string.Empty);
-        _plot.YLabel(YAxisTitle ?? string.Empty);
+        _plot.Axes.Title.Label.Text = PlotTitle ?? string.Empty;
+        _plot.Axes.Bottom.Label.Text = XAxisTitle ?? string.Empty;
+        _plot.Axes.Left.Label.Text = YAxisTitle ?? string.Empty;
+        _plot.Axes.Right.Label.Text = YAxisSecondaryTitle ?? string.Empty;
 
         _plotHost.Refresh();
     }
