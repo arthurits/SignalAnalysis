@@ -38,11 +38,13 @@ public partial class StartUpViewModel : ObservableRecipient
     public partial string StrButtonPlotPaletteToolTip { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial string StrDerivarivePlotTitle { get; set; } = string.Empty;
+    public partial string StrDerivativePlotTitle { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrDerivativeXAxisTitle { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrDerivativeYAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrDerivativeYAxisSecondaryTitle { get; set; } = string.Empty;
 
 
     private void OnLanguageChanged(object? sender, EventArgs e)
@@ -61,6 +63,11 @@ public partial class StartUpViewModel : ObservableRecipient
         StrButtonPlotSeriesToolTip = "StrButtonPlotSeriesToolTip".GetLocalized("SignalAnalysis");
         //StrButtonPlotPalette = "StrButtonPlotPalette".GetLocalized("SignalAnalysis");
         StrButtonPlotPaletteToolTip = "StrButtonPlotPaletteToolTip".GetLocalized("SignalAnalysis");
+
+        StrDerivativePlotTitle = "StrDerivativePlotTitle".GetLocalized("SignalAnalysis");
+        StrDerivativeXAxisTitle = "StrDerivativeXAxisTitle".GetLocalized("SignalAnalysis");
+        StrDerivativeYAxisTitle = "StrDerivativeYAxisTitle".GetLocalized("SignalAnalysis");
+        StrDerivativeYAxisSecondaryTitle = "StrDerivativeYAxisSecondaryTitle".GetLocalized("SignalAnalysis");
 
         // Derivative algorithms
         DerivativeMethods = [.. "StrDifferentiationAlgorithms".GetLocalized("Numerical").Split(',')];
