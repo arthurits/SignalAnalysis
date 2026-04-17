@@ -241,10 +241,10 @@
                             Height="300">
                             <controls:ScatterPlotView x:Name="plotDerivativeView"
                                Series="{x:Bind ViewModel.DerivativeData, Mode=OneWay}"                                                      
-                                PlotTitle="{x:Bind ViewModel.StrDerivarivePlotTitle}"
+                                PlotTitle="{x:Bind ViewModel.StrDerivativePlotTitle}"
                                 XAxisTitle="{x:Bind ViewModel.StrDerivativeXAxisTitle}"
                                 YAxisTitle="{x:Bind ViewModel.StrDerivativeYAxisTitle}"
->
+                                YAxisSecondaryTitle="{x:Bind ViewModel.StrDerivativeYAxisSecondaryTitle}">
                             </controls:ScatterPlotView>
                         </Border>
                     </StackPanel>
