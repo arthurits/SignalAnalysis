@@ -24,7 +24,10 @@ public partial class StartUpViewModel: ObservableRecipient
     [ObservableProperty]
     public partial ObservableCollection<ScatterSeries> OriginalData { get; set; } = [];
     [ObservableProperty]
+    public partial BoxPlotData BoxPlotData { get; set; } = new BoxPlotData();
+    [ObservableProperty]
     public partial ObservableCollection<ScatterSeries> DerivativeData { get; set; } = [];
+    
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
@@ -105,12 +108,6 @@ public partial class StartUpViewModel: ObservableRecipient
             //}
         }
 
-        // Select the first series by default if there are any
-        if (PlotSeries.Count >= 1)
-        {
-            SelectedPlotSeriesIndex = 0;
-        }
-
         // Set up X values for the original data and derivative data. We need to keep the references to the ObservableCollections for the plot to update correctly.
         var dataAbscissa = new ObservableCollection<double>(Enumerable.Range(0, newValue.SeriesPoints).Select(i => 0 + i / newValue.SamplingFrequency));
 
@@ -118,6 +115,11 @@ public partial class StartUpViewModel: ObservableRecipient
         foreach (var dataSerie in DerivativeData)
             dataSerie.Xs = dataAbscissa;
 
+        // Select the first series by default if there are any
+        if (PlotSeries.Count >= 1)
+        {
+            SelectedPlotSeriesIndex = 0;
+        }
 
         //Derivative_Xs = dataAbscissa;
 
