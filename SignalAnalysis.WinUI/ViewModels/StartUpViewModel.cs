@@ -141,18 +141,18 @@ public partial class StartUpViewModel: ObservableRecipient
             var selectedSeriesName = DocumentDto.SeriesNames[newValue];
             
             // Clear existing data points. We need to keep the references to the ObservableCollections for the plot to update correctly.
-            Xs.Clear();
-            Ys.Clear();
+            //Xs.Clear();
+            //Ys.Clear();
             
-            var period = 1 / DocumentDto.SamplingFrequency;
+            //var period = 1 / DocumentDto.SamplingFrequency;
             var data = DocumentDto.SeriesData[newValue];
-            for (int i = 0; i < data.Count; i++)
-            {
-                Xs.Add(i * period); // Ejemplo de eje X
-                Ys.Add(data[i]); // Datos de la serie seleccionada
-            }
-
-            DerivativeData[1].Ys = new ObservableCollection<double>(data);
+            //for (int i = 0; i < data.Count; i++)
+            //{
+            //    Xs.Add(i * period); // Ejemplo de eje X
+            //    Ys.Add(data[i]); // Datos de la serie seleccionada
+            //}
+            OriginalData[0].Ys = new ObservableCollection<double>(data);
+            DerivativeData[1].Ys = OriginalData[0].Ys;
 
         }
     }
