@@ -369,7 +369,19 @@ public sealed partial class ScatterPlotView : UserControl
             var color = newPalette.GetColor(seriesIndex);
             handle.Scatter.LineColor = color;
             if (handle.Scatter.Axes.YAxis == _plot.Axes.Right)
+            {
                 handle.Scatter.LineColor = color.Lighten(0.5f);
+                
+                // Update the color of the right Y-axis frame to match the color of the left Y-axis series, for better visual association.
+                _plot.Axes.Right.FrameLineStyle.Color = color;
+            }
+            else if(handle.Scatter.Axes.YAxis == _plot.Axes.Left)
+            {
+                handle.Scatter.LineColor = color;
+                
+                // Update the color of the left Y-axis frame to match the color of the left Y-axis series, for better visual association.
+                _plot.Axes.Left.FrameLineStyle.Color = color;
+            }
         });
 
         // Alternative approach if we want to loop directly through the Scatter plottables without using the _seriesMap
