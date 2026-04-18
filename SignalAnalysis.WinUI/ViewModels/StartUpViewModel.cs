@@ -150,6 +150,7 @@ public partial class StartUpViewModel: ObservableRecipient
             //}
             OriginalData[0].Ys = new ObservableCollection<double>(data);
             DerivativeData[1].Ys = OriginalData[0].Ys;
+            _ = OnSelectedDerivativeMethodIndexAsync(-1, SelectedDerivativeIndex);
 
             (_signalStats.BoxplotMin, _signalStats.BoxplotQ1, _signalStats.BoxplotQ2, _signalStats.BoxplotQ3, _signalStats.BoxplotMax) = NumericalAlgorithms.BoxPlot.ComputeBoxPlotValues(data.ToArray(), false);
             BoxPlotData = new BoxPlotData()
@@ -161,6 +162,7 @@ public partial class StartUpViewModel: ObservableRecipient
                 WhiskerMin = _signalStats.BoxplotMin - 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
                 WhiskerMax = _signalStats.BoxplotMax + 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
             };
+            StrBoxPlotXAxisTitle = selectedSeriesName;
         }
     }
 
