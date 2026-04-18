@@ -21,8 +21,8 @@ public partial class StartUpViewModel: ObservableRecipient
 
     public ObservableCollection<PlotSeries> PlotSeries = [];
 
-    public ObservableCollection<double> Xs { get; } = [];
-    public ObservableCollection<double> Ys { get; } = [];
+    //public ObservableCollection<double> Xs { get; } = [];
+    //public ObservableCollection<double> Ys { get; } = [];
 
     [ObservableProperty]
     public partial ObservableCollection<double> Derivative_Xs { get; set; } = [];
