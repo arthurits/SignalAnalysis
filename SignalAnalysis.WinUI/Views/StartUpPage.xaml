@@ -138,25 +138,9 @@
                                                       ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
                                                       ItemsSource="{x:Bind PlotPalettes}"
                                                       SelectedValue="{x:Bind ViewModel.PlotPalette, Mode=TwoWay}"
-                                                      Width="170"
-                                                      SelectionChanged="Palette_SelectionChanged"/>
+                                                      Width="170"/>
                                         </StackPanel>
                                     </AppBarElementContainer>
-                                    <AppBarSeparator Visibility="Collapsed"/>
-                                    <AppBarToggleButton x:Name="UpdatePlotSimpleTasks"
-                                                      ToolTipService.ToolTip="Compute LM-MMH"
-                                                      Icon="Calculator"
-                                                      Label="Compute"
-                                                      LabelPosition="Default"
-                                                      IsChecked="{x:Bind ViewModel.UpdatePlotSimpleTasksChecked, Mode=TwoWay}"
-                                                      Checked="UpdatePlotSimpleTasks_Checked"
-                                                      Foreground="MidnightBlue"
-                                                      Visibility="Collapsed"/>
-                                    <AppBarToggleButton x:Name="UpdatePlotCompositeTasks"
-                                                        IsChecked="{x:Bind ViewModel.UpdatePlotCompositeTasksChecked, Mode=TwoWay}"
-                                                        Checked="UpdatePlotCompositeTasks_Checked"
-                                                        Foreground="MidnightBlue"
-                                                        Visibility="Collapsed"/>
                                 </CommandBar.PrimaryCommands>
                             </CommandBar>
                         </Border>
