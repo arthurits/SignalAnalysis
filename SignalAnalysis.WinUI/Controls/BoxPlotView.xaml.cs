@@ -1,28 +1,37 @@
-using Microsoft.UI.Xaml;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace SignalAnalysis.Controls
+namespace SignalAnalysis.Controls;
+
+public partial class BoxPlotData : ObservableObject
 {
-    public sealed partial class BoxPlotView : UserControl
+    [ObservableProperty]
+    public partial double Position { get; set; }
+
+    [ObservableProperty]
+    public partial double BoxMin { get; set; }
+
+    [ObservableProperty]
+    public partial double BoxMax { get; set; }
+
+    [ObservableProperty]
+    public partial double WhiskerMin { get; set; }
+
+    [ObservableProperty]
+    public partial double WhiskerMax { get; set; }
+
+    [ObservableProperty]
+    public partial double BoxMiddle { get; set; }
+}
+
+public sealed partial class BoxPlotView : UserControl
+{
+    public BoxPlotView()
     {
-        public BoxPlotView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
