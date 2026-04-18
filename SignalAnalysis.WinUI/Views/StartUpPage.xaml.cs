@@ -85,18 +85,18 @@ public sealed partial class StartUpPage : Page, IDisposable
         {
             //PlotSimpleTasks.Plot.ShowLegend();
             //PlotCompositeTasks.Plot.ShowLegend();
-            PlotTaskFactors.Plot.ShowLegend();
+            //PlotTaskFactors.Plot.ShowLegend();
         }
         else
         {
             //PlotSimpleTasks.Plot.HideLegend();
             //PlotCompositeTasks.Plot.HideLegend();
-            PlotTaskFactors.Plot.HideLegend();
+            //PlotTaskFactors.Plot.HideLegend();
         }
 
         //PlotSimpleTasks.Refresh();
         //PlotCompositeTasks.Refresh();
-        PlotTaskFactors.Refresh();
+        //PlotTaskFactors.Refresh();
     }
 
     private void UpdatePlotSimpleTasks_Checked(object sender, RoutedEventArgs e)
@@ -137,7 +137,7 @@ public sealed partial class StartUpPage : Page, IDisposable
             //DrawPlots(series: selectedItem.Item2);
 
             // For the time being, changing the series selection only modifies the factors plot
-            PlotTaskFactors.Plot.Clear();
+            //PlotTaskFactors.Plot.Clear();
             //CreatePlotFactors(series: selectedItem.Value);
         }
     }
@@ -152,9 +152,9 @@ public sealed partial class StartUpPage : Page, IDisposable
             }
 
             // This is not needed, since plots are custom-drawn
-            var selectedPalette = ScottPlot.Palette.GetPalettes().Cast<ScottPlot.IPalette>().Where(x => x.Name == ViewModel.PlotPalette).First();
-            signalXYView.GetPlot().Add.Palette = selectedPalette;
-            signalXYView.ForceRender();
+            //var selectedPalette = ScottPlot.Palette.GetPalettes().Cast<ScottPlot.IPalette>().Where(x => x.Name == ViewModel.PlotPalette).First();
+            //signalXYView.GetPlot().Add.Palette = selectedPalette;
+            //signalXYView.ForceRender();
             //PlotSimpleTasks.Plot.Add.Palette = selectedPalette;
             //PlotCompositeTasks.Plot.Add.Palette = selectedPalette;
             //PlotTaskFactors.Plot.Add.Palette = selectedPalette;
