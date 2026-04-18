@@ -2,6 +2,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ScottPlot;
+using ScottPlot.Plottables;
+using SignalAnalysis.Interop;
 using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -101,6 +103,14 @@ public sealed partial class BoxPlotView : UserControl
     public BoxPlotView()
     {
         InitializeComponent();
+
+        // Create the ScottPlot Plot and Scatter plottable, and set up the host control for WinUI.
+        _plotHost = new();
+        _plot = _plotHost.Plot;
+
+        // Insert the ScottPlot host control into the visual tree of this UserControl.
+        // In this case, we assume there is a Grid named "RootGrid" in the XAML where we want to place the plot.
+        RootGrid.Children.Add(_plotHost);
     }
 
     #region BoxPlotData handling
