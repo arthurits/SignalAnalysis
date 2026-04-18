@@ -121,6 +121,7 @@ public sealed partial class BoxPlotView : UserControl
     {
         if (Box is null)
             return;
+        
         _plot.Clear();
         _plot.Add.Box( new()
         {
@@ -131,6 +132,7 @@ public sealed partial class BoxPlotView : UserControl
             WhiskerMax = Box.WhiskerMax,
             BoxMiddle = Box.BoxMiddle
         });
+        _plot.Axes.AutoScale();
         _plotHost.Refresh();
     }
     #endregion
