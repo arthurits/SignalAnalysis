@@ -2,7 +2,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using ScottPlot;
-using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -101,6 +100,14 @@ public sealed partial class BoxPlotView : UserControl
     public BoxPlotView()
     {
         InitializeComponent();
+
+        // Create the ScottPlot Plot and Scatter plottable, and set up the host control for WinUI.
+        _plotHost = new();
+        _plot = _plotHost.Plot;
+
+        // Insert the ScottPlot host control into the visual tree of this UserControl.
+        // In this case, we assume there is a Grid named "RootGrid" in the XAML where we want to place the plot.
+        RootGrid.Children.Add(_plotHost);
     }
 
     #region BoxPlotData handling
@@ -114,6 +121,7 @@ public sealed partial class BoxPlotView : UserControl
     {
         if (Box is null)
             return;
+        
         _plot.Clear();
         _plot.Add.Box( new()
         {
@@ -124,6 +132,7 @@ public sealed partial class BoxPlotView : UserControl
             WhiskerMax = Box.WhiskerMax,
             BoxMiddle = Box.BoxMiddle
         });
+        _plot.Axes.AutoScale();
         _plotHost.Refresh();
     }
     #endregion

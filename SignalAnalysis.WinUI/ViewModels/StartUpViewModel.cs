@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.Logging;
+using ScottPlot.Plottables;
 using ScottPlot.Statistics;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Controls;
@@ -7,7 +8,9 @@ using SignalAnalysis.Enumerations;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.NumericalAlgorithms;
+using System.Collections;
 using System.Collections.ObjectModel;
+using static SkiaSharp.HarfBuzz.SKShaper;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis.ViewModels;
@@ -24,7 +27,10 @@ public partial class StartUpViewModel: ObservableRecipient
     [ObservableProperty]
     public partial ObservableCollection<ScatterSeries> OriginalData { get; set; } = [];
     [ObservableProperty]
+    public partial BoxPlotData BoxPlotData { get; set; } = new BoxPlotData();
+    [ObservableProperty]
     public partial ObservableCollection<ScatterSeries> DerivativeData { get; set; } = [];
+    
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
@@ -105,12 +111,6 @@ public partial class StartUpViewModel: ObservableRecipient
             //}
         }
 
-        // Select the first series by default if there are any
-        if (PlotSeries.Count >= 1)
-        {
-            SelectedPlotSeriesIndex = 0;
-        }
-
         // Set up X values for the original data and derivative data. We need to keep the references to the ObservableCollections for the plot to update correctly.
         var dataAbscissa = new ObservableCollection<double>(Enumerable.Range(0, newValue.SeriesPoints).Select(i => 0 + i / newValue.SamplingFrequency));
 
@@ -118,6 +118,11 @@ public partial class StartUpViewModel: ObservableRecipient
         foreach (var dataSerie in DerivativeData)
             dataSerie.Xs = dataAbscissa;
 
+        // Select the first series by default if there are any
+        if (PlotSeries.Count >= 1)
+        {
+            SelectedPlotSeriesIndex = 0;
+        }
 
         //Derivative_Xs = dataAbscissa;
 
@@ -131,21 +136,24 @@ public partial class StartUpViewModel: ObservableRecipient
         if (newValue >= 0 && newValue < DocumentDto.SeriesNames.Count)
         {
             var selectedSeriesName = DocumentDto.SeriesNames[newValue];
-            
-            // Clear existing data points. We need to keep the references to the ObservableCollections for the plot to update correctly.
-            //Xs.Clear();
-            //Ys.Clear();
-            
             //var period = 1 / DocumentDto.SamplingFrequency;
             var data = DocumentDto.SeriesData[newValue];
-            //for (int i = 0; i < data.Count; i++)
-            //{
-            //    Xs.Add(i * period); // Ejemplo de eje X
-            //    Ys.Add(data[i]); // Datos de la serie seleccionada
-            //}
+
             OriginalData[0].Ys = new ObservableCollection<double>(data);
             DerivativeData[1].Ys = OriginalData[0].Ys;
+            _ = OnSelectedDerivativeMethodIndexAsync(-1, SelectedDerivativeIndex);
 
+            (_signalStats.BoxplotMin, _signalStats.BoxplotQ1, _signalStats.BoxplotQ2, _signalStats.BoxplotQ3, _signalStats.BoxplotMax) = NumericalAlgorithms.BoxPlot.ComputeBoxPlotValues(data.ToArray(), false);
+            BoxPlotData = new BoxPlotData()
+            {
+                Position = 0,
+                BoxMin = _signalStats.BoxplotMin,
+                BoxMiddle = _signalStats.BoxplotQ2,
+                BoxMax = _signalStats.BoxplotMax,
+                WhiskerMin = _signalStats.BoxplotMin - 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
+                WhiskerMax = _signalStats.BoxplotMax + 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
+            };
+            StrBoxPlotXAxisTitle = selectedSeriesName;
         }
     }
 
