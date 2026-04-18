@@ -43,7 +43,12 @@ public partial class StartUpViewModel : ObservableRecipient
     public partial string StrOriginalXAxisTitle { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrOriginalYAxisTitle { get; set; } = string.Empty;
-
+    [ObservableProperty]
+    public partial string StrBoxPlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrBoxPlotXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrBoxPlotYAxisTitle { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrDerivativePlotTitle { get; set; } = string.Empty;
     [ObservableProperty]
@@ -75,6 +80,9 @@ public partial class StartUpViewModel : ObservableRecipient
         StrOriginalPlotTitle = "StrOriginalPlotTitle".GetLocalized("SignalAnalysis");
         StrOriginalXAxisTitle = "StrOriginalXAxisTitle".GetLocalized("SignalAnalysis");
         StrOriginalYAxisTitle = "StrOriginalYAxisTitle".GetLocalized("SignalAnalysis");
+        StrBoxPlotTitle = "StrBoxPlotTitle".GetLocalized("SignalAnalysis");
+        StrBoxPlotXAxisTitle = "StrBoxPlotXAxisTitle".GetLocalized("SignalAnalysis");
+        StrBoxPlotYAxisTitle = "StrBoxPlotYAxisTitle".GetLocalized("SignalAnalysis");
         StrDerivativePlotTitle = "StrDerivativePlotTitle".GetLocalized("SignalAnalysis");
         StrDerivativeXAxisTitle = "StrDerivativeXAxisTitle".GetLocalized("SignalAnalysis");
         StrDerivativeYAxisTitle = "StrDerivativeYAxisTitle".GetLocalized("SignalAnalysis");
