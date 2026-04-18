@@ -102,4 +102,47 @@ public sealed partial class BoxPlotView : UserControl
     {
         InitializeComponent();
     }
+
+    #region BoxPlotData handling
+    private static void OnBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var ctrl = (BoxPlotView)d;
+        ctrl.ApplyBoxPlotData();
+    }
+
+    private void ApplyBoxPlotData()
+    {
+        if (Box is null)
+            return;
+        _plot.Clear();
+        _plot.Add.Box( new()
+        {
+            Position = Box.Position,
+            BoxMin = Box.BoxMin,
+            BoxMax = Box.BoxMax,
+            WhiskerMin = Box.WhiskerMin,
+            WhiskerMax = Box.WhiskerMax,
+            BoxMiddle = Box.BoxMiddle
+        });
+        _plotHost.Refresh();
+    }
+    #endregion
+
+    #region Titles handling
+    private static void OnTitlesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var ctrl = (BoxPlotView)d;
+        ctrl.ApplyTitles();
+    }
+
+    private void ApplyTitles()
+    {
+        _plot.Axes.Title.Label.Text = PlotTitle ?? string.Empty;
+        _plot.Axes.Bottom.Label.Text = XAxisTitle ?? string.Empty;
+        _plot.Axes.Left.Label.Text = YAxisTitle ?? string.Empty;
+
+        _plotHost.Refresh();
+    }
+
+    #endregion
 }
