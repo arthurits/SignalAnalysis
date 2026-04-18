@@ -68,7 +68,6 @@ public sealed partial class ScatterPlotView : UserControl
     }
     #endregion
 
-
     #region Titles DependencyProperties
 
     public static readonly DependencyProperty PlotTitleProperty =
@@ -124,6 +123,7 @@ public sealed partial class ScatterPlotView : UserControl
     }
     #endregion
 
+    #region PlotPalette DependencyProperty
     public static readonly DependencyProperty PlotPaletteProperty =
         DependencyProperty.Register(
             nameof(PlotPalette),
@@ -136,7 +136,23 @@ public sealed partial class ScatterPlotView : UserControl
         get => (IPalette)GetValue(PlotPaletteProperty);
         set => SetValue(PlotPaletteProperty, value);
     }
+    #endregion
 
+    #region LineWidth DependencyProperties
+    public static readonly DependencyProperty LineWidthProperty =
+        DependencyProperty.Register(
+            nameof(LineWidth),
+            typeof(double),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(1.0, OnLineWidthChanged));
+
+    public double LineWidth
+    {
+        get => (double)GetValue(LineWidthProperty);
+        set => SetValue(LineWidthProperty, value);
+    }
+    #endregion
+    
     // Método público para que la vista que contiene este control pueda añadir el host visual
     // y enlazar el Plot creado aquí al host concreto de ScottPlot WinUI.
     public Plot GetPlot() => _plot;
@@ -171,7 +187,7 @@ public sealed partial class ScatterPlotView : UserControl
     }
 
 
-    #region Series handling
+    #region Series data handling
 
     private static void OnSeriesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -357,10 +373,69 @@ public sealed partial class ScatterPlotView : UserControl
 
     private void ApplyPalette(IPalette newPalette)
     {
+        // Update the plot's palette reference so that it can be used for assigning colors to new series in the future.
         _plot.Add.Palette = newPalette;
+
+        // Update the colors of all existing Scatter plottables based on the new palette.
+        // We need to loop through the series and find the corresponding Scatter for each one to apply the correct color.
+        _seriesMap.Values.ToList().ForEach(handle =>
+        {
+            int seriesIndex = Series!.IndexOf(_seriesMap.First(kvp => kvp.Value.Scatter == handle.Scatter).Key);
+            var color = newPalette.GetColor(seriesIndex);
+            handle.Scatter.LineColor = color;
+            if (handle.Scatter.Axes.YAxis == _plot.Axes.Right)
+            {
+                handle.Scatter.LineColor = color.Lighten(0.5f);
+                
+                // Update the color of the right Y-axis frame to match the color of the left Y-axis series, for better visual association.
+                _plot.Axes.Right.FrameLineStyle.Color = new Color(color.ARGB);
+            }
+            else if(handle.Scatter.Axes.YAxis == _plot.Axes.Left)
+            {
+                handle.Scatter.LineColor = color;
+                
+                // Update the color of the left Y-axis frame to match the color of the left Y-axis series, for better visual association.
+                _plot.Axes.Left.FrameLineStyle.Color = new Color(color.ARGB);
+            }
+        });
+
+        // Alternative approach if we want to loop directly through the Scatter plottables without using the _seriesMap
+        // (but we would need to find the corresponding series for each scatter to get the correct color index):
+        //_plot.GetPlottables().OfType<Scatter>().ToList().ForEach(scatter =>
+        //{
+        //    scatter.LineColor = newPalette.GetColor(Series!.IndexOf(_seriesMap.First(kvp => kvp.Value.Scatter == scatter).Key));
+
+        //    int seriesIndex = Series!.IndexOf(_seriesMap.First(kvp => kvp.Value.Scatter == scatter).Key);
+        //    var color = newPalette.GetColor(seriesIndex);
+        //    scatter.LineColor = color;
+        //    if (scatter.Axes.YAxis == _plot.Axes.Right)
+        //        scatter.LineColor = color.Lighten(0.5f);
+        //});
+
+        // Finally, refresh the plot to apply the new colors.
         _plotHost.Refresh();
     }
 
+    #endregion
+
+    #region Series style handling
+    private static void OnLineWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var ctrl = (ScatterPlotView)d;
+        ctrl.ApplyLineWidth((double)e.NewValue);
+    }
+
+    private void ApplyLineWidth(double newLineWidth)
+    {
+        // Update the line width of all existing Scatter plottables based on the new LineWidth property value.
+        _seriesMap.Values.ToList().ForEach(handle =>
+        {
+            handle.Scatter.LineWidth = (float)newLineWidth;
+        });
+
+        // Finally, refresh the plot to apply the new line widths.
+        _plotHost.Refresh();
+    }
     #endregion
 
 }
