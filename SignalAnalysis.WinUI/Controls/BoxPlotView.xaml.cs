@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.ObjectModel;
 
@@ -30,6 +31,64 @@ public partial class BoxPlotData : ObservableObject
 
 public sealed partial class BoxPlotView : UserControl
 {
+    #region BoxPlotData DependencyProperty
+    public static readonly DependencyProperty BoxProperty =
+        DependencyProperty.Register(
+            nameof(Box),
+            typeof(BoxPlotData),
+            typeof(BoxPlotView),
+            new PropertyMetadata(null, OnBoxChanged));
+
+    public BoxPlotData? Box
+    {
+        get => (BoxPlotData?)GetValue(BoxProperty);
+        set => SetValue(BoxProperty, value);
+    }
+    #endregion
+
+    #region Titles DependencyProperties
+
+    public static readonly DependencyProperty PlotTitleProperty =
+        DependencyProperty.Register(
+            nameof(PlotTitle),
+            typeof(string),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(string.Empty, OnTitlesChanged));
+
+    public static readonly DependencyProperty XAxisTitleProperty =
+        DependencyProperty.Register(
+            nameof(XAxisTitle),
+            typeof(string),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(string.Empty, OnTitlesChanged));
+
+    public static readonly DependencyProperty YAxisTitleProperty =
+        DependencyProperty.Register(
+            nameof(YAxisTitle),
+            typeof(string),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(string.Empty, OnTitlesChanged));
+
+    public string PlotTitle
+    {
+        get => (string)GetValue(PlotTitleProperty);
+        set => SetValue(PlotTitleProperty, value);
+    }
+
+    public string XAxisTitle
+    {
+        get => (string)GetValue(XAxisTitleProperty);
+        set => SetValue(XAxisTitleProperty, value);
+    }
+
+    public string YAxisTitle
+    {
+        get => (string)GetValue(YAxisTitleProperty);
+        set => SetValue(YAxisTitleProperty, value);
+    }
+
+    #endregion
+
     public BoxPlotView()
     {
         InitializeComponent();
