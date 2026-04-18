@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.Logging;
+using ScottPlot.Plottables;
 using ScottPlot.Statistics;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Controls;
@@ -7,7 +8,9 @@ using SignalAnalysis.Enumerations;
 using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.NumericalAlgorithms;
+using System.Collections;
 using System.Collections.ObjectModel;
+using static SkiaSharp.HarfBuzz.SKShaper;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis.ViewModels;
@@ -147,6 +150,10 @@ public partial class StartUpViewModel: ObservableRecipient
             //}
             OriginalData[0].Ys = new ObservableCollection<double>(data);
             DerivativeData[1].Ys = OriginalData[0].Ys;
+
+            if (stats) ComputeStatistics(signalClipped);
+            if (boxplot) ComputeBoxplot(signalClipped);
+            (Results.BoxplotMin, Results.BoxplotQ1, Results.BoxplotQ2, Results.BoxplotQ3, Results.BoxplotMax) = DescriptiveSatatistics.ComputeBoxPlotValues(signal, false);
 
         }
     }
