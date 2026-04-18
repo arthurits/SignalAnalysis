@@ -372,14 +372,14 @@ public sealed partial class ScatterPlotView : UserControl
                 handle.Scatter.LineColor = color.Lighten(0.5f);
                 
                 // Update the color of the right Y-axis frame to match the color of the left Y-axis series, for better visual association.
-                _plot.Axes.Right.FrameLineStyle.Color = color;
+                _plot.Axes.Right.FrameLineStyle.Color = new Color(color.ARGB);
             }
             else if(handle.Scatter.Axes.YAxis == _plot.Axes.Left)
             {
                 handle.Scatter.LineColor = color;
                 
                 // Update the color of the left Y-axis frame to match the color of the left Y-axis series, for better visual association.
-                _plot.Axes.Left.FrameLineStyle.Color = color;
+                _plot.Axes.Left.FrameLineStyle.Color = new Color(color.ARGB);
             }
         });
 
