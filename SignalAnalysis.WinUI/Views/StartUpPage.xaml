@@ -150,16 +150,20 @@
                             BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
                             Height="300">
                             <Grid ColumnDefinitions="2*, *" RowDefinitions="*">
-                                <controls:ScatterPlotView x:Name="plotOriginalData"
+                                <controls:ScatterPlotView x:Name="PlotOriginalData"
                                                           Series="{x:Bind ViewModel.OriginalData, Mode=OneWay}"
                                                           PlotTitle="{x:Bind ViewModel.StrOriginalPlotTitle}"
                                                           XAxisTitle="{x:Bind ViewModel.StrOriginalXAxisTitle}"
                                                           YAxisTitle="{x:Bind ViewModel.StrOriginalYAxisTitle}"
                                                           PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
                                 </controls:ScatterPlotView>
-                                <ScottPlot:WinUIPlot x:Name="PlotSimpleTasks"
-                                    Grid.Column="1">
-                                </ScottPlot:WinUIPlot>
+                                <controls:BoxPlotView x:Name="BoxPlot"
+                                                      Grid.Column="1"
+                                                      Box="{x:Bind ViewModel.BoxPlotData}"
+                                                      PlotTitle="{x:Bind ViewModel.StrBoxPlotTitle}"
+                                                      XAxisTitle="{x:Bind ViewModel.StrBoxPlotXAxisTitle}"
+                                                      YAxisTitle="{x:Bind ViewModel.StrBoxPlotYAxisTitle}">
+                                </controls:BoxPlotView>
                             </Grid>
                         </Border>
                     </StackPanel>
