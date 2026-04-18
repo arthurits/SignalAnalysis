@@ -99,7 +99,7 @@ public sealed partial class StartUpPage : Page, IDisposable
         //PlotTaskFactors.Refresh();
     }
 
-    #region OpenFile
+    #region Open file
 
     private async void OpenFile_Drop(object sender, DragEventArgs e)
     {

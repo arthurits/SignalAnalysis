@@ -20,14 +20,6 @@ public partial class StartUpViewModel: ObservableRecipient
     private readonly ILocalizationService _localizationService;
 
     public ObservableCollection<PlotSeries> PlotSeries = [];
-
-    //public ObservableCollection<double> Xs { get; } = [];
-    //public ObservableCollection<double> Ys { get; } = [];
-
-    [ObservableProperty]
-    public partial ObservableCollection<double> Derivative_Xs { get; set; } = [];
-    [ObservableProperty]
-    public partial ObservableCollection<double> Derivative_Ys { get; set; } = [];
     
     [ObservableProperty]
     public partial ObservableCollection<ScatterSeries> OriginalData { get; set; } = [];
