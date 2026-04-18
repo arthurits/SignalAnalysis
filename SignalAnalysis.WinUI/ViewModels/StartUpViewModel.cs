@@ -136,11 +136,11 @@ public partial class StartUpViewModel: ObservableRecipient
         if (newValue >= 0 && newValue < DocumentDto.SeriesNames.Count)
         {
             var selectedSeriesName = DocumentDto.SeriesNames[newValue];
-            
+
             // Clear existing data points. We need to keep the references to the ObservableCollections for the plot to update correctly.
             //Xs.Clear();
             //Ys.Clear();
-            
+
             //var period = 1 / DocumentDto.SamplingFrequency;
             var data = DocumentDto.SeriesData[newValue];
             //for (int i = 0; i < data.Count; i++)
@@ -151,10 +151,16 @@ public partial class StartUpViewModel: ObservableRecipient
             OriginalData[0].Ys = new ObservableCollection<double>(data);
             DerivativeData[1].Ys = OriginalData[0].Ys;
 
-            if (stats) ComputeStatistics(signalClipped);
-            if (boxplot) ComputeBoxplot(signalClipped);
-            (Results.BoxplotMin, Results.BoxplotQ1, Results.BoxplotQ2, Results.BoxplotQ3, Results.BoxplotMax) = DescriptiveSatatistics.ComputeBoxPlotValues(signal, false);
-
+            (_signalStats.BoxplotMin, _signalStats.BoxplotQ1, _signalStats.BoxplotQ2, _signalStats.BoxplotQ3, _signalStats.BoxplotMax) = NumericalAlgorithms.BoxPlot.ComputeBoxPlotValues(data.ToArray(), false);
+            BoxPlotData = new BoxPlotData()
+            {
+                Position = 0,
+                BoxMin = _signalStats.BoxplotMin,
+                BoxMiddle = _signalStats.BoxplotQ2,
+                BoxMax = _signalStats.BoxplotMax,
+                WhiskerMin = _signalStats.BoxplotMin - 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
+                WhiskerMax = _signalStats.BoxplotMax + 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
+            };
         }
     }
 
