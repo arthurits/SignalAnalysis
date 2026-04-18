@@ -68,7 +68,6 @@ public sealed partial class ScatterPlotView : UserControl
     }
     #endregion
 
-
     #region Titles DependencyProperties
 
     public static readonly DependencyProperty PlotTitleProperty =
@@ -124,6 +123,7 @@ public sealed partial class ScatterPlotView : UserControl
     }
     #endregion
 
+    #region PlotPalette DependencyProperty
     public static readonly DependencyProperty PlotPaletteProperty =
         DependencyProperty.Register(
             nameof(PlotPalette),
@@ -136,7 +136,23 @@ public sealed partial class ScatterPlotView : UserControl
         get => (IPalette)GetValue(PlotPaletteProperty);
         set => SetValue(PlotPaletteProperty, value);
     }
+    #endregion
 
+    #region LineWidth DependencyProperties
+    public static readonly DependencyProperty LineWidthProperty =
+        DependencyProperty.Register(
+            nameof(LineWidth),
+            typeof(double),
+            typeof(ScatterPlotView),
+            new PropertyMetadata(1.0, OnLineWidthChanged));
+
+    public double LineWidth
+    {
+        get => (double)GetValue(LineWidthProperty);
+        set => SetValue(LineWidthProperty, value);
+    }
+    #endregion
+    
     // Método público para que la vista que contiene este control pueda añadir el host visual
     // y enlazar el Plot creado aquí al host concreto de ScottPlot WinUI.
     public Plot GetPlot() => _plot;
@@ -171,7 +187,7 @@ public sealed partial class ScatterPlotView : UserControl
     }
 
 
-    #region Series handling
+    #region Series data handling
 
     private static void OnSeriesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -400,6 +416,26 @@ public sealed partial class ScatterPlotView : UserControl
         _plotHost.Refresh();
     }
 
+    #endregion
+
+    #region Series style handling
+    private static void OnLineWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var ctrl = (ScatterPlotView)d;
+        ctrl.ApplyLineWidth((double)e.NewValue);
+    }
+
+    private void ApplyLineWidth(double newLineWidth)
+    {
+        // Update the line width of all existing Scatter plottables based on the new LineWidth property value.
+        _seriesMap.Values.ToList().ForEach(handle =>
+        {
+            handle.Scatter.LineWidth = (float)newLineWidth;
+        });
+
+        // Finally, refresh the plot to apply the new line widths.
+        _plotHost.Refresh();
+    }
     #endregion
 
 }
