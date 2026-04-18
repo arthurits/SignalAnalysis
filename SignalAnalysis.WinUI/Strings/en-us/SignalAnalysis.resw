@@ -87,4 +87,13 @@
   <data name="StrOpenDocumentToolTip" xml:space="preserve">
     <value>Open 'sig (*.sig)' document</value>
   </data>
+  <data name="StrOriginalPlotTitle" xml:space="preserve">
+    <value>Input signal</value>
+  </data>
+  <data name="StrOriginalXAxisTitle" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="StrOriginalYAxisTitle" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
 </root>
