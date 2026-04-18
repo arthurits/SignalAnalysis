@@ -6,6 +6,7 @@ using ScottPlot.Plottables;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Reflection.Metadata;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -357,7 +358,34 @@ public sealed partial class ScatterPlotView : UserControl
 
     private void ApplyPalette(IPalette newPalette)
     {
+        // Update the plot's palette reference so that it can be used for assigning colors to new series in the future.
         _plot.Add.Palette = newPalette;
+
+        // Update the colors of all existing Scatter plottables based on the new palette.
+        // We need to loop through the series and find the corresponding Scatter for each one to apply the correct color.
+        _seriesMap.Values.ToList().ForEach(handle =>
+        {
+            int seriesIndex = Series!.IndexOf(_seriesMap.First(kvp => kvp.Value.Scatter == handle.Scatter).Key);
+            var color = newPalette.GetColor(seriesIndex);
+            handle.Scatter.LineColor = color;
+            if (handle.Scatter.Axes.YAxis == _plot.Axes.Right)
+                handle.Scatter.LineColor = color.Lighten(0.5f);
+        });
+
+        // Alternative approach if we want to loop directly through the Scatter plottables without using the _seriesMap
+        // (but we would need to find the corresponding series for each scatter to get the correct color index):
+        //_plot.GetPlottables().OfType<Scatter>().ToList().ForEach(scatter =>
+        //{
+        //    scatter.LineColor = newPalette.GetColor(Series!.IndexOf(_seriesMap.First(kvp => kvp.Value.Scatter == scatter).Key));
+
+        //    int seriesIndex = Series!.IndexOf(_seriesMap.First(kvp => kvp.Value.Scatter == scatter).Key);
+        //    var color = newPalette.GetColor(seriesIndex);
+        //    scatter.LineColor = color;
+        //    if (scatter.Axes.YAxis == _plot.Axes.Right)
+        //        scatter.LineColor = color.Lighten(0.5f);
+        //});
+
+        // Finally, refresh the plot to apply the new colors.
         _plotHost.Refresh();
     }
 
