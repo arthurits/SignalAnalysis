@@ -165,20 +165,16 @@
                             BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
                             BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
                             Height="300">
-                            <Grid ColumnDefinitions="*, *, *" RowDefinitions="*">
-                                <controls:SignalXYView x:Name="signalXYView"
-                                                       Grid.Column="0"
-                                                       Xs="{x:Bind ViewModel.Xs, Mode=OneWay}"
-                                                       Ys="{x:Bind ViewModel.Ys, Mode=OneWay}">
-                                </controls:SignalXYView>
+                            <Grid ColumnDefinitions="2*, *" RowDefinitions="*">
+                                <controls:ScatterPlotView x:Name="plotOriginalData"
+                                                          Series="{x:Bind ViewModel.OriginalData, Mode=OneWay}"
+                                                          PlotTitle="{x:Bind ViewModel.StrDerivativePlotTitle}"
+                                                          XAxisTitle="{x:Bind ViewModel.StrDerivativeXAxisTitle}"
+                                                          YAxisTitle="{x:Bind ViewModel.StrDerivativeYAxisTitle}"
+                                                          PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
                                 <ScottPlot:WinUIPlot x:Name="PlotSimpleTasks"
                                     Grid.Column="1">
-                                </ScottPlot:WinUIPlot>
-                                <ScottPlot:WinUIPlot x:Name="PlotCompositeTasks"
-                                    Grid.Column="1">
-                                </ScottPlot:WinUIPlot>
-                                <ScottPlot:WinUIPlot x:Name="PlotTaskFactors"
-                                    Grid.Column="3">
                                 </ScottPlot:WinUIPlot>
                             </Grid>
                         </Border>
