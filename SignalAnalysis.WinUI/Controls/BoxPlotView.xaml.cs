@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using ScottPlot;
 using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -88,6 +89,14 @@ public sealed partial class BoxPlotView : UserControl
     }
 
     #endregion
+
+    // Public method for the parent view to add the visual host and bind the Plot created here to the specific ScottPlot WinUI host.
+    public Plot GetPlot() => _plot;
+
+    // Internal property to hold the reference to the ScottPlot host control, which is used to call Refresh() when needed.
+    // This should be set by the parent view after adding the host control to the visual tree.
+    private readonly ScottPlot.WinUI.WinUIPlot _plotHost;
+    private readonly Plot _plot;
 
     public BoxPlotView()
     {
