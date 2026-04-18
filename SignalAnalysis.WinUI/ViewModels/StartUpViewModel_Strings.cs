@@ -38,6 +38,13 @@ public partial class StartUpViewModel : ObservableRecipient
     public partial string StrButtonPlotPaletteToolTip { get; set; } = string.Empty;
 
     [ObservableProperty]
+    public partial string StrOriginalPlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrOriginalXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrOriginalYAxisTitle { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial string StrDerivativePlotTitle { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrDerivativeXAxisTitle { get; set; } = string.Empty;
@@ -64,6 +71,10 @@ public partial class StartUpViewModel : ObservableRecipient
         //StrButtonPlotPalette = "StrButtonPlotPalette".GetLocalized("SignalAnalysis");
         StrButtonPlotPaletteToolTip = "StrButtonPlotPaletteToolTip".GetLocalized("SignalAnalysis");
 
+        // Plots titles and axis labels
+        StrOriginalPlotTitle = "StrOriginalPlotTitle".GetLocalized("SignalAnalysis");
+        StrOriginalXAxisTitle = "StrOriginalXAxisTitle".GetLocalized("SignalAnalysis");
+        StrOriginalYAxisTitle = "StrOriginalYAxisTitle".GetLocalized("SignalAnalysis");
         StrDerivativePlotTitle = "StrDerivativePlotTitle".GetLocalized("SignalAnalysis");
         StrDerivativeXAxisTitle = "StrDerivativeXAxisTitle".GetLocalized("SignalAnalysis");
         StrDerivativeYAxisTitle = "StrDerivativeYAxisTitle".GetLocalized("SignalAnalysis");

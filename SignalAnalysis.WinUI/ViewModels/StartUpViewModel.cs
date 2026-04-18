@@ -20,15 +20,9 @@ public partial class StartUpViewModel: ObservableRecipient
     private readonly ILocalizationService _localizationService;
 
     public ObservableCollection<PlotSeries> PlotSeries = [];
-
-    public ObservableCollection<double> Xs { get; } = [];
-    public ObservableCollection<double> Ys { get; } = [];
-
-    [ObservableProperty]
-    public partial ObservableCollection<double> Derivative_Xs { get; set; } = [];
-    [ObservableProperty]
-    public partial ObservableCollection<double> Derivative_Ys { get; set; } = [];
     
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> OriginalData { get; set; } = [];
     [ObservableProperty]
     public partial ObservableCollection<ScatterSeries> DerivativeData { get; set; } = [];
 
@@ -76,15 +70,11 @@ public partial class StartUpViewModel: ObservableRecipient
         OnLanguageChanged(null, EventArgs.Empty);
 
         // Add plot series
+        OriginalData.Clear();
+        OriginalData.Add(new ScatterSeries());
         DerivativeData.Clear();
-        // Derivative signal on the primary Y axis
-        DerivativeData.Add(new ScatterSeries
-        {
-            UseSecondaryYAxis = false
-        });
-
-        // Original signal on the secondary Y axis
-        DerivativeData.Add(new ScatterSeries
+        DerivativeData.Add(new ScatterSeries());    // Derivative signal on the primary Y axis
+        DerivativeData.Add(new ScatterSeries        // Original signal on the secondary Y axis
         {
             UseSecondaryYAxis = true
         });
@@ -121,9 +111,10 @@ public partial class StartUpViewModel: ObservableRecipient
             SelectedPlotSeriesIndex = 0;
         }
 
-        // Update _signalStats with the new document data
+        // Set up X values for the original data and derivative data. We need to keep the references to the ObservableCollections for the plot to update correctly.
         var dataAbscissa = new ObservableCollection<double>(Enumerable.Range(0, newValue.SeriesPoints).Select(i => 0 + i / newValue.SamplingFrequency));
 
+        OriginalData[0].Xs = dataAbscissa;
         foreach (var dataSerie in DerivativeData)
             dataSerie.Xs = dataAbscissa;
 
@@ -142,18 +133,18 @@ public partial class StartUpViewModel: ObservableRecipient
             var selectedSeriesName = DocumentDto.SeriesNames[newValue];
             
             // Clear existing data points. We need to keep the references to the ObservableCollections for the plot to update correctly.
-            Xs.Clear();
-            Ys.Clear();
+            //Xs.Clear();
+            //Ys.Clear();
             
-            var period = 1 / DocumentDto.SamplingFrequency;
+            //var period = 1 / DocumentDto.SamplingFrequency;
             var data = DocumentDto.SeriesData[newValue];
-            for (int i = 0; i < data.Count; i++)
-            {
-                Xs.Add(i * period); // Ejemplo de eje X
-                Ys.Add(data[i]); // Datos de la serie seleccionada
-            }
-
-            DerivativeData[1].Ys = new ObservableCollection<double>(data);
+            //for (int i = 0; i < data.Count; i++)
+            //{
+            //    Xs.Add(i * period); // Ejemplo de eje X
+            //    Ys.Add(data[i]); // Datos de la serie seleccionada
+            //}
+            OriginalData[0].Ys = new ObservableCollection<double>(data);
+            DerivativeData[1].Ys = OriginalData[0].Ys;
 
         }
     }

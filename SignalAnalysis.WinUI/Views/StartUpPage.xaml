@@ -138,25 +138,9 @@
                                                       ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
                                                       ItemsSource="{x:Bind PlotPalettes}"
                                                       SelectedValue="{x:Bind ViewModel.PlotPalette, Mode=TwoWay}"
-                                                      Width="170"
-                                                      SelectionChanged="Palette_SelectionChanged"/>
+                                                      Width="170"/>
                                         </StackPanel>
                                     </AppBarElementContainer>
-                                    <AppBarSeparator Visibility="Collapsed"/>
-                                    <AppBarToggleButton x:Name="UpdatePlotSimpleTasks"
-                                                      ToolTipService.ToolTip="Compute LM-MMH"
-                                                      Icon="Calculator"
-                                                      Label="Compute"
-                                                      LabelPosition="Default"
-                                                      IsChecked="{x:Bind ViewModel.UpdatePlotSimpleTasksChecked, Mode=TwoWay}"
-                                                      Checked="UpdatePlotSimpleTasks_Checked"
-                                                      Foreground="MidnightBlue"
-                                                      Visibility="Collapsed"/>
-                                    <AppBarToggleButton x:Name="UpdatePlotCompositeTasks"
-                                                        IsChecked="{x:Bind ViewModel.UpdatePlotCompositeTasksChecked, Mode=TwoWay}"
-                                                        Checked="UpdatePlotCompositeTasks_Checked"
-                                                        Foreground="MidnightBlue"
-                                                        Visibility="Collapsed"/>
                                 </CommandBar.PrimaryCommands>
                             </CommandBar>
                         </Border>
@@ -165,20 +149,16 @@
                             BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
                             BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
                             Height="300">
-                            <Grid ColumnDefinitions="*, *, *" RowDefinitions="*">
-                                <controls:SignalXYView x:Name="signalXYView"
-                                                       Grid.Column="0"
-                                                       Xs="{x:Bind ViewModel.Xs, Mode=OneWay}"
-                                                       Ys="{x:Bind ViewModel.Ys, Mode=OneWay}">
-                                </controls:SignalXYView>
+                            <Grid ColumnDefinitions="2*, *" RowDefinitions="*">
+                                <controls:ScatterPlotView x:Name="plotOriginalData"
+                                                          Series="{x:Bind ViewModel.OriginalData, Mode=OneWay}"
+                                                          PlotTitle="{x:Bind ViewModel.StrOriginalPlotTitle}"
+                                                          XAxisTitle="{x:Bind ViewModel.StrOriginalXAxisTitle}"
+                                                          YAxisTitle="{x:Bind ViewModel.StrOriginalYAxisTitle}"
+                                                          PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
                                 <ScottPlot:WinUIPlot x:Name="PlotSimpleTasks"
                                     Grid.Column="1">
-                                </ScottPlot:WinUIPlot>
-                                <ScottPlot:WinUIPlot x:Name="PlotCompositeTasks"
-                                    Grid.Column="1">
-                                </ScottPlot:WinUIPlot>
-                                <ScottPlot:WinUIPlot x:Name="PlotTaskFactors"
-                                    Grid.Column="3">
                                 </ScottPlot:WinUIPlot>
                             </Grid>
                         </Border>

@@ -85,88 +85,21 @@ public sealed partial class StartUpPage : Page, IDisposable
         {
             //PlotSimpleTasks.Plot.ShowLegend();
             //PlotCompositeTasks.Plot.ShowLegend();
-            PlotTaskFactors.Plot.ShowLegend();
+            //PlotTaskFactors.Plot.ShowLegend();
         }
         else
         {
             //PlotSimpleTasks.Plot.HideLegend();
             //PlotCompositeTasks.Plot.HideLegend();
-            PlotTaskFactors.Plot.HideLegend();
+            //PlotTaskFactors.Plot.HideLegend();
         }
 
         //PlotSimpleTasks.Refresh();
         //PlotCompositeTasks.Refresh();
-        PlotTaskFactors.Refresh();
+        //PlotTaskFactors.Refresh();
     }
 
-    private void UpdatePlotSimpleTasks_Checked(object sender, RoutedEventArgs e)
-    {
-        if (sender is AppBarToggleButton toggleButton)
-        {
-            if (toggleButton.IsChecked == true)
-            {
-                //CreatePlotSimple();
-                //CreatePlotFactors(series: Math.Min(plotSeries.SelectedIndex - 1, ViewModel.AllTaskData.Count - 2));
-            }
-        }
-    }
-
-    private void UpdatePlotCompositeTasks_Checked(object sender, RoutedEventArgs e)
-    {
-        if (sender is AppBarToggleButton toggleButton)
-        {
-            if (toggleButton.IsChecked == true)
-            {
-                //CreatePlotComposite();
-            }
-        }
-    }
-
-    private void Series_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (sender is ComboBox combo)
-        {
-            if (combo.SelectedIndex == -1)
-            {
-                combo.SelectedIndex = ViewModel.PlotSeries.Count - 1;
-            }
-
-            var selectedItem = (PlotSeries)combo.SelectedItem;
-
-            //ClearPlots();
-            //DrawPlots(series: selectedItem.Item2);
-
-            // For the time being, changing the series selection only modifies the factors plot
-            PlotTaskFactors.Plot.Clear();
-            //CreatePlotFactors(series: selectedItem.Value);
-        }
-    }
-
-    private void Palette_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (sender is ComboBox combo)
-        {
-            if (combo.SelectedValue.ToString() != ViewModel.PlotPalette)
-            {
-                return;
-            }
-
-            // This is not needed, since plots are custom-drawn
-            var selectedPalette = ScottPlot.Palette.GetPalettes().Cast<ScottPlot.IPalette>().Where(x => x.Name == ViewModel.PlotPalette).First();
-            signalXYView.GetPlot().Add.Palette = selectedPalette;
-            signalXYView.ForceRender();
-            //PlotSimpleTasks.Plot.Add.Palette = selectedPalette;
-            //PlotCompositeTasks.Plot.Add.Palette = selectedPalette;
-            //PlotTaskFactors.Plot.Add.Palette = selectedPalette;
-
-            //ClearPlots();
-            //CreatePlotSimple();
-            //CreatePlotComposite();
-            //CreatePlotFactors(series: Math.Min(plotSeries.SelectedIndex - 1, ViewModel.AllTaskData.Count - 2));
-        }
-    }
-
-    #region OpenFile
+    #region Open file
 
     private async void OpenFile_Drop(object sender, DragEventArgs e)
     {
