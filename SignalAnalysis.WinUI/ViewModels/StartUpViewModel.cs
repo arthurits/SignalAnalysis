@@ -65,13 +65,13 @@ public partial class StartUpViewModel: ObservableRecipient
 
 
     [ObservableProperty]
-    public partial bool VisibleResultsSection { get; set; } = false;
+    public partial bool VisibleResultsSection { get; set; } = true;
     [ObservableProperty]
     public partial string TextResults { get; set; } = string.Empty;
     public IReadOnlyList<double> FontSizes { get; }
     public IReadOnlyList<FontItem> MonospacedFonts { get; }
     [ObservableProperty]
-    public partial bool ExportTextEnabled { get; set; } = false;
+    public partial bool ExportTextEnabled { get; set; } = true;
 
     [ObservableProperty]
     public partial DocumentBase DocumentDto { get; set; }

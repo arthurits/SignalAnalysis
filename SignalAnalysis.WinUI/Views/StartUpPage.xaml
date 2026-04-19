@@ -417,6 +417,7 @@
                                                   Label="{x:Bind ViewModel.StrButtonResultsSave}"
                                                   LabelPosition="Default"
                                                   ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonResultsSaveToolTip}"
+                                                  Click="Export_Click"
                                                   IsEnabled="{x:Bind ViewModel.ExportTextEnabled}"
                                                   Foreground="MidnightBlue"/>
                                     <AppBarSeparator/>
