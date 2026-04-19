@@ -289,14 +289,23 @@
                                 BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
                                 BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
                                 Height="300">
-                            <controls:ScatterPlotView x:Name="plotFractalView"
+                            <Grid ColumnDefinitions="2*, *" RowDefinitions="*">
+                                <controls:ScatterPlotView x:Name="plotFractalView"
                                                        Series="{x:Bind ViewModel.FractalData, Mode=OneWay}"                                                      
                                                         PlotTitle="{x:Bind ViewModel.StrFractalPlotTitle}"
                                                         XAxisTitle="{x:Bind ViewModel.StrFractalXAxisTitle}"
                                                         YAxisTitle="{x:Bind ViewModel.StrFractalYAxisTitle}"
-                                                        YAxisSecondaryTitle="{x:Bind ViewModel.StrFractalYAxisSecondaryTitle}"
                                                         PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
-                            </controls:ScatterPlotView>
+                                </controls:ScatterPlotView>
+                                <controls:ScatterPlotView x:Name="plotDistributionView"
+                                                          Grid.Column="1"
+                                                          Series="{x:Bind ViewModel.DistributionData, Mode=OneWay}"                                                      
+                                                          PlotTitle="{x:Bind ViewModel.StrDistributionPlotTitle}"
+                                                          XAxisTitle="{x:Bind ViewModel.StrDistributionXAxisTitle}"
+                                                          YAxisTitle="{x:Bind ViewModel.StrDistributionYAxisTitle}"
+                                                          PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
+                            </Grid>
                         </Border>
                     </StackPanel>
 
@@ -361,7 +370,6 @@
                                                         PlotTitle="{x:Bind ViewModel.StrFourierPlotTitle}"
                                                         XAxisTitle="{x:Bind ViewModel.StrFourierXAxisTitle}"
                                                         YAxisTitle="{x:Bind ViewModel.StrFourierYAxisTitle}"
-                                                        YAxisSecondaryTitle="{x:Bind ViewModel.StrFourierYAxisSecondaryTitle}"
                                                         PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
                                 </controls:ScatterPlotView>
                                 <controls:ScatterPlotView x:Name="plotWindowView"
@@ -370,7 +378,6 @@
                                                             PlotTitle="{x:Bind ViewModel.StrWindowPlotTitle}"
                                                             XAxisTitle="{x:Bind ViewModel.StrWindowXAxisTitle}"
                                                             YAxisTitle="{x:Bind ViewModel.StrWindowYAxisTitle}"
-                                                            YAxisSecondaryTitle="{x:Bind ViewModel.StrWindowYAxisSecondaryTitle}"
                                                             PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
                                 </controls:ScatterPlotView>
                                 <controls:ScatterPlotView x:Name="plotWindowedView"
@@ -379,7 +386,6 @@
                                                             PlotTitle="{x:Bind ViewModel.StrWindowedPlotTitle}"
                                                             XAxisTitle="{x:Bind ViewModel.StrWindowedXAxisTitle}"
                                                             YAxisTitle="{x:Bind ViewModel.StrWindowedYAxisTitle}"
-                                                            YAxisSecondaryTitle="{x:Bind ViewModel.StrWindowedYAxisSecondaryTitle}"
                                                             PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
                                 </controls:ScatterPlotView>
                             </Grid>
