@@ -1,4 +1,6 @@
-﻿namespace SignalAnalysis.Models;
+﻿using SignalAnalysis.Helpers;
+
+namespace SignalAnalysis.Models;
 
 internal class SignalStats(double Max = 0, double Min = 0, double Avg = 0, double Var = 0, double FractalDim = 0, double FractalVar = 0, double AppEn = 0, double SampEn = 0, double ShannEn = 0, double BitEn = 0, double IdealEn = 0, double ShannonIdeal = 0, double IntegralValue = 0)
 {
@@ -53,19 +55,21 @@ internal class SignalStats(double Max = 0, double Min = 0, double Avg = 0, doubl
     {
         string strTemp= string.Empty;
 
-        //strTemp = $"{StringResources.FileHeader07}{StringResources.FileHeaderColon}{Average.ToString("0.######", culture)}{Environment.NewLine}" +
-        //$"{StringResources.FileHeader32}{StringResources.FileHeaderColon}{Variance.ToString("0.######", culture)}{Environment.NewLine}" +
-        //$"{StringResources.FileHeader08}{StringResources.FileHeaderColon}{Maximum.ToString("0.##", culture)}{Environment.NewLine}" +
-        //$"{StringResources.FileHeader09}{StringResources.FileHeaderColon}{Minimum.ToString("0.##", culture)}{Environment.NewLine}";
+        var strColon = "StrOpenDataFileColon".GetLocalized("ReadDataFile");
 
-        //if (boxplot)
-        //{
-        //    strTemp += $"{StringResources.FileHeader33}{StringResources.FileHeaderColon}{BoxplotMin.ToString("0.######", culture)}{Environment.NewLine}" +
-        //        $"{StringResources.FileHeader35}{StringResources.FileHeaderColon}{BoxplotQ1.ToString("0.######", culture)}{Environment.NewLine}" +
-        //        $"{StringResources.FileHeader36}{StringResources.FileHeaderColon}{BoxplotQ2.ToString("0.######", culture)}{Environment.NewLine}" +
-        //        $"{StringResources.FileHeader37}{StringResources.FileHeaderColon}{BoxplotQ3.ToString("0.######", culture)}{Environment.NewLine}" +
-        //        $"{StringResources.FileHeader34}{StringResources.FileHeaderColon}{BoxplotMax.ToString("0.######", culture)}{Environment.NewLine}";
-        //}
+        strTemp = $"{"StrOpenDataFile07".GetLocalized("ReadDataFile")}{strColon} {Average.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"{"StrOpenDataFile32".GetLocalized("ReadDataFile")}{strColon} {Variance.ToString("0.######", culture)}{Environment.NewLine}" +
+        $"{"StrOpenDataFile08".GetLocalized("ReadDataFile")}{strColon} {Maximum.ToString("0.##", culture)}{Environment.NewLine}" +
+        $"{"StrOpenDataFile09".GetLocalized("ReadDataFile")}{strColon} {Minimum.ToString("0.##", culture)}{Environment.NewLine}";
+
+        if (boxplot)
+        {
+            strTemp += $"{"StrOpenDataFile33".GetLocalized("ReadDataFile")}{strColon} {BoxplotMin.ToString("0.######", culture)}{Environment.NewLine}" +
+                $"{"StrOpenDataFile35".GetLocalized("ReadDataFile")}{strColon} {BoxplotQ1.ToString("0.######", culture)}{Environment.NewLine}" +
+                $"{"StrOpenDataFile36".GetLocalized("ReadDataFile")}{strColon} {BoxplotQ2.ToString("0.######", culture)}{Environment.NewLine}" +
+                $"{"StrOpenDataFile37".GetLocalized("ReadDataFile")}{strColon} {BoxplotQ3.ToString("0.######", culture)}{Environment.NewLine}" +
+                $"{"StrOpenDataFile34".GetLocalized("ReadDataFile")}{strColon} {BoxplotMax.ToString("0.######", culture)}{Environment.NewLine}";
+        }
 
         //strTemp += $"{StringResources.FileHeader10}{StringResources.FileHeaderColon}{FractalDimension.ToString("0.########", culture)}{Environment.NewLine}" +
         //$"{StringResources.FileHeader11}{StringResources.FileHeaderColon}{FractalVariance.ToString("0.########", culture)}{Environment.NewLine}";

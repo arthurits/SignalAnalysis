@@ -393,21 +393,87 @@
                     </StackPanel>
 
                     <!-- Text results section -->
-                    <StackPanel x:Name="PanelTextResults"
+                    <StackPanel x:Name="PanelResults"
                                 Grid.Row="9"
-                                Style="{StaticResource ContentStackPanel}"
+                                Orientation="Vertical"
                                 Margin="0, 12, 0, 0"
-                                Spacing="4">
-                        <ScrollView x:Name="ScrollViewText" ContentOrientation="Horizontal"
+                                Spacing="4"
+                                x:DefaultBindMode="OneWay"
+                                Visibility="{x:Bind ViewModel.VisibleResultsSection, Mode=OneWay}">
+                        <Border
+                            CornerRadius="4"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            BorderThickness="1"
+                            BorderBrush="MistyRose">
+                            <Border.Background>
+                                <SolidColorBrush Color="MistyRose"  Opacity=".4" />
+                            </Border.Background>
+                            <CommandBar DefaultLabelPosition="Right"
+                                    OverflowButtonVisibility="Collapsed">
+                                <CommandBar.PrimaryCommands>
+                                    <AppBarButton x:Name="exportResults"
+                                                  Icon="Save"
+                                                  Label="{x:Bind ViewModel.StrButtonResultsSave}"
+                                                  LabelPosition="Default"
+                                                  ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonResultsSaveToolTip}"
+                                                  Click="Export_Click"
+                                                  IsEnabled="{x:Bind ViewModel.ExportTextEnabled}"
+                                                  Foreground="MidnightBlue"/>
+                                    <AppBarSeparator/>
+                                    <AppBarElementContainer VerticalAlignment="Center" HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
+                                            <StackPanel x:Name="fontSizePanel"
+                                                        Orientation="Horizontal"
+                                                        Margin="0,0,12,0">
+                                                <FontIcon Glyph="&#xE8E9;"
+                                                          ToolTipService.ToolTip="Font size"
+                                                          Margin="0,0,4,0"
+                                                          Foreground="MidnightBlue"/>
+                                                <ComboBox x:Name="fontSize"
+                                                          AutomationProperties.Name="Font size"
+                                                          ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonResultsFontSizeToolTip}"
+                                                          IsEditable="True"
+                                                          ItemsSource="{x:Bind ViewModel.FontSizes, Mode=OneWay}"
+                                                          SelectedIndex="6"
+                                                          Width="80"
+                                                          TextSubmitted="FontSize_TextSubmitted"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="fontFamilyPanel"
+                                                Orientation="Horizontal">
+                                                <FontIcon Glyph="&#xE8D2;"
+                                                          ToolTipService.ToolTip="Font family"
+                                                          Margin="0,0,4,0"
+                                                          Foreground="MidnightBlue"/>
+                                                <ComboBox x:Name="fontFamily"
+                                                          AutomationProperties.Name="Select font"
+                                                          ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonResultsFontFamilyToolTip}"
+                                                          ItemsSource="{x:Bind ViewModel.MonospacedFonts, Mode=OneWay}"
+                                                          DisplayMemberPath="Name"
+                                                          SelectedValuePath="Family"
+                                                          SelectedIndex="2"
+                                                          Width="140"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </AppBarElementContainer>
+                                </CommandBar.PrimaryCommands>
+                            </CommandBar>
+                        </Border>
+                        
+                        <StackPanel x:Name="PanelTextResults"
+                                Style="{StaticResource ContentStackPanel}">
+                            <ScrollView x:Name="ScrollViewText" ContentOrientation="Horizontal"
                                         HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch"
                                         ZoomMode="Disabled" IsTabStop="True"
                                         VerticalAlignment="Top" HorizontalAlignment="Left"
                                         HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
                                         VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                            <TextBlock x:Name="TextResults"
-                                       Grid.Row="10">
-                            </TextBlock>
-                        </ScrollView>
+                                <TextBlock x:Name="TextResults"
+                                           IsTextSelectionEnabled="True"
+                                           Text="{x:Bind ViewModel.TextResults}">
+                                </TextBlock>
+                            </ScrollView>
+                        </StackPanel>
                     </StackPanel>
 
                 </Grid>

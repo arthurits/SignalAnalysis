@@ -627,4 +627,74 @@ public sealed partial class StartUpPage : Page, IDisposable
 
     #endregion OpenFile
 
+    #region Output text results
+
+    private async void Export_Click(object sender, RoutedEventArgs e)
+    {
+        // Disable the button to avoid double-clicking
+        this.exportResults.IsEnabled = false;
+
+        // Modify cursor shape
+        var currentCursor = this.ProtectedCursor;
+        this.ProtectedCursor = InputSystemCursor.Create(InputSystemCursorShape.Wait);
+
+        // Create a file picker
+        FileSavePicker savePicker = new();
+
+        var window = App.MainWindow;
+        var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+        WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hWnd);
+
+        savePicker.FileTypeChoices.Add("Manual handling file", [".mmh"]);
+        //savePicker.FileTypeChoices.Add("PDF file", [".pdf"]);
+        //savePicker.FileTypeChoices.Add("Rich text", [".rtf"]);
+        savePicker.FileTypeChoices.Add("Plain Text", [".txt"]);
+        savePicker.SuggestedFileName = "Lifting/lowering results";
+
+        if (!rememberFileDialogPath)
+        {
+            var random = new Random(Convert.ToInt32(DateTime.Now.Ticks & 0x0000FFFF));
+            savePicker.SettingsIdentifier = random.ToString();
+            savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
+        }
+
+
+        // Re-enable the button
+        this.exportResults.IsEnabled = true;
+
+        // Set the cursor to the previous one
+        this.ProtectedCursor = currentCursor;
+    }
+
+    private void FontSize_TextSubmitted(ComboBox sender, ComboBoxTextSubmittedEventArgs args)
+    {
+        bool isDouble = double.TryParse(sender.Text, out double newValue);
+
+        // Set the selected item if:
+        // - The value successfully parsed to double AND
+        // - The value is in the list of sizes OR is a custom value between 8 and 100
+        if (isDouble && (ViewModel.FontSizes.Contains(newValue) || (newValue < ViewModel.FontSizes[0] && newValue > ViewModel.FontSizes[^1])))
+        {
+            // Update the SelectedItem to the new value. 
+            sender.SelectedItem = newValue;
+        }
+        else
+        {
+            // If the item is invalid, reject it and revert the text. 
+            sender.Text = sender.SelectedValue.ToString();
+
+            var dialog = new ContentDialog
+            {
+                Content = "The font size must be a number between 8 and 100.",
+                CloseButtonText = "Close",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = sender.XamlRoot
+            };
+            _ = dialog.ShowAsync();
+        }
+
+        // Mark the event as handled so the framework doesn’t update the selected item automatically. 
+        args.Handled = true;
+    }
+    #endregion
 }

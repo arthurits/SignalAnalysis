@@ -1,17 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Extensions.Logging;
-using ScottPlot.Plottables;
-using ScottPlot.Statistics;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Controls;
 using SignalAnalysis.Enumerations;
-using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.NumericalAlgorithms;
-using System.Collections;
 using System.Collections.ObjectModel;
-using static SkiaSharp.HarfBuzz.SKShaper;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis.ViewModels;
 
@@ -63,12 +56,25 @@ public partial class StartUpViewModel: ObservableRecipient
     [ObservableProperty]
     public partial bool UpdatePlotCompositeTasksChecked { get; set; } = false;
 
+
+    [ObservableProperty]
+    public partial bool VisibleResultsSection { get; set; } = true;
+    [ObservableProperty]
+    public partial string TextResults { get; set; } = string.Empty;
+    public IReadOnlyList<double> FontSizes { get; }
+    public IReadOnlyList<FontItem> MonospacedFonts { get; }
+    [ObservableProperty]
+    public partial bool ExportTextEnabled { get; set; } = true;
+
     [ObservableProperty]
     public partial DocumentBase DocumentDto { get; set; }
 
     private SignalStats _signalStats = new();
 
-    public StartUpViewModel(ILocalSettingsService<AppSettings> settings, ILocalizationService localizationService)
+    public StartUpViewModel(
+        ILocalSettingsService<AppSettings> settings,
+        ILocalizationService localizationService,
+        IMonospacedFontsService fontsService)
     {
         // Load settings
         _appSettings = settings.GetValues;
@@ -80,6 +86,10 @@ public partial class StartUpViewModel: ObservableRecipient
         _localizationService = localizationService;
         _localizationService.LanguageChanged -= OnLanguageChanged;
         _localizationService.LanguageChanged += OnLanguageChanged;
+
+        // Get font information
+        FontSizes = fontsService.FontSizes;
+        MonospacedFonts = fontsService.MonospacedFonts;
 
         // Load string resources into binding variables for the UI
         OnLanguageChanged(null, EventArgs.Empty);
@@ -152,7 +162,9 @@ public partial class StartUpViewModel: ObservableRecipient
             DerivativeData[1].Ys = OriginalData[0].Ys;
             _ = OnSelectedDerivativeMethodIndexAsync(-1, SelectedDerivativeIndex);
 
-            (_signalStats.BoxplotMin, _signalStats.BoxplotQ1, _signalStats.BoxplotQ2, _signalStats.BoxplotQ3, _signalStats.BoxplotMax) = NumericalAlgorithms.BoxPlot.ComputeBoxPlotValues(data.ToArray(), false);
+            (_signalStats.Average, _signalStats.Variance, _signalStats.Maximum, _signalStats.Minimum) = DescriptiveStatistics.ComputeAverage(data.ToArray());
+
+            (_signalStats.BoxplotMin, _signalStats.BoxplotQ1, _signalStats.BoxplotQ2, _signalStats.BoxplotQ3, _signalStats.BoxplotMax) = BoxPlot.ComputeBoxPlotValues(data.ToArray(), false);
             BoxPlotData = new BoxPlotData()
             {
                 Position = 0,
@@ -163,6 +175,10 @@ public partial class StartUpViewModel: ObservableRecipient
                 WhiskerMax = _signalStats.BoxplotMax + 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
             };
             StrBoxPlotXAxisTitle = selectedSeriesName;
+
+            TextResults = _signalStats.ToString(
+                _appSettings.AppCulture,
+                boxplot:true);
         }
     }
 
