@@ -1,17 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Extensions.Logging;
-using ScottPlot.Plottables;
-using ScottPlot.Statistics;
 using SignalAnalysis.Contracts.Services;
 using SignalAnalysis.Controls;
 using SignalAnalysis.Enumerations;
-using SignalAnalysis.Helpers;
 using SignalAnalysis.Models;
 using SignalAnalysis.NumericalAlgorithms;
-using System.Collections;
 using System.Collections.ObjectModel;
-using static SkiaSharp.HarfBuzz.SKShaper;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SignalAnalysis.ViewModels;
 
@@ -169,7 +162,9 @@ public partial class StartUpViewModel: ObservableRecipient
             DerivativeData[1].Ys = OriginalData[0].Ys;
             _ = OnSelectedDerivativeMethodIndexAsync(-1, SelectedDerivativeIndex);
 
-            (_signalStats.BoxplotMin, _signalStats.BoxplotQ1, _signalStats.BoxplotQ2, _signalStats.BoxplotQ3, _signalStats.BoxplotMax) = NumericalAlgorithms.BoxPlot.ComputeBoxPlotValues(data.ToArray(), false);
+            (_signalStats.Average, _signalStats.Variance, _signalStats.Maximum, _signalStats.Minimum) = DescriptiveStatistics.ComputeAverage(data.ToArray());
+
+            (_signalStats.BoxplotMin, _signalStats.BoxplotQ1, _signalStats.BoxplotQ2, _signalStats.BoxplotQ3, _signalStats.BoxplotMax) = BoxPlot.ComputeBoxPlotValues(data.ToArray(), false);
             BoxPlotData = new BoxPlotData()
             {
                 Position = 0,
