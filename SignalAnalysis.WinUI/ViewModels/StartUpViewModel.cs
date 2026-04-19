@@ -30,7 +30,16 @@ public partial class StartUpViewModel: ObservableRecipient
     public partial BoxPlotData BoxPlotData { get; set; } = new BoxPlotData();
     [ObservableProperty]
     public partial ObservableCollection<ScatterSeries> DerivativeData { get; set; } = [];
-    
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> FractalData { get; set; } = [];
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> DistributionData { get; set; } = [];
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> FourierData { get; set; } = [];
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> WindowData { get; set; } = [];
+    [ObservableProperty]
+    public partial ObservableCollection<ScatterSeries> WindowedData { get; set; } = [];
 
     [ObservableProperty]
     public partial bool PlotSaveEnabled { get; set; } = true;
