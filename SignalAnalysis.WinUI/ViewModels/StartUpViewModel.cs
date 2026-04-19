@@ -180,6 +180,10 @@ public partial class StartUpViewModel: ObservableRecipient
                 WhiskerMax = _signalStats.BoxplotMax + 1.5 * (_signalStats.BoxplotMax - _signalStats.BoxplotMin),
             };
             StrBoxPlotXAxisTitle = selectedSeriesName;
+
+            TextResults = _signalStats.ToString(
+                _appSettings.AppCulture,
+                boxplot:true);
         }
     }
 
