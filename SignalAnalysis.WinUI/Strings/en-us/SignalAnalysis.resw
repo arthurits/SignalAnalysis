@@ -144,6 +144,18 @@
   <data name="StrButtonPlotSeriesToolTip" xml:space="preserve">
     <value>Select series to be plotted</value>
   </data>
+  <data name="StrButtonResultsFontFamilyToolTip" xml:space="preserve">
+    <value>Select font family</value>
+  </data>
+  <data name="StrButtonResultsFontSizeToolTip" xml:space="preserve">
+    <value>Select font size</value>
+  </data>
+  <data name="StrButtonResultsSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="StrButtonResultsSaveToolTip" xml:space="preserve">
+    <value>Save results into a file archive</value>
+  </data>
   <data name="StrDerivativePlotTitle" xml:space="preserve">
     <value>Derivative</value>
   </data>

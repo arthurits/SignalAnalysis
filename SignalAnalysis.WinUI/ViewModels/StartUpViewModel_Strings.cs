@@ -87,7 +87,14 @@ public partial class StartUpViewModel : ObservableRecipient
     public partial string StrWindowedXAxisTitle { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrWindowedYAxisTitle { get; set; } = string.Empty;
-
+    [ObservableProperty]
+    public partial string StrButtonResultsSave { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrButtonResultsSaveToolTip { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrButtonResultsFontSizeToolTip { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrButtonResultsFontFamilyToolTip { get; set; } = string.Empty;
 
     private void OnLanguageChanged(object? sender, EventArgs e)
     {
@@ -132,6 +139,12 @@ public partial class StartUpViewModel : ObservableRecipient
         StrWindowedPlotTitle = "StrWindowedPlotTitle".GetLocalized("SignalAnalysis");
         StrWindowedXAxisTitle = "StrWindowedXAxisTitle".GetLocalized("SignalAnalysis");
         StrWindowedYAxisTitle = "StrWindowedYAxisTitle".GetLocalized("SignalAnalysis");
+
+        // Results section
+        StrButtonResultsSave = "StrButtonResultsSave".GetLocalized("SignalAnalysis");
+        StrButtonResultsSaveToolTip = "StrButtonResultsSaveToolTip".GetLocalized("SignalAnalysis");
+        StrButtonResultsFontSizeToolTip = "StrButtonResultsFontSizeToolTip".GetLocalized("SignalAnalysis");
+        StrButtonResultsFontFamilyToolTip = "StrButtonResultsFontFamilyToolTip".GetLocalized("SignalAnalysis");
 
         // Derivative algorithms
         DerivativeMethods = [.. "StrDifferentiationAlgorithms".GetLocalized("Numerical").Split(',')];

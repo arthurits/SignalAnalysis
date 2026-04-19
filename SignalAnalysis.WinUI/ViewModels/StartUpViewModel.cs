@@ -63,12 +63,25 @@ public partial class StartUpViewModel: ObservableRecipient
     [ObservableProperty]
     public partial bool UpdatePlotCompositeTasksChecked { get; set; } = false;
 
+
+    [ObservableProperty]
+    public partial bool VisibleResultsSection { get; set; } = false;
+    [ObservableProperty]
+    public partial string TextResults { get; set; } = string.Empty;
+    public IReadOnlyList<double> FontSizes { get; }
+    public IReadOnlyList<FontItem> MonospacedFonts { get; }
+    [ObservableProperty]
+    public partial bool ExportTextEnabled { get; set; } = false;
+
     [ObservableProperty]
     public partial DocumentBase DocumentDto { get; set; }
 
     private SignalStats _signalStats = new();
 
-    public StartUpViewModel(ILocalSettingsService<AppSettings> settings, ILocalizationService localizationService)
+    public StartUpViewModel(
+        ILocalSettingsService<AppSettings> settings,
+        ILocalizationService localizationService,
+        IMonospacedFontsService fontsService)
     {
         // Load settings
         _appSettings = settings.GetValues;
@@ -80,6 +93,10 @@ public partial class StartUpViewModel: ObservableRecipient
         _localizationService = localizationService;
         _localizationService.LanguageChanged -= OnLanguageChanged;
         _localizationService.LanguageChanged += OnLanguageChanged;
+
+        // Get font information
+        FontSizes = fontsService.FontSizes;
+        MonospacedFonts = fontsService.MonospacedFonts;
 
         // Load string resources into binding variables for the UI
         OnLanguageChanged(null, EventArgs.Empty);
