@@ -57,6 +57,36 @@ public partial class StartUpViewModel : ObservableRecipient
     public partial string StrDerivativeYAxisTitle { get; set; } = string.Empty;
     [ObservableProperty]
     public partial string StrDerivativeYAxisSecondaryTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrFractalPlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrFractalXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrFractalYAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrDistributionPlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrDistributionXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrDistributionYAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrFourierPlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrFourierXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrFourierYAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrWindowPlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrWindowXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrWindowYAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrWindowedPlotTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrWindowedXAxisTitle { get; set; } = string.Empty;
+    [ObservableProperty]
+    public partial string StrWindowedYAxisTitle { get; set; } = string.Empty;
 
 
     private void OnLanguageChanged(object? sender, EventArgs e)
@@ -87,6 +117,21 @@ public partial class StartUpViewModel : ObservableRecipient
         StrDerivativeXAxisTitle = "StrDerivativeXAxisTitle".GetLocalized("SignalAnalysis");
         StrDerivativeYAxisTitle = "StrDerivativeYAxisTitle".GetLocalized("SignalAnalysis");
         StrDerivativeYAxisSecondaryTitle = "StrDerivativeYAxisSecondaryTitle".GetLocalized("SignalAnalysis");
+        StrFractalPlotTitle = "StrFractalPlotTitle".GetLocalized("SignalAnalysis");
+        StrFractalXAxisTitle = "StrFractalXAxisTitle".GetLocalized("SignalAnalysis");
+        StrFractalYAxisTitle = "StrFractalYAxisTitle".GetLocalized("SignalAnalysis");
+        StrDistributionPlotTitle = "StrDistributionPlotTitle".GetLocalized("SignalAnalysis");
+        StrDistributionXAxisTitle = "StrDistributionXAxisTitle".GetLocalized("SignalAnalysis");
+        StrDistributionYAxisTitle = "StrDistributionYAxisTitle".GetLocalized("SignalAnalysis");
+        StrFourierPlotTitle = "StrFourierPlotTitle".GetLocalized("SignalAnalysis");
+        StrFourierXAxisTitle = "StrFourierXAxisTitle".GetLocalized("SignalAnalysis");
+        StrFourierYAxisTitle = "StrFourierYAxisTitle".GetLocalized("SignalAnalysis");
+        StrWindowPlotTitle = "StrWindowPlotTitle".GetLocalized("SignalAnalysis");
+        StrWindowXAxisTitle = "StrWindowXAxisTitle".GetLocalized("SignalAnalysis");
+        StrWindowYAxisTitle = "StrWindowYAxisTitle".GetLocalized("SignalAnalysis");
+        StrWindowedPlotTitle = "StrWindowedPlotTitle".GetLocalized("SignalAnalysis");
+        StrWindowedXAxisTitle = "StrWindowedXAxisTitle".GetLocalized("SignalAnalysis");
+        StrWindowedYAxisTitle = "StrWindowedYAxisTitle".GetLocalized("SignalAnalysis");
 
         // Derivative algorithms
         DerivativeMethods = [.. "StrDifferentiationAlgorithms".GetLocalized("Numerical").Split(',')];

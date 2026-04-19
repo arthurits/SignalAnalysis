@@ -156,6 +156,15 @@
   <data name="StrDerivativeYAxisTitle" xml:space="preserve">
     <value>Amplitude / sec</value>
   </data>
+  <data name="StrDistributionPlotTitle" xml:space="preserve">
+    <value>Fractal dimension distribution</value>
+  </data>
+  <data name="StrDistributionXAxisTitle" xml:space="preserve">
+    <value>Fractal dimension (H)</value>
+  </data>
+  <data name="StrDistributionYAxisTitle" xml:space="preserve">
+    <value>Probability</value>
+  </data>
   <data name="StrDragDrop" xml:space="preserve">
     <value>Click or drag and drop here</value>
   </data>
@@ -167,6 +176,24 @@
   </data>
   <data name="StrDragUIOvereride" xml:space="preserve">
     <value>Open manual handling data</value>
+  </data>
+  <data name="StrFourierPlotTitle" xml:space="preserve">
+    <value>Fast Fourier transform</value>
+  </data>
+  <data name="StrFourierXAxisTitle" xml:space="preserve">
+    <value>Frequency (Hz)</value>
+  </data>
+  <data name="StrFourierYAxisTitle" xml:space="preserve">
+    <value>Magnitude (RMS²)</value>
+  </data>
+  <data name="StrFractalPlotTitle" xml:space="preserve">
+    <value>Fractal dimension distribution</value>
+  </data>
+  <data name="StrFractalXAxisTitle" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="StrFractalYAxisTitle" xml:space="preserve">
+    <value>Dimension (H)</value>
   </data>
   <data name="StrOpenDocument" xml:space="preserve">
     <value>Open manual materials handling document (*.sig)</value>
@@ -181,6 +208,24 @@
     <value>Time (seconds)</value>
   </data>
   <data name="StrOriginalYAxisTitle" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="StrWindowedPlotTitle" xml:space="preserve">
+    <value>Windowed signal</value>
+  </data>
+  <data name="StrWindowedXAxisTitle" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="StrWindowedYAxisTitle" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="StrWindowPlotTitle" xml:space="preserve">
+    <value>{0} window</value>
+  </data>
+  <data name="StrWindowXAxisTitle" xml:space="preserve">
+    <value>Time (seconds)</value>
+  </data>
+  <data name="StrWindowYAxisTitle" xml:space="preserve">
     <value>Amplitude</value>
   </data>
 </root>

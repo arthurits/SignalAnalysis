@@ -26,7 +26,7 @@
 
             <StackPanel Orientation="Vertical" Style="{StaticResource BaseStackPanel}">
 
-                <Grid x:Name="ContentGrid" ColumnDefinitions="*" RowDefinitions ="*, *, 300, *, 300, *, Auto">
+                <Grid x:Name="ContentGrid" ColumnDefinitions="*" RowDefinitions ="*, *, 300, *, 300, *,300, *,300, *, Auto">
 
                     <!-- Open file section -->
                     <StackPanel x:Name="PanelOpenFile"
@@ -234,17 +234,178 @@
                         </Border>
                     </StackPanel>
 
+                    <!-- Fractal section -->
+                    <StackPanel x:Name="FractalPanel"
+                                x:DefaultBindMode="OneWay"
+                                Orientation="Vertical"
+                                Grid.Row="5"
+                                Grid.RowSpan="2"
+                                Margin="0, 12, 0, 0"
+                                Spacing="4">
+                        <Border 
+                                CornerRadius="4"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                BorderThickness="1"
+                                BorderBrush="MistyRose">
+                            <Border.Background>
+                                <SolidColorBrush Color="MistyRose"
+                                                Opacity=".4" />
+                            </Border.Background>
+                            <CommandBar DefaultLabelPosition="Right"
+                                        OverflowButtonVisibility="Collapsed">
+                                <CommandBar.PrimaryCommands>
+                                    <AppBarButton x:Name="SavePlotFractal"
+                                                  IsEnabled="{x:Bind ViewModel.PlotSaveEnabled, Mode=OneWay}"
+                                                  ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotSaveToolTip}"
+                                                  Icon="Save"
+                                                  Label="{x:Bind ViewModel.StrButtonPlotSave}"
+                                                  LabelPosition="Default"
+                                                  Click="SavePlot_Click"
+                                                  Foreground="MidnightBlue" />
+                                    <AppBarSeparator/>
+                                    <AppBarElementContainer VerticalAlignment="Center">
+                                        <StackPanel x:Name="plotFractalPanel"
+                                                    Orientation="Horizontal"
+                                                    Margin="8,0,0,0">
+                                            <Image Source="/Assets/ColorPaletteIcon.svg"
+                                                   ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                   Margin="0,0,8,0"
+                                                   Width="16"
+                                                   Height="16"/>
+                                            <ComboBox x:Name="plotFractalCombo"
+                                                      AutomationProperties.Name="Fractal method"
+                                                      ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                      ItemsSource="{x:Bind ViewModel.DerivativeMethods}"
+                                                      SelectedIndex="{x:Bind ViewModel.SelectedDerivativeIndex, Mode=TwoWay}"
+                                                      Width="220"/>
+                                        </StackPanel>
+                                    </AppBarElementContainer>
+                                </CommandBar.PrimaryCommands>
+                            </CommandBar>
+                        </Border>
+                        <Border 
+                                CornerRadius="{x:Bind PanelTextResults.CornerRadius}"
+                                BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
+                                BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
+                                Height="300">
+                            <Grid ColumnDefinitions="2*, *" RowDefinitions="*">
+                                <controls:ScatterPlotView x:Name="plotFractalView"
+                                                       Series="{x:Bind ViewModel.FractalData, Mode=OneWay}"                                                      
+                                                        PlotTitle="{x:Bind ViewModel.StrFractalPlotTitle}"
+                                                        XAxisTitle="{x:Bind ViewModel.StrFractalXAxisTitle}"
+                                                        YAxisTitle="{x:Bind ViewModel.StrFractalYAxisTitle}"
+                                                        PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
+                                <controls:ScatterPlotView x:Name="plotDistributionView"
+                                                          Grid.Column="1"
+                                                          Series="{x:Bind ViewModel.DistributionData, Mode=OneWay}"                                                      
+                                                          PlotTitle="{x:Bind ViewModel.StrDistributionPlotTitle}"
+                                                          XAxisTitle="{x:Bind ViewModel.StrDistributionXAxisTitle}"
+                                                          YAxisTitle="{x:Bind ViewModel.StrDistributionYAxisTitle}"
+                                                          PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Fourier section -->
+                    <StackPanel x:Name="FourierPanel"
+                                x:DefaultBindMode="OneWay"
+                                Orientation="Vertical"
+                                Grid.Row="7"
+                                Grid.RowSpan="2"
+                                Margin="0, 12, 0, 0"
+                                Spacing="4">
+                        <Border 
+                                CornerRadius="4"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                BorderThickness="1"
+                                BorderBrush="MistyRose">
+                            <Border.Background>
+                                <SolidColorBrush Color="MistyRose"
+                            Opacity=".4" />
+                            </Border.Background>
+                            <CommandBar DefaultLabelPosition="Right"
+                                        OverflowButtonVisibility="Collapsed">
+                                <CommandBar.PrimaryCommands>
+                                    <AppBarButton x:Name="SavePlotFourier"
+                                                  IsEnabled="{x:Bind ViewModel.PlotSaveEnabled, Mode=OneWay}"
+                                                  ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotSaveToolTip}"
+                                                  Icon="Save"
+                                                  Label="{x:Bind ViewModel.StrButtonPlotSave}"
+                                                  LabelPosition="Default"
+                                                  Click="SavePlot_Click"
+                                                  Foreground="MidnightBlue" />
+                                    <AppBarSeparator/>
+                                    <AppBarElementContainer VerticalAlignment="Center">
+                                        <StackPanel x:Name="plotFourierPanel"
+                                                    Orientation="Horizontal"
+                                                    Margin="8,0,0,0">
+                                            <Image Source="/Assets/ColorPaletteIcon.svg"
+                                                       ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                       Margin="0,0,8,0"
+                                                       Width="16"
+                                                       Height="16"/>
+                                            <ComboBox x:Name="plotFourierCombo"
+                                                      AutomationProperties.Name="Fourier method"
+                                                      ToolTipService.ToolTip="{x:Bind ViewModel.StrButtonPlotPaletteToolTip}"
+                                                      ItemsSource="{x:Bind ViewModel.DerivativeMethods}"
+                                                      SelectedIndex="{x:Bind ViewModel.SelectedDerivativeIndex, Mode=TwoWay}"
+                                                      Width="220"/>
+                                        </StackPanel>
+                                    </AppBarElementContainer>
+                                </CommandBar.PrimaryCommands>
+                            </CommandBar>
+                        </Border>
+                        <Border 
+                            CornerRadius="{x:Bind PanelTextResults.CornerRadius}"
+                            BorderThickness="{x:Bind PanelTextResults.BorderThickness}"
+                            BorderBrush="{x:Bind PanelTextResults.BorderBrush}"
+                            Height="300">
+                            <Grid ColumnDefinitions="2*, *, *" RowDefinitions="*">
+                                <controls:ScatterPlotView x:Name="plotFourierView"
+                                                       Series="{x:Bind ViewModel.FourierData, Mode=OneWay}"                                                      
+                                                        PlotTitle="{x:Bind ViewModel.StrFourierPlotTitle}"
+                                                        XAxisTitle="{x:Bind ViewModel.StrFourierXAxisTitle}"
+                                                        YAxisTitle="{x:Bind ViewModel.StrFourierYAxisTitle}"
+                                                        PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
+                                <controls:ScatterPlotView x:Name="plotWindowView"
+                                                          Grid.Column="1"
+                                                           Series="{x:Bind ViewModel.WindowData, Mode=OneWay}"                                                      
+                                                            PlotTitle="{x:Bind ViewModel.StrWindowPlotTitle}"
+                                                            XAxisTitle="{x:Bind ViewModel.StrWindowXAxisTitle}"
+                                                            YAxisTitle="{x:Bind ViewModel.StrWindowYAxisTitle}"
+                                                            PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
+                                <controls:ScatterPlotView x:Name="plotWindowedView"
+                                                          Grid.Column="2"
+                                                           Series="{x:Bind ViewModel.WindowedData, Mode=OneWay}"                                                      
+                                                            PlotTitle="{x:Bind ViewModel.StrWindowedPlotTitle}"
+                                                            XAxisTitle="{x:Bind ViewModel.StrWindowedXAxisTitle}"
+                                                            YAxisTitle="{x:Bind ViewModel.StrWindowedYAxisTitle}"
+                                                            PlotPalette="{x:Bind ViewModel.SelectedPlotPalette}">
+                                </controls:ScatterPlotView>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
                     <!-- Text results section -->
                     <StackPanel x:Name="PanelTextResults"
-                                    Style="{StaticResource ContentStackPanel}"
-                                Visibility="Collapsed">
+                                Grid.Row="9"
+                                Style="{StaticResource ContentStackPanel}"
+                                Margin="0, 12, 0, 0"
+                                Spacing="4">
                         <ScrollView x:Name="ScrollViewText" ContentOrientation="Horizontal"
                                         HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch"
                                         ZoomMode="Disabled" IsTabStop="True"
                                         VerticalAlignment="Top" HorizontalAlignment="Left"
                                         HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
                                         VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                            <TextBlock x:Name="TextResults">
+                            <TextBlock x:Name="TextResults"
+                                       Grid.Row="10">
                             </TextBlock>
                         </ScrollView>
                     </StackPanel>
