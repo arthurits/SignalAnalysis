@@ -111,7 +111,7 @@ internal class SignalDto:DocumentBase
             // Sampling frequency
             if (lines[3] is null)
                 throw new FormatException(string.Format("StrOpenDataFileSection".GetLocalized("ReadDataFile"), "StrOpenDataFile06".GetLocalized("ReadDataFile")));
-            if (!lines[3].Contains($"{"StrOpenDataFile05".GetLocalized("ReadDataFile", fileCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
+            if (!lines[3].Contains($"{"StrOpenDataFile06".GetLocalized("ReadDataFile", fileCulture) ?? "Sampling frequency"}: ", StringComparison.Ordinal))
                 throw new FormatException(string.Format("StrOpenDataFileSection".GetLocalized("ReadDataFile"), "StrOpenDataFile06".GetLocalized("ReadDataFile")));
             if (!double.TryParse(lines[3][(lines[3].IndexOf(':') + 1)..], System.Globalization.NumberStyles.Float | System.Globalization.NumberStyles.AllowThousands, fileCulture, out sampleFreq))
                 throw new FormatException(string.Format("StrOpenDataFileSection".GetLocalized("ReadDataFile"), "StrOpenDataFile06".GetLocalized("ReadDataFile")));
@@ -147,7 +147,7 @@ internal class SignalDto:DocumentBase
 
             // Retrieve data rows and parse values
             dto.SeriesData = Enumerable.Range(0, seriesLabels.Length).Select(_ => new List<double>()).ToList();
-            for (int i = 9; i < lines.Length; i++)
+            for (int i = 6; i < lines.Length; i++)
             {
                 var line = lines[i];
                 if (string.IsNullOrWhiteSpace(line)) continue;
