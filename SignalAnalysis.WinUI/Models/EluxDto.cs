@@ -76,6 +76,8 @@ internal class EluxlDto: DocumentBase
         double sampleFreq;
         string[] seriesLabels;
 
+        var primaryLanguage = Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride;
+
         try
         {
 
@@ -233,7 +235,11 @@ internal class EluxlDto: DocumentBase
             //        MessageBoxIcon.Error);
             //}
         }
-
+        finally
+        {
+            // Restore the original primary language override
+            Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = primaryLanguage;
+        }
         return dto;
     }
 
