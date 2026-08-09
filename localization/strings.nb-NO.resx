@@ -1,0 +1,686 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAboutCompanyName" xml:space="preserve">
+    <value>Utviklet av {0}</value>
+  </data>
+  <data name="strAboutCopyright" xml:space="preserve">
+    <value>Opphavsrett {0}</value>
+  </data>
+  <data name="strAboutDescription" xml:space="preserve">
+    <value>Analyseverktøy med grunnleggende beskrivende statistikk, FFT (rask Fourier-transformasjon), fraktal dimensjon, differensiering, integrasjon og entropi for signaler (elux-filer så vel som generiske).
+
+Ingen kommersiell bruk tillatt overhodet. Kontakt forfatteren for eventuelle spørsmål.
+
+Hvis du synes denne programvaren er nyttig, kan du vurdere å støtte den!</value>
+  </data>
+  <data name="strAboutProductName" xml:space="preserve">
+    <value>Produktnavn: {0}</value>
+  </data>
+  <data name="strAboutVersion" xml:space="preserve">
+    <value>Versjon {0}</value>
+  </data>
+  <data name="strBtnAccept" xml:space="preserve">
+    <value>&amp;Godta</value>
+  </data>
+  <data name="strBtnCancel" xml:space="preserve">
+    <value>&amp;Avbryt</value>
+  </data>
+  <data name="strBtnData" xml:space="preserve">
+    <value>Velg data</value>
+  </data>
+  <data name="strBtnExport" xml:space="preserve">
+    <value>&amp;Eksporter</value>
+  </data>
+  <data name="strBtnReset" xml:space="preserve">
+    <value>&amp;Tilbakestill</value>
+  </data>
+  <data name="strBtnSettings" xml:space="preserve">
+    <value>&amp;Innstillinger</value>
+  </data>
+  <data name="strChkAbsoluteIntegral" xml:space="preserve">
+    <value>Kalkuler absoluttverdi-integral?</value>
+  </data>
+  <data name="strChkBoxplot" xml:space="preserve">
+    <value>Boksplott</value>
+  </data>
+  <data name="strChkComputeDerivative" xml:space="preserve">
+    <value>Kalkuler numerisk differensiering?</value>
+  </data>
+  <data name="strChkComputeIntegration" xml:space="preserve">
+    <value>Kalkuler numerisk integrasjon?</value>
+  </data>
+  <data name="strChkCrossHair" xml:space="preserve">
+    <value>Vis trådkors for utvalg</value>
+  </data>
+  <data name="strChkCumulative" xml:space="preserve">
+    <value>Kumulativ fraktal dimensjon</value>
+  </data>
+  <data name="strChkDlgPath" xml:space="preserve">
+    <value>Husk åpne/lagre dialog forrige bane</value>
+  </data>
+  <data name="strChkEntropy" xml:space="preserve">
+    <value>Entropi (omtrentlig og utvalg)</value>
+  </data>
+  <data name="strChkExportDerivative" xml:space="preserve">
+    <value>Eksporter derivert data?</value>
+  </data>
+  <data name="strChkExportIntegration" xml:space="preserve">
+    <value>Eksporter numerisk integrasjon?</value>
+  </data>
+  <data name="strChkPower" xml:space="preserve">
+    <value>Kraft (dB)</value>
+  </data>
+  <data name="strDifferentiationAlgorithms" xml:space="preserve">
+    <value>Bakover én-punkts differanse, Fremover én-punkts differanse, Sentral tre-punkts differanse, Sentral fem-punkts differanse, Sentral syv-punkts differanse, Sentral ni-punkts differanse, Savitzky–Golay lineær tre-punkts, Savitzky–Golay lineær fem-punkts, Savitzky–Golay lineær syv-punkts, Savitzky–Golay lineær ni-punkts, Savitzky–Golay kubisk fem-punkts, Savitzky–Golay kubisk syv-punkts, Savitzky–Golay kubisk ni-punkts</value>
+  </data>
+  <data name="strDlgReset" xml:space="preserve">
+    <value>Vil du tilbakestille alle felter
+til standardverdien?</value>
+  </data>
+  <data name="strDlgResetTitle" xml:space="preserve">
+    <value>Tilbakestill innstillinger?</value>
+  </data>
+  <data name="strErrorDeserialize" xml:space="preserve">
+    <value>Feil ved lasting av innstillingsfil.
+
+{0}
+
+Standardverdier vil bli benyttet i stedet.</value>
+  </data>
+  <data name="strErrorDeserializeTitle" xml:space="preserve">
+    <value>Feil</value>
+  </data>
+  <data name="strFileHeader00" xml:space="preserve">
+    <value>ErgoLux-data</value>
+  </data>
+  <data name="strFileHeader01" xml:space="preserve">
+    <value>SignalAnalysis-data</value>
+  </data>
+  <data name="strFileHeader02" xml:space="preserve">
+    <value>Starttid</value>
+  </data>
+  <data name="strFileHeader03" xml:space="preserve">
+    <value>Sluttid</value>
+  </data>
+  <data name="strFileHeader04" xml:space="preserve">
+    <value>Total måletid</value>
+  </data>
+  <data name="strFileHeader05" xml:space="preserve">
+    <value>Antall datapunkter</value>
+  </data>
+  <data name="strFileHeader06" xml:space="preserve">
+    <value>Prøvetakingsfrekvens</value>
+  </data>
+  <data name="strFileHeader07" xml:space="preserve">
+    <value>Gjennomsnitt</value>
+  </data>
+  <data name="strFileHeader08" xml:space="preserve">
+    <value>Maksimum</value>
+  </data>
+  <data name="strFileHeader09" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="strFileHeader10" xml:space="preserve">
+    <value>Fraktaldimensjon</value>
+  </data>
+  <data name="strFileHeader11" xml:space="preserve">
+    <value>Fraktalvarians</value>
+  </data>
+  <data name="strFileHeader12" xml:space="preserve">
+    <value>Omtrentlig entropi</value>
+  </data>
+  <data name="strFileHeader13" xml:space="preserve">
+    <value>Eksempel på entropi</value>
+  </data>
+  <data name="strFileHeader14" xml:space="preserve">
+    <value>Shannonentropi</value>
+  </data>
+  <data name="strFileHeader15" xml:space="preserve">
+    <value>Entropibit</value>
+  </data>
+  <data name="strFileHeader16" xml:space="preserve">
+    <value>Ideell entropi</value>
+  </data>
+  <data name="strFileHeader17" xml:space="preserve">
+    <value>Antall dataserier</value>
+  </data>
+  <data name="strFileHeader18" xml:space="preserve">
+    <value>Antall sensorer</value>
+  </data>
+  <data name="strFileHeader19" xml:space="preserve">
+    <value>Mangler en tom linje.</value>
+  </data>
+  <data name="strFileHeader20" xml:space="preserve">
+    <value>Manglende kolonneoverskrifter (serienavn).</value>
+  </data>
+  <data name="strFileHeader21" xml:space="preserve">
+    <value>Tid</value>
+  </data>
+  <data name="strFileHeader22" xml:space="preserve">
+    <value>dager, dag, dager</value>
+  </data>
+  <data name="strFileHeader23" xml:space="preserve">
+    <value>timer, time, timer</value>
+  </data>
+  <data name="strFileHeader24" xml:space="preserve">
+    <value>minutter, minutt, minutter</value>
+  </data>
+  <data name="strFileHeader25" xml:space="preserve">
+    <value>sekunder, sekund, sekunder</value>
+  </data>
+  <data name="strFileHeader26" xml:space="preserve">
+    <value>og</value>
+  </data>
+  <data name="strFileHeader27" xml:space="preserve">
+    <value>millisekunder, millisekund, millisekunder</value>
+  </data>
+  <data name="strFileHeader28" xml:space="preserve">
+    <value>Derivativ</value>
+  </data>
+  <data name="strFileHeader29" xml:space="preserve">
+    <value>Deriveringsalgoritme</value>
+  </data>
+  <data name="strFileHeader30" xml:space="preserve">
+    <value>Integreringsalgoritme</value>
+  </data>
+  <data name="strFileHeader31" xml:space="preserve">
+    <value>Integralet</value>
+  </data>
+  <data name="strFileHeader32" xml:space="preserve">
+    <value>Varians</value>
+  </data>
+  <data name="strFileHeader33" xml:space="preserve">
+    <value>Boksplott nedre grense</value>
+  </data>
+  <data name="strFileHeader34" xml:space="preserve">
+    <value>Boksplott øvre grense</value>
+  </data>
+  <data name="strFileHeader35" xml:space="preserve">
+    <value>Kvartil 1 (25%)</value>
+  </data>
+  <data name="strFileHeader36" xml:space="preserve">
+    <value>Kvartil 2 (50 %)</value>
+  </data>
+  <data name="strFileHeader37" xml:space="preserve">
+    <value>Kvartil 3 (75 %)</value>
+  </data>
+  <data name="strFileHeader38" xml:space="preserve">
+    <value>Shannon / Ideell</value>
+  </data>
+  <data name="strFileHeaderColon" xml:space="preserve">
+    <value>: </value>
+  </data>
+  <data name="strFileHeaderSection" xml:space="preserve">
+    <value>Del '{0}' er feilformatert.</value>
+  </data>
+  <data name="strFrmLanguage" xml:space="preserve">
+    <value>Velg kultur</value>
+  </data>
+  <data name="strFrmSettings" xml:space="preserve">
+    <value>Innstillinger</value>
+  </data>
+  <data name="strFrmTitle" xml:space="preserve">
+    <value>Signalanalyse</value>
+  </data>
+  <data name="strFrmTitleUnion" xml:space="preserve">
+    <value> - </value>
+  </data>
+  <data name="strGrpAlgorithms" xml:space="preserve">
+    <value>Diskrete differansealgoritmer</value>
+  </data>
+  <data name="strGrpAxis" xml:space="preserve">
+    <value>Abscisse-akse</value>
+  </data>
+  <data name="strGrpCulture" xml:space="preserve">
+    <value>UI og dataformat</value>
+  </data>
+  <data name="strGrpFFT" xml:space="preserve">
+    <value>FFT-punkt</value>
+  </data>
+  <data name="strIntegrationAlgorithms" xml:space="preserve">
+    <value>Venstre punktregel, Midtpunktregel, Høyre punktregel, Trapesregel, Simpsons 1/3-regel, Simpsons 3/8-regel, Simpsons sammensatte regel, Rombergs metode</value>
+  </data>
+  <data name="strLblData" xml:space="preserve">
+    <value>Datafilbane</value>
+  </data>
+  <data name="strLblDataFormat" xml:space="preserve">
+    <value>Numerisk dataformateringsstreng</value>
+  </data>
+  <data name="strLblEnd" xml:space="preserve">
+    <value>Array-indeksslutt  (maks {0})</value>
+  </data>
+  <data name="strLblIntegration" xml:space="preserve">
+    <value>Kvadraturmetode</value>
+  </data>
+  <data name="strLblSeries" xml:space="preserve">
+    <value>Velg serie</value>
+  </data>
+  <data name="strLblStart" xml:space="preserve">
+    <value>Array-indeksstart</value>
+  </data>
+  <data name="strLblWindow" xml:space="preserve">
+    <value>Vindu</value>
+  </data>
+  <data name="strMsgBoxErrorDerivative" xml:space="preserve">
+    <value>Uventet feil  under numerisk derivasjon.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDerivativeTitle" xml:space="preserve">
+    <value>Derivasjonsfeil</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStats" xml:space="preserve">
+    <value>Uventet feil ved beregning av deskriptiv statistikk.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorDescriptiveStatsTitle" xml:space="preserve">
+    <value>Statistikkfeil</value>
+  </data>
+  <data name="strMsgBoxErrorEntropy" xml:space="preserve">
+    <value>Uventet feil under beregning av entropi.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorEntropyTitle" xml:space="preserve">
+    <value>Entropifeil</value>
+  </data>
+  <data name="strMsgBoxErrorFFT" xml:space="preserve">
+    <value>Uventet feil under beregning av FFT.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFFTTitle" xml:space="preserve">
+    <value>FFT-feil</value>
+  </data>
+  <data name="strMsgBoxErrorFractal" xml:space="preserve">
+    <value>Uventet feil ved beregning av fraktaldimensjon.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorFractalTitle" xml:space="preserve">
+    <value>Fraktal-feil</value>
+  </data>
+  <data name="strMsgBoxErrorOpenData" xml:space="preserve">
+    <value>Det oppstod en uventet feil under åpningen av datafilen.
+Prøv igjen senere eller kontakt programvareingeniøren.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorOpenDataTitle" xml:space="preserve">
+    <value>Feil ved åpning av data</value>
+  </data>
+  <data name="strMsgBoxErrorSaveData" xml:space="preserve">
+    <value>Det oppstod en uventet feil under lagring av datafilen.
+Prøv igjen senere eller kontakt programvareingeniøren.
+{0}</value>
+  </data>
+  <data name="strMsgBoxErrorSaveDataTitle" xml:space="preserve">
+    <value>Feil under lagring av data</value>
+  </data>
+  <data name="strMsgBoxExit" xml:space="preserve">
+    <value>Er du sikker på at du vil avslutte
+programmet?</value>
+  </data>
+  <data name="strMsgBoxExitTitle" xml:space="preserve">
+    <value>Exit?</value>
+  </data>
+  <data name="strMsgBoxInitArray" xml:space="preserve">
+    <value>Uventet feil i 'InitializeDataArrays'.
+{0}</value>
+  </data>
+  <data name="strMsgBoxInitArrayTitle" xml:space="preserve">
+    <value>Feil</value>
+  </data>
+  <data name="strMsgBoxNoData" xml:space="preserve">
+    <value>Det er ingen tilgjengelige data som kan lagres.</value>
+  </data>
+  <data name="strMsgBoxNoDataTitle" xml:space="preserve">
+    <value>Ingen data</value>
+  </data>
+  <data name="strMsgBoxOKSaveData" xml:space="preserve">
+    <value>Data har blitt lagret på disken.</value>
+  </data>
+  <data name="strMsgBoxOKSaveDataTitle" xml:space="preserve">
+    <value>Data lagret</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancel" xml:space="preserve">
+    <value>Numerisk derivasjon har blitt stoppet.</value>
+  </data>
+  <data name="strMsgBoxTaskDerivativeCancelTitle" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancel" xml:space="preserve">
+    <value>Entropi-kalkulasjon har blitt stoppet.</value>
+  </data>
+  <data name="strMsgBoxTaskEntropyCancelTitle" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancel" xml:space="preserve">
+    <value>Beregning av Hausdorff-Besicovitch fraktaldimensjonen
+har stoppet.</value>
+  </data>
+  <data name="strMsgBoxTaskFractalCancelTitle" xml:space="preserve">
+    <value>Stoppe</value>
+  </data>
+  <data name="strOpenDlgFilter" xml:space="preserve">
+    <value>ErgoLux-filer (*.elux)|*.elux|Signalanalysefiler (*.sig)|*.sig|Tekstfiler (*.txt)|*.txt|Binære filer (*.bin)|*.bin|Alle filer (*.*)|*.*</value>
+  </data>
+  <data name="strOpenDlgTitle" xml:space="preserve">
+    <value>Åpne datafil</value>
+  </data>
+  <data name="strPlotAppliedTitle" xml:space="preserve">
+    <value>Vindusignal</value>
+  </data>
+  <data name="strPlotAppliedXLabel" xml:space="preserve">
+    <value>Tid (sekunder)</value>
+  </data>
+  <data name="strPlotAppliedYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotBoxPlotTitle" xml:space="preserve">
+    <value>Boksplott</value>
+  </data>
+  <data name="strPlotBoxplotYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotDerivativeTitle" xml:space="preserve">
+    <value>Derivasjon</value>
+  </data>
+  <data name="strPlotDerivativeXLabel" xml:space="preserve">
+    <value>Tid (sekunder)</value>
+  </data>
+  <data name="strPlotDerivativeYLabel1" xml:space="preserve">
+    <value>Amplitude / sekunder</value>
+  </data>
+  <data name="strPlotDerivativeYLabel2" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotFFTTitle" xml:space="preserve">
+    <value>Rask Fourier-transformasjon</value>
+  </data>
+  <data name="strPlotFFTXLabel" xml:space="preserve">
+    <value>Frekvens (Hz)</value>
+  </data>
+  <data name="strPlotFFTYLabelMag" xml:space="preserve">
+    <value>Størrelse (RMS²)</value>
+  </data>
+  <data name="strPlotFFTYLabelPow" xml:space="preserve">
+    <value>Kraft (dB)</value>
+  </data>
+  <data name="strPlotFractalDisributionXLabel" xml:space="preserve">
+    <value>Fraktaldimensjon (H)</value>
+  </data>
+  <data name="strPlotFractalDisributionYLabel" xml:space="preserve">
+    <value>Sannsynlighet</value>
+  </data>
+  <data name="strPlotFractalDistributionTitle" xml:space="preserve">
+    <value>Fraktal dimensjonsfordeling</value>
+  </data>
+  <data name="strPlotFractalTitle1" xml:space="preserve">
+    <value>Fraktal dimensjon</value>
+  </data>
+  <data name="strPlotFractalTitle2" xml:space="preserve">
+    <value>(kumulativ)</value>
+  </data>
+  <data name="strPlotFractalXLabel" xml:space="preserve">
+    <value>Tid (sekunder)</value>
+  </data>
+  <data name="strPlotFractalYLabel" xml:space="preserve">
+    <value>Dimensjon (H)</value>
+  </data>
+  <data name="strPlotOriginalTitle" xml:space="preserve">
+    <value>Inngangssignal</value>
+  </data>
+  <data name="strPlotOriginalXLabel" xml:space="preserve">
+    <value>Tid (sekunder)</value>
+  </data>
+  <data name="strPlotOriginalYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strPlotWindowTitle" xml:space="preserve">
+    <value>{0}-vindu</value>
+  </data>
+  <data name="strPlotWindowXLabel" xml:space="preserve">
+    <value>Tid (sekunder)</value>
+  </data>
+  <data name="strPlotWindowYLabel" xml:space="preserve">
+    <value>Amplitude</value>
+  </data>
+  <data name="strRadCurrentCulture" xml:space="preserve">
+    <value>Gjeldende kulturformatering</value>
+  </data>
+  <data name="strRadInvariantCulture" xml:space="preserve">
+    <value>Invariant kulturformatering</value>
+  </data>
+  <data name="strRadPoints" xml:space="preserve">
+    <value>Datapunkter</value>
+  </data>
+  <data name="strRadRoundDown" xml:space="preserve">
+    <value>Runde ned</value>
+  </data>
+  <data name="strRadRoundUp" xml:space="preserve">
+    <value>Rund opp</value>
+  </data>
+  <data name="strRadSeconds" xml:space="preserve">
+    <value>Sekunder</value>
+  </data>
+  <data name="strRadTime" xml:space="preserve">
+    <value>Dato og tid</value>
+  </data>
+  <data name="strRadUserCulture" xml:space="preserve">
+    <value>Velg kultur</value>
+  </data>
+  <data name="strReadDataError" xml:space="preserve">
+    <value>Kan ikke lese data fra fil.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCulture" xml:space="preserve">
+    <value>Kulturidentifikatorens strengnavn er ikke gyldig.
+{0}</value>
+  </data>
+  <data name="strReadDataErrorCultureTitle" xml:space="preserve">
+    <value>Kulturnavnfeil</value>
+  </data>
+  <data name="strReadDataErrorNumber" xml:space="preserve">
+    <value>Ugyldig numerisk verdi: {0}</value>
+  </data>
+  <data name="strReadDataErrorNumberTitle" xml:space="preserve">
+    <value>Feil under analyse av data</value>
+  </data>
+  <data name="strReadDataErrorTitle" xml:space="preserve">
+    <value>Feil</value>
+  </data>
+  <data name="strReadNotimplementedError" xml:space="preserve">
+    <value>Kan ikke lese data fra en {0}-fil.</value>
+  </data>
+  <data name="strReadNotimplementedErrorTitle" xml:space="preserve">
+    <value>Ikke implementert</value>
+  </data>
+  <data name="strSaveDlgFilter" xml:space="preserve">
+    <value>Tekstfil (*.txt)|*.txt|Signalanalysefil (*.sig)|*.sig|Binær fil (*.bin)|*.bin|Resultatfil (*.results)|*.results|Alle filer (*.*)|*.*</value>
+  </data>
+  <data name="strSaveDlgTitle" xml:space="preserve">
+    <value>Lagre datafil</value>
+  </data>
+  <data name="strStatusTipCrossHair" xml:space="preserve">
+    <value>Vis plotts trådkorsmodus</value>
+  </data>
+  <data name="strStatusTipDerivative" xml:space="preserve">
+    <value>Numerisk derivasjon</value>
+  </data>
+  <data name="strStatusTipEntropy" xml:space="preserve">
+    <value>Beregn den omtrentlige og sample entropien</value>
+  </data>
+  <data name="strStatusTipFractal" xml:space="preserve">
+    <value>Beregn den kumulative fraktale dimensjonen (CPU-intensiv)</value>
+  </data>
+  <data name="strStatusTipIntegration" xml:space="preserve">
+    <value>Numerisk integrasjon</value>
+  </data>
+  <data name="strStatusTipPower" xml:space="preserve">
+    <value>Plott enten FFT-effektspektra(dB) eller størrelse</value>
+  </data>
+  <data name="strTabDerivative" xml:space="preserve">
+    <value>Differensiering</value>
+  </data>
+  <data name="strTabGUI" xml:space="preserve">
+    <value>Brukergrensesnitt</value>
+  </data>
+  <data name="strTabIntegration" xml:space="preserve">
+    <value>Integrasjon</value>
+  </data>
+  <data name="strTabPlot" xml:space="preserve">
+    <value>Plotter</value>
+  </data>
+  <data name="strToolStripAbout" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="strToolStripExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="strToolStripExport" xml:space="preserve">
+    <value>Eksport</value>
+  </data>
+  <data name="strToolStripOpen" xml:space="preserve">
+    <value>Åpne</value>
+  </data>
+  <data name="strToolStripSettings" xml:space="preserve">
+    <value>Innstillinger</value>
+  </data>
+  <data name="strToolTipAbout" xml:space="preserve">
+    <value>Om denne programvaren</value>
+  </data>
+  <data name="strToolTipCboSeries" xml:space="preserve">
+    <value>Velg dataserie</value>
+  </data>
+  <data name="strToolTipCboWindows" xml:space="preserve">
+    <value>Velg FFT-vindu</value>
+  </data>
+  <data name="strToolTipExit" xml:space="preserve">
+    <value>Avslutt applikasjonen</value>
+  </data>
+  <data name="strToolTipExport" xml:space="preserve">
+    <value>Eksporter data og dataanalyse</value>
+  </data>
+  <data name="strToolTipOpen" xml:space="preserve">
+    <value>Åpne datafilen fra disken</value>
+  </data>
+  <data name="strToolTipSettings" xml:space="preserve">
+    <value>Innstillinger for plott, data og brukergrensesnitt</value>
+  </data>
+  <data name="strToolTipUILanguage" xml:space="preserve">
+    <value>Brukergrensesnittspråk</value>
+  </data>
+</root>

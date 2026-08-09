@@ -1,0 +1,21 @@
+﻿SignalAnalysis data (es-ES)
+Tiempo inicial: lunes, 5 de julio de 2021 8:59:12,020
+Tiempo final: lunes, 5 de julio de 2021 8:59:12,687
+Duración total: 0 días, 0 horas, 0 minutos, 0 segundos y 667 milisegundos
+Número de series: 1
+Número de puntos: 2
+Frecuencia de muestreo: 1,5
+Promedio: 694,45
+Máximo: 716,5
+Mínimo: 672,4
+Dimensión fractal: 1,5
+Variancia fractal: 0
+Entropía aproximada: 0
+Entropía de muestra: 0
+Entropía Shannon: 0
+Entropía bit: 0
+Entropía ideal: 0
+
+Tiempo	Promedio
+lunes, 5 de julio de 2021 8:59:12,020	672,4
+lunes, 5 de julio de 2021 8:59:12,687	716,5
